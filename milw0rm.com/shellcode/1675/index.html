@@ -1,0 +1,35 @@
+<html><head><title>win32 Beep Shellcode (SP1/SP2) 35 bytes</title></head><pre>/*
+Shellcode can be changed to work with any windows distribution by changing the address of Beep in kernel32.dll
+Addresses for SP1 and SP2
+
+-xnull
+*/
+
+#include &lt;stdio.h&gt;
+
+unsigned char beepsp1[] =
+&quot;\x55\x89\xE5\x83\xEC\x18\xC7\x45\xFC&quot;
+&quot;\x10\xC9\xEA\x77&quot;                      //Address \x10\xC9\xEA\x77 = SP1
+&quot;\xC7\x44\x24\x04&quot;
+&quot;\xE8\x03&quot;                              //Length \xE8\x03 = 1000 (1 second)
+&quot;\x00\x00\xC7\x04\x24&quot;
+&quot;\xE8\x03&quot;                              //Frequency  \xE8\x03 = 1000
+&quot;\x00\x00\x8B\x45\xFC\xFF\xD0\xC9\xC3&quot;;
+
+unsigned char beepsp2[] =
+&quot;\x55\x89\xE5\x83\xEC\x18\xC7\x45\xFC&quot;
+&quot;\x53\x8A\x83\x7C&quot;                      //Address \x53\x8A\x83\x7C = SP2
+&quot;\xC7\x44\x24\x04&quot;
+&quot;\xD0\x03&quot;                              //Length \xD0\x03 = 2000 (2 seconds)
+&quot;\x00\x00\xC7\x04\x24&quot;
+&quot;\x01\x0E&quot;                              //Frequency \x01\x0E = 3585
+&quot;\x00\x00\x8B\x45\xFC\xFF\xD0\xC9\xC3&quot;;
+
+int main()
+{
+    void (*function)();
+    *(long*)&amp;function = (long)beepsp1;
+    function();
+}
+
+// milw0rm.com [2006-04-14]</pre></html>

@@ -1,0 +1,184 @@
+<html><head>
+<title>milw0rm - exploits : vulnerabilities : videos : papers : shellcode</title>
+<meta name="description" content="milw0rm exploits and 0day exploits database">
+<meta name="keywords" content="exploits code, exploit code, exploits, 0-day, 0day, 0days, exploit, zero day, poc, exploit, local exploits, remote exploits, root exploits, windows, linux, new exploits, latest exploits, shellcode, Zero-day, zeroday, security articles, ezines, zines, security papers">
+<link type="text/css" rel="stylesheet" href="/milw0rm.css">
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php">
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon"></head>
+<body dir="ltr" alink="#00ff00" background="/images/dot.gif" bgcolor="#000000" link="#00c000" text="#008000" vlink="#00c000">
+<center>
+<table border="0">
+<tr>
+<td nowrap="nowrap">
+
+			<b>[ <a href="/" target=_self>home</a> ]</b>
+			<b>[ <a href="/contents.php" target=_self>contents</a> ]</b>
+			<b>[ <a href="/platforms/" target=_self>platforms</a> ]</b>
+			<b>[ <a href="/shellcode/" target=_self>shellcode</a> ]</b>
+			<b>[ <a href="/search.php" target=_self>search</a> ]</b>
+			<b>[ <a href="/cracker/" target=_self>cracker</a> ]</b>
+			<b>[ <a href="/links/" target=_self>links</a> ]</b>
+			<b>[ <a href="/rss.php" target=blank>rss</a> ]</b>
+			<b>[ <a href="/sploits/milw0rm.tar.bz2" target=_self>archive</a> ]</b>
+			</td>
+    </tr>
+  </table>
+
+<table width="668" border="0" cellpadding="3" cellspacing="3" class="main">
+  <tr><td><img src="/images/milw0rm-wi.jpg" alt="milw0rm"></td></tr><tr><td>
+<b>[ <a href="/" target=_self>RealPlayer</a> ]</b><table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-12-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4683" target="_blank" class="style14">RealPlayer 11 Malformed AU File Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">6844</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=RealPlayer" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4683" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1286">NtWaK0</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-06-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4118" target="_blank" class="style14">RealNetworks RealPlayer/HelixPlayer SMIL wallclock Stack Overflow PoC</a></td>
+<td nowrap="nowrap" width=40 align="left">5779</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=RealPlayer" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4118" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=4118" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1074">axis</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3819" target="_blank" class="style14">RealPlayer 10 (.ra file) Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">7417</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=RealPlayer" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3819" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/664">n00b</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-12-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3030" target="_blank" class="style14">RealPlayer 10.5 ierpplug.dll Internet Explorer Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">8931</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=RealPlayer" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3030" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=3030" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/938">shinnai</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-12-20</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2966" target="_blank" class="style14">RealPlayer 10.5 (ActiveX Control) Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">8967</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=RealPlayer" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2966" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=2966" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/938">shinnai</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-03-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1622" target="_blank" class="style14">RealPlayer <= 10.5 (6.0.12.1040-1348) SWF Buffer Overflow PoC</a></td>
+<td nowrap="nowrap" width=40 align="left">6477</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=RealPlayer" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1622" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/602">Federico L. Bossi Bonin</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-09-26</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1232" target="_blank" class="style14">RealPlayer/Helix Player Remote Format String Exploit (linux)</a></td>
+<td nowrap="nowrap" width=40 align="left">8771</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=RealPlayer" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1232" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/191">c0ntex</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-03-07</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/863" target="_blank" class="style14">RealPlayer 10 ".smil" File Local Buffer Overflow Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5718</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=RealPlayer" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/863" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/394">nolimit</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2003-09-09</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/93" target="_blank" class="style14">RealPlayer 9 *nix Local Privilege Escalation Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5463</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=RealPlayer" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/93" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/68">Jon Hart</a>
+</td>
+</tr></tbody></table><br><br><center></center><br><br><br><br><br><br><br><br><br><br><center>
+<script type="text/javascript"><!--
+google_ad_client = "pub-0718555979486542";
+/* 468x60, created 9/26/08 */
+google_ad_slot = "3279240256";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</center>
+
+<p><FONT style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit[at]milw0rm.com">submit[at]milw0rm.com</a> [<a href="/gpg/submit.asc" target="_blank">gpg</a>]<br>Copyright &copy; 2004-2009 <a href="mailto:str0ke[at]milw0rm.com">milw0rm</a> </FONT></p>
+</td></tr></table>
+  <br>
+  <br>
+</center>
+</body></html>

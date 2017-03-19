@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>milw0rm.com</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<STYLE type=text/css>
+BODY {
+        SCROLLBAR-FACE-COLOR: #000000; FONT-SIZE: 10px; SCROLLBAR-HIGHLIGHT-COLOR: #008000; SCROLLBAR-SHADOW-COLOR: #008000; SCROLLBAR-3DLIGHT-COLOR: #000000; SCROLLBAR-ARROW-COLOR: #000000; SCROLLBAR-TRACK-COLOR: #000000; FONT-FAMILY: verdana; SCROLLBAR-DARKSHADOW-COLOR: #000000
+}
+INPUT {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+TEXTAREA {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+P {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DL {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DT {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DD {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+TD {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+TH {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+.submit {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+A:link {
+        TEXT-DECORATION: none
+}
+A:visited {
+        TEXT-DECORATION: none
+}
+A:active {
+        TEXT-DECORATION: none
+}
+A:hover {
+        COLOR: #00ff00; TEXT-DECORATION: none
+}
+B.hl1 {
+        FONT-WEIGHT: bold
+}
+B.hl2 {
+        FONT-WEIGHT: bold; FONT-STYLE: italic
+}
+.sr {
+
+        FONT-SIZE: 10px; LINE-HEIGHT: 14px
+}
+.style13 {font-size: 9px; font-weight: bold; }
+.style14 {font-size: 9px}
+.style15 {font-size: 9px; color: #D6EF39; }
+//.style16 {font-size: 9px; color: #FF0000; }
+.style16 {font-size: 9px}
+</STYLE>
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php" />
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" />
+</HEAD>
+<BODY dir=ltr text=#008000 vLink=#00c000 aLink=#00ff00 link=#00c000
+bgColor=#000000 background=/images/dot.gif>
+<CENTER>
+<TABLE border=0>
+<TBODY>
+<TR>
+<td nowrap>
+  <B>[ <A href="/"
+              target=_self>home</A> ]</B>
+              <B>[ <A href="exploits.php" target=_self>exploits</A> ]</B> 
+              <B>[ <A href="platforms.php"
+              target=_self>platforms</A> ]</B> <B>[ <A href="shellcode2.php"
+              target=_self>shellcode</A> ]</B> <B>[ <A href="info.php"
+              target=_self>search</A> ]</B>
+              <B>[ <A href="/cracker/" target=_self>cracker</A> ]</B> 
+              <B>[ <A href="links.php" target=_self>links</A> ]</B> 
+              <B>[ <A href="rss.php" target=_self>rss</A> ]</B>
+              <B>[ <A href="http://www.milw0rm.com/sploits/milw0rm.tar.bz2" target=_self>archive</A> ]</B> 
+              <BR>
+	      </td>
+	      </TR>
+	      </TBODY>
+	      </TABLE>
+  <TABLE height=80 cellSpacing=0 cellPadding=1 width=637 bgColor=#008000 border=0>
+    <TBODY>
+      <TR>
+        <TD vAlign=top width="100%" height="100%"> <TABLE height="100%" cellSpacing=0 cellPadding=5 width="100%" bgColor=#000000 border=0>
+          <TBODY>
+            <TR>
+		<td style="background-repeat: no-repeat;" align="center" width="100%"><img src="/images/milw0rm-wi.jpg" width="445" height="71"></td>
+	    </TR>
+ <TR> 
+  <TD height="300" align=middle vAlign=top><B>[ <a href="remote.php"
+            target=_self>remote</a> ]</B> 
+     <TABLE borderColor=#333333 width=597 align=center border=0> 
+      <TBODY> 
+         <TR class="style13"> 
+          <TD nowrap="nowrap" width=65 class="style13">-::DATE</TD> 
+          <TD nowrap="nowrap" width=375 class="style13">-::DESCRIPTION</TD> 
+          <TD nowrap="nowrap" width=40 class="style13">-::HITS</TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap">-::AUTHOR</TD> 
+        </TR> 
+         <TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-10-20</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1265 target='_blank' class='style14'>Veritas NetBackup <= 6.0 (bpjava-msvc) Remote Exploit (OS X)</A></TD><TD nowrap="nowrap" width=40 align=left>930</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Veritas+Backup+Exec class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1265 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=auth.php?id=1265>Kevin Finisterre</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-01-16</TD><TD nowrap="nowrap" width=375><a href=id.php?id=758 target='_blank' class='style14'>Apple iTunes Playlist Local Parsing Buffer Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>904</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Apple+iTunes class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=758 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=auth.php?id=758>nemo</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-08-13</TD><TD nowrap="nowrap" width=375><a href=id.php?id=391 target='_blank' class='style14'>Mac OS X <= 10.3.3 AppleFileServer Remote Root Overflow Exploit
+</A></TD><TD nowrap="nowrap" width=40 align=left>906</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Mac+OS+X class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=metasploit.php?id=2 class='style16'>M</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=391 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=auth.php?id=391>Dino Dai Zovi</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-09-11</TD><TD nowrap="nowrap" width=375><a href=id.php?id=96 target='_blank' class='style14'>4D WebSTAR FTP Server Suite Remote Buffer Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>841</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=4D+WebSTAR class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=metasploit.php?id=76 class='style16'>M</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=96 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=auth.php?id=96>B-r00t</A></TD></TR> 
+       </TBODY> 
+    </TABLE> 
+     <br> 
+     <B>[ <A href="local.php"
+            target=_self>local</A> ]</B> 
+     <TABLE borderColor=#333333 width=597 align=center border=0> 
+      <TBODY> 
+         <TR class="style13"> 
+          <TD nowrap="nowrap" width=65 class="style13">-::DATE</TD> 
+          <TD nowrap="nowrap" width=375 class="style13">-::DESCRIPTION</TD> 
+          <TD nowrap="nowrap" width=40 class="style13">-::HITS</TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap">-::AUTHOR</TD> 
+        </TR> 
+                               <TR class=submit>                        <TD width=65 class=style14>2005-08-30</TD>                        <TD width=375><a href=id.php?id=1185 target='_blank' class='style14'>Adobe Version Cue 1.0/1.0.1 Local Root Exploit (OSX)</A></TD>                        <TD nowrap="nowrap" width=40 align=left>932</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Adobe class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1185 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=1185>vade79</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 class=style14>2005-08-30</TD>                        <TD width=375><a href=id.php?id=1186 target='_blank' class='style14'>Adobe Version Cue 1.0/1.0.1 (-lib) Local Root Exploit (OSX)</A></TD>                        <TD nowrap="nowrap" width=40 align=left>626</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Adobe class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1186 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=1186>vade79</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 class=style14>2005-06-14</TD>                        <TD width=375><a href=id.php?id=1043 target='_blank' class='style14'>Mac OS X 10.4 launchd Race Condition Exploit</A></TD>                        <TD nowrap="nowrap" width=40 align=left>1414</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Mac+OS+X class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1043 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=1043>intropy</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 class=style14>2005-03-22</TD>                        <TD width=375><a href=id.php?id=896 target='_blank' class='style14'>Mac OS X <= 10.3.8 (CF_CHARSET_PATH) Local Root Buffer Overflow</A></TD>                        <TD nowrap="nowrap" width=40 align=left>1370</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Mac+OS+X class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=896 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=896>vade79</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 class=style14>2005-02-07</TD>                        <TD width=375><a href=id.php?id=793 target='_blank' class='style14'>Mac OS X DS_Store Arbitrary File Overwrite Exploit</A></TD>                        <TD nowrap="nowrap" width=40 align=left>796</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Mac+OS+X class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=793 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=793>vade79</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 class=style14>2005-02-07</TD>                        <TD width=375><a href=id.php?id=795 target='_blank' class='style14'>Mac OS X Adobe Version Cue Local Root Exploit</A></TD>                        <TD nowrap="nowrap" width=40 align=left>925</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Mac+OS+X class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=795 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=795>0xdeadbabe</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 class=style14>2005-01-22</TD>                        <TD width=375><a href=id.php?id=766 target='_blank' class='style14'>Mac OS X <= 10.3.7 mRouter Local Privilege Escalation Exploit</A></TD>                        <TD nowrap="nowrap" width=40 align=left>672</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Mac+OS+X class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=766 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=766>nemo</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 class=style14>2004-12-08</TD>                        <TD width=375><a href=id.php?id=680 target='_blank' class='style14'>Mac OS X Adobe Version Cue Local Root Exploit</A></TD>                        <TD nowrap="nowrap" width=40 align=left>920</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Mac+OS+X class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=680 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=680>Jonathan Bringhurst</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 class=style14>2004-07-28</TD>                        <TD width=375><a href=id.php?id=367 target='_blank' class='style14'>Mac OS X Panther Internet Connect Local Root Exploit</A></TD>                        <TD nowrap="nowrap" width=40 align=left>735</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Mac+OS+X class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=367 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=367>B-r00t</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 class=style14>2003-04-18</TD>                        <TD width=375><a href=id.php?id=15 target='_blank' class='style14'>Mac OS X <= 10.2.4 DirectoryService (PATH) Local Root Exploit</A></TD>                        <TD nowrap="nowrap" width=40 align=left>569</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Mac+OS+X class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=15 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=15>Neeko Oni</A></TD>                      </TR> 
+       </TBODY> 
+    </TABLE> 
+     <br> 
+     <B>[ <A href="dos.php"
+            target=_self>dos</A> ]</B> 
+     <TABLE borderColor=#333333 width=597 align=center border=0> 
+      <TBODY> 
+         <TR class="style13"> 
+	  <TD nowrap="nowrap" width=65 class="style13">-::DATE</TD>
+	  <TD nowrap="nowrap" width=375 class="style13">-::DESCRIPTION</TD>
+          <TD nowrap="nowrap" width=40 class="style13">-::HITS</TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap">-::AUTHOR</TD> 
+        </TR> 
+                               <TR class=submit>                        <TD nowrap="nowrap" width=65 class=style14>2005-02-08</TD>                        <TD nowrap="nowrap" width=375><a href=id.php?id=799 target='_blank' class='style14'>Mac OS X AppleFileServer Remote Denial of Service Exploit</A></TD>                        <TD nowrap="nowrap" width=40 align=left>619</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Mac+OS+X class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=799 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=799>nemo</A></TD>                      </TR>                      <TR class=submit>                        <TD nowrap="nowrap" width=65 class=style14>2005-01-20</TD>                        <TD nowrap="nowrap" width=375><a href=id.php?id=762 target='_blank' class='style14'>Mac OS X <= 10.3.7 Input Validation Flaw parse_machfile() DoS</A></TD>                        <TD nowrap="nowrap" width=40 align=left>645</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Mac+OS+X class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=762 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=762>nemo</A></TD>                      </TR> 
+       </TBODY> 
+    </TABLE> 
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br> 
+     <br> 
+     <script language="JavaScript">
+<!--
+ctxt_ad_partner = "9308575640";
+ctxt_ad_section = "";
+ctxt_ad_bg = "000000";
+ctxt_ad_width = 468;
+ctxt_ad_height = 60;
+ctxt_ad_bc = "000000";
+ctxt_ad_cc = "333333";
+ctxt_ad_lc = "00c000";
+ctxt_ad_tc = "FFFFFF";
+ctxt_ad_uc = "00c000";
+// -->
+</script>
+<script language="JavaScript" src="http://ypn-js.overture.com/partner/js/ypn.js">
+</script>
+                  <p><FONT
+            style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit@milw0rm.com">submit@milw0rm.com</a><br><br>Copyright © 2004-2006 <a href="mailto:str0ke@milw0rm.com">str0ke@milw0rm.com</a> </FONT></p>
+</TD>
+              </TR>
+            </TBODY>
+          </TABLE></TD>
+      </TR>
+    </TBODY>
+  </TABLE>
+  <BR>
+  <BR>
+</CENTER>
+</BODY>
+</HTML>
+ 

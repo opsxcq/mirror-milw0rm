@@ -1,0 +1,410 @@
+<html><head>
+<title>milw0rm - exploits : vulnerabilities : videos : papers : shellcode</title>
+<meta name="description" content="milw0rm exploits and 0day exploits database">
+<meta name="keywords" content="exploits code, exploit code, exploits, 0-day, 0day, 0days, exploit, zero day, poc, exploit, local exploits, remote exploits, root exploits, windows, linux, new exploits, latest exploits, shellcode, Zero-day, zeroday, security articles, ezines, zines, security papers">
+<link type="text/css" rel="stylesheet" href="/milw0rm.css">
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php">
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon"></head>
+<body dir="ltr" alink="#00ff00" background="/images/dot.gif" bgcolor="#000000" link="#00c000" text="#008000" vlink="#00c000">
+<center>
+<table border="0">
+<tr>
+<td nowrap="nowrap">
+
+			<b>[ <a href="/" target=_self>home</a> ]</b>
+			<b>[ <a href="/contents.php" target=_self>contents</a> ]</b>
+			<b>[ <a href="/platforms/" target=_self>platforms</a> ]</b>
+			<b>[ <a href="/shellcode/" target=_self>shellcode</a> ]</b>
+			<b>[ <a href="/search.php" target=_self>search</a> ]</b>
+			<b>[ <a href="/cracker/" target=_self>cracker</a> ]</b>
+			<b>[ <a href="/links/" target=_self>links</a> ]</b>
+			<b>[ <a href="/rss.php" target=blank>rss</a> ]</b>
+			<b>[ <a href="/sploits/milw0rm.tar.bz2" target=_self>archive</a> ]</b>
+			</td>
+    </tr>
+  </table>
+
+<table width="668" border="0" cellpadding="3" cellspacing="3" class="main">
+  <tr><td><img src="/images/milw0rm-wi.jpg" alt="milw0rm"></td></tr><tr><td>
+<b>[ <a href="/" target=_self>Cisco</a> ]</b><table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-07-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9268" target="_blank" class="style14">Cisco WLC 4402 Basic Auth Remote Denial of Service (meta)</a></td>
+<td nowrap="nowrap" width=40 align="left">2303</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9268" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/2048">Christoph Bott</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-04-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8393" target="_blank" class="style14">Cisco ASA/PIX Appliances Fail to Properly Check Fragmented TCP Packets</a></td>
+<td nowrap="nowrap" width=40 align="left">5329</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8393" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/775">Daniel Clemens</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-14</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7776" target="_blank" class="style14">Cisco VLAN Trunking Protocol Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">6061</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7776" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1789">showrun</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-09-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6476" target="_blank" class="style14">Cisco Router HTTP Administration CSRF Command Execution Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">11890</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6476" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=6476" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1531">Jeremy Brown</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-09-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6477" target="_blank" class="style14">Cisco Router HTTP Administration CSRF Command Execution Exploit 2</a></td>
+<td nowrap="nowrap" width=40 align="left">14514</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6477" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=6477" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1531">Jeremy Brown</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-08-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6220" target="_blank" class="style14">Cisco WebEx Meeting Manager (atucfobj.dll) ActiveX Remote BOF Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">7028</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6220" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=6220" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1413">Guido Landi</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-07-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6155" target="_blank" class="style14">Cisco IOS 12.3(18) FTP Server Remote Exploit (attached to gdb)</a></td>
+<td nowrap="nowrap" width=40 align="left">12511</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6155" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1542">Andy Davis</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4911" target="_blank" class="style14">Cisco VPN Client IPSec Driver Local kernel system pool Corruption PoC</a></td>
+<td nowrap="nowrap" width=40 align="left">8044</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4911" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1011">mu-b</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-12-05</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4692" target="_blank" class="style14">Cisco Phone 7940 Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">7647</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4692" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1050">MADYNES</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-08-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4297" target="_blank" class="style14">Cisco IP Phone 7940 (3 SIP messages) Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5879</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4297" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1050">MADYNES</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-08-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4298" target="_blank" class="style14">Cisco IP Phone 7940 (10 SIP messages) Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">6621</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4298" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1050">MADYNES</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-08-09</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4272" target="_blank" class="style14">Cisco IOS Next Hop Resolution Protocol (NHRP) Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">7964</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4272" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/47">Martin Kluge</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-20</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3526" target="_blank" class="style14">Cisco Phone 7940/7960 (SIP INVITE) Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">6165</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3526" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1050">MADYNES</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-10-24</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2638" target="_blank" class="style14">Cisco VPN 3000 Concentrator <= 4.1.7, 4.7.2 (FTP) Remote Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">11405</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2638" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/578">prdelka</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-20</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2048" target="_blank" class="style14">Cisco/Protego CS-MARS < 4.2.1 (JBoss) Remote Code Execution Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">9093</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2048" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/68">Jon Hart</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-01-25</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1447" target="_blank" class="style14">Cisco Aironet Wireless Access Points Memory Exhaustion ARP Attack DoS</a></td>
+<td nowrap="nowrap" width=40 align="left">7939</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1447" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/554">Pasv</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-01-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1411" target="_blank" class="style14">Cisco IP Phone 7940 (Reboot) Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">10754</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1411" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/73">kokanin</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-11-23</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1338" target="_blank" class="style14">Cisco PIX Spoofed TCP SYN Packets Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">7751</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1338" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/524">Janis Vizulis</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2004-03-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/169" target="_blank" class="style14">Multiple Cisco Products Vulnerabilities Exploit (Cisco Global Exploiter)
+</a></td>
+<td nowrap="nowrap" width=40 align="left">9839</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/169" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/109">blackangels</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2003-08-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/77" target="_blank" class="style14">Cisco IOS 12.x/11.x HTTP Remote Integer Overflow Exploit
+</a></td>
+<td nowrap="nowrap" width=40 align="left">11667</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/77" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/59">FX</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2003-07-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/62" target="_blank" class="style14">Cisco IOS (using hping) Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">9182</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/62" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/49">zerash</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2003-07-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/60" target="_blank" class="style14">Cisco IOS IPv4 Packet Denial of Service Exploit (cisco-bug-44020.c)</a></td>
+<td nowrap="nowrap" width=40 align="left">7211</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/60" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/47">Martin Kluge</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2003-07-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/59" target="_blank" class="style14">Cisco IOS IPv4 Packets Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">6468</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/59" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/46">l0cK</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2001-01-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/262" target="_blank" class="style14">Cisco Multiple Products Automated Exploit Tool</a></td>
+<td nowrap="nowrap" width=40 align="left">7817</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/262" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/164">hypoclear</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2001-01-19</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/254" target="_blank" class="style14">Cisco Password Bruteforcer Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">15296</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/254" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/162">norby</a>
+</td>
+</tr></tbody></table><br><br><center></center><br><br><br><center>
+<script type="text/javascript"><!--
+google_ad_client = "pub-0718555979486542";
+/* 468x60, created 9/26/08 */
+google_ad_slot = "3279240256";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</center>
+
+<p><FONT style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit[at]milw0rm.com">submit[at]milw0rm.com</a> [<a href="/gpg/submit.asc" target="_blank">gpg</a>]<br>Copyright &copy; 2004-2009 <a href="mailto:str0ke[at]milw0rm.com">milw0rm</a> </FONT></p>
+</td></tr></table>
+  <br>
+  <br>
+</center>
+</body></html>

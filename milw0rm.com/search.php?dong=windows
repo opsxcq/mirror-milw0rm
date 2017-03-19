@@ -1,0 +1,1502 @@
+<html><head>
+<title>milw0rm - exploits : vulnerabilities : videos : papers : shellcode</title>
+<meta name="description" content="milw0rm exploits and 0day exploits database">
+<meta name="keywords" content="exploits code, exploit code, exploits, 0-day, 0day, 0days, exploit, zero day, poc, exploit, local exploits, remote exploits, root exploits, windows, linux, new exploits, latest exploits, shellcode, Zero-day, zeroday, security articles, ezines, zines, security papers">
+<link type="text/css" rel="stylesheet" href="/milw0rm.css">
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php">
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon"></head>
+<body dir="ltr" alink="#00ff00" background="/images/dot.gif" bgcolor="#000000" link="#00c000" text="#008000" vlink="#00c000">
+<center>
+<table border="0">
+<tr>
+<td nowrap="nowrap">
+
+			<b>[ <a href="/" target=_self>home</a> ]</b>
+			<b>[ <a href="/contents.php" target=_self>contents</a> ]</b>
+			<b>[ <a href="/platforms/" target=_self>platforms</a> ]</b>
+			<b>[ <a href="/shellcode/" target=_self>shellcode</a> ]</b>
+			<b>[ <a href="/search.php" target=_self>search</a> ]</b>
+			<b>[ <a href="/cracker/" target=_self>cracker</a> ]</b>
+			<b>[ <a href="/links/" target=_self>links</a> ]</b>
+			<b>[ <a href="/rss.php" target=blank>rss</a> ]</b>
+			<b>[ <a href="/sploits/milw0rm.tar.bz2" target=_self>archive</a> ]</b>
+			</td>
+    </tr>
+  </table>
+
+<table width="668" border="0" cellpadding="3" cellspacing="3" class="main">
+  <tr><td><img src="/images/milw0rm-wi.jpg" alt="milw0rm"></td></tr><tr><td>
+
+	<table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr>
+	<td align="middle" vAlign="top">
+	<form name="milw0rm" method="post" action="/search.php">
+	<br>
+	<strong>[ Search:&nbsp;&nbsp; </strong>
+	<input type="text" name="dong" size="35">
+	&nbsp;&nbsp;
+	<input type="submit" name="Submit" value="Submit">
+	</form>
+	</td>
+	</tr>
+	</tbody></table><br><br><b>[ <a href="/search.php" target=_self>exploits/shellcode</a> ]</b><table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-05-08</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5563" target="_blank" class="style14">TFTP Server for Windows 1.4 ST Remote BSS Overflow Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">7190</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=TFTPServer" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5563" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1442">tixxDZ</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-04-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5518" target="_blank" class="style14">MS Windows XP SP2 (win32k.sys) Privilege Escalation Exploit (MS08-025)</a></td>
+<td nowrap="nowrap" width=40 align="left">23060</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5518" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/644">Ruben Santamarta</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-04-14</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5442" target="_blank" class="style14">MS Windows GDI Image Parsing Stack Overflow Exploit (MS08-021)</a></td>
+<td nowrap="nowrap" width=40 align="left">10210</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5442" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1419">Lamhtz</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-03-31</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5327" target="_blank" class="style14">MS Windows Explorer Unspecified .DOC File Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4188</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5327" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1401">Iron Team</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-03-26</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5314" target="_blank" class="style14">TFTP Server for Windows 1.4 ST Buffer Overflow Exploit (0day)</a></td>
+<td nowrap="nowrap" width=40 align="left">7221</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=TFTP+Server" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5314" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/301">muts</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4948" target="_blank" class="style14">Windows RSH daemon <= 1.8 Remote Buffer Overflow Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">7151</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Windows+RSH+daemon" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4948" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/578">prdelka</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4934" target="_blank" class="style14">MS Windows Message Queuing Service RPC BOF Exploit (dnsname)</a></td>
+<td nowrap="nowrap" width=40 align="left">14764</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4934" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1301">Marcin Kozlowski</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-12-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4760" target="_blank" class="style14">MS Windows 2000 AS SP4 Message Queue Exploit (MS07-065)</a></td>
+<td nowrap="nowrap" width=40 align="left">8897</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4760" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/563">Andres Tarasco</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-12-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4745" target="_blank" class="style14">MS Windows Message Queuing Service RPC BOF Exploit (MS07-065)</a></td>
+<td nowrap="nowrap" width=40 align="left">7670</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows+" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4745" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1074">axis</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-12-08</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4702" target="_blank" class="style14">Windows Media Player 6.4 MP4 File Stack Overflow PoC</a></td>
+<td nowrap="nowrap" width=40 align="left">6368</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Windows+Media+Player" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4702" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/688">SYS 49152</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-11-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4682" target="_blank" class="style14">Windows Media Player AIFF Divide By Zero Exception DoS PoC</a></td>
+<td nowrap="nowrap" width=40 align="left">4683</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Windows+Media+Player" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4682" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1196">Gil-Dong / Woo-Chi</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-08-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4337" target="_blank" class="style14">MS Windows (GDI32.DLL) Denial of Service Exploit (MS07-046)</a></td>
+<td nowrap="nowrap" width=40 align="left">9317</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4337" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1196">Gil-Dong / Woo-Chi</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-08-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4325" target="_blank" class="style14">XAMPP for Windows 1.6.3a Local Privilege Escalation Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5155</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XAMPP" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4325" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1182">Inphex</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-07-24</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4222" target="_blank" class="style14">Windows RSH daemon 1.7 Remote Buffer Overflow Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">9311</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Windows+RSH+daemon" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4222" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1170">Joey Mengele</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-07-23</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4215" target="_blank" class="style14">MS Windows Explorer.exe Gif Image Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">10015</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4215" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/860">DeltahackingTEAM</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-07-20</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4205" target="_blank" class="style14">TeamSpeak 2.0 (Windows Release) Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">13030</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=TeamSpeak" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4205" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/810">YAG KOHHA</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-06-12</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4061" target="_blank" class="style14">Safari 3 for Windows Beta Remote Command Execution PoC</a></td>
+<td nowrap="nowrap" width=40 align="left">8764</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Safari" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4061" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=4061" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1131">Thor Larholm</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-06-07</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4045" target="_blank" class="style14">Microsoft Windows Animated Cursor Stack Overflow Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">11994</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4045" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/776">RISE Security</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-06-07</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4044" target="_blank" class="style14">MS Windows GDI+ ICO File Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5305</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4044" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1127">kad</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-05-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3926" target="_blank" class="style14">MS Windows Vista forged ARP packet Network Stack DoS Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">8224</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3926" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/588">Kristian Hermansen</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-26</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3804" target="_blank" class="style14">MS Windows (.ANI) GDI Remote Elevation of Privilege Exploit (MS07-017)</a></td>
+<td nowrap="nowrap" width=40 align="left">12355</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3804" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1086">Lionel d'Hauenens</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3746" target="_blank" class="style14">MS Windows DNS RPC Remote Buffer Overflow Exploit (port 445) v2</a></td>
+<td nowrap="nowrap" width=40 align="left">42770</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3746" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/563">Andres Tarasco</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3755" target="_blank" class="style14">MS Windows GDI Local Privilege Escalation Exploit (MS07-017) 2</a></td>
+<td nowrap="nowrap" width=40 align="left">10225</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3755" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1086">Lionel d'Hauenens</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3740" target="_blank" class="style14">MS Windows DNS DnssrvQuery Remote Stack Overflow Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">19551</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3740" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1065">devcode</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3738" target="_blank" class="style14">XAMPP for Windows <= 1.6.0a mssql_connect() Remote BoF Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">12637</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XAMPP" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3738" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/534">rgod</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3737" target="_blank" class="style14">MS Windows DNS RPC Remote Buffer Overflow Exploit (win2k SP4)</a></td>
+<td nowrap="nowrap" width=40 align="left">17528</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3737" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/507">Winny Thomas</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-09</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3695" target="_blank" class="style14">MS Windows Animated Cursor (.ANI) Local Overflow Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">8649</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3695" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/952">Breno Silva Pinto</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-09</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3693" target="_blank" class="style14">MS Windows .HLP File Local HEAP Overflow PoC 0day</a></td>
+<td nowrap="nowrap" width=40 align="left">7031</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3693" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/301">muts</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-08</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3688" target="_blank" class="style14">MS Windows GDI Local Privilege Escalation Exploit (MS07-017)</a></td>
+<td nowrap="nowrap" width=40 align="left">9677</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3688" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1076">Ivanlef0u</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-08</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3684" target="_blank" class="style14">MS Windows Explorer Unspecified .ANI File Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5770</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3684" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/983">Marsu</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-03</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3652" target="_blank" class="style14">MS Windows Animated Cursor (.ANI) Overflow Exploit (Hardware DEP)</a></td>
+<td nowrap="nowrap" width=40 align="left">8367</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3652" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1065">devcode</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-03</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3651" target="_blank" class="style14">MS Windows Animated Cursor (.ANI) Universal Exploit Generator</a></td>
+<td nowrap="nowrap" width=40 align="left">15539</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3651" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/810">YAG KOHHA</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-02</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3647" target="_blank" class="style14">MS Windows Animated Cursor (.ANI) Local Buffer Overflow Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">6965</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3647" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/983">Marsu</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3636" target="_blank" class="style14">MS Windows Animated Cursor (.ANI) Remote Exploit (eeye patch bypass)</a></td>
+<td nowrap="nowrap" width=40 align="left">20920</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3636" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/803">jamikazu</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3635" target="_blank" class="style14">MS Windows XP Animated Cursor (.ANI) Remote Overflow Exploit 2</a></td>
+<td nowrap="nowrap" width=40 align="left">13938</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3635" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/510">Trirat Puttaraksa</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3634" target="_blank" class="style14">MS Windows XP/Vista Animated Cursor (.ANI) Remote Overflow Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">23210</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3634" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/803">jamikazu</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-31</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3617" target="_blank" class="style14">MS Windows Animated Cursor (.ANI) Stack Overflow Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">11904</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3617" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1065">devcode</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-25</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3575" target="_blank" class="style14">Frontbase <= 4.2.7 Remote Buffer Overflow Exploit (windows)</a></td>
+<td nowrap="nowrap" width=40 align="left">3305</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Frontbase" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3575" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1058">Heretic2</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3453" target="_blank" class="style14">MS Windows DCE-RPC svcctl ChangeServiceConfig2A() Memory Corruption</a></td>
+<td nowrap="nowrap" width=40 align="left">6320</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3453" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/668">h07</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-06</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3419" target="_blank" class="style14">MS Windows (.doc File) Malformed Pointers Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5407</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3419" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/983">Marsu</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-01-24</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3190" target="_blank" class="style14">MS Windows Explorer (AVI) Unspecified Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5896</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3190" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/938">shinnai</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-01-13</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3111" target="_blank" class="style14">MS Windows Explorer (WMF) CreateBrushIndirect DoS Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">8619</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3111" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/980">cyanid-E</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-12-31</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3052" target="_blank" class="style14">MS Windows NtRaiseHardError Csrss.exe-winsrv.dll Double Free</a></td>
+<td nowrap="nowrap" width=40 align="left">6698</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3052" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/644">Ruben Santamarta</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-12-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3024" target="_blank" class="style14">MS Windows NtRaiseHardError Csrss.exe Memory Disclosure Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">8632</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3024" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/644">Ruben Santamarta</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-12-25</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3013" target="_blank" class="style14">MS Windows NetrWkstaUserEnum() Remote DoS Exploit (0day)</a></td>
+<td nowrap="nowrap" width=40 align="left">23872</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3013" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/668">h07</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-12-20</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2967" target="_blank" class="style14">MS Windows (MessageBox) Memory Corruption Local Denial of Service</a></td>
+<td nowrap="nowrap" width=40 align="left">8603</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2967" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/28">n/a</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-12-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2935" target="_blank" class="style14">Windows Media Player 9/10 (MID File) Denial Of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4862</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2935" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/947">sehato</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-12-09</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2900" target="_blank" class="style14">MS Windows DNS Resolution Remote Denial of Service PoC (MS06-041)</a></td>
+<td nowrap="nowrap" width=40 align="left">5953</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2900" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/507">Winny Thomas</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-12-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2879" target="_blank" class="style14">MS Windows spoolss GetPrinterData() Remote DoS Exploit (0day)</a></td>
+<td nowrap="nowrap" width=40 align="left">17183</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2879" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/668">h07</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-11-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2809" target="_blank" class="style14">MS Windows NetpManageIPCConnect Stack Overflow Exploit (py)</a></td>
+<td nowrap="nowrap" width=40 align="left">16840</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2809" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/507">Winny Thomas</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-11-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2800" target="_blank" class="style14">MS Windows Wkssvc NetrJoinDomain2 Stack Overflow Exploit (MS06-070)</a></td>
+<td nowrap="nowrap" width=40 align="left">15876</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2800" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/866">S A Stevens</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-11-16</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2789" target="_blank" class="style14">MS Windows NetpManageIPCConnect Stack Overflow Exploit (MS06-070)</a></td>
+<td nowrap="nowrap" width=40 align="left">16873</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2789" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/711">cocoruder</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-10-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2682" target="_blank" class="style14">MS Windows NAT Helper Components Remote DoS Exploit (perl)</a></td>
+<td nowrap="nowrap" width=40 align="left">7166</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2682" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/846">x82</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-10-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2672" target="_blank" class="style14">MS Windows NAT Helper Components (ipnathlp.dll) Remote DoS Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">17142</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2672" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/668">h07</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-09-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2412" target="_blank" class="style14">MS Windows (Windows Kernel) Privilege Escalation Exploit (MS06-049)</a></td>
+<td nowrap="nowrap" width=40 align="left">18703</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2412" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/542">SoBeIt</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-09-13</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2355" target="_blank" class="style14">MS Windows NetpIsRemote() Remote Overflow Exploit (MS06-040) (2k3)</a></td>
+<td nowrap="nowrap" width=40 align="left">21518</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"><a href=/metasploit/152 class="style16" title="metasploit module">M</a></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2355" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/510">Trirat Puttaraksa</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-08-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2265" target="_blank" class="style14">MS Windows NetpIsRemote() Remote Overflow Exploit (MS06-040) (2)</a></td>
+<td nowrap="nowrap" width=40 align="left">21547</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"><a href=/metasploit/152 class="style16" title="metasploit module">M</a></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2265" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/713">ub3rst4r</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-08-20</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2231" target="_blank" class="style14">Simple Machines Forum <= 1.1 rc2 (lngfile) Remote Exploit (windows)</a></td>
+<td nowrap="nowrap" width=40 align="left">13995</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Simple_Machines_Forum" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2231" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/534">rgod</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-08-19</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2223" target="_blank" class="style14">MS Windows CanonicalizePathName() Remote Exploit (MS06-040)</a></td>
+<td nowrap="nowrap" width=40 align="left">22883</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"><a href=/metasploit/152 class="style16" title="metasploit module">M</a></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2223" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/637">Preddy</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-08-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2210" target="_blank" class="style14">MS Windows PNG File IHDR Block Denial of Service Exploit PoC (c) (2)</a></td>
+<td nowrap="nowrap" width=40 align="left">5518</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2210" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/757">vegas78</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-08-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2204" target="_blank" class="style14">MS Windows PNG File IHDR Block Denial of Service Exploit PoC (c)</a></td>
+<td nowrap="nowrap" width=40 align="left">4830</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2204" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/637">Preddy</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-08-16</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2194" target="_blank" class="style14">MS Windows PNG File IHDR Block Denial of Service Exploit PoC</a></td>
+<td nowrap="nowrap" width=40 align="left">5646</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2194" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/637">Preddy</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-08-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2162" target="_blank" class="style14">MS Windows NetpIsRemote() Remote Overflow Exploit (MS06-040)</a></td>
+<td nowrap="nowrap" width=40 align="left">34010</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"><a href=/metasploit/152 class="style16" title="metasploit module">M</a></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2162" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/6">H D Moore</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2057" target="_blank" class="style14">MS Windows Mailslot Ring0 Memory Corruption Exploit (MS06-035)</a></td>
+<td nowrap="nowrap" width=40 align="left">20380</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2057" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/711">cocoruder</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2054" target="_blank" class="style14">MS Windows DHCP Client Broadcast Attack Exploit (MS06-036)</a></td>
+<td nowrap="nowrap" width=40 align="left">17656</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2054" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/470">redsand</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-06-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1967" target="_blank" class="style14">MS Windows TCP/IP Protocol Driver Remote Buffer Overflow Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">9717</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1967" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/637">Preddy</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-06-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1965" target="_blank" class="style14">MS Windows RRAS RASMAN Registry Stack Overflow Exploit (MS06-025)</a></td>
+<td nowrap="nowrap" width=40 align="left">17824</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"><a href=/metasploit/151 class="style16" title="metasploit module">M</a></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1965" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/686">Pusscat</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-06-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1940" target="_blank" class="style14">MS Windows RRAS Remote Stack Overflow Exploit (MS06-025)</a></td>
+<td nowrap="nowrap" width=40 align="left">26693</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"><a href=/metasploit/147 class="style16" title="metasploit module">M</a></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1940" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/6">H D Moore</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-06-14</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1911" target="_blank" class="style14">MS Windows XP/2K (Mrxsmb.sys) Privilege Escalation PoC (MS06-030)</a></td>
+<td nowrap="nowrap" width=40 align="left">18694</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1911" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/644">Ruben Santamarta</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-06-14</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1910" target="_blank" class="style14">MS Windows (NtClose DeadLock) Vulnerability PoC (MS06-030)</a></td>
+<td nowrap="nowrap" width=40 align="left">9490</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1910" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/644">Ruben Santamarta</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-03-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1603" target="_blank" class="style14">MS Windows XP/2003 (IGMP v3) Denial of Service Exploit (MS06-007)  (2)</a></td>
+<td nowrap="nowrap" width=40 align="left">10794</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1603" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/568">Firestorm</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-03-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1599" target="_blank" class="style14">MS Windows XP/2003 (IGMP v3) Denial of Service Exploit (MS06-007)</a></td>
+<td nowrap="nowrap" width=40 align="left">11218</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1599" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/593">Alexey Sintsov</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-03-14</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1584" target="_blank" class="style14">MS Windows Telephony Service Command Execution Exploit (MS05-040)</a></td>
+<td nowrap="nowrap" width=40 align="left">11267</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+WIndows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1584" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/171">Cesar Cerrudo</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-02-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1520" target="_blank" class="style14">MS Windows Media Player Plugin Overflow Exploit (MS06-006)(3)</a></td>
+<td nowrap="nowrap" width=40 align="left">11015</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"><a href=/metasploit/121 class="style16" title="metasploit module">M</a></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1520" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/8">Matthew Murphy</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-02-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1506" target="_blank" class="style14">MS Windows Color Management Module Overflow Exploit (MS05-036) (2)</a></td>
+<td nowrap="nowrap" width=40 align="left">8000</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1506" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/407">darkeagle</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-02-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1505" target="_blank" class="style14">MS Windows Media Player 10 Plugin Overflow Exploit (MS06-006)</a></td>
+<td nowrap="nowrap" width=40 align="left">18728</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"><a href=/metasploit/121 class="style16" title="metasploit module">M</a></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1505" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=1505" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/8">Matthew Murphy</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-02-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1504" target="_blank" class="style14">MS Windows Media Player 9 Plugin Overflow Exploit (MS06-006) (meta)</a></td>
+<td nowrap="nowrap" width=40 align="left">12056</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"><a href=/metasploit/121 class="style16" title="metasploit module">M</a></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1504" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/6">H D Moore</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-02-16</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1502" target="_blank" class="style14">Windows Media Player 7.1 <= 10 BMP Heap Overflow PoC (MS06-005) (2)</a></td>
+<td nowrap="nowrap" width=40 align="left">8143</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1502" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/470">redsand</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-02-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1500" target="_blank" class="style14">Windows Media Player 7.1 <= 10 BMP Heap Overflow PoC (MS06-005)</a></td>
+<td nowrap="nowrap" width=40 align="left">6283</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1500" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/214">ATmaCA</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-02-12</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1465" target="_blank" class="style14">MS Windows Services ACLs Local Privilege Escalation Exploit (updated)</a></td>
+<td nowrap="nowrap" width=40 align="left">12657</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1465" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/563">Andres Tarasco</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-01-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1420" target="_blank" class="style14">MS Windows Metafile (WMF) Remote File Download Exploit Generator</a></td>
+<td nowrap="nowrap" width=40 align="left">23424</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1420" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/407">darkeagle</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-01-05</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1407" target="_blank" class="style14">MS Windows 2k Kernel APC Data-Free Local Escalation Exploit (MS05-055)</a></td>
+<td nowrap="nowrap" width=40 align="left">7739</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1407" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/542">SoBeIt</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-12-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1396" target="_blank" class="style14">MS Windows IIS Malformed HTTP Request Denial of Service Exploit (cpp)</a></td>
+<td nowrap="nowrap" width=40 align="left">8726</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1396" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/482">Lympex</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-12-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1391" target="_blank" class="style14">Windows XP/2003 Metafile Escape() Code Execution Exploit (meta)</a></td>
+<td nowrap="nowrap" width=40 align="left">25591</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Windows+XP" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"><a href=/metasploit/111 class="style16" title="metasploit module">M</a></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1391" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/6">H D Moore</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-12-19</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1377" target="_blank" class="style14">MS Windows IIS Malformed HTTP Request Denial of Service Exploit (pl)</a></td>
+<td nowrap="nowrap" width=40 align="left">8070</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1377" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/73">kokanin</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-12-19</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1376" target="_blank" class="style14">MS Windows IIS Malformed HTTP Request Denial of Service Exploit (c)</a></td>
+<td nowrap="nowrap" width=40 align="left">8213</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1376" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/370">Kozan</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-12-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1352" target="_blank" class="style14">Microsoft Windows DTC Remote Exploit (PoC) (MS05-051) (updated)</a></td>
+<td nowrap="nowrap" width=40 align="left">15373</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Microsoft+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1352" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/388">Swan</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-11-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1346" target="_blank" class="style14">MS Windows Metafile (mtNoObjects) Denial of Service Exploit (MS05-053)</a></td>
+<td nowrap="nowrap" width=40 align="left">5360</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1346" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/507">Winny Thomas</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-11-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1343" target="_blank" class="style14">MS Windows Metafile (gdi32.dll) Denial of Service Exploit (MS05-053)</a></td>
+<td nowrap="nowrap" width=40 align="left">7252</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1343" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/507">Winny Thomas</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-11-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1341" target="_blank" class="style14">MS Windows MSDTC Service Remote Memory Modification PoC (MS05-051)</a></td>
+<td nowrap="nowrap" width=40 align="left">7520</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1341" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/407">darkeagle</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-11-16</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1328" target="_blank" class="style14">MS Windows 2k UPNP (getdevicelist) Memory Leak DoS Exploit </a></td>
+<td nowrap="nowrap" width=40 align="left">6934</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1328" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/507">Winny Thomas</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-11-02</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1287" target="_blank" class="style14">GO-Global Windows Server <= 3.1.0.3270 Buffer Overflow (PoC)</a></td>
+<td nowrap="nowrap" width=40 align="left">3779</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=GO-Global" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1287" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/69">Luigi Auriemma</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-11-02</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1286" target="_blank" class="style14">GO-Global Windows Clients <= 3.1.0.3270 Buffer Overflow (PoC)</a></td>
+<td nowrap="nowrap" width=40 align="left">3278</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=GO-Global" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1286" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/69">Luigi Auriemma</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-10-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1275" target="_blank" class="style14">Windows NT/2k/XP useradd shellcode for russian systems 318 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">13197</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1275" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/407">darkeagle</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-10-24</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1271" target="_blank" class="style14">MS Windows Plug-and-Play (Umpnpmgr.dll) DoS Exploit (MS05-047) (2)</a></td>
+<td nowrap="nowrap" width=40 align="left">7470</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1271" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/507">Winny Thomas</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-10-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1269" target="_blank" class="style14">MS Windows Plug-and-Play (Umpnpmgr.dll) DoS Exploit (MS05-047)</a></td>
+<td nowrap="nowrap" width=40 align="left">8618</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1269" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/28">n/a</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-10-19</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1260" target="_blank" class="style14">MS Windows IIS SA WebAgent 5.2/5.3 Redirect Overflow Exploit (meta)</a></td>
+<td nowrap="nowrap" width=40 align="left">13101</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"><a href=/metasploit/101 class="style16" title="metasploit module">M</a></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1260" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/6">H D Moore</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-09-06</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1198" target="_blank" class="style14">MS Windows CSRSS Local Privilege Escalation Exploit (MS05-018)</a></td>
+<td nowrap="nowrap" width=40 align="left">8125</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1198" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/454">eyas</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-09-06</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1197" target="_blank" class="style14">MS Windows (keybd_event) Local Privilege Elevation Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">10942</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1197" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/226">Andrés Acunha</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-08-25</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1180" target="_blank" class="style14">MS Windows Plug-and-Play Service Remote Universal Exploit (french fix)</a></td>
+<td nowrap="nowrap" width=40 align="left">6540</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"><a href=/metasploit/87 class="style16" title="metasploit module">M</a></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1180" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/483">Fabrice Mourron</a>
+</td>
+</tr></tbody></table><br><b>[ <a href="/papers/" target=_self>papers</a> ]</b><table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2008-05-23</TD><TD nowrap="nowrap" width=375><a href="/papers/205" target='_blank' class='style14'>Shellcode locations and buffer overflows in Windows</A></TD><TD nowrap="nowrap" width=40 align=left>3255</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/205" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/1464">suN8Hclf</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2008-04-21</TD><TD nowrap="nowrap" width=375><a href="/papers/195" target='_blank' class='style14'>Security Implications of Windows Access Tokens</A></TD><TD nowrap="nowrap" width=40 align=left>2460</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/195" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/1427">Luke Jennings</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-12-30</TD><TD nowrap="nowrap" width=375><a href="/papers/129" target='_blank' class='style14'>Shellcoding for Linux and Windows Tutorial</A></TD><TD nowrap="nowrap" width=40 align=left>7365</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/129" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/1060">Steve Hanna</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-12-11</TD><TD nowrap="nowrap" width=375><a href="/papers/121" target='_blank' class='style14'>Defeating Microsoft Windows XP SP2 Heap protection and DEP bypass</A></TD><TD nowrap="nowrap" width=40 align=left>7250</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/121" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/939">Alexander Anisimov</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-12-11</TD><TD nowrap="nowrap" width=375><a href="/papers/122" target='_blank' class='style14'>Bypassing Windows heap protections</A></TD><TD nowrap="nowrap" width=40 align=left>4811</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/122" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/940">Nicolas Falliere</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-08-20</TD><TD nowrap="nowrap" width=375><a href="/papers/79" target='_blank' class='style14'>Hardening Windows NT [2K, XP, 2003]</A></TD><TD nowrap="nowrap" width=40 align=left>11857</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/79" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/880">Aelphaeis Mangarae</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-06-09</TD><TD nowrap="nowrap" width=375><a href="/papers/68" target='_blank' class='style14'>Improving Automated Analysis of Windows x64 Binaries</A></TD><TD nowrap="nowrap" width=40 align=left>4091</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/68" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/908">skape</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-05-31</TD><TD nowrap="nowrap" width=375><a href="/papers/66" target='_blank' class='style14'>Windows Heap Overflows using the Process Environment Block (PEB)</A></TD><TD nowrap="nowrap" width=40 align=left>8652</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/66" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/191">c0ntex</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-03-14</TD><TD nowrap="nowrap" width=375><a href="/papers/12" target='_blank' class='style14'>WLSI Windows Local Shellcode Injection</A></TD><TD nowrap="nowrap" width=40 align=left>4337</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/12" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/171">Cesar Cerrudo</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-03-11</TD><TD nowrap="nowrap" width=375><a href="/papers/11" target='_blank' class='style14'>Practical Windows and Linux Shellcode Design</A></TD><TD nowrap="nowrap" width=40 align=left>8133</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/11" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/587">Nomenumbra</A></TD></TR></tbody></table><br><b>[ <a href="/video/" target=_self>videos</a> ]</b><table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2007-05-14</TD><TD nowrap="nowrap" width=375><a href="#"  onclick="window.open('/video/watch.php?id=68','test','width=894, height=721,scrollbars=no');" class='style14'>The dangers of Ad-Hoc networks in Windows XP SP2</a></TD>
+<TD nowrap="nowrap" width=40 align=left>44003</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=135><a href="/author/1105">rel1k</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2007-04-02</TD><TD nowrap="nowrap" width=375><a href="#"  onclick="window.open('/video/watch.php?id=60','test','width=750, height=510,scrollbars=no');" class='style14'>Windows Shellcode</a></TD>
+<TD nowrap="nowrap" width=40 align=left>28778</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=135><a href="/author/1067">Xnuxer Research</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-11-07</TD><TD nowrap="nowrap" width=375><a href="#"  onclick="window.open('/video/watch.php?id=46','test','width=1310, height=830,scrollbars=no');" class='style14'>Attack on Windows Systems based on the ActiveX Vulnerability</a></TD>
+<TD nowrap="nowrap" width=40 align=left>27723</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=135><a href="/author/888">Michal Bucko</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-10-28</TD><TD nowrap="nowrap" width=375><a href="#"  onclick="window.open('/video/watch.php?id=44','test','width=1054, height=828,scrollbars=no');" class='style14'>How to Exploit Stack Base Buffer Overrun Under Windows XP SP2</a></TD>
+<TD nowrap="nowrap" width=40 align=left>29496</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=135><a href="/author/550">Omega7</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-08-17</TD><TD nowrap="nowrap" width=375><a href="#"  onclick="window.open('/video/watch.php?id=33','test','width=1182, height=894,scrollbars=no');" class='style14'>Windows Server Rooting (Remote Desktop Connection)</a></TD>
+<TD nowrap="nowrap" width=40 align=left>58361</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=135><a href="/author/758">Chironex Fleckeri</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-04-30</TD><TD nowrap="nowrap" width=375><a href="#"  onclick="window.open('/video/watch.php?id=29','test','width=1182, height=894,scrollbars=no');" class='style14'>PHP Remote File Inclusion / Windows Backdoor</a></TD>
+<TD nowrap="nowrap" width=40 align=left>71252</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=135><a href="/author/881">WiLdBoY</A></TD></TR></tbody></table><br><br><br><script type="text/javascript"><!--
+google_ad_client = "pub-0718555979486542";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "text";
+//2007-08-22: milw0rm
+google_ad_channel = "1394564144";
+google_color_border = "000000";
+google_color_bg = "141414";
+google_color_link = "00c000";
+google_color_text = "000000";
+google_color_url = "00c000";
+google_ui_features = "rc:0";
+//-->
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+<p><FONT style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit[at]milw0rm.com">submit[at]milw0rm.com</a> [<a href="/gpg/submit.asc" target="_blank">gpg</a>]<br><br>Copyright &copy; 2004-2008 <a href="mailto:str0ke[at]milw0rm.com">milw0rm</a> </FONT></p>
+</td></tr></table>
+  <br>
+  <br>
+</center>
+</body></html>

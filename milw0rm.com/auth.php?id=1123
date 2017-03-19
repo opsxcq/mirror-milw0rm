@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>milw0rm.com - CoKi</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<STYLE type=text/css>
+BODY {
+        SCROLLBAR-FACE-COLOR: #000000; FONT-SIZE: 10px; SCROLLBAR-HIGHLIGHT-COLOR: #008000; SCROLLBAR-SHADOW-COLOR: #008000; SCROLLBAR-3DLIGHT-COLOR: #000000; SCROLLBAR-ARROW-COLOR: #000000; SCROLLBAR-TRACK-COLOR: #000000; FONT-FAMILY: verdana; SCROLLBAR-DARKSHADOW-COLOR: #000000
+}
+INPUT {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+TEXTAREA {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+P {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DL {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DT {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DD {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+TD {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+TH {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+.submit {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+A:link {
+        TEXT-DECORATION: none
+}
+A:visited {
+        TEXT-DECORATION: none
+}
+A:active {
+        TEXT-DECORATION: none
+}
+A:hover {
+        COLOR: #00ff00; TEXT-DECORATION: none
+}
+B.hl1 {
+        FONT-WEIGHT: bold
+}
+B.hl2 {
+        FONT-WEIGHT: bold; FONT-STYLE: italic
+}
+.sr {
+
+        FONT-SIZE: 10px; LINE-HEIGHT: 14px
+}
+.style13 {font-size: 9px; font-weight: bold; }
+.style14 {font-size: 9px}
+.style15 {font-size: 9px; color: #D6EF39; }
+</STYLE>
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php" />
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" />
+</HEAD>
+<BODY dir=ltr text=#008000 vLink=#00c000 aLink=#00ff00 link=#00c000
+bgColor=#000000 background=/images/dot.gif>
+<CENTER>
+<TABLE border=0>
+<TBODY>
+<TR>
+<td nowrap>
+  <B>[ <A href="http://www.milw0rm.com"
+              target=_self>home</A> ]</B>
+              <B>[ <A href="exploits.php" target=_self>exploits</A> ]</B>
+	      <B>[ <A href="platforms.php"
+              target=_self>platforms</A> ]</B> <B>[ <A href="shellcode2.php"
+              target=_self>shellcode</A> ]</B> <B>[ <A href="info.php"
+              target=_self>search</A> ]</B>
+              <B>[ <A href="links.php" target=_self>links</A> ]</B> 
+              <B>[ <A href="rss.php" target=_self>rss</A> ]</B> 
+              <BR>
+	      </td>
+	      </TR>
+	      </TBODY>
+	      </TABLE>
+  <TABLE height=80 cellSpacing=0 cellPadding=1 width=500 bgColor=#008000
+border=0>
+    <TBODY>
+      <TR>
+        <TD vAlign=top width="100%" height="100%"> <TABLE height="100%" cellSpacing=0 cellPadding=5 width="100%"
+      bgColor=#000000 border=0>
+            <TBODY>
+              <TR>
+	<td style="background-repeat: no-repeat;" align="center" valign="top" width="100%"><img src="/contest/milworm-12.jpg" width="445" height="71"></td>
+</TR>
+              
+	      
+	      <TR> 
+                <TD height="100" align=middle vAlign=bottom><!-- <B>[ <a href="author.php" 
+            target=_self>Authors</a> ]--><br></B>          
+	    
+	    <table align="center" border="0" bordercolor="#333333" width="597">
+                    <tbody>
+		      <tr class="style13">
+		      <td><table cellspacing="0" cellpadding="0">
+
+
+                <tr>
+                  <td width="75"><strong>Author: </strong></td>
+                  <td width="514">CoKi</td>
+                </tr>
+                <tr>
+                  <td><strong>Homepage: </strong></td>
+                  <td><a href="http://nosystem.com.ar">http://nosystem.com.ar </a></td>
+                </tr>
+                <tr>
+                  <td><strong>Email:</strong></td>
+                  <td>coki@nosystem.com.ar</td>
+                </tr>
+              </table>		        </td>
+		      </tr>
+		      </tbody>
+		      </table>
+		      <br>
+
+		      <TABLE borderColor=#333333 width=597 align=center border=0>
+
+                    <TBODY>
+                      <TR class="style13">
+                        <TD class="style13">-::DATE</TD>
+                        <TD class="style13">-::DESCRIPTION</TD>
+                        <TD width=40 class="style13">-::HITS</TD>
+                        <td width=9 class="style13"></td>
+                        <td width=9 class="style13"></td>
+                        <td width=9 class="style13"></td>
+                        <td width=9 class="style13"></td>
+                        <TD>-::AUTHOR</TD>
+                      </TR>
+
+<TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-08-05</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1138 target='_blank' class='style14'>nbSMTP <= 0.99 (util.c) Client-Side Command Execution Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>790</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=nbSMTP class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1138 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>CoKi</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-08-01</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1123 target='_blank' class='style14'>GNU Mailutils imap4d <= 0.6 Remote Format String Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>1524</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=GNU+Mailutils class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=metasploit.php?id=23 class='style16'>M</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1123 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>CoKi</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-02-03</TD><TD nowrap="nowrap" width=375><a href=id.php?id=784 target='_blank' class='style14'>ngIRCd <= 0.8.2 Remote Format String Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>782</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=ngIRCd class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=784 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>CoKi</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-12-14</TD><TD nowrap="nowrap" width=375><a href=id.php?id=684 target='_blank' class='style14'>TipxD <= 1.1.1 Local Format String Vulnerability (not setuid)</A></TD><TD nowrap="nowrap" width=40 align=left>411</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=TipxD class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=684 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>CoKi</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-12-12</TD><TD nowrap="nowrap" width=375><a href=id.php?id=681 target='_blank' class='style14'>Citadel/UX <= 6.27 Remote Root Format String Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>560</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Citadel%2FUX class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=681 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>CoKi</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-10-23</TD><TD nowrap="nowrap" width=375><a href=id.php?id=591 target='_blank' class='style14'>socat <= 1.4.0.2 Local Format String Exploit (not setuid)</A></TD><TD nowrap="nowrap" width=40 align=left>410</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=socat class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=591 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>CoKi</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-09-23</TD><TD nowrap="nowrap" width=375><a href=id.php?id=476 target='_blank' class='style14'>glFTPd Local Stack Overflow Exploit (PoC) (Slackware 9.0/9.1/10.0) </A></TD><TD nowrap="nowrap" width=40 align=left>467</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=glFTPd class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=476 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>CoKi</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-08-02</TD><TD nowrap="nowrap" width=375><a href=id.php?id=370 target='_blank' class='style14'>Citadel/UX Remote Denial of Service Exploit (PoC)</A></TD><TD nowrap="nowrap" width=40 align=left>337</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Citadel%2FUX class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=370 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>CoKi</TD></TR>		      
+                  </TBODY>
+                  </TABLE>
+                    <br>
+                    <br>
+                    <br>
+
+                  <p><FONT
+            style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit@milw0rm.com">submit@milw0rm.com</a><br><br>Copyright © 2004-2005 <a href="mailto:str0ke@milw0rm.com">str0ke@milw0rm.com</a> </FONT></p>
+</TD>
+              </TR>
+            </TBODY>
+          </TABLE></TD>
+      </TR>
+    </TBODY>
+  </TABLE>
+  <BR>
+  <BR>
+</CENTER>
+</BODY>
+</HTML>

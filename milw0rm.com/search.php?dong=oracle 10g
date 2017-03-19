@@ -1,0 +1,393 @@
+<html><head>
+<title>milw0rm - exploits : vulnerabilities : videos : papers : shellcode</title>
+<meta name="description" content="milw0rm exploits and 0day exploits database">
+<meta name="keywords" content="exploits code, exploit code, exploits, 0-day, 0day, 0days, exploit, zero day, poc, exploit, local exploits, remote exploits, root exploits, windows, linux, new exploits, latest exploits, shellcode, Zero-day, zeroday, security articles, ezines, zines, security papers">
+<link type="text/css" rel="stylesheet" href="/milw0rm.css">
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php">
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon"></head>
+<body dir="ltr" alink="#00ff00" background="/images/dot.gif" bgcolor="#000000" link="#00c000" text="#008000" vlink="#00c000">
+<center>
+<table border="0">
+<tr>
+<td nowrap="nowrap">
+
+			<b>[ <a href="/" target=_self>home</a> ]</b>
+			<b>[ <a href="/contents.php" target=_self>contents</a> ]</b>
+			<b>[ <a href="/platforms/" target=_self>platforms</a> ]</b>
+			<b>[ <a href="/shellcode/" target=_self>shellcode</a> ]</b>
+			<b>[ <a href="/search.php" target=_self>search</a> ]</b>
+			<b>[ <a href="/cracker/" target=_self>cracker</a> ]</b>
+			<b>[ <a href="/links/" target=_self>links</a> ]</b>
+			<b>[ <a href="/rss.php" target=blank>rss</a> ]</b>
+			<b>[ <a href="/sploits/milw0rm.tar.bz2" target=_self>archive</a> ]</b>
+			</td>
+    </tr>
+  </table>
+
+<table width="668" border="0" cellpadding="3" cellspacing="3" class="main">
+  <tr><td><img src="/images/milw0rm-wi.jpg" alt="milw0rm"></td></tr><tr><td>
+
+	<table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr>
+	<td align="middle" vAlign="top">
+	<form name="milw0rm" method="post" action="/search.php">
+	<br>
+	<strong>[ Search:&nbsp;&nbsp; </strong>
+	<input type="text" name="dong" size="35">
+	&nbsp;&nbsp;
+	<input type="submit" name="Submit" value="Submit">
+	</form>
+	</td>
+	</tr>
+	</tbody></table><br><br><b>[ <a href="/search.php" target=_self>exploits/shellcode</a> ]</b><table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-07-02</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9072" target="_blank" class="style14">Oracle 10g SYS.LT.COMPRESSWORKSPACETREE SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5369</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Oracle" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9072" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/847">Sumit Siddharth</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8074" target="_blank" class="style14">Oracle 10g MDSYS.SDO_TOPO_DROP_FTBL SQL Injection Exploit (meta)</a></td>
+<td nowrap="nowrap" width=40 align="left">11056</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Oracle" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8074" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1264">Sh2kerr</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-06</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7677" target="_blank" class="style14">Oracle 10g SYS.LT.COMPRESSWORKSPACETREE SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">3942</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Oracle" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7677" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1264">Sh2kerr</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-06</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7676" target="_blank" class="style14">Oracle 10g SYS.LT.MERGEWORKSPACE SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2846</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Oracle" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7676" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1264">Sh2kerr</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-06</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7675" target="_blank" class="style14">Oracle 10g SYS.LT.REMOVEWORKSPACE SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2767</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Oracle" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7675" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1264">Sh2kerr</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4997" target="_blank" class="style14">Oracle 10g R1 xdb.xdb_pitrig_pkg Buffer Overflow Exploit (PoC)</a></td>
+<td nowrap="nowrap" width=40 align="left">6618</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Oracle" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4997" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1264">Sh2kerr</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4996" target="_blank" class="style14">Oracle 10g R1 xdb.xdb_pitrig_pkg  PLSQL Injection (change sys password)</a></td>
+<td nowrap="nowrap" width=40 align="left">8001</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Oracle" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4996" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1264">Sh2kerr</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4995" target="_blank" class="style14">Oracle 10g R1 pitrig_truncate PLSQL Injection (get users hash)</a></td>
+<td nowrap="nowrap" width=40 align="left">6514</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Oracle" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4995" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1264">Sh2kerr</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4994" target="_blank" class="style14">Oracle 10g R1 pitrig_drop PLSQL Injection (get users hash)</a></td>
+<td nowrap="nowrap" width=40 align="left">6203</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Oracle" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4994" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1264">Sh2kerr</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-10-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4572" target="_blank" class="style14">Oracle 10g LT.FINDRICSET Local SQL Injection Exploit (IDS evasion)</a></td>
+<td nowrap="nowrap" width=40 align="left">8319</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Oracle" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4572" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1264">Sh2kerr</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-10-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4571" target="_blank" class="style14">Oracle 10g/11g SYS.LT.FINDRICSET Local SQL Injection Exploit (2)</a></td>
+<td nowrap="nowrap" width=40 align="left">6835</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Oracle" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4571" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/729">bunker</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-10-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4570" target="_blank" class="style14">Oracle 10g/11g SYS.LT.FINDRICSET Local SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5347</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Oracle" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4570" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/729">bunker</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-10-23</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4564" target="_blank" class="style14">Oracle 10g CTX_DOC.MARKUP SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">8884</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Oracle" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4564" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1264">Sh2kerr</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3585" target="_blank" class="style14">Oracle 10g KUPM$MCP.MAIN SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">7446</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Oracle" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3585" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/729">bunker</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3584" target="_blank" class="style14">Oracle 10g KUPM$MCP.MAIN SQL Injection Exploit v2</a></td>
+<td nowrap="nowrap" width=40 align="left">6478</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Oracle" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3584" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/729">bunker</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3451" target="_blank" class="style14">Oracle 10g (PROCESS_DUP_HANDLE) Local Privilege Elevation (win32)</a></td>
+<td nowrap="nowrap" width=40 align="left">6143</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Oracle" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3451" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/171">Cesar Cerrudo</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-02-26</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3376" target="_blank" class="style14">Oracle 10g KUPV$FT.ATTACH_JOB SQL Injection Exploit v2</a></td>
+<td nowrap="nowrap" width=40 align="left">6027</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Oracle" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3376" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/729">bunker</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-02-26</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3375" target="_blank" class="style14">Oracle 10g KUPW$WORKER.MAIN SQL Injection Exploit v2</a></td>
+<td nowrap="nowrap" width=40 align="left">7610</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Oracle" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3375" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/729">bunker</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-02-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3359" target="_blank" class="style14">Oracle 10g KUPV$FT.ATTACH_JOB Grant/Revoke dba Permission Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">6732</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Oracle" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3359" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/729">bunker</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-02-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3358" target="_blank" class="style14">Oracle 10g KUPW$WORKER.MAIN Grant/Revoke dba Permission Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">7377</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Oracle" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3358" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/729">bunker</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-01-23</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3179" target="_blank" class="style14">Oracle 10g SYS.KUPV$FT.ATTACH_JOB PL/SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5586</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Oracle" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3179" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/854">Joxean Koret</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-01-23</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3178" target="_blank" class="style14">Oracle 10g SYS.KUPW$WORKER.MAIN PL/SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5918</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Oracle" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3178" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/854">Joxean Koret</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-01-23</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3177" target="_blank" class="style14">Oracle 10g SYS.DBMS_CDC_IMPDP.BUMP_SEQUENCE PL/SQL Injection</a></td>
+<td nowrap="nowrap" width=40 align="left">7594</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Oracle" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3177" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/854">Joxean Koret</a>
+</td>
+</tr></tbody></table><br><br><br><center>
+<script type="text/javascript"><!--
+google_ad_client = "pub-0718555979486542";
+/* 468x60, created 9/26/08 */
+google_ad_slot = "3279240256";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</center>
+
+<p><FONT style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit[at]milw0rm.com">submit[at]milw0rm.com</a> [<a href="/gpg/submit.asc" target="_blank">gpg</a>]<br>Copyright &copy; 2004-2009 <a href="mailto:str0ke[at]milw0rm.com">milw0rm</a> </FONT></p>
+</td></tr></table>
+  <br>
+  <br>
+</center>
+</body></html>

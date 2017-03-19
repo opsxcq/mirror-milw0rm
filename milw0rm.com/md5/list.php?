@@ -1,0 +1,98 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>milw0rm.com - free md5/lm hash cracking</TITLE>
+<link type="text/css" rel="stylesheet" href="/milw0rm.css">
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php" />
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" />
+</HEAD>
+<BODY dir=ltr text=#008000 vLink=#00c000 aLink=#00ff00 link=#00c000
+bgColor=#000000 background=/images/dot.gif>
+<CENTER>
+<TABLE border=0>
+<TBODY>
+<TR>
+<td nowrap>
+  <B>[ <A href="/" target=_self>home</A> ]</B>
+              <B>[ <A href="/cracker/" target=_self>cracker</A> ]</B> 
+              <B>[ <A href="insert.php" target=_self>insert</A> ]</B> 
+              <B>[ <A href="list.php" target=_self>list</A> ]</B> 
+              <B>[ <A href="info.php" target=_self>search</A> ]</B> 
+              <B>[ <A href="donated.php" target=_self>donated users</A> ]</B> 
+              <B>[ <A href="/mil-dic.php" target=_self>cracked hashs</A> ]</B> 
+	      </td>
+	      </TR>
+	      </TBODY>
+	      </TABLE>
+  <TABLE height=80 cellSpacing=0 cellPadding=1 width=637 bgColor=#008000 border=0>
+    <TBODY>
+      <TR>
+        <TD vAlign=top width="100%" height="100%"> <TABLE height="100%" cellSpacing=0 cellPadding=5 width="100%" bgColor=#000000 border=0>
+          <TBODY>
+            <TR>
+		<td style="background-repeat: no-repeat;" align="center" width="100%"><img src="/images/milw0rm_cracker.jpg" width="445" height="71"></td>
+	    </TR>
+	
+ <TR> 
+  <TD align=middle vAlign=top> 
+     <TABLE borderColor=#333333 width=536 align=center border=0> 
+      <TBODY> 
+         <TR class="style13">
+          <TD width=40 class="style13"><div align="center">-::TYPE</div></TD>
+          <TD width=224 class="style13"><div align="center">-::HASH</div></TD>
+          <TD width=150 class="style13"><div align="center">-::PASS</div></TD>
+          <TD width=90 class="style13"><div align="center">-::STATUS</div></TD>
+<!--
+          <TD width=50 class="style13"><div align="center">-::TIME</div></TD>
+-->
+          <TD width=132 class="style13"><div align="center">-::SUBMITED</div></TD>
+        </TR>
+<TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">a5546da34d5926a91b74d4847e18d035</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">waiting</div></TD><TD nowrap="nowrap" width=132><div align="center">2008-12-18 05:05:25</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">2c72d95f8c4695168d795cdf6afd4b08</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">waiting</div></TD><TD nowrap="nowrap" width=132><div align="center">2008-12-18 04:56:09</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">83e8fcce02edc155be3ed6b5d0d603f2</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">waiting</div></TD><TD nowrap="nowrap" width=132><div align="center">2008-12-18 04:53:14</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">a6e0e74227aade2136dfddc2def0d13e</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">waiting</div></TD><TD nowrap="nowrap" width=132><div align="center">2008-12-18 04:51:17</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">143ca473722748ae79cae618f273af2d</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">waiting</div></TD><TD nowrap="nowrap" width=132><div align="center">2008-12-18 04:50:02</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">50cbb432141a2b058dc66c354a47e8b5</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">waiting</div></TD><TD nowrap="nowrap" width=132><div align="center">2008-12-18 04:49:37</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">dafa0f8cd7aa35da9636153d93be810c</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">waiting</div></TD><TD nowrap="nowrap" width=132><div align="center">2008-12-18 04:49:08</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">50275006d1f3b9cccfa531f2c4fdd0f7</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">waiting</div></TD><TD nowrap="nowrap" width=132><div align="center">2008-12-18 04:49:00</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">0f44f74faf56bcc537dd2f27a0072625</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">waiting</div></TD><TD nowrap="nowrap" width=132><div align="center">2008-12-18 04:48:22</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">14014bdfd765547a3514e5f95447918f</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">waiting</div></TD><TD nowrap="nowrap" width=132><div align="center">2008-12-18 04:48:08</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">3f90a428738956efe20560b6d5ba214a</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">waiting</div></TD><TD nowrap="nowrap" width=132><div align="center">2008-12-18 04:45:32</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">52cf8b83ba2f4f239d0ae76b5dba7684</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">waiting</div></TD><TD nowrap="nowrap" width=132><div align="center">2008-12-18 04:45:22</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">f73ee5c66a36ae5587f01d5f868bccd8</div></TD><TD nowrap="nowrap" width=150><div align="center">bb3851</div></TD><TD nowrap="nowrap" width=90><div align="center">cracked</div></TD><TD nowrap="nowrap" width=132><div align="center">2008-12-18 04:33:25</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">988847ac6feac0c4355756ebddc87fa2</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">processing2</div></TD><TD nowrap="nowrap" width=132><div align="center">2008-12-18 04:29:39</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">0ae569b5f4e5449f1a9496e6f259f9be</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">processing2</div></TD><TD nowrap="nowrap" width=132><div align="center">2008-12-18 04:19:12</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">59b04866c28b2c2c246c04237d5dd2ac</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">processing2</div></TD><TD nowrap="nowrap" width=132><div align="center">2008-12-18 04:18:01</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">7412ca8847e2975203b425c9a3f2b628</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">processing2</div></TD><TD nowrap="nowrap" width=132><div align="center">2008-12-18 04:07:03</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">b9311b1b76c87e47b2a76400c60dd4d5</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">processing2</div></TD><TD nowrap="nowrap" width=132><div align="center">2008-12-18 04:06:38</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">1f0fe25a42ef6bd230841d0c796f1718</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">processing2</div></TD><TD nowrap="nowrap" width=132><div align="center">2008-12-18 03:56:57</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">1fac758dd72ba05d33e92480f551478d</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">processing2</div></TD><TD nowrap="nowrap" width=132><div align="center">2008-12-18 03:56:27</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">8c4a3a92dfc0bacc63241d3eb4cd412d</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">processing2</div></TD><TD nowrap="nowrap" width=132><div align="center">2008-12-18 03:52:36</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">abeb58c004a118c69daa4274bce0a4f0</div></TD><TD nowrap="nowrap" width=150><div align="center">1nt3rf</div></TD><TD nowrap="nowrap" width=90><div align="center">cracked</div></TD><TD nowrap="nowrap" width=132><div align="center">2008-12-18 03:46:49</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">1944ef45779932f53cc1f05f4f99db7a</div></TD><TD nowrap="nowrap" width=150><div align="center">72475d</div></TD><TD nowrap="nowrap" width=90><div align="center">cracked</div></TD><TD nowrap="nowrap" width=132><div align="center">2008-12-18 03:37:16</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">f8303ed36b2b21eeb68682d1886e0b40</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">processing</div></TD><TD nowrap="nowrap" width=132><div align="center">2008-12-18 02:40:36</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">3a4a0b6811cac6b47eb6b519f3d15249</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">processing</div></TD><TD nowrap="nowrap" width=132><div align="center">2008-12-18 02:30:39</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">ac4cf957d8fdb0ae68c933ef7ace29b0</div></TD><TD nowrap="nowrap" width=150><div align="center">freemanx</div></TD><TD nowrap="nowrap" width=90><div align="center">cracked</div></TD><TD nowrap="nowrap" width=132><div align="center">2008-12-18 02:26:29</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">365a8f11c96b7a6e53dbfc9d73ece01f</div></TD><TD nowrap="nowrap" width=150><div align="center">753ED1</div></TD><TD nowrap="nowrap" width=90><div align="center">cracked</div></TD><TD nowrap="nowrap" width=132><div align="center">2008-12-18 02:23:45</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">2b75f90181c09686c8b22060bc19638e</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">processing</div></TD><TD nowrap="nowrap" width=132><div align="center">2008-12-18 02:22:35</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">eea677ab514484c9b43247c7b329c190</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">notfound</div></TD><TD nowrap="nowrap" width=132><div align="center">2008-12-18 02:13:42</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">4493785d71486405601484682f832fa4</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">notfound</div></TD><TD nowrap="nowrap" width=132><div align="center">2008-12-18 01:39:51</div></TD></TR>       </TBODY> 
+    </TABLE> 
+     <br> 
+     <br> 
+<center>
+[&laquo;] &laquo; prev | 1  <a href="?start=30" class=style13> 2</a>  <a href="?start=60" class=style13> 3</a>  <a href="?start=90" class=style13> 4</a>  <a href="?start=120" class=style13> 5</a>  <a href="?start=150" class=style13> 6</a>  <a href="?start=180" class=style13> 7</a>  <a href="?start=210" class=style13> 8</a>  <a href="?start=240" class=style13> 9</a>  <a href="?start=270" class=style13> 10</a> | <a href="?start=30" class=style13>next &raquo;</a> [<a href="?start=219390" class=style13>&raquo;</a>]</center>
+<br>
+<script type="text/javascript"><!--
+google_ad_client = "pub-0718555979486542";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "text";
+//2007-08-22: milw0rm
+google_ad_channel = "1394564144";
+google_color_border = "000000";
+google_color_bg = "141414";
+google_color_link = "00c000";
+google_color_text = "000000";
+google_color_url = "00c000";
+google_ui_features = "rc:0";
+//-->
+</script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+<br><br>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but04.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+</form>
+<br>
+                  <p><br>Copyright &copy; 2004-2008 <a href="mailto:str0ke[at]milw0rm.com">milw0rm</a></p>
+</TD>
+              </TR>
+            </TBODY>
+          </TABLE></TD>
+      </TR>
+    </TBODY>
+  </TABLE>
+  <BR>
+  <BR>
+</CENTER>
+</BODY>
+</HTML>

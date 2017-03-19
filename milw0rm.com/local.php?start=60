@@ -1,0 +1,479 @@
+<html><head>
+<title>milw0rm - exploits : vulnerabilities : videos : papers : shellcode</title>
+<meta name="description" content="milw0rm exploits and 0day exploits database">
+<meta name="keywords" content="exploits code, exploit code, exploits, 0-day, 0day, 0days, exploit, zero day, poc, exploit, local exploits, remote exploits, root exploits, windows, linux, new exploits, latest exploits, shellcode, Zero-day, zeroday, security articles, ezines, zines, security papers">
+<link type="text/css" rel="stylesheet" href="/milw0rm.css">
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php">
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon"></head>
+<body dir="ltr" alink="#00ff00" background="/images/dot.gif" bgcolor="#000000" link="#00c000" text="#008000" vlink="#00c000">
+<center>
+<table border="0">
+<tr>
+<td nowrap="nowrap">
+
+			<b>[ <a href="/" target=_self>home</a> ]</b>
+			<b>[ <a href="/contents.php" target=_self>contents</a> ]</b>
+			<b>[ <a href="/platforms/" target=_self>platforms</a> ]</b>
+			<b>[ <a href="/shellcode/" target=_self>shellcode</a> ]</b>
+			<b>[ <a href="/search.php" target=_self>search</a> ]</b>
+			<b>[ <a href="/cracker/" target=_self>cracker</a> ]</b>
+			<b>[ <a href="/links/" target=_self>links</a> ]</b>
+			<b>[ <a href="/rss.php" target=blank>rss</a> ]</b>
+			<b>[ <a href="/sploits/milw0rm.tar.bz2" target=_self>archive</a> ]</b>
+			</td>
+    </tr>
+  </table>
+
+<table width="668" border="0" cellpadding="3" cellspacing="3" class="main">
+  <tr><td><img src="/images/milw0rm-wi.jpg" alt="milw0rm"></td></tr><tr><td>
+<b>[ <a href="/" target=_self>local</a> ]</b><table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-11</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9418" target="_blank" class="style14">Easy Music Player 1.0.0.2 (wav) Universal Local Buffer Exploit (SEH) #2</a></td>
+<td nowrap="nowrap" width=40 align="left">2576</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Easy+Music+Player" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9418" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1896">ThE g0bL!N</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-11</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9412" target="_blank" class="style14">Easy Music Player 1.0.0.2 (wav) Universal Local Buffer Exploit (SEH)</a></td>
+<td nowrap="nowrap" width=40 align="left">2193</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Easy+Music+Player" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9412" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/2070">ahwak2000</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9409" target="_blank" class="style14">MediaCoder 0.7.1.4490 (.lst/.m3u) Universal BOF Exploit (SEH)</a></td>
+<td nowrap="nowrap" width=40 align="left">2972</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MediaCoder" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9409" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1940">hack4love</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-07</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9386" target="_blank" class="style14">Steam v.54/894 Local Privilege Escalation Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">3695</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Steam" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9386" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1732">MrDoug</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-06</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9379" target="_blank" class="style14">Playlistmaker 1.5 (.M3U/M3L File) Local Stack Overflow Exploit (seh)</a></td>
+<td nowrap="nowrap" width=40 align="left">2445</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Playlistmaker" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9379" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/2060">germaya_x</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-06</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9377" target="_blank" class="style14">A2 Media Player Pro 2.51 (.m3u /m3l) Universal Local BOF Exploit (SEH)</a></td>
+<td nowrap="nowrap" width=40 align="left">3011</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=A2+Media+Player+Pro" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9377" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1940">hack4love</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-06</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9375" target="_blank" class="style14">JetAudio 7.1.9.4030 Universal Stack Overflow Exploit (SEH)</a></td>
+<td nowrap="nowrap" width=40 align="left">2898</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=JetAudio" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9375" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/2041">Dr_IDE</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-05</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9366" target="_blank" class="style14">jetAudio v 7.1.9.4030 plus vx (.m3u ) Local Stack Overflow (SEH)</a></td>
+<td nowrap="nowrap" width=40 align="left">2359</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=jetAudio" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9366" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/2052">corelanc0d3r</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-05</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9364" target="_blank" class="style14">Tuniac v.090517c (.M3U File) Local File Crash PoC</a></td>
+<td nowrap="nowrap" width=40 align="left">2516</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Tuniac" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9364" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/2041">Dr_IDE</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-05</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9363" target="_blank" class="style14">Linux Kernel < 2.6.14.6 procfs Kernel Memory Disclosure Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4862</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9363" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1745">Jon Oberheide</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-04</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9360" target="_blank" class="style14">BlazeDVD 5.1/HDTV Player 6.0 (.PLF File) Universal 
+BOF Exploit (SEH)</a></td>
+<td nowrap="nowrap" width=40 align="left">2099</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=BlazeDVD" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9360" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1896">ThE g0bL!N</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-04</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9354" target="_blank" class="style14">MediaCoder 0.7.1.4486 (.lst) Universal Buffer Overflow Exploit (SEH)</a></td>
+<td nowrap="nowrap" width=40 align="left">2226</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MediaCoder" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9354" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/2060">germaya_x</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-04</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9352" target="_blank" class="style14">Linux Kernel <= 2.6.31-rc5 sigaltstack 4-Byte Stack Disclosure Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">6921</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9352" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1745">Jon Oberheide</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-03</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9346" target="_blank" class="style14">Blaze HDTV Player 6.0 (.PLF File) Local Buffer Overflow Exploit (SEH)</a></td>
+<td nowrap="nowrap" width=40 align="left">3198</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Blaze+HDTV+Player" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9346" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1940">hack4love</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-03</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9343" target="_blank" class="style14">MediaCoder 0.6.2.4275 (.lst File) Stack Buffer Overflow Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2360</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MediaCoder" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9343" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/2034">SkuLL-HacKeR</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-03</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9329" target="_blank" class="style14">BlazeDVD 5.1 Professional (.PLF File) Local Buffer Overflow Exploit (SEH)</a></td>
+<td nowrap="nowrap" width=40 align="left">2925</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=BlazeDVD" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9329" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1940">hack4love</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9321" target="_blank" class="style14">Destiny Media Player 1.61 (.pls) Universal Buffer Overflow Exploit (SEH)</a></td>
+<td nowrap="nowrap" width=40 align="left">2395</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Destiny+Media+Player" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9321" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1896">ThE g0bL!N</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-07-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9306" target="_blank" class="style14">IBM AIX 5.3 libc MALLOCDEBUG File Overwrite Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">3844</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=AIX" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9306" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1181">Affix</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-07-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9305" target="_blank" class="style14">EPSON Status Monitor 3 Local Privilege Escalation Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">8564</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=EPSON" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9305" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1470">Nine:Situations:Group</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-07-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9302" target="_blank" class="style14">Compface 1.1.5 (.xbm File) Local Buffer Overflow Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">1944</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Compface" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9302" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1429">His0k4</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-07-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9301" target="_blank" class="style14">Microsoft Windows XP (win32k.sys) Local Privilege Escalation Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">31757</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9301" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1617">NT Internals</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-07-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9298" target="_blank" class="style14">Millenium MP3 Studio 1.0 .mpf File Local Stack Overflow Exploit (update)</a></td>
+<td nowrap="nowrap" width=40 align="left">3391</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MP3+Studio" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9298" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/2052">corelanc0d3r</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-07-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9299" target="_blank" class="style14">WINMOD 1.4 (.lst) Local Stack Overflow Exploit XP SP3 (RET+SEH) #3</a></td>
+<td nowrap="nowrap" width=40 align="left">3403</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=WINMOD" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9299" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/2052">corelanc0d3r</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-07-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9291" target="_blank" class="style14">MP3 Studio v1.0 (mpf File) Local BOF Exploit (SEH)</a></td>
+<td nowrap="nowrap" width=40 align="left">2901</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MP3+Studio" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9291" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1208">Koshi</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-07-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9286" target="_blank" class="style14">MP3 Studio 1.0 (.mpf /.m3u File) Local Stack Overflow Exploit (SEH)</a></td>
+<td nowrap="nowrap" width=40 align="left">2752</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MP3+Studio" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9286" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/2052">corelanc0d3r</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-07-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9272" target="_blank" class="style14">Adobe Acrobat 9.1.2 NOS Local Privilege Escalation Exploit (py)</a></td>
+<td nowrap="nowrap" width=40 align="left">4834</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Adobe" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9272" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/2041">Dr_IDE</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-07-23</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9234" target="_blank" class="style14">WINMOD 1.4 (.lst) Local Stack Overflow Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">3045</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=WINMOD" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9234" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1456">CWH Underground</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-07-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9229" target="_blank" class="style14">WINMOD 1.4 (.lst) Universal Buffer Overflow Exploit (SEH) #2</a></td>
+<td nowrap="nowrap" width=40 align="left">3340</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=WINMOD" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9229" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/2036">Dz_Girl</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-07-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9223" target="_blank" class="style14">Adobe Acrobat 9.1.2 NOS Local Privilege Escalation Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">7019</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Adobe" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9223" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1531">Jeremy Brown</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-07-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9221" target="_blank" class="style14">WINMOD 1.4 (.lst File) Local Buffer Overflow Exploit (SEH)</a></td>
+<td nowrap="nowrap" width=40 align="left">4050</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=WINMOD" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9221" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1940">hack4love</a>
+</td>
+</tr></tbody></table><br><br>[<a href="?start=0" class=style13>&laquo;</a>] <a href="?start=30" class=style13>&laquo; prev</a> |  <a href="?start=0" class=style13> 1</a>  <a href="?start=30" class=style13> 2</a> 3  <a href="?start=90" class=style13> 4</a>  <a href="?start=120" class=style13> 5</a>  <a href="?start=150" class=style13> 6</a>  <a href="?start=180" class=style13> 7</a>  <a href="?start=210" class=style13> 8</a>  <a href="?start=240" class=style13> 9</a>  <a href="?start=270" class=style13> 10</a> | <a href="?start=90" class=style13>next &raquo;</a> [<a href="?start=870" class=style13>&raquo;</a>]<br><br><center>
+<script type="text/javascript"><!--
+google_ad_client = "pub-0718555979486542";
+/* 468x60, created 9/26/08 */
+google_ad_slot = "3279240256";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</center>
+
+<p><FONT style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit[at]milw0rm.com">submit[at]milw0rm.com</a> [<a href="/gpg/submit.asc" target="_blank">gpg</a>]<br>Copyright &copy; 2004-2009 <a href="mailto:str0ke[at]milw0rm.com">milw0rm</a> </FONT></p>
+</td></tr></table>
+  <br>
+  <br>
+</center>
+</body></html>

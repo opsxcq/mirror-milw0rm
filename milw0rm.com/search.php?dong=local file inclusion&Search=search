@@ -1,0 +1,1481 @@
+<html><head>
+<title>milw0rm - exploits : vulnerabilities : videos : papers : shellcode</title>
+<meta name="description" content="milw0rm exploits and 0day exploits database">
+<meta name="keywords" content="exploits code, exploit code, exploits, 0-day, 0day, 0days, exploit, zero day, poc, exploit, local exploits, remote exploits, root exploits, windows, linux, new exploits, latest exploits, shellcode, Zero-day, zeroday, security articles, ezines, zines, security papers">
+<link type="text/css" rel="stylesheet" href="/milw0rm.css">
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php">
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon"></head>
+<body dir="ltr" alink="#00ff00" background="/images/dot.gif" bgcolor="#000000" link="#00c000" text="#008000" vlink="#00c000">
+<center>
+<table border="0">
+<tr>
+<td nowrap="nowrap">
+
+			<b>[ <a href="/" target=_self>home</a> ]</b>
+			<b>[ <a href="/contents.php" target=_self>contents</a> ]</b>
+			<b>[ <a href="/platforms/" target=_self>platforms</a> ]</b>
+			<b>[ <a href="/shellcode/" target=_self>shellcode</a> ]</b>
+			<b>[ <a href="/search.php" target=_self>search</a> ]</b>
+			<b>[ <a href="/cracker/" target=_self>cracker</a> ]</b>
+			<b>[ <a href="/links/" target=_self>links</a> ]</b>
+			<b>[ <a href="/rss.php" target=blank>rss</a> ]</b>
+			<b>[ <a href="/sploits/milw0rm.tar.bz2" target=_self>archive</a> ]</b>
+			</td>
+    </tr>
+  </table>
+
+<table width="668" border="0" cellpadding="3" cellspacing="3" class="main">
+  <tr><td><img src="/images/milw0rm-wi.jpg" alt="milw0rm"></td></tr><tr><td>
+
+	<table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr>
+	<td align="middle" vAlign="top">
+	<form name="milw0rm" method="post" action="/search.php">
+	<br>
+	<strong>[ Search:&nbsp;&nbsp; </strong>
+	<input type="text" name="dong" size="35">
+	&nbsp;&nbsp;
+	<input type="submit" name="Submit" value="Submit">
+	</form>
+	</td>
+	</tr>
+	</tbody></table><br><br><b>[ <a href="/search.php" target=_self>exploits/shellcode</a> ]</b><table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-09-09</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9611" target="_blank" class="style14">phpNagios 1.2.0 (menu.php) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">1655</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=phpNagios" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9611" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1739">CoBRa_21</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-09-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9570" target="_blank" class="style14">Ve-EDIT 0.1.4 (debug_php.php) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">1359</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Ve-EDIT" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9570" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1739">CoBRa_21</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9444" target="_blank" class="style14">PHP-Lance 1.52 Multiple Local File Inclusion Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">1236</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=PHP-Lance" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9444" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/2082">jetli007</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-04</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9358" target="_blank" class="style14">In-Portal 4.3.1 (index.php env) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2460</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=In-Portal" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9358" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1899">Angela Chang</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-04</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9355" target="_blank" class="style14">elgg <= 1.5 (/_css/js.php) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2094</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=elgg" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9355" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1998">eLwaux</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-03</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9347" target="_blank" class="style14">Arab Portal <= 2.2 (mod.php module) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2537</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Arab+Portal" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9347" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1637">Qabandi</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-03</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9333" target="_blank" class="style14">Netpet CMS 1.9 (confirm.php language) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">1078</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Netpet+CMS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9333" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1549">SirGod</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-07-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9315" target="_blank" class="style14">PunBB Reputation.php Mod <= 2.0.4 Local File Inclusion Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2406</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=PunBB" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9315" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/2000">Dante90</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-07-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9314" target="_blank" class="style14">MUJE CMS 1.0.4.34 Local File Inclusion Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">1567</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MUJE+CMS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9314" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1549">SirGod</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-07-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9313" target="_blank" class="style14">Really Simple CMS 0.3a (pagecontent.php PT) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">1805</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Really+Simple+CMS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9313" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1549">SirGod</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-07-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9310" target="_blank" class="style14">dit.cms 1.3 (path/sitemap/relPath) Local File Inclusion Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">1172</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=dit.cms" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9310" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1549">SirGod</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-07-23</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9237" target="_blank" class="style14">AWCM 2.1 Local File Inclusion / Auth Bypass Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">1861</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=AWCM" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9237" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/2038">SwEET-DeViL</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-07-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9179" target="_blank" class="style14">Super Simple Blog Script 2.5.4 Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">1522</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Super+Simple+Blog+Script" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9179" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1407">JiKo</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-07-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9156" target="_blank" class="style14">Greenwood Content Manager 0.3.2 Local File Inclusion Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">1797</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Greenwood" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9156" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1234">IRCRASH</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-07-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9119" target="_blank" class="style14">LionWiki (index.php page) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2575</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=LionWiki" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9119" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/2014">MoDaMeR</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-06-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9052" target="_blank" class="style14">BIGACE CMS 2.6 (cmd) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">1792</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=BIGACE" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9052" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1999">CWD@rBe</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-06-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9036" target="_blank" class="style14">PHP-Sugar 0.80 (index.php t) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">1759</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=PHP-Sugar" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9036" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1486">ahmadbady</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-06-25</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9018" target="_blank" class="style14">MyFusion 6b settings[locale] Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2026</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MyFusion" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9018" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1303">CraCkEr</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-06-24</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9015" target="_blank" class="style14">LightOpenCMS 0.1 (smarty.php cwd) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2177</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=LightOpenCMS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9015" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1248">JosS</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-06-24</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9010" target="_blank" class="style14">Glossword <= 1.8.11 (index.php x) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">1809</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Gloosword" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9010" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1689">t0fx</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-06-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8979" target="_blank" class="style14">FretsWeb 1.2 Multiple Local File Inclusion Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">2545</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=FretsWeb" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8979" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1911">YEnH4ckEr</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-06-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8975" target="_blank" class="style14">phpFK 7.03 (page_bottom.php) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2483</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=phpFK" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8975" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1486">ahmadbady</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-06-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8952" target="_blank" class="style14">DB Top Sites 1.0 (index.php u) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">1782</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=DB+Top+Sites" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8952" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1549">SirGod</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-06-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8946" target="_blank" class="style14">Joomla Component com_Projectfork 2.0.10 Local File Inclusion Vuln</a></td>
+<td nowrap="nowrap" width=40 align="left">2766</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Joomla" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8946" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1778">ByALBAYX</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-06-11</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8928" target="_blank" class="style14">phpWebThings <= 1.5.2 (help.php module) Local File Inclusion Vuln</a></td>
+<td nowrap="nowrap" width=40 align="left">2165</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=phpWebThings" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8928" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1941">Br0ly</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-06-09</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8913" target="_blank" class="style14">S-CMS <= 2.0b3 Multiple Local File Inclusion Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">1426</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=S-Cms" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8913" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1911">YEnH4ckEr</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-06-03</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8870" target="_blank" class="style14">Joomla Omilen Photo Gallery 0.5b Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">3804</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Joomla" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8870" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1778">ByALBAYX</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-06-02</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8853" target="_blank" class="style14">Online Grades & Attendance 3.2.6 Multiple Local File Inclusion Vulns</a></td>
+<td nowrap="nowrap" width=40 align="left">1540</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Online+Grades" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8853" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1911">YEnH4ckEr</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-05-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8816" target="_blank" class="style14">SiteX <= 0.7.4.418 (THEME_FOLDER) Local File Inclusion Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">2299</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=SiteX" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8816" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1486">ahmadbady</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-05-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8815" target="_blank" class="style14">Easy Px 41 CMS v09.00.00B1 (fiche) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2306</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Easy+Px+41+CMS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8815" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1896">ThE g0bL!N</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-05-26</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8791" target="_blank" class="style14">Wordpress Plugin Lytebox (wp-lytebox) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">3454</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordpress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8791" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1802">TurkGuvenligi</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-05-26</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8781" target="_blank" class="style14">Dokuwiki 2009-02-14 Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2237</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Dokuwiki" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8781" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1398">girex</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-05-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8715" target="_blank" class="style14">Pluck 4.6.2 (langpref) Local File Inclusion Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">1434</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Pluck" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8715" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1486">ahmadbady</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-05-14</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8680" target="_blank" class="style14">beLive v.0.2.3 (arch.php arch) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">1764</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=beLive" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8680" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/649">Kacper</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-05-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8593" target="_blank" class="style14">pecio cms 1.1.5 (index.php language) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">3727</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=pecio+cms" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8593" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1549">SirGod</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-04-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8566" target="_blank" class="style14">S-Cms 1.1 Stable (page) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2088</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=S-Cms" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8566" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1370">ZoRLu</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-04-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8549" target="_blank" class="style14">Flatchat 3.0 (pmscript.php with) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2300</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Flatchat" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8549" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1549">SirGod</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-04-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8546" target="_blank" class="style14">Thickbox Gallery v2 (index.php ln) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2113</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Thickbox+Gallery" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8546" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1549">SirGod</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-04-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8539" target="_blank" class="style14">Opencart 1.1.8 (route) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2140</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Opencart" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8539" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1914">OoN_Boy</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-04-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8516" target="_blank" class="style14">WebPortal CMS 0.8b Multiple Remote/Local File Inclusion Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">3110</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=WebPortal+CMS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8516" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1486">ahmadbady</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-04-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8504" target="_blank" class="style14">NotFTP 1.3.1 (newlang) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2035</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=NotFTP" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8504" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/649">Kacper</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-04-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8503" target="_blank" class="style14">TotalCalendar 2.4 (include) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2323</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=TotalCalendar" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8503" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1549">SirGod</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-04-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8446" target="_blank" class="style14">FreeWebshop.org 2.2.9 RC2 (lang_file) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2837</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=FreeWebshop.org" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8446" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1486">ahmadbady</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-04-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8443" target="_blank" class="style14">Job2C 4.2 (adtype) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">1955</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Job2C" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8443" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1370">ZoRLu</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-04-14</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8423" target="_blank" class="style14">Jamroom (index.php t) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">1707</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Jamroom" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8423" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1905">zxvf</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-04-14</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8431" target="_blank" class="style14">GuestCal 2.1 (index.php lang) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2105</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=GuestCal" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8431" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1549">SirGod</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-04-13</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8409" target="_blank" class="style14">Yellow Duck Weblog 2.1.0 (lang) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">1455</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Yellow+Duck+Weblog" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8409" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1486">ahmadbady</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-04-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8395" target="_blank" class="style14">Redaxscript 0.2.0 (language) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2428</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Redaxscript" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8395" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1549">SirGod</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-04-06</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8357" target="_blank" class="style14">iDB 0.2.5pa SVN 243 (skin) Local File Inclusion Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2438</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=iDB" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8357" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/592">LOTFREE</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-04-03</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8346" target="_blank" class="style14">ActiveKB Knowledgebase (loadpanel.php Panel) Local File Inclusion Vuln</a></td>
+<td nowrap="nowrap" width=40 align="left">2769</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=ActiveKB" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8346" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1899">Angela Chang</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-04-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8334" target="_blank" class="style14">Koschtit Image Gallery 1.82 Multiple Local File Inclusion Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">2783</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Koschtit+Image+Gallery" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8334" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1486">ahmadbady</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-03-31</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8328" target="_blank" class="style14">webEdition <= 6.0.0.4 (WE_LANGUAGE) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2296</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=webEdition+cms" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8328" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1804">drosophila</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-03-26</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8290" target="_blank" class="style14">blogplus 1.0 Multiple Local File Inclusion Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">2576</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=blogplus" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8290" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1486">ahmadbady</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-03-24</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8278" target="_blank" class="style14">Jinzora Media Jukebox <= 2.8 (name) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2438</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Jinzora+Media+Jukebox" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8278" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1185">dun</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-03-13</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8207" target="_blank" class="style14">YAP 1.1.1 (index.php page) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">3633</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=YAP" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8207" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1873">Alkindiii</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-03-06</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8168" target="_blank" class="style14">OneOrZero Helpdesk <= 1.6.5.7 Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">3939</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=OneOrZero+Helpdesk" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8168" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1185">dun</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8032" target="_blank" class="style14">Potato News 1.0.0 (user) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2478</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Potato+News" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8032" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1661">x0r</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8030" target="_blank" class="style14">Papoo CMS 3.x (pfadhier) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2411</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Papoo+CMS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8030" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1549">SirGod</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8029" target="_blank" class="style14">Thyme <= 1.3 (export_to) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">1985</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Thyme" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8029" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1829">cheverok</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-09</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8020" target="_blank" class="style14">Yet Another NOCC <= 0.1.0 Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2037</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Yet+Another+NOCC" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8020" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/649">Kacper</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-06</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8001" target="_blank" class="style14">Mailist 3.0 Insecure Backup/Local File Inclusion Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">3367</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mailist" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8001" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1549">SirGod</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-04</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7980" target="_blank" class="style14">PHPbbBook 1.3 (bbcode.php l) Local File Inclusion Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">7929</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=PHPbbBook" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7980" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1717">Osirys</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-04</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7977" target="_blank" class="style14">Syntax Desktop 2.7 (synTarget) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">1873</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Syntax+Desktop" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7977" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1486">ahmadbady</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-04</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7976" target="_blank" class="style14">Jaws 0.8.8 Multiple Local File Inclusion Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">1822</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Jaws" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7976" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1343">fuzion</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-02</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7939" target="_blank" class="style14">AJA Portal 1.2 Local File Inclusion Vulnerabilities (win)</a></td>
+<td nowrap="nowrap" width=40 align="left">1826</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=AJA+Portal" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7939" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1486">ahmadbady</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7897" target="_blank" class="style14">phplist 2.10.x (RCE by environ inclusion) Local File Inclusion Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4256</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=phplist" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7897" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/814">mozi</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7895" target="_blank" class="style14">Gazelle CMS (template) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2234</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Gazelle+CMS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7895" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1343">fuzion</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7886" target="_blank" class="style14">Pixie CMS 1.0 Multiple Local File Inclusion Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">2683</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Pixie+CMS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7886" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1305">DSecRG</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-26</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7883" target="_blank" class="style14">OpenX 2.6.3 (MAX_type) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4385</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=OpenX" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7883" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1803">Charlie Briggs</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-26</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7879" target="_blank" class="style14">SiteXS <= 0.1.1 (type) Local File Inclusion Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2121</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=SiteXS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7879" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1776">darkjoker</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-25</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7863" target="_blank" class="style14">OpenGoo 1.1 (script_class) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">1845</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=OpenGoo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7863" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1343">fuzion</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-20</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7838" target="_blank" class="style14">Dodo's Quiz Script 1.1 (dodosquiz.php) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">3913</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Dodos+Quiz+Script" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7838" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1331">Stack</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7818" target="_blank" class="style14">SCMS v1 (index.php p) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2562</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=SCMS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7818" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1486">ahmadbady</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-16</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7813" target="_blank" class="style14">Simple PHP Newsletter 1.5 (olang) Local File Inclusion Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">4449</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Simple+PHP+Newsletter" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7813" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1486">ahmadbady</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7792" target="_blank" class="style14">GNUBoard 4.31.03 (08.12.29) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">3904</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=GNUBoard" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7792" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1790">flyh4t</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-14</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7786" target="_blank" class="style14">Php Photo Album 0.8b (index.php preview) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4107</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Php+Photo+Album" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7786" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1717">Osirys</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-14</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7778" target="_blank" class="style14">phpList <= 2.10.8 Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">12573</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=phpList" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7778" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1261">BugReport.IR</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-11</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7733" target="_blank" class="style14">Photobase 1.2 (language) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2883</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Photobase" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7733" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1717">Osirys</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-06</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7687" target="_blank" class="style14">playSMS 0.9.3 Multiple Remote/Local File Inclusion Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">3680</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=playSMS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7687" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1486">ahmadbady</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-04</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7658" target="_blank" class="style14">PNphpBB2 <= 1.2i (ModName) Multiple Local File Inclusion Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">9051</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=PNphpBB2" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7658" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1487">StAkeR</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-12-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7625" target="_blank" class="style14">CMScout 2.06 SQL Injection/Local File Inclusion Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">3354</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=CMScout" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7625" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1549">SirGod</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-12-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7604" target="_blank" class="style14">eDContainer v2.22 (lg) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">1898</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=eDContainer" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7604" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/975">GoLd_M</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-12-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7603" target="_blank" class="style14">eDNews v2 (lg) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">1930</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=eDNews" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7603" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/975">GoLd_M</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-12-24</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7580" target="_blank" class="style14">BloofoxCMS 0.3.4 (lang) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4402</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=BloofoxCMS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7580" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1343">fuzion</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-12-24</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7579" target="_blank" class="style14">ClaSS <= 0.8.60 (export.php ftype) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">3160</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=ClaSS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7579" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1343">fuzion</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-12-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7519" target="_blank" class="style14">MyPHPsite (index.php mod) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">3973</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MyPHPsite" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7519" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1045">Piker</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-12-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7482" target="_blank" class="style14">Aperto Blog 0.1.1 Local File Inclusion / SQL Injection Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">2515</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Aperto+Blog" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7482" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1242">NoGe</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-12-14</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7458" target="_blank" class="style14">Mediatheka 4.2 (index.php lang) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">3833</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mediatheka" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7458" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1717">Osirys</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-12-11</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7422" target="_blank" class="style14">Feed Cms 1.07.03.19b (lang) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">1879</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Feed+Cms" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7422" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1661">x0r</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-12-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7417" target="_blank" class="style14">phpAddEdit 1.3 (editform) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2482</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=phpAddEdit" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7417" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1539">nuclear</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-12-08</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7380" target="_blank" class="style14">XOOPS 2.3.1 Multiple Local File Inclusion Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">3692</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7380" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1305">DSecRG</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-12-07</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7375" target="_blank" class="style14">Mini-CMS 1.0.1 (index.php) Multiple Local File Inclusion Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">2015</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mini-CMS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7375" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1394">cOndemned</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-12-07</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7374" target="_blank" class="style14">Mini Blog 1.0.1 (index.php) Multiple Local File Inclusion Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">1910</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mini+Blog" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7374" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1394">cOndemned</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-12-06</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7363" target="_blank" class="style14">phpPgAdmin <= 4.2.1 (_language) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4367</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=phpPgAdmin" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7363" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1185">dun</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-12-04</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7345" target="_blank" class="style14">BNCwi <= 1.04 Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2193</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=BNCwi" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7345" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1185">dun</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-12-04</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7342" target="_blank" class="style14">My Simple Forum 3.0 (index.php action) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2724</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=My+Simple+Forum" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7342" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1394">cOndemned</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-11-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7304" target="_blank" class="style14">KTP Computer Customer Database CMS Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2161</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=KTP+Computer+Customer+Database+CMS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7304" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1456">CWH Underground</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-11-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7285" target="_blank" class="style14">CMS Made Simple 1.4.1 Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2757</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=CMS+Made+Simple" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7285" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1734">M4ck-h@cK</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-11-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7241" target="_blank" class="style14">TxtBlog (index.php m) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2445</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=TxtBlog" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7241" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1456">CWH Underground</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-11-25</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7231" target="_blank" class="style14">fuzzylime cms 3.03 (track.php p) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2705</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=fuzzylime+cms" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7231" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1668">Alfons Luja</a>
+</td>
+</tr></tbody></table><br><b>[ <a href="/papers/" target=_self>papers</a> ]</b><table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2009-08-04</TD><TD nowrap="nowrap" width=375><a href="/papers/364" target='_blank' class='style14'>[german] Remote/Local File Inclusion Basic Tutorial</A></TD><TD nowrap="nowrap" width=40 align=left>2381</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/364" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/2049">int_main();</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-11-01</TD><TD nowrap="nowrap" width=375><a href="/papers/106" target='_blank' class='style14'>Remote / Local File Inclusion Exploits</A></TD><TD nowrap="nowrap" width=40 align=left>12349</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/106" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/918">sunjester</A></TD></TR></tbody></table><br><br><br><center>
+<script type="text/javascript"><!--
+google_ad_client = "pub-0718555979486542";
+/* 468x60, created 9/26/08 */
+google_ad_slot = "3279240256";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</center>
+
+<p><FONT style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit[at]milw0rm.com">submit[at]milw0rm.com</a> [<a href="/gpg/submit.asc" target="_blank">gpg</a>]<br>Copyright &copy; 2004-2009 <a href="mailto:str0ke[at]milw0rm.com">milw0rm</a> </FONT></p>
+</td></tr></table>
+  <br>
+  <br>
+</center>
+</body></html>

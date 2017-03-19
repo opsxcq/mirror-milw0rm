@@ -1,0 +1,98 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>milw0rm.com - free md5/lm hash cracking</TITLE>
+<link type="text/css" rel="stylesheet" href="/milw0rm.css">
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php" />
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" />
+</HEAD>
+<BODY dir=ltr text=#008000 vLink=#00c000 aLink=#00ff00 link=#00c000
+bgColor=#000000 background=/images/dot.gif>
+<CENTER>
+<TABLE border=0>
+<TBODY>
+<TR>
+<td nowrap>
+  <B>[ <A href="/" target=_self>home</A> ]</B>
+              <B>[ <A href="/cracker/" target=_self>cracker</A> ]</B> 
+              <B>[ <A href="insert.php" target=_self>insert</A> ]</B> 
+              <B>[ <A href="list.php" target=_self>list</A> ]</B> 
+              <B>[ <A href="info.php" target=_self>search</A> ]</B> 
+              <B>[ <A href="donated.php" target=_self>donated users</A> ]</B> 
+              <B>[ <A href="/mil-dic.php" target=_self>cracked hashs</A> ]</B> 
+	      </td>
+	      </TR>
+	      </TBODY>
+	      </TABLE>
+  <TABLE height=80 cellSpacing=0 cellPadding=1 width=637 bgColor=#008000 border=0>
+    <TBODY>
+      <TR>
+        <TD vAlign=top width="100%" height="100%"> <TABLE height="100%" cellSpacing=0 cellPadding=5 width="100%" bgColor=#000000 border=0>
+          <TBODY>
+            <TR>
+		<td style="background-repeat: no-repeat;" align="center" width="100%"><img src="/images/milw0rm_cracker.jpg" width="445" height="71"></td>
+	    </TR>
+	
+ <TR> 
+  <TD align=middle vAlign=top> 
+     <TABLE borderColor=#333333 width=536 align=center border=0> 
+      <TBODY> 
+         <TR class="style13">
+          <TD width=40 class="style13"><div align="center">-::TYPE</div></TD>
+          <TD width=224 class="style13"><div align="center">-::HASH</div></TD>
+          <TD width=150 class="style13"><div align="center">-::PASS</div></TD>
+          <TD width=90 class="style13"><div align="center">-::STATUS</div></TD>
+<!--
+          <TD width=50 class="style13"><div align="center">-::TIME</div></TD>
+-->
+          <TD width=132 class="style13"><div align="center">-::SUBMITED</div></TD>
+        </TR>
+<TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">058555670953ae4c2f6c26d5e8908532</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">notfound</div></TD><TD nowrap="nowrap" width=132><div align="center">2007-12-13 06:19:11</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">5779f2d493b2f4c389a86d5b0fe76c4d</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">notfound</div></TD><TD nowrap="nowrap" width=132><div align="center">2007-12-13 06:18:44</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">c76d6432247ab66277d2831b21854032</div></TD><TD nowrap="nowrap" width=150><div align="center">xfear86</div></TD><TD nowrap="nowrap" width=90><div align="center">cracked</div></TD><TD nowrap="nowrap" width=132><div align="center">2007-12-13 06:13:38</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">bf37c408e12d6312780934325f5e3385</div></TD><TD nowrap="nowrap" width=150><div align="center">sale2002</div></TD><TD nowrap="nowrap" width=90><div align="center">cracked</div></TD><TD nowrap="nowrap" width=132><div align="center">2007-12-13 06:13:34</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">ecf9902e0f61677c8de25ae60b654669</div></TD><TD nowrap="nowrap" width=150><div align="center">9810</div></TD><TD nowrap="nowrap" width=90><div align="center">cracked</div></TD><TD nowrap="nowrap" width=132><div align="center">2007-12-13 06:07:48</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">76f6ba490d1d1926a54b5e3735576f2e</div></TD><TD nowrap="nowrap" width=150><div align="center">euracom</div></TD><TD nowrap="nowrap" width=90><div align="center">cracked</div></TD><TD nowrap="nowrap" width=132><div align="center">2007-12-13 06:06:12</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">9fab3aa3476cdbeadd5aa32f9bbc6ecc</div></TD><TD nowrap="nowrap" width=150><div align="center">5112200</div></TD><TD nowrap="nowrap" width=90><div align="center">cracked</div></TD><TD nowrap="nowrap" width=132><div align="center">2007-12-13 06:01:30</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">507aee4a98b6198e68c651b564fc101b</div></TD><TD nowrap="nowrap" width=150><div align="center">dawnod</div></TD><TD nowrap="nowrap" width=90><div align="center">cracked</div></TD><TD nowrap="nowrap" width=132><div align="center">2007-12-13 06:00:07</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">4b173100c4153a9b0222b11b1faf9cee</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">notfound</div></TD><TD nowrap="nowrap" width=132><div align="center">2007-12-13 05:56:10</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">3d22d9656c0b88bbb5e82df5b28c4db8</div></TD><TD nowrap="nowrap" width=150><div align="center">taouser</div></TD><TD nowrap="nowrap" width=90><div align="center">cracked</div></TD><TD nowrap="nowrap" width=132><div align="center">2007-12-13 05:44:12</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">23572d3c988e300453e7cd35542cfd82</div></TD><TD nowrap="nowrap" width=150><div align="center">baran</div></TD><TD nowrap="nowrap" width=90><div align="center">cracked</div></TD><TD nowrap="nowrap" width=132><div align="center">2007-12-13 05:36:22</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">6f79823a55783a5d1f65713c60a6cd0e</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">notfound</div></TD><TD nowrap="nowrap" width=132><div align="center">2007-12-13 05:35:12</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">705e7811e983eaaa96ea43ab51649c5d</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">notfound</div></TD><TD nowrap="nowrap" width=132><div align="center">2007-12-13 05:33:32</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">b53e8f81c371a867b712d7a352e4af3a</div></TD><TD nowrap="nowrap" width=150><div align="center">0507659120</div></TD><TD nowrap="nowrap" width=90><div align="center">cracked</div></TD><TD nowrap="nowrap" width=132><div align="center">2007-12-13 05:33:15</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">3ed09c2ea4dfceaae39e0c44ea09a9e9</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">notfound</div></TD><TD nowrap="nowrap" width=132><div align="center">2007-12-13 05:30:45</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">bc2f29b1669e36bc57a5fea43fb562d0</div></TD><TD nowrap="nowrap" width=150><div align="center">aalo</div></TD><TD nowrap="nowrap" width=90><div align="center">cracked</div></TD><TD nowrap="nowrap" width=132><div align="center">2007-12-13 05:28:08</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">d0deb42a8a4e30d61c1b126f9f5b36c0</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">notfound</div></TD><TD nowrap="nowrap" width=132><div align="center">2007-12-13 05:27:26</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">18d2e2d4c1445548f8a5ef124ed20bfd</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">notfound</div></TD><TD nowrap="nowrap" width=132><div align="center">2007-12-13 05:21:22</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">13b4b6d0fba2a3c50c0e0c78754443fb</div></TD><TD nowrap="nowrap" width=150><div align="center">002266</div></TD><TD nowrap="nowrap" width=90><div align="center">cracked</div></TD><TD nowrap="nowrap" width=132><div align="center">2007-12-13 05:18:09</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">74271a0b5d6fb481ba3dd2e48afb3da3</div></TD><TD nowrap="nowrap" width=150><div align="center">049614115</div></TD><TD nowrap="nowrap" width=90><div align="center">cracked</div></TD><TD nowrap="nowrap" width=132><div align="center">2007-12-13 05:14:31</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">6fa21d6677e07f0233e72d8f1e503890</div></TD><TD nowrap="nowrap" width=150><div align="center">44027aa</div></TD><TD nowrap="nowrap" width=90><div align="center">cracked</div></TD><TD nowrap="nowrap" width=132><div align="center">2007-12-13 05:13:58</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">c4c371099cbdfb2c794eec59afd731a8</div></TD><TD nowrap="nowrap" width=150><div align="center">183454</div></TD><TD nowrap="nowrap" width=90><div align="center">cracked</div></TD><TD nowrap="nowrap" width=132><div align="center">2007-12-13 05:13:09</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">e64c166fddb4f1c2d82d8091f1cd95da</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">notfound</div></TD><TD nowrap="nowrap" width=132><div align="center">2007-12-13 05:11:55</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">53ddc797d8904f9366b1ea3287f6309f</div></TD><TD nowrap="nowrap" width=150><div align="center">nyquist</div></TD><TD nowrap="nowrap" width=90><div align="center">cracked</div></TD><TD nowrap="nowrap" width=132><div align="center">2007-12-13 05:11:17</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">cd8729ab1f03af0d66c8a69192a95f22</div></TD><TD nowrap="nowrap" width=150><div align="center">wkplooau</div></TD><TD nowrap="nowrap" width=90><div align="center">cracked</div></TD><TD nowrap="nowrap" width=132><div align="center">2007-12-13 05:10:26</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">69174d0a96b1a70b5e6bcc8e685e4d81</div></TD><TD nowrap="nowrap" width=150><div align="center">476234</div></TD><TD nowrap="nowrap" width=90><div align="center">cracked</div></TD><TD nowrap="nowrap" width=132><div align="center">2007-12-13 05:10:07</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">b3effdd10d982d2c7339c9604c67c34c</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">notfound</div></TD><TD nowrap="nowrap" width=132><div align="center">2007-12-13 05:10:02</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">1b1954fc19449d57b0691eda419e4cbc</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">notfound</div></TD><TD nowrap="nowrap" width=132><div align="center">2007-12-13 05:09:48</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">943f4f4c2933c713a216dd96323e2c69</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">notfound</div></TD><TD nowrap="nowrap" width=132><div align="center">2007-12-13 05:08:48</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">8cda00c548f6aac632e4f2c58b67f1eb</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">notfound</div></TD><TD nowrap="nowrap" width=132><div align="center">2007-12-13 05:06:20</div></TD></TR>       </TBODY> 
+    </TABLE> 
+     <br> 
+     <br> 
+<center>
+[<a href="/cracker/list.php?start=0" class=style13>&laquo;</a>] <a href="/cracker/list.php?start=510" class=style13>&laquo; prev</a> |  <a href="/cracker/list.php?start=390" class=style13> 14</a>  <a href="/cracker/list.php?start=420" class=style13> 15</a>  <a href="/cracker/list.php?start=450" class=style13> 16</a>  <a href="/cracker/list.php?start=480" class=style13> 17</a>  <a href="/cracker/list.php?start=510" class=style13> 18</a> 19  <a href="/cracker/list.php?start=570" class=style13> 20</a>  <a href="/cracker/list.php?start=600" class=style13> 21</a>  <a href="/cracker/list.php?start=630" class=style13> 22</a>  <a href="/cracker/list.php?start=660" class=style13> 23</a> | <a href="/cracker/list.php?start=570" class=style13>next &raquo;</a> [<a href="/cracker/list.php?start=151020" class=style13>&raquo;</a>]</center>
+<br><br><br>
+<script type="text/javascript"><!--
+google_ad_client = "pub-0718555979486542";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "text";
+//2007-08-22: milw0rm
+google_ad_channel = "1394564144";
+google_color_border = "000000";
+google_color_bg = "141414";
+google_color_link = "00c000";
+google_color_text = "000000";
+google_color_url = "00c000";
+google_ui_features = "rc:0";
+//-->
+</script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+<br><br>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but04.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+</form>
+<br>
+                  <p><br>Copyright &copy; 2004-2007 <a href="mailto:str0ke[at]milw0rm.com">milw0rm</a></p>
+</TD>
+              </TR>
+            </TBODY>
+          </TABLE></TD>
+      </TR>
+    </TBODY>
+  </TABLE>
+  <BR>
+  <BR>
+</CENTER>
+</BODY>
+</HTML>

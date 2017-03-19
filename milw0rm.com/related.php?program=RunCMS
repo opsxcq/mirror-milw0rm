@@ -1,0 +1,268 @@
+<html><head>
+<title>milw0rm - exploits : vulnerabilities : videos : papers : shellcode</title>
+<meta name="description" content="milw0rm exploits and 0day exploits database">
+<meta name="keywords" content="exploits code, exploit code, exploits, 0-day, 0day, 0days, exploit, zero day, poc, exploit, local exploits, remote exploits, root exploits, windows, linux, new exploits, latest exploits, shellcode, Zero-day, zeroday, security articles, ezines, zines, security papers">
+<link type="text/css" rel="stylesheet" href="/milw0rm.css">
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php">
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon"></head>
+<body dir="ltr" alink="#00ff00" background="/images/dot.gif" bgcolor="#000000" link="#00c000" text="#008000" vlink="#00c000">
+<center>
+<table border="0">
+<tr>
+<td nowrap="nowrap">
+
+			<b>[ <a href="/" target=_self>home</a> ]</b>
+			<b>[ <a href="/contents.php" target=_self>contents</a> ]</b>
+			<b>[ <a href="/platforms/" target=_self>platforms</a> ]</b>
+			<b>[ <a href="/shellcode/" target=_self>shellcode</a> ]</b>
+			<b>[ <a href="/search.php" target=_self>search</a> ]</b>
+			<b>[ <a href="/cracker/" target=_self>cracker</a> ]</b>
+			<b>[ <a href="/links/" target=_self>links</a> ]</b>
+			<b>[ <a href="/rss.php" target=blank>rss</a> ]</b>
+			<b>[ <a href="/sploits/milw0rm.tar.bz2" target=_self>archive</a> ]</b>
+			</td>
+    </tr>
+  </table>
+
+<table width="668" border="0" cellpadding="3" cellspacing="3" class="main">
+  <tr><td><img src="/images/milw0rm-wi.jpg" alt="milw0rm"></td></tr><tr><td>
+<b>[ <a href="/" target=_self>RunCMS</a> ]</b><table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-07-13</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9132" target="_blank" class="style14">RunCMS <= 1.6.3 (double ext) Remote Shell Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4221</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=RunCMS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9132" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1487">StAkeR</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-05-08</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5562" target="_blank" class="style14">RunCMS <= 1.6.1 (msg_image) SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4281</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=RunCMS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5562" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1280">The:Paradox</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-04-26</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5505" target="_blank" class="style14">RunCMS Module MyArticles 0.6 Beta-1 SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4130</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=RunCMS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5505" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/960">Cr@zy_King</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-04-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5340" target="_blank" class="style14">RunCMS Module bamagalerie3 Remote SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4354</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=RunCMS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5340" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1403">DreamTurk</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-03-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5290" target="_blank" class="style14">RunCMS Module Photo 3.02 (cid) Remote SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">5220</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=RunCMS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5290" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1334">S@BUN </a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-03-20</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5285" target="_blank" class="style14">RunCMS Module section (artid) Remote SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4058</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=RunCMS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5285" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/960">Cr@zy_King</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-02-19</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5156" target="_blank" class="style14">RunCMS Module MyAnnonces (cid) SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4110</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=RunCMS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5156" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1334">S@BUN </a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-06</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4845" target="_blank" class="style14">RunCMS Newbb_plus <= 0.92 Client IP Remote SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5045</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=RunCMS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4845" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1317">Eugene Minaev</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-12-26</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4792" target="_blank" class="style14">RunCMS 1.6 Remote Blind SQL Injection Exploit (IDS evasion)</a></td>
+<td nowrap="nowrap" width=40 align="left">4697</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=RunCMS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4792" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1264">Sh2kerr</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-12-25</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4787" target="_blank" class="style14">RunCMS 1.6 Get Admin Cookie Remote Blind SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5247</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=RunCMS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4787" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1264">Sh2kerr</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-12-25</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4790" target="_blank" class="style14">RunCMS 1.6 Multiple Remote Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">6041</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=RunCMS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4790" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1305">DSecRG</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-11-25</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4658" target="_blank" class="style14">RunCMS <= 1.6 disclaimer.php Remote File Overwrite Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">6467</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=RunCMS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4658" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1261">BugReport.IR</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-11-24</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4656" target="_blank" class="style14">RunCMS <= 1.6 Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">5724</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=RunCMS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4656" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1261">BugReport.IR</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-05-04</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3850" target="_blank" class="style14">RunCms <= 1.5.2 (debug_show.php) Remote SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">6969</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=RunCms" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3850" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/534">rgod</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-02-09</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1485" target="_blank" class="style14">RunCMS <= 1.2 (class.forumposts.php) Arbitrary Remote Inclusion Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">8525</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=RunCMS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1485" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/534">rgod</a>
+</td>
+</tr></tbody></table><br><br><center></center><br><br><br><br><center>
+<script type="text/javascript"><!--
+google_ad_client = "pub-0718555979486542";
+/* 468x60, created 9/26/08 */
+google_ad_slot = "3279240256";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</center>
+
+<p><FONT style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit[at]milw0rm.com">submit[at]milw0rm.com</a> [<a href="/gpg/submit.asc" target="_blank">gpg</a>]<br>Copyright &copy; 2004-2009 <a href="mailto:str0ke[at]milw0rm.com">milw0rm</a> </FONT></p>
+</td></tr></table>
+  <br>
+  <br>
+</center>
+</body></html>

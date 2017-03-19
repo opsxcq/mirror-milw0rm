@@ -1,0 +1,887 @@
+<html><head>
+<title>milw0rm - exploits : vulnerabilities : videos : papers : shellcode</title>
+<meta name="description" content="milw0rm exploits and 0day exploits database">
+<meta name="keywords" content="exploits code, exploit code, exploits, 0-day, 0day, 0days, exploit, zero day, poc, exploit, local exploits, remote exploits, root exploits, windows, linux, new exploits, latest exploits, shellcode, Zero-day, zeroday, security articles, ezines, zines, security papers">
+<link type="text/css" rel="stylesheet" href="/milw0rm.css">
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php">
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon"></head>
+<body dir="ltr" alink="#00ff00" background="/images/dot.gif" bgcolor="#000000" link="#00c000" text="#008000" vlink="#00c000">
+<center>
+<table border="0">
+<tr>
+<td nowrap="nowrap">
+
+			<b>[ <a href="/" target=_self>home</a> ]</b>
+			<b>[ <a href="/contents.php" target=_self>contents</a> ]</b>
+			<b>[ <a href="/platforms/" target=_self>platforms</a> ]</b>
+			<b>[ <a href="/shellcode/" target=_self>shellcode</a> ]</b>
+			<b>[ <a href="/search.php" target=_self>search</a> ]</b>
+			<b>[ <a href="/cracker/" target=_self>cracker</a> ]</b>
+			<b>[ <a href="/links/" target=_self>links</a> ]</b>
+			<b>[ <a href="/rss.php" target=blank>rss</a> ]</b>
+			<b>[ <a href="/sploits/milw0rm.tar.bz2" target=_self>archive</a> ]</b>
+			</td>
+    </tr>
+  </table>
+
+<table width="668" border="0" cellpadding="3" cellspacing="3" class="main">
+  <tr><td><img src="/images/milw0rm-wi.jpg" alt="milw0rm"></td></tr><tr><td>
+<b>[ <a href="/platforms/" target=_self>hardware - remote</a> ]</b><table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-02-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5150" target="_blank" class="style14">Thecus N5200Pro NAS Server Control Panel RFI Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">3980</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Thecus" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5150" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/735">Crackers_Child</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-02-14</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5113" target="_blank" class="style14">Philips VOIP841 (Firmware <= 1.0.4.800) Multiple Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">4166</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Philips" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5113" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1254">ikki</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-20</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4941" target="_blank" class="style14">Belkin Wireless G Plus MIMO Router F5D9230-4 Auth Bypass Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2289</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Belkin" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4941" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/506">DarkFig</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-12-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4797" target="_blank" class="style14">March Networks DVR 3204 Logfile Information Disclosure Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2486</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=March+Networks+DVR" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4797" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1153">Alex Hernandez</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-12-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4744" target="_blank" class="style14">rooter VDSL Device (Goahead WEBSERVER) Disclosure Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">1366</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=rooter+VDSL+Device" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4744" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1299">NeoCoderz</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-10-11</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4522" target="_blank" class="style14">Apple iTouch/iPhone 1.1.1 tif File Remote Jailbreak Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">11894</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=iPhone" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4522" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=4522" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1247">Niacin and Dre</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-02-11</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3294" target="_blank" class="style14">IP3 NetAccess < 4.1.9.6 Remote Arbitrary File Disclosure Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">3498</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=IP3+NetAccess" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3294" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/999">Sebastian Wolfgarten</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-01-24</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3189" target="_blank" class="style14">PA168 Chipset IP Phones Weak Session Management Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4062</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=PA168+Chipset" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3189" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/995">Adrian Pastor</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-10-24</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2638" target="_blank" class="style14">Cisco VPN 3000 Concentrator <= 4.1.7, 4.7.2 (FTP) Remote Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">7606</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2638" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/578">prdelka</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-08-08</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2145" target="_blank" class="style14">Barracuda Spam Firewall <= 3.3.03.053 Remote Code Execution (extra)</a></td>
+<td nowrap="nowrap" width=40 align="left">6785</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Barracuda" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2145" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/738">PATz</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-08-07</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2136" target="_blank" class="style14">Barracuda Spam Firewall <= 3.3.03.053 Remote Code Execution</a></td>
+<td nowrap="nowrap" width=40 align="left">5361</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Barracuda" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2136" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/734">Greg Sinclair</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-20</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2048" target="_blank" class="style14">Cisco/Protego CS-MARS < 4.2.1 (JBoss) Remote Code Execution Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5655</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2048" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/68">Jon Hart</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2034" target="_blank" class="style14">BT Voyager 2091 (Wireless ADSL) Multiple Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">5582</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=BT+Voyager" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2034" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/385">pagvac</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-06-08</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1889" target="_blank" class="style14">D-Link Access-Point <= 2.10na (DWL Series) Config Disclosure Vuln</a></td>
+<td nowrap="nowrap" width=40 align="left">13840</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=D-Link" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1889" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/667">INTRUDERS</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-11-20</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1333" target="_blank" class="style14">Google Search Appliance proxystylesheet XSLT Java Code Execution</a></td>
+<td nowrap="nowrap" width=40 align="left">10062</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Google" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"><a href=/metasploit/107 class="style16" title="metasploit module">M</a></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1333" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/6">H D Moore</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-07-03</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1081" target="_blank" class="style14">Nokia Affix < 3.2.0 btftp Remote Client Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">7671</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Nokia" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1081" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/367">Kevin Finisterre</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-02-19</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/829" target="_blank" class="style14">Thomson TCW690 POST Password Validation Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4260</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Thomson" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/829" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/382">MurDoK</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2004-08-31</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/425" target="_blank" class="style14">D-Link DCS-900 Camera Remote IP Address Changer Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">6144</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=D-Link" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/425" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/28">n/a</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2004-04-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/294" target="_blank" class="style14">HP Web JetAdmin 6.5 (connectedNodes.ovpl) Remote Root Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4435</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=HP" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"><a href=/metasploit/108 class="style16" title="metasploit module">M</a></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/294" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/59">FX</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2004-03-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/169" target="_blank" class="style14">Multiple Cisco Products Vulnerabilities Exploit (Cisco Global Exploiter)
+</a></td>
+<td nowrap="nowrap" width=40 align="left">5861</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/169" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/109">blackangels</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2003-08-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/77" target="_blank" class="style14">Cisco IOS 12.x/11.x HTTP Remote Integer Overflow Exploit
+</a></td>
+<td nowrap="nowrap" width=40 align="left">6676</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/77" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/59">FX</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2001-01-19</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/254" target="_blank" class="style14">Cisco Password Bruteforcer Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">9500</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/254" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/162">norby</a>
+</td>
+</tr></tbody></table><br><b>[ <a href="/platforms/" target=_self>hardware - dos</a> ]</b><table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-02-03</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5054" target="_blank" class="style14">MicroTik RouterOS <= 3.2 SNMPd snmp-set Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">1725</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MicroTik+RouterOS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5054" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/826">ShadOS</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-24</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4978" target="_blank" class="style14">Apple iPhone 1.1.2 Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5654</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Apple+iPhone" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4978" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=4978" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/191">c0ntex</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-12-05</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4692" target="_blank" class="style14">Cisco Phone 7940 Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">3299</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4692" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1050">MADYNES</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-09-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4426" target="_blank" class="style14">Airsensor M520 HTTPD Remote Preauth DoS / BOF PoC	</a></td>
+<td nowrap="nowrap" width=40 align="left">2661</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Airsensor" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4426" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1153">Alex Hernandez</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-08-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4319" target="_blank" class="style14">Thomson SIP phone ST 2030 Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">1895</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Thomson" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4319" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1050">MADYNES</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-08-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4297" target="_blank" class="style14">Cisco IP Phone 7940 (3 SIP messages) Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2616</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4297" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1050">MADYNES</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-08-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4298" target="_blank" class="style14">Cisco IP Phone 7940 (10 SIP messages) Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">3395</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4298" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1050">MADYNES</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-24</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3791" target="_blank" class="style14">Linksys SPA941 \377 character Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2790</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linksys" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3791" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1050">MADYNES</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-24</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3792" target="_blank" class="style14">Linksys SPA941 (remote reboot) Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4145</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linksys" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3792" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1050">MADYNES</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3535" target="_blank" class="style14">Grandstream Budge Tone-200 IP Phone (Digest domain) DoS Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2560</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Grandstream+Budge+Tone-200+IP+Phone" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3535" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1050">MADYNES</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-20</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3526" target="_blank" class="style14">Cisco Phone 7940/7960 (SIP INVITE) Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">3335</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3526" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1050">MADYNES</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-12-19</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2961" target="_blank" class="style14">Hewlett-Packard FTP Print Server <= 2.4.5 Buffer Overflow (PoC)</a></td>
+<td nowrap="nowrap" width=40 align="left">2640</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=HP" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2961" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/854">Joxean Koret</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-12-11</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2915" target="_blank" class="style14">D-Link DWL-2000AP 2.11 (ARP Flood) Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4142</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=D-Link" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2915" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/910">poplix</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-11-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2700" target="_blank" class="style14">Apple Airport 802.11 Probe Response Kernel Memory Corruption PoC</a></td>
+<td nowrap="nowrap" width=40 align="left">3990</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Apple" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2700" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/6">H D Moore</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-08-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2246" target="_blank" class="style14">2wire Modems/Routers CRLF Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4714</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=2wire" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2246" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/762">preth00nker</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-08-13</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2176" target="_blank" class="style14">Nokia Symbian 60 3rd Edition Browser Denial of Service Crash</a></td>
+<td nowrap="nowrap" width=40 align="left">6063</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Nokia" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2176" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=2176" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/749">Qode</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-08-09</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2156" target="_blank" class="style14">PocketPC MMS Composer (WAPPush) Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">3219</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=PocketPC" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2156" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/742">Collin Mulliner</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2059" target="_blank" class="style14">D-Link Router UPNP Stack Overflow Denial of Service Exploit (PoC)</a></td>
+<td nowrap="nowrap" width=40 align="left">7107</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=D-Link" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2059" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/713">ub3rst4r</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2000" target="_blank" class="style14">SIPfoundry sipXtapi (CSeq) Remote Buffer Overflow Exploit PoC</a></td>
+<td nowrap="nowrap" width=40 align="left">4326</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=SIPfoundry" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2000" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/695">Michael Thumann</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-04-26</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1718" target="_blank" class="style14">OCE 3121/3122 Printer (parser.exe) Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4789</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=OCE" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1718" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/624">sh4d0wman</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-03-04</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1551" target="_blank" class="style14">Multiple Routers (IRC Request) Disconnect  Denial of Service Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4900</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Multiple+Routers" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1551" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/582">Ryan Meyer</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-02-14</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1496" target="_blank" class="style14">D-Link Wireless Access Point (Fragmented UDP) DoS Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">6372</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=D-Link" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1496" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/572">Aaron Portnoy</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-02-06</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1473" target="_blank" class="style14">Sony/Ericsson Bluetooth (Reset Display) Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5735</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Ericsson" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1473" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/567">Pierre Betouin</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-02-02</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1464" target="_blank" class="style14">Arescom NetDSL-1000 (telnetd) Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">3743</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Arescom" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1464" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/562">Fabian Ramirez</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-01-25</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1447" target="_blank" class="style14">Cisco Aironet Wireless Access Points Memory Exhaustion ARP Attack DoS</a></td>
+<td nowrap="nowrap" width=40 align="left">5098</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1447" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/554">Pasv</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-01-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1411" target="_blank" class="style14">Cisco IP Phone 7940 (Reboot) Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">7320</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1411" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/73">kokanin</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-11-23</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1338" target="_blank" class="style14">Cisco PIX Spoofed TCP SYN Packets Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5043</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1338" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/524">Janis Vizulis</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-09-23</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/856" target="_blank" class="style14">Nokia Symbian 60 (Bluetooth Nickname) Remote Restart (update)</a></td>
+<td nowrap="nowrap" width=40 align="left">9792</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Nokia" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/856" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/379">Qnix</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-08-12</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1153" target="_blank" class="style14">Grandstream Budge Tone 101/102 VOIP Phone Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">3733</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Grandstream" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1153" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/477">Pierre Kroma</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2004-12-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/688" target="_blank" class="style14">Ricoh Aficio 450/455 PCL 5e Printer ICMP Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">3134</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Ricoh+Aficio" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/688" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/330">x90c</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2004-07-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/358" target="_blank" class="style14">Lexmark Multiple HTTP Servers Denial of Service Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">3034</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Lexmark" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/358" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/215">Peter Kruse</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2004-07-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/363" target="_blank" class="style14">Conceptronic CADSLR1 Router Denial of Service Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">3215</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Conceptronic" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/363" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/218">Seth Alan Woolley</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2003-07-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/62" target="_blank" class="style14">Cisco IOS (using hping) Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4850</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/62" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/49">zerash</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2003-07-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/60" target="_blank" class="style14">Cisco IOS IPv4 Packet Denial of Service Exploit (cisco-bug-44020.c)</a></td>
+<td nowrap="nowrap" width=40 align="left">4158</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/60" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/47">Martin Kluge</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2003-07-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/59" target="_blank" class="style14">Cisco IOS IPv4 Packets Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">3772</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/59" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/46">l0cK</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2001-01-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/262" target="_blank" class="style14">Cisco Multiple Products Automated Exploit Tool</a></td>
+<td nowrap="nowrap" width=40 align="left">4791</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Cisco" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/262" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/164">hypoclear</a>
+</td>
+</tr></tbody></table><br><br><br><script type="text/javascript"><!--
+google_ad_client = "pub-0718555979486542";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "text";
+//2007-08-22: milw0rm
+google_ad_channel = "1394564144";
+google_color_border = "000000";
+google_color_bg = "141414";
+google_color_link = "00c000";
+google_color_text = "000000";
+google_color_url = "00c000";
+google_ui_features = "rc:0";
+//-->
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+<p><FONT style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit[at]milw0rm.com">submit[at]milw0rm.com</a> [<a href="/gpg/str0ke.asc" target="_blank">gpg</a>]<br><br>Copyright &copy; 2004-2008 <a href="mailto:str0ke[at]milw0rm.com">milw0rm</a> </FONT></p>
+</td></tr></table>
+  <br>
+  <br>
+</center>
+</body></html>

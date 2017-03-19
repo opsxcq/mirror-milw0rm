@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>www.milw0rm.com</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<STYLE type=text/css>
+BODY {
+        SCROLLBAR-FACE-COLOR: #000000; FONT-SIZE: 10px; SCROLLBAR-HIGHLIGHT-COLOR: #008000; SCROLLBAR-SHADOW-COLOR: #008000; SCROLLBAR-3DLIGHT-COLOR: #000000; SCROLLBAR-ARROW-COLOR: #000000; SCROLLBAR-TRACK-COLOR: #000000; FONT-FAMILY: verdana; SCROLLBAR-DARKSHADOW-COLOR: #000000
+}
+INPUT {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+TEXTAREA {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+P {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DL {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DT {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DD {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+TD {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+TH {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+.submit {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+A:link {
+        TEXT-DECORATION: none
+}
+A:visited {
+        TEXT-DECORATION: none
+}
+A:active {
+        TEXT-DECORATION: none
+}
+A:hover {
+        COLOR: #00ff00; TEXT-DECORATION: none
+}
+B.hl1 {
+        FONT-WEIGHT: bold
+}
+B.hl2 {
+        FONT-WEIGHT: bold; FONT-STYLE: italic
+}
+.sr {
+
+        FONT-SIZE: 10px; LINE-HEIGHT: 14px
+}
+.style13 {font-size: 9px; font-weight: bold; }
+.style14 {font-size: 9px}
+.style15 {font-size: 9px; color: #D6EF39; }
+</STYLE>
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php" />
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" />
+</HEAD>
+<BODY dir=ltr text=#008000 vLink=#00c000 aLink=#00ff00 link=#00c000
+bgColor=#000000 background=images/dot.gif>
+<CENTER>
+<TABLE border=0>
+<TBODY>
+<TR>
+<td nowrap>
+  <B>[ <A href="http://www.milw0rm.com"
+              target=_self>home</A> ]</B> <B>[ <A href="remote.php"
+              target=_self>remote</A> ]</B> <B>[ <A href="local.php"
+              target=_self>local</A> ]</B> <B>[ <A href="dos.php"
+              target=_self>dos</A> ]</B> <B>[ <A href="platforms.php"
+              target=_self>platforms</A> ]</B> <B>[ <A href="shellcode2.php"
+              target=_self>shellcode</A> ]</B> <B>[ <A href="info.php"
+              target=_self>search</A> ]</B> <B>[ <A href="author.php"
+              target=_self>author</A> ]</B> <B>[ <A href="links.php"
+              target=_self>links</A> ]</B> <BR>
+	      </td>
+	      </TR>
+	      </TBODY>
+	      </TABLE>
+  <TABLE height=80 cellSpacing=0 cellPadding=1 width=500 bgColor=#008000
+border=0>
+    <TBODY>
+      <TR>
+        <TD vAlign=top width="100%" height="100%"> <TABLE height="100%" cellSpacing=0 cellPadding=10 width="100%"
+      bgColor=#000000 border=0>
+            <TBODY>
+              <TR>
+                <TD style="BACKGROUND-REPEAT: no-repeat" vAlign=top align=middle
+          width="100%" background=images/logo.png
+            height=80><BR>
+                  <BR></TD>
+</TR>
+              
+	      
+	      <TR> 
+                <TD height="100" align=middle vAlign=bottom><!-- <B>[ <a href="author.php" 
+            target=_self>Authors</a> ]--><br></B>          
+	    
+	    <table align="center" border="0" bordercolor="#333333" width="597">
+                    <tbody>
+		      <tr class="style13">
+		      <td><table cellspacing="0" cellpadding="0">
+
+
+                <tr>
+                  <td width="75"><strong>Author: </strong></td>
+                  <td width="514">Luigi Auriemma</td>
+                </tr>
+                <tr>
+                  <td><strong>Homepage: </strong></td>
+                  <td><a href="http://aluigi.altervista.org">http://aluigi.altervista.org </a></td>
+                </tr>
+                <tr>
+                  <td><strong>Email:</strong></td>
+                  <td><img src="email.php?id=667"></td>
+                </tr>
+              </table>		        </td>
+		      </tr>
+		      </tbody>
+		      </table>
+		      <br>
+
+		      <TABLE borderColor=#333333 width=597 align=center border=0>
+
+                    <TBODY>
+                      <TR class="style13">
+                        <TD class="style13">-::DATE</TD>
+                        <TD class="style13">-::DESCRIPTION</TD>
+                        <TD>-::AUTHOR</TD>
+                      </TR>
+
+<TR class=submit><TD width=65 class=style14>2004-12-02</TD><TD width=375><a href=id.php?id=672 target='_blank' class='style14'> Kreed <= 1.05 Format String and Denial of Service</A></TD><TD width=135>Luigi Auriemma</TD></TR><TR class=submit><TD width=65 class=style14>2004-12-01</TD><TD width=375><a href=id.php?id=671 target='_blank' class='style14'>Neverwinter Nights special Fake Players DoS</A></TD><TD width=135>Luigi Auriemma</TD></TR><TR class=submit><TD width=65 class=style14>2004-11-30</TD><TD width=375><a href=id.php?id=667 target='_blank' class='style14'>Jana Server <= 2.4.4 http/pna DoS</A></TD><TD width=135>Luigi Auriemma</TD></TR><TR class=submit><TD width=65 class=style14>2004-11-29</TD><TD width=375><a href=id.php?id=665 target='_blank' class='style14'>Orbz <= 2.10 buffer-overflow</A></TD><TD width=135>Luigi Auriemma</TD></TR><TR class=submit><TD width=65 class=style14>2004-11-28</TD><TD width=375><a href=id.php?id=661 target='_blank' class='style14'>Serious Engine Players Overflow Remote DoS Exploit</A></TD><TD width=135>Luigi Auriemma</TD></TR><TR class=submit><TD width=65 class=style14>2004-11-24</TD><TD width=375><a href=id.php?id=655 target='_blank' class='style14'>Star Wars Battlefront 1.1 and below Fake Players DoS and Tester </A></TD><TD width=135>Luigi Auriemma</TD></TR><TR class=submit><TD width=65 class=style14>2004-11-23</TD><TD width=375><a href=id.php?id=653 target='_blank' class='style14'>Soldier of Fortune II 1.3 and below server and client crash</A></TD><TD width=135>Luigi Auriemma</TD></TR><TR class=submit><TD width=65 class=style14>2004-11-22</TD><TD width=375><a href=id.php?id=651 target='_blank' class='style14'>Halo 1.05 and below broadcast client crash </A></TD><TD width=135>Luigi Auriemma</TD></TR><TR class=submit><TD width=65 class=style14>2004-11-01</TD><TD width=375><a href=id.php?id=611 target='_blank' class='style14'>Chesapeake TFTP Server 1.0 Directory Traversal and DoS PoC Exploit</A></TD><TD width=135>Luigi Auriemma</TD></TR><TR class=submit><TD width=65 class=style14>2004-10-27</TD><TD width=375><a href=id.php?id=603 target='_blank' class='style14'>Crashs in Master of Orion III 1.2.5</A></TD><TD width=135>Luigi Auriemma</TD></TR><TR class=submit><TD width=65 class=style14>2004-10-14</TD><TD width=375><a href=id.php?id=576 target='_blank' class='style14'>ShixxNote 6.net Remote Buffer-Overflow</A></TD><TD width=135>Luigi Auriemma</TD></TR><TR class=submit><TD width=65 class=style14>2004-10-10</TD><TD width=375><a href=id.php?id=571 target='_blank' class='style14'>Buffer-Overflow in some old Monolith games</A></TD><TD width=135>Luigi Auriemma</TD></TR><TR class=submit><TD width=65 class=style14>2004-09-28</TD><TD width=375><a href=id.php?id=557 target='_blank' class='style14'>Broadcast crash in Chatman 1.5.1 RC1</A></TD><TD width=135>Luigi Auriemma</TD></TR><TR class=submit><TD width=65 class=style14>2004-09-23</TD><TD width=375><a href=id.php?id=477 target='_blank' class='style14'>PopMessenger <= 1.60 Remote Denial of Service Exploit</A></TD><TD width=135>Luigi Auriemma</TD></TR><TR class=submit><TD width=65 class=style14>2004-09-19</TD><TD width=375><a href=id.php?id=468 target='_blank' class='style14'>Pigeon Server DoS</A></TD><TD width=135>Luigi Auriemma</TD></TR><TR class=submit><TD width=65 class=style14>2004-09-05</TD><TD width=375><a href=id.php?id=433 target='_blank' class='style14'>Call of Duty <= 1.4 Denial of Service</A></TD><TD width=135>Luigi Auriemma</TD></TR><TR class=submit><TD width=65 class=style14>2004-08-31</TD><TD width=375><a href=id.php?id=429 target='_blank' class='style14'>Ground Control <= 1.0.0.7 server/client dos exploit</A></TD><TD width=135>Luigi Auriemma</TD></TR><TR class=submit><TD width=65 class=style14>2004-08-27</TD><TD width=375><a href=id.php?id=422 target='_blank' class='style14'>Painkiller versions 1.3.1 and below exploit</A></TD><TD width=135>Luigi Auriemma</TD></TR><TR class=submit><TD width=65 class=style14>2004-07-20</TD><TD width=375><a href=id.php?id=357 target='_blank' class='style14'>Medal of Honor Remote Buffer Overflow Vulnerability</A></TD><TD width=135>Luigi Auriemma</TD></TR><TR class=submit><TD width=65 class=style14>2004-03-04</TD><TD width=375><a href=id.php?id=161 target='_blank' class='style14'>Red Faction <= 1.20 Server Reply Buffer Overflow Remote Exploit
+</A></TD><TD width=135>Luigi Auriemma</TD></TR><TR class=submit><TD width=65 class=style14>2004-03-03</TD><TD width=375><a href=id.php?id=604 target='_blank' class='style14'>Age of Sail II 1.04.151 and below buffer overflow </A></TD><TD width=135>Luigi Auriemma</TD></TR><TR class=submit><TD width=65 class=style14>2004-03-03</TD><TD width=375><a href=id.php?id=605 target='_blank' class='style14'>Alpha Black Zero 1.04 and below server crash </A></TD><TD width=135>Luigi Auriemma</TD></TR><TR class=submit><TD width=65 class=style14>2004-03-02</TD><TD width=375><a href=id.php?id=607 target='_blank' class='style14'>Flash Messaging 5.2.0g and below server crash </A></TD><TD width=135>Luigi Auriemma</TD></TR><TR class=submit><TD width=65 class=style14>2004-03-00</TD><TD width=375><a href=id.php?id=606 target='_blank' class='style14'>Chatman 1.5.1 and below RC1 broadcast crash </A></TD><TD width=135>Luigi Auriemma</TD></TR><TR class=submit><TD width=65 class=style14>2004-01-23</TD><TD width=375><a href=id.php?id=147 target='_blank' class='style14'>Need for Speed 2 Remote Client Buffer Overflow Exploit
+</A></TD><TD width=135>Luigi Auriemma</TD></TR><TR class=submit><TD width=65 class=style14>2003-09-10</TD><TD width=375><a href=id.php?id=95 target='_blank' class='style14'>Roger Wilco 1.x Client Data Buffer Overflow Exploit</A></TD><TD width=135>Luigi Auriemma</TD></TR>		      
+                  </TBODY>
+                  </TABLE>
+                    <br>
+                    <br>
+                    <br>
+
+                  <p><FONT
+            style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit@milw0rm.com">submit@milw0rm.com</a><br><br>Copyright © 2004 <a href="mailto:str0ke@milw0rm.com">str0ke@milw0rm.com</a> </FONT></p></TD>
+              </TR>
+            </TBODY>
+          </TABLE></TD>
+      </TR>
+    </TBODY>
+  </TABLE>
+  <BR>
+  <BR>
+</CENTER>
+</BODY>
+</HTML>
+

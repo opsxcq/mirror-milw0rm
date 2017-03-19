@@ -1,0 +1,422 @@
+<html><head>
+<title>milw0rm - exploits : vulnerabilities : videos : papers : shellcode</title>
+<meta name="description" content="milw0rm exploits and 0day exploits database">
+<meta name="keywords" content="exploits code, exploit code, exploits, 0-day, 0day, 0days, exploit, zero day, poc, exploit, local exploits, remote exploits, root exploits, windows, linux, new exploits, latest exploits, shellcode, Zero-day, zeroday, security articles, ezines, zines, security papers">
+<link type="text/css" rel="stylesheet" href="/milw0rm.css">
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php">
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon"></head>
+<body dir="ltr" alink="#00ff00" background="/images/dot.gif" bgcolor="#000000" link="#00c000" text="#008000" vlink="#00c000">
+<center>
+<table border="0">
+<tr>
+<td nowrap="nowrap">
+
+			<b>[ <a href="/" target=_self>home</a> ]</b>
+			<b>[ <a href="/contents.php" target=_self>contents</a> ]</b>
+			<b>[ <a href="/platforms/" target=_self>platforms</a> ]</b>
+			<b>[ <a href="/shellcode/" target=_self>shellcode</a> ]</b>
+			<b>[ <a href="/search.php" target=_self>search</a> ]</b>
+			<b>[ <a href="/cracker/" target=_self>cracker</a> ]</b>
+			<b>[ <a href="/links/" target=_self>links</a> ]</b>
+			<b>[ <a href="/rss.php" target=blank>rss</a> ]</b>
+			<b>[ <a href="/sploits/milw0rm.tar.bz2" target=_self>archive</a> ]</b>
+			</td>
+    </tr>
+  </table>
+
+<table width="668" border="0" cellpadding="3" cellspacing="3" class="main">
+  <tr><td><img src="/images/milw0rm-wi.jpg" alt="milw0rm"></td></tr><tr><td>
+<b>[ <a href="/" target=_self>e107</a> ]</b><table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-07-23</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9235" target="_blank" class="style14">e107 Plugin my_gallery 2.4.1 readfile() Local File Disclosure Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">3549</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=e107" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9235" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1242">NoGe</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-04-20</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8495" target="_blank" class="style14">e107 <= 0.7.15 (extended_user_fields) Blind SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">8883</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=e107" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8495" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1487">StAkeR</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-04-13</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8417" target="_blank" class="style14">e107 Plugin userjournals_menu (blog.id) SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4551</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=e107" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8417" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1502">boom3rang</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-11-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7184" target="_blank" class="style14">e107 Plugin ZoGo-Shop 1.15.4 (product) SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">5015</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=e107" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7184" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1242">NoGe</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-10-31</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6885" target="_blank" class="style14">e107 Plugin lyrics_menu (lyrics_song.php l_id) SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4597</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=e107" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6885" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1370">ZoRLu</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-10-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6865" target="_blank" class="style14">e107 Plugin fm pro v1 (FD/Upload/DT) Multiple Remote Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">3070</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=e107" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6865" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/975">GoLd_M</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-10-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6856" target="_blank" class="style14">e107 Plugin BLOG Engine 2.1.4 Remote SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">3904</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=e107" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6856" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1370">ZoRLu</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-10-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6849" target="_blank" class="style14">e107 Plugin alternate_profiles (id) SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4794</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=e107" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6849" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1502">boom3rang</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-10-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6852" target="_blank" class="style14">e107 Plugin EasyShop (category_id) Blind SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4355</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=e107" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6852" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1487">StAkeR</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-10-19</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6791" target="_blank" class="style14">e107 <= 0.7.13 (usersettings.php) Blind SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">7071</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=e107" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6791" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1398">girex</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-09-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6516" target="_blank" class="style14">e107 Plugin Image Gallery 0.9.6.2 (image) SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">6236</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=e107" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6516" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1502">boom3rang</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-09-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6346" target="_blank" class="style14">e107 Plugin BLOG Engine 2.2 (uid) SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4604</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=e107" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6346" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/712">Virangar Security</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-08-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6219" target="_blank" class="style14">e107 <= 0.7.11 Arbitrary Variable Overwriting Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4139</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=e107" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6219" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/239">GulfTech Security</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-07-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6158" target="_blank" class="style14">e107 Plugin BLOG Engine 2.2 Blind SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4796</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=e107" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6158" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/712">Virangar Security</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-05-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5666" target="_blank" class="style14">e107 Plugin BLOG Engine 2.2 (uid) Blind SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">5796</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=e107" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5666" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/712">Virangar Security</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-05-13</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5604" target="_blank" class="style14">e107 Plugin BLOG Engine 2.2 (rid) Blind SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">5084</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=e107" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5604" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1443">Saime</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-05-13</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5605" target="_blank" class="style14">e-107 Plugin zogo-shop 1.16 Beta 13 SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">5000</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=e107" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5605" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/960">Cr@zy_King</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-04-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5459" target="_blank" class="style14">e107 Module 123 Flash Chat 6.8.0 Remote File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">8691</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=e107" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5459" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1422">by_casper41</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-03-25</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5308" target="_blank" class="style14">e107 Plugin My_Gallery 2.3 Arbitrary File Download Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">10480</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=e107" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5308" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/378">Jerome Athias</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-06-24</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4099" target="_blank" class="style14">e107 <= 0.7.8 (photograph) Arbitrary File Upload Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">9004</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=e107" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4099" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/957">g00ns</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-12</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3721" target="_blank" class="style14">e107 0.7.8 (mailout.php) Access Escalation Exploit (admin needed)</a></td>
+<td nowrap="nowrap" width=40 align="left">7443</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=e107" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3721" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1084">Gammarays</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-11-04</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2711" target="_blank" class="style14">e107 <= 0.75 (e107language_e107cookie) Local File Include Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">9994</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=e107" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2711" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/649">Kacper</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-08-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2268" target="_blank" class="style14">e107 <= 0.75 (GLOBALS Overwrite) Remote Code Execution Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">10774</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=e107" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2268" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/534">rgod</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-10-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1258" target="_blank" class="style14">e107 <= 0.6172 (resetcore.php) Remote SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">14586</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=e107" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1258" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/534">rgod</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-07-14</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1106" target="_blank" class="style14">e107 <= 0.617 XSS Remote Cookie Disclosure Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">12497</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=e107" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1106" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/468">Warlord</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2004-12-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/704" target="_blank" class="style14">e107 include() Remote Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">20661</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=e107" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/704" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/339">sysbug</a>
+</td>
+</tr></tbody></table><br><br><center></center><br><br><br><center>
+<script type="text/javascript"><!--
+google_ad_client = "pub-0718555979486542";
+/* 468x60, created 9/26/08 */
+google_ad_slot = "3279240256";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</center>
+
+<p><FONT style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit[at]milw0rm.com">submit[at]milw0rm.com</a> [<a href="/gpg/submit.asc" target="_blank">gpg</a>]<br>Copyright &copy; 2004-2009 <a href="mailto:str0ke[at]milw0rm.com">milw0rm</a> </FONT></p>
+</td></tr></table>
+  <br>
+  <br>
+</center>
+</body></html>

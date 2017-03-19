@@ -1,0 +1,812 @@
+<html>
+<head>
+<title>Stack Overflow IRC Lecture</title>
+<pre>
+Title: Stack Overflow IRC Lecture
+Author/Lecturer: Aelphaeis Mangarae
+Website: http://blackhat-forums.com
+Email: adam_we1shaupt@hotmail.com
+IRC: IRC.BlueHell.Org #BHF
+
+
+&lt;Aelphaeis&gt; -------------------------------------------------------------------------------------
+&lt;Aelphaeis&gt; Learn Stack Overflow Exploitation IRC Lecture
+&lt;Aelphaeis&gt; Lecturer: Aelphaeis Mangarae
+&lt;Aelphaeis&gt; Topic: Win32 Stack Based Buffer Overflow Exploitation
+&lt;Aelphaeis&gt; Time: 10:17 PM, Perth, Western Australia
+&lt;Aelphaeis&gt; So we begin the lecture
+&lt;Aelphaeis&gt; as you should of already guessed, a stack based buffer overflow is something which occurs on the stack
+&lt;Aelphaeis&gt; The stack is a data structure in memory that can be used for storing temporary and initialized data
+&lt;Aelphaeis&gt; The stack works on a LIFO principal
+&lt;Aelphaeis&gt; that is Last In, First Out
+&lt;Aelphaeis&gt; The top of the stack is at a fixed address and grows downwards
+&lt;Aelphaeis&gt; If something is added to the stack, that means something is PUSHED onto the stack
+&lt;Aelphaeis&gt; when this happens something is placed on the stack, and the Stack Frame Pointer is decremented 
+(because of stack growth's direction)
+&lt;Aelphaeis&gt; that is, it will point to a lower address
+&lt;Aelphaeis&gt; when something is removed from the stack it is POPPED
+&lt;Aelphaeis&gt; at which point the stack frame is removed and the Stack Frame Pointer is incremented
+* dni_ (~dni@bluehell-8A5C4F46.hsd1.fl.comcast.net) Quit (Ping timeout )
+&lt;Aelphaeis&gt; So now you have a basic understanding of how the stack works
+* dni_ (~dni@bluehell-8A5C4F46.hsd1.fl.comcast.net) has joined #bhf
+&lt;Aelphaeis&gt; Here is a diagram of a typical stack from wikipedia
+&lt;Aelphaeis&gt; http://en.wikipedia.org/wiki/Image:ProgramCallStack2.png
+&lt;Aelphaeis&gt; On the win32 stack there is basicall half a dozen registers
+&lt;Aelphaeis&gt; these registers contain information
+&lt;Aelphaeis&gt; some important ones are:
+&lt;Aelphaeis&gt; The EBP, which is the Extended Base Pointer, this points to the current stack frame (sometimes it's named Stack DATA Pointer)
+&lt;Aelphaeis&gt; The EIP, the Extended Instructional Pointer, which points to where a function will return to after it is 
+called (generally it determines the next instruction's address)
+&lt;Aelphaeis&gt; The ESP, the Extended Stack Pointer which points to the &quot;top of the stack&quot; (more accurately the bottom of stack on x86)
+&lt;Aelphaeis&gt; in some books the essayists have told that it's used to point to the next stack operation which is true and the same somehow
+&lt;Aelphaeis&gt; the two most important of these registers are the ESP and the EIP.
+&lt;Aelphaeis&gt; These two we will come across when exploiting our application (vulnerable to a typical Stack Overflow).
+* Aelphaeis sets mode: -m
+&lt;Aelphaeis&gt; Any questions?
+&lt;Syn4ps3&gt; no
+&lt;santabug&gt; any :)
+&lt;blackcat&gt; so far no
+&lt;dni&gt; non
+&lt;Fakep&gt; no
+&lt;TheMagician&gt; nope
+&lt;SeventotheSeven&gt; no
+&lt;Umdebaba&gt; nope
+&lt;dcboy&gt; i iam
+&lt;sm&gt; nope.
+&lt;dcboy&gt; how long the esp ?
+&lt;DanielG&gt; as long as an address i suppose
+&lt;Aelphaeis&gt; each register on a 32-bit OS is 4 bytes in length (32bits/8bits=4bytes), storing 32-bit address/data at 
+maximum. If you need less space to use you can use 16-bit and/or 8-bit registers (sometimes we are forced to use a 
+8-bit register for example) 
+&lt;Syn4ps3&gt; esp its an address of a 4bytes register
+&lt;Silentz&gt; hence 32bit?
+&lt;dni&gt; the esp is 4 bytes
+&lt;dcboy&gt; ok`
+&lt;Silentz&gt; Aelph?
+&lt;dcboy&gt; thanks
+* popkorn (pop_korn@bluehell-7307429E.miki.eu.org) has joined #bhf
+&lt;headyy&gt; w00t i can talk :D
+* mIcr0s0ft (user@ping.pong.np) has joined #bhf
+&lt;Aelphaeis&gt; fuck up headYY, lecture is going on
+&lt;headyy&gt; sorry :(
+&lt;Silentz&gt; Aelphaeis?
+&lt;Syn4ps3&gt; ¨http://lardcave.net/~wzdd/hype/localimages/cs9244__ia32_integer_registers.png
+&lt;Aelphaeis&gt; so no more questions really?
+&lt;Syn4ps3&gt; look at this guys
+&lt;Silentz&gt; yes
+&lt;Silentz&gt; me
+&lt;Silentz&gt; &lt;Silentz&gt; hence 32bit?
+&lt;Syn4ps3&gt; and this one: ¨http://www.unixwiz.net/images/stackframe-cdecl.gif
+* Aelphaeis sets mode: +m
+&lt;Aelphaeis&gt; So now we move onto the next bit of the lecture
+&lt;Aelphaeis&gt; What Is A Stack Based Buffer Overflow
+* mIcr0s0ft (user@ping.pong.np) has left #bhf
+&lt;Aelphaeis&gt; A stack based buffer overflow occurs when more data is transferred into a (static) buffer than what the 
+buffer was designed to hold, therefore the buffer overflows
+&lt;Aelphaeis&gt; the contents of the buffer would be stored somewhere on the stack temporarily, what would happen is the 
+excess data would overwrite other memory locations (stack frames, registers, func ptr, ...)
+&lt;Aelphaeis&gt; The fact we can overwrite registers on the stack is the important part, because this is the key to exploitation
+&lt;Aelphaeis&gt; In this lecture I will demonstrate the overwriting of the EIP and how to execute shellcode by hijacking flow 
+of the program and landing it into a NOPSLED which of course will be followed by shellcode
+&lt;Aelphaeis&gt; Why Do Stack Overflows Occur?
+* cesnjak (cesnjak@bluehell-D2958902.adsl.net.t-com.hr) has joined #bhf
+&lt;Aelphaeis&gt; Stack Overflows occur because there are functions in C/C++ that do not do &quot;bounds checking&quot; and will copy the 
+contents of one buffer or inputted data into a buffer without checking how much data the buffer can hold
+* insanity (_th3-x@F88F3A20.8CE6CB0B.F175557F.IP) has joined #bhf
+&lt;Aelphaeis&gt; functions such as strcpy() do not do bounds checking and are therefore exploitable
+&lt;Aelphaeis&gt; A small list of C functions that are vulnerable are:
+&lt;Aelphaeis&gt; gets()
+&lt;Aelphaeis&gt; sprintf()
+&lt;Aelphaeis&gt; strcat()
+&lt;Aelphaeis&gt; strcpy()
+&lt;Aelphaeis&gt; streadd()
+&lt;Aelphaeis&gt; strecpy()
+&lt;Aelphaeis&gt; strtrns()
+&lt;Aelphaeis&gt; index()
+&lt;Aelphaeis&gt; fscanf()
+&lt;Aelphaeis&gt; scanf()
+&lt;Aelphaeis&gt; sscanf()
+&lt;Aelphaeis&gt; vsprintf()
+&lt;Aelphaeis&gt; realpath()
+&lt;Aelphaeis&gt; getopt()
+&lt;Aelphaeis&gt; getpass()
+&lt;Aelphaeis&gt; If I remember correctly, dni found that list through googling
+* Aelphaeis sets mode: -m
+&lt;dni&gt; :)
+&lt;Aelphaeis&gt; Any questions?
+&lt;Fakep&gt; nope
+&lt;santabug&gt; strlen()
+&lt;insanity&gt; thankz
+&lt;sm&gt; everything's fine..
+&lt;Umdebaba&gt; no questions
+&lt;sm&gt; maybe more functions..
+&lt;Syn4ps3&gt; no questions
+&lt;Aelphaeis&gt; well you guys can find that out for yourself
+&lt;sm&gt; im making list of them..
+&lt;sm&gt; :D
+&lt;SeventotheSeven&gt; no questions
+&lt;Aelphaeis&gt; not like you can't use Google, unlike my retard friend Ben who acts like he can't use Google
+&lt;dcboy&gt; gogo``
+&lt;sm&gt; ok... if anyone has any list..it would be nice to share it
+&lt;Syn4ps3&gt; so i want to tell if someone has any question just ask, do not be quiet
+&lt;Aelphaeis&gt; yeah feel free to ask
+&lt;Aelphaeis&gt; ok, seems no one has any questions
+&lt;nic`&gt; why does my peenii smell?
+&lt;D4rk&gt; ...
+&lt;Aelphaeis&gt; nic`, you need to wash your penis everyday
+&lt;Syn4ps3&gt; lol
+&lt;Fakep&gt; =\
+&lt;nic`&gt; ok thanx =D !
+&lt;santabug&gt; haah
+&lt;Aelphaeis&gt; otherwise it will become vulnerable to a stack based buffer overflow
+&lt;cesnjak&gt; lol
+&lt;Aelphaeis&gt; and you will be exploited by h4x0rz
+&lt;Syn4ps3&gt; hahaha
+&lt;Fakep&gt; lol
+&lt;SeventotheSeven&gt; lol
+&lt;Umdebaba&gt; pwned
+&lt;D4rk&gt; sperm overflow
+&lt;nic`&gt; then ill get posted on steak and cheese
+&lt;sm&gt; lol
+&lt;Aelphaeis&gt; lol, ok that's enough about nic` pen0r
+&lt;sm&gt; vuln one :P
+* Typo (~you.suck@bluehell-156E3E87.lns1-c11.dsl.pol.co.uk) has joined #bhf
+&lt;Aelphaeis&gt; So now we move onto:
+&lt;Aelphaeis&gt; Fuzzing Our Vulnerable Application!
+&lt;Aelphaeis&gt; now, I have already compiled our target application using LCC W32
+&lt;Aelphaeis&gt; it can be found here:
+&lt;Aelphaeis&gt; http://blackhat-forums.com/Aelphaeis/vuln.exe
+&lt;Aelphaeis&gt; everyone download it
+&lt;Aelphaeis&gt; if you haven't got a vuln.exe suitable for exploitation
+&lt;Aelphaeis&gt; brb, gotta piss
+&lt;Silentz&gt; classic
+&lt;D4rk&gt; the thrill of the ride Silentz ;D
+&lt;Silentz&gt; heh
+* Balgan (~pinokavat@bluehell-574D17AD.brig.cable.ntl.com) has joined #bhf
+&lt;Silentz&gt; 43 and counting...
+&lt;Syn4ps3&gt; lol
+&lt;Aelphaeis&gt; so you all downloaded vuln.exe? or got a copy
+&lt;Silentz&gt; yup
+&lt;Fakep&gt; yes
+&lt;Syn4ps3&gt; yeah, just continue
+&lt;dcboy&gt; yes
+&lt;D4rk&gt; :D
+&lt;cesnjak&gt; it crashes to me
+&lt;dcboy&gt; i have download it
+&lt;insanity&gt; yes
+&lt;Aelphaeis&gt; Now as I should of mentioned earlier this exploitation should be done on a Windows XP box
+&lt;sm&gt; and turn back the moderated mode back on:)
+* nic` sets mode: +m
+&lt;Aelphaeis&gt; If for some reason you have DEP enabled on applications (other than windows system files) you can turn it off by going to
+&lt;Aelphaeis&gt; Control Panel -&gt; System -&gt; Advanced -&gt; Performance (Settings) -&gt; Data Execution Prevention
+&lt;Aelphaeis&gt; this technology will be discussed a bit more later on
+&lt;Aelphaeis&gt; I believe most 64bit CPU's support Data Execution Prevention
+&lt;Aelphaeis&gt; ok now it is time to fuzz our vulnerable application
+&lt;dni&gt; Aelhaeis: can DEP stay on if its just for windows progrms and serviceS?
+&lt;Aelphaeis&gt; yes, I have found you can still exploit the application that way
+&lt;dni&gt; ok
+&lt;Aelphaeis&gt; in fact I also discovered today that by default that's the way it seems to be
+&lt;D4rk&gt; indeed
+&lt;Aelphaeis&gt; Now it's time to open up our vulnerable application in Ollydbg
+&lt;Aelphaeis&gt; We will be fuzzing to see how many bytes we can slam in memory before overwriting the EIP.
+&lt;Aelphaeis&gt; For those you will need my Fuzzing.txt (well you could just use Perl)
+&lt;Aelphaeis&gt; http://blackhat-forums.com/Aelphaeis/Fuzzing.txt
+* popkorn (pop_korn@bluehell-7307429E.miki.eu.org) Quit (Quit: leaving )
+* r0rkty (admin@securzone.org) Quit (Ping timeout )
+&lt;Aelphaeis&gt; You can open Ollydbg and pass the A's which we will be using to fuzz our application as an argument
+&lt;Aelphaeis&gt; This program takes input as an argument (named a &quot;command-line argument&quot; program)
+&lt;Aelphaeis&gt; http://img144.imageshack.us/img144/9519/ollydbg1lf0.png
+&lt;Aelphaeis&gt; Ollydbg, File -&gt; Open
+&lt;Aelphaeis&gt; then paste 262 A's into the Arguments input box
+&lt;Aelphaeis&gt; Press Open
+&lt;Aelphaeis&gt; Now go to Debug -&gt; Run
+&lt;Aelphaeis&gt; You should possibly notice that some bytes (2) of your EIP have been overwritten
+* Aelphaeis sets mode: -m
+* cesnjak (cesnjak@bluehell-D2958902.adsl.net.t-com.hr) Quit (Quit:  )
+&lt;Aelphaeis&gt; Any questions?
+&lt;Syn4ps3&gt; 4 bytes overwritten
+&lt;sm&gt; why 262 A's
+&lt;sm&gt; ?
+&lt;Aelphaeis&gt; meaning the whole thing right?
+&lt;dcboy&gt; EIP point to 00004141
+&lt;Aelphaeis&gt; yes sm, 262
+&lt;Syn4ps3&gt; to probe
+&lt;santabug&gt; Syn4pse  2
+&lt;Syn4ps3&gt; me 4
+&lt;dni&gt; not me
+&lt;dcboy&gt; the buffer length is 256 why 262 can overwrite
+&lt;santabug&gt; 41 and 41
+&lt;Aelphaeis&gt; well it should vary on what compiler you use
+&lt;sm&gt; yep.. that's what i asked
+&lt;Syn4ps3&gt; yes
+&lt;Aelphaeis&gt; well there is space between the end of the buffer and the EIP on the stack
+&lt;Syn4ps3&gt; my EIP -&gt; 41414141
+&lt;Aelphaeis&gt; so that has to be overwritten
+&lt;Aelphaeis&gt; let demonstrate it:
+&lt;Aelphaeis&gt; [ buffer (256) ] [ SFP (4) ] [ RET (eip) (4) ] = 264 (data needed to overwrite the eip completely)
+&lt;Aelphaeis&gt; 264 - 262 (our data) = 2 =&gt; two last bytes of EIP is not overwritten
+&lt;D4rk&gt; 00004141
+&lt;Fakep&gt; me to
+&lt;dcboy&gt; my EIP -&gt; 00004141
+&lt;sm&gt; 00004141
+* r0rkty (admin@ircop.bluehell.org) has joined #bhf
+&lt;dcboy&gt; 262 's A
+* Aelphaeis sets mode: +o r0rkty
+&lt;SeventotheSeven&gt; 00401219 ?
+&lt;dni&gt; my eip is not overwritten at ll
+&lt;dni&gt; i put 262 A's in it
+&lt;Aelphaeis&gt; have you gone Debug -&gt; Run
+&lt;Syn4ps3&gt; i have to pass by parameter 260 A's
+&lt;SeventotheSeven&gt; yes
+&lt;dcboy&gt; EBP is -&gt;41414141
+&lt;Aelphaeis&gt; try more then dni and Seven
+&lt;Syn4ps3&gt; to have 2 bytes overwritten of EIP
+&lt;Aelphaeis&gt; did you use my vuln.exe ?
+&lt;SeventotheSeven&gt; now it's working
+&lt;Aelphaeis&gt; dni &amp;&amp; seven
+&lt;SeventotheSeven&gt; 00004141
+&lt;Aelphaeis&gt; ok good
+&lt;Syn4ps3&gt; try 260 A's
+&lt;TheMagician&gt; EIP: 00004141 EBP: 41414141
+&lt;Aelphaeis&gt; how about you dni, what is happening?
+&lt;Syn4ps3&gt; the guys that have 41414141 just probe with 260 A's
+&lt;Aelphaeis&gt; no, because 4 bytes is overwritten
+&lt;Fakep&gt; 41414141 - it's EBP
+&lt;Aelphaeis&gt; if they slamed 262 bytes in there, that means they can place 258 bytes in memory before overwriting the EIP.
+&lt;dni&gt; hmm
+&lt;dni&gt; maybe its DEP fucking with my shit
+&lt;Syn4ps3&gt; yeah i konw ael
+&lt;Aelphaeis&gt; well DEP marks areas of memory as non-executable so shellcode can't be executed
+&lt;Aelphaeis&gt; I wouldn't think it would effect the overwrite of the EIP.
+&lt;Aelphaeis&gt; dni did you use my vuln.exe?
+&lt;Syn4ps3&gt; have you Run-&gt;debug ?
+&lt;dni&gt; i got it
+&lt;Aelphaeis&gt; working now dni?
+&lt;dni&gt; yeah i had to put more into the buffer
+&lt;Aelphaeis&gt; ahh ok
+&lt;Syn4ps3&gt; right
+&lt;Aelphaeis&gt; so now you guys should all have worked out how many bytes you can place in memory before overwriting the EIP.
+&lt;Syn4ps3&gt; so, is there anyone lost?
+&lt;Aelphaeis&gt; this will be needed to align our new address over the old one.
+&lt;sm&gt; w8 a sec
+&lt;sm&gt; one more... you said:
+&lt;sm&gt; [15:45] &lt;Aelphaeis&gt; well there is space between the end of the buffer and the EIP on the stack
+&lt;sm&gt; how do we know how big is the space?
+&lt;Balgan&gt; just one question u guyz are going to put this &quot;lecture&quot; in the forum when it ends ? since iwasnt here since the begginin
+&lt;Aelphaeis&gt; in a normal stack based overflow process that space is 4 bytes.
+&lt;Aelphaeis&gt; there's one segment sfp or stack frame pointer between 'em in usual
+&lt;Aelphaeis&gt; so you need to put 4 more characters in order to reach the first byte of EIP or RET.
+&lt;Aelphaeis&gt; yes Balgan
+&lt;Balgan&gt; thx Aelphaeis
+&lt;Syn4ps3&gt; :)
+&lt;sm&gt; Ok.. everything's find. continue :]
+&lt;Aelphaeis&gt; ok, so everyone now knows how they can align their new address over their old one?
+&lt;sm&gt; fine*
+&lt;D4rk&gt; what do you mean?
+&lt;dni&gt; i ad to put 264
+&lt;dni&gt; **had
+&lt;dni&gt; to overwrite the eip
+&lt;Syn4ps3&gt; what cpu do you have?
+&lt;dni&gt; amd
+&lt;Syn4ps3&gt; ok
+&lt;dcboy&gt; 264 's A can overwirte all eip
+&lt;santabug&gt; yes
+&lt;dcboy&gt; EIP-&gt;41414141
+&lt;D4rk&gt; two questions: do we have to keep the bytes that overflow to a minimum, i mean, if the EIP is written at exactly 
+262 chars, why we use 264?
+&lt;Aelphaeis&gt; D4rk, well it's not overwritten completely (2 bytes is still left). Generally we don't need to overwrite our 
+eip with a junk data (A's). we just try to determine the number of characters needed to overflow the buffer. 
+&lt;dni&gt; d4rk no
+&lt;Syn4ps3&gt; then we are going to use the exactly num
+&lt;dcboy&gt; C:\&gt;findjmp ntdll.dll esp
+&lt;Syn4ps3&gt; you are going to see it later
+&lt;Aelphaeis&gt; sm, you just need to work out how many bytes you can put into memory before overwriting the EIP.
+&lt;Aelphaeis&gt; dcboy, please leave the explaining to me
+&lt;sm&gt; yeah aelph, it's ok
+&lt;Aelphaeis&gt; I will discuss what you are going onto later on
+&lt;sm&gt; i got it.. thanks
+&lt;Aelphaeis&gt; so you all now should have worked it out
+&lt;dcboy&gt; ok
+&lt;Syn4ps3&gt; one thing Ael
+&lt;Aelphaeis&gt; yes?
+&lt;Syn4ps3&gt; you told me to leave then with 41414141
+&lt;Syn4ps3&gt; but you can leave with that
+&lt;Syn4ps3&gt; you may search for at least 00414141
+&lt;Aelphaeis&gt; no, I didn't. You just needed to work out as I have said numerous times
+&lt;Syn4ps3&gt; to know the bytes exactly
+&lt;Aelphaeis&gt; &lt; 01~Aelphaeis &gt; ok, so everyone now knows how they can align their new address over their old o
+&lt;Aelphaeis&gt; yes
+&lt;Syn4ps3&gt; so i think there are guys with 41414141 now
+&lt;Syn4ps3&gt; ant it can result an error later
+&lt;Aelphaeis&gt; well then you need to work out how many bytes they can put into memory before overwriting the EIP.
+&lt;Aelphaeis&gt; That's what they need to work out
+&lt;Aelphaeis&gt; and what you should have all worked out by now
+&lt;Syn4ps3&gt; :)
+&lt;Aelphaeis&gt; That's the reason we are doing the fuzzing
+&lt;Aelphaeis&gt; Now, what we are going to do is put the following into memory:
+&lt;Aelphaeis&gt; [JUNK DATA] [NEW RETURN ADDRESS] [NOP SLED] [SHELLCODE]
+&lt;Aelphaeis&gt; The JUNK DATA will be used to overflow our buffer
+&lt;Aelphaeis&gt; because as I said before strcpy() does not do bounds checking, and in our application will just copy what is 
+receives into our char buffer[256];
+&lt;Balgan&gt; the junk data will be th same has the A's we use in fuzzing aye?
+&lt;Aelphaeis&gt; yes, you can use what ever you want
+&lt;Balgan&gt; ty
+&lt;Aelphaeis&gt; but in this case we will be using A's
+&lt;Aelphaeis&gt; Now it is time for us to find a suitable address, to overwrite the EIP (RET) with.
+&lt;Aelphaeis&gt; the RET in its simplest fashion is a simple CALL/JMP instruction.
+&lt;Aelphaeis&gt; in generally we can use the call/jmp trick to locate our data on the stack and use it to exploit the program successfully
+&lt;Aelphaeis&gt; and our data here is: NOP SLED and SHELLCODE
+&lt;Aelphaeis&gt; What we need is an address with a JMP ESP or a CALL ESP.
+&lt;Aelphaeis&gt; If we overwrite our EIP with an address that has JMP ESP we can jump into our NOPSLED.
+* KZ (~kanada@bluehell-5EBF2E1A.nc.res.rr.com) has joined #bhf
+&lt;Aelphaeis&gt; In this case I am not sure if the NOPSLED is actually needed, but when doing more complicated exploitation you 
+will find you probably will need to use it
+&lt;Aelphaeis&gt; but the point is that you can't use the nop sled everywhere. Sometimes the target program (buffer) is 
+very tiny and can't waste it by using of NOP instructions. So you need to find the exact address of the shellcode to 
+avoid using nop sled. Anyway it's not the case here in our example.
+&lt;Aelphaeis&gt; when we hit the NOPSLED, the Stack Frame Pointer will be incremented as it moves along each NOP.
+&lt;Aelphaeis&gt; A NOP, is a No-Operation byte (with the hexadecimal represent of 0x90), it doesn't do anything.
+&lt;Aelphaeis&gt; So now, let's find our address to overwrite the EIP with.
+&lt;Aelphaeis&gt; First here is the &quot;skeleton&quot; if you will for the exploit we will be coding to exploit the vulnerable application
+&lt;Aelphaeis&gt; http://blackhat-forums.com/Aelphaeis/exploit_b0f.c
+&lt;Aelphaeis&gt; Everyone get it and whack it into their C Compilers
+* KSURi (~ksuri@9E51E34F.E8A52DC2.B891CCD7.IP) has joined #bhf
+&lt;KSURi&gt; re2all
+&lt;Aelphaeis&gt; before, we go on. I would like to point out that obviously you will need to change the path in exploit[] to 
+what is suitable for your application
+&lt;Aelphaeis&gt; hello, KSURi, STFU while the lecture is going on
+&lt;Aelphaeis&gt; So everyone please do that now
+&lt;Balgan&gt; Aelphaeis just one question which is the c compiler ur using in the movie of exploiting stack overf. ?
+&lt;Aelphaeis&gt; LCC W32
+&lt;Balgan&gt; thx
+&lt;Aelphaeis&gt; so everyone ok with where we have come so far?
+&lt;SeventotheSeven&gt; yes
+&lt;dni&gt; yeah
+&lt;Fakep&gt; yes
+&lt;Balgan&gt; uep
+&lt;Syn4ps3&gt; yes
+&lt;Balgan&gt; yep
+&lt;dni&gt; question tho
+&lt;dni&gt; in b0f.
+&lt;dni&gt; c
+* skvoznoy (~madrish@F7E2E0C1.E2D05FA0.4BFF86AB.IP) has joined #bhf
+&lt;Aelphaeis&gt; yes, continue
+&lt;dni&gt; shoudnt it be 4 bytes ess than whatever the amount it took to overwrite the EIP ?
+&lt;Syn4ps3&gt; that is i told
+&lt;Aelphaeis&gt; welcome skvoznoy, the lecture is currently going on
+&lt;Syn4ps3&gt; if you have eip 41414141
+&lt;Syn4ps3&gt; you have to put 4bytes less
+&lt;dni&gt; cuz,  dont we need to send it garbage until right before the EIP starts getting overwritten
+&lt;Aelphaeis&gt; yes correct
+&lt;dni&gt; ok
+&lt;Aelphaeis&gt; as I said before!
+&lt;Syn4ps3&gt; if you had 00004141 2bytes less
+&lt;Aelphaeis&gt; correct Syn4ps3
+&lt;skvoznoy&gt; good day to all, it is pleasent to be here now for me, in so wonderful company :) 
+* r0rkty- (~h4x@ircop.bluehell.org) has joined #bhf
+&lt;Aelphaeis&gt; so now, we get our JMP ESP/CALL ESP address
+&lt;Syn4ps3&gt; so Aelphaeis the problem i was saying before is that you have EIP 41414141 you can be overwritting another registers too
+&lt;Aelphaeis&gt; we need to find one, in Windows NT as I have probably mentioned before, the addresses are static (NO ASLR) so, no problems finding one
+&lt;Aelphaeis&gt; correct, but that isn't important for this
+&lt;Syn4ps3&gt; ok
+&lt;Aelphaeis&gt; http://blackhat-forums.com/Aelphaeis/Findjmp2.exe
+&lt;Aelphaeis&gt; Findjmp2 is a program written by Hat-Squad, for finding possibly locations to JMP to
+&lt;Aelphaeis&gt; For those of you who remember a while back (when he was still releasing exploits) class101 was a member of Hat-Squad
+* r0rkty (admin@ircop.bluehell.org) Quit (Ping timeout )
+&lt;dcboy&gt; find which dll?
+&lt;Aelphaeis&gt; I believe he actually wrote the program
+&lt;Aelphaeis&gt; of course not written the whole, but also he has optimized it
+&lt;Aelphaeis&gt; the findjump tool mainly is developed by eEye and class101 has optimized it. 
+&lt;Aelphaeis&gt; dcboy I will get to that
+&lt;dcboy&gt; sorry~
+&lt;Aelphaeis&gt; for this example, we will use kernel32.dll
+&lt;Aelphaeis&gt; everyone got findjmp2.exe ?
+&lt;dni&gt; yea
+* phetips (~phetips@bluehell-31B75992.upc-i.chello.nl) has joined #bhf
+&lt;SeventotheSeven&gt; yes
+&lt;Fakep&gt; yep
+&lt;phetips&gt; lecture over?
+&lt;dni&gt; no
+&lt;Aelphaeis&gt; no, phetips we are like half way through
+&lt;sm&gt; try turning the +m mode again... it was better that way... after you're done we can ask questions
+&lt;Aelphaeis&gt; doesn't bother me sm atm, not too bad
+&lt;Aelphaeis&gt; anyway
+&lt;phetips&gt; okay i'll just sit and read than :)
+&lt;Aelphaeis&gt; we will now use findjmp2 to find an address
+&lt;sm&gt; lol
+&lt;Aelphaeis&gt; drag it into cmd and pass it the following arguments
+&lt;dcboy&gt; [+]0x77e7ae59   call esp is this?
+&lt;Aelphaeis&gt; findjmp2.exe KERNEL32.DLL esp
+&lt;Aelphaeis&gt; dcboy, for the last time don't go jumping ahead of us please
+&lt;dcboy&gt; sorry
+&lt;Aelphaeis&gt; all of you should find an address
+&lt;Balgan&gt; 2
+* SeventotheSeven nods
+&lt;Aelphaeis&gt; Balgan what operating system and service pack do you have?
+&lt;dni&gt; 2 as well
+&lt;dni&gt; xp sp 2
+&lt;Balgan&gt; Win xp SP2
+&lt;SeventotheSeven&gt; same
+&lt;Syn4ps3&gt; 0x7C81518B call esp
+&lt;Syn4ps3&gt; 0x7C8369D8 call esp
+&lt;SeventotheSeven&gt; same as me
+&lt;Fakep&gt; 2
+&lt;Balgan&gt; 0x7C81518B      call esp
+&lt;Balgan&gt; 0x7C8369D8      call esp
+&lt;sm&gt; 0x7C4FEDBB	call esp
+&lt;Aelphaeis&gt; ok, that seems to be different from mine, but anyway
+&lt;D4rk&gt; hmm how strange, i've got win xp sp2 and it only has one
+&lt;Aelphaeis&gt; ok, I get the point now guys. For those of you who have different language Operating Systems I think the addresses will vary
+&lt;Aelphaeis&gt; same with me D4rk
+&lt;Balgan&gt; ye mine is in PT
+&lt;Aelphaeis&gt; the KERNEL32.DLL isn't the most reliable dll to look for addresses in. 
+&lt;dni&gt; ou guys put 262 right ?
+&lt;D4rk&gt; yup
+&lt;Aelphaeis&gt; you can use any windows system dll you want that is loaded in memory
+&lt;Aelphaeis&gt; for example you can use ntdll.dll too, but of course it's not the case, so forget it for now.
+&lt;dni&gt; i put 264
+&lt;phetips&gt; 0x7C81518B      call esp
+&lt;phetips&gt; 0x7C8369D8      call esp
+&lt;phetips&gt; oh sorry that's exactly the same :)
+&lt;Syn4ps3&gt; me 260
+&lt;Aelphaeis&gt; I just chose to use KERNEL32.DLL
+&lt;Aelphaeis&gt; so we now need to format this address correctly and add it to our exploit
+&lt;Aelphaeis&gt; so we can overwrite our EIP.
+&lt;dni&gt; ok
+&lt;Aelphaeis&gt; Now the amount of A's in the skeleton of an exploit I gave you is 262
+&lt;Aelphaeis&gt; so please adjust it, to what you need
+* lightphoenix (~chatzilla@D58CE8C0.EC497771.38CE1736.IP) has joined #bhf
+&lt;Aelphaeis&gt; now let's take Syn4ps3's address (one of his) and format is correctly
+&lt;Aelphaeis&gt;  010x7C8369D8 call esp 
+&lt;Syn4ps3&gt; first one
+&lt;Aelphaeis&gt; 7C 83 69 D8
+&lt;Aelphaeis&gt; D8 69 83 7C
+&lt;Aelphaeis&gt; \xD8\x69\x83\x7C
+&lt;Aelphaeis&gt; Is our return address, well Syn4ps3's return address anyway
+&lt;Aelphaeis&gt; you should all format yours the same way I demonstrated
+* insanity (_th3-x@F88F3A20.8CE6CB0B.F175557F.IP) Quit (Quit:  )
+&lt;Aelphaeis&gt; you all doing that now?
+&lt;Syn4ps3&gt; yeah
+&lt;SeventotheSeven&gt; yes
+&lt;Balgan&gt; y
+&lt;D4rk&gt; done
+&lt;D4rk&gt; \x5D\x39\x82\x7C
+&lt;sm&gt; done
+&lt;Fakep&gt; \x33\x3A\x87\x7C
+&lt;Aelphaeis&gt; Balgan, wtf do you mean y? because we fucking have to
+&lt;dcboy&gt; ok
+&lt;sm&gt; i guess he mean yes:D
+&lt;Balgan&gt; yes
+&lt;Balgan&gt; lol
+&lt;Balgan&gt; sorry Aelphaeis
+&lt;Balgan&gt; :{
+&lt;Aelphaeis&gt; lol ok, you confused me
+&lt;Aelphaeis&gt; so now we put this into char ret[]
+&lt;dcboy&gt; i have one question: in exploit_b0f.c the overfolw[] 's A is 262 or 260?
+* Warpboy (~Warpboy1@bluehell-ACB9014E.carolina.res.rr.com) has joined #bhf
+&lt;Balgan&gt; 262
+&lt;Aelphaeis&gt; mine is: char ret[] = &quot;\x5D\x38\x82\x7C&quot;;
+&lt;dni&gt; dcb0y:  you had to modify it according to however many bytes it took to overflow
+&lt;D4rk&gt; same here
+&lt;Aelphaeis&gt; 262 dcboy
+&lt;dcboy&gt; thanks
+&lt;dni&gt; if it took you 264 characters to overflow it,..  you would put 260
+&lt;sm&gt; 262 for me too.. but some guys needed more
+&lt;Aelphaeis&gt; correct dni
+&lt;sm&gt; like dni
+&lt;Aelphaeis&gt; so you all formatted your return addresses correctly and added it to your exploit?
+&lt;Balgan&gt; yes
+&lt;dni&gt; yes
+&lt;Fakep&gt; yes
+&lt;sm&gt; yep
+&lt;SeventotheSeven&gt; yep
+&lt;Syn4ps3&gt; yes
+&lt;dcboy&gt; yes
+&lt;Aelphaeis&gt; ok, now time to add the NOPSLED
+&lt;Aelphaeis&gt; char NOPSLED[] = &quot;\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90&quot;;
+&lt;Aelphaeis&gt; we then add that NOPSLED to the variable exploit
+&lt;Aelphaeis&gt; under the two strcat()'s I have put in the exploit
+&lt;Aelphaeis&gt; put
+&lt;Aelphaeis&gt; strcat(exploit, NOPSLED);
+&lt;Aelphaeis&gt; that will append the NOPSLED after the return address
+&lt;Aelphaeis&gt; everyone done that?
+&lt;dcboy&gt; yes
+&lt;Syn4ps3&gt; yes
+&lt;dni&gt; yup
+&lt;SeventotheSeven&gt; yep
+&lt;Aelphaeis&gt; No one having any problems?
+&lt;Umdebaba&gt; nope
+&lt;dni&gt; i have  question tho
+&lt;dni&gt; why the 11 bytes of noslep ?
+&lt;Aelphaeis&gt; just random
+&lt;dni&gt; ko
+&lt;dni&gt; ok
+&lt;sm&gt; in the both strcat()?
+&lt;Aelphaeis&gt; I don't understand sm
+&lt;Napster911&gt; whats the lecture on I missed the start? 
+&lt;dni&gt; strcat(exploit, overflow);
+&lt;dni&gt; strcat(exploit, ret);
+&lt;dni&gt; strcat(exploit, NOPSLEP);
+&lt;sm&gt; oh k
+&lt;Aelphaeis&gt; thats how you should have it so far
+&lt;Aelphaeis&gt; as dni just pasted
+&lt;phetips&gt; Napster911: Topic: Win32 Stack Based Buffer Overflows
+&lt;Fakep&gt; done
+&lt;phetips&gt; but let's shhhh and let them hax ^^
+&lt;Aelphaeis&gt; ok, now time for our shellcode
+&lt;Aelphaeis&gt; now, in most exploits like this we can really use any shellcode we want, that has any payload
+&lt;Aelphaeis&gt; but for this we are just going to use some small shellcode that spawns a message box
+&lt;Syn4ps3&gt; you can find lots of them :)
+&lt;dni&gt; Aelph: size limitaion is an issue right ??
+&lt;Syn4ps3&gt; or code yourself
+&lt;Aelphaeis&gt; dni: yes
+&lt;D4rk&gt; you can make em to
+&lt;D4rk&gt; too*
+&lt;dcboy&gt; i have question: how long this max shellcode?
+&lt;Aelphaeis&gt; ahh, with this dni I found it is, but I also found that some of the shellcode from metasploit (generated) only 
+sometimes worked, and sometimes didnt
+&lt;dcboy&gt; how max long of the shellcode can input in
+&lt;dni&gt; dcboy:  i beleiv its the size of the buffer
+&lt;Aelphaeis&gt; well, listen here
+&lt;Aelphaeis&gt; no relation to program's buffer actually. But also it depends on our main &quot;payload size&quot;. 
+&lt;Aelphaeis&gt; take a look here: 
+&lt;Aelphaeis&gt; strcat(exploit, overflow);
+&lt;Aelphaeis&gt; strcat(exploit, ret);
+&lt;Aelphaeis&gt; strcat(exploit, NOPSLEP);
+&lt;Aelphaeis&gt; strcat(exploit, shellcode); (gonna add this line a bit later)
+&lt;Aelphaeis&gt; well, if you look this lines carefully, you'll see the &quot;exploit&quot; array here.
+&lt;Aelphaeis&gt; Anything related to our payload is added to this buffer. 
+&lt;Aelphaeis&gt; So we name the &quot;exploit&quot; array, our PAYLOAD-HOLDING buffer.
+&lt;Aelphaeis&gt; this means that the exploit stuff (junk, jmp, nop, shellcode, .) is added to this array.
+&lt;Aelphaeis&gt; so if our shellcode be too long to be hold by &quot;exploit&quot; array, our shellcode (and thus our exploit) will fail.
+&lt;Aelphaeis&gt; thus if we exceed our payload buffer space, we will see a segmentation fault message and the shellcode 
+execution is interrupted in the middle!
+* lightphoenix (~chatzilla@D58CE8C0.EC497771.38CE1736.IP) has joined #bhf
+&lt;Aelphaeis&gt; anyway, you can get the shellcode we are using from here:
+&lt;Aelphaeis&gt; http://blackhat-forums.com/Aelphaeis/Shellcode.txt
+&lt;dni&gt; buffer - EIP - SHELLCODE - RETURN
+&lt;dni&gt; i think
+&lt;santabug&gt; ah yes shellcoding is funny on linux with polymorphic engine 
+&lt;Fakep&gt; win32 Beep Shellcode (SP1/SP2) 35 bytes - may i use that?
+* SubSyn (~TcpSynAck@bluehell-I-NO7-1337.ur.berrylame.ru) has joined #bhf
+&lt;SeventotheSeven&gt; lol Fakep i was just looking at that
+&lt;Balgan&gt; well Aelphaeis u said a pop up message box so win32/xp sp2 Pop up message box 110 bytes should do the job ?
+&lt;Aelphaeis&gt; fakep, the SP2 version of that has a NULL byte in it (I guess they expect you to encode it.)
+&lt;sm&gt; i guess i need to find some other for my 2k
+&lt;Syn4ps3&gt; oh shit sm, just find another one quiclkly
+&lt;D4rk&gt; lol NULL byte, probl to scare off kiddies
+&lt;phetips&gt; isn't the limit simply the memory allocated to the stack? since you're writing at the end of the stack
+&lt;Aelphaeis&gt; yeah maybe D4rk, but I dont think so
+&lt;Aelphaeis&gt; correct phetips
+&lt;Syn4ps3&gt; yes
+&lt;Aelphaeis&gt; now this shellcode will only work on Windows XP SP2, as the addresses the shellcode calls are different on 
+different Windows branches (xp, 2000, 2003, etc)/Versions/Service packs/CPU-Architectures.
+&lt;Aelphaeis&gt; you can add your shellcode to your exploit by doing
+&lt;Aelphaeis&gt; char shellcode[] =
+&lt;Aelphaeis&gt; &quot;\x31\xc0\x31\xdb\x31\xc9\x31\xd2\xeb\x37\x59\x88\x51\x0a\xbb&quot;
+&lt;Aelphaeis&gt; &quot;\x77\x1d\x80\x7c&quot; //***LoadLibraryA(libraryname) IN WinXP sp2***
+&lt;Aelphaeis&gt; &quot;\x51\xff\xd3\xeb\x39\x59\x31\xd2\x88\x51\x0b\x51\x50\xbb&quot;
+&lt;Aelphaeis&gt; &quot;\x28\xac\x80\x7c&quot; //***GetProcAddress(hmodule,functionname) IN sp2***
+&lt;Aelphaeis&gt; &quot;\xff\xd3\xeb\x39\x59\x31\xd2\x88\x51\x06\x31\xd2\x52\x51&quot;
+&lt;Aelphaeis&gt; &quot;\x51\x52\xff\xd0\x31\xd2\x50\xb8\xa2\xca\x81\x7c\xff\xd0\xe8\xc4\xff&quot;
+&lt;Aelphaeis&gt; &quot;\xff\xff\x75\x73\x65\x72\x33\x32\x2e\x64\x6c\x6c\x4e\xe8\xc2\xff\xff&quot;
+&lt;Aelphaeis&gt; &quot;\xff\x4d\x65\x73\x73\x61\x67\x65\x42\x6f\x78\x41\x4e\xe8\xc2\xff\xff&quot;
+&lt;Aelphaeis&gt; &quot;\xff\x4f\x6d\x65\x67\x61\x37\x4e&quot;;
+&lt;Aelphaeis&gt; strcat(exploit, shellcode);
+&lt;Aelphaeis&gt; of course strcat(exploit, shellcode); would be placed after strcat(exploit, NOPSLED); so that your shellcode 
+is appended to your NOPSLED
+&lt;Aelphaeis&gt; everyone done that?
+&lt;SeventotheSeven&gt; yep
+&lt;Balgan&gt; ye
+&lt;Umdebaba&gt; what about non sp2 users, screwed?
+&lt;dni&gt; yup
+&lt;SeventotheSeven&gt; find diff shellcode
+&lt;Aelphaeis&gt; use different shellcode, you should be right
+&lt;Aelphaeis&gt; as long as its small
+&lt;Balgan&gt; http://milw0rm.com/shellcode/win32
+&lt;Umdebaba&gt; kk thanks
+&lt;dcboy&gt; i have one question: if the shellcode have \x00 how to do??
+&lt;Kekke&gt; remove it?
+&lt;dni&gt; yeah, i remember reading null bytes in shellcodes are a no
+&lt;phetips&gt; don't, you have to do tricks like xor instead of set to 0, etc
+&lt;dcboy&gt; ok``use XOR```
+&lt;lightphoenix&gt; encode the shellcode ?
+&lt;phetips&gt; or that
+&lt;Aelphaeis&gt; yes you would encode your shellcode in order to get around the problem of a NULL byte
+&lt;Aelphaeis&gt; of course there are  ways around to avoid null bytes which can be discussed in the forums.
+&lt;lightphoenix&gt; but how to decode before exec it?
+&lt;Aelphaeis&gt; Ok, run the exploit you have made and you should get the following:
+&lt;Aelphaeis&gt; http://img470.imageshack.us/img470/8485/exploitworkz0rxl5.png
+&lt;Aelphaeis&gt; So who's exploit works?
+* r0rkty- (~h4x@ircop.bluehell.org) Quit (Ping timeout )
+&lt;dcboy&gt; don't work
+&lt;santabug&gt; i 've tried blue beep sp1 one and it doesn't works
+&lt;Fakep&gt; not mine (
+&lt;Aelphaeis&gt; your exploit should of looked like this:
+&lt;Aelphaeis&gt; http://blackhat-forums.com/Aelphaeis/exploit2.c
+&lt;dni&gt; exploit.cpp
+&lt;dni&gt; exploit.cpp(56) : error C2065: 'execve' : undeclared identifier
+&lt;dni&gt; C:\Documents and Settings\John  Blaze\My Documents\0wn3d\C_stuff&gt;
+&lt;Syn4ps3&gt; mine works
+&lt;Aelphaeis&gt; dni? WTF You werent meant to use execve you were meant to use WinExec()
+&lt;Syn4ps3&gt; lol
+&lt;santabug&gt; ^^
+&lt;dni&gt; hmm
+&lt;dni&gt; i think i compiled the wrong exploit.c
+&lt;dni&gt; lol
+&lt;santabug&gt; for me this is just the shellcode which sux
+&lt;dni&gt; brb
+* SeventotheSeven (~seven@seven.to.the.seven) Quit (Ping timeout )
+&lt;Aelphaeis&gt; WinExec() is defined in windows.h btw dni, you should of used my exploit_b0f.c as a skeleton
+&lt;D4rk&gt; no window message for me, yet some directions to it
+&lt;D4rk&gt; C:\DOCUME~1\Dark\Escritorio&gt;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+&lt;D4rk&gt; AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+&lt;D4rk&gt; AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]9È|???????????1+1¶1+1??7YÍQ
+&lt;D4rk&gt; +w??|Q ??9Y1?ÍQ?QP+(º?| ??9Y1?ÍQ?1?RQQR ?1?P©?-¸| ??-   user32.dllN?-   MessageBoxAN?-   Omega7N
+&lt;Aelphaeis&gt; well it seems D4rk, it has jumped to the correct place, just hasnt executed the code
+&lt;D4rk&gt; yeah, wierd isn't it
+&lt;Aelphaeis&gt; it is possible as I said, that your version of Windows has the addresses at a different location in memory
+&lt;Aelphaeis&gt; therefore the shellcode doesn't work
+&lt;Syn4ps3&gt;   4[  D4rk   4] 
+&lt;Syn4ps3&gt; just probe with diferent number of A's
+&lt;Syn4ps3&gt; and it still works :)
+&lt;D4rk&gt; hmm let me check the addresses with arwin
+&lt;Syn4ps3&gt; but without the messages
+&lt;Aelphaeis&gt; no wait D4rk sorry, you may not have done it correctly
+&lt;Balgan&gt; mine goes same way has Dark
+&lt;Balgan&gt; D4rk
+&lt;Balgan&gt; i mean
+* SeventotheSeven (Seventothe@seven.to.the.seven) has joined #bhf
+&lt;Syn4ps3&gt; mine =
+* BHF sets mode: +h SeventotheSeven
+&lt;SeventotheSeven&gt; nothing happened for me
+&lt;Balgan&gt; but i noticed something D4rk ur windows is in PT or Brazilian ?
+&lt;Balgan&gt; coz of C:\DOCUME~1\Dark\Escritorio
+* z0r (~pruebas@bluehell-8FD5E1B4.red-62-57-233.user.auna.net) has joined #bhf
+&lt;z0r&gt; hi there
+&lt;D4rk&gt; ahh lol, its spanish
+&lt;Balgan&gt; ye it might have to do with that
+&lt;Aelphaeis&gt; Well if you guys did everything correctly and your OS is Windows XP SP2 English
+&lt;Aelphaeis&gt; it should of worked
+&lt;D4rk&gt; im checking the addresses
+&lt;Balgan&gt; since mine is in PT
+&lt;Aelphaeis&gt; the addresses are not case sensitive, but the commands are
+&lt;SeventotheSeven&gt; i'll move to a diff dir and try again
+&lt;D4rk&gt; what's strange is that i've tryied omega7's shellcode before and worked good
+&lt;SeventotheSeven&gt; one with shorter address
+* matsch (~matsch@bluehell-8B7F4498.cable.fcom.ch) has joined #bhf
+&lt;matsch&gt; gd mornig from switzerland
+&lt;Aelphaeis&gt; good morning, the lecture is currently going on, so please be quiet
+* z0r (~pruebas@bluehell-8FD5E1B4.red-62-57-233.user.auna.net) Quit (Quit: z0r )
+&lt;Aelphaeis&gt; ok, well for those of you who have the appropriate software
+&lt;Aelphaeis&gt; plus hardware that doesn't support DEP, or have DEP turned off it should of worked if you did it correctly
+&lt;Aelphaeis&gt; For the purpose of this lecture (at the moment) we will not weed through and try and find out what you did wrong
+&lt;Aelphaeis&gt; all of you now have a good grasp of how to exploit a stack based buffer overflow (assuming everything goes right) ?
+&lt;Umdebaba&gt; yup
+&lt;sm&gt; everythings find.. just need to find some shellcode:D
+&lt;Balgan&gt; Aelphaeis can u plz take a quick look
+&lt;Balgan&gt; see if i made everything right
+&lt;Balgan&gt; http://clientes.netvisao.pt/mariavas/myexploit.c
+&lt;sm&gt; fine*
+&lt;Aelphaeis&gt; Balgan please leave it till the end of this lecture
+&lt;SeventotheSeven&gt; yes
+&lt;Balgan&gt; ok Aelphaeis
+&lt;Aelphaeis&gt; now as I said, you should all have a good grasp of it now
+&lt;Aelphaeis&gt; moving onto the next subject
+&lt;Aelphaeis&gt; Protection Schemes and Limitations
+&lt;Aelphaeis&gt; First some basic limitations
+&lt;Fakep&gt; didn't work (
+&lt;Aelphaeis&gt; obviously there is a limit to the shellcode you can use based on size
+&lt;matsch&gt; 1
+&lt;Aelphaeis&gt; I know fakep, just wait
+&lt;Fakep&gt; ok
+&lt;Aelphaeis&gt; A smart thing to do may be to store your NOPSLED + Shellcode inside another variable then redirect the program flow to taht
+* insanity (_th3-x@FAA89349.37D30F16.F175557F.IP) has joined #bhf
+&lt;Aelphaeis&gt; the location of the NOPSLED should be visible in ollydbg if you know where to look
+&lt;Aelphaeis&gt; shellcode cannot contain NULL bytes, as you guys should know
+&lt;Aelphaeis&gt; any shellcode that does would have to be encoded before it could be used
+&lt;Aelphaeis&gt; For those of you wanting to know where to get usuable shellcode, http://metasploit.com:55555/PAYLOADS
+&lt;Aelphaeis&gt; You can use metasploits shellcode generator, you can tell the generator which sort of characters are not allowed
+&lt;Aelphaeis&gt; Obviously, 0x00 would not be allowed (NULL byte)
+&lt;Aelphaeis&gt; and of course with certain protocols there would be certain characters you would not be able to use
+&lt;Aelphaeis&gt; generally, in some protocols some characters has a special means. We name them &quot;Bad Characters&quot;. 
+For example in ftp protocol the 0x20 character is a  bad character so that it can't be used in the shellcode and the 
+protocol treats them in a different way (it's used as blank-space.. and in ftp applications, it represents the 
+termination of a string) Thus your shellcode execution will be stopped.
+* r0rkty (~h4x@ircop.bluehell.org) has joined #bhf
+* dcboy (~szdcboy@EAE3BC56.AD403039.C232DFAA.IP) Quit (Ping timeout )
+* SubZ (~U2FsdGVkX@netadmin.bluehell.org) has joined #bhf
+* BHF sets mode: +v SubZ
+&lt;Aelphaeis&gt; As far as protection schemes go, there are many different protection schemes
+&lt;Aelphaeis&gt; For those of you wanting to venture into Linux exploitation, I will tell you (you will need to know this)
+&lt;Aelphaeis&gt; since (from memory) the 2.6.12 or 2.6.11 Linux kernel, ASLR is implemented by default
+&lt;Aelphaeis&gt; that is the addresses in memory are randomized, they are not static so this can pose a big problem when it comes to exploitation
+&lt;Aelphaeis&gt; of course this can be bypassed because there are areas in memory in Linux which are static, one of which has a JMP ESP
+&lt;Aelphaeis&gt; xD
+&lt;Aelphaeis&gt; Another probably more serious and hard to bypass protection is DEP
+&lt;SubZ&gt; ah you and your memory hacking ;P
+&lt;santabug&gt; (ASLR=&gt;Adress Space Layout Randomization)
+&lt;Aelphaeis&gt; Data Execution Prevention
+&lt;Aelphaeis&gt; support for DEP was added into Windows XP when SP2 came out
+&lt;Aelphaeis&gt; and into Windows Server 2003 as of Service Pack 1
+* dcboy (~szdcboy@EAE3BC56.AD403039.C232DFAA.IP) has joined #bhf
+&lt;santabug&gt; http://opcodes.free.fr/tmp/randomized_stack.txt &lt;- look on linux
+&lt;Aelphaeis&gt; DEP is a technology on most 64 bit CPU's that marks areas's of memory as non-executable
+&lt;Aelphaeis&gt; Thank you santabug
+&lt;Aelphaeis&gt; as I said earlier, there are areas in memory in Linux that are static
+&lt;Aelphaeis&gt; now, DEP isn't 100% effective
+&lt;dni&gt; Aelph: not working for me dude
+&lt;dni&gt; i compiled
+* sarkar112 (~sarkar112@bluehell-C612ADDB.nycap.res.rr.com) has joined #bhf
+&lt;dni&gt; and i run it,. but i never get the winpopup
+&lt;Aelphaeis&gt; first, who here remembers that WMF exploit that came out a while ago
+&lt;Balgan&gt; me
+&lt;sarkar112&gt; me
+&lt;Aelphaeis&gt; ok dni, but as I said, will help ya out later
+&lt;Umdebaba&gt; haha i remember
+* SeventotheSeven (Seventothe@seven.to.the.seven) Quit (Ping timeout )
+&lt;Aelphaeis&gt; so everyone please stfu
+&lt;dni&gt; ok
+&lt;Aelphaeis&gt; no one else remembers?
+&lt;sm&gt; me
+&lt;sm&gt; the one few months ago?
+&lt;D4rk&gt; i do
+&lt;Aelphaeis&gt; yes sm I believe it was
+&lt;sm&gt; k
+&lt;Aelphaeis&gt; maybe a bit further back, I can't remember
+&lt;Aelphaeis&gt; DEP didn't protect against that exploit
+&lt;r0rkty&gt; Aelphaeis is the lecture already over ?
+&lt;Balgan&gt; no
+* SeventotheSeven (~seven@seven.to.the.seven) has joined #bhf
+* BHF sets mode: +h SeventotheSeven
+&lt;Aelphaeis&gt; the reason being is that for some reason there was an area in memory that has READ, WRITE, EXECUTE permissions
+* LiquidWorm (~jox@7084D5A4.85A73766.880F58B.IP) Quit (Ping timeout )
+&lt;Syn4ps3&gt; lol
+* nic` (0wnage@i.laid.your.sister.with.a.broken.c0nd0m.us) Quit (Ping timeout )
+&lt;Aelphaeis&gt; DEP can be theoritically bypassed by calling a function in windows (forget the name off the top of my head) 
+and allocating memory that has EXECUTE permissions
+&lt;Aelphaeis&gt; and storing your shellcode in there
+* LiquidWorm (~jox@7084D5A4.85A73766.880F58B.IP) has joined #bhf
+&lt;Aelphaeis&gt; of course this is pretty complicated
+&lt;Aelphaeis&gt; Another protection mechanism used by Microsoft is the /GS Flag which is turned on by default in MSVC++ 2003
+&lt;Aelphaeis&gt; it places what is called a canary before the EIP in memory
+&lt;Aelphaeis&gt; if the canary is overwritten when the application returns (from memory) the program will simply crash
+&lt;Aelphaeis&gt; not allowing hijacking of the EIP.
+&lt;Aelphaeis&gt; there are other protection mechanisms that are similar, that are patches for the gcc compiler
+&lt;Aelphaeis&gt; many of these can be bypassed, but of course this is beyond the scope of this lecture
+&lt;santabug&gt; For more information aboit MSVC++ 2003 protection mechanism : www.ngssoftware.com/papers/defeating-w2k3-stack-protection.pdf
+&lt;dcboy&gt; can i ask one question&gt;?
+&lt;Aelphaeis&gt; what was in SP0
+&lt;Aelphaeis&gt; I believe they fixed that in SP1
+&lt;santabug&gt; k
+&lt;Aelphaeis&gt; see their protection mechanism in their compiler when they first released it was flawed
+&lt;Aelphaeis&gt; David Litchfield discovered that they used their compiler (when it was &quot;broken&quot;) to compile Windows Server 2003 SP0
+&lt;Aelphaeis&gt; and therefore the protection mechanism on Windows Server 2003 SP0 could be bypassed
+* dcb0y (~szdcboy@4F81535B.C351D3EE.C5C0FE80.IP) has joined #bhf
+&lt;Aelphaeis&gt; *pretty much everyone buffer overflow protection scheme released can be bypassed some how*
+&lt;Aelphaeis&gt; of course alot of them limit what you can do, and make exploitation a hell of alot harder
+&lt;Aelphaeis&gt; The only reason protection against stack based buffer overflows is for programmers to right secure code.
+&lt;Aelphaeis&gt; I will not bother covering this, as this isn't part of the lecture.
+&lt;Aelphaeis&gt; and I won't gain anything from teaching people how to write secure code
+&lt;Aelphaeis&gt; xD
+&lt;santabug&gt; lol yes
+&lt;Aelphaeis&gt; of course, those of you who understand how the vulnerability occurs could surely figure out how to write relatively secure code
+&lt;Aelphaeis&gt; at least when it comes to stack overflows
+* dcboy (~szdcboy@EAE3BC56.AD403039.C232DFAA.IP) Quit (Ping timeout )
+&lt;dcb0y&gt; i have question
+&lt;Aelphaeis&gt; THIS ENDS THIS IRC LECTURE
+&lt;Aelphaeis&gt; wait god damnit
+&lt;Aelphaeis&gt; Time: 12:07 Perth, Western Australia
+
+
+Greetz To
+
+htek, FRSilent, Read101, nic`, BSoD, r0rkty/John h4x,  SyS64738,  morning_wood, SysSpider, fritz, darkt3ch, 
+SeventotheSeven, Predator/ill skillz, BioHunter, Digerati, butthead, PTP, felosi, wicked/aera, spiderlance, 
+sNKenjoi, tgo, melkor, mu-tiger, royal, Wex, ksv, GoTiT4FrE, D4rk, muon, drygol, santabug, skvoznoy, 
+SuicidalManiac, theNerd, CKD, dlab, snx, skiddieleet, ProwL, Edu19, drygol, kon, RedemptiX, dni, belgther, 
+deca, icenix, j0sh, werx, oHawko,Cephexin/Cefixim, FLX, kingvandal, illbot, str0ke 
+and Kenny, Blake &amp; Stephen from GSO.
+
+# milw0rm.com [2007-01-29]</pre>
+</html>

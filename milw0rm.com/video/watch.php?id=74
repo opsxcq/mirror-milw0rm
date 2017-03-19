@@ -1,0 +1,18 @@
+<html>
+<body bgcolor="#000000">
+<div align="center">
+
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,16,0" id="FLVPlayer" height="592" width="800">
+    <param name="movie" value="/video/flvplayer.swf">
+    <param name="salign" value="lt">
+    <param name="quality" value="high">
+    <param name="scale" value="noscale">
+    <param name="FlashVars" value="&amp;MM_ComponentVersion=1&amp;file=http://milw0rm.com/video/store/74.flv&amp;autoPlay=true&amp;autoRewind=false">
+    <embed src="/video/flvplayer.swf" flashvars="&amp;MM_ComponentVersion=1&amp;file=http://milw0rm.com/video/store/74.flv&amp;autoPlay=true&amp;autoRewind=false" quality="high" scale="noscale" name="FLVPlayer" salign="LT" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" height="592" width="800">
+</object>
+
+
+
+
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br></body></html>

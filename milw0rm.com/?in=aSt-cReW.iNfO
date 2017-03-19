@@ -1,0 +1,566 @@
+<html><head>
+<title>milw0rm - exploits : vulnerabilities : videos : papers : shellcode</title>
+<meta name="description" content="milw0rm exploits and 0day exploits database">
+<meta name="keywords" content="exploits code, exploit code, exploits, 0-day, 0day, 0days, exploit, zero day, poc, exploit, local exploits, remote exploits, root exploits, windows, linux, new exploits, latest exploits, shellcode, Zero-day, zeroday, security articles, ezines, zines, security papers">
+<link type="text/css" rel="stylesheet" href="/milw0rm.css">
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php">
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon"></head>
+<body dir="ltr" alink="#00ff00" background="/images/dot.gif" bgcolor="#000000" link="#00c000" text="#008000" vlink="#00c000">
+<center>
+<table border="0">
+<tr>
+<td nowrap="nowrap">
+
+			<b>[ <a href="/" target=_self>home</a> ]</b>
+			<b>[ <a href="/contents.php" target=_self>contents</a> ]</b>
+			<b>[ <a href="/platforms/" target=_self>platforms</a> ]</b>
+			<b>[ <a href="/shellcode/" target=_self>shellcode</a> ]</b>
+			<b>[ <a href="/search.php" target=_self>search</a> ]</b>
+			<b>[ <a href="/cracker/" target=_self>cracker</a> ]</b>
+			<b>[ <a href="/links/" target=_self>links</a> ]</b>
+			<b>[ <a href="/rss.php" target=blank>rss</a> ]</b>
+			<b>[ <a href="http://www.milw0rm.com/sploits/milw0rm.tar.bz2" target=_self>archive</a> ]</b>
+			</td>
+    </tr>
+  </table>
+
+<table width="668" border="0" cellpadding="3" cellspacing="3" class="main">
+  <tr><td><img src="/images/milw0rm-wi.jpg" alt="milw0rm"></td></tr><tr><td>
+<b>[ <a href="/remote.php" target=_self>remote</a> ]</b><table width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-10-16</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4542" target="_blank" class="style14">Boa 0.93.15 HTTP Basic Authentication Bypass Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">1610</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Boa" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4542" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1254">ikki</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-10-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4534" target="_blank" class="style14">eXtremail <= 2.1.1 PLAIN authentication Remote Stack Overflow Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">1644</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=eXtremail" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4534" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1011">mu-b</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-10-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4533" target="_blank" class="style14">eXtremail <= 2.1.1 (LOGIN) Remote Stack Overflow Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">1403</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=eXtremail" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4533" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1011">mu-b</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-10-14</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4530" target="_blank" class="style14">Apache Tomcat (webdav) Remote File Disclosure Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">3151</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Apache" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4530" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1249">eliteb0y</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-10-12</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4526" target="_blank" class="style14">PBEmail 7 ActiveX Edition Insecure Method Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">1936</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=PBEmail" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4526" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=4526" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1107">Katatafish</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-10-11</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4522" target="_blank" class="style14">Apple iTouch/iPhone 1.1.1 tif File Remote Jailbreak Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">3724</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=iPhone" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4522" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=4522" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1247">Niacin and Dre</a>
+</td>
+</tr></tbody></table><br><b>[ <a href="/local.php" target=_self>local</a> ]</b><table width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-10-14</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4531" target="_blank" class="style14">jetAudio 7.x (m3u File) Local SEH Overwrite Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">1163</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=jetAudio" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4531" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/668">h07</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-10-11</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4517" target="_blank" class="style14">PHP 5.2.4 ionCube extension safe_mode / disable_functions Bypass</a></td>
+<td nowrap="nowrap" width=40 align="left">2326</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=PHP" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4517" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/938">shinnai</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-10-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4516" target="_blank" class="style14">Solaris fifofs I_PEEK Kernel Memory Disclosure Exploit (x86/sparc)</a></td>
+<td nowrap="nowrap" width=40 align="left">1298</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Solaris" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4516" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/505">qaaz</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-09-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4460" target="_blank" class="style14">Linux Kernel 2.4/2.6 x86-64 System Call Emulation Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">12488</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4460" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1061">Robert Swiecki</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-09-19</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4431" target="_blank" class="style14">Microsoft Visual Basic Enterprise Edition 6.0 SP6 Code Execution Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4430</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Microsoft+Visual+Basic" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4431" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/938">shinnai</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-09-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4392" target="_blank" class="style14">PHP <= 4.4.7 / 5.2.3 MySQL/MySQLi Safe Mode Bypass Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">10893</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=PHP" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4392" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1214">Mattias Bengtsson</a>
+</td>
+</tr></tbody></table><br><b>[ <a href="/webapps.php" target=_self>web apps</a> ]</b><table width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-10-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4544" target="_blank" class="style15">LimeSurvey <= 1.52 (language.php) Remote File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">145</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=LimeSurvey" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4544" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/930">S.W.A.T.</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-10-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4543" target="_blank" class="style15">PHPDJ 0.5 (djpage.php page) Remote File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">128</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=PHPDJ" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4543" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/975">GoLd_M</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-10-16</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4539" target="_blank" class="style14">Okul Otomasyon Portal 2.0 Remote SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">1625</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Okul+Otomasyon+Portal" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4539" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1253">dumenci</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-10-16</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4538" target="_blank" class="style14">Artmedic CMS <= 3.4 (index.php page) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">1311</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Artmedic+CMS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4538" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1252">iNs</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-10-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4536" target="_blank" class="style14">doop CMS <= 1.3.7 (page) Local File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2534</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=doop+CMS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4536" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1250">vladii</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-10-13</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4529" target="_blank" class="style14">WWWISIS <= 7.1 (IsisScript) Local File Disclosure / XSS Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">2267</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=WWWISIS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4529" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1248">JosS</a>
+</td>
+</tr></tbody></table><br><b>[ <a href="/dos.php" target=_self>dos / poc</a> ]</b><table width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-10-16</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4540" target="_blank" class="style14">GCALDaemon <= 1.0-beta13 Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">516</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=GCALDaemon" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4540" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1254">ikki</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-10-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4535" target="_blank" class="style14">eXtremail <= 2.1.1 Remote Heap Overflow PoC</a></td>
+<td nowrap="nowrap" width=40 align="left">876</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=eXtremail" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4535" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1011">mu-b</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-10-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4532" target="_blank" class="style14">eXtremail <= 2.1.1 memmove() Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">694</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=eXtremail" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4532" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1011">mu-b</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-10-07</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4498" target="_blank" class="style14">wzdftpd <= 0.8.0 (USER) Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">1746</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=wzdftpd" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4498" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/754">k1tk4t</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-10-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4479" target="_blank" class="style14">CyberLink PowerDVD CreateNewFile Arbitrary Remote Rewrite DoS</a></td>
+<td nowrap="nowrap" width=40 align="left">2617</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=CyberLink+PowerDVD" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4479" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=4479" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/534">rgod</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-10-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4474" target="_blank" class="style14">EDraw Office Viewer Component 5.3 FtpDownloadFile() Remote BoF</a></td>
+<td nowrap="nowrap" width=40 align="left">1400</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=EDraw" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4474" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=4474" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/938">shinnai</a>
+</td>
+</tr></tbody></table><br><b>[ <a href="/shellcode/" target=_self>shellcode</a> ]</b><table width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-06-27</td>
+<td nowrap="nowrap" width="375"><a href="/shellcode/4117" target="_blank" class="style14">win32 Tiny Download and Exec Shellcode 192 bytes</a></td>
+<td nowrap="nowrap" width=40 align=left>20545</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/shellcode/win32" title="related">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/shellcode/download/4117" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1145">czy</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-06-14</td>
+<td nowrap="nowrap" width="375"><a href="/shellcode/4073" target="_blank" class="style14">win32 download and execute 124 bytes</a></td>
+<td nowrap="nowrap" width=40 align=left>15366</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/shellcode/win32" title="related">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/shellcode/download/4073" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/551">Weiss</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-05-31</td>
+<td nowrap="nowrap" width="375"><a href="/shellcode/4018" target="_blank" class="style14">win32 IsDebuggerPresent ShellCode (NT/XP) 39 bytes</a></td>
+<td nowrap="nowrap" width=40 align=left>9096</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/shellcode/win32" title="related">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/shellcode/download/4018" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1119">ex-pb</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-02</td>
+<td nowrap="nowrap" width="375"><a href="/shellcode/3637" target="_blank" class="style14">linux/x86 raw-socket ICMP/checksum shell 235 byte</a></td>
+<td nowrap="nowrap" width=40 align=left>12921</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/shellcode/linux/x86" title="related">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/shellcode/download/3637" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1011">mu-b</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-09</td>
+<td nowrap="nowrap" width="375"><a href="/shellcode/3446" target="_blank" class="style14">linux/x86 kill all processes 11 bytes</a></td>
+<td nowrap="nowrap" width=40 align=left>18070</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/shellcode/linux/x86" title="related">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/shellcode/download/3446" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/867">Kris Katterjohn</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-09</td>
+<td nowrap="nowrap" width="375"><a href="/shellcode/3445" target="_blank" class="style14">linux/x86 /sbin/iptables -F 40 bytes</a></td>
+<td nowrap="nowrap" width=40 align=left>12449</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/shellcode/linux/x86" title="related">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/shellcode/download/3445" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/867">Kris Katterjohn</a>
+</td>
+</tr></tbody></table><br><b>[ <a href="/papers/" target=_self>papers</a> ]</b><table width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2007-10-17</TD><TD nowrap="nowrap" width=375><a href="/papers/180" target='_blank' class='style15'>[ezine] .aware eZine Beta - Overground Hacking</A></TD><TD nowrap="nowrap" width=40 align=left>49</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/180" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/997">.aware</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2007-10-07</TD><TD nowrap="nowrap" width=375><a href="/papers/179" target='_blank' class='style14'>Check Point Secure Platform Hack</A></TD><TD nowrap="nowrap" width=40 align=left>2382</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/179" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/1244">Hugo Vazquez</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2007-10-01</TD><TD nowrap="nowrap" width=375><a href="/papers/178" target='_blank' class='style14'>High-Level Reverse Engineering </A></TD><TD nowrap="nowrap" width=40 align=left>3691</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/178" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/1239">Matthew Lewis</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2007-08-27</TD><TD nowrap="nowrap" width=375><a href="/papers/177" target='_blank' class='style14'>Tactical Exploitation and Response Over Solaris Sparc 5.8 / 5.9 Systems</A></TD><TD nowrap="nowrap" width=40 align=left>3410</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/177" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/1153">Alex Hernandez</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2007-08-15</TD><TD nowrap="nowrap" width=375><a href="/papers/176" target='_blank' class='style14'>Php Endangers - Remote Code Execution</A></TD><TD nowrap="nowrap" width=40 align=left>8732</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/176" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/1128">Arham Muhammad</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2007-08-14</TD><TD nowrap="nowrap" width=375><a href="/papers/175" target='_blank' class='style14'>[ezine] ZFO 3</A></TD><TD nowrap="nowrap" width=40 align=left>7887</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/175" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/990">ZFO</A></TD></TR></tbody></table><br><b>[ <a href="/video/" target=_self>videos</a> ]</b><table width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2007-06-18</TD><TD nowrap="nowrap" width=375><a href="#"  onclick="window.open('/video/watch.php?id=73','test','width=835, height=655,scrollbars=no');" class='style14'>Exploiting SW Vulnerabilities</a></TD>
+<TD nowrap="nowrap" width=40 align=left>32253</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=135><a href="/author/1062">skillTube</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2007-06-15</TD><TD nowrap="nowrap" width=375><a href="#"  onclick="window.open('/video/watch.php?id=72','test','width=734, height=750,scrollbars=no');" class='style14'>Patching KeyGenMe with OllyDbg</a></TD>
+<TD nowrap="nowrap" width=40 align=left>14951</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=135><a href="/author/1104">FBi</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2007-06-12</TD><TD nowrap="nowrap" width=375><a href="#"  onclick="window.open('/video/watch.php?id=71','test','width=1054, height=798,scrollbars=no');" class='style14'>Find, Exploit & Cure XSS w0rms</a></TD>
+<TD nowrap="nowrap" width=40 align=left>21935</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=135><a href="/author/28">n/a</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2007-05-23</TD><TD nowrap="nowrap" width=375><a href="#"  onclick="window.open('/video/watch.php?id=70','test','width=1310, height=933,scrollbars=no');" class='style14'>Rooting SQL Server via SQL Injection</a></TD>
+<TD nowrap="nowrap" width=40 align=left>42684</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=135><a href="/author/1101">gsy</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2007-05-14</TD><TD nowrap="nowrap" width=375><a href="#"  onclick="window.open('/video/watch.php?id=69','test','width=1182, height=894,scrollbars=no');" class='style14'>Classical Basic Local Buffer Overflow</a></TD>
+<TD nowrap="nowrap" width=40 align=left>17936</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=135><a href="/author/1039">UniquE-Key</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2007-05-14</TD><TD nowrap="nowrap" width=375><a href="#"  onclick="window.open('/video/watch.php?id=68','test','width=894, height=721,scrollbars=no');" class='style14'>The dangers of Ad-Hoc networks in Windows XP SP2</a></TD>
+<TD nowrap="nowrap" width=40 align=left>23748</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=135><a href="/author/1105">rel1k</A></TD></TR></tbody></table><br><br><table align="center">
+<tr>
+<td valign="middle">
+<a href="http://www.hackerscenter.com/"><img border=0 src="http://www.milw0rm.com/images/hc-small_logo.gif"></a>
+</td>
+<td>
+<script type="text/javascript"><!--
+google_ad_client = "pub-0718555979486542";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "text";
+//2007-08-22: milw0rm
+google_ad_channel = "1394564144";
+google_color_border = "000000";
+google_color_bg = "141414";
+google_color_link = "00c000";
+google_color_text = "000000";
+google_color_url = "00c000";
+google_ui_features = "rc:0";
+//-->
+</script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+</td>
+</tr>
+</table>
+<p><FONT style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit[at]milw0rm.com">submit[at]milw0rm.com</a> [<a href="/gpg/str0ke.asc" target="_blank">gpg</a>]<br><br>Copyright &copy; 2004-2007 <a href="mailto:str0ke[at]milw0rm.com">milw0rm</a> </FONT></p>
+</td></tr></table>
+  <br>
+  <br>
+</center>
+</body></html>
+ 

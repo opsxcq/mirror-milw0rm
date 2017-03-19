@@ -1,0 +1,687 @@
+<html><head>
+<title>milw0rm - exploits : vulnerabilities : videos : papers : shellcode</title>
+<meta name="description" content="milw0rm exploits and 0day exploits database">
+<meta name="keywords" content="exploits code, exploit code, exploits, 0-day, 0day, 0days, exploit, zero day, poc, exploit, local exploits, remote exploits, root exploits, windows, linux, new exploits, latest exploits, shellcode, Zero-day, zeroday, security articles, ezines, zines, security papers">
+<link type="text/css" rel="stylesheet" href="/milw0rm.css">
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php">
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon"></head>
+<body dir="ltr" alink="#00ff00" background="/images/dot.gif" bgcolor="#000000" link="#00c000" text="#008000" vlink="#00c000">
+<center>
+<table border="0">
+<tr>
+<td nowrap="nowrap">
+
+			<b>[ <a href="/" target=_self>home</a> ]</b>
+			<b>[ <a href="/contents.php" target=_self>contents</a> ]</b>
+			<b>[ <a href="/platforms/" target=_self>platforms</a> ]</b>
+			<b>[ <a href="/shellcode/" target=_self>shellcode</a> ]</b>
+			<b>[ <a href="/search.php" target=_self>search</a> ]</b>
+			<b>[ <a href="/cracker/" target=_self>cracker</a> ]</b>
+			<b>[ <a href="/links/" target=_self>links</a> ]</b>
+			<b>[ <a href="/rss.php" target=blank>rss</a> ]</b>
+			<b>[ <a href="/sploits/milw0rm.tar.bz2" target=_self>archive</a> ]</b>
+			</td>
+    </tr>
+  </table>
+
+<table width="668" border="0" cellpadding="3" cellspacing="3" class="main">
+  <tr><td><img src="/images/milw0rm-wi.jpg" alt="milw0rm"></td></tr><tr><td>
+
+	<table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr>
+	<td align="middle" vAlign="top">
+	<form name="milw0rm" method="post" action="/search.php">
+	<br>
+	<strong>[ Search:&nbsp;&nbsp; </strong>
+	<input type="text" name="dong" size="35">
+	&nbsp;&nbsp;
+	<input type="submit" name="Submit" value="Submit">
+	</form>
+	</td>
+	</tr>
+	</tbody></table><br><br><b>[ <a href="/search.php" target=_self>exploits/shellcode</a> ]</b><table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-10-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6867" target="_blank" class="style14">Wordpress Plugin e-Commerce <= 3.4 Arbitrary File Upload Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2623</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordpress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6867" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1141">t0pP8uZz</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-10-26</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6842" target="_blank" class="style14">WordPress Media Holder (mediaHolder.php id) SQL Injection Vuln</a></td>
+<td nowrap="nowrap" width=40 align="left">3169</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=WordPress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6842" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1502">boom3rang</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-10-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6777" target="_blank" class="style14">Wordpress Plugin st_newsletter (stnl_iframe.php) SQL Injection Vuln</a></td>
+<td nowrap="nowrap" width=40 align="left">4064</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordperss" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6777" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1562">r45c4l</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-09-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6421" target="_blank" class="style14">Wordpress 2.6.1 (SQL Column Truncation) Admin Takeover Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">10325</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordpress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6421" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1597">iso^kpsbr</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-09-07</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6397" target="_blank" class="style14">Wordpress 2.6.1 SQL Column Truncation Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">12461</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordpress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6397" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1160">irk4z</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-07-24</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6127" target="_blank" class="style14">Wordpress Plugin Download Manager 0.2 Arbitrary File Upload Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">7152</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordpress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6127" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1013">SaO</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-04-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5486" target="_blank" class="style14">Wordpress Plugin Spreadsheet <= 0.6 SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">7690</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordpress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5486" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1430">1ten0.0net1</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-03-31</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5326" target="_blank" class="style14">Wordpress Plugin Download (dl_id) SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">8629</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordpress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5326" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1400">BL4CK</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-02-26</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5194" target="_blank" class="style14">Wordpress Plugin Sniplets 1.1.2 (RFI/XSS/RCE) Multiple Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">7547</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordpress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5194" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1378">Florinu</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-02-16</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5135" target="_blank" class="style14">Wordpress Photo album Remote SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">9731</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordpress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5135" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1334">S@BUN </a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-02-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5127" target="_blank" class="style14">Wordpress Plugin Simple Forum 1.10-1.11 SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">5697</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordpress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5127" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1334">S@BUN </a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-02-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5126" target="_blank" class="style14">Wordpress Plugin Simple Forum 2.0-2.1 SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">5560</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordpress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5126" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1334">S@BUN </a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-02-05</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5066" target="_blank" class="style14">Wordpress MU < 1.3.2 active_plugins option Code Execution Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">7096</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordpress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5066" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1144">Alexander Concha</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-02-03</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5053" target="_blank" class="style14">Wordpress Plugin st_newsletter Remote SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4624</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordpress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5053" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1334">S@BUN </a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-02-02</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5039" target="_blank" class="style14">Wordpress Plugin Wordspew Remote SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">6206</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordpress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5039" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1334">S@BUN </a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-02-02</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5035" target="_blank" class="style14">Wordpress Plugin dmsguestbook 1.7.0 Multiple Remote Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">3652</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordpress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5035" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1352">NBBN</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5017" target="_blank" class="style14">Wordpress Plugin WassUp 1.4.3 (spy.php to_date) SQL Injection Exploit </a></td>
+<td nowrap="nowrap" width=40 align="left">4443</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordpress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5017" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1348">enter_the_dragon</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5013" target="_blank" class="style14">Wordpress Plugin Adserve 0.2 adclick.php SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5311</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordpress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5013" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1348">enter_the_dragon</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4993" target="_blank" class="style14">Wordpress plugin fGallery 2.4.1 fimrss.php SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">6910</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordpress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4993" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1220">H-T Team</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4992" target="_blank" class="style14">Wordpress Plugin WP-Cal 0.3 editevent.php SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">5726</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordpress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4992" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1220">H-T Team</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-19</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4939" target="_blank" class="style14">Wordpress plugin WP-Forum 1.7.4 Remote SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">8722</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordpress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4939" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1335">websec Team</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-06</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4844" target="_blank" class="style14">Wordpress Plugin Wp-FileManager 1.2 Remote Upload Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">6570</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordpress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4844" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1220">H-T Team</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-12-11</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4721" target="_blank" class="style14">Wordpress <= 2.3.1 Charset Remote SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">15572</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=WordPress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4721" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1295">Abel Cheung</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-12-05</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4695" target="_blank" class="style14">Wordpress Plugin PictPress <= 0.91 Remote File Disclosure Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">6315</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordpress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4695" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/975">GoLd_M</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-11-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4593" target="_blank" class="style14">WordPress Plugin BackUpWordPress <= 0.4.2b RFI Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">9955</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=WordPress+Plugin" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4593" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/930">S.W.A.T.</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-09-14</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4397" target="_blank" class="style14">Wordpress Multiple Versions Pwnpress Exploitation Tookit (0.2pub)</a></td>
+<td nowrap="nowrap" width=40 align="left">19277</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordpress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4397" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1217">Lance M. Havok</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-06-26</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4113" target="_blank" class="style14">WordPress 2.2 (wp-app.php) Arbitrary File Upload Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">17765</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=WordPress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4113" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1144">Alexander Concha</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-06-06</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4039" target="_blank" class="style14">Wordpress 2.2 (xmlrpc.php) Remote SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">41097</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordpress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4039" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1125">Slappter</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-05-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3960" target="_blank" class="style14">Wordpress 2.1.3 admin-ajax.php SQL Injection Blind Fishing Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">15257</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordpress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3960" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1113">waraxe</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-05-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3828" target="_blank" class="style14">Wordpress plugin myflash <= 1.00 (wppath) RFI Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">10390</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordpress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3828" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/735">Crackers_Child</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-05-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3825" target="_blank" class="style14">Wordpress plugin wordTube <= 1.43 (wpPATH) RFI Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">12621</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordpress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3825" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/603">K-159</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-05-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3824" target="_blank" class="style14">Wordpress plugin wp-Table <= 1.43 (inc_dir) RFI Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">9120</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordpress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3824" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/603">K-159</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3814" target="_blank" class="style14">Wordpress Plugin myGallery <= 1.4b4 Remote File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">12364</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordpress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3814" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/975">GoLd_M</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-03</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3656" target="_blank" class="style14">Wordpress 2.1.2 (xmlrpc) Remote SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">16197</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Wordpress" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3656" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/847">Sumit Siddharth</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-01-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3109" target="_blank" class="style14">Wordpress <= 2.0.6 wp-trackback.php Remote SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">25187</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=WordPress_Blog" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3109" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/534">rgod</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-01-07</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3095" target="_blank" class="style14">Wordpress 2.0.5 Trackback UTF-7 Remote SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">19334</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=WordPress_Blog" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3095" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/974">Stefan Esser</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-12-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3051" target="_blank" class="style14">Enigma 2 WordPress Bridge (boarddir) Remote File Include Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">6048</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Enigma" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3051" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/721">xoron</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-05-25</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6" target="_blank" class="style14">WordPress <= 2.0.2 (cache) Remote Shell Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">21338</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=WordPress_Blog" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/534">rgod</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-08-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1145" target="_blank" class="style14">Wordpress <= 1.5.1.3 Remote Code Execution eXploit (metasploit)</a></td>
+<td nowrap="nowrap" width=40 align="left">11522</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=WordPress_Blog" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"><a href=/metasploit/86 class="style16" title="metasploit module">M</a></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1145" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/256">str0ke</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-08-09</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1142" target="_blank" class="style14">Wordpress <= 1.5.1.3 Remote Code Execution 0-Day Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">10475</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=WordPress_Blog" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"><a href=/metasploit/86 class="style16" title="metasploit module">M</a></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1142" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/474">Kartoffelguru</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-06-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1077" target="_blank" class="style14">Wordpress <= 1.5.1.2 xmlrpc Interface SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">10685</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=WordPress_Blog" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"><a href=/metasploit/49 class="style16" title="metasploit module">M</a></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1077" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/451">James Bercegay</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-06-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1033" target="_blank" class="style14">WordPress <= 1.5.1.1 SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">10616</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=WordPress_Blog" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1033" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/444">Alberto Trivero</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-06-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1059" target="_blank" class="style14">WordPress <= 1.5.1.1 "add new admin" SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">10361</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=WordPress_Blog" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1059" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/95">RusH</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2004-10-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/570" target="_blank" class="style14">WordPress Blog HTTP Splitting Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">7872</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=WordPress_Blog" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/570" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/289">Tenable NS</a>
+</td>
+</tr></tbody></table><br><br><br><center>
+<script type="text/javascript"><!--
+google_ad_client = "pub-0718555979486542";
+/* 468x60, created 9/26/08 */
+google_ad_slot = "3279240256";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</center>
+
+<p><FONT style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit[at]milw0rm.com">submit[at]milw0rm.com</a> [<a href="/gpg/submit.asc" target="_blank">gpg</a>]<br><br>Copyright &copy; 2004-2008 <a href="mailto:str0ke[at]milw0rm.com">milw0rm</a> </FONT></p>
+</td></tr></table>
+  <br>
+  <br>
+</center>
+</body></html>

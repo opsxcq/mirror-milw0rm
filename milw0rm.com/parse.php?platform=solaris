@@ -1,0 +1,194 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>milw0rm.com</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<STYLE type=text/css>
+BODY {
+        SCROLLBAR-FACE-COLOR: #000000; FONT-SIZE: 10px; SCROLLBAR-HIGHLIGHT-COLOR: #008000; SCROLLBAR-SHADOW-COLOR: #008000; SCROLLBAR-3DLIGHT-COLOR: #000000; SCROLLBAR-ARROW-COLOR: #000000; SCROLLBAR-TRACK-COLOR: #000000; FONT-FAMILY: verdana; SCROLLBAR-DARKSHADOW-COLOR: #000000
+}
+INPUT {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+TEXTAREA {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+P {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DL {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DT {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DD {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+TD {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+TH {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+.submit {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+A:link {
+        TEXT-DECORATION: none
+}
+A:visited {
+        TEXT-DECORATION: none
+}
+A:active {
+        TEXT-DECORATION: none
+}
+A:hover {
+        COLOR: #00ff00; TEXT-DECORATION: none
+}
+B.hl1 {
+        FONT-WEIGHT: bold
+}
+B.hl2 {
+        FONT-WEIGHT: bold; FONT-STYLE: italic
+}
+.sr {
+
+        FONT-SIZE: 10px; LINE-HEIGHT: 14px
+}
+.style12 {font-size: 9px; color: #00CC00; }
+.style13 {font-size: 9px; font-weight: bold; }
+.style14 {font-size: 9px}
+.style15 {font-size: 9px; color: #D6EF39; }
+.style16 {font-size: 9px}
+</STYLE>
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php" />
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" />
+</HEAD>
+<BODY dir=ltr text=#008000 vLink=#00c000 aLink=#00ff00 link=#00c000
+bgColor=#000000 background=/images/dot.gif>
+<CENTER>
+<TABLE border=0>
+<TBODY>
+<TR>
+<td nowrap>
+  <B>[ <A href="/"
+              target=_self>home</A> ]</B>
+              <B>[ <A href="contents.php" target=_self>contents</A> ]</B> 
+              <B>[ <A href="platforms.php"
+              target=_self>platforms</A> ]</B> <B>[ <A href="shellcode2.php"
+              target=_self>shellcode</A> ]</B> <B>[ <A href="info.php"
+              target=_self>search</A> ]</B>
+              <B>[ <A href="/cracker/" target=_self>cracker</A> ]</B> 
+              <B>[ <A href="links.php" target=_self>links</A> ]</B> 
+              <B>[ <A href="rss.php" target=_self>rss</A> ]</B>
+              <B>[ <A href="http://www.milw0rm.com/sploits/milw0rm.tar.bz2" target=_self>archive</A> ]</B> 
+              <BR>
+	      </td>
+	      </TR>
+	      </TBODY>
+	      </TABLE>
+  <TABLE height=80 cellSpacing=0 cellPadding=1 width=637 bgColor=#008000 border=0>
+    <TBODY>
+      <TR>
+        <TD vAlign=top width="100%" height="100%"> <TABLE height="100%" cellSpacing=0 cellPadding=5 width="100%" bgColor=#000000 border=0>
+          <TBODY>
+            <TR>
+		<td style="background-repeat: no-repeat;" align="center" width="100%"><img src="/images/milw0rm-wi.jpg"></td>
+	    </TR>
+ <TR> 
+  <TD height="300" align=middle vAlign=top><B>[ <a href="remote.php"
+            target=_self>remote</a> ]</B> 
+     <TABLE borderColor=#333333 width=597 align=center border=0> 
+      <TBODY> 
+         <TR class="style13"> 
+          <TD nowrap="nowrap" width=65 class="style13">-::DATE</TD> 
+          <TD nowrap="nowrap" width=375 class="style13">-::DESCRIPTION</TD> 
+          <TD nowrap="nowrap" width=40 class="style13">-::HITS</TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap">-::AUTHOR</TD> 
+        </TR> 
+         <TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-08-19</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1167 target='_blank' class='style14'>Solaris <= 10 LPD Arbitrary File Delete Exploit (metasploit)</A></TD><TD nowrap="nowrap" width=40 align=left>2044</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Solaris class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=metasploit.php?id=94 class='style16'>M</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1167 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=auth.php?id=1167>Optyx</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-12-24</TD><TD nowrap="nowrap" width=375><a href=id.php?id=716 target='_blank' class='style14'>Solaris 2.5.1/2.6/7/8 rlogin /bin/login Buffer Overflow Exploit (SPARC)</A></TD><TD nowrap="nowrap" width=40 align=left>1764</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Solaris class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=716 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=auth.php?id=716>Marco Ivaldi</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-06-25</TD><TD nowrap="nowrap" width=375><a href=id.php?id=301 target='_blank' class='style14'>CVS Remote Entry Line Root Heap Overflow Exploit </A></TD><TD nowrap="nowrap" width=40 align=left>816</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=CVS class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=301 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=auth.php?id=301></A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-09-19</TD><TD nowrap="nowrap" width=375><a href=id.php?id=101 target='_blank' class='style14'>Solaris Sadmind Default Configuration Remote Root Exploit
+</A></TD><TD nowrap="nowrap" width=40 align=left>2042</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Solaris class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=metasploit.php?id=64 class='style16'>M</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=101 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=auth.php?id=101>H D Moore</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2001-03-01</TD><TD nowrap="nowrap" width=375><a href=id.php?id=280 target='_blank' class='style14'>BIND 8.2.x (TSIG) Remote Root Stack Overflow Exploit (3)</A></TD><TD nowrap="nowrap" width=40 align=left>1015</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=BIND class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=280 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=auth.php?id=280>LSD-PLaNET</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2001-01-27</TD><TD nowrap="nowrap" width=375><a href=id.php?id=263 target='_blank' class='style14'>Netscape Enterprise Server 4.0/sparc/SunOS 5.7 Remote Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>804</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Netscape class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=263 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=auth.php?id=263>Fyodor</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2001-01-03</TD><TD nowrap="nowrap" width=375><a href=id.php?id=239 target='_blank' class='style14'>wu-ftpd 2.6.0 Remote Format Strings Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>885</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=wu-ftpd class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=239 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=auth.php?id=239>kalou</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2000-12-01</TD><TD nowrap="nowrap" width=375><a href=id.php?id=213 target='_blank' class='style14'>Solaris sadmind Remote Buffer Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>1150</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Solaris class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=metasploit.php?id=64 class='style16'>M</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=213 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=auth.php?id=213>optyx</A></TD></TR> 
+       </TBODY> 
+    </TABLE> 
+     <br> 
+     <B>[ <A href="local.php"
+            target=_self>local</A> ]</B> 
+     <TABLE borderColor=#333333 width=597 align=center border=0> 
+      <TBODY> 
+         <TR class="style13"> 
+          <TD nowrap="nowrap" width=65 class="style13">-::DATE</TD> 
+          <TD nowrap="nowrap" width=375 class="style13">-::DESCRIPTION</TD> 
+          <TD nowrap="nowrap" width=40 class="style13">-::HITS</TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap">-::AUTHOR</TD> 
+        </TR> 
+                               <TR class=submit>                        <TD width=65 class=style14>2005-12-07</TD>                        <TD width=375><a href=id.php?id=1360 target='_blank' class='style14'>Appfluent Database IDS < 2.1.0.103 (Env Variable) Local Exploit</A></TD>                        <TD nowrap="nowrap" width=40 align=left>1132</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Appfluent class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1360 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=1360>c0ntex</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 class=style14>2005-10-12</TD>                        <TD width=375><a href=id.php?id=1248 target='_blank' class='style14'>Solaris 10 DtPrintinfo/Session Local Root Exploit (x86)</A></TD>                        <TD nowrap="nowrap" width=40 align=left>2040</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Solaris class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1248 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=1248>Charles Stevenson</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 class=style14>2005-07-06</TD>                        <TD width=375><a href=id.php?id=1092 target='_blank' class='style14'>Solaris SPARC / x86 Local Socket Hijack Exploit</A></TD>                        <TD nowrap="nowrap" width=40 align=left>2158</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Solaris class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1092 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=1092>c0ntex</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 class=style14>2005-06-28</TD>                        <TD width=375><a href=id.php?id=1073 target='_blank' class='style14'>Solaris 9 / 10 ld.so Local Root Exploit (1)</A></TD>                        <TD nowrap="nowrap" width=40 align=left>2797</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Solaris class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1073 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=1073>Przemyslaw Frasunek</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 class=style14>2005-06-28</TD>                        <TD width=375><a href=id.php?id=1074 target='_blank' class='style14'>Solaris 9 / 10 ld.so Local Root Exploit (2)</A></TD>                        <TD nowrap="nowrap" width=40 align=left>2031</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Solaris class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1074 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=1074>Przemyslaw Frasunek</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 class=style14>2005-04-30</TD>                        <TD width=375><a href=id.php?id=972 target='_blank' class='style14'>Solaris 10.x ESRI Arcgis Local Root Format String Exploit</A></TD>                        <TD nowrap="nowrap" width=40 align=left>1317</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Solaris class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=972 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=972>Kevin Finisterre</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 class=style14>2004-12-24</TD>                        <TD width=375><a href=id.php?id=713 target='_blank' class='style14'>Solaris 7/8/9 CDE LibDTHelp Local Buffer Overflow Exploit</A></TD>                        <TD nowrap="nowrap" width=40 align=left>1159</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Solaris class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=713 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=713>Marco Ivaldi</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 class=style14>2004-12-24</TD>                        <TD width=375><a href=id.php?id=714 target='_blank' class='style14'>Solaris 7/8/9 CDE LibDTHelp Local Buffer Overflow Exploit (2)</A></TD>                        <TD nowrap="nowrap" width=40 align=left>977</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Solaris class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=714 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=714>Marco Ivaldi</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 class=style14>2004-12-24</TD>                        <TD width=375><a href=id.php?id=715 target='_blank' class='style14'>Solaris 8/9 passwd circ() Local Root Exploit</A></TD>                        <TD nowrap="nowrap" width=40 align=left>1479</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Solaris class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=715 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=715>Marco Ivaldi</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 class=style14>2004-12-24</TD>                        <TD width=375><a href=id.php?id=1182 target='_blank' class='style14'>Solaris 2.6/7/8/9 (ld.so.1) Local Root Exploit (sparc)</A></TD>                        <TD nowrap="nowrap" width=40 align=left>654</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Solaris class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1182 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=1182>Marco Ivaldi</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 class=style14>2003-10-27</TD>                        <TD width=375><a href=id.php?id=114 target='_blank' class='style14'>Solaris Runtime Linker (ld.so.1) Buffer Overflow Exploit (SPARC version)
+</A></TD>                        <TD nowrap="nowrap" width=40 align=left>826</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Solaris class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=114 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=114>osker178</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 class=style14>2003-04-01</TD>                        <TD width=375><a href=id.php?id=4 target='_blank' class='style14'>Sun SUNWlldap Library Hostname Buffer Overflow Exploit
+</A></TD>                        <TD nowrap="nowrap" width=40 align=left>830</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Sun class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=4 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=4>andi</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 class=style14>2001-01-25</TD>                        <TD width=375><a href=id.php?id=256 target='_blank' class='style14'>Solaris 2.6 / 2.7 /usr/bin/write Local Overflow Exploit</A></TD>                        <TD nowrap="nowrap" width=40 align=left>712</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Solaris class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=256 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=256>Pablo Sor</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 class=style14>2001-01-15</TD>                        <TD width=375><a href=id.php?id=250 target='_blank' class='style14'>Solaris 7 / 8-beta arp Local Overflow Exploit</A></TD>                        <TD nowrap="nowrap" width=40 align=left>764</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Solaris class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=250 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=250>ahmed</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 class=style14>2001-01-13</TD>                        <TD width=375><a href=id.php?id=247 target='_blank' class='style14'>Solaris 2.5 / 2.5.1 getgrnam() Local Overflow Exploit</A></TD>                        <TD nowrap="nowrap" width=40 align=left>698</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Solaris class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=247 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=247>Pablo Sor</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 class=style14>2000-11-30</TD>                        <TD width=375><a href=id.php?id=210 target='_blank' class='style14'>Solaris locale Format Strings (noexec stack) Exploit</A></TD>                        <TD nowrap="nowrap" width=40 align=left>680</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Solaris class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=210 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=210>warning3</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 class=style14>2000-11-20</TD>                        <TD width=375><a href=id.php?id=197 target='_blank' class='style14'>Solaris/SPARC 2.7 / 7 locale Format String Exploit</A></TD>                        <TD nowrap="nowrap" width=40 align=left>797</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Solaris class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=197 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=197>Solar Eclipse</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 class=style14>1997-07-12</TD>                        <TD width=375><a href=id.php?id=341 target='_blank' class='style14'>Solaris 2.4 passwd, yppasswd, and nispasswd Overflow Exploits</A></TD>                        <TD nowrap="nowrap" width=40 align=left>696</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Solaris class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=341 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=341>Cristian Schipor</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 class=style14>1997-05-28</TD>                        <TD width=375><a href=id.php?id=338 target='_blank' class='style14'>Solaris 5.5.1 X11R6.3 xterm (-xrm) Local Root Exploit</A></TD>                        <TD nowrap="nowrap" width=40 align=left>703</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Solaris class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=338 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=338>David Hedley</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 class=style14>1997-05-19</TD>                        <TD width=375><a href=id.php?id=332 target='_blank' class='style14'>Solaris 2.5.0/2.5.1 ps & chkey Data Buffer Exploit</A></TD>                        <TD nowrap="nowrap" width=40 align=left>661</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Solaris class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=332 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=332>Joe Zbiciak</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 class=style14>1997-05-03</TD>                        <TD width=375><a href=id.php?id=330 target='_blank' class='style14'>Solaris 2.5.1 lp and lpsched Symlink Vulnerabilities</A></TD>                        <TD nowrap="nowrap" width=40 align=left>807</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Solaris class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=330 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=330>Chris Sheldon</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 class=style14>1997-03-23</TD>                        <TD width=375><a href=id.php?id=328 target='_blank' class='style14'>Solaris 2.4 /bin/fdformat Local Buffer Overflow Exploits</A></TD>                        <TD nowrap="nowrap" width=40 align=left>634</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Solaris class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=328 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=328>Cristian Schipor</A></TD>                      </TR> 
+       </TBODY> 
+    </TABLE> 
+     <br> 
+     <B>[ <A href="dos.php"
+            target=_self>dos</A> ]</B> 
+     <TABLE borderColor=#333333 width=597 align=center border=0> 
+      <TBODY> 
+         <TR class="style13"> 
+	  <TD nowrap="nowrap" width=65 class="style13">-::DATE</TD>
+	  <TD nowrap="nowrap" width=375 class="style13">-::DESCRIPTION</TD>
+          <TD nowrap="nowrap" width=40 class="style13">-::HITS</TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap">-::AUTHOR</TD> 
+        </TR> 
+                               <TR class=submit>                        <TD nowrap="nowrap" width=65 class=style14>2001-01-03</TD>                        <TD nowrap="nowrap" width=375><a href=id.php?id=240 target='_blank' class='style14'>Solaris 2.6 / 7 / 8 Lock Users Out of mailx Exploit</A></TD>                        <TD nowrap="nowrap" width=40 align=left>933</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Solaris class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=240 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=240>optyx</A></TD>                      </TR>                      <TR class=submit>                        <TD nowrap="nowrap" width=65 class=style14>2000-12-20</TD>                        <TD nowrap="nowrap" width=375><a href=id.php?id=235 target='_blank' class='style14'>SunOS 5.7  Catman - Local Insecure tmp Symlink Clobber Exploit</A></TD>                        <TD nowrap="nowrap" width=40 align=left>640</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=SunOS class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=235 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                             </TD>                        <TD nowrap="nowrap" width=135><a href=auth.php?id=235>lwc</A></TD>                      </TR> 
+       </TBODY> 
+    </TABLE> 
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br> 
+     <br> 
+     <script language="JavaScript">
+<!--
+ctxt_ad_partner = "9308575640";
+ctxt_ad_section = "";
+ctxt_ad_bg = "000000";
+ctxt_ad_width = 468;
+ctxt_ad_height = 60;
+ctxt_ad_bc = "000000";
+ctxt_ad_cc = "141414";
+ctxt_ad_lc = "00c000";
+ctxt_ad_tc = "FFFFFF";
+ctxt_ad_uc = "00c000";
+// -->
+</script>
+<script language="JavaScript" src="http://ypn-js.overture.com/partner/js/ypn.js">
+</script>
+                  <p><FONT
+            style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit[at]milw0rm.com">submit[at]milw0rm.com</a><br><br>Copyright © 2004-2006 <a href="mailto:str0ke[at]milw0rm.com">str0ke[at]milw0rm.com</a> </FONT></p>
+</TD>
+              </TR>
+            </TBODY>
+          </TABLE></TD>
+      </TR>
+    </TBODY>
+  </TABLE>
+  <BR>
+  <BR>
+</CENTER>
+</BODY>
+</HTML>
+ 

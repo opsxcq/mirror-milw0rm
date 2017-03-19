@@ -1,0 +1,98 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>milw0rm.com - free md5/lm hash cracking</TITLE>
+<link type="text/css" rel="stylesheet" href="/milw0rm.css">
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php" />
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" />
+</HEAD>
+<BODY dir=ltr text=#008000 vLink=#00c000 aLink=#00ff00 link=#00c000
+bgColor=#000000 background=/images/dot.gif>
+<CENTER>
+<TABLE border=0>
+<TBODY>
+<TR>
+<td nowrap>
+  <B>[ <A href="/" target=_self>home</A> ]</B>
+              <B>[ <A href="/cracker/" target=_self>cracker</A> ]</B> 
+              <B>[ <A href="insert.php" target=_self>insert</A> ]</B> 
+              <B>[ <A href="list.php" target=_self>list</A> ]</B> 
+              <B>[ <A href="info.php" target=_self>search</A> ]</B> 
+              <B>[ <A href="donated.php" target=_self>donated users</A> ]</B> 
+              <B>[ <A href="/mil-dic.php" target=_self>cracked hashs</A> ]</B> 
+	      </td>
+	      </TR>
+	      </TBODY>
+	      </TABLE>
+  <TABLE height=80 cellSpacing=0 cellPadding=1 width=637 bgColor=#008000 border=0>
+    <TBODY>
+      <TR>
+        <TD vAlign=top width="100%" height="100%"> <TABLE height="100%" cellSpacing=0 cellPadding=5 width="100%" bgColor=#000000 border=0>
+          <TBODY>
+            <TR>
+		<td style="background-repeat: no-repeat;" align="center" width="100%"><img src="/images/milw0rm_cracker.jpg" width="445" height="71"></td>
+	    </TR>
+	
+ <TR> 
+  <TD align=middle vAlign=top> 
+     <TABLE borderColor=#333333 width=536 align=center border=0> 
+      <TBODY> 
+         <TR class="style13">
+          <TD width=40 class="style13"><div align="center">-::TYPE</div></TD>
+          <TD width=224 class="style13"><div align="center">-::HASH</div></TD>
+          <TD width=150 class="style13"><div align="center">-::PASS</div></TD>
+          <TD width=90 class="style13"><div align="center">-::STATUS</div></TD>
+<!--
+          <TD width=50 class="style13"><div align="center">-::TIME</div></TD>
+-->
+          <TD width=132 class="style13"><div align="center">-::SUBMITED</div></TD>
+        </TR>
+<TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">d080f3c28d9cb67f6925c56f0af10174</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">processing3</div></TD><TD nowrap="nowrap" width=132><div align="center">2009-10-01 12:15:59</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">7c412825f7dfa7675f8e9352997a0544</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">processing3</div></TD><TD nowrap="nowrap" width=132><div align="center">2009-10-01 12:13:57</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">4936beeb30f1b9b02ef18d20eeb89f7a</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">processing3</div></TD><TD nowrap="nowrap" width=132><div align="center">2009-10-01 12:06:51</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">15f7cd972501c142b0c7eeabe46c5e9c</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">processing3</div></TD><TD nowrap="nowrap" width=132><div align="center">2009-10-01 12:05:17</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">3b5038ec652effc1303bdd2a06118900</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">processing3</div></TD><TD nowrap="nowrap" width=132><div align="center">2009-10-01 12:05:10</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">0b35dd0d73ab7c8e77f18d26a2a65828</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">processing3</div></TD><TD nowrap="nowrap" width=132><div align="center">2009-10-01 12:00:20</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">bd673fb43b345b734d7a8f01eb8df965</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">processing3</div></TD><TD nowrap="nowrap" width=132><div align="center">2009-10-01 11:59:12</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">7e73d06707f5fb75ec77cc5f2bd9bb92</div></TD><TD nowrap="nowrap" width=150><div align="center">programming</div></TD><TD nowrap="nowrap" width=90><div align="center">cracked</div></TD><TD nowrap="nowrap" width=132><div align="center">2009-10-01 11:59:03</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">3b1d70d92faee48e48044288ebc9528f</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">processing4</div></TD><TD nowrap="nowrap" width=132><div align="center">2009-10-01 11:55:54</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">d8b7690aca7263507659d269c96f4427</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">processing4</div></TD><TD nowrap="nowrap" width=132><div align="center">2009-10-01 11:55:27</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">a8a3f9c51572f59008a2b381f0c5e367</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">processing4</div></TD><TD nowrap="nowrap" width=132><div align="center">2009-10-01 11:52:22</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">e14ffd35ff7c5f8e239cdc6ed9fa4da0</div></TD><TD nowrap="nowrap" width=150><div align="center">228real</div></TD><TD nowrap="nowrap" width=90><div align="center">cracked</div></TD><TD nowrap="nowrap" width=132><div align="center">2009-10-01 11:50:23</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">b2b88a3929fb00bf4f10b0802a08dece</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">processing4</div></TD><TD nowrap="nowrap" width=132><div align="center">2009-10-01 11:50:06</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">19c82edb7a6a1fcd7143f1d0c5ec53fc</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">processing4</div></TD><TD nowrap="nowrap" width=132><div align="center">2009-10-01 11:29:32</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">d23591539b84386e12798cfbc68152fa</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">processing4</div></TD><TD nowrap="nowrap" width=132><div align="center">2009-10-01 11:24:22</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">8d879412b8066e73fcd0ac782b13514e</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">processing4</div></TD><TD nowrap="nowrap" width=132><div align="center">2009-10-01 11:19:33</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">623ca4d7ebb3ca9425f6e63dcc091c5e</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">processing4</div></TD><TD nowrap="nowrap" width=132><div align="center">2009-10-01 11:19:13</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">f32dc9813ce29c5e577cd85d61cb4f00</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">processing4</div></TD><TD nowrap="nowrap" width=132><div align="center">2009-10-01 11:10:43</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">402fd6b845fbec7284d8cec27e9b04ef</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">notfound</div></TD><TD nowrap="nowrap" width=132><div align="center">2009-10-01 08:59:16</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">5a547ed8c8fb2a7ffa3e2bb1528de566</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">notfound</div></TD><TD nowrap="nowrap" width=132><div align="center">2009-10-01 08:42:51</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">a7daff4463675e876ca80432b18f7dba</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">notfound</div></TD><TD nowrap="nowrap" width=132><div align="center">2009-10-01 07:39:00</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">01fc1ee73d76d6444bb19d3fa4eba1a1</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">notfound</div></TD><TD nowrap="nowrap" width=132><div align="center">2009-10-01 07:37:55</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">fb95a44b16be782d58f1329b60ad0906</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">notfound</div></TD><TD nowrap="nowrap" width=132><div align="center">2009-10-01 07:36:15</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">7512c942892ea3bdb7d70f5fbd207409</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">notfound</div></TD><TD nowrap="nowrap" width=132><div align="center">2009-10-01 07:35:26</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">b8ea7fde735ba3bf4f6302f14ec13658</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">notfound</div></TD><TD nowrap="nowrap" width=132><div align="center">2009-10-01 07:27:05</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">5de6520d68e6336cecd528238738482f</div></TD><TD nowrap="nowrap" width=150><div align="center">10412500</div></TD><TD nowrap="nowrap" width=90><div align="center">cracked</div></TD><TD nowrap="nowrap" width=132><div align="center">2009-10-01 07:26:00</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">ac4f798877fb538b300b7886d622a3d3</div></TD><TD nowrap="nowrap" width=150><div align="center">005691</div></TD><TD nowrap="nowrap" width=90><div align="center">cracked</div></TD><TD nowrap="nowrap" width=132><div align="center">2009-10-01 07:22:11</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">28cb32014a3ce674f61b8bbacd52f342</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">notfound</div></TD><TD nowrap="nowrap" width=132><div align="center">2009-10-01 07:20:02</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">ec57183e3be194657bb2305abd9ad451</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">notfound</div></TD><TD nowrap="nowrap" width=132><div align="center">2009-10-01 06:10:12</div></TD></TR><TR class=submit><TD nowrap="nowrap" class="style14" width=40><div align="center">md5</div></TD><TD nowrap="nowrap" width=240><div align="center">3710249e0d7ed1a151267fae2a4a0b3a</div></TD><TD nowrap="nowrap" width=150><div align="center"></div></TD><TD nowrap="nowrap" width=90><div align="center">notfound</div></TD><TD nowrap="nowrap" width=132><div align="center">2009-10-01 05:57:11</div></TD></TR>       </TBODY> 
+    </TABLE> 
+     <br> 
+     <br> 
+<center>
+[<a href="?start=0" class=style13>&laquo;</a>] <a href="?start=0" class=style13>&laquo; prev</a> |  <a href="?start=0" class=style13> 1</a> 2  <a href="?start=60" class=style13> 3</a>  <a href="?start=90" class=style13> 4</a>  <a href="?start=120" class=style13> 5</a>  <a href="?start=150" class=style13> 6</a>  <a href="?start=180" class=style13> 7</a>  <a href="?start=210" class=style13> 8</a>  <a href="?start=240" class=style13> 9</a>  <a href="?start=270" class=style13> 10</a> | <a href="?start=60" class=style13>next &raquo;</a> [<a href="?start=88380" class=style13>&raquo;</a>]</center>
+<br>
+<script type="text/javascript"><!--
+google_ad_client = "pub-0718555979486542";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "text";
+//2007-08-22: milw0rm
+google_ad_channel = "1394564144";
+google_color_border = "000000";
+google_color_bg = "141414";
+google_color_link = "00c000";
+google_color_text = "000000";
+google_color_url = "00c000";
+google_ui_features = "rc:0";
+//-->
+</script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+<br><br>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but04.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+</form>
+<br>
+                  <p><br>Copyright &copy; 2004-2009 <a href="mailto:str0ke[at]milw0rm.com">milw0rm</a></p>
+</TD>
+              </TR>
+            </TBODY>
+          </TABLE></TD>
+      </TR>
+    </TBODY>
+  </TABLE>
+  <BR>
+  <BR>
+</CENTER>
+</BODY>
+</HTML>

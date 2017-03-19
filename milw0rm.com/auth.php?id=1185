@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>milw0rm.com - vade79</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<STYLE type=text/css>
+BODY {
+        SCROLLBAR-FACE-COLOR: #000000; FONT-SIZE: 10px; SCROLLBAR-HIGHLIGHT-COLOR: #008000; SCROLLBAR-SHADOW-COLOR: #008000; SCROLLBAR-3DLIGHT-COLOR: #000000; SCROLLBAR-ARROW-COLOR: #000000; SCROLLBAR-TRACK-COLOR: #000000; FONT-FAMILY: verdana; SCROLLBAR-DARKSHADOW-COLOR: #000000
+}
+INPUT {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+TEXTAREA {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+P {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DL {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DT {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DD {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+TD {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+TH {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+.submit {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+A:link {
+        TEXT-DECORATION: none
+}
+A:visited {
+        TEXT-DECORATION: none
+}
+A:active {
+        TEXT-DECORATION: none
+}
+A:hover {
+        COLOR: #00ff00; TEXT-DECORATION: none
+}
+B.hl1 {
+        FONT-WEIGHT: bold
+}
+B.hl2 {
+        FONT-WEIGHT: bold; FONT-STYLE: italic
+}
+.sr {
+
+        FONT-SIZE: 10px; LINE-HEIGHT: 14px
+}
+.style13 {font-size: 9px; font-weight: bold; }
+.style14 {font-size: 9px}
+.style15 {font-size: 9px; color: #D6EF39; }
+</STYLE>
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php" />
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" />
+</HEAD>
+<BODY dir=ltr text=#008000 vLink=#00c000 aLink=#00ff00 link=#00c000
+bgColor=#000000 background=/images/dot.gif>
+<CENTER>
+<TABLE border=0>
+<TBODY>
+<TR>
+<td nowrap>
+  <B>[ <A href="http://www.milw0rm.com"
+              target=_self>home</A> ]</B>
+              <B>[ <A href="exploits.php" target=_self>exploits</A> ]</B>
+	      <B>[ <A href="platforms.php"
+              target=_self>platforms</A> ]</B> <B>[ <A href="shellcode2.php"
+              target=_self>shellcode</A> ]</B> <B>[ <A href="info.php"
+              target=_self>search</A> ]</B>
+              <B>[ <A href="links.php" target=_self>links</A> ]</B> 
+              <B>[ <A href="rss.php" target=_self>rss</A> ]</B> 
+              <BR>
+	      </td>
+	      </TR>
+	      </TBODY>
+	      </TABLE>
+  <TABLE height=80 cellSpacing=0 cellPadding=1 width=500 bgColor=#008000
+border=0>
+    <TBODY>
+      <TR>
+        <TD vAlign=top width="100%" height="100%"> <TABLE height="100%" cellSpacing=0 cellPadding=5 width="100%"
+      bgColor=#000000 border=0>
+            <TBODY>
+              <TR>
+	<td style="background-repeat: no-repeat;" align="center" valign="top" width="100%"><img src="/contest/milworm-12.jpg" width="445" height="71"></td>
+</TR>
+              
+	      
+	      <TR> 
+                <TD height="100" align=middle vAlign=bottom><!-- <B>[ <a href="author.php" 
+            target=_self>Authors</a> ]--><br></B>          
+	    
+	    <table align="center" border="0" bordercolor="#333333" width="597">
+                    <tbody>
+		      <tr class="style13">
+		      <td><table cellspacing="0" cellpadding="0">
+
+
+                <tr>
+                  <td width="75"><strong>Author: </strong></td>
+                  <td width="514">vade79</td>
+                </tr>
+                <tr>
+                  <td><strong>Homepage: </strong></td>
+                  <td><a href="http://fakehalo.us">http://fakehalo.us </a></td>
+                </tr>
+                <tr>
+                  <td><strong>Email:</strong></td>
+                  <td>v9@fakehalo.us</td>
+                </tr>
+              </table>		        </td>
+		      </tr>
+		      </tbody>
+		      </table>
+		      <br>
+
+		      <TABLE borderColor=#333333 width=597 align=center border=0>
+
+                    <TBODY>
+                      <TR class="style13">
+                        <TD class="style13">-::DATE</TD>
+                        <TD class="style13">-::DESCRIPTION</TD>
+                        <TD width=40 class="style13">-::HITS</TD>
+                        <td width=9 class="style13"></td>
+                        <td width=9 class="style13"></td>
+                        <td width=9 class="style13"></td>
+                        <td width=9 class="style13"></td>
+                        <TD>-::AUTHOR</TD>
+                      </TR>
+
+<TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-08-30</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1185 target='_blank' class='style14'>Adobe Version Cue 1.0/1.0.1 Local Root Exploit (OSX)</A></TD><TD nowrap="nowrap" width=40 align=left>666</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Adobe class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1185 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>vade79</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-08-30</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1186 target='_blank' class='style14'>Adobe Version Cue 1.0/1.0.1 (-lib) Local Root Exploit (OSX)</A></TD><TD nowrap="nowrap" width=40 align=left>385</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Adobe class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1186 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>vade79</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-08-30</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1187 target='_blank' class='style14'>Gopher <= 3.0.9 (+VIEWS) Remote (Client Side) Buffer Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>466</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Gopher class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1187 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>vade79</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-08-06</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1139 target='_blank' class='style14'>Ethereal 10.x AFP Protocol Dissector Remote Format String Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>1257</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Ethereal class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1139 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>vade79</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-04-26</TD><TD nowrap="nowrap" width=375><a href=id.php?id=956 target='_blank' class='style14'>Ethereal / tcpdump (rsvp_print) Infinite Loop Denial of Service Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>671</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Ethereal class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=956 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>vade79</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-04-26</TD><TD nowrap="nowrap" width=375><a href=id.php?id=957 target='_blank' class='style14'>Tcpdump 3.8.x (ldp_print) Infinite Loop Denial of Service Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>481</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Tcpdump class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=957 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>vade79</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-04-26</TD><TD nowrap="nowrap" width=375><a href=id.php?id=958 target='_blank' class='style14'>Tcpdump 3.8.x (rt_routing_info) Infinite Loop Denial of Service Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>416</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Tcpdump class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=958 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>vade79</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-04-26</TD><TD nowrap="nowrap" width=375><a href=id.php?id=959 target='_blank' class='style14'>Tcpdump 3.8.x/3.9.1 (isis_print) Infinite Loop DoS Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>429</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Tcpdump class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=959 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>vade79</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-04-14</TD><TD nowrap="nowrap" width=375><a href=id.php?id=940 target='_blank' class='style14'>Sumus 0.2.2 httpd Remote Buffer Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>2470</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Sumus class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=940 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>vade79</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-03-22</TD><TD nowrap="nowrap" width=375><a href=id.php?id=896 target='_blank' class='style14'>Mac OS X <= 10.3.8 (CF_CHARSET_PATH) Local Root Buffer Overflow</A></TD><TD nowrap="nowrap" width=40 align=left>1040</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Mac+OS+X class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=896 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>vade79</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-02-07</TD><TD nowrap="nowrap" width=375><a href=id.php?id=793 target='_blank' class='style14'>Mac OS X DS_Store Arbitrary File Overwrite Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>623</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Mac+OS+X class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=793 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>vade79</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-01-20</TD><TD nowrap="nowrap" width=375><a href=id.php?id=763 target='_blank' class='style14'>fkey <= 0.0.2 Local File Accessibility Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>543</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=fkey class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=763 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>vade79</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-09-26</TD><TD nowrap="nowrap" width=375><a href=id.php?id=510 target='_blank' class='style14'>bsdi/x86 execve /bin/sh 46 bytes</A></TD><TD nowrap="nowrap" width=40 align=left>685</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=510 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>vade79</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-09-26</TD><TD nowrap="nowrap" width=375><a href=id.php?id=511 target='_blank' class='style14'>bsdi/x86 execve /bin/sh 46 bytes</A></TD><TD nowrap="nowrap" width=40 align=left>657</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=511 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>vade79</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-05-05</TD><TD nowrap="nowrap" width=375><a href=id.php?id=296 target='_blank' class='style14'>XChat 1.8.0/2.0.8 socks5 Remote Buffer overflow Exploit
+</A></TD><TD nowrap="nowrap" width=40 align=left>588</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=XChat class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=296 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>vade79</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-08-28</TD><TD nowrap="nowrap" width=375><a href=id.php?id=88 target='_blank' class='style14'>GtkFtpd 1.0.4 Remote Root Buffer Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>572</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=GtkFtpd class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=88 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>vade79</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-08-22</TD><TD nowrap="nowrap" width=375><a href=id.php?id=84 target='_blank' class='style14'>Gopherd <= 3.0.5 FTP Gateway Remote Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>579</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Gopherd class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=84 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>vade79</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-08-06</TD><TD nowrap="nowrap" width=375><a href=id.php?id=75 target='_blank' class='style14'>man-db 2.4.1 open_cat_stream() Local uid=man Exploit
+</A></TD><TD nowrap="nowrap" width=40 align=left>550</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=man-db class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=75 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>vade79</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2000-11-30</TD><TD nowrap="nowrap" width=375><a href=id.php?id=207 target='_blank' class='style14'>BSDi 3.0 inc Local Root Buffer Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>596</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=BSDi class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=207 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>vade79</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2000-11-21</TD><TD nowrap="nowrap" width=375><a href=id.php?id=200 target='_blank' class='style14'>BSDi suidperl Local Stack Buffer Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>634</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=BSDi class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=200 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>vade79</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2000-11-21</TD><TD nowrap="nowrap" width=375><a href=id.php?id=202 target='_blank' class='style14'>BSDi 3.0 / 4.0 rcvtty[mh] Local Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>523</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=BSDi class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=202 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>vade79</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2000-11-17</TD><TD nowrap="nowrap" width=375><a href=id.php?id=186 target='_blank' class='style14'>xsplumber - strcpy() buffer overflow</A></TD><TD nowrap="nowrap" width=40 align=left>510</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=splumber class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=186 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>vade79</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2000-11-15</TD><TD nowrap="nowrap" width=375><a href=id.php?id=180 target='_blank' class='style14'>GnomeHack 1.0.5 Local Buffer Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>487</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=GnomeHack class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=180 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>vade79</TD></TR>		      
+                  </TBODY>
+                  </TABLE>
+                    <br>
+                    <br>
+                    <br>
+
+                  <p><FONT
+            style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit@milw0rm.com">submit@milw0rm.com</a><br><br>Copyright © 2004-2005 <a href="mailto:str0ke@milw0rm.com">str0ke@milw0rm.com</a> </FONT></p>
+</TD>
+              </TR>
+            </TBODY>
+          </TABLE></TD>
+      </TR>
+    </TBODY>
+  </TABLE>
+  <BR>
+  <BR>
+</CENTER>
+</BODY>
+</HTML>

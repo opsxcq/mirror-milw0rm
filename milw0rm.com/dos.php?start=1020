@@ -1,0 +1,478 @@
+<html><head>
+<title>milw0rm - exploits : vulnerabilities : videos : papers : shellcode</title>
+<meta name="description" content="milw0rm exploits and 0day exploits database">
+<meta name="keywords" content="exploits code, exploit code, exploits, 0-day, 0day, 0days, exploit, zero day, poc, exploit, local exploits, remote exploits, root exploits, windows, linux, new exploits, latest exploits, shellcode, Zero-day, zeroday, security articles, ezines, zines, security papers">
+<link type="text/css" rel="stylesheet" href="/milw0rm.css">
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php">
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon"></head>
+<body dir="ltr" alink="#00ff00" background="/images/dot.gif" bgcolor="#000000" link="#00c000" text="#008000" vlink="#00c000">
+<center>
+<table border="0">
+<tr>
+<td nowrap="nowrap">
+
+			<b>[ <a href="/" target=_self>home</a> ]</b>
+			<b>[ <a href="/contents.php" target=_self>contents</a> ]</b>
+			<b>[ <a href="/platforms/" target=_self>platforms</a> ]</b>
+			<b>[ <a href="/shellcode/" target=_self>shellcode</a> ]</b>
+			<b>[ <a href="/search.php" target=_self>search</a> ]</b>
+			<b>[ <a href="/cracker/" target=_self>cracker</a> ]</b>
+			<b>[ <a href="/links/" target=_self>links</a> ]</b>
+			<b>[ <a href="/rss.php" target=blank>rss</a> ]</b>
+			<b>[ <a href="/sploits/milw0rm.tar.bz2" target=_self>archive</a> ]</b>
+			</td>
+    </tr>
+  </table>
+
+<table width="668" border="0" cellpadding="3" cellspacing="3" class="main">
+  <tr><td><img src="/images/milw0rm-wi.jpg" alt="milw0rm"></td></tr><tr><td>
+<b>[ <a href="/" target=_self>dos / poc</a> ]</b><table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-07-07</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1093" target="_blank" class="style14">PrivaShare <= 1.3 Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5089</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=PrivaShare" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1093" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/469">basher13</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-07-06</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1090" target="_blank" class="style14">TCP Chat (TCPX) 1.0 Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5233</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=TCP+Chat" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1090" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/469">basher13</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-06-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1166" target="_blank" class="style14">Inframail Advantage Server Edition 6.0 <= 6.37 (FTP) BoF Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4007</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Inframail" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1166" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/317">Reed Arvin</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-06-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1165" target="_blank" class="style14">Inframail Advantage Server Edition 6.0 <= 6.37 (SMTP) BoF Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4158</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Inframail" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1165" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/317">Reed Arvin</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-06-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1072" target="_blank" class="style14">Stream / Raped Denial of Service Attack (win version)</a></td>
+<td nowrap="nowrap" width=40 align="left">5184</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=TCP" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1072" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/456">Marco Del Percio</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-06-26</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1163" target="_blank" class="style14">IA eMailServer Corporate Edition Version <= 5.2.2 DoS Exploit </a></td>
+<td nowrap="nowrap" width=40 align="left">4106</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=IA+eMailServer" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1163" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/317">Reed Arvin</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-06-25</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1067" target="_blank" class="style14">TCP-IP Datalook <= 1.3 Local Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5350</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=TCP-IP+Datalook" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1067" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/469">basher13</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-06-23</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1065" target="_blank" class="style14">MS Windows (SMB) Transaction Response Handling Exploit (MS05-011)</a></td>
+<td nowrap="nowrap" width=40 align="left">11440</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1065" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/343">cybertronic</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-06-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1064" target="_blank" class="style14">phpBB <= 2.0.15 Register Multiple Users Denial of Service (c code)</a></td>
+<td nowrap="nowrap" width=40 align="left">12240</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=phpBB" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1064" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/453">HaCkZaTaN</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-06-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1063" target="_blank" class="style14">phpBB <= 2.0.15 Register Multiple Users Denial of Service (perl code)</a></td>
+<td nowrap="nowrap" width=40 align="left">20233</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=phpBB" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1063" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/452">g30rg3_x</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-06-20</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1056" target="_blank" class="style14">Apache <= 2.0.49 Arbitrary Long HTTP Headers Denial of Service</a></td>
+<td nowrap="nowrap" width=40 align="left">16347</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Apache" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1056" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/379">Qnix</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-06-09</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1037" target="_blank" class="style14">Tcpdump bgp_update_print Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5335</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Tcpdump" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1037" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/447">simon</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-06-07</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1162" target="_blank" class="style14">GoodTech SMTP Server <= 5.14 Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4269</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=GoodTech" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1162" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/317">Reed Arvin</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-06-02</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1027" target="_blank" class="style14">FutureSoft TFTP Server 2000 Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">6287</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=FutureSoft" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1027" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/214">ATmaCA</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-05-31</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1025" target="_blank" class="style14">MS Internet Explorer - javascript "window()" Crash</a></td>
+<td nowrap="nowrap" width=40 align="left">13165</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Internet+Explorer" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1025" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=1025" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/445">Benjamin Franz</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-05-31</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1024" target="_blank" class="style14">MS Internet Explorer - Multiple Stack Overflows Crash</a></td>
+<td nowrap="nowrap" width=40 align="left">10371</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Internet+Explorer" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1024" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=1024" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/445">Benjamin Franz</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-05-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1008" target="_blank" class="style14">TCP TIMESTAMPS Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">6537</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=TCP" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1008" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/437">Daniel Hartmeier</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-05-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1000" target="_blank" class="style14">MS Windows XP/2003 IPv6 Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">10504</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MS+Windows" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1000" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/433">Konrad Malewski</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-05-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/999" target="_blank" class="style14">Gaim <= 1.2.1 URL Handling Remote Stack Overflow Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4818</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Gaim" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/999" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/432">Ron</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-05-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/998" target="_blank" class="style14">Linux Kernel <= 2.6.12-rc4 (ioctl_by_bdev) Local Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">9156</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/998" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/431">alert7</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-05-08</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/988" target="_blank" class="style14">Remote File Manager 1.0 Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5175</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Remote+File+Manager" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/988" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/469">basher13</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-05-07</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/984" target="_blank" class="style14">Ethereal <= 0.10.10 (dissect_ipc_state) Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5225</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Ethereal" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/984" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/427">Nicob</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-05-06</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/983" target="_blank" class="style14">DataTrac Activity Console Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5028</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=DataTrac+Activity" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/983" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/469">basher13</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-05-04</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/978" target="_blank" class="style14">Ashley's Web Server Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4817</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Ashleys+Web+Server" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/978" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/469">basher13</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-04-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1160" target="_blank" class="style14">Golden FTP Server Pro <= 2.52 (USER) Remote Buffer Overflow Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4758</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Golden+FTP+Server" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1160" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/317">Reed Arvin</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-04-26</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/959" target="_blank" class="style14">Tcpdump 3.8.x/3.9.1 (isis_print) Infinite Loop DoS Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5255</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Tcpdump" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/959" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/57">vade79</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-04-26</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/958" target="_blank" class="style14">Tcpdump 3.8.x (rt_routing_info) Infinite Loop Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5074</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Tcpdump" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/958" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/57">vade79</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-04-26</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/957" target="_blank" class="style14">Tcpdump 3.8.x (ldp_print) Infinite Loop Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5160</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Tcpdump" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/957" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/57">vade79</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-04-26</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/956" target="_blank" class="style14">Ethereal / tcpdump (rsvp_print) Infinite Loop Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5792</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Ethereal" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/956" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/57">vade79</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-04-20</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/948" target="_blank" class="style14">Multiple OS (win32/aix/cisco) Crafted ICMP Messages DoS Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">7868</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Multiple+OS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/948" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/183">houseofdabus</a>
+</td>
+</tr></tbody></table><br><br>[<a href="?start=0" class=style13>&laquo;</a>] <a href="?start=990" class=style13>&laquo; prev</a> |  <a href="?start=870" class=style13> 30</a>  <a href="?start=900" class=style13> 31</a>  <a href="?start=930" class=style13> 32</a>  <a href="?start=960" class=style13> 33</a>  <a href="?start=990" class=style13> 34</a> 35  <a href="?start=1050" class=style13> 36</a>  <a href="?start=1080" class=style13> 37</a>  <a href="?start=1110" class=style13> 38</a>  <a href="?start=1140" class=style13> 39</a> | <a href="?start=1050" class=style13>next &raquo;</a> [<a href="?start=1230" class=style13>&raquo;</a>]<br><br><center>
+<script type="text/javascript"><!--
+google_ad_client = "pub-0718555979486542";
+/* 468x60, created 9/26/08 */
+google_ad_slot = "3279240256";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</center>
+
+<p><FONT style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit[at]milw0rm.com">submit[at]milw0rm.com</a> [<a href="/gpg/submit.asc" target="_blank">gpg</a>]<br>Copyright &copy; 2004-2009 <a href="mailto:str0ke[at]milw0rm.com">milw0rm</a> </FONT></p>
+</td></tr></table>
+  <br>
+  <br>
+</center>
+</body></html>

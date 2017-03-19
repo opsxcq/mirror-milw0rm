@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>milw0rm.com - izik</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<STYLE type=text/css>
+BODY {
+        SCROLLBAR-FACE-COLOR: #000000; FONT-SIZE: 10px; SCROLLBAR-HIGHLIGHT-COLOR: #008000; SCROLLBAR-SHADOW-COLOR: #008000; SCROLLBAR-3DLIGHT-COLOR: #000000; SCROLLBAR-ARROW-COLOR: #000000; SCROLLBAR-TRACK-COLOR: #000000; FONT-FAMILY: verdana; SCROLLBAR-DARKSHADOW-COLOR: #000000
+}
+INPUT {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+TEXTAREA {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+P {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DL {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DT {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DD {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+TD {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+TH {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+.submit {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+A:link {
+        TEXT-DECORATION: none
+}
+A:visited {
+        TEXT-DECORATION: none
+}
+A:active {
+        TEXT-DECORATION: none
+}
+A:hover {
+        COLOR: #00ff00; TEXT-DECORATION: none
+}
+B.hl1 {
+        FONT-WEIGHT: bold
+}
+B.hl2 {
+        FONT-WEIGHT: bold; FONT-STYLE: italic
+}
+.sr {
+
+        FONT-SIZE: 10px; LINE-HEIGHT: 14px
+}
+.style13 {font-size: 9px; font-weight: bold; }
+.style14 {font-size: 9px}
+.style15 {font-size: 9px; color: #D6EF39; }
+</STYLE>
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php" />
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" />
+</HEAD>
+<BODY dir=ltr text=#008000 vLink=#00c000 aLink=#00ff00 link=#00c000
+bgColor=#000000 background=/images/dot.gif>
+<CENTER>
+<TABLE border=0>
+<TBODY>
+<TR>
+<td nowrap>
+  <B>[ <A href="/"
+              target=_self>home</A> ]</B>
+              <B>[ <A href="contents.php" target=_self>contents</A> ]</B>
+	      <B>[ <A href="platforms.php"
+              target=_self>platforms</A> ]</B> <B>[ <A href="shellcode2.php"
+              target=_self>shellcode</A> ]</B> <B>[ <A href="info.php"
+              target=_self>search</A> ]</B>
+              <B>[ <A href="links.php" target=_self>links</A> ]</B> 
+              <B>[ <A href="rss.php" target=_self>rss</A> ]</B>
+              <B>[ <A href="http://www.milw0rm.com/sploits/milw0rm.tar.bz2" target=_self>archive</A> ]</B>
+              <BR>
+	      </td>
+	      </TR>
+	      </TBODY>
+	      </TABLE>
+  <TABLE height=80 cellSpacing=0 cellPadding=1 width=500 bgColor=#008000
+border=0>
+    <TBODY>
+      <TR>
+        <TD vAlign=top width="100%" height="100%"> <TABLE height="100%" cellSpacing=0 cellPadding=5 width="100%"
+      bgColor=#000000 border=0>
+            <TBODY>
+              <TR>
+	<td style="background-repeat: no-repeat;" align="center" valign="top" width="100%"><img src="/images/milw0rm-wi.jpg" width="445" height="71"></td>
+</TR>
+              
+	      
+	      <TR> 
+                <TD height="100" align=middle vAlign=top><!-- <B>[ <a href="author.php" 
+            target=_self>Authors</a> ]--><br></B>          
+	    
+	    <table align="center" border="0" bordercolor="#333333" width="597">
+                    <tbody>
+		      <tr class="style13">
+		      <td><table cellspacing="0" cellpadding="0">
+
+		
+                <tr>
+                  <td width="75"><strong>Author: </strong></td>
+                  <td width="514">izik &lt;izik [at] tty64.org&gt;</td>
+                </tr>
+		                <tr>
+                  <td><strong>Homepage: </strong></td>
+                  <td><a href="http://www.tty64.org">http://www.tty64.org </a></td>
+                </tr>
+		              </table>		        </td>
+		      </tr>
+		      </tbody>
+		      </table>
+		      <br>
+
+		      <TABLE borderColor=#333333 width=597 align=center border=0>
+
+                    <TBODY>
+                      <TR class="style13">
+                        <TD class="style13">-::DATE</TD>
+                        <TD class="style13">-::DESCRIPTION</TD>
+                        <TD width=40 class="style13">-::HITS</TD>
+                        <td width=9 class="style13"></td>
+                        <td width=9 class="style13"></td>
+                        <td width=9 class="style13"></td>
+                        <td width=9 class="style13"></td>
+                        <TD>-::AUTHOR</TD>
+                      </TR>
+
+<TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-01-25</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1450 target='_blank' class='style14'>linux/x86 execve /bin/sh xored for Intel x86 CPUID 41 bytes</A></TD><TD nowrap="nowrap" width=40 align=left>538</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1450 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>izik</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-01-25</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1451 target='_blank' class='style14'>linux/x86 execve /bin/sh (encoded by +1) 39 bytes</A></TD><TD nowrap="nowrap" width=40 align=left>442</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1451 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>izik</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-01-21</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1426 target='_blank' class='style14'>linux/x86 Adduser without Password to /etc/passwd 59 bytes</A></TD><TD nowrap="nowrap" width=40 align=left>750</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1426 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>izik</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-01-21</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1427 target='_blank' class='style14'>linux/x86 anti-debug trick (INT 3h trap) + execve /bin/sh 39 bytes</A></TD><TD nowrap="nowrap" width=40 align=left>213</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1427 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>izik</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-01-21</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1428 target='_blank' class='style14'>linux/x86 Bind /bin/sh to 31337/tcp 80 bytes</A></TD><TD nowrap="nowrap" width=40 align=left>287</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1428 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>izik</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-01-21</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1429 target='_blank' class='style14'>linux/x86 Bind /bin/sh to 31337/tcp + fork() 98 bytes</A></TD><TD nowrap="nowrap" width=40 align=left>216</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1429 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>izik</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-01-21</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1430 target='_blank' class='style14'>linux/x86 24/7 open cd-rom loop (follows /dev/cdrom symlink) 39 bytes</A></TD><TD nowrap="nowrap" width=40 align=left>221</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1430 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>izik</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-01-21</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1431 target='_blank' class='style14'>linux/x86 eject cd-rom (follows /dev/cdrom symlink) + exit() 40 bytes</A></TD><TD nowrap="nowrap" width=40 align=left>135</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1431 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>izik</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-01-21</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1432 target='_blank' class='style14'>linux/x86 eject/close cd-rom loop (follows /dev/cdrom symlink) 45 bytes</A></TD><TD nowrap="nowrap" width=40 align=left>126</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1432 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>izik</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-01-21</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1433 target='_blank' class='style14'>linux/x86 chmod(/etc/shadow, 0666) + exit() 32 bytes</A></TD><TD nowrap="nowrap" width=40 align=left>169</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1433 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>izik</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-01-21</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1434 target='_blank' class='style14'>linux/x86 connect-back shellcode 127.0.0.1:31337/tcp 74 bytes</A></TD><TD nowrap="nowrap" width=40 align=left>163</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1434 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>izik</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-01-21</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1435 target='_blank' class='style14'>linux/x86 normal exit w/ random (so to speak) return value 5 bytes</A></TD><TD nowrap="nowrap" width=40 align=left>103</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1435 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>izik</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-01-21</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1436 target='_blank' class='style14'>linux/x86 getppid() + execve(/proc/pid/exe) 51 bytes</A></TD><TD nowrap="nowrap" width=40 align=left>105</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1436 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>izik</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-01-21</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1437 target='_blank' class='style14'>linux/x86 quick (yet conditional, eax != 0 and edx == 0) exit 4 bytes</A></TD><TD nowrap="nowrap" width=40 align=left>103</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1437 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>izik</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-01-21</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1438 target='_blank' class='style14'>linux/x86 reboot() - 20 bytes</A></TD><TD nowrap="nowrap" width=40 align=left>182</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1438 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>izik</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-01-21</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1439 target='_blank' class='style14'>linux/x86 setreuid(0, 0) + execve(/bin/sh) 31 bytes</A></TD><TD nowrap="nowrap" width=40 align=left>127</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1439 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>izik</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-01-21</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1440 target='_blank' class='style14'>linux/x86 execve(/bin/sh) / PUSH - 23 bytes</A></TD><TD nowrap="nowrap" width=40 align=left>117</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1440 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>izik</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-01-21</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1441 target='_blank' class='style14'>linux/x86 cat /dev/urandom > /dev/console, just for kicks - 63 bytes</A></TD><TD nowrap="nowrap" width=40 align=left>121</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1441 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>izik</TD></TR>		      
+                  </TBODY>
+                  </TABLE>
+                    <br>
+                    <br>
+                    <br>
+
+<script language="JavaScript">
+<!--
+ctxt_ad_partner = "9308575640";
+ctxt_ad_section = "";
+ctxt_ad_bg = "000000";
+ctxt_ad_width = 468;
+ctxt_ad_height = 60;
+ctxt_ad_bc = "000000";
+ctxt_ad_cc = "141414";
+ctxt_ad_lc = "00c000";
+ctxt_ad_tc = "FFFFFF";
+ctxt_ad_uc = "00c000";
+// -->
+</script>
+<script language="JavaScript" src="http://ypn-js.overture.com/partner/js/ypn.js">
+</script>
+                  <p><FONT
+            style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit[at]milw0rm.com">submit[at]milw0rm.com</a><br><br>Copyright © 2004-2006 <a href="mailto:str0ke[at]milw0rm.com">str0ke[at]milw0rm.com</a> </FONT></p>
+</TD>
+              </TR>
+            </TBODY>
+          </TABLE></TD>
+      </TR>
+    </TBODY>
+  </TABLE>
+  <BR>
+  <BR>
+</CENTER>
+</BODY>
+</HTML>

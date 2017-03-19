@@ -1,0 +1,36 @@
+<script type="text/javascript">
+<!--
+function errorMsg()
+{
+	alert("Netscape 6 or Mozilla is needed to install a sherlock plugin");
+}
+function addEngine(name,ext,cat)
+{
+	if ((typeof window.sidebar == "object") && (typeof
+				window.sidebar.addSearchEngine == "function"))
+	{
+		//cat="Web";
+		//cat=prompt('In what category should this engine be installed?','Web')
+		window.sidebar.addSearchEngine(
+		"http://www.milw0rm.com/ffplugin/"+name+".src",
+		"http://www.milw0rm.com/ffplugin/"+name+"."+ext,
+		name,
+		cat );
+	}
+	else
+	{
+		errorMsg();
+	}
+	self.close();
+}
+//-->
+</script>
+
+<html>
+<body onLoad="addEngine('milw0rm','png','Exploits')"></body>
+This plugin was created by Jerome Athias <jerome.athias@free.fr>. <br>
+This version as well as future versions will be located at his site:<br>
+http://wired.s6n.com/files/jathias/milw0rm_search.htm<br>
+<br>
+/str0ke
+</html>

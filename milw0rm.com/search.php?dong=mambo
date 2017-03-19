@@ -1,0 +1,1471 @@
+<html><head>
+<title>milw0rm - exploits : vulnerabilities : videos : papers : shellcode</title>
+<meta name="description" content="milw0rm exploits and 0day exploits database">
+<meta name="keywords" content="exploits code, exploit code, exploits, 0-day, 0day, 0days, exploit, zero day, poc, exploit, local exploits, remote exploits, root exploits, windows, linux, new exploits, latest exploits, shellcode, Zero-day, zeroday, security articles, ezines, zines, security papers">
+<link type="text/css" rel="stylesheet" href="/milw0rm.css">
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php">
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon"></head>
+<body dir="ltr" alink="#00ff00" background="/images/dot.gif" bgcolor="#000000" link="#00c000" text="#008000" vlink="#00c000">
+<center>
+<table border="0">
+<tr>
+<td nowrap="nowrap">
+
+			<b>[ <a href="/" target=_self>home</a> ]</b>
+			<b>[ <a href="/contents.php" target=_self>contents</a> ]</b>
+			<b>[ <a href="/platforms/" target=_self>platforms</a> ]</b>
+			<b>[ <a href="/shellcode/" target=_self>shellcode</a> ]</b>
+			<b>[ <a href="/search.php" target=_self>search</a> ]</b>
+			<b>[ <a href="/cracker/" target=_self>cracker</a> ]</b>
+			<b>[ <a href="/links/" target=_self>links</a> ]</b>
+			<b>[ <a href="/rss.php" target=blank>rss</a> ]</b>
+			<b>[ <a href="/sploits/milw0rm.tar.bz2" target=_self>archive</a> ]</b>
+			</td>
+    </tr>
+  </table>
+
+<table width="668" border="0" cellpadding="3" cellspacing="3" class="main">
+  <tr><td><img src="/images/milw0rm-wi.jpg" alt="milw0rm"></td></tr><tr><td>
+
+	<table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr>
+	<td align="middle" vAlign="top">
+	<form name="milw0rm" method="post" action="/search.php">
+	<br>
+	<strong>[ Search:&nbsp;&nbsp; </strong>
+	<input type="text" name="dong" size="35">
+	&nbsp;&nbsp;
+	<input type="submit" name="Submit" value="Submit">
+	</form>
+	</td>
+	</tr>
+	</tbody></table><br><br><b>[ <a href="/search.php" target=_self>exploits/shellcode</a> ]</b><table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-09-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9714" target="_blank" class="style14">Mambo Component com_koesubmit 1.0.0 RFI Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">8372</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9714" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/2123">Don Tukulesto</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-09-09</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9609" target="_blank" class="style14">Mambo Component com_hestar Remote SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">3050</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9609" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1867">M3NW5</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-09-04</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9588" target="_blank" class="style14">Mambo Component com_zoom (catid) Blind SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4842</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9588" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1502">boom3rang</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-03-02</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8136" target="_blank" class="style14">Joomla/Mambo Component eXtplorer Code Execution Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">9718</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Joomla" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8136" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1857">Juan Galiana Lara</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-25</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7860" target="_blank" class="style14">Mambo com_sim v0.8 Blind SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">3861</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7860" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/721">xoron</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7841" target="_blank" class="style14">Mambo Component SOBI2 RC 2.8.2 (bid) SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4880</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Joomla" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7841" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1795">Br1ght D@rk</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-11-11</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7095" target="_blank" class="style14">Joomla/Mambo com_catalogproduction (id) SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">8062</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Joomla" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7095" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1502">boom3rang</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-11-08</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7064" target="_blank" class="style14">Mambo Component n-form (form_id) Blind SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4348</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7064" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1502">boom3rang</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-10-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6868" target="_blank" class="style14">Mambo Component SimpleBoard <= 1.0.1 Arbitrary File Upload Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4981</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6868" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1141">t0pP8uZz</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-06-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5980" target="_blank" class="style14">Mambo Component n-gallery Multiple SQL Injection Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">5018</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5980" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1510">AlbaniaN-[H]</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-06-25</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5935" target="_blank" class="style14">Mambo Component Articles (artid) Blind SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5256</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5935" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1337">Ded MustD!e</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-06-13</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5808" target="_blank" class="style14">Mambo <= 4.6.4 (Output.php) Remote File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">9117</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5808" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1160">irk4z</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-06-13</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5799" target="_blank" class="style14">Mambo Component galleries 1.0 (aid) Remote SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4512</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5799" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1220">Houssamix</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-05-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5692" target="_blank" class="style14">Mambo Component mambads  <= 1.0 RC1 Beta SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4523</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5692" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1220">Houssamix</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-04-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5335" target="_blank" class="style14">Mambo Component ahsShop <= 1.51 (vara) SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">6964</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5335" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1334">S@BUN </a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-03-19</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5279" target="_blank" class="style14">Mambo Component accombo 1.x (id) SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">5534</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5279" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1334">S@BUN </a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-03-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5226" target="_blank" class="style14">Mambo Component eWriting 1.2.1 (cat) SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">8424</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5226" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1197">Don</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-03-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5207" target="_blank" class="style14">Mambo Component com_Musica (id) Remote SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">6523</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5207" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/965">Aria-Security Team</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-02-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5195" target="_blank" class="style14">Mambo Component Simpleboard 1.0.3 (catid) SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">7071</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5195" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1360">it's my</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-02-23</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5178" target="_blank" class="style14">Mambo Component garyscookbook <= 1.1.1 SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">5856</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5178" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1334">S@BUN </a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-02-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5139" target="_blank" class="style14">Mambo Component Portfolio 1.0 (categoryId) SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">7063</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5139" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1360">it's my</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-02-16</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5133" target="_blank" class="style14">Mambo Component Ricette 1.0 Remote SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4656</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5133" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1334">S@BUN </a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-02-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5128" target="_blank" class="style14">Mambo Component Quran <= 1.1 (surano) SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">7056</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5128" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1197">Don</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-02-09</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5094" target="_blank" class="style14">Mambo Component Comments <= 0.5.8.5g SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">6136</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5094" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1363">CheebaHawk215</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-02-08</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5084" target="_blank" class="style14">Mambo Component com_gallery Remote SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">7342</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5084" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1334">S@BUN </a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-02-07</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5076" target="_blank" class="style14">Mambo Component Sermon 0.2 (gid) SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">5523</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5076" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1334">S@BUN </a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-02-06</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5073" target="_blank" class="style14">Mambo Component com_downloads Remote SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">6409</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5073" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1334">S@BUN </a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-02-04</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5059" target="_blank" class="style14">Mambo Component Shambo2 (Itemid) Remote SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4805</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5059" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1334">S@BUN </a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-02-04</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5058" target="_blank" class="style14">Mambo Component Awesom <= 0.3.2 (listid) SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4437</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5058" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1334">S@BUN </a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-31</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5031" target="_blank" class="style14">Mambo Component Restaurant 1.0 Remote SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">5535</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5031" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1334">S@BUN </a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-31</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5030" target="_blank" class="style14">Mambo Component Catalogshop 1.0b1 SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">5444</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5030" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1334">S@BUN </a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-31</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5029" target="_blank" class="style14">Mambo Component AkoGallery 2.5b SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">7443</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5029" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1334">S@BUN </a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5016" target="_blank" class="style14">Mambo Component EstateAgent 0.1 Remote SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4684</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5016" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1334">S@BUN </a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5015" target="_blank" class="style14">Mambo Component jokes 1.0 (cat) SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4453</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5015" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1334">S@BUN </a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5014" target="_blank" class="style14">Mambo Component Recipes 1.00 (id) Remote SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4022</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5014" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1334">S@BUN </a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5011" target="_blank" class="style14">Mambo Component musepoes (aid) Remote SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">5044</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5011" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1334">S@BUN </a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5010" target="_blank" class="style14">Mambo Component Glossary 2.0 (catid) SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">5139</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5010" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1334">S@BUN </a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5009" target="_blank" class="style14">Mambo Component MaMML (listid) Remote SQL Injection  Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4798</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5009" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1334">S@BUN </a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5008" target="_blank" class="style14">Mambo Component Fq (listid) Remote SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4101</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5008" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1334">S@BUN </a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5007" target="_blank" class="style14">Mambo Component Newsletter (listid) Remote SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4609</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5007" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1334">S@BUN </a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-12-05</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4691" target="_blank" class="style14">Mambo/Joomla Component rsgallery <= 2.0b5 (catid) SQL Injection Vuln</a></td>
+<td nowrap="nowrap" width=40 align="left">16559</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4691" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/603">K-159</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-09-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4469" target="_blank" class="style14">Mambo Component Mambads <= 1.5 Remote SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">7791</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4469" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1237">Sniper456</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-08-23</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4306" target="_blank" class="style14">Mambo Component RemoSitory (cat) Remote SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">11321</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4306" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/657">ajann</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-08-20</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4296" target="_blank" class="style14">Mambo Component SimpleFAQ 2.11 Remote SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">9710</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4296" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/754">k1tk4t</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-05-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3944" target="_blank" class="style14">Mambo com_yanc 1.4 beta (id) Remote SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">8487</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3944" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/721">xoron</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-14</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3736" target="_blank" class="style14">Mambo/Joomla Component Article 1.1 Remote File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">13317</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3736" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/844">Cold Zero</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-11</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3713" target="_blank" class="style14">Mambo Module Calendar (Agenda) 1.5.5 RFI Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">9401</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3713" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/844">Cold Zero</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-11</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3712" target="_blank" class="style14">Mambo Module Weather (absolute_path) RFI Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">7543</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3712" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/844">Cold Zero</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-11</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3707" target="_blank" class="style14">TOSMO/Mambo 1.4.13a (absolute_path) Remote File Inclusion Vulns</a></td>
+<td nowrap="nowrap" width=40 align="left">6559</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=TOSMO" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3707" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/844">Cold Zero</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-11</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3706" target="_blank" class="style14">Mambo Component zOOm Media Gallery <=    2.5 Beta 2 RFI Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">9639</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3706" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1081">iskorpitx</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3703" target="_blank" class="style14">Joomla/Mambo Component Taskhopper 1.1 RFI Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">10103</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3703" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/844">Cold Zero</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-25</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3567" target="_blank" class="style14">Mambo Module Flatmenu <= 1.07 Remote File Include Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">9094</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3567" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/844">Cold Zero</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-23</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3557" target="_blank" class="style14">Joomla/Mambo Component SWmenuFree 4.0 RFI Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">9858</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3557" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/844">Cold Zero</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3539" target="_blank" class="style14">Mambo Component nfnaddressbook 0.4 Remote File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">7037</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3539" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/844">Cold Zero</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-11-26</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2852" target="_blank" class="style14">com_flyspray Mambo Com. <= 1.0.1 Remote File Disclosure Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">10794</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2852" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/790">3l3ctric-Cracker</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-10-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2613" target="_blank" class="style14">MambWeather Mambo Module <= 1.8.1 Remote Include Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">8473</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2613" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/671">h4ntu</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-09-16</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2379" target="_blank" class="style14">Mambo com_registration_detailed <= 4.1 Remote File Include</a></td>
+<td nowrap="nowrap" width=40 align="left">11379</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2379" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/754">k1tk4t</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-09-14</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2367" target="_blank" class="style14">Mambo com_serverstat Component <= 0.4.4 File Include Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">12943</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2367" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/721">xoron</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-08-19</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2225" target="_blank" class="style14">mambo com_babackup Component <= 1.1 File Include Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">8663</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2225" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/750">mdx</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-08-19</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2222" target="_blank" class="style14">Mambo com_lurm_constructor Component <= 0.6b Include Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">7151</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2222" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/750">mdx</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-08-19</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2217" target="_blank" class="style14">Mambo cropimage Component <= 1.0 Remote File Include Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">9507</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2217" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/721">xoron</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-08-18</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2213" target="_blank" class="style14">Mambo MamboWiki Component <= 0.9.6 Remote Include Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">6915</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2213" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/747">camino</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-08-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2207" target="_blank" class="style14">Mambo a6mambocredits Component 1.0.0 File Include Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">7963</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2207" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/745">Cmaster4</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-08-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2206" target="_blank" class="style14">Mambo phpShop Component <= 1.2 RC2b File Include Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">9207</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2206" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/745">Cmaster4</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-08-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2202" target="_blank" class="style14">Mambo mambelfish Component <= 1.1 Remote File Include Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">6858</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2202" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/750">mdx</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-08-16</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2196" target="_blank" class="style14">Mambo CopperminePhotoGalery Component  Remote Include Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">10480</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2196" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/754">k1tk4t</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-08-14</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2184" target="_blank" class="style14">Mambo Peoplebook Component 1.0 Remote File Include Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">8063</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2184" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/704">Matdhule</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-08-14</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2182" target="_blank" class="style14">Mambo mmp Component <= 1.2 Remote File Include Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">7709</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2182" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/750">mdx</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-08-10</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2172" target="_blank" class="style14">Mambo Remository Component <= 3.25 Remote Include Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">7738</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2172" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/747">camino</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2089" target="_blank" class="style14">Mambo User Home Pages Component <= 0.5 Remote Include Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">11676</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2089" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/645">Kurdish Security</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2086" target="_blank" class="style14">Mambo mambatStaff Component <= 3.1b Remote Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">7073</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2086" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/720">Dr.Jr7</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2085" target="_blank" class="style14">Mambo Colophon Component <= 1.2 Remote Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">8058</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2085" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/722">Drago84</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2084" target="_blank" class="style14">Mambo MGM Component <= 0.95r2 Remote Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">7632</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2084" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/723">A-S-T TEAM</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2083" target="_blank" class="style14">Mambo Security Images Component <= 3.0.5 Inclusion Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">10213</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2083" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/722">Drago84</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2078" target="_blank" class="style14">a6mambohelpdesk Mambo Component <= 18RC1 Include Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">8168</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2078" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/720">Dr.Jr7</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-24</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2069" target="_blank" class="style14">PrinceClan Chess Mambo Com <= 0.8 Remote Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">6966</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2069" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/642">OLiBekaS</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-23</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2066" target="_blank" class="style14">multibanners Mambo Component <= 1.0.1 Remote Inclusion Vulnerability </a></td>
+<td nowrap="nowrap" width=40 align="left">6642</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2066" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/718">Blue|Spy</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-23</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2064" target="_blank" class="style14">Mam-Moodle Mambo Component alpha Remote Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">10134</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2064" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/717">jank0</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-23</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2062" target="_blank" class="style14">MoSpray Mambo Component <= 18RC1 Remote Include Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">7428</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2062" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/645">Kurdish Security</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2029" target="_blank" class="style14">pollxt Mambo Component <= 1.22.07 Remote Include Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">8124</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2029" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/706">vitux</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2028" target="_blank" class="style14">Sitemap Mambo Component <= 2.0.0 Remote Include Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">6770</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2028" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/704">Matdhule</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2027" target="_blank" class="style14">HTMLArea3 Mambo Module <= 1.5 Remote Include Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">6452</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2027" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/704">Matdhule</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2026" target="_blank" class="style14">com_hashcash Mambo Component <= 1.2.1 Include Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">6083</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2026" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/704">Matdhule</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2030" target="_blank" class="style14">MiniBB Mambo Component <= 1.5a Remote File Include Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">6212</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2030" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/704">Matdhule</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2025" target="_blank" class="style14">perForms Mambo Component <= 1.0 Remote File Inclusion</a></td>
+<td nowrap="nowrap" width=40 align="left">7693</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2025" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/705">endeneu</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2024" target="_blank" class="style14">pc_cookbook Mambo Component <= 0.3 Include Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">5661</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2024" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/704">Matdhule</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2023" target="_blank" class="style14">com_loudmouth Mambo Component <= 4.0j Include Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">8122</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2023" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/671">h4ntu</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2022" target="_blank" class="style14">com_extcalendar Mambo Component <= 2.0 Include Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">9959</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2022" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/642">OLiBekaS</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2021" target="_blank" class="style14">SMF Forum Mambo Component <= 1.3.1.3 Include Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">29310</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2021" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/703">ASIANEAGLE</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2020" target="_blank" class="style14">com_videodb Mambo Component <= 0.3en Remote Include Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">7249</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2020" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/671">h4ntu</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-08</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1995" target="_blank" class="style14">com_forum Mambo Component <= 1.2.4RC3 Remote Include Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">9940</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1995" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/671">h4ntu</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-08</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1994" target="_blank" class="style14">SimpleBoard Mambo Component <= 1.1.0 Remote Include Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">13274</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1994" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/671">h4ntu</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-04</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1981" target="_blank" class="style14">galleria Mambo Module <= 1.0b Remote File Include Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">10360</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1981" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/690">sikunYuk</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-06-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1956" target="_blank" class="style14">Pearl For Mambo <= 1.6 Multiple Remote File Include Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">9620</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1956" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/678">Kw3[R]Ln</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-06-26</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1955" target="_blank" class="style14">CBSMS Mambo Module <= 1.0 Remote File Include Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">10544</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1955" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/678">Kw3[R]Ln</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-06-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1941" target="_blank" class="style14">Mambo <= 4.6rc1 (Weblinks) Remote Blind SQL Injection Exploit (2)</a></td>
+<td nowrap="nowrap" width=40 align="left">11502</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1941" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/534">rgod</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-06-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1920" target="_blank" class="style14">Mambo <= 4.6rc1 (Weblinks) Blind SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">13762</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1920" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/534">rgod</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-04-19</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1698" target="_blank" class="style14">Mambo <= 4.5.3 , Joomla <=1.0.7 (feed) Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">15404</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1698" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/574">trueend5</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-11-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1337" target="_blank" class="style14">Mambo <= 4.5.2 Globals Overwrite / Remote Command Exection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">17490</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1337" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/534">rgod</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-06-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1061" target="_blank" class="style14">Mambo <= 4.5.2.1 SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">13123</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Mambo" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1061" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/95">RusH</a>
+</td>
+</tr></tbody></table><br><br><br><center>
+<script type="text/javascript"><!--
+google_ad_client = "pub-0718555979486542";
+/* 468x60, created 9/26/08 */
+google_ad_slot = "3279240256";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</center>
+
+<p><FONT style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit[at]milw0rm.com">submit[at]milw0rm.com</a> [<a href="/gpg/submit.asc" target="_blank">gpg</a>]<br>Copyright &copy; 2004-2009 <a href="mailto:str0ke[at]milw0rm.com">milw0rm</a> </FONT></p>
+</td></tr></table>
+  <br>
+  <br>
+</center>
+</body></html>

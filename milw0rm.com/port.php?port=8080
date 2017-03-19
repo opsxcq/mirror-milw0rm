@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>milw0rm.com - Port 8080</TITLE>
+<link type="text/css" rel="stylesheet" href="/milw0rm.css">
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php" />
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" />
+</HEAD>
+<BODY dir=ltr text=#008000 vLink=#00c000 aLink=#00ff00 link=#00c000
+bgColor=#000000 background=/images/dot.gif>
+<CENTER>
+<TABLE border=0>
+<TBODY>
+<TR>
+<td nowrap>
+              <B>[ <A href="/" target=_self>home</A> ]</B>
+              <B>[ <A href="/contents/" target=_self>contents</A> ]</B>
+              <B>[ <A href="/platforms/" target=_self>platforms</A> ]</B>
+              <B>[ <A href="/shellcode/" target=_self>shellcode</A> ]</B>
+              <B>[ <A href="/search/" target=_self>search</A> ]</B>
+              <B>[ <A href="/cracker/" target=_self>cracker</A> ]</B>
+              <B>[ <A href="/links/" target=_self>links</A> ]</B>
+              <B>[ <A href="/rss.php" target=blank>rss</A> ]</B>
+              <B>[ <A href="http://forum.milw0rm.com/" target=_self>forum</A> ]</B>
+              <B>[ <A href="http://www.milw0rm.com/sploits/milw0rm.tar.bz2" target=_self>archive</A> ]</B>
+              <BR>
+	      </td>
+	      </TR>
+	      </TBODY>
+	      </TABLE>
+  <TABLE height=80 cellSpacing=0 cellPadding=1 width=637 bgColor=#008000 border=0>
+    <TBODY>
+      <TR>
+        <TD vAlign=top width="100%" height="100%"> <TABLE height="100%" cellSpacing=0 cellPadding=5 width="100%" bgColor=#000000 border=0>
+          <TBODY>
+            <TR>
+		<td style="background-repeat: no-repeat;" align="center" width="100%"><img src="/images/milw0rm-wi.jpg" width="445" height="71"></td>
+	    </TR>
+ <TR> 
+  <TD height="300" align=middle vAlign=top><B>[ <a href="remoteport.php"
+            target=_self>Port 8080</a> ]</B> 
+     <TABLE borderColor=#333333 width=597 align=center border=0> 
+      <TBODY> 
+         <TR class="style13"> 
+          <TD nowrap="nowrap" width=65 class="style13">-::DATE</TD> 
+          <TD nowrap="nowrap" width=375 class="style13">-::DESCRIPTION</TD> 
+	  <TD nowrap="nowrap" width=40 class="style13">-::HITS</TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap">-::AUTHOR</TD> 
+        </TR> 
+         <TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-04-15</TD><TD nowrap="nowrap" width=375><a href=/exploits/1681 target='_blank' class='style14'>Sybase EAServer 5.2 (WebConsole) Remote Stack Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>3899</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/134 class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/metasploit/134 class='style16'>M</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/1681 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/1681>n/a</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-12-08</TD><TD nowrap="nowrap" width=375><a href=/exploits/1365 target='_blank' class='style14'>Oracle 9.2.0.1 Universal XDB HTTP Pass Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>4371</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/Oracle class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/metasploit/109 class='style16'>M</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/1365 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/1365>y0</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-10-02</TD><TD nowrap="nowrap" width=375><a href=/exploits/1238 target='_blank' class='style14'>Prozilla <= 1.3.7.4 (ftpsearch) Results Handling Buffer Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>2877</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/Prozilla class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/1238 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/1238>taviso</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-06-14</TD><TD nowrap="nowrap" width=375><a href=/exploits/1047 target='_blank' class='style14'>ViRobot Advanced Server 2.0 (addschup) Remote Cookie Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>2819</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/ViRobot class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/1047 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/1047>Kevin Finisterre</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-04-25</TD><TD nowrap="nowrap" width=375><a href=/exploits/952 target='_blank' class='style14'>MailEnable Enterprise & Professional https Remote BoF Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>2912</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/MailEnable class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/metasploit/97 class='style16'>M</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/952 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/952>CorryL</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-02-09</TD><TD nowrap="nowrap" width=375><a href=/exploits/805 target='_blank' class='style14'>ELOG <= 2.5.6 Remote Shell Exploit </A></TD><TD nowrap="nowrap" width=40 align=left>2472</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/ELOG class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/805 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/805>n4rk0tix</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-02-09</TD><TD nowrap="nowrap" width=375><a href=/exploits/806 target='_blank' class='style14'>Prozilla <= 1.3.7.3 Remote Format String Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>1686</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/Prozilla class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/806 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/806>Serkan Akpolat</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-11-23</TD><TD nowrap="nowrap" width=375><a href=/exploits/652 target='_blank' class='style14'>Prozilla 1.3.6 Remote Stack Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>1625</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/Prozilla class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/652 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/652>Serkan Akpolat</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-02-26</TD><TD nowrap="nowrap" width=375><a href=/exploits/156 target='_blank' class='style14'>PSOProxy 0.91 Remote Buffer Overflow Exploit (Win2k/XP)
+</A></TD><TD nowrap="nowrap" width=40 align=left>1703</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/PSOProxy class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/156 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/156>Rave</A></TD></TR> 
+       </TBODY> 
+    </TABLE> 
+     <br> 
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <script language="JavaScript">
+<!--
+ctxt_ad_partner = "9308575640";
+ctxt_ad_section = "";
+ctxt_ad_bg = "000000";
+ctxt_ad_width = 468;
+ctxt_ad_height = 60;
+ctxt_ad_bc = "000000";
+ctxt_ad_cc = "141414";
+ctxt_ad_lc = "00c000";
+ctxt_ad_tc = "FFFFFF";
+ctxt_ad_uc = "00c000";
+// -->
+</script>
+<script language="JavaScript" src="http://ypn-js.overture.com/partner/js/ypn.js">
+</script>
+                  <p><FONT
+            style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit[at]milw0rm.com">submit[at]milw0rm.com</a><br><br>Copyright &copy; 2004-2006 <a href="mailto:str0ke[at]milw0rm.com">milw0rm</a> </FONT></p>
+</TD>
+              </TR>
+            </TBODY>
+          </TABLE></TD>
+      </TR>
+    </TBODY>
+  </TABLE>
+  <BR>
+  <BR>
+</CENTER>
+</BODY>
+</HTML>
+ 

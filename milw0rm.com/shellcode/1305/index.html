@@ -1,0 +1,37 @@
+<html><head><title>linux/x86 write(0,"Hello core!\n",12); (w/optional 7 byte exit) 36 bytes</title></head><pre>/* writehello-core.c by Charles Stevenson &lt;core@bokeoa.com&gt; 
+ *
+ * I made this as a chunk you can paste in to make modular remote
+ * exploits.  I use it to see if my dup2_loop worked.  If you don't
+ * get &quot;Hello core!\n&quot; back it's a good indicator your shell won't
+ * be functional the way you'd like.
+ */
+char hellcode[] = /* write(0,&quot;Hello core!\n&quot;,12); linux/x86 by core */
+&quot;\x31\xdb&quot;              // xor  %ecx,%ecx
+&quot;\xf7\xe3&quot;              // mul  %ecx
+&quot;\x53&quot;                  // push %ecx
+&quot;\x68\x72\x65\x21\x0a&quot;  // push $0xa216572
+&quot;\x68\x6f\x20\x63\x6f&quot;  // push $0x6f63206f
+&quot;\x68\x48\x65\x6c\x6c&quot;  // push $0x6c6c6548
+&quot;\xb2\x0c&quot;              // mov  $0xc,%dl
+&quot;\x43&quot;                  // inc  %ebx
+&quot;\x89\xe1&quot;              // mov  %esp,%ecx
+&quot;\xb0\x04&quot;              // mov  $0x4,%al
+&quot;\xcd\x80&quot;              // int  $0x80
+// not needed.. makes it exit cleanly
+// 7 bytes _exit(1) ... 'cause we're nice &gt;:) by core
+&quot;\x31\xc0&quot;              // xor  %eax,%eax
+&quot;\x40&quot;                  // inc  %eax
+&quot;\x89\xc3&quot;              // mov  %eax,%ebx
+&quot;\xcd\x80&quot;              // int  $0x80
+;
+
+int main(void)
+{
+  void (*shell)() = (void *)&amp;hellcode;
+  printf(&quot;%d byte (w/optional 7 byte exit) write(0,\&quot;Hello core!\\n\&quot;,12); linux/x86 by core\n&quot;,
+         strlen(hellcode));
+  shell();
+  return 0;
+}
+
+// milw0rm.com [2005-11-09]</pre></html>

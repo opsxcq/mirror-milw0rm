@@ -1,0 +1,274 @@
+<html>
+<head>
+<title>Ins and outs SQL injection</title>
+<pre>
+    &gt; Ins and outs SQL injection
+    &gt;
+    &gt; SQL injection is one of the biggest and most overlooked flaws on the
+    &gt; web today, with the advent of millions of hosting companies that offer
+    &gt; you your own database and scripting language to play with,
+    &gt; anyone can setup their own community, blog or anything in between.
+    &gt;
+    &gt; Developers who are unskilled tend to leave a lot of flaws in their
+    &gt; code, room for SQL injection is one of the most dangerous.
+    &gt;
+    &gt; In this tutorial we'll look at how attackers use SQL injection for the
+    &gt; purpose of damage or unauthorized access and how to protect you and
+    &gt; your site against it.
+    &gt;
+    &gt; ----------------------------------------------------------------------------------
+    &gt;
+    &gt;     What is SQL injection?
+    &gt;
+    &gt; SQL injection is an extremely overlooked problem, especially with how
+    &gt; easy it is for Joe Bloggs and John Smith to setup their own website
+    &gt; and do with it what they wish. SQL injection is the equivalent of
+    &gt; letting any old user manipulate your database, be it for malicious
+    &gt; purposes or not.This dangerous flaw is easy to prevent, however it is
+    &gt; easier to overlook. Every time your website or application commits an
+    &gt; SQL query with input that is given to it from the user, it is a
+    &gt; possibility for SQL injection if you are not safeguarded properly.
+    &gt; Today we're going to learn how the SQL injection is done and how to
+    &gt; prevent it in easy to swallow chunks, here we go…
+    &gt;
+    &gt;
+    &gt;     Right, so how do you do it?
+    &gt;
+    &gt; It's much simpler than it sounds, SQL injection is simply changing the
+    &gt; query from what it was intended to do with it what you wish, let's
+    &gt; skip the boring footwork and jump in head first. In order to 'do' SQL
+    &gt; injection you need a vulnerable website or application, of course to
+    &gt; demonstrate prevention and so on we need to use a language, surprise
+    &gt; surprise the language we'll be using today is PHP coupled with it's
+    &gt; wonderful brethren, MySQL. Consider this, you have a page called
+    &gt; profile.php that when accessed properly will pull information about a
+    &gt; certain user from your wonderfully crafted database. Let's say the
+    &gt; query looks like this;
+    &gt;
+    &gt; mysql_query(&quot;SELECT   first_name,
+    &gt;                                       last_name
+    &gt;                               FROM users
+    &gt;                               WHERE user_id = '$_GET['id']'&quot;);
+    &gt;
+    &gt; Seemingly harmless, when executed properly this query will pull two
+    &gt; fields from a table called users. In order to wreak havoc inject SQL
+    &gt; into this query we need to perform our own query, let's say for
+    &gt; example; DROP TABLE users, seems only right. Obviously if we visited
+    &gt; profile.php?id=123 then the query would look a little like this;
+    &gt;
+    &gt; mysql_query(&quot;SELECT   first_name,
+    &gt;                       last_name
+    &gt;                       FROM users
+    &gt;                       WHERE user_id = '123'&quot;);
+    &gt;
+    &gt; Simple enough, this query will fetch the first name and last name of a
+    &gt; user who has an ID of 123. Obviously not the best designed query as
+    &gt; it'd be better to limit the amount of results etc but that is beyond
+    &gt; the scope of this tutorial. Now let's say we change profile.php?id=123
+    &gt; to profile.php?id=DROP TABLE users. The query that is executed now
+    &gt; looks something like this;
+    &gt;
+    &gt; mysql_query(&quot;SELECT   first_name,
+    &gt;                       last_name
+    &gt;                       FROM users
+    &gt;                       WHERE user_id = 'DROP TABLE users'&quot;);
+    &gt;
+    &gt; Pretty useless. All this query is doing is what's intended of it and
+    &gt; searching for a record where the user_id is set to DROP TABLE users.
+    &gt; To actually make our command execute, we need to 'escape' the friendly
+    &gt; SQL query and insert our own query, I'd like to introduce the single
+    &gt; quote ( ' ). When you search for a string using SQL, in order to
+    &gt; prevent the string from interfering with the query, it is wrapped in a
+    &gt; set of single quotes. If we use a single quote in our query it
+    &gt; suddenly becomes a little more interesting. Let's try 'DROP TABLE users.
+    &gt;
+    &gt; mysql_query(&quot;SELECT   first_name,
+    &gt;                       last_name
+    &gt;                       FROM users
+    &gt;                       WHERE user_id = ''DROP TABLE users'&quot;);
+    &gt;
+    &gt; What we have done is made it so that the string to search for is
+    &gt; simply blank, by using a single quote we have closed the string and we
+    &gt; are now inside the actual query, exciting isn't it? If you were to
+    &gt; execute the above query all you'd receive back would be an error
+    &gt; (although this varies depending on the PHP configuration). 'Great' I
+    &gt; hear you saying, but one of the golden rules when trying to exploit
+    &gt; something is learning to love error messages. One of the quickest ways
+    &gt; to find out whether a site can be exploited is to slap a single quote
+    &gt; in a few of the $_GET variables and see if you receive an error
+    &gt; message. If you do then it's likely there's a gaping hole for you to
+    &gt; destroy report to the local administrator. Of course this isn't always
+    &gt; true, depending on many factors and should only be used as a quick
+    &gt; first resort to check for vulnerability.
+    &gt;
+    &gt; So we have an error message, awesome, we can manipulate the SQL query!
+    &gt; Now the reason the above query didn't work is because it is read as a
+    &gt; single command to execute, we're executing a SELECT command to select
+    &gt; records from a database, shoving a DROP TABLE command in half way
+    &gt; through isn't going to be expected and therefore it's going to cause a
+    &gt; problem. The way we get round this is to close the SELECT command in
+    &gt; order to inject our own SQL. The way to properly end a command in SQL
+    &gt; is the same as with most languages, with a semi-colon, so all we need
+    &gt; to do is end the previous command and then begin our own. One thing we
+    &gt; need to remember is that the query we're ending mustn't cause an error
+    &gt; because if it does then the error will stop the query and our command
+    &gt; won't be reached. Let's inject.
+    &gt;
+    &gt; mysql_query(&quot;SELECT   first_name,
+    &gt;                       last_name
+    &gt;                       FROM users
+    &gt;                       WHERE user_id = ''; DROP TABLE users'&quot;);
+    &gt;
+    &gt; We inserted '; DROP TABLE users. What we did was inserted an
+    &gt; apostrophe to close the string followed by a semi-colon to end the
+    &gt; query that's searching for the user, as far as anyone is concerned the
+    &gt; first command in this query is valid, the second one however is not.
+    &gt; Why? Because after our command there is a single apostrophe lingering
+    &gt; from the first command where we injected. Uh oh. Our command won't be
+    &gt; executed because there's an error in it now. Another hurdle that can
+    &gt; be jumped, essentially we need to ignore everything after what we've
+    &gt; injected, we don't care about it. In order to ignore the rest we have
+    &gt; to use an SQL comment signified by two hyphens (–). Once two hyphens
+    &gt; are read, the rest of the query is simply ignored and what we have is
+    &gt; a successful command, before we comment out the rest of the query
+    &gt; however, we need to end our command with the semi-colon. All in all
+    &gt; our query now looks like this.
+    &gt;
+    &gt; mysql_query(&quot;SELECT   first_name,
+    &gt;                       last_name
+    &gt;                       FROM users
+    &gt;                       WHERE user_id = ''; DROP TABLE users;--'&quot;);
+    &gt;
+    &gt; Voila, you've just upset a database administrator somewhere,
+    &gt; congratulations. Now one thing we should touch on is getting around
+    &gt; basic PHP/MySQL authorization with SQL injection.
+    &gt;
+    &gt;
+    &gt;       Correct login OR 1=1?
+    &gt;
+    &gt; Some (very) weak PHP login scripts that use a MySQL database use the
+    &gt; actual query to check authorization rather than querying the database
+    &gt; and then doing some playing with the results. Here's an example of an
+    &gt; extremely weak query;
+    &gt;
+    &gt; myqsl_query(&quot;SELECT   user_id
+    &gt;                       FROM users
+    &gt;                       WHERE username = '&quot;.$username.&quot;' AND password = '&quot;.$password.&quot;'&quot;);
+    &gt;
+    &gt; Now the reason people might use this query for authorization is that
+    &gt; when the username and password specified are found in the database the
+    &gt; above query will return TRUE, well actually it'll return the user_id
+    &gt; but for our example we'll just assume that the PHP code just checks
+    &gt; for any returned value. If the user isn't found, the query will
+    &gt; evaluate theoretically to FALSE. With this information in mind we
+    &gt; already know that in order to get round this authorization, what we
+    &gt; need is the query to return true - we can do this with some more SQL
+    &gt; injection.
+    &gt;
+    &gt; Assuming that the above query is used in the PHP code, we need to
+    &gt; inject something that will make the query return true (or a value) no
+    &gt; matter what credentials we supply. Well first we need to break into
+    &gt; this query, there are two possibilities here; username and password,
+    &gt; we're going to use username. Now we know where we're going to break
+    &gt; into the query we need to make it return true, what will always return
+    &gt; true?… 1=1. We need to tell MySQL to evaluate 1=1 rather than the
+    &gt; username and password, to do that we're going to use a little boolean
+    &gt; algebra and use OR. Let's see what this looks like with the username
+    &gt; field injected;
+    &gt;
+    &gt; myqsl_query(&quot;SELECT   user_id
+    &gt;                       FROM users
+    &gt;                       WHERE username = '' OR 1=1;--' AND password = '&quot;.$password.&quot;'&quot;);
+    &gt;
+    &gt; By inserting a single quote, we escape from the username comparison
+    &gt; and we're now in the SQL query as we've previously learned. The next
+    &gt; thing we do is insert an OR clause, this checks to see if the username
+    &gt; is blank OR 1=1 and of course we then need to end this command and
+    &gt; comment out the rest. Voila.
+    &gt;
+    &gt; Now it's all well and good being able to conduct SQL injection, but
+    &gt; now it's time to move on to the more important matter…
+    &gt;
+    &gt;
+    &gt;     Countering SQL injection
+    &gt;
+    &gt; It's important to understand how the attackers will attempt to use SQL
+    &gt; injection to attack your website in order to understand where the
+    &gt; threats/weaknesses lie so we can use this knowledge to secure these
+    &gt; flaws. You might be expecting paragraph upon paragraph of information
+    &gt; on countering this threat but in reality you can protect yourself
+    &gt; against it easily.
+    &gt;
+    &gt; As with all input that PHP uses, it should be sanitized to ensure it
+    &gt; can not interfere where it shouldn't. The obvious method for
+    &gt; protection is to simply remove all single quotes from a string or
+    &gt; simply display an error if they are used, but this can cause problems
+    &gt; when you apply it to a website that needs to display single quotes
+    &gt; such as a review website or forum where you need to use words like
+    &gt; can't and don't etc.
+    &gt;
+    &gt; Note: It's important to remember that the great thing about PHP is
+    &gt; people can solve things in their own way, everyone has their own
+    &gt; preferred method for countering SQL injection and this just happens to
+    &gt; be the way I've chosen to convey to you.
+    &gt;
+    &gt;
+    &gt;       Escaping characters
+    &gt;
+    &gt; In order to use certain characters safely in a query, we need to
+    &gt; escape them. This means prepending then evil character with a
+    &gt; backslash, so ' becomes \' and for extra safety, \ becomes \\. Now
+    &gt; finding all the evil characters and putting backslashes in front of
+    &gt; them might seem a bit of a chore, but PHP has a few handy functions
+    &gt; that can help us. One of the most common is the addslashes() and
+    &gt; stripslashes() functions. It is as simple as it sounds, addslashes()
+    &gt; will add slashes before your evil characters and stripslashes() will
+    &gt; take them away. Simple as that. Here's a quick example;
+    &gt;
+    &gt; $evil_name = &quot;dan' OR 1=1;--&quot;;
+    &gt; $password = &quot;abc123&quot;
+    &gt; mysql_query(&quot;SELECT   *
+    &gt;                       FROM users
+    &gt;                       WHERE username='&quot;.addslashes($evil_name).&quot;' AND password='&quot;.addslashes($password).&quot;'&quot;);
+    &gt;
+    &gt; This query should now be safe to run as the quotes in the original
+    &gt; name have been escaped, the username now looks like this: dan\' OR
+    &gt; 1=1'– which is not harmful to our query. Although there are many
+    &gt; methods in which to prevent SQL injection, we're just going to look at
+    &gt; one more function provided by PHP and that's
+    &gt; mysql_real_escape_string(). This function has a little sister called
+    &gt; mysql_escape_string(), the difference is that
+    &gt; mysql_real_escape_string() takes into account the current character
+    &gt; set used in the connection to the database. Using the same method as
+    &gt; above, the query would look like this;
+    &gt;
+    &gt; $evil_name = &quot;dan' OR 1=1;--&quot;;
+    &gt; $password = &quot;abc123&quot;
+    &gt; mysql_query(&quot;SELECT   *
+    &gt;                       FROM users
+    &gt;                       WHERE username='&quot;.mysql_real_escape_string($evil_name).&quot;' AND mysql_real_escape_string ='&quot;.addslashes($password).&quot;'&quot;);
+    &gt;
+    &gt; Another safe query successfully executed on the database.
+    &gt;
+    &gt; ---------------------------------------------------------------------------------------------------------------------------------------------
+    &gt;
+    &gt;
+    &gt;       Conclusion
+    &gt;
+    &gt; We've learnt today that SQL injection is a major threat if not dealt
+    &gt; with correctly and dealing with it isn't at all hard and is only
+    &gt; overlooked by developers who are either not knowledgable in this area
+    &gt; or those who are just plain lazy.
+    &gt;
+    &gt; --------------------------------------------------------------------------------------------------------------------------------------------
+    &gt; Don - Balcan crew - December 2008
+    &gt;
+    &gt;
+    &gt; http://www.balcan-crew.org
+    &gt;
+    &gt;
+    &gt; Greetz to all my friends
+    &gt; --------------------------------------------------------------------------------------------------------------------------------------------
+
+# milw0rm.com [2008-12-01]</pre>
+</html>

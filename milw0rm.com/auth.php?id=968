@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>milw0rm.com - c0d3r</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<STYLE type=text/css>
+BODY {
+        SCROLLBAR-FACE-COLOR: #000000; FONT-SIZE: 10px; SCROLLBAR-HIGHLIGHT-COLOR: #008000; SCROLLBAR-SHADOW-COLOR: #008000; SCROLLBAR-3DLIGHT-COLOR: #000000; SCROLLBAR-ARROW-COLOR: #000000; SCROLLBAR-TRACK-COLOR: #000000; FONT-FAMILY: verdana; SCROLLBAR-DARKSHADOW-COLOR: #000000
+}
+INPUT {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+TEXTAREA {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+P {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DL {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DT {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DD {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+TD {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+TH {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+.submit {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+A:link {
+        TEXT-DECORATION: none
+}
+A:visited {
+        TEXT-DECORATION: none
+}
+A:active {
+        TEXT-DECORATION: none
+}
+A:hover {
+        COLOR: #00ff00; TEXT-DECORATION: none
+}
+B.hl1 {
+        FONT-WEIGHT: bold
+}
+B.hl2 {
+        FONT-WEIGHT: bold; FONT-STYLE: italic
+}
+.sr {
+
+        FONT-SIZE: 10px; LINE-HEIGHT: 14px
+}
+.style13 {font-size: 9px; font-weight: bold; }
+.style14 {font-size: 9px}
+.style15 {font-size: 9px; color: #D6EF39; }
+</STYLE>
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php" />
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" />
+</HEAD>
+<BODY dir=ltr text=#008000 vLink=#00c000 aLink=#00ff00 link=#00c000
+bgColor=#000000 background=/images/dot.gif>
+<CENTER>
+<TABLE border=0>
+<TBODY>
+<TR>
+<td nowrap>
+  <B>[ <A href="/"
+              target=_self>home</A> ]</B>
+              <B>[ <A href="contents.php" target=_self>contents</A> ]</B>
+	      <B>[ <A href="platforms.php"
+              target=_self>platforms</A> ]</B> <B>[ <A href="shellcode2.php"
+              target=_self>shellcode</A> ]</B> <B>[ <A href="info.php"
+              target=_self>search</A> ]</B>
+              <B>[ <A href="links.php" target=_self>links</A> ]</B> 
+              <B>[ <A href="rss.php" target=_self>rss</A> ]</B>
+              <B>[ <A href="http://www.milw0rm.com/sploits/milw0rm.tar.bz2" target=_self>archive</A> ]</B>
+              <BR>
+	      </td>
+	      </TR>
+	      </TBODY>
+	      </TABLE>
+  <TABLE height=80 cellSpacing=0 cellPadding=1 width=500 bgColor=#008000
+border=0>
+    <TBODY>
+      <TR>
+        <TD vAlign=top width="100%" height="100%"> <TABLE height="100%" cellSpacing=0 cellPadding=5 width="100%"
+      bgColor=#000000 border=0>
+            <TBODY>
+              <TR>
+	<td style="background-repeat: no-repeat;" align="center" valign="top" width="100%"><img src="/images/milw0rm-wi.jpg" width="445" height="71"></td>
+</TR>
+              
+	      
+	      <TR> 
+                <TD height="100" align=middle vAlign=top><!-- <B>[ <a href="author.php" 
+            target=_self>Authors</a> ]--><br></B>          
+	    
+	    <table align="center" border="0" bordercolor="#333333" width="597">
+                    <tbody>
+		      <tr class="style13">
+		      <td><table cellspacing="0" cellpadding="0">
+
+		
+                <tr>
+                  <td width="75"><strong>Author: </strong></td>
+                  <td width="514">c0d3r &lt;c0d3r [at] ihsteam.com&gt;</td>
+                </tr>
+		                <tr>
+                  <td><strong>Homepage: </strong></td>
+                  <td><a href="http://www.ihsteam.com">http://www.ihsteam.com </a></td>
+                </tr>
+		              </table>		        </td>
+		      </tr>
+		      </tbody>
+		      </table>
+		      <br>
+
+		      <TABLE borderColor=#333333 width=597 align=center border=0>
+
+                    <TBODY>
+                      <TR class="style13">
+                        <TD class="style13">-::DATE</TD>
+                        <TD class="style13">-::DESCRIPTION</TD>
+                        <TD width=40 class="style13">-::HITS</TD>
+                        <td width=9 class="style13"></td>
+                        <td width=9 class="style13"></td>
+                        <td width=9 class="style13"></td>
+                        <td width=9 class="style13"></td>
+                        <TD>-::AUTHOR</TD>
+                      </TR>
+
+<TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-01-04</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1404 target='_blank' class='style14'>WinRAR 3.30 Long Filename Buffer Overflow Exploit (more targets) (2)</A></TD><TD nowrap="nowrap" width=40 align=left>1127</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=WinRAR class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1404 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>c0d3r</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-09-20</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1223 target='_blank' class='style14'>Mercury Mail <= 4.01a (Pegasus) IMAP Buffer Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>3047</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Mercury+Mail class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=metasploit.php?id=98 class='style16'>M</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1223 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>c0d3r</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-07-06</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1091 target='_blank' class='style14'>Internet Download Manager <= 4.05 Input URL Stack Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>4604</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Internet+Download+Manager class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1091 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>c0d3r</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-04-29</TD><TD nowrap="nowrap" width=375><a href=id.php?id=968 target='_blank' class='style14'>Golden FTP Server Pro 2.52 Remote Buffer Overflow Exploit (2nd)</A></TD><TD nowrap="nowrap" width=40 align=left>1280</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Golden+FTP+Server class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=968 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>c0d3r</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-04-20</TD><TD nowrap="nowrap" width=375><a href=id.php?id=949 target='_blank' class='style14'>PMsoftware Simple Web Server 1.0 Remote Stack Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>1250</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=PMSoftware+Simple+Web+Server class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=949 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>c0d3r</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-04-03</TD><TD nowrap="nowrap" width=375><a href=id.php?id=908 target='_blank' class='style14'>ArGoSoft Ftp <= 1.4.2.8 Denial of Service Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>959</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=ArGoSoft class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=908 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>c0d3r</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-02-17</TD><TD nowrap="nowrap" width=375><a href=id.php?id=825 target='_blank' class='style14'>3Com Ftp Server 2.0 Remote Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>1134</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=3Com class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=825 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>c0d3r</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-01-04</TD><TD nowrap="nowrap" width=375><a href=id.php?id=738 target='_blank' class='style14'>iWebNegar Configuration Nullification Denial of Service Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>644</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=iWebNegar class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=738 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>c0d3r</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2004-12-01</TD><TD nowrap="nowrap" width=375><a href=id.php?id=669 target='_blank' class='style14'>Aspell (word-list-compress) Command Line Stack Overflow</A></TD><TD nowrap="nowrap" width=40 align=left>688</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Aspell class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=669 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>c0d3r</TD></TR>		      
+                  </TBODY>
+                  </TABLE>
+                    <br>
+                    <br>
+                    <br>
+
+<script language="JavaScript">
+<!--
+ctxt_ad_partner = "9308575640";
+ctxt_ad_section = "";
+ctxt_ad_bg = "000000";
+ctxt_ad_width = 468;
+ctxt_ad_height = 60;
+ctxt_ad_bc = "000000";
+ctxt_ad_cc = "333333";
+ctxt_ad_lc = "00c000";
+ctxt_ad_tc = "FFFFFF";
+ctxt_ad_uc = "00c000";
+// -->
+</script>
+<script language="JavaScript" src="http://ypn-js.overture.com/partner/js/ypn.js">
+</script>
+                  <p><FONT
+            style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit@milw0rm.com">submit@milw0rm.com</a><br><br>Copyright © 2004-2006 <a href="mailto:str0ke@milw0rm.com">str0ke@milw0rm.com</a> </FONT></p>
+</TD>
+              </TR>
+            </TBODY>
+          </TABLE></TD>
+      </TR>
+    </TBODY>
+  </TABLE>
+  <BR>
+  <BR>
+</CENTER>
+</BODY>
+</HTML>

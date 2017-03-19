@@ -1,0 +1,18 @@
+<html><head><title>linux/x86 normal exit w/ random (so to speak) return value 5 bytes</title></head><pre>/*
+ * (linux/x86) normal exit w/ random (so to speak) return value - 5 bytes
+ * - izik &lt;izik@tty64.org&gt;
+ */
+
+char shellcode[] = 
+
+	&quot;\x31\xc0&quot;              // xor %eax,%eax 
+	&quot;\x40&quot;                  // inc %eax 
+	&quot;\xcd\x80&quot;;             // int $0x80 
+
+int main(int argc, char **argv) {
+	int *ret;
+	ret = (int *)&amp;ret + 2;
+	(*ret) = (int) shellcode;
+}
+
+// milw0rm.com [2006-01-21]</pre></html>

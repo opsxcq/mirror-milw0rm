@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>milw0rm.com - Port 135</TITLE>
+<link type="text/css" rel="stylesheet" href="/milw0rm.css">
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php" />
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" />
+</HEAD>
+<BODY dir=ltr text=#008000 vLink=#00c000 aLink=#00ff00 link=#00c000
+bgColor=#000000 background=/images/dot.gif>
+<CENTER>
+<TABLE border=0>
+<TBODY>
+<TR>
+<td nowrap>
+              <B>[ <A href="/" target=_self>home</A> ]</B>
+              <B>[ <A href="/contents/" target=_self>contents</A> ]</B>
+              <B>[ <A href="/platforms/" target=_self>platforms</A> ]</B>
+              <B>[ <A href="/shellcode/" target=_self>shellcode</A> ]</B>
+              <B>[ <A href="/search/" target=_self>search</A> ]</B>
+              <B>[ <A href="/cracker/" target=_self>cracker</A> ]</B>
+              <B>[ <A href="/links/" target=_self>links</A> ]</B>
+              <B>[ <A href="/rss.php" target=blank>rss</A> ]</B>
+              <B>[ <A href="http://forum.milw0rm.com/" target=_self>forum</A> ]</B>
+              <B>[ <A href="http://www.milw0rm.com/sploits/milw0rm.tar.bz2" target=_self>archive</A> ]</B>
+              <BR>
+	      </td>
+	      </TR>
+	      </TBODY>
+	      </TABLE>
+  <TABLE height=80 cellSpacing=0 cellPadding=1 width=637 bgColor=#008000 border=0>
+    <TBODY>
+      <TR>
+        <TD vAlign=top width="100%" height="100%"> <TABLE height="100%" cellSpacing=0 cellPadding=5 width="100%" bgColor=#000000 border=0>
+          <TBODY>
+            <TR>
+		<td style="background-repeat: no-repeat;" align="center" width="100%"><img src="/images/milw0rm-wi.jpg" width="445" height="71"></td>
+	    </TR>
+ <TR> 
+  <TD height="300" align=middle vAlign=top><B>[ <a href="remoteport.php"
+            target=_self>Port 135</a> ]</B> 
+     <TABLE borderColor=#333333 width=597 align=center border=0> 
+      <TBODY> 
+         <TR class="style13"> 
+          <TD nowrap="nowrap" width=65 class="style13">-::DATE</TD> 
+          <TD nowrap="nowrap" width=375 class="style13">-::DESCRIPTION</TD> 
+	  <TD nowrap="nowrap" width=40 class="style13">-::HITS</TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap" width=9 class="style13"></TD>
+          <TD nowrap="nowrap">-::AUTHOR</TD> 
+        </TR> 
+         <TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-12-16</TD><TD nowrap="nowrap" width=375><a href=/exploits/135 target='_blank' class='style14'>MS Windows Messenger Service Remote Exploit FR (MS03-043)
+</A></TD><TD nowrap="nowrap" width=40 align=left>3836</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/MS+Windows class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/135 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/135>MrNice</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-11-07</TD><TD nowrap="nowrap" width=375><a href=/exploits/117 target='_blank' class='style14'>MS Windows XP/2000 RPC Remote (non exec memory) Exploit
+</A></TD><TD nowrap="nowrap" width=40 align=left>4152</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/MS+Windows class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/117 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/117>ins1der</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-10-09</TD><TD nowrap="nowrap" width=375><a href=/exploits/109 target='_blank' class='style14'>MS Windows (RPC2) Universal Exploit & DoS (RPC3) (MS03-039) 
+</A></TD><TD nowrap="nowrap" width=40 align=left>4424</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/MS+Windows class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/109 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/109>n/a</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-09-20</TD><TD nowrap="nowrap" width=375><a href=/exploits/103 target='_blank' class='style14'>MS Windows (RPC DCOM2) Remote Exploit (MS03-039)</A></TD><TD nowrap="nowrap" width=40 align=left>4349</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/MS+Windows class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/103 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/103>Flashsky</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-09-16</TD><TD nowrap="nowrap" width=375><a href=/exploits/100 target='_blank' class='style14'>MS Windows (RPC DCOM) Long Filename Overflow Exploit (MS03-026)</A></TD><TD nowrap="nowrap" width=40 align=left>4446</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/MS+Windows class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/metasploit/42 class='style16'>M</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/100 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/100>n/a</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-09-12</TD><TD nowrap="nowrap" width=375><a href=/exploits/97 target='_blank' class='style14'>MS Windows (RPC DCOM) Scanner (MS03-039)</A></TD><TD nowrap="nowrap" width=40 align=left>3584</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/MS+Windows class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/97 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/97>Doke Scott</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-08-07</TD><TD nowrap="nowrap" width=375><a href=/exploits/76 target='_blank' class='style14'>MS Windows (RPC DCOM) Remote Exploit (Universal Targets)
+</A></TD><TD nowrap="nowrap" width=40 align=left>4559</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/MS+Windows class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/76 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/76>oc192</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-07-30</TD><TD nowrap="nowrap" width=375><a href=/exploits/70 target='_blank' class='style14'>MS Windows (RPC DCOM) Remote Exploit (48 Targets)
+</A></TD><TD nowrap="nowrap" width=40 align=left>5137</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/MS+Windows class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/metasploit/42 class='style16'>M</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/70 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/70>n/a</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-07-29</TD><TD nowrap="nowrap" width=375><a href=/exploits/69 target='_blank' class='style14'>MS Windows RPC DCOM Remote Exploit (18 Targets)
+</A></TD><TD nowrap="nowrap" width=40 align=left>2555</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/MS+Windows class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/69 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/69>pHrail</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-07-26</TD><TD nowrap="nowrap" width=375><a href=/exploits/66 target='_blank' class='style14'>MS Windows (RPC DCOM) Remote Exploit (w2k+XP Targets)
+</A></TD><TD nowrap="nowrap" width=40 align=left>6133</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/MS+Windows class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/66 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/66>H D Moore</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2003-07-25</TD><TD nowrap="nowrap" width=375><a href=/exploits/64 target='_blank' class='style14'>MS Windows (RPC DCOM) Remote Buffer Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>2928</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/related/MS+Windows class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/64 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/64>Flashsky</A></TD></TR> 
+       </TBODY> 
+    </TABLE> 
+     <br> 
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <script language="JavaScript">
+<!--
+ctxt_ad_partner = "9308575640";
+ctxt_ad_section = "";
+ctxt_ad_bg = "000000";
+ctxt_ad_width = 468;
+ctxt_ad_height = 60;
+ctxt_ad_bc = "000000";
+ctxt_ad_cc = "141414";
+ctxt_ad_lc = "00c000";
+ctxt_ad_tc = "FFFFFF";
+ctxt_ad_uc = "00c000";
+// -->
+</script>
+<script language="JavaScript" src="http://ypn-js.overture.com/partner/js/ypn.js">
+</script>
+                  <p><FONT
+            style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit[at]milw0rm.com">submit[at]milw0rm.com</a><br><br>Copyright &copy; 2004-2006 <a href="mailto:str0ke[at]milw0rm.com">milw0rm</a> </FONT></p>
+</TD>
+              </TR>
+            </TBODY>
+          </TABLE></TD>
+      </TR>
+    </TBODY>
+  </TABLE>
+  <BR>
+  <BR>
+</CENTER>
+</BODY>
+</HTML>
+ 

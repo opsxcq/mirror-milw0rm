@@ -1,0 +1,283 @@
+<html><head>
+<title>milw0rm - exploits : vulnerabilities : videos : papers : shellcode</title>
+<meta name="description" content="milw0rm exploits and 0day exploits database">
+<meta name="keywords" content="exploits code, exploit code, exploits, 0-day, 0day, 0days, exploit, zero day, poc, exploit, local exploits, remote exploits, root exploits, windows, linux, new exploits, latest exploits, shellcode, Zero-day, zeroday, security articles, ezines, zines, security papers">
+<link type="text/css" rel="stylesheet" href="/milw0rm.css">
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php">
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon"></head>
+<body dir="ltr" alink="#00ff00" background="/images/dot.gif" bgcolor="#000000" link="#00c000" text="#008000" vlink="#00c000">
+<center>
+<table border="0">
+<tr>
+<td nowrap="nowrap">
+
+			<b>[ <a href="/" target=_self>home</a> ]</b>
+			<b>[ <a href="/contents.php" target=_self>contents</a> ]</b>
+			<b>[ <a href="/platforms/" target=_self>platforms</a> ]</b>
+			<b>[ <a href="/shellcode/" target=_self>shellcode</a> ]</b>
+			<b>[ <a href="/search.php" target=_self>search</a> ]</b>
+			<b>[ <a href="/cracker/" target=_self>cracker</a> ]</b>
+			<b>[ <a href="/links/" target=_self>links</a> ]</b>
+			<b>[ <a href="/rss.php" target=blank>rss</a> ]</b>
+			<b>[ <a href="/sploits/milw0rm.tar.bz2" target=_self>archive</a> ]</b>
+			</td>
+    </tr>
+  </table>
+
+<table width="668" border="0" cellpadding="3" cellspacing="3" class="main">
+  <tr><td><img src="/images/milw0rm-wi.jpg" alt="milw0rm"></td></tr><tr><td>
+<b>[ <a href="/" target=_self>Opera</a> ]</b><table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-03-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8320" target="_blank" class="style14">Opera 9.64 (7400 nested elements) XML Parsing Remote Crash Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4866</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Opera" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8320" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1860">Ahmed Obied</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-11-17</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7135" target="_blank" class="style14">Opera 9.62 file:// Local Heap Overflow Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">13532</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Opera" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7135" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1413">Guido Landi</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-10-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6880" target="_blank" class="style14">Opera 9.61 opera:historysearch Code Execution Exploit PoC</a></td>
+<td nowrap="nowrap" width=40 align="left">11071</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Opera" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6880" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=6880" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/531">Aviv Raff</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-10-23</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6813" target="_blank" class="style14">Opera 9.52/9.60 Stored Cross Site Scripting Code Exec PoC</a></td>
+<td nowrap="nowrap" width=40 align="left">9113</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Opera" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6813" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=6813" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/531">Aviv Raff</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-10-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6801" target="_blank" class="style14">Opera <= 9.60 Stored Cross Site Scripting Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">7213</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Opera" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6801" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1438">Roberto Suggi Liverani</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-09-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6615" target="_blank" class="style14">Opera 9.52 Window Object Suppressing Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4652</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Opera" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6615" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=6615" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1619">Aditya K Sood</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-05-08</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3871" target="_blank" class="style14">Opera 9.10 alert() Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">7530</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Opera" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3871" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=3871" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1035">Dj7xpl</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-23</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3784" target="_blank" class="style14">Opera 9.2 (torrent File) Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">7670</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Opera" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3784" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/664">n00b</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-01-08</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3101" target="_blank" class="style14">Opera <= 9.10 JPG Image DHT Marker Heap Corruption Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">10980</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Opera" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3101" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/502">posidron</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-08-13</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2179" target="_blank" class="style14">Opera 9 IRC Client Remote Denial of Service Exploit (c)</a></td>
+<td nowrap="nowrap" width=40 align="left">7310</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Opera" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2179" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/637">Preddy</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-08-13</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2180" target="_blank" class="style14">Opera 9 IRC Client Remote Denial of Service Exploit (py)</a></td>
+<td nowrap="nowrap" width=40 align="left">6035</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Opera" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2180" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/637">Preddy</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1972" target="_blank" class="style14">Opera Web Browser 9.00 (iframe) Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">6936</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Opera" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1972" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/397">y3dips</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-06-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1937" target="_blank" class="style14">Opera 9 (long href) Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">10726</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Opera" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1937" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=1937" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/680">N9</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-10-16</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1254" target="_blank" class="style14">Opera <= 8.02 Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">8068</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Opera" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1254" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=1254" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/502">posidron</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-10-16</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1255" target="_blank" class="style14">Opera <= 8.02 Remote Denial of Service Exploit (2)</a></td>
+<td nowrap="nowrap" width=40 align="left">8097</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Opera" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1255" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/exploit.php?id=1255" class="style16" title="browser test" target="_blank">X</a>
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/502">posidron</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2003-11-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/127" target="_blank" class="style14">Opera 7.22 File Creation and Execution Exploit (Malicious Webserver)
+</a></td>
+<td nowrap="nowrap" width=40 align="left">5938</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Opera" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/127" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/89">nesumin</a>
+</td>
+</tr></tbody></table><br><br><center></center><br><br><br><center>
+<script type="text/javascript"><!--
+google_ad_client = "pub-0718555979486542";
+/* 468x60, created 9/26/08 */
+google_ad_slot = "3279240256";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</center>
+
+<p><FONT style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit[at]milw0rm.com">submit[at]milw0rm.com</a> [<a href="/gpg/submit.asc" target="_blank">gpg</a>]<br>Copyright &copy; 2004-2009 <a href="mailto:str0ke[at]milw0rm.com">milw0rm</a> </FONT></p>
+</td></tr></table>
+  <br>
+  <br>
+</center>
+</body></html>

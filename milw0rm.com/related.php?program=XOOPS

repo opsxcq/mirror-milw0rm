@@ -1,0 +1,634 @@
+<html><head>
+<title>milw0rm - exploits : vulnerabilities : videos : papers : shellcode</title>
+<meta name="description" content="milw0rm exploits and 0day exploits database">
+<meta name="keywords" content="exploits code, exploit code, exploits, 0-day, 0day, 0days, exploit, zero day, poc, exploit, local exploits, remote exploits, root exploits, windows, linux, new exploits, latest exploits, shellcode, Zero-day, zeroday, security articles, ezines, zines, security papers">
+<link type="text/css" rel="stylesheet" href="/milw0rm.css">
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php">
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon"></head>
+<body dir="ltr" alink="#00ff00" background="/images/dot.gif" bgcolor="#000000" link="#00c000" text="#008000" vlink="#00c000">
+<center>
+<table border="0">
+<tr>
+<td nowrap="nowrap">
+
+			<b>[ <a href="/" target=_self>home</a> ]</b>
+			<b>[ <a href="/contents.php" target=_self>contents</a> ]</b>
+			<b>[ <a href="/platforms/" target=_self>platforms</a> ]</b>
+			<b>[ <a href="/shellcode/" target=_self>shellcode</a> ]</b>
+			<b>[ <a href="/search.php" target=_self>search</a> ]</b>
+			<b>[ <a href="/cracker/" target=_self>cracker</a> ]</b>
+			<b>[ <a href="/links/" target=_self>links</a> ]</b>
+			<b>[ <a href="/rss.php" target=blank>rss</a> ]</b>
+			<b>[ <a href="http://www.milw0rm.com/sploits/milw0rm.tar.bz2" target=_self>archive</a> ]</b>
+			</td>
+    </tr>
+  </table>
+
+<table width="668" border="0" cellpadding="3" cellspacing="3" class="main">
+  <tr><td><img src="/images/milw0rm-wi.jpg" alt="milw0rm"></td></tr><tr><td>
+<b>[ <a href="/" target=_self>XOOPS</a> ]</b><table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-06-20</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4084" target="_blank" class="style14">XOOPS Module WiwiMod 0.4 Remote File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4804</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4084" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/975">GoLd_M</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-06-13</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4068" target="_blank" class="style14">XOOPS Module XFsection (modify.php) Remote File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4148</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4068" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1132">Sp[L]o1T</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-06-13</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4069" target="_blank" class="style14">XOOPS Module XT-Conteudo (spaw_root) RFI Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4274</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4069" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/957">g00ns</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-06-13</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4070" target="_blank" class="style14">XOOPS Module Cjay Content 3 Remote File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">4844</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4070" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/957">g00ns</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-06-12</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4064" target="_blank" class="style14">XOOPS Module Horoscope <= 2.0 Remote File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">3960</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4064" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1042">BeyazKurt</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-06-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4022" target="_blank" class="style14">XOOPS Module icontent 1.0/4.5 Remote File Inclusion Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5724</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4022" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/975">GoLd_M</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-05-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3931" target="_blank" class="style14">XOOPS Module resmanager <= 1.21 BLIND SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2092</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3931" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/657">ajann</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-05-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3932" target="_blank" class="style14">XOOPS Module Glossarie <= 1.7 (sid) Remote SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2034</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3932" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/657">ajann</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-05-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3933" target="_blank" class="style14">XOOPS Module MyConference 1.0 (index.php) SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2758</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3933" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/657">ajann</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-05-06</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3862" target="_blank" class="style14">XOOPS Module wfquotes 1.0 0 Remote SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2966</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3862" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/845">Cyber-Security</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-05-04</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3849" target="_blank" class="style14">XOOPS Flashgames Module 1.0.1 Remote SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">2867</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3849" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/845">Cyber-Security</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-16</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3750" target="_blank" class="style14">XOOPS Module tsdisplay4xoops 0.1 Remote File Inclusion Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">3605</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3750" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/975">GoLd_M</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-05</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3670" target="_blank" class="style14">XOOPS Module WF-Links <= 1.03 (cid) Remote SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2533</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3670" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/657">ajann</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-05</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3672" target="_blank" class="style14">XOOPS Module Jobs <= 2.4 (cid) Remote SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2885</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3672" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/657">ajann</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-04</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3663" target="_blank" class="style14">XOOPS Module WF-Snippets <= 1.02 (c) BLIND SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2224</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3663" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/657">ajann</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-04</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3666" target="_blank" class="style14">XOOPS Module Rha7 Downloads 1.0 (visit.php) SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2630</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3666" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/657">ajann</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-03</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3655" target="_blank" class="style14">XOOPS Module PopnupBlog <= 2.52 (postid) BLIND SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2162</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3655" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/657">ajann</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-02</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3644" target="_blank" class="style14">XOOPS Module WF-Section <= 1.01 (articleid) SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">1948</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3644" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/657">ajann</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-02</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3645" target="_blank" class="style14">XOOPS Module XFsection <= 1.07 (articleid) BLIND SQL Injection Exploit
+	</a></td>
+<td nowrap="nowrap" width=40 align="left">2075</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3645" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/657">ajann</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-02</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3646" target="_blank" class="style14">XOOPS Module Zmagazine 1.0 (print.php) Remote SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2475</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3646" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/657">ajann</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3623" target="_blank" class="style14">XOOPS Module eCal <= 2.24 (display.php) Remote SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">1536</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3623" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/657">ajann</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3625" target="_blank" class="style14">XOOPS Module Tiny Event <= 1.01 (id) Remote SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">1357</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3625" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/657">ajann</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3626" target="_blank" class="style14">XOOPS Module Kshop <= 1.17 (id) Remote SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">1837</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3626" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/657">ajann</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3629" target="_blank" class="style14">XOOPS Module Camportail <= 1.1 (camid) Remote SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">1701</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3629" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/657">ajann</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3630" target="_blank" class="style14">XOOPS Module debaser <= 0.92 (genre.php) BLIND SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">1834</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3630" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/657">ajann</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3632" target="_blank" class="style14">XOOPS Module myAlbum-P <= 2.0 (cid) Remote SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2265</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3632" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/657">ajann</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-01</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3633" target="_blank" class="style14">XOOPS Module RM+Soft Gallery 1.0 BLIND SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2136</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3633" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/657">ajann</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-31</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3618" target="_blank" class="style14">XOOPS Module Lykos Reviews 1.00 (index.php) SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2151</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3618" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/657">ajann</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-31</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3619" target="_blank" class="style14">XOOPS Module Library (viewcat.php) Remote SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2166</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3619" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/657">ajann</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-31</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3620" target="_blank" class="style14">XOOPS Module Core (viewcat.php) Remote SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2441</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3620" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/657">ajann</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-31</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3621" target="_blank" class="style14">XOOPS Module Tutoriais (viewcat.php) Remote SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2954</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3621" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/657">ajann</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3612" target="_blank" class="style14">XOOPS Module Repository (viewcat.php) Remote SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2181</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3612" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/657">ajann</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3603" target="_blank" class="style14">XOOPS Module MyAds Bug Fix <= 2.04jp (index.php) SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2517</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3603" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/657">ajann</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3594" target="_blank" class="style14">XOOPS module Articles <= 1.03 (index.php cat_id) SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2840</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3594" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/657">ajann</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3597" target="_blank" class="style14">XOOPS Module Friendfinder <= 3.3 (view.php id) SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">2310</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3597" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/657">ajann</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-27</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3588" target="_blank" class="style14">XOOPS module Articles <= 1.02 (print.php id) SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">3319</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3588" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1039">UniquE-Key</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-06-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1961" target="_blank" class="style14">XOOPS myAds Module (lid) Remote SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">5789</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1961" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/685">KeyCoder</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-05-21</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1811" target="_blank" class="style14">XOOPS <= 2.0.13.2 xoopsOption[nocommon] Remote Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">8835</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1811" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/534">rgod</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-11-12</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1315" target="_blank" class="style14">XOOPS (wfdownloads) 2.05 Module Multiple Vulnerabilities Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">7396</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1315" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/534">rgod</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-07-04</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1082" target="_blank" class="style14">XOOPS <= 2.0.11 xmlrpc.php SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">9968</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=XOOPS" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"><a href=/metasploit/49 class="style16" title="metasploit module">M</a></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1082" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/95">RusH</a>
+</td>
+</tr></tbody></table><br><br><center></center><br><br><br><table align="center">
+<tr>
+<td valign="middle">
+<a href="http://www.hackerscenter.com/"><img border=0 src="http://www.milw0rm.com/images/hc-small_logo.gif"></a>
+</td>
+<td>
+<script type="text/javascript"><!--
+google_ad_client = "pub-0718555979486542";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "text";
+//2007-08-22: milw0rm
+google_ad_channel = "1394564144";
+google_color_border = "000000";
+google_color_bg = "141414";
+google_color_link = "00c000";
+google_color_text = "000000";
+google_color_url = "00c000";
+google_ui_features = "rc:0";
+//-->
+</script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+</td>
+</tr>
+</table>
+<p><FONT style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit[at]milw0rm.com">submit[at]milw0rm.com</a> [<a href="/gpg/str0ke.asc" target="_blank">gpg</a>]<br><br>Copyright &copy; 2004-2007 <a href="mailto:str0ke[at]milw0rm.com">milw0rm</a> </FONT></p>
+</td></tr></table>
+  <br>
+  <br>
+</center>
+</body></html>

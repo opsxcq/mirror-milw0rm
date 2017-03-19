@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>milw0rm.com - basher13</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<STYLE type=text/css>
+BODY {
+        SCROLLBAR-FACE-COLOR: #000000; FONT-SIZE: 10px; SCROLLBAR-HIGHLIGHT-COLOR: #008000; SCROLLBAR-SHADOW-COLOR: #008000; SCROLLBAR-3DLIGHT-COLOR: #000000; SCROLLBAR-ARROW-COLOR: #000000; SCROLLBAR-TRACK-COLOR: #000000; FONT-FAMILY: verdana; SCROLLBAR-DARKSHADOW-COLOR: #000000
+}
+INPUT {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+TEXTAREA {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+P {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DL {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DT {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DD {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+TD {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+TH {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+.submit {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+A:link {
+        TEXT-DECORATION: none
+}
+A:visited {
+        TEXT-DECORATION: none
+}
+A:active {
+        TEXT-DECORATION: none
+}
+A:hover {
+        COLOR: #00ff00; TEXT-DECORATION: none
+}
+B.hl1 {
+        FONT-WEIGHT: bold
+}
+B.hl2 {
+        FONT-WEIGHT: bold; FONT-STYLE: italic
+}
+.sr {
+
+        FONT-SIZE: 10px; LINE-HEIGHT: 14px
+}
+.style13 {font-size: 9px; font-weight: bold; }
+.style14 {font-size: 9px}
+.style15 {font-size: 9px; color: #D6EF39; }
+</STYLE>
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php" />
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" />
+</HEAD>
+<BODY dir=ltr text=#008000 vLink=#00c000 aLink=#00ff00 link=#00c000
+bgColor=#000000 background=/images/dot.gif>
+<CENTER>
+<TABLE border=0>
+<TBODY>
+<TR>
+<td nowrap>
+  <B>[ <A href="/"
+              target=_self>home</A> ]</B>
+              <B>[ <A href="exploits.php" target=_self>exploits</A> ]</B>
+	      <B>[ <A href="platforms.php"
+              target=_self>platforms</A> ]</B> <B>[ <A href="shellcode2.php"
+              target=_self>shellcode</A> ]</B> <B>[ <A href="info.php"
+              target=_self>search</A> ]</B>
+              <B>[ <A href="links.php" target=_self>links</A> ]</B> 
+              <B>[ <A href="rss.php" target=_self>rss</A> ]</B>
+              <B>[ <A href="http://www.milw0rm.com/sploits/milw0rm.tar.bz2" target=_self>archive</A> ]</B>
+              <BR>
+	      </td>
+	      </TR>
+	      </TBODY>
+	      </TABLE>
+  <TABLE height=80 cellSpacing=0 cellPadding=1 width=500 bgColor=#008000
+border=0>
+    <TBODY>
+      <TR>
+        <TD vAlign=top width="100%" height="100%"> <TABLE height="100%" cellSpacing=0 cellPadding=5 width="100%"
+      bgColor=#000000 border=0>
+            <TBODY>
+              <TR>
+	<td style="background-repeat: no-repeat;" align="center" valign="top" width="100%"><img src="/images/milw0rm-wi.jpg" width="445" height="71"></td>
+</TR>
+              
+	      
+	      <TR> 
+                <TD height="100" align=middle vAlign=top><!-- <B>[ <a href="author.php" 
+            target=_self>Authors</a> ]--><br></B>          
+	    
+	    <table align="center" border="0" bordercolor="#333333" width="597">
+                    <tbody>
+		      <tr class="style13">
+		      <td><table cellspacing="0" cellpadding="0">
+
+
+                <tr>
+                  <td width="75"><strong>Author: </strong></td>
+                  <td width="514">basher13</td>
+                </tr>
+                <tr>
+                  <td><strong>Homepage: </strong></td>
+                  <td><a href="http://infamous.2hell.com">http://infamous.2hell.com </a></td>
+                </tr>
+                <tr>
+                  <td><strong>Email:</strong></td>
+                  <td>basher13@linuxmail.org</td>
+                </tr>
+              </table>		        </td>
+		      </tr>
+		      </tbody>
+		      </table>
+		      <br>
+
+		      <TABLE borderColor=#333333 width=597 align=center border=0>
+
+                    <TBODY>
+                      <TR class="style13">
+                        <TD class="style13">-::DATE</TD>
+                        <TD class="style13">-::DESCRIPTION</TD>
+                        <TD width=40 class="style13">-::HITS</TD>
+                        <td width=9 class="style13"></td>
+                        <td width=9 class="style13"></td>
+                        <td width=9 class="style13"></td>
+                        <td width=9 class="style13"></td>
+                        <TD>-::AUTHOR</TD>
+                      </TR>
+
+<TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-10-11</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1246 target='_blank' class='style14'>RBExplorer 1.0 (Hijacking Command) Denial of Service Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>760</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=RBExplorer class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1246 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>basher13</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-09-19</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1222 target='_blank' class='style14'>MCCS (Multi-Computer Control Systems) Command DoS Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>904</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=MCCS class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1222 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>basher13</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-09-11</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1212 target='_blank' class='style14'>COOL! Remote Control <= 1.12 Remote Denial of Service Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>1183</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=COOL+Remote+Control class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1212 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>basher13</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-09-07</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1201 target='_blank' class='style14'>FTP Internet Access Manager <= 1.2 Command Execution Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>2325</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=ftp+internet+access+manager class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1201 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>basher13</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-09-02</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1192 target='_blank' class='style14'>P2P Pro 1.0 (command) Denial of Service Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>729</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=P2P+Pro class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1192 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>basher13</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-09-02</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1193 target='_blank' class='style14'>Free SMTP Server <= 2.2 Spam Filter Vulnerability</A></TD><TD nowrap="nowrap" width=40 align=left>1925</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Free+SMTP+Server class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1193 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>basher13</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-08-30</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1184 target='_blank' class='style14'>Savant Web Server 3.1 Remote Buffer Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>2059</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Savant+Web+Server class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1184 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>basher13</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-08-05</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1137 target='_blank' class='style14'>Acunetix HTTP Sniffer Denial of Service Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>881</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Acunetix+HTTP+Sniffer class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1137 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>basher13</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-07-21</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1115 target='_blank' class='style14'>Intruder Client 1.00 Remote Command Execution & DoS Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>2333</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Intruder+Client class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1115 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>basher13</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-07-15</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1107 target='_blank' class='style14'>Remote Control Server 1.6.2 Denial of Service Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>1140</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Remote+Control+Server class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1107 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>basher13</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-07-15</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1108 target='_blank' class='style14'>Small HTTP Server <= 3.05.28 Abritary Data Execution Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>2028</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Small+HTTP class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1108 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>basher13</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-07-15</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1109 target='_blank' class='style14'>DzSoft PHP Editor <= 3.1.2.8 Denial of Service Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>778</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=DzSoft+PHP+Editor class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1109 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>basher13</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-07-11</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1099 target='_blank' class='style14'>Baby ASP Web Server <= 2.6.2 Command Validation Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>1542</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Baby+ASP+Web+Server class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1099 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>basher13</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-07-11</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1100 target='_blank' class='style14'>Remote File Explorer <= 1.0 Denial of Service Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>801</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Remote+File+Explorer class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1100 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>basher13</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-07-07</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1093 target='_blank' class='style14'>PrivaShare <= 1.3 Denial of Service Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>899</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=PrivaShare class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1093 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>basher13</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-07-06</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1090 target='_blank' class='style14'>TCP Chat (TCPX) 1.0 Denial of Service Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>947</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=TCP+Chat class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1090 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>basher13</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-06-25</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1067 target='_blank' class='style14'>TCP-IP Datalook <= 1.3 Local Denial of Service Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>1070</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=TCP-IP+Datalook class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1067 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>basher13</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-05-13</TD><TD nowrap="nowrap" width=375><a href=id.php?id=989 target='_blank' class='style14'>PhotoPost Arbitrary Data Remote Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>982</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=PhotoPost class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=989 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>basher13</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-05-08</TD><TD nowrap="nowrap" width=375><a href=id.php?id=988 target='_blank' class='style14'>Remote File Manager 1.0 Denial of Service Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>987</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Remote+File+Manager class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=988 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>basher13</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-05-06</TD><TD nowrap="nowrap" width=375><a href=id.php?id=983 target='_blank' class='style14'>DataTrac Activity Console Denial of Service Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>744</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=DataTrac+Activity class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=983 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>basher13</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-05-04</TD><TD nowrap="nowrap" width=375><a href=id.php?id=978 target='_blank' class='style14'>Ashley's Web Server Denial of Service Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>856</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Ashleys+Web+Server class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=978 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>basher13</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-03-27</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1208 target='_blank' class='style14'>phpMyFamily <= 1.4.0 SQL Injection Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>286</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=phpMyFamily class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1208 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>basher13</TD></TR>		      
+                  </TBODY>
+                  </TABLE>
+                    <br>
+                    <br>
+                    <br>
+
+<script language="JavaScript">
+<!--
+ctxt_ad_partner = "9308575640";
+ctxt_ad_section = "";
+ctxt_ad_bg = "000000";
+ctxt_ad_width = 468;
+ctxt_ad_height = 60;
+ctxt_ad_bc = "000000";
+ctxt_ad_cc = "333333";
+ctxt_ad_lc = "00c000";
+ctxt_ad_tc = "FFFFFF";
+ctxt_ad_uc = "00c000";
+// -->
+</script>
+<script language="JavaScript" src="http://ypn-js.overture.com/partner/js/ypn.js">
+</script>
+                  <p><FONT
+            style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit@milw0rm.com">submit@milw0rm.com</a><br><br>Copyright © 2004-2006 <a href="mailto:str0ke@milw0rm.com">str0ke@milw0rm.com</a> </FONT></p>
+</TD>
+              </TR>
+            </TBODY>
+          </TABLE></TD>
+      </TR>
+    </TBODY>
+  </TABLE>
+  <BR>
+  <BR>
+</CENTER>
+</BODY>
+</HTML>

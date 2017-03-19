@@ -1,0 +1,89 @@
+rss {
+	display: block;
+	margin: 10px auto 10px auto;
+	width: 80%;
+	background: #000;
+	font-family: Verdana, arial, sans-serif;
+	font-size: small;
+	text-align: left;
+	}
+
+channel {
+	display: block;
+	margin-bottom: 10px;
+	border: 1px solid #008000;
+	padding: 10px;
+	color: #666;
+	}
+
+channel>title {
+	display: block;
+	font-size: large;
+	font-weight: bold;
+	color: #FFF;
+	text-align: left;
+	}
+
+channel>description {
+	display: block;
+	color: #666;
+	text-align: left;
+	}
+
+channel>copyright {
+	display: block;
+	font-size: x-small;
+	color: #666;
+	text-align: left;
+	}
+
+channel>lastBuildDate {
+	display: block;
+	text-align: right;
+	color: #666;
+	}
+
+channel>language,
+channel>image,
+channel>managingEditor,
+channel>webMaster,
+channel>generator,
+channel>docs,
+channel>ttl {
+	display: none;
+	}
+
+item {
+	display: block;
+	padding: 5px;
+	margin-top: 10px;
+	background: #004000;
+	}
+
+item>title {
+	display: block;
+	float: left;
+	margin-right: 5px;
+	font-weight: bold;
+	color: #D6EF39;
+	}
+
+item>pubDate {
+	margin-right: 5px;
+	font-size: x-small;
+	color: #00c000;
+	white-space: nowrap;
+	text-align: left;
+	}
+
+item>guid {
+	display: block;
+	margin-right: 5px;
+	font-size: x-small;
+	color: #00c000;
+	text-align: left;
+	}
+	
+item>category, item>link {
+	display: none;
+	}

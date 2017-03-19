@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>milw0rm.com</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<STYLE type=text/css>
+BODY {
+        SCROLLBAR-FACE-COLOR: #000000; FONT-SIZE: 10px; SCROLLBAR-HIGHLIGHT-COLOR: #008000; SCROLLBAR-SHADOW-COLOR: #008000; SCROLLBAR-3DLIGHT-COLOR: #000000; SCROLLBAR-ARROW-COLOR: #000000; SCROLLBAR-TRACK-COLOR: #000000; FONT-FAMILY: verdana; SCROLLBAR-DARKSHADOW-COLOR: #000000
+}
+INPUT {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+TEXTAREA {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+P {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DL {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DT {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DD {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+TD {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+TH {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+.submit {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+A:link {
+        TEXT-DECORATION: none
+}
+A:visited {
+        TEXT-DECORATION: none
+}
+A:active {
+        TEXT-DECORATION: none
+}
+A:hover {
+        COLOR: #00ff00; TEXT-DECORATION: none
+}
+B.hl1 {
+        FONT-WEIGHT: bold
+}
+B.hl2 {
+        FONT-WEIGHT: bold; FONT-STYLE: italic
+}
+.sr {
+
+        FONT-SIZE: 10px; LINE-HEIGHT: 14px
+}
+.style13 {font-size: 9px; font-weight: bold; }
+.style14 {font-size: 9px}
+.style15 {font-size: 9px; color: #D6EF39; }
+//.style16 {font-size: 9px; color: #FF0000; }
+.style16 {font-size: 9px}
+</STYLE>
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php" />
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" />
+</HEAD>
+<BODY dir=ltr text=#008000 vLink=#00c000 aLink=#00ff00 link=#00c000
+bgColor=#000000 background=/images/dot.gif>
+<CENTER>
+<TABLE border=0>
+<TBODY>
+<TR>
+<td nowrap>
+  <B>[ <A href="http://www.milw0rm.com"
+              target=_self>home</A> ]</B>
+              <B>[ <A href="exploits.php" target=_self>exploits</A> ]</B> 
+              <B>[ <A href="platforms.php"
+              target=_self>platforms</A> ]</B> <B>[ <A href="shellcode2.php"
+              target=_self>shellcode</A> ]</B> <B>[ <A href="info.php"
+              target=_self>search</A> ]</B>
+              <B>[ <A href="md5/" target=_self>cracker</A> ]</B> 
+              <B>[ <A href="links.php" target=_self>links</A> ]</B> 
+              <B>[ <A href="contest.php" target=_self>contest</A> ]</B> 
+              <B>[ <A href="rss.php" target=_self>rss</A> ]</B> 
+              <BR>
+	      </td>
+	      </TR>
+	      </TBODY>
+	      </TABLE>
+  <TABLE height=80 cellSpacing=0 cellPadding=1 width=637 bgColor=#008000 border=0>
+    <TBODY>
+      <TR>
+        <TD vAlign=top width="100%" height="100%"> <TABLE height="100%" cellSpacing=0 cellPadding=5 width="100%" bgColor=#000000 border=0>
+          <TBODY>
+            <TR>
+		<td style="background-repeat: no-repeat;" align="center" width="100%"><img src="/contest/milworm-12.jpg" width="445" height="71"></td>
+	    </TR>
+ <TR> 
+  <TD height="300" align=middle vAlign=bottom><B>[ <a href="phpsoft.php"
+            target=_self>php</a> ]</B> 
+     <TABLE borderColor=#333333 width=597 align=center border=0> 
+      <TBODY> 
+         <TR class="style13"> 
+          <TD width=65 class="style13">-::DATE</TD> 
+          <TD width=375 class="style13">-::DESCRIPTION</TD> 
+          <TD width=40 class="style13">-::HITS</TD>
+          <TD width=9 class="style13"></TD>
+          <TD width=9 class="style13"></TD>
+          <TD width=9 class="style13"></TD>
+          <TD>-::AUTHOR</TD> 
+        </TR> 
+                               <TR class=submit>                        <TD width=65 nowrap="nowrap" class=style14>2005-10-11</TD>                        <TD width=375 nowrap="nowrap"><a href=id.php?id=1247 target='_blank' class='style14'>phpBB 2.0.13 (admin_styles.php) Remote Command Execution Exploit</A></TD>                        <TD nowrap="nowrap" width=40 align=left>4513</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1247 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                        </TD>                        <TD width=135 nowrap="nowrap"><a href=auth.php?id=1247>RusH</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 nowrap="nowrap" class=style14>2005-07-19</TD>                        <TD width=375 nowrap="nowrap"><a href=id.php?id=1113 target='_blank' class='style14'>phpBB 2.0.15 Remote PHP Code Execution Exploit (metasploit)</A></TD>                        <TD nowrap="nowrap" width=40 align=left>9190</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=metasploit.php?id=80 class='style16'>M</a>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1113 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                        </TD>                        <TD width=135 nowrap="nowrap"><a href=auth.php?id=1113>str0ke</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 nowrap="nowrap" class=style14>2005-07-13</TD>                        <TD width=375 nowrap="nowrap"><a href=id.php?id=1103 target='_blank' class='style14'>phpBB <= 2.0.16 XSS Remote Cookie Disclosure Exploit (cookie grabber)</A></TD>                        <TD nowrap="nowrap" width=40 align=left>4991</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1103 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                        </TD>                        <TD width=135 nowrap="nowrap"><a href=auth.php?id=1103>suBzero</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 nowrap="nowrap" class=style14>2005-07-08</TD>                        <TD width=375 nowrap="nowrap"><a href=id.php?id=1095 target='_blank' class='style14'>phpBB <= 2.0.16 XSS Remote Cookie Disclosure Exploit  </A></TD>                        <TD nowrap="nowrap" width=40 align=left>9140</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1095 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                        </TD>                        <TD width=135 nowrap="nowrap"><a href=auth.php?id=1095>D|ablo</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 nowrap="nowrap" class=style14>2005-07-03</TD>                        <TD width=375 nowrap="nowrap"><a href=id.php?id=1080 target='_blank' class='style14'>phpBB 2.0.15 (highlight) Database Authentication Details Exploit</A></TD>                        <TD nowrap="nowrap" width=40 align=left>10236</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=metasploit.php?id=80 class='style16'>M</a>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1080 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                        </TD>                        <TD width=135 nowrap="nowrap"><a href=auth.php?id=1080>SecureD</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 nowrap="nowrap" class=style14>2005-06-29</TD>                        <TD width=375 nowrap="nowrap"><a href=id.php?id=1076 target='_blank' class='style14'>phpBB 2.0.15 (highlight) Remote PHP Code Execution</A></TD>                        <TD nowrap="nowrap" width=40 align=left>7249</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=metasploit.php?id=80 class='style16'>M</a>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1076 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                        </TD>                        <TD width=135 nowrap="nowrap"><a href=auth.php?id=1076>rattle</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 nowrap="nowrap" class=style14>2005-06-22</TD>                        <TD width=375 nowrap="nowrap"><a href=id.php?id=1063 target='_blank' class='style14'>phpBB <= 2.0.15 Register Multiple Users Denial of Service (perl code)</A></TD>                        <TD nowrap="nowrap" width=40 align=left>3802</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1063 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                        </TD>                        <TD width=135 nowrap="nowrap"><a href=auth.php?id=1063>g30rg3_x</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 nowrap="nowrap" class=style14>2005-06-22</TD>                        <TD width=375 nowrap="nowrap"><a href=id.php?id=1064 target='_blank' class='style14'>phpBB <= 2.0.15 Register Multiple Users Denial of Service (c code)</A></TD>                        <TD nowrap="nowrap" width=40 align=left>2469</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1064 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                        </TD>                        <TD width=135 nowrap="nowrap"><a href=auth.php?id=1064>HaCkZaTaN</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 nowrap="nowrap" class=style14>2005-04-04</TD>                        <TD width=375 nowrap="nowrap"><a href=id.php?id=910 target='_blank' class='style14'>phpBB <= 2.0.13 'Calendar Pro' mod Remote Exploit</A></TD>                        <TD nowrap="nowrap" width=40 align=left>3599</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=910 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                        </TD>                        <TD width=135 nowrap="nowrap"><a href=auth.php?id=910>CereBrums</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 nowrap="nowrap" class=style14>2005-04-02</TD>                        <TD width=375 nowrap="nowrap"><a href=id.php?id=907 target='_blank' class='style14'>phpBB <= 2.0.13 'downloads.php' mod Remote Exploit</A></TD>                        <TD nowrap="nowrap" width=40 align=left>6293</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=907 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                        </TD>                        <TD width=135 nowrap="nowrap"><a href=auth.php?id=907>CereBrums</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 nowrap="nowrap" class=style14>2005-03-24</TD>                        <TD width=375 nowrap="nowrap"><a href=id.php?id=897 target='_blank' class='style14'>phpBB <= 2.0.12 Change User Rights Authentication Bypass (c code)</A></TD>                        <TD nowrap="nowrap" width=40 align=left>4231</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=897 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                        </TD>                        <TD width=135 nowrap="nowrap"><a href=auth.php?id=897>str0ke</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 nowrap="nowrap" class=style14>2005-03-21</TD>                        <TD width=375 nowrap="nowrap"><a href=id.php?id=889 target='_blank' class='style14'>phpBB <= 2.0.12 Change User Rights Authentication Bypass</A></TD>                        <TD nowrap="nowrap" width=40 align=left>6767</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=889 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                        </TD>                        <TD width=135 nowrap="nowrap"><a href=auth.php?id=889>Kutas</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 nowrap="nowrap" class=style14>2005-03-11</TD>                        <TD width=375 nowrap="nowrap"><a href=id.php?id=871 target='_blank' class='style14'>phpBB <= 2.0.12 Session Handling Authentication Bypass (tutorial 2)</A></TD>                        <TD nowrap="nowrap" width=40 align=left>8176</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=871 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                        </TD>                        <TD width=135 nowrap="nowrap"><a href=auth.php?id=871>Ali7</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 nowrap="nowrap" class=style14>2005-03-05</TD>                        <TD width=375 nowrap="nowrap"><a href=id.php?id=858 target='_blank' class='style14'>phpBB <= 2.0.12 Session Handling Authentication Bypass (tutorial)</A></TD>                        <TD nowrap="nowrap" width=40 align=left>4352</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=858 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                        </TD>                        <TD width=135 nowrap="nowrap"><a href=auth.php?id=858>PPC</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 nowrap="nowrap" class=style14>2005-01-04</TD>                        <TD width=375 nowrap="nowrap"><a href=id.php?id=740 target='_blank' class='style14'>phpBB <= 2.0.10 Bot Install (Altavista) (ssh.D.Worm)</A></TD>                        <TD nowrap="nowrap" width=40 align=left>2166</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=740 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                        </TD>                        <TD width=135 nowrap="nowrap"><a href=auth.php?id=740>Severino Honorato</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 nowrap="nowrap" class=style14>2004-12-25</TD>                        <TD width=375 nowrap="nowrap"><a href=id.php?id=720 target='_blank' class='style14'>Sanity.b - phpBB <= 2.0.10 Bot Install (AOL/Yahoo Search)</A></TD>                        <TD nowrap="nowrap" width=40 align=left>1494</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=720 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                        </TD>                        <TD width=135 nowrap="nowrap"><a href=auth.php?id=720>n/a</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 nowrap="nowrap" class=style14>2004-12-22</TD>                        <TD width=375 nowrap="nowrap"><a href=id.php?id=702 target='_blank' class='style14'>phpBB highlight Arbitrary File Upload (Santy.A)</A></TD>                        <TD nowrap="nowrap" width=40 align=left>1743</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=702 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                        </TD>                        <TD width=135 nowrap="nowrap"><a href=auth.php?id=702>n/a</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 nowrap="nowrap" class=style14>2004-12-17</TD>                        <TD width=375 nowrap="nowrap"><a href=id.php?id=697 target='_blank' class='style14'>PHP <= 4.3.9 & phpBB 2.x with unserialize() Remote Exploit (compiled)</A></TD>                        <TD nowrap="nowrap" width=40 align=left>1892</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=697 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                        </TD>                        <TD width=135 nowrap="nowrap"><a href=auth.php?id=697>overdose</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 nowrap="nowrap" class=style14>2004-12-05</TD>                        <TD width=375 nowrap="nowrap"><a href=id.php?id=676 target='_blank' class='style14'>phpBB v1.0.0 - 2.0.10 admin_cash.php remote exploit</A></TD>                        <TD nowrap="nowrap" width=40 align=left>2016</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=676 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                        </TD>                        <TD width=135 nowrap="nowrap"><a href=auth.php?id=676>evilrabbi</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 nowrap="nowrap" class=style14>2004-12-03</TD>                        <TD width=375 nowrap="nowrap"><a href=id.php?id=673 target='_blank' class='style14'>phpBB <= 2.0.10 Remote Command Execution Exploit (cgi version)</A></TD>                        <TD nowrap="nowrap" width=40 align=left>2115</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=metasploit.php?id=80 class='style16'>M</a>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=673 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                        </TD>                        <TD width=135 nowrap="nowrap"><a href=auth.php?id=673>ZzagorR</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 nowrap="nowrap" class=style14>2004-11-22</TD>                        <TD width=375 nowrap="nowrap"><a href=id.php?id=647 target='_blank' class='style14'>phpBB <= 2.0.10 Remote Command Execution Exploit</A></TD>                        <TD nowrap="nowrap" width=40 align=left>3932</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=metasploit.php?id=80 class='style16'>M</a>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=647 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                        </TD>                        <TD width=135 nowrap="nowrap"><a href=auth.php?id=647>RusH</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 nowrap="nowrap" class=style14>2003-12-21</TD>                        <TD width=375 nowrap="nowrap"><a href=id.php?id=137 target='_blank' class='style14'>phpBB 2.0.6 search_id sql injection MD5 Hash Remote Exploit
+</A></TD>                        <TD nowrap="nowrap" width=40 align=left>2116</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=137 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                        </TD>                        <TD width=135 nowrap="nowrap"><a href=auth.php?id=137>RusH</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 nowrap="nowrap" class=style14>2003-06-30</TD>                        <TD width=375 nowrap="nowrap"><a href=id.php?id=47 target='_blank' class='style14'>phpBB 2.0.4 Remote php File Include Exploit
+</A></TD>                        <TD nowrap="nowrap" width=40 align=left>1462</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=47 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                        </TD>                        <TD width=135 nowrap="nowrap"><a href=auth.php?id=47>Spoofed</A></TD>                      </TR>                      <TR class=submit>                        <TD width=65 nowrap="nowrap" class=style14>2003-06-20</TD>                        <TD width=375 nowrap="nowrap"><a href=id.php?id=44 target='_blank' class='style14'>phpBB 2.0.5 SQL Injection password disclosure Exploit
+</A></TD>                        <TD nowrap="nowrap" width=40 align=left>1937</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle">                        <TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=44 class='style16'>D</a></TD>                        <TD nowrap="nowrap" width=9 valign="middle" align="middle">                        </TD>                        <TD width=135 nowrap="nowrap"><a href=auth.php?id=44>Rick Patel</A></TD>                      </TR> 
+       </TBODY> 
+    </TABLE> 
+     <br> 
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br> 
+     <br> 
+                       <p><FONT
+            style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit@milw0rm.com">submit@milw0rm.com</a><br><br>Copyright © 2004-2005 <a href="mailto:str0ke@milw0rm.com">str0ke@milw0rm.com</a> </FONT></p>
+</TD>
+              </TR>
+            </TBODY>
+          </TABLE></TD>
+      </TR>
+    </TBODY>
+  </TABLE>
+  <BR>
+  <BR>
+</CENTER>
+</BODY>
+</HTML>
+ 

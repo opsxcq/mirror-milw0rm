@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>milw0rm.com - Kozan</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<STYLE type=text/css>
+BODY {
+        SCROLLBAR-FACE-COLOR: #000000; FONT-SIZE: 10px; SCROLLBAR-HIGHLIGHT-COLOR: #008000; SCROLLBAR-SHADOW-COLOR: #008000; SCROLLBAR-3DLIGHT-COLOR: #000000; SCROLLBAR-ARROW-COLOR: #000000; SCROLLBAR-TRACK-COLOR: #000000; FONT-FAMILY: verdana; SCROLLBAR-DARKSHADOW-COLOR: #000000
+}
+INPUT {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+TEXTAREA {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+P {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DL {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DT {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+DD {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+TD {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+TH {
+        FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+.submit {
+        BORDER-TOP-WIDTH: 1px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 10px; BORDER-LEFT-COLOR: #008000; BACKGROUND: #004000; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #008000; COLOR: #00ff00; BORDER-TOP-COLOR: #008000; FONT-FAMILY: verdana; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #008000
+}
+A:link {
+        TEXT-DECORATION: none
+}
+A:visited {
+        TEXT-DECORATION: none
+}
+A:active {
+        TEXT-DECORATION: none
+}
+A:hover {
+        COLOR: #00ff00; TEXT-DECORATION: none
+}
+B.hl1 {
+        FONT-WEIGHT: bold
+}
+B.hl2 {
+        FONT-WEIGHT: bold; FONT-STYLE: italic
+}
+.sr {
+
+        FONT-SIZE: 10px; LINE-HEIGHT: 14px
+}
+.style13 {font-size: 9px; font-weight: bold; }
+.style14 {font-size: 9px}
+.style15 {font-size: 9px; color: #D6EF39; }
+</STYLE>
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php" />
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" />
+</HEAD>
+<BODY dir=ltr text=#008000 vLink=#00c000 aLink=#00ff00 link=#00c000
+bgColor=#000000 background=/images/dot.gif>
+<CENTER>
+<TABLE border=0>
+<TBODY>
+<TR>
+<td nowrap>
+  <B>[ <A href="/"
+              target=_self>home</A> ]</B>
+              <B>[ <A href="contents.php" target=_self>contents</A> ]</B>
+	      <B>[ <A href="platforms.php"
+              target=_self>platforms</A> ]</B> <B>[ <A href="shellcode2.php"
+              target=_self>shellcode</A> ]</B> <B>[ <A href="info.php"
+              target=_self>search</A> ]</B>
+              <B>[ <A href="links.php" target=_self>links</A> ]</B> 
+              <B>[ <A href="rss.php" target=_self>rss</A> ]</B>
+              <B>[ <A href="http://www.milw0rm.com/sploits/milw0rm.tar.bz2" target=_self>archive</A> ]</B>
+              <BR>
+	      </td>
+	      </TR>
+	      </TBODY>
+	      </TABLE>
+  <TABLE height=80 cellSpacing=0 cellPadding=1 width=500 bgColor=#008000
+border=0>
+    <TBODY>
+      <TR>
+        <TD vAlign=top width="100%" height="100%"> <TABLE height="100%" cellSpacing=0 cellPadding=5 width="100%"
+      bgColor=#000000 border=0>
+            <TBODY>
+              <TR>
+	<td style="background-repeat: no-repeat;" align="center" valign="top" width="100%"><img src="/images/milw0rm-wi.jpg" width="445" height="71"></td>
+</TR>
+              
+	      
+	      <TR> 
+                <TD height="100" align=middle vAlign=top><!-- <B>[ <a href="author.php" 
+            target=_self>Authors</a> ]--><br></B>          
+	    
+	    <table align="center" border="0" bordercolor="#333333" width="597">
+                    <tbody>
+		      <tr class="style13">
+		      <td><table cellspacing="0" cellpadding="0">
+
+		
+                <tr>
+                  <td width="75"><strong>Author: </strong></td>
+                  <td width="514">Kozan &lt;kozan [at] spyinstructors.com&gt;</td>
+                </tr>
+		                <tr>
+                  <td><strong>Homepage: </strong></td>
+                  <td><a href="http://www.spyinstructors.com">http://www.spyinstructors.com </a></td>
+                </tr>
+		              </table>		        </td>
+		      </tr>
+		      </tbody>
+		      </table>
+		      <br>
+
+		      <TABLE borderColor=#333333 width=597 align=center border=0>
+
+                    <TBODY>
+                      <TR class="style13">
+                        <TD class="style13">-::DATE</TD>
+                        <TD class="style13">-::DESCRIPTION</TD>
+                        <TD width=40 class="style13">-::HITS</TD>
+                        <td width=9 class="style13"></td>
+                        <td width=9 class="style13"></td>
+                        <td width=9 class="style13"></td>
+                        <td width=9 class="style13"></td>
+                        <TD>-::AUTHOR</TD>
+                      </TR>
+
+<TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-12-19</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1376 target='_blank' class='style14'>MS Windows IIS Malformed HTTP Request Denial of Service Exploit (c)</A></TD><TD nowrap="nowrap" width=40 align=left>2242</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=MS+Windows class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1376 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-12-14</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1371 target='_blank' class='style14'>Macromedia Flash Media Server 2 Remote Denial of Service Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>1160</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Macromedia class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1371 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-08-22</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1173 target='_blank' class='style14'>Mercora IMRadio <= 4.0.0.0 Local Password Disclosure Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>1121</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Mercora+IMRadio class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1173 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-08-22</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1174 target='_blank' class='style14'>ZipTorrent <= 1.3.7.3 Local Proxy Password Disclosure Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>841</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=ZipTorrent class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1174 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-08-02</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1129 target='_blank' class='style14'>Quick 'n EasY 3.0 FTP Server Remote Denial of Service Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>940</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Quick+n+Easy class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1129 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-08-01</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1126 target='_blank' class='style14'>BusinessMail Server <= 4.60.00 Remote Denial of Service Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>805</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=BusinessMail class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1126 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-07-12</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1101 target='_blank' class='style14'>wMailServer 1.0 Remote Denial of Service Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>794</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=wMailServer class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1101 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-07-04</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1085 target='_blank' class='style14'>Willing Webcam 2.8 Licence Info Disclosure Local Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>1374</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Willing+Webcam class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1085 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-07-04</TD><TD nowrap="nowrap" width=375><a href=id.php?id=1086 target='_blank' class='style14'>Access Remote PC 4.5.1 Local Password Disclosure Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>1633</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Access+Remote+PC class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=1086 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-04-28</TD><TD nowrap="nowrap" width=375><a href=id.php?id=963 target='_blank' class='style14'>GoText 1.01 Local User Informations Disclosure Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>816</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=GoText class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=963 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-04-28</TD><TD nowrap="nowrap" width=375><a href=id.php?id=964 target='_blank' class='style14'>FilePocket 1.2 Local Proxy Password Disclosure Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>895</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=FilePocket class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=964 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-04-28</TD><TD nowrap="nowrap" width=375><a href=id.php?id=965 target='_blank' class='style14'>ICUII 7.0 Local Password Disclosure Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>825</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=ICUII class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=965 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-04-28</TD><TD nowrap="nowrap" width=375><a href=id.php?id=966 target='_blank' class='style14'>NotJustBrowsing 1.0.3 Local Password Disclosure Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>712</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=NotJustBrowsing class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=966 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-04-13</TD><TD nowrap="nowrap" width=375><a href=id.php?id=935 target='_blank' class='style14'>Morpheus <= 4.8 Local Chat Passwords Disclosure Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>1016</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Morpheus class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=935 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-04-13</TD><TD nowrap="nowrap" width=375><a href=id.php?id=936 target='_blank' class='style14'>DeluxeFtp 6.x Local Password Disclosure Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>705</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=DeluxeFtp class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=936 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-04-13</TD><TD nowrap="nowrap" width=375><a href=id.php?id=937 target='_blank' class='style14'>BitComet 0.57 Local Proxy Password Disclosure Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>923</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=BitComet class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=937 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-04-07</TD><TD nowrap="nowrap" width=375><a href=id.php?id=919 target='_blank' class='style14'>FireFly 1.0 Local Proxy Password Disclosure Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>833</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=FireFly class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=919 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-04-07</TD><TD nowrap="nowrap" width=375><a href=id.php?id=920 target='_blank' class='style14'>P2P Share Spy 2.2 Local Password Disclosure Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>731</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=P2P+Share+Spy class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=920 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-04-06</TD><TD nowrap="nowrap" width=375><a href=id.php?id=918 target='_blank' class='style14'>FTP Now <= 2.6.14 Local Password Disclosure Exploit </A></TD><TD nowrap="nowrap" width=40 align=left>1136</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=FTP+Now class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=918 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-04-04</TD><TD nowrap="nowrap" width=375><a href=id.php?id=912 target='_blank' class='style14'>GetDataBack Data Recovery 2.31 Local Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>1816</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=GetDataBack class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=912 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-03-16</TD><TD nowrap="nowrap" width=375><a href=id.php?id=884 target='_blank' class='style14'>iSnooker <= 1.6.8 Local Password Disclosure Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>923</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=iSnooker class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=884 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-03-16</TD><TD nowrap="nowrap" width=375><a href=id.php?id=885 target='_blank' class='style14'>iPool <= 1.6.81 Local Password Disclosure Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>688</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=iPool class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=885 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-02-27</TD><TD nowrap="nowrap" width=375><a href=id.php?id=846 target='_blank' class='style14'>Einstein <= 1.01 Local Password Disclosure Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>902</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Einstein class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=846 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-02-23</TD><TD nowrap="nowrap" width=375><a href=id.php?id=836 target='_blank' class='style14'>WWW File Share Pro 2.72 Local Password Disclosure Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>856</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=WWW+File+Share+Pro class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=836 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-02-23</TD><TD nowrap="nowrap" width=375><a href=id.php?id=837 target='_blank' class='style14'>Chat Anywhere 2.72a Local Password Disclosure Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>930</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=Chat+Anywhere class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=837 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-02-22</TD><TD nowrap="nowrap" width=375><a href=id.php?id=833 target='_blank' class='style14'>PeerFTP 5 Local Password Disclosure Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>813</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=PeerFTP class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=833 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-02-22</TD><TD nowrap="nowrap" width=375><a href=id.php?id=834 target='_blank' class='style14'>eXeem 0.21 Local Password Disclosure Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>927</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=eXeem class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=834 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-02-22</TD><TD nowrap="nowrap" width=375><a href=id.php?id=835 target='_blank' class='style14'>SendLink 1.5 Local Password Disclosure Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>717</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=SendLink class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=835 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-02-10</TD><TD nowrap="nowrap" width=375><a href=id.php?id=811 target='_blank' class='style14'>DelphiTurk e-Posta v1.0 Local Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>653</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=DelphiTurk+e-Posta class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=811 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-02-09</TD><TD nowrap="nowrap" width=375><a href=id.php?id=803 target='_blank' class='style14'>DelphiTurk FTP v1.0 Passwords to Local Users Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>688</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=DelphiTurk+FTP class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=803 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-02-08</TD><TD nowrap="nowrap" width=375><a href=id.php?id=798 target='_blank' class='style14'>DelphiTurk CodeBank 3.1 Local Username and Password Disclosure</A></TD><TD nowrap="nowrap" width=40 align=left>788</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=related.php?program=DelphiTurk+CodeBank class='style16'>R</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=down.php?id=798 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135>Kozan</TD></TR>		      
+                  </TBODY>
+                  </TABLE>
+                    <br>
+                    <br>
+                    <br>
+
+<script language="JavaScript">
+<!--
+ctxt_ad_partner = "9308575640";
+ctxt_ad_section = "";
+ctxt_ad_bg = "000000";
+ctxt_ad_width = 468;
+ctxt_ad_height = 60;
+ctxt_ad_bc = "000000";
+ctxt_ad_cc = "141414";
+ctxt_ad_lc = "00c000";
+ctxt_ad_tc = "FFFFFF";
+ctxt_ad_uc = "00c000";
+// -->
+</script>
+<script language="JavaScript" src="http://ypn-js.overture.com/partner/js/ypn.js">
+</script>
+                  <p><FONT
+            style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit[at]milw0rm.com">submit[at]milw0rm.com</a><br><br>Copyright © 2004-2006 <a href="mailto:str0ke[at]milw0rm.com">str0ke[at]milw0rm.com</a> </FONT></p>
+</TD>
+              </TR>
+            </TBODY>
+          </TABLE></TD>
+      </TR>
+    </TBODY>
+  </TABLE>
+  <BR>
+  <BR>
+</CENTER>
+</BODY>
+</HTML>

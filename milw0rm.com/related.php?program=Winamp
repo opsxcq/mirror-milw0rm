@@ -1,0 +1,311 @@
+<html><head>
+<title>milw0rm - exploits : vulnerabilities : videos : papers : shellcode</title>
+<meta name="description" content="milw0rm exploits and 0day exploits database">
+<meta name="keywords" content="exploits code, exploit code, exploits, 0-day, 0day, 0days, exploit, zero day, poc, exploit, local exploits, remote exploits, root exploits, windows, linux, new exploits, latest exploits, shellcode, Zero-day, zeroday, security articles, ezines, zines, security papers">
+<link type="text/css" rel="stylesheet" href="/milw0rm.css">
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php">
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon"></head>
+<body dir="ltr" alink="#00ff00" background="/images/dot.gif" bgcolor="#000000" link="#00c000" text="#008000" vlink="#00c000">
+<center>
+<table border="0">
+<tr>
+<td nowrap="nowrap">
+
+			<b>[ <a href="/" target=_self>home</a> ]</b>
+			<b>[ <a href="/contents.php" target=_self>contents</a> ]</b>
+			<b>[ <a href="/platforms/" target=_self>platforms</a> ]</b>
+			<b>[ <a href="/shellcode/" target=_self>shellcode</a> ]</b>
+			<b>[ <a href="/search.php" target=_self>search</a> ]</b>
+			<b>[ <a href="/cracker/" target=_self>cracker</a> ]</b>
+			<b>[ <a href="/links/" target=_self>links</a> ]</b>
+			<b>[ <a href="/rss.php" target=blank>rss</a> ]</b>
+			<b>[ <a href="/sploits/milw0rm.tar.bz2" target=_self>archive</a> ]</b>
+			</td>
+    </tr>
+  </table>
+
+<table width="668" border="0" cellpadding="3" cellspacing="3" class="main">
+  <tr><td><img src="/images/milw0rm-wi.jpg" alt="milw0rm"></td></tr><tr><td>
+<b>[ <a href="/" target=_self>Winamp</a> ]</b><table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-05-26</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8783" target="_blank" class="style14">Winamp 5.551 MAKI Parsing Integer Overflow Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">6424</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Winamp" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8783" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/664">n00b</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-05-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8767" target="_blank" class="style14">Winamp 5.551 MAKI Parsing Integer Overflow PoC</a></td>
+<td nowrap="nowrap" width=40 align="left">3328</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Winamp" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8767" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/664">n00b</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-05-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8770" target="_blank" class="style14">Winamp <= 5.55 (MAKI script) Universal Seh Overwrite Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">3223</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Winamp" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8770" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1429">His0k4</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-05-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8772" target="_blank" class="style14">Winamp <= 5.55 (MAKI script) Universal Integer Overflow Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">4142</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Winamp" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8772" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1530">Encrypt3d.M!nd</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-03-05</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/8158" target="_blank" class="style14">Winamp <= 5.541 Skin Universal Buffer Overflow Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">11816</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Winamp" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/8158" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1638">SkD</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-12</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7742" target="_blank" class="style14">Winamp <= 5.541 (mp3/aiff) Multiple Denial of Service Exploits</a></td>
+<td nowrap="nowrap" width=40 align="left">5714</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Winamp" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7742" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/849">securfrog</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-01-07</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/7696" target="_blank" class="style14">WinAmp GEN_MSN Plugin Heap Buffer Overflow PoC</a></td>
+<td nowrap="nowrap" width=40 align="left">6649</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=WinAmp" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/7696" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1638">SkD</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-12-08</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4703" target="_blank" class="style14">Nullsoft Winamp 5.32 MP4 tags Stack Overflow Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">11170</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Winamp" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4703" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/688">SYS 49152</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-30</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3823" target="_blank" class="style14">Winamp <= 5.34 .MP4 File Code Execution Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">21016</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Winamp" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3823" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/983">Marsu</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-23</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3782" target="_blank" class="style14">Winamp <= 5.33 (.AVI File) Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">5296</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Winamp" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3782" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/860">DeltahackingTEAM</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-19</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3768" target="_blank" class="style14">Winamp <= 5.3 (WMV File) Remote Denial of Service Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">9351</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Winamp" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3768" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1039">WiLdBoY</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-03-07</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3422" target="_blank" class="style14">Winamp <= 5.12 (Crafted PLS) Remote Buffer Overflow Exploit (perl)</a></td>
+<td nowrap="nowrap" width=40 align="left">14250</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Winamp" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3422" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1026">Umesh Wanve</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-11-03</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2708" target="_blank" class="style14">Nullsoft Winamp <= 5.3 (Ultravox-Max-Msg) Heap Overflow DoS PoC</a></td>
+<td nowrap="nowrap" width=40 align="left">7419</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Winamp" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2708" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/711">cocoruder</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-06-20</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1935" target="_blank" class="style14">Winamp <= 5.21 (Midi File Header Handling) Buffer Overflow PoC</a></td>
+<td nowrap="nowrap" width=40 align="left">10045</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Winamp" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1935" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/521">BassReFLeX</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-01-31</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1460" target="_blank" class="style14">Winamp <= 5.12 (Crafted PLS) Remote Buffer Overflow Exploit (meta)</a></td>
+<td nowrap="nowrap" width=40 align="left">19307</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Winamp" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"><a href=/metasploit/113 class="style16" title="metasploit module">M</a></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1460" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/6">H D Moore</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-01-29</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1458" target="_blank" class="style14">Winamp <= 5.12 (Crafted PLS) Remote Buffer Overflow Exploit (0-Day)</a></td>
+<td nowrap="nowrap" width=40 align="left">31431</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Winamp" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"><a href=/metasploit/113 class="style16" title="metasploit module">M</a></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1458" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/214">ATmaCA</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2004-11-24</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/654" target="_blank" class="style14">Winamp <= 5.06 IN_CDDA.dll Remote Buffer Overflow Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">6941</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Winamp" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/654" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/319">k-otik</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2004-08-25</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/418" target="_blank" class="style14">Winamp <= 5.04 Skin File (.wsz) Remote Code Execution Exploit
+</a></td>
+<td nowrap="nowrap" width=40 align="left">12215</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=Winamp" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/418" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/238">Petrol Designs</a>
+</td>
+</tr></tbody></table><br><br><center></center><br><br><br><center>
+<script type="text/javascript"><!--
+google_ad_client = "pub-0718555979486542";
+/* 468x60, created 9/26/08 */
+google_ad_slot = "3279240256";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</center>
+
+<p><FONT style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit[at]milw0rm.com">submit[at]milw0rm.com</a> [<a href="/gpg/submit.asc" target="_blank">gpg</a>]<br>Copyright &copy; 2004-2009 <a href="mailto:str0ke[at]milw0rm.com">milw0rm</a> </FONT></p>
+</td></tr></table>
+  <br>
+  <br>
+</center>
+</body></html>

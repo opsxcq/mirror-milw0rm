@@ -1,0 +1,296 @@
+<html><head>
+<title>milw0rm - exploits : vulnerabilities : videos : papers : shellcode</title>
+<meta name="description" content="milw0rm exploits and 0day exploits database">
+<meta name="keywords" content="exploits code, exploit code, exploits, 0-day, 0day, 0days, exploit, zero day, poc, exploit, local exploits, remote exploits, root exploits, windows, linux, new exploits, latest exploits, shellcode, Zero-day, zeroday, security articles, ezines, zines, security papers">
+<link type="text/css" rel="stylesheet" href="/milw0rm.css">
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php">
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon"></head>
+<body dir="ltr" alink="#00ff00" background="/images/dot.gif" bgcolor="#000000" link="#00c000" text="#008000" vlink="#00c000">
+<center>
+<table border="0">
+<tr>
+<td nowrap="nowrap">
+
+			<b>[ <a href="/" target=_self>home</a> ]</b>
+			<b>[ <a href="/contents.php" target=_self>contents</a> ]</b>
+			<b>[ <a href="/platforms/" target=_self>platforms</a> ]</b>
+			<b>[ <a href="/shellcode/" target=_self>shellcode</a> ]</b>
+			<b>[ <a href="/search.php" target=_self>search</a> ]</b>
+			<b>[ <a href="/cracker/" target=_self>cracker</a> ]</b>
+			<b>[ <a href="/links/" target=_self>links</a> ]</b>
+			<b>[ <a href="/rss.php" target=blank>rss</a> ]</b>
+			<b>[ <a href="/sploits/milw0rm.tar.bz2" target=_self>archive</a> ]</b>
+			</td>
+    </tr>
+  </table>
+
+<table width="668" border="0" cellpadding="3" cellspacing="3" class="main">
+  <tr><td><img src="/images/milw0rm-wi.jpg" alt="milw0rm"></td></tr><tr><td>
+<b>[ <a href="/" target=_self>MyBB</a> ]</b><table borderColor="#333333" width="597" align="center" border="0"><tbody>
+	<tr class="style13">
+	<td class="style13">-::DATE</td>
+	<td class="style13">-::DESCRIPTION</td>
+	<td class="style13" width="40">-::HITS</td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td class="style13" width="9"></td>
+	<td>-::AUTHOR</td>
+	</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2009-06-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/9001" target="_blank" class="style14">MyBB <= 1.4.6 Remote Code Execution Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">14143</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MyBB" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/9001" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1280">The:Paradox</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-08-26</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/6316" target="_blank" class="style14">MyBulletinBoard (MyBB) <= 1.2.11 private.php SQL Injection Exploit (2)</a></td>
+<td nowrap="nowrap" width=40 align="left">10635</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MyBB" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/6316" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1576">c411k</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-04-06</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5379" target="_blank" class="style14">MyBB Plugin Custom Pages 1.0 Remote SQL Injection Vulnerability</a></td>
+<td nowrap="nowrap" width=40 align="left">7515</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MyBB" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5379" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1410">Lidloses_Auge</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-02-06</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/5070" target="_blank" class="style14">MyBulletinBoard (MyBB) <= 1.2.11 private.php SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">8966</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MyBB" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/5070" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1358">F</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-16</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4927" target="_blank" class="style14">MyBulletinBoard (MyBB) <= 1.2.10 Remote Code Execution Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">7811</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MyBB" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4927" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1097">Silentz</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2008-01-16</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/4928" target="_blank" class="style14">MyBulletinBoard (MyBB) <= 1.2.10 Multiple Remote Vulnerabilities</a></td>
+<td nowrap="nowrap" width=40 align="left">11077</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MyBB" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/4928" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1113">waraxe</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-23</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3780" target="_blank" class="style14">MyBulletinBoard (MyBB) <= 1.2.5 calendar.php Blind SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">11305</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MyBB" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3780" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1088">0x86</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-12</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3719" target="_blank" class="style14">MyBulletinBoard (MyBB) <= 1.2.2 (CLIENT-IP) SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">8172</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MyBB" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3719" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/1083">Elekt</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2007-04-03</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/3653" target="_blank" class="style14">MyBulletinBoard (MyBB) <= 1.2.3 Remote Code Execution Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">9166</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MyBB" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/3653" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/506">DarkFig</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-07-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/2012" target="_blank" class="style14">MyBulletinBoard (MyBB) <= 1.1.5 (CLIENT-IP) SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">14647</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MyBB" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/2012" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/534">rgod</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-06-25</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1950" target="_blank" class="style14">MyBulletinBoard (MyBB) <= 1.1.3 (usercp.php) Create Admin Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">14892</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MyBB" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1950" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/565">Hessam-x</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-06-13</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1909" target="_blank" class="style14">MyBulletinBoard (MyBB) < 1.1.3 Remote Code Execution Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">7857</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MyBB" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1909" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/628">Javier Olascoaga</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-03-03</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1548" target="_blank" class="style14">MyBulletinBoard (MyBB) <= 1.04 (misc.php COMMA) SQL Injection (2)</a></td>
+<td nowrap="nowrap" width=40 align="left">7329</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MyBB" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1548" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/509">Devil-00</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-02-28</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1539" target="_blank" class="style14">MyBulletinBoard (MyBB) <= 1.03 (misc.php COMMA) SQL Injection</a></td>
+<td nowrap="nowrap" width=40 align="left">7562</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MyBB" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1539" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/509">Devil-00</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2006-02-15</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1499" target="_blank" class="style14">MyBulletinBoard (MyBB) <= 1.03 Multiple SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">6350</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MyBB" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1499" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/519">HACKERS PAL</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-08-22</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1172" target="_blank" class="style14">MyBulletinBoard (MyBB) <= 1.00 RC4 SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">7680</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MyBB" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1172" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/435">Alpha_Programmer</a>
+</td>
+</tr>
+<tr class="submit">
+<td class="style14" nowrap="nowrap" width="62">2005-05-31</td>
+<td nowrap="nowrap" width="375"><a href="/exploits/1022" target="_blank" class="style14">MyBulletinBoard (MyBB) <= 1.00 RC4 SQL Injection Exploit</a></td>
+<td nowrap="nowrap" width=40 align="left">8730</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center"><a href="/related.php?program=MyBB" class="style16" title="related releases">R</a></td><td nowrap="nowrap" width="9" valign="middle" align="center"></td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+	<a href="/exploits/download/1022" class="style16" title="download">D</a>
+</td>
+<td nowrap="nowrap" width="9" valign="middle" align="center">
+</td>
+<td nowrap="nowrap" width="135">
+	<a href="/author/444">Alberto Trivero</a>
+</td>
+</tr></tbody></table><br><br><center></center><br><br><br><center>
+<script type="text/javascript"><!--
+google_ad_client = "pub-0718555979486542";
+/* 468x60, created 9/26/08 */
+google_ad_slot = "3279240256";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</center>
+
+<p><FONT style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit[at]milw0rm.com">submit[at]milw0rm.com</a> [<a href="/gpg/submit.asc" target="_blank">gpg</a>]<br>Copyright &copy; 2004-2009 <a href="mailto:str0ke[at]milw0rm.com">milw0rm</a> </FONT></p>
+</td></tr></table>
+  <br>
+  <br>
+</center>
+</body></html>

